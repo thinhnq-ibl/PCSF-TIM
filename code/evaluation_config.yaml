@@ -1,0 +1,216 @@
+# Default Configuration for 5-Layer Evaluation Framework
+
+# ============================================================================
+# LAYER 1: DECAY IDENTIFICATION TEST
+# ============================================================================
+layer1:
+  # Number of distance bins to test
+  bin_levels: [3, 5, 10, 20]
+  
+  # Number of samples for synthetic data generation
+  n_samples: 10000
+  
+  # Distance decay function parameters (for ground truth)
+  decay_function: "power_exp"  # power_exp | offset_power | stretched
+  ground_truth_alpha: 1.5
+  ground_truth_beta: 0.05
+
+# ============================================================================
+# LAYER 2: OUTFLOW (Oi) ESTIMATION TEST
+# ============================================================================
+layer2:
+  # Noise levels to test for sensitivity (in percentages)
+  noise_levels: [0.0, 0.1, 0.2, 0.4]
+  
+  # Train/test split fraction
+  test_frac: 0.30
+  
+  # Number of training cities for cross-city transfer
+  n_train_cities: 10
+  n_test_cities: 40
+  
+  # Random seed for reproducibility
+  seed: 42
+
+# ============================================================================
+# LAYER 3: ATTRACTION MODEL (Aj) ABLATION TEST
+# ============================================================================
+layer3:
+  # OSM features to use
+  features: [POI, POP, ROAD, AREA]
+  
+  # Normalization schemes to test
+  normalizations: [raw, minmax, zscore]
+  
+  # Feature scaling parameters
+  zscore_epsilon: 1e-10
+  minmax_epsilon: 1e-10
+  
+  # Cross-city settings
+  n_train_cities: 10
+  n_test_cities: 40
+
+# ============================================================================
+# LAYER 4: FULL SYSTEM DECOMPOSITION TEST
+# ============================================================================
+layer4:
+  # Number of factorial ablations (should be 8 = 2^3 for 3 components)
+  n_ablations: 8
+  
+  # Components to ablate: [decay, outflow, attraction]
+  components: [decay, outflow, attraction]
+  
+  # Report individual ablation results
+  report_individual_ablations: true
+
+# ============================================================================
+# LAYER 5: ZERO-SHOT GENERALIZATION TEST
+# ============================================================================
+layer5:
+  # Urban morphology classifications
+  morphologies:
+    dense: ["NYC", "San_Francisco"]
+    suburban: ["Phoenix", "Houston", "LA"]
+    polycentric: ["Chicago", "Los_Angeles"]
+    coastal: ["San_Diego", "San_Francisco"]
+  
+  # Extreme transfer pairs: (source_city, target_city)
+  extreme_transfer_pairs:
+    - ["NYC", "Phoenix"]      # Dense → Suburban
+    - ["LA", "Chicago"]       # Suburban → Polycentric
+    - ["Houston", "San_Jose"] # Suburban → Dense
+  
+  # Feature perturbation stress test
+  # Format: feature_name: [min_pct, max_pct]
+  perturbation_levels:
+    POI: [0.08, 0.12]      # ±10% range
+    POP: [0.10, 0.20]      # ±10-20% range
+    ROAD: [0.12, 0.15]     # ±12-15% range
+    AREA: [0.05, 0.10]     # ±5-10% range
+  
+  # Number of perturbation samples
+  n_perturbation_samples: 100
+
+# ============================================================================
+# GLOBAL SETTINGS
+# ============================================================================
+global:
+  # Random seed for all experiments
+  seed: 42
+  
+  # Number of runs for averaging (if applicable)
+  n_runs: 1
+  
+  # Verbosity level
+  verbosity: "INFO"  # INFO | DEBUG | WARNING | ERROR
+  
+  # Output directory
+  output_dir: "./evaluation_results"
+  
+  # Save intermediate results
+  save_intermediate: true
+  
+  # Parallel execution
+  n_jobs: 1  # -1 for all cores
+
+# ============================================================================
+# DATA PATHS (customize for your environment)
+# ============================================================================
+data:
+  # Path to city data
+  data_root: "./prepare_for_paper/data"
+  
+  # Path to results directory
+  results_root: "./prepare_for_paper/results"
+  
+  # Path to cached distance matrices
+  distance_cache: "./prepare_for_paper/cache"
+  
+  # City list (US cities for evaluation)
+  cities:
+    - New_York
+    - Los_Angeles
+    - Chicago
+    - Houston
+    - Philadelphia
+    - Phoenix
+    - San_Antonio
+    - Dallas
+    - San_Diego
+    - San_Jose
+
+# ============================================================================
+# METRIC CONFIGURATION
+# ============================================================================
+metrics:
+  # Primary metric: Commuting Pattern Correlation
+  primary: "CPC"
+  
+  # Secondary metrics
+  secondary:
+    - "R2_log"
+    - "RMSE_log"
+    - "MAE_log"
+  
+  # CPC computation parameters
+  cpc_log_transform: true
+  cpc_min_trips_threshold: 1  # Minimum trips to include in correlation
+
+# ============================================================================
+# REPORTING & VISUALIZATION
+# ============================================================================
+reporting:
+  # Generate plots
+  generate_plots: true
+  
+  # Plot format
+  plot_format: "png"
+  plot_dpi: 300
+  
+  # Include confidence intervals
+  include_ci: true
+  ci_level: 0.95
+  
+  # Export formats
+  export_formats: [json, csv, xlsx]
+  
+  # Generate summary statistics
+  summary_statistics: true
+  
+  # Per-layer summary
+  per_layer_summary: true
+
+# ============================================================================
+# STATISTICAL TESTS
+# ============================================================================
+statistics:
+  # Perform hypothesis tests
+  hypothesis_testing: true
+  
+  # Test type: paired_ttest | wilcoxon | mannwhitneyu
+  test_type: "wilcoxon"
+  
+  # Significance level
+  alpha: 0.05
+  
+  # Multiple comparison correction: bonferroni | fdr | none
+  correction: "bonferroni"
+
+# ============================================================================
+# ADVANCED SETTINGS
+# ============================================================================
+advanced:
+  # Numerical stability settings
+  epsilon: 1e-10
+  
+  # Optimization settings for Layer 1 & 2
+  optimization:
+    method: "L-BFGS-B"
+    max_iterations: 1000
+    tolerance: 1e-6
+  
+  # Ablation table aggregation
+  aggregation_method: "mean"  # mean | median
+  
+  # Handle missing values
+  missing_value_strategy: "impute_mean"  # drop | impute_mean | impute_median

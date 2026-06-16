@@ -1,0 +1,89 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\providecommand{\eprint}[2][]{\url{#2}}
+ \bibcommenthead
+
+\bibitem[{Barbosa et~al.(2018)Barbosa, Barthelemy, Ghoshal, James, Lenormand,
+  Louail et~al.}]{barbosa2018human}
+Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
+  applications. Physics Reports 734:1--74
+
+\bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
+  De~Domenico}]{gallotti2024distorted}
+Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
+  human mobility data. Nature Cities 1(1):1--10
+
+\bibitem[{Gonz{\'a}lez et~al.(2008)Gonz{\'a}lez, Hidalgo, and
+  Barab{\'a}si}]{gonzalez2008understanding}
+Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
+  human mobility patterns. Nature 453(7196):779--782. \doi{10.1038/nature06958}
+
+\bibitem[{Lenormand et~al.(2016)Lenormand, Bassolas, and
+  Ramasco}]{lenormand2016systematic}
+Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
+  distribution laws and models. Journal of Transport Geography 51:158--169.
+  \doi{10.1016/j.jtrangeo.2016.02.003}
+
+\bibitem[{Lundberg and Lee(2017)}]{lundberg2017unified}
+Lundberg SM, Lee SI (2017) A unified approach to interpreting model
+  predictions. Advances in Neural Information Processing Systems 30:4765--4774
+
+\bibitem[{Mai et~al.(2022)}]{mai2022geospatial}
+Mai G, et~al (2022) Towards a foundation model for geospatial artificial
+  intelligence. ACM Transactions on Intelligent Systems and Technology
+  13(6):1--25
+
+\bibitem[{{Meta AI} and {Center for International Earth Science Information
+  Network (CIESIN)}(2016)}]{meta_hrsl}
+{Meta AI}, {Center for International Earth Science Information Network
+  (CIESIN)} (2016) High resolution settlement layer ({HRSL}). Tech. rep., Meta
+  Platforms, Inc. / Columbia University, distributed via Humanitarian Data
+  Exchange (HDX).
+  \url{https://data.humdata.org/dataset/highresolutionpopulationdensitymaps}
+
+\bibitem[{Rong et~al.(2023)}]{Rong2023goddag}
+Rong Z, et~al (2023) Graph-based origin-destination flow prediction with deep
+  learning. arXiv preprint
+
+\bibitem[{Simini et~al.(2012)Simini, Gonzalez, Maritan, and
+  Barabasi}]{Simini2012universal}
+Simini F, Gonzalez M, Maritan A, et~al (2012) A universal model for mobility
+  and migration patterns. Nature 484:96--100. \doi{10.1038/nature10856}
+
+\bibitem[{Simini et~al.(2021)Simini, Barlacchi, Luca, and
+  Pappalardo}]{simini2021}
+Simini F, Barlacchi G, Luca M, et~al (2021) A deep gravity model for mobility
+  flows generation. Nature Communications 12(1):5647.
+  \doi{10.1038/s41467-021-26752-6}
+
+\bibitem[{Song et~al.(2010)Song, Qu, Blumm, and Barab{\'a}si}]{song2010limits}
+Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
+  Science 327(5968):1018--1021. \doi{10.1126/science.1177170}
+
+\bibitem[{Tanner(1961)}]{tanner1961}
+Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
+  Paper~51, Road Research Laboratory, London
+
+\bibitem[{Tatem(2017)}]{worldpop2018}
+Tatem AJ (2017) {WorldPop}, open data for spatial demography. Scientific Data
+  4:170004. \doi{10.1038/sdata.2017.4}, worldPop gridded population datasets
+  available at \url{https://www.worldpop.org/}
+
+\bibitem[{Wang et~al.(2018)Wang, Wu, Wang, Wang et~al.}]{wang2018regiontrans}
+Wang J, Wu J, Wang Y, et~al (2018) Regiontrans: Transfer learning for
+  crossing-city crowd flow prediction. In: Proceedings of the 24th ACM SIGKDD
+  International Conference on Knowledge Discovery and Data Mining, pp
+  2437--2446
+
+\bibitem[{Wang et~al.(2019)Wang, Cao, and Yu}]{wang2019origin}
+Wang S, Cao J, Yu P (2019) Origin-destination flow prediction via
+  spatial-temporal relation learning. Pattern Recognition 96:106967
+
+\bibitem[{Wilson(1971)}]{wilson1971}
+Wilson A (1971) A family of spatial interaction models, and associated
+  developments. Environment and Planning A 3(1):1--32. \doi{10.1068/a030001}
+
+\end{thebibliography}
