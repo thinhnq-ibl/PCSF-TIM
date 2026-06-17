@@ -24,20 +24,27 @@ Nếu bạn đã cài đặt hệ thống LaTeX trên Windows (ví dụ: **TeX L
 
 1. Di chuyển vào thư mục paper trong PowerShell:
    ```powershell
-   cd "c:\Users\Thinh Nguyen\OneDrive - Aarista Technologies\human_mobility\prepare_for_paper\paper"
+   cd "D:\research\PCSF-TIM\paper"
    ```
 
-xoa cache Remove-Item -Path *.aux, *.bbl, *.blg, *.log, *.out, *.toc, *.synctex.gz, *.run.xml, *.bcf -ErrorAction SilentlyContinue
+xoa cache 
+
+```powershell
+Remove-Item -Path *.aux, *.bbl, *.blg, *.log, *.out, *.toc, *.synctex.gz, *.run.xml, *.bcf -ErrorAction SilentlyContinue
+```
 
 # 1. Thiết lập biến môi trường để LaTeX tìm được hình ảnh/thư viện con
+
+```
 $env:TEXINPUTS = ".;./lib;./pgfplots;$env:TEXINPUTS"
 $env:BIBINPUTS = ".;./lib;$env:BIBINPUTS"
+```
 # 2. Thực thi chu trình biên dịch đầy đủ
+```
 pdflatex -interaction=nonstopmode draft_paper_springer.tex
 bibtex draft_paper_springer.aux
 pdflatex -interaction=nonstopmode draft_paper_springer.tex
 pdflatex -interaction=nonstopmode draft_paper_springer.tex
-
-
+```
 
 Sau khi hoàn thành, file PDF mới nhất sẽ được xuất ra tại thư mục hiện tại với tên: `draft_paper_springer.pdf`.

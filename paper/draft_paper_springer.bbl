@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{13}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -34,10 +34,6 @@ Mai G, et~al (2022) Towards a foundation model for geospatial artificial
   intelligence. ACM Transactions on Intelligent Systems and Technology
   13(6):1--25
 
-\bibitem[{Mendieta et~al.(2023)}]{mendieta2023geogpt}
-Mendieta M, et~al (2023) Geoai foundation models: A review and future
-  directions. arXiv preprint arXiv:231100000
-
 \bibitem[{Rong et~al.(2023)Rong, Feng, Ding et~al.}]{Rong2023goddag}
 Rong C, Feng J, Ding J, et~al (2023) {GODDAG}: Generating origin-destination
   flow for new cities via domain adversarial training. IEEE Transactions on
@@ -63,12 +59,6 @@ Stouffer SA (1940) Intervening opportunities: A theory relating mobility and
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
   Paper~51, Road Research Laboratory, London
 
-\bibitem[{Wang et~al.(2018)Wang, Wu, Wang, Wang et~al.}]{wang2018regiontrans}
-Wang J, Wu J, Wang Y, et~al (2018) Regiontrans: Transfer learning for
-  crossing-city crowd flow prediction. In: Proceedings of the 24th ACM SIGKDD
-  International Conference on Knowledge Discovery and Data Mining, pp
-  2437--2446
-
 \bibitem[{Wang et~al.(2019)Wang, Cao, and Yu}]{wang2019origin}
 Wang S, Cao J, Yu P (2019) Origin-destination flow prediction via
   spatial-temporal relation learning. Pattern Recognition 96:106967
@@ -76,10 +66,5 @@ Wang S, Cao J, Yu P (2019) Origin-destination flow prediction via
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated
   developments. Environment and Planning A 3(1):1--32. \doi{10.1068/a030001}
-
-\bibitem[{Yao et~al.(2020)}]{yao2020meta}
-Yao H, et~al (2020) Meta-learning for spatio-temporal prediction in urban
-  computing. In: Proceedings of the 26th ACM SIGKDD International Conference on
-  Knowledge Discovery and Data Mining, pp 2437--2446
 
 \end{thebibliography}
