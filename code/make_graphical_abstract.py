@@ -30,10 +30,10 @@ plt.rcParams.update({
     "axes.linewidth": 0,
 })
 
-FW, FH = 15.0, 8.2
+FW, FH = 10.0, 8.2
 fig = plt.figure(figsize=(FW, FH), dpi=200)
 ax  = fig.add_axes([0.005, 0.005, 0.990, 0.990])
-ax.set_xlim(0, 150); ax.set_ylim(0, 82)
+ax.set_xlim(0, 100); ax.set_ylim(0, 82)
 ax.axis("off")
 fig.patch.set_facecolor("white")
 RNG = np.random.default_rng(42)
@@ -71,14 +71,13 @@ def draw_building(x, y):
 # SECTION TITLES
 tx(24,  79.5, "\u2460  Decay Calibration",         sz=15.5, bold=True, c=B)
 tx(74,  79.5, "\u2461  Target-City Estimation",     sz=15.5, bold=True, c=O)
-tx(125, 79.5, "\u2462  Performance Decomposition",  sz=15.5, bold=True, c=AMB)
 
 # ════════════════════════ COLUMN 1  x:2-46 ══════════════════════════════════
 C1 = 2.0;  C1W = 44.0;  M1 = C1 + C1W / 2
 
 # A. Source cities  [y:63-77, h=14]
 box(C1, 63, C1W, 14, BL, ec=B, lw=2.2)
-tx(M1, 75.8, "SOURCE CITIES", sz=13.5, bold=True, c=B)
+tx(M1, 74.5, "SOURCE CITIES", sz=13.5, bold=True, c=B)
 
 city_pts = [(9.5,  70.0, "New York"),
             (24.0, 70.0, "Chicago"),
@@ -100,7 +99,7 @@ arrow(M1, 62.5, M1, 61.0, c=B, lw=2.2)
 
 # B. Aggregate distance histogram  [y:48-60, h=12]
 box(C1, 48, C1W, 12, BL, ec=B, lw=2.2)
-tx(M1, 56.5, "Aggregate Distance Distribution", sz=12.0, bold=True, c=B)
+tx(M1, 57.5, "Aggregate Distance Distribution", sz=12.0, bold=True, c=B)
 
 bars = [1.0, 0.76, 0.52, 0.34, 0.20, 0.11, 0.06]
 bx0 = C1 + 11.0;  bw = 2.8;  base = 49.8
@@ -199,77 +198,14 @@ ax.text(mxs + (nc * cs) / 2.0 - 0.5, 21.3, "OD", fontsize=11, color=GRY, fontwei
         ha="center", va="center", bbox=dict(facecolor=GLT, edgecolor="none", pad=1.5), zorder=4)
 
 
-# ════════════════════════ COLUMN 3  x:100-148  y:10-77 ══════════════════════
-P0 = 100.0;  PW = 48.0;  PM = P0 + PW / 2
-
-# Outer panel
-box(P0, 10.0, PW, 67.0, AMBL, ec=AMB, lw=2.5, z=1)
-
-tx(122.0, 74.5, "What limits accuracy?",      sz=13.0,   bold=True, c=INK)
-tx(122.0, 71.8, "Decay transfer  \u2248  solved", sz=13.5, bold=True, c=B)
-
-# Oracle card  [y:59-70, h=11]
-box(P0 + 3.0, 59, 18, 11, "white", ec=B, lw=2.2)
-tx(112.0, 68.0, "Oracle Outflow",  sz=10.0, bold=True, c=B)
-tx(112.0, 63.5, "CPC  0.743",      sz=15,   bold=True, c=B)
-
-# Local card  [y:59-70, h=11]
-box(P0 + 23.0, 59, 18, 11, "white", ec=B, lw=2.2)
-tx(132.0, 68.0, "Local Calibration", sz=10.0, bold=True, c=B)
-tx(132.0, 63.5, "CPC  0.744",        sz=15,   bold=True, c=B)
-
-# "≈" bridge
-ax.plot([120.7, 123.3], [64.3, 64.3], c=G, lw=2.6, zorder=5)
-tx(122.0, 65.8, "\u2248",                          sz=20, bold=True,   c=G)
-
-
-ax.plot([P0 + 3, P0 + PW - 9], [53.0, 53.0],
-        c=AMB, lw=1.2, ls="--", alpha=0.60, zorder=3)
-
-tx(122.0, 51.5, "Outflow  =  bottleneck", sz=13.0, bold=True, c=AMB)
-
-# Survey-free card  [y:38-49, h=11]
-box(P0 + 10.0, 38, 24, 11, "white", ec=AMB, lw=2.8)
-tx(122.0, 46.8, "Survey-free",  sz=11.0, bold=True, c=AMB)
-tx(122.0, 43.0, "CPC  0.697",  sz=15,   bold=True, c=AMB)
-
-# Gap arrow
-arrow(P0 + 43.5, 67.5, P0 + 43.5, 39.5, c=AMB, lw=2.5, ms=14, style="<|-|>")
-tx(P0 + 44.8, 53.5, "4.7 pp", sz=10.5, bold=True, c=AMB, ha="left")
-
-# "Where outflow fails" box  [y:24-36, h=12]
-box(P0 + 3.0, 24, 38, 12, "white", ec=AMB, lw=1.8)
-tx(122.0, 34.0, "Where outflow fails",        sz=11.5, bold=True, c=AMB)
-tx(122.0, 30.8, "Dense polycentric metros",    sz=10.5, c=INK)
-tx(122.0, 27.2, r"$\mathrm{corr}(\mathrm{outflow}, \mathrm{CPC}) = 0.49$",  sz=10.0, bold=True, c=INK)
-
-
 # ════════════════════════ FOOTER  y:0.5-8  h=7.5  light-blue background ═════
-box(2, 0.5, 146, 7.5, FBKG, ec=B, lw=2.0)
-tx(75, 5.7,
+box(2, 0.5, 96, 7.5, FBKG, ec=B, lw=2.0)
+tx(50.0, 5.7,
    "Aggregate distance distributions are near-sufficient for mobility-decay calibration.",
    sz=13.5, bold=True, c=INK)
-tx(75, 2.7,
+tx(50.0, 2.7,
    "The bottleneck is trip-production estimation \u2014 not decay transfer.",
    sz=13.5, bold=True, italic=True, c=B)
-
-
-# LEGEND
-leg = ax.legend(
-    [Line2D([0], [0], color=B,   lw=8),
-     Line2D([0], [0], color=O,   lw=8),
-     Line2D([0], [0], color=AMB, lw=8)],
-    ["Decay transfer (near-lossless)",
-     "OSM open features",
-     "Bottleneck: outflow estimation"],
-    loc="lower right",
-    bbox_to_anchor=(0.975, 0.130),
-    frameon=True, fontsize=11.5,
-    handlelength=1.4, ncol=1,
-    fancybox=False,
-    edgecolor=INK, facecolor="white",
-)
-leg.get_frame().set_linewidth(1.2)
 
 
 # Save

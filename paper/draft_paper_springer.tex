@@ -23,7 +23,7 @@
 
 \abstract{Urban mobility modeling presents a trade-off: gravity models are interpretable but fragile across cities, while neural networks generalize without transparency. This paper introduces the \textbf{P}rivacy-\textbf{C}entric \textbf{F}ramework for \textbf{C}ross-city \textbf{T}ransferable \textbf{F}lows (PCF-CTF), a decomposed framework that factorizes origin-destination flows into three learnable components: origin production, distance decay, and destination attraction. 
 
-Core contribution: A cross-city SHAP-based stability selection method identifies 22 transferable urban features from 30 candidates drawn exclusively from globally available open data (OpenStreetMap and WorldPop/Meta High-Resolution Population Density), enabling zero-shot transfer without target-city retraining. Evaluation across 25 held-out US cities shows that the fully survey-free configuration (PCF-CTF Survey-Free) achieves 0.7124 CPC versus DeepGravity's 0.7117 CPC, matching state-of-the-art neural performance under identical zero-shot conditions, while outperforming radiation models (0.512 CPC) by 37--45\%. A theoretical upper-bound variant (PCF-CTF Oracle $O_i$), which substitutes ground-truth target-city outflow in place of the GBDT prediction, achieves 0.7447 CPC, quantifying the headroom remaining if production estimation is further improved. Results indicate that decomposed structure can match unconstrained neural learning while retaining interpretability and policy relevance.}
+Core contribution: A cross-city SHAP-based stability selection method identifies 22 transferable urban features from 30 candidates drawn exclusively from globally available open data (OpenStreetMap, WorldPop, and Meta High-Resolution Population Density), enabling zero-shot transfer without target-city retraining. Evaluation across 25 held-out US cities shows that the fully survey-free configuration (PCF-CTF Survey-Free) achieves 0.7124 CPC versus DeepGravity's 0.7117 CPC, matching state-of-the-art neural performance under identical zero-shot conditions, while outperforming radiation models (0.512 CPC) by 37--45\%. A theoretical upper-bound variant (PCF-CTF Oracle $O_i$), which substitutes ground-truth target-city outflow in place of the GBDT prediction, achieves 0.7447 CPC, quantifying the headroom remaining if production estimation is further improved. Results indicate that decomposed structure can match unconstrained neural learning while retaining interpretability and policy relevance.}
 
 \keywords{Urban mobility, origin-destination flows, gravity models, interpretability, transfer learning, zero-shot transfer, privacy-centric modeling}
 
@@ -34,7 +34,7 @@ Core contribution: A cross-city SHAP-based stability selection method identifies
   \vspace{-6pt}
   \centering
   \includegraphics[width=\textwidth]{../figures/graphical_abstract.png}
-  \caption{PCF-CTF framework: Three independent components (origin production O$_i$ from features, distance decay f(d) from aggregate data, destination attraction A$_j$ from features) are evaluated via a 25-city training and 25-city held-out zero-shot validation framework, where the model is evaluated on the 25 held-out cities without target-city OD data. Key innovation: SHAP-based feature stability selection identifies 22 transferable features from 30 open-data candidates (OSM + WorldPop/Meta). Note: The source cities shown in the diagram (e.g., New York, Chicago, Houston) are illustrative examples only, as the full list of 25 source and 25 held-out target cities is selected dynamically across the 50-city pool.}
+  \caption{PCF-CTF framework: Three independent components (origin production O$_i$ from features, distance decay f(d) from aggregate data, destination attraction A$_j$ from features) are evaluated via a 25-city training and 25-city held-out zero-shot validation framework, where the model is evaluated on the 25 held-out cities without target-city OD data. Key innovation: SHAP-based feature stability selection identifies 22 transferable features from 30 open-data candidates (OSM + WorldPop + Meta). Note: The source cities shown in the diagram (e.g., New York, Chicago, Houston) are illustrative examples only, as the full list of 25 source and 25 held-out target cities is selected dynamically across the 50-city pool.}
   \label{fig:graphical_abstract}
 \end{figure*}
 
@@ -59,7 +59,7 @@ We hypothesize that urban mobility arises from three transferable mechanisms: tr
 \begin{equation}
 T_{ij} = O_i \cdot f(d_{ij}) \cdot A_j
 \end{equation}
-where $O_i$ represents origin production capacity, $f(d_{ij})$ represents distance decay, and $A_j$ captures destination attraction. Rather than relying on proprietary cellular data or local survey calibrations, the framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap and WorldPop/Meta HRSL), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
+where $O_i$ represents origin production capacity, $f(d_{ij})$ represents distance decay, and $A_j$ captures destination attraction. Rather than relying on proprietary cellular data or local survey calibrations, the framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap, WorldPop, and Meta HRSL), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
 
 \begin{figure*}[!h]
   \centering
@@ -188,34 +188,38 @@ The conceptual pipeline of the proposed Privacy-Centric Framework for Cross-city
 \begin{figure*}[!h]
   \centering
   \begin{tikzpicture}[
-    node distance=1.0cm and 1.5cm,
-    block/.style={draw, rectangle, rounded corners, minimum width=2.5cm, minimum height=0.8cm, align=center, thick, fill=blue!5, draw=blue!40},
-    cloud/.style={draw, ellipse, minimum width=2.2cm, minimum height=0.8cm, align=center, fill=green!5, draw=green!40},
+    font=\small,
+    node distance=0.8cm and 1.1cm,
+    block/.style={draw, rectangle, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, thick, fill=blue!5, draw=blue!40},
+    cloud/.style={draw, ellipse, minimum width=2.0cm, minimum height=0.7cm, align=center, fill=green!5, draw=green!40},
     arrow/.style={-latex, thick}
   ]
     % Inputs
     \node[cloud] (osm) {OSM / Population};
-    \node[cloud, below=1.8cm of osm] (dist) {Distance Matrix ($d_{ij}$)};
+    \node[cloud, below=1.5cm of osm] (dist) {Distance Matrix};
     
     % Intermediate Models
-    \node[block, right=of osm, yshift=0.8cm] (oi) {Outflow GBDT ($O_i$)};
-    \node[block, right=of osm, yshift=-0.8cm] (aj) {Attraction GBDT ($A_j$)};
-    \node[block, right=of dist] (decay) {Decay Model $f(d_{ij})$};
+    \node[block, right=of osm, yshift=0.7cm] (oi) {Outflow GBDT};
+    \node[block, right=of osm, yshift=-0.7cm] (aj) {Attraction GBDT};
+    \node[block, right=of dist, xshift=0.3cm] (decay) {Decay Model};
     
     % Fusion & Output
-    \node[block, right=4.8cm of osm] (fusion) {Gravity Fusion \\ $T_{ij} = O_i f(d_{ij}) A_j$};
-    \node[cloud, right=of fusion] (od) {Predicted OD ($T_{ij}$)};
+    \node[block, right=5cm of osm] (fusion) {Gravity Fusion};
+    \node[cloud, below=0.8cm of fusion] (od) {Predicted OD};
     
     % Connections
-    \draw[arrow] (osm.east) -- ++(0.3,0) |- (oi.west);
-    \draw[arrow] (osm.east) -- ++(0.3,0) |- (aj.west);
+    \draw[arrow] (osm.east) -- ++(0.5,0) |- (oi.west);
+    \draw[arrow] (osm.east) -- ++(0.5,0) |- (aj.west);
     \draw[arrow] (dist.east) -- (decay.west);
     
-    \draw[arrow] (oi.east) -- ++(0.3,0) |- (fusion.west);
-    \draw[arrow] (aj.east) -- ++(0.3,0) |- (fusion.west);
-    \draw[arrow] (decay.east) -- ++(0.3,0) |- (fusion.west);
+    % Merging arrows
+    \coordinate (joint) at (6.5, 0);
+    \draw[-] (oi.east) -| (joint);
+    \draw[-] (aj.east) -| (joint);
+    \draw[-] (decay.east) -| (joint);
+    \draw[arrow] (joint) -- (fusion.west);
     
-    \draw[arrow] (fusion) -- (od);
+    \draw[arrow] (fusion.south) -- (od.north);
   \end{tikzpicture}
   \caption{Pipeline of the PCF-CTF framework. Globally available spatial features serve as inputs to GBDT models predicting trip production ($O_i$) and attraction ($A_j$). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}
   \label{fig:framework_pipeline}
@@ -234,7 +238,7 @@ To prevent singularity for intra-zonal flows ($d_{ij} = 0$) and scale parameter 
 \end{equation}
 where $\bar{R}_{\mathrm{zone}}$ is the mean empirical radius of the administrative zones in the target city. Decay parameters $(\beta, \gamma)$ are estimated via maximum likelihood estimation (MLE) using exclusively the aggregate distance-bin distribution of source cities, preserving privacy. Complete calibration, moment-based initialization, and optimization details are provided in the Appendix.
 
-\textbf{Privacy-Centric Design.} The ``Privacy-Centric'' designation in PCF-CTF reflects three concrete architectural choices that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop/Meta HRSL) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-privacy regulations (e.g., GDPR) without requiring institutional data-sharing agreements.
+\textbf{Privacy-Centric Design.} The ``Privacy-Centric'' designation in PCF-CTF reflects three concrete architectural choices that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop + Meta HRSL) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-privacy regulations (e.g., GDPR) without requiring institutional data-sharing agreements.
 
 \subsection{Origin Outflow Component ($O_i$)}
 The trip production $O_i$ represents the total daily trips originating from zone $i$:
@@ -306,7 +310,7 @@ To implement and evaluate the PCF-CTF framework across diverse metropolitan area
 OD Matrix ($T_{ij}$) & \texttimes & \texttimes & \checkmark & \checkmark \\
 Distance Matrix ($d_{ij}$) & \texttimes & \texttimes & \checkmark & \checkmark \\
 OpenStreetMap (OSM) & \checkmark & \checkmark & \texttimes & \texttimes \\
-WorldPop / Meta HRSL & \checkmark & \checkmark & \texttimes & \texttimes \\
+WorldPop + Meta HRSL & \checkmark & \checkmark & \texttimes & \texttimes \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -385,7 +389,7 @@ To test true zero-shot generalization, we design a strict Cross-City Transfer Pr
 Under this cross-city evaluation protocol, we enforce a strict information firewall between the source and target environments. 
 \begin{itemize}
   \item \textbf{Forbidden}: Target-city flow matrices $T_{ij}$, target-city household survey results, target cellular data, and target trip-demand signals.
-  \item \textbf{Allowed}: Centroid coordinates, administrative zone boundaries, OpenStreetMap POIs, and gridded open demography (WorldPop/Meta HRSL).
+  \item \textbf{Allowed}: Centroid coordinates, administrative zone boundaries, OpenStreetMap POIs, and gridded open demography (WorldPop + Meta HRSL).
 \end{itemize}
 Since the destination attraction GBDTs and distance decay parameters are learned on source cities and deployed on target cities using only static allowed features, zero-shot leakage is mathematically prevented.
 
@@ -811,7 +815,7 @@ To clarify the contribution of PCF-CTF, we position it relative to three existin
 The proposed framework offers several practical benefits for urban planning and policy:
 \begin{description}
   \item[Planning]: By separating mobility into independent production, attraction, and decay components, PCF-CTF allows planners to run targeted simulations. For instance, planners can alter zone amenities to see the direct impact on destination attraction without confounding the distance decay or trip production parameters.
-  \item[Data-Scarce Cities]: Because the framework operates exclusively on OpenStreetMap and WorldPop/Meta HRSL, it can be deployed in resource-constrained regions where large-scale household travel surveys are unavailable or outdated.
+  \item[Data-Scarce Cities]: Because the framework operates exclusively on OpenStreetMap and WorldPop + Meta HRSL, it can be deployed in resource-constrained regions where large-scale household travel surveys are unavailable or outdated.
   \item[Explainable Mobility Analytics]: Unlike neural black boxes, PCF-CTF provides auditable predictions. This transparency is crucial for supporting policy dialogues, securing regulatory approvals, and justifying transport infrastructure investments to stakeholders.
 \end{description}
 

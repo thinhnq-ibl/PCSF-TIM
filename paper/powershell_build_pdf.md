@@ -27,12 +27,6 @@ Nếu bạn đã cài đặt hệ thống LaTeX trên Windows (ví dụ: **TeX L
    cd "D:\research\PCSF-TIM\paper"
    ```
 
-xoa cache 
-
-```powershell
-Remove-Item -Path *.aux, *.bbl, *.blg, *.log, *.out, *.toc, *.synctex.gz, *.run.xml, *.bcf -ErrorAction SilentlyContinue
-```
-
 # 1. Thiết lập biến môi trường để LaTeX tìm được hình ảnh/thư viện con
 
 ```
@@ -41,6 +35,7 @@ $env:BIBINPUTS = ".;./lib;$env:BIBINPUTS"
 ```
 # 2. Thực thi chu trình biên dịch đầy đủ
 ```
+Remove-Item -Path *.aux, *.bbl, *.blg, *.log, *.out, *.toc, *.synctex.gz, *.run.xml, *.bcf -ErrorAction SilentlyContinue
 pdflatex -interaction=nonstopmode draft_paper_springer.tex
 bibtex draft_paper_springer.aux
 pdflatex -interaction=nonstopmode draft_paper_springer.tex
