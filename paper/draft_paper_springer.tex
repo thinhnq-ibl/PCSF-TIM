@@ -1,4 +1,4 @@
-\documentclass[pdflatex,sn-basic]{sn-jnl}
+\documentclass[pdflatex,sn-basic,iicol]{sn-jnl}
 %% sn-jnl internally loads: geometry, fancyhdr, hyperref, natbib, etc.
 %% Do NOT re-load hyperref or natbib here to avoid option clashes.
 
@@ -30,7 +30,7 @@ Core contribution: A cross-city SHAP-based stability selection method identifies
 \maketitle
 
 %% ── Graphical Abstract ─────────────────────────────────────────────────────
-\begin{figure*}[!h]
+\begin{figure*}[t!]
   \vspace{-6pt}
   \centering
   \includegraphics[width=\textwidth]{../figures/graphical_abstract.png}
@@ -46,7 +46,7 @@ To address these data gaps, human mobility researchers have proposed two main pa
 
 Despite their success, existing paradigms face a fundamental trade-off: \textbf{interpretability versus transferability}. Classical gravity models provide clear, policy-relevant interpretations but perform poorly when transferred to new cities without local calibration. Conversely, deep neural models achieve high predictive accuracy but function as black boxes, sacrificing structural transparency and requiring extensive local, target-city OD data for training or fine-tuning. Whether an interpretable, structured model can generalize to unseen cities without local mobility observations remains an open question.
 
-This represents a critical research gap in spatial interaction modeling: existing transfer-learning approaches still require some form of target-city calibration, fine-tuning, similarity matching, or access to local mobility observations. Consequently, the fundamental question remains unresolved: Can a mobility model trained in one set of cities generalize to entirely unseen cities without any target-city OD data while retaining interpretability?
+This represents a critical research gap in spatial interaction modeling. Most existing machine-learning approaches rely on individual-level OD data for model training or adaptation. Such data may expose sensitive mobility information and raise privacy concerns. Therefore, an important open question is whether a mobility model trained on a collection of source cities can generalize to entirely unseen cities without access to any target-city OD data while still achieving reliable and interpretable predictions.
 
 To address this challenge, we investigate three core research questions:
 \begin{description}
@@ -61,12 +61,12 @@ T_{ij} = O_i \cdot f(d_{ij}) \cdot A_j
 \end{equation}
 where $O_i$ represents origin production capacity, $f(d_{ij})$ represents distance decay, and $A_j$ captures destination attraction. Rather than relying on proprietary cellular data or local survey calibrations, the framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap, WorldPop, and Meta HRSL), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
 
-\begin{figure*}[!h]
+\begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
-    node distance=1.0cm and 1.8cm,
-    box/.style={draw, rectangle, rounded corners, minimum width=2.8cm, minimum height=1cm, align=center, thick, fill=blue!5, draw=blue!40},
-    greenbox/.style={draw, rectangle, rounded corners, minimum width=2.8cm, minimum height=1cm, align=center, thick, fill=green!5, draw=green!40},
+    node distance=1.0cm and 1.2cm,
+    box/.style={draw, rectangle, rounded corners, minimum width=2.6cm, minimum height=1cm, align=center, thick, fill=blue!5, draw=blue!40},
+    greenbox/.style={draw, rectangle, rounded corners, minimum width=2.6cm, minimum height=1cm, align=center, thick, fill=green!5, draw=green!40},
     arrow/.style={-latex, thick}
   ]
     % Existing Paradigm
@@ -142,25 +142,24 @@ While explainable AI (XAI) methods, such as SHAP (SHapley Additive exPlanations)
 Most studies use SHAP for post-hoc interpretation rather than identifying transferable urban structure.
 
 \subsection{Research Gap and Positioning}
-We compare the characteristics of classical models, recent neural baselines, and our proposed PCF-CTF framework in Table~\ref{tab:literature_comparison}.
+We compare the characteristics of classical models and our proposed PCF-CTF framework in Table~\ref{tab:literature_comparison}.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Comparative analysis of human mobility models across structural and transferability dimensions.}
 \label{tab:literature_comparison}
-\begin{tabular}{lcccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
-\textbf{Model Class} & \textbf{Decomposed Structure} & \textbf{Cross-City Transfer} & \textbf{Zero-Shot Target} & \textbf{Interpretability} \\
+\shortstack[c]{\textbf{Model} \\ \textbf{Class}} & \shortstack[c]{\textbf{Decomposed} \\ \textbf{Structure}} & \shortstack[c]{\textbf{Cross-City} \\ \textbf{Transfer}} & \shortstack[c]{\textbf{Zero-Shot} \\ \textbf{Target}} & \textbf{Interpretability} \\
 \midrule
 Gravity \citep{wilson1971} & \checkmark & \texttimes & \texttimes & \checkmark \\
-Radiation \citep{Simini2012universal} & \checkmark & \texttimes & \texttimes & \checkmark \\
 DeepGravity \citep{simini2021} & \texttimes & Limited & \texttimes & \texttimes \\
 GNN OD \citep{Rong2023goddag} & \texttimes & Limited & \texttimes & \texttimes \\
 RegionTrans & Partial & \checkmark & \texttimes & \texttimes \\
 \textbf{PCF-CTF (Ours)} & \checkmark & \checkmark & \checkmark & \checkmark \\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{tabular*}
+\end{table*}
 
 To the best of our knowledge, no prior study simultaneously combines: (1) interpretable decomposition, (2) globally available open-data features, (3) zero-shot cross-city transfer, and (4) explicit transferable feature discovery.
 
@@ -185,7 +184,7 @@ where $g(O_i)$ represents the trip production capacity at the origin, $h(d_{ij})
 \subsection{Framework Overview}
 The conceptual pipeline of the proposed Privacy-Centric Framework for Cross-city Transferable Flows (PCF-CTF) is illustrated in Fig.~\ref{fig:framework_pipeline}.
 
-\begin{figure*}[!h]
+\begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
     font=\small,
@@ -228,9 +227,9 @@ The conceptual pipeline of the proposed Privacy-Centric Framework for Cross-city
 \subsection{Distance Decay Function}\label{sec:decay_function}
 We adopt the \textbf{Tanner Multi deterrence function} to capture the dual-regime spatial friction governing human travel:
 \begin{equation}\label{eq:tanner_multi}
-f(d_{ij};\,\beta,\gamma,\delta) = (d_{ij} + \delta)^{-\gamma} \cdot \exp(-\beta\,d_{ij}), \quad \beta > 0,\;\gamma \ge 0,\;\delta > 0
+f(d_{ij};\,\beta,\gamma,\delta) = (d_{ij} + \delta)^{-\gamma} \cdot \exp(-\beta\,d_{ij})
 \end{equation}
-where $\beta$ is the exponential decay rate governing long-range trip attenuation, $\gamma$ is the power-law exponent modeling short-to-medium range trip distribution, and $\delta > 0$ is the adaptive geometric anchor. 
+where $\beta > 0$ is the exponential decay rate governing long-range trip attenuation, $\gamma \ge 0$ is the power-law exponent modeling short-to-medium range trip distribution, and $\delta > 0$ is the adaptive geometric anchor. 
 
 To prevent singularity for intra-zonal flows ($d_{ij} = 0$) and scale parameter sensitivity automatically to the study layout, the adaptive offset $\delta$ is defined dynamically per target city as:
 \begin{equation}\label{eq:delta}
@@ -268,7 +267,7 @@ The computational complexity of the PCF-CTF framework is divided into three part
 \subsection{Algorithmic Flow}
 The complete pipeline for training and zero-shot deployment is formalized in Algorithm 1.
 
-\begin{table}[h!]
+\begin{table*}[t]
 \centering
 \begin{tabular}{p{0.95\textwidth}}
 \toprule
@@ -287,7 +286,7 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 \hspace{1em} d. Fuse components: $\hat{T}_{ij}^{(t)} = \hat{O}_i^{(t)} (d_{ij} + \delta^{(t)})^{-\hat{\gamma}} e^{-\hat{\beta} d_{ij}} \hat{A}_j^{(t)}$. \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 \section{Data and Transferable Urban Representation}
 \label{sec:data}
 
@@ -299,11 +298,11 @@ A key consequence of this design principle is the intentional exclusion of local
 \subsection{Data Sources}
 To implement and evaluate the PCF-CTF framework across diverse metropolitan areas, we compile a multi-source dataset combining static urban geography, open features, and evaluation labels. The operational role of each data source is summarized in the Data Usage Matrix in Table~\ref{tab:data_usage_matrix}.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Data usage matrix illustrating the operational roles of inputs across PCF-CTF components to guarantee leakage-free prediction.}
 \label{tab:data_usage_matrix}
-\begin{tabular}{lcccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
 \textbf{Data Source} & \textbf{Outflow $O_i$} & \textbf{Attraction $A_j$} & \textbf{Distance Decay $f(d)$} & \textbf{Evaluation} \\
 \midrule
@@ -312,8 +311,8 @@ Distance Matrix ($d_{ij}$) & \texttimes & \texttimes & \checkmark & \checkmark \
 OpenStreetMap (OSM) & \checkmark & \checkmark & \texttimes & \texttimes \\
 WorldPop + Meta HRSL & \checkmark & \checkmark & \texttimes & \texttimes \\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{tabular*}
+\end{table*}
 
 \subsubsection{(1) Origin-Destination (OD) Matrix - $T_{ij}$}
 The OD matrix contains daily commute flows between census tracts. In this study, OD observations are extracted from Cuebiq cellular location data (aggregated daily, validated against US Census surveys, covering 50 metropolitan areas). Crucially, the OD matrix is utilized exclusively as training labels for source cities and as ground truth for evaluation. It is never used for feature engineering, ensuring a strict separation between predictive inputs and evaluation targets.
@@ -330,7 +329,7 @@ To map residential population densities, we leverage gridded population counts f
 \subsection{Transferable Urban Features}
 To discover stable spatial patterns that translate across cities, we implement a two-stage feature engineering and stability selection procedure, mapping raw datasets to a low-dimensional transferable urban representation. The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
 
-\begin{figure*}[!h]
+\begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
     grow=right,
@@ -396,7 +395,7 @@ Since the destination attraction GBDTs and distance decay parameters are learned
 \subsection{Preprocessing \& Normalization}
 Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Preprocessing and normalization steps applied to spatial features prior to model learning.}
 \label{tab:preprocessing}
@@ -410,7 +409,7 @@ Standardization & Per-city (not global) & Preserve relative spatial hierarchy \\
 Outliers & Retain & Important spatial hubs (CBDs); robust models \\
 \bottomrule
 \end{tabular*}
-\end{table}
+\end{table*}
 
 \section{Results}
 
@@ -419,18 +418,18 @@ We provide a systematic 5-layer framework to validate each component of the grav
 \subsection{Validation Framework Overview}
 We evaluate each component of the proposed framework systematically using a 5-layer validation roadmap (illustrated in Fig.~\ref{fig:validation_roadmap}).
 
-\begin{figure*}[!h]
+\begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
-    node distance=0.8cm,
-    box/.style={draw, rectangle, rounded corners, minimum width=3.0cm, minimum height=0.8cm, align=center, thick, fill=blue!5, draw=blue!40},
+    node distance=0.2cm,
+    box/.style={draw, rectangle, rounded corners, text width=2.0cm, minimum height=1.0cm, align=center, thick, fill=blue!5, draw=blue!40},
     arrow/.style={-latex, thick}
   ]
-    \node[box] (l1) {\textbf{Layer 1: Decay} \\ \small Identifiability Validation};
-    \node[box, right=of l1] (l2) {\textbf{Layer 2: Production} \\ \small Outflow Transferability};
-    \node[box, right=of l2] (l3) {\textbf{Layer 3: Attraction} \\ \small Transferable Features};
-    \node[box, right=of l3] (l4) {\textbf{Layer 4: Components} \\ \small Ablation \& Contribution};
-    \node[box, right=of l4] (l5) {\textbf{Layer 5: Paradigms} \\ \small Zero-Shot Evaluation};
+    \node[box] (l1) {\textbf{Layer 1: Decay} \\ \footnotesize Identifiability Validation};
+    \node[box, right=of l1] (l2) {\textbf{Layer 2: Production} \\ \footnotesize Outflow Transferability};
+    \node[box, right=of l2] (l3) {\textbf{Layer 3: Attraction} \\ \footnotesize Transferable Features};
+    \node[box, right=of l3] (l4) {\textbf{Layer 4: Components} \\ \footnotesize Ablation \& Contribution};
+    \node[box, right=of l4] (l5) {\textbf{Layer 5: Paradigms} \\ \footnotesize Zero-Shot Evaluation};
     
     \draw[arrow] (l1) -- (l2);
     \draw[arrow] (l2) -- (l3);
@@ -516,7 +515,7 @@ Crucially, the use of a simple heuristic for $A_j$ in this layer is a deliberate
 \textbf{T2.1: Outflow Model Comparison (Averaged across 25 held-out cities)}
 To evaluate outflow prediction quality, we compare the naive population baseline, the GBDT predictions, and the oracle outflow. Results are summarized in Table~\ref{tab:outflow_comparison}.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}
 \label{tab:outflow_comparison}
@@ -529,7 +528,7 @@ Predicted Outflow (GBDT) & 0.7037 \\
 Oracle Outflow ($O_i^{\text{true}}$) & 0.7447 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 \textit{Interpretation}: GBDT-predicted outflows yield a CPC of $0.7037$, representing a massive improvement over the Naive Population Baseline ($0.584$) and achieving 94.5\% of the Oracle upper bound ($0.7447$). This proves that GBDTs learn highly transferable production dynamics from built-environment features.
 
@@ -562,7 +561,7 @@ We retrain the GBDT on subsets of $n_{\text{src}} \in \{5, 10, 15, 20, 25\}$ sou
 \textbf{T3.1: Feature Importance Ranking (Source City SHAP Analysis)}
 SHAP analysis on the 25 training source cities identifies stable features using the stability score $S_p$. Top-10 features by importance are reported in Table~\ref{tab:top_features}.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Top-10 Features by Average SHAP Importance (Training Source Cities, $N=25$)}
 \label{tab:top_features}
@@ -582,14 +581,14 @@ SHAP analysis on the 25 training source cities identifies stable features using 
   10 & poi\_entertainment\_culture & 0.018 & 3.55 \\
 \bottomrule
 \end{tabular*}
-\end{table}
+\end{table*}
 
 \textit{Interpretation}: Population and localized POIs (fast food, shopping, education) represent the most stable predictors of zone attractiveness across metropolitan areas.
 
 \textbf{T3.2: SHAP Feature Count Performance Sweep}
 We train GBDT models using nested subsets of the top-$K$ SHAP features ($K \in \{5, 10, 15, 20, 22, 25, 30\}$) and evaluate their zero-shot CPC on held-out target cities. Performance effectively plateaus at $K=15$ features (CPC: $0.7124$) and remains identical at $K=22$ (CPC: $0.7124$) before showing a marginal decline beyond 22 features (e.g., $0.7122$ for all 30 features). While $K=15$ features are sufficient for baseline prediction, we select $K=22$ as our final feature set to incorporate a stability margin. This retains all features satisfying our joint importance threshold ($\mu_p \ge 0.005$) and stability criterion ($S_p \ge 1.0$), providing broader semantic coverage to handle structural variations in unseen metropolitan areas. This feature count sweep is illustrated in Fig.~\ref{fig:shap_sweep}.
 
-\begin{figure}[h]
+\begin{figure*}[t]
   \centering
   \begin{tikzpicture}
     \begin{axis}[
@@ -618,7 +617,7 @@ We train GBDT models using nested subsets of the top-$K$ SHAP features ($K \in \
   \end{tikzpicture}
   \caption{SHAP feature count performance sweep showing zero-shot Mean CPC across the 25 held-out target cities. Performance plateaus between $K=15$ and $K=22$ (CPC: $0.7124$), validating that selecting $K=22$ features retains stability without sacrificing predictive performance.}
   \label{fig:shap_sweep}
-\end{figure}
+\end{figure*}
 
 \subsection{Layer 4: Component Contribution Analysis}
 
@@ -634,7 +633,7 @@ We train GBDT models using nested subsets of the top-$K$ SHAP features ($K \in \
 \textbf{T4.1: Factorial Ablation (Averaged across 25 held-out cities)}
 For each of the 25 held-out target cities, we train eight models corresponding to all $2^3$ combinations of component presence/absence, using only the 25 source cities' data. Results below represent averages across all 25 held-out cities.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Factorial Ablation Results (Average across $N=25$ held-out target cities)}
 \label{tab:ablation}
@@ -648,7 +647,7 @@ $\checkmark$ & $\times$ & $\checkmark$ & 0.485 & f(d) removal: 31.1\% loss \\
 $\checkmark$ & $\checkmark$ & $\times$ & 0.666 & A$_j$ removal: 5.3\% loss \\
 \bottomrule
 \end{tabular*}
-\end{table}
+\end{table*}
 
 \textit{Interpretation}:
 Using the factorial ablation results, we calculate the relative marginal contribution of each component to the total explainable CPC variance (derived from the performance drops when individual components are removed): distance decay $f(d)$ represents 75.7\%, destination attraction $A_j$ accounts for 12.9\%, and origin production $O_i$ accounts for 11.4\%. This confirms that:
@@ -667,24 +666,24 @@ Using the factorial ablation results, we calculate the relative marginal contrib
 
 \textbf{Evaluation Protocol}: Models are trained on the pooled data of 25 source cities and evaluated zero-shot on the 25 held-out target cities. Table~\ref{tab:multibaseline_comparison} summarizes the comparative performance across all baselines.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Multi-Baseline Comparison (25 Held-Out Target Cities)}
 \label{tab:multibaseline_comparison}
-\begin{tabular}{lccccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{4.2cm}ccccc}
 \toprule
-\textbf{Model} & \textbf{Mean CPC} & \textbf{Std Dev} & \textbf{Win \% (vs DG)} & \textbf{Type} & \textbf{Features} \\
+\textbf{Model} & \shortstack[c]{\textbf{Mean} \\ \textbf{CPC}} & \shortstack[c]{\textbf{Std} \\ \textbf{Dev}} & \shortstack[c]{\textbf{Win \%} \\ \textbf{(vs DG)}} & \textbf{Type} & \textbf{Features} \\
 \midrule
 PCF-CTF (Survey-Free) & 0.7124 & 0.0329 & 48.0\% & Decomposed & 22 (selected) \\
 PCF-CTF (Oracle O$_i$) & 0.7447 & 0.028 & 56.0\% & Decomposed & 22 (selected) \\
 DeepGravity (E2E) & 0.7117 & 0.0332 & -- & Neural E2E & 30 (all) \\
-Tanner Gravity (Power Constrained) & 0.750 & 0.026 & 72.0\% & Structure-only & 0 \\
+Tanner Gravity (Power Const.) & 0.750 & 0.026 & 72.0\% & Structure-only & 0 \\
 Traditional Tanner Gravity & 0.750 & 0.027 & 72.0\% & Structure-only & 0 \\
 Traditional Exponential Gravity & 0.670 & 0.035 & 24.0\% & Structure-only & 0 \\
 Radiation Model & 0.512 & 0.051 & 0.0\% & Param-free & 0 \\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{tabular*}
+\end{table*}
 
 \textit{Interpretation}: Under zero-shot transfer conditions, PCF-CTF (Survey-Free) matches the performance of the end-to-end neural baseline (CPC of 0.7124 versus 0.7117 for DeepGravity), while PCF-CTF (Oracle $O_i$) provides a significant improvement (0.7447 CPC). This confirms that explicitly separating production, attraction, and decay dynamics does not sacrifice accuracy compared to deep learning methods, while substantially outperforming parameter-free baselines like the Radiation Model (CPC: 0.512).
 
@@ -697,20 +696,20 @@ To rigorously validate the zero-shot transfer performance of the proposed PCF-CT
 
 The divergence between protocols has a concrete mechanistic explanation. Under LOCO, each fold trains on 49 cities, providing DeepGravity's unconstrained architecture with substantially more data to fit subtle spatial non-linearities, amplifying its advantage over PCF-CTF. Under the fixed 25/25 split, both models train on only 25 source cities; at this smaller training set size, the structured inductive bias of PCF-CTF (enforced decomposability and open-data features) compensates for the reduced data, closing the gap with DeepGravity. This \emph{data-volume sensitivity} is consistent with findings in transfer learning literature: structured models generalize more efficiently from smaller source pools, while unconstrained neural models require more data to realize their full expressive capacity.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{LOCO 50-Fold Statistical Significance Test Summary}
 \label{tab:statistical_tests}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc}
 \toprule
-\textbf{Baseline Model} & \textbf{Mean Diff.} & \textbf{t-statistic ($t$)} & \textbf{p-value ($t$-test)} & \textbf{Wilcoxon $W$} & \textbf{p-value (Wilcoxon)} & \textbf{95\% CI of Diff.} \\
+\shortstack[c]{\textbf{Baseline} \\ \textbf{Model}} & \shortstack[c]{\textbf{Mean} \\ \textbf{Diff.}} & \shortstack[c]{\textbf{t-stat} \\ \textbf{($t$)}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(t-test)}} & \shortstack[c]{\textbf{Wilcoxon} \\ \textbf{$W$}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(Wilc.)}} & \shortstack[c]{\textbf{95\% CI} \\ \textbf{Diff.}} \\
 \midrule
 DeepGravity & -0.0255 & -9.150 & $3.53 \times 10^{-12}$ & 66.0 & $3.49 \times 10^{-10}$ & [-0.0311, -0.0199] \\
 Traditional Gravity & 0.0000 & 1.000 & $3.22 \times 10^{-1}$ & 18.5 & $3.31 \times 10^{-1}$ & [-0.0000, 0.0000] \\
 Radiation Model & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 0.0 & $1.78 \times 10^{-15}$ & [0.2380, 0.2605] \\
 \bottomrule
 \end{tabular*}
-\end{table}
+\end{table*}
 
 \textit{Significance Interpretation}: The performance of PCF-CTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and significantly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$), demonstrating a massive and statistically robust improvement by incorporating learned destination attraction and aggregate decay. While under the fixed 25-city split, PCF-CTF achieves comparable performance, under the more stringent LOCO protocol, DeepGravity retains a modest but statistically significant advantage in mean CPC of $0.0255$ ($p < 10^{-10}$, Cohen's $d = -1.29$, 95\% CI [-0.0311, -0.0199]). This narrow advantage is likely due to the unconstrained model's capacity to fit subtle spatial non-linearities when trained on 49 cities instead of 25. Nevertheless, this minor gap is balanced by PCF-CTF's complete interpretability and zero data leakage.
 
@@ -718,11 +717,11 @@ Radiation Model & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 0.0 & $1.78 \times 
 
 The overall zero-shot performance masks spatial variations across urban configurations. We evaluate transfer CPC by urban morphology class across the 25 held-out cities in Table~\ref{tab:morphology}.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}
 \label{tab:morphology}
-\begin{tabular}{lcccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
 \textbf{Morphology Type} & \textbf{\# Cities} & \textbf{PCF-CTF CPC} & \textbf{DeepGravity CPC} & \textbf{Gravity Win \%} \\
 \midrule
@@ -731,8 +730,8 @@ Sprawling / Grid & 11 & 0.715 & 0.718 & 45\% \\
 Polycentric & 6 & 0.716 & 0.712 & 50\% \\
 Coastal & 3 & 0.734 & 0.712 & 66\% \\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{tabular*}
+\end{table*}
 
 \textit{Interpretation}: Neither paradigm appears to be universally superior. Evaluation across the 25 held-out target cities (Table~\ref{tab:morphology}) suggests morphology-dependent advantages: PCF-CTF seems to perform best in coastal and polycentric environments (CPC 0.734 and 0.716 respectively), where distance-driven spatial structure potentially dominates. Conversely, DeepGravity appears to retain a systematic advantage in dense, transit-oriented cities (CPC 0.695 vs 0.690 for PCF-CTF), where multi-modal nonlinear interactions are likely more dominant. This morphology heterogeneity justifies both the city-stratified evaluation protocol and the morphology-specific reporting.
 
@@ -768,7 +767,7 @@ We find strong empirical evidence to support this hypothesis across our validati
 \subsection{Morphology-Dependent Trade-Offs}
 The overall zero-shot performance equivalence masks important spatial structure. Our morphology-specific evaluations show that the suitability of each paradigm depends heavily on the target city's layout. To guide model selection, we present a conceptual Paradigm Suitability Map in Fig.~\ref{fig:paradigm_suitability}.
 
-\begin{figure*}[!h]
+\begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
     node distance=1.5cm,
@@ -833,14 +832,14 @@ While robust, the framework is subject to several limitations:
 \begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
-    node distance=1.0cm and 1.2cm,
-    stepbox/.style={draw, rectangle, rounded corners, minimum width=3.2cm, minimum height=0.8cm, align=center, thick, fill=blue!5, draw=blue!40},
+    node distance=1.0cm and 0.4cm,
+    stepbox/.style={draw, rectangle, rounded corners, text width=2.4cm, minimum height=1.0cm, align=center, thick, fill=blue!5, draw=blue!40},
     arrow/.style={-latex, thick}
   ]
     % Flowchart Nodes
     \node[stepbox] (open) {Globally Available \\ Open Data};
     \node[stepbox, right=of open] (feats) {SHAP Stability-Selected \\ Transferable Features ($K=22$)};
-    \node[stepbox, right=of feats] (comp) {Decomposed GBDT Models \\ ($O_i, f(d), A_j$)};
+    \node[stepbox, right=of feats] (comp) {Decomposed GBDT Models \\ ($O_i, f(d), A_j$);};
     \node[stepbox, right=of comp] (fuse) {Gravity Fusion \\ Zero-Shot OD Prediction};
     
     \draw[arrow] (open) -- (feats);
@@ -848,7 +847,7 @@ While robust, the framework is subject to several limitations:
     \draw[arrow] (comp) -- (fuse);
     
     % Core characteristics checklist block below
-    \node[draw, rectangle, rounded corners, fill=green!5, draw=green!40, thick, below=0.6cm of feats, xshift=1.5cm, text width=9.5cm, align=left, inner sep=8pt] (chk) {
+    \node[draw, rectangle, rounded corners, fill=green!5, draw=green!40, thick, below=0.6cm of feats, xshift=1.4cm, text width=9.5cm, align=left, inner sep=8pt] (chk) {
       \textbf{Key System Characteristics of PCF-CTF:} \\
       \quad $\checkmark$ \textbf{Interpretable Structure}: Components are physically and behaviorally separate. \\
       \quad $\checkmark$ \textbf{Survey-Free Calibration}: Replaces proprietary registers and travel surveys. \\
@@ -917,11 +916,11 @@ Here, we detail the robustness tests conducted on Layer 1 regarding distance dec
 \subsection*{A.5 GBDT Hyperparameters and Reproducibility Details}
 To ensure the reproducibility of the origin trip production ($O_i$) and destination attractiveness ($A_j$) estimators, the hyperparameter configurations for the Gradient Boosted Decision Tree (GBDT) models are summarized in Table~\ref{tab:gbdt_hyperparameters}. The models are trained using the \texttt{scikit-learn} and \texttt{LightGBM} libraries in Python, and hyperparameters are optimized using 5-fold cross-validation on the 25 source training cities.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{GBDT Model Hyperparameter Configurations}
 \label{tab:gbdt_hyperparameters}
-\begin{tabular}{lcc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcc}
 \toprule
 \textbf{Hyperparameter} & \textbf{Outflow Model ($O_i$)} & \textbf{Attraction Model ($A_j$)} \\
 \midrule
@@ -936,8 +935,8 @@ Colsample By Tree & 0.8 & 0.8 \\
 Minimum Child Weight & 1 & 1 \\
 Early Stopping Rounds & 15 & 15 \\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{tabular*}
+\end{table*}
 
 \bibliography{references}
 
