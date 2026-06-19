@@ -21,7 +21,7 @@
 \author*[1]{\fnm{Thinh} \sur{Nguyen}}\email{nqt900@gmail.com}
 \affil*[1]{\orgname{Aarista Technologies}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 
-\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. Existing approaches typically rely on historical OD records, travel surveys, or individual mobility traces. However, these data sources are often expensive to collect, difficult to obtain, and subject to privacy and regulatory constraints. To address these challenges, we propose the Privacy-Centric Framework for Cross-city Transferable Flows (PCF-CTF), a decomposed mobility modeling framework that factorizes OD flows into three interpretable components: origin production, distance decay, and destination attraction. By relying exclusively on globally available open datasets, including OpenStreetMap, WorldPop, and Meta High-Resolution Population Density data, the framework enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that PCF-CTF achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
+\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. Existing approaches typically rely on historical OD records, travel surveys, or individual mobility traces. However, these data sources are often expensive to collect, difficult to obtain, and subject to privacy and regulatory constraints. To address these challenges, we propose the Privacy-Centric Framework for Cross-city Transferable Flows (PCF-CTF), a decomposed mobility modeling framework that factorizes OD flows into three interpretable components: target-recovered distance decay, open-data-driven destination attraction, and cross-city transferable origin production. By relying exclusively on globally available open datasets, including OpenStreetMap, WorldPop, and Meta High-Resolution Population Density data, the framework enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that PCF-CTF achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
 
 \keywords{Urban mobility, origin-destination flows, gravity models, interpretability, transfer learning, zero-shot transfer, privacy-centric modeling}
 
@@ -38,9 +38,9 @@
 
 \section{Introduction}
 
-Urban mobility modeling is a critical pillar for modern infrastructure planning, epidemiological tracking, and transportation management \cite{barbosa2018human}. Accurately predicting origin-destination (OD) flows within a city is essential for addressing municipal challenges ranging from congestion mitigation to transit-oriented development. However, traditional approaches for collecting OD matrices rely on expensive, large-scale household travel surveys that suffer from decade-long update cycles, resulting in persistent data gaps, particularly in developing regions.
+Urban mobility modeling is a critical pillar for modern infrastructure planning, epidemiological tracking, and transportation management \cite{barbosa2018human,gonzalez2008understanding,song2010limits}. Accurately predicting origin-destination (OD) flows within a city is essential for addressing municipal challenges ranging from congestion mitigation to transit-oriented development. However, traditional approaches for collecting OD matrices rely on expensive, large-scale household travel surveys that suffer from decade-long update cycles, resulting in persistent data gaps, particularly in developing regions.
 
-To address these data gaps, human mobility researchers have proposed two main paradigms. Classical spatial interaction models, such as gravity and radiation models, assume a structured relationship where travel flows are determined by physical proximity and zone attributes. Modern deep neural models, such as DeepGravity and graph neural networks, treat mobility prediction as a monolithic learning task, mapping high-dimensional urban features to flow rates using deep multi-layer architectures.
+To address these data gaps, human mobility researchers have proposed two main paradigms. Classical spatial interaction models, such as gravity and radiation models, assume a structured relationship where travel flows are determined by physical proximity and zone attributes \cite{wilson1971,Simini2012universal,stouffer1940intervening}. Modern deep neural models, such as DeepGravity and graph neural networks, treat mobility prediction as a monolithic learning task, mapping high-dimensional urban features to flow rates using deep multi-layer architectures \cite{simini2021,Rong2023goddag,wang2019origin}.
 
 Despite their success, existing paradigms face a fundamental trade-off: \textbf{interpretability versus transferability}. Classical gravity models provide clear, policy-relevant interpretations but perform poorly when transferred to new cities without local calibration. Conversely, deep neural models achieve high predictive accuracy but function as black boxes, sacrificing structural transparency and requiring extensive local, target-city OD data for training or fine-tuning. Whether an interpretable, structured model can generalize to unseen cities without local mobility observations remains an open question.
 
@@ -48,16 +48,16 @@ This represents a critical research gap in spatial interaction modeling. Most ex
 
 To address this challenge, we investigate three core research questions:
 \begin{description}
-  \item[RQ1:] Can urban mobility be decomposed into transferable production, attraction, and decay components?
+  \item[RQ1:] Can urban mobility be decomposed into separable components consisting of local-recovered decay, open-data attraction, and cross-city transferable origin production?
   \item[RQ2:] Can transferable urban features be identified from globally available open data?
   \item[RQ3:] Can a decomposed model achieve zero-shot transfer performance comparable to end-to-end neural models?
 \end{description}
 
-We hypothesize that urban mobility arises from three transferable mechanisms: trip production, distance deterrence, and destination attraction, and that each mechanism can be learned independently and transferred across cities. Instead of treating mobility prediction as a monolithic learning problem, we propose the \textbf{Privacy-Centric Framework for Cross-city Transferable Flows} (\textbf{PCF-CTF}), which implements this hypothesis via a multiplicative decomposition:
+We hypothesize that urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction mapped from open spatial features, and trip production transferred across cities via built-environment representations. Instead of treating mobility prediction as a monolithic learning problem, we propose the \textbf{Privacy-Centric Framework for Cross-city Transferable Flows} (\textbf{PCF-CTF}), which implements this hypothesis via a multiplicative decomposition:
 \begin{equation}
 T_{ij} = O_i \cdot f(d_{ij}) \cdot A_j
 \end{equation}
-where $O_i$ represents origin production capacity, $f(d_{ij})$ represents distance decay, and $A_j$ captures destination attraction. Rather than relying on proprietary cellular data or local survey calibrations, the framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap, WorldPop, and Meta HRSL), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
+where $O_i$ represents origin production capacity, $f(d_{ij})$ represents distance decay, and $A_j$ captures destination attraction. Rather than relying on proprietary cellular data or local survey calibrations, the framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap \cite{atwal2025commuting}, WorldPop \cite{worldpop2018}, and Meta HRSL \cite{meta_hrsl}), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
 
 \begin{figure*}[t!]
   \centering
@@ -79,7 +79,7 @@ where $O_i$ represents origin production capacity, $f(d_{ij})$ represents distan
     
     % Our Paradigm
     \node[greenbox, below=1.6cm of cityA_ex] (cityA_our) {City A \\ \small (Source city OD)};
-    \node[greenbox, right=of cityA_our] (model_our) {Transferable Structure \\ \small ($O_i, f(d_{ij}), A_j$)};
+    \node[greenbox, right=of cityA_our] (model_our) {Decomposed Structure \\ \small ($O_i$ transferable, $f(d_{ij})$ recovered, $A_j$ mapped)};
     \node[greenbox, right=of model_our] (cityB_our) {City B \\ \small (Zero target OD)};
     
     \draw[arrow] (cityA_our) -- (model_our);
@@ -87,7 +87,7 @@ where $O_i$ represents origin production capacity, $f(d_{ij})$ represents distan
     
     \node[above=0.2cm of model_our] {\textbf{Our Paradigm (Zero-Shot Transferable)}};
   \end{tikzpicture}
-  \caption{Conceptual comparison of the existing locally dependent modeling paradigm versus our zero-shot transferable paradigm. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In our paradigm, we learn transferable mechanisms ($O_i, f(d), A_j$) using globally available open data features in source City A and transfer them directly to City B without target-city OD data.}
+  \caption{Conceptual comparison of the existing locally dependent modeling paradigm versus our zero-shot transferable paradigm. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In our paradigm, we learn transferable origin production structures from source City A, recover decay from target aggregate data, and map attraction from local open features in target City B, enabling zero-shot transfer without target-city OD surveys.}
   \label{fig:conceptual_framework}
 \end{figure*}
 
@@ -107,7 +107,7 @@ This study makes five main contributions:
 \section{Related Work}
 
 \subsection{Classical and Structured Mobility Models}
-Classical spatial interaction models, such as gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal,alis2021generalized}, represent the historical foundation of human mobility modeling. These models are built upon physical analogies (e.g., Newtonian gravity) or probabilistic formulations of destination choice, such as Stouffer's theory of intervening opportunities \citep{stouffer1940intervening}, which models migration flows based on the number of opportunities closer than a given destination. Early studies on scaling laws in human travel \citep{brockmann2006scaling,gonzalez2008understanding} further confirmed that spatial dynamics are governed by robust statistical regularities.
+Classical spatial interaction models, such as gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal,alis2021generalized}, represent the historical foundation of human mobility modeling. These models are built upon physical analogies (e.g., Newtonian gravity) or probabilistic formulations of destination choice, such as Stouffer's theory of intervening opportunities \citep{stouffer1940intervening}, which models migration flows based on the number of opportunities closer than a given destination. Early studies on scaling laws in human travel \citep{brockmann2006scaling,gonzalez2008understanding} and the limits of predictability \citep{song2010limits} further confirmed that spatial dynamics are governed by robust statistical regularities.
 \begin{itemize}
   \item \textbf{Strengths}: These structured models are highly interpretable, mathematically simple, and explain the physical constraints of travel behavior.
   \item \textbf{Limitations}: They depend heavily on city-specific calibrations of distance decay and attraction parameters, making them extremely fragile when applied to unseen cities.
@@ -115,7 +115,7 @@ Classical spatial interaction models, such as gravity models \citep{wilson1971,t
 Existing structured models explain mobility well but depend on locally calibrated parameters, limiting deployment in unseen cities.
 
 \subsection{Deep Learning for OD Prediction}
-With the rise of deep learning, monolithic architectures have been proposed to predict origin-destination (OD) flows directly from spatial features. Filippo Simini and colleagues introduced DeepGravity \citep{simini2021}, which maps high-dimensional urban features to flow rates using multi-layer perceptrons. Subsequent works have utilized graph neural networks (GNNs) \citep{Rong2023goddag} and spatial-temporal neural networks \citep{wang2019origin} to capture nonlinear geographic interactions and network structures.
+With the rise of deep learning, monolithic architectures have been proposed to predict origin-destination (OD) flows directly from spatial features. Filippo Simini and colleagues introduced DeepGravity \citep{simini2021}, which maps high-dimensional urban features to flow rates using multi-layer perceptrons. Subsequent works have utilized graph neural networks (GNNs) \citep{Rong2023goddag}, spatial-temporal neural networks \citep{wang2019origin}, and OpenStreetMap-derived commute prediction models \citep{atwal2025commuting} to capture nonlinear geographic interactions and network structures.
 \begin{itemize}
   \item \textbf{Strengths}: These models capture complex, non-linear relationships between variables, significantly improving predictive accuracy in data-rich environments.
   \item \textbf{Limitations}: They act as black-boxes, require massive amounts of local target-city training data, and suffer from poor out-of-distribution generalization.
@@ -125,9 +125,9 @@ Most neural models are optimized for within-city prediction rather than cross-ci
 \subsection{Cross-City Transfer Learning}
 To predict mobility in cities lacking historical OD surveys, cross-city transfer learning has emerged as a key area of study. Existing approaches can be categorized into three main paradigms:
 \begin{enumerate}
-  \item \textbf{Similarity-based transfer}: Models like RegionTrans seek to transfer knowledge by calculating spatial similarity metrics between source and target urban zones.
-  \item \textbf{Representation learning}: These approaches utilize geospatial embeddings and foundation models for geographic artificial intelligence (GeoAI) \citep{mai2022geospatial} to capture generalized features of urban space.
-  \item \textbf{Domain adaptation and Meta-learning}: Approaches in this category apply meta-learning and domain alignment techniques to adapt models trained on source cities to target environments with minimal adjustments.
+  \item \textbf{Similarity-based transfer}: Models like RegionTrans \citep{wang2018regiontrans} seek to transfer knowledge by calculating spatial similarity metrics between source and target urban zones, while newer approaches adaptively re-weight source regions using meta-learning networks such as CrossTReS \citep{jin2022crosstres}.
+  \item \textbf{Representation learning}: These approaches utilize geospatial embeddings and foundation models for geographic artificial intelligence (GeoAI) \citep{mai2022geospatial,mendieta2023geogpt} to capture generalized features of urban space.
+  \item \textbf{Domain adaptation and Meta-learning}: Approaches in this category apply meta-learning and domain alignment techniques, such as STAN \citep{wang2022when} or meta-spatiotemporal networks \citep{yao2020meta}, to adapt models trained on source cities to target environments with minimal adjustments.
 \end{enumerate}
 Despite progress, existing transfer approaches generally require target-city observations, calibration, or fine-tuning.
 
@@ -153,11 +153,12 @@ We compare the characteristics of classical models and our proposed PCF-CTF fram
 Gravity \citep{wilson1971} & \checkmark & \texttimes & \texttimes & \checkmark \\
 DeepGravity \citep{simini2021} & \texttimes & Limited & \texttimes & \texttimes \\
 GNN OD \citep{Rong2023goddag} & \texttimes & Limited & \texttimes & \texttimes \\
-RegionTrans & Partial & \checkmark & \texttimes & \texttimes \\
+RegionTrans \citep{wang2018regiontrans} & Partial & \checkmark & \texttimes & \texttimes \\
 \textbf{PCF-CTF (Ours)} & \checkmark & \checkmark & \checkmark & \checkmark \\
 \bottomrule
 \end{tabular*}
 \end{table*}
+
 
 To the best of our knowledge, no prior study simultaneously combines: (1) interpretable decomposition, (2) globally available open-data features, (3) zero-shot cross-city transfer, and (4) explicit transferable feature discovery.
 
@@ -168,7 +169,7 @@ This study directly addresses four critical gaps in the literature:
   \item[Gap 3 (Data-dependency):] Cross-city transfer learning frameworks still require target-city OD data for fine-tuning or similarity alignment.
   \item[Gap 4 (Feature Generalizability):] There is a lack of systematic frameworks to discover which specific spatial features transfer consistently across distinct urban morphologies.
 \end{description}
-This study addresses all four gaps through a decomposed mobility framework that separates production, attraction, and decay into independently transferable, open-data-driven components.
+This study addresses all four gaps through a decomposed mobility framework that separates production (cross-city transferable), attraction (open-data mapped), and decay (target-recovered) into independently modeled, survey-free components.
 
 \section{Model Structure \& Problem Formulation}
 
@@ -177,7 +178,7 @@ We formalize human mobility prediction through the lens of a multiplicative deco
 \begin{equation}
 T_{ij} = g(O_i) \times h(d_{ij}) \times k(A_j)
 \end{equation}
-where $g(O_i)$ represents the trip production capacity at the origin, $h(d_{ij})$ represents the spatial friction (distance decay), and $k(A_j)$ represents the destination attraction. We hypothesize that: (1) each component is approximately independent, (2) the underlying mechanisms can be learned from spatial descriptors of the built environment, and (3) these learned relationships transfer directly to unseen target cities without target-city OD data calibration. Section 5 evaluates and validates this hypothesis.
+where $g(O_i)$ represents the trip production capacity at the origin, $h(d_{ij})$ represents the spatial friction (distance decay), and $k(A_j)$ represents the destination attraction. We hypothesize that: (1) each component is approximately independent, (2) the underlying mechanisms can be learned from spatial descriptors of the built environment, and (3) the learned origin production relationship transfers directly to unseen target cities, while decay parameters are recovered from target-city aggregate trip-length distributions, and attraction is computed from locally available open data. Section 5 evaluates and validates this hypothesis.
 
 \subsection{Framework Overview}
 The conceptual pipeline of the proposed Privacy-Centric Framework for Cross-city Transferable Flows (PCF-CTF) is illustrated in Fig.~\ref{fig:framework_pipeline}.
@@ -257,7 +258,7 @@ Although $O_i$ and $A_j$ use the same pool of candidate spatial features, we mod
 \subsection{Computational Complexity}
 The computational complexity of the PCF-CTF framework is divided into three parts:
 \begin{itemize}
-  \item \textbf{Decay estimation}: Calibrating the distance decay parameters using the aggregate distance distribution takes $O(N^2)$ time to build distance bins, but optimization is performed over a small set of bins $K \ll N$, taking $O(K)$ per L-BFGS-B iteration.
+  \item \textbf{Decay estimation}: Calibrating the distance decay parameters using the aggregate distance distribution takes $O(N^2)$ time to build distance bins, but optimization is performed over a small set of bins $K \ll N$, taking $O(K)$ per L-BFGS-B \citep{byrd1995limited} iteration.
   \item \textbf{GBDT training}: Training GBDTs for $O_i$ and $A_j$ on $M$ training zones across source cities takes $O(D \cdot M \log M)$, where $D$ is the feature dimension ($D=22$).
   \item \textbf{Inference}: Reconstructing the OD matrix for a target city with $N$ zones takes $O(N^2)$ calculations.
 \end{itemize}
@@ -313,16 +314,16 @@ WorldPop + Meta HRSL & \checkmark & \checkmark & \texttimes & \texttimes \\
 \end{table*}
 
 \subsubsection{(1) Origin-Destination (OD) Matrix - $T_{ij}$}
-The OD matrix contains daily commute flows between census tracts. In this study, OD observations are extracted from Cuebiq cellular location data (aggregated daily, validated against US Census surveys, covering 50 metropolitan areas). Crucially, the OD matrix is utilized exclusively as training labels for source cities and as ground truth for evaluation. It is never used for feature engineering, ensuring a strict separation between predictive inputs and evaluation targets.
+The OD matrix contains daily commute flows between census tracts. In this study, OD observations are extracted from Cuebiq cellular location data \citep{gallotti2024distorted} (aggregated daily, validated against US Census surveys, covering 50 metropolitan areas). Crucially, the OD matrix is utilized exclusively as training labels for source cities and as ground truth for evaluation. It is never used for feature engineering, ensuring a strict separation between predictive inputs and evaluation targets.
 
 \subsubsection{(2) Distance Matrix - $d_{ij}$}
 The pairwise great-circle (Haversine) distance $d_{ij}$ is computed between zone centroids using WGS84 geographic coordinates. Center coordinates are extracted from census boundaries.
 
 \subsubsection{(3) OSM-Derived Features}
-We extract POIs and road features using the Overpass API from OpenStreetMap snapshots. POI counts are calculated across 16 land-use categories (e.g., retail, industrial, education, health).
+We extract POIs and road features using the Overpass API from OpenStreetMap snapshots \citep{atwal2025commuting}. POI counts are calculated across 16 land-use categories (e.g., retail, industrial, education, health).
 
 \subsubsection{(4) Gridded Population Estimates}
-To map residential population densities, we leverage gridded population counts from WorldPop (100\,m resolution) and the Meta High-Resolution Settlement Layer (30\,m resolution). These layers are aggregated to zone boundaries to provide consistent scale baselines globally.
+To map residential population densities, we leverage gridded population counts from WorldPop \citep{worldpop2018} (100\,m resolution) and the Meta High-Resolution Settlement Layer \citep{meta_hrsl} (30\,m resolution). These layers are aggregated to zone boundaries to provide consistent scale baselines globally.
 
 \subsection{Transferable Urban Features}
 To discover stable spatial patterns that translate across cities, we implement a two-stage feature engineering and stability selection procedure, mapping raw datasets to a low-dimensional transferable urban representation. The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
@@ -389,6 +390,14 @@ Under this cross-city evaluation protocol, we enforce a strict information firew
   \item \textbf{Allowed}: Centroid coordinates, administrative zone boundaries, OpenStreetMap POIs, and gridded open demography (WorldPop + Meta HRSL).
 \end{itemize}
 Since the destination attraction GBDTs and distance decay parameters are learned on source cities and deployed on target cities using only static allowed features, zero-shot leakage is mathematically prevented.
+
+\subsubsection{Evaluation Metric: Common Part of Commuters}
+To measure prediction performance, we use the Common Part of Commuters (CPC) \citep{lenormand2012universal}, which is widely used in human mobility studies to evaluate origin-destination flow matrices. The CPC index is defined as:
+\begin{equation}
+\text{CPC}(T, \hat{T}) = \frac{2 \sum_{i,j} \min(T_{ij}, \hat{T}_{ij})}{\sum_{i,j} T_{ij} + \sum_{i,j} \hat{T}_{ij}}
+\end{equation}
+where $T_{ij}$ represents the ground-truth commuter flow from zone $i$ to zone $j$, and $\hat{T}_{ij}$ is the predicted flow. The CPC index ranges from 0 (indicating completely disjoint flow matrices) to 1 (indicating perfect prediction).
+
 
 \subsection{Preprocessing \& Normalization}
 Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
@@ -751,7 +760,7 @@ Across the 50 evaluated US metropolitan areas, we observe a consistent empirical
 \subsection{Interpretation of the Decomposition Hypothesis}
 The success of gravity decomposition in cross-city transfer rests on a tested hypothesis regarding urban structure:
 \begin{description}
-  \item[Hypothesis $H_1$ (Approximate Separability)] Origin-destination flow interactions can be factored into three independent, transferable mechanisms: origin production capacity, spatial distance decay, and destination attraction capacity.
+  \item[Hypothesis $H_1$ (Approximate Separability)] Origin-destination flow interactions can be factored into three independent, separable mechanisms: transferable origin production capacity, target-recovered distance decay, and open-data destination attraction capacity.
 \end{description}
 We find strong empirical evidence to support this hypothesis across our validation layers:
 \begin{itemize}
@@ -861,15 +870,15 @@ While robust, the framework is subject to several limitations:
 
 Urban mobility prediction typically faces a trade-off between structural interpretability and predictive flexibility. While classical models explain spatial interaction dynamics but fail to transfer without extensive target-city calibrations, modern deep learning architectures generalize accurately but operate as uninterpretable black boxes, limiting their diagnostic utility for planning and policy formulation.
 
-This study resolves this trade-off by demonstrating that urban mobility flows can be successfully decomposed into origin production, destination attraction, and distance-decay components that remain stable and transferable across different metropolitan areas. Rather than relying on monolithic end-to-end learning, we show that these key physical and behavioral mechanisms can be estimated independently from globally available open data features, enabling survey-free cross-city transfer without target-city travel surveys.
+This study resolves this trade-off by demonstrating that urban mobility flows can be successfully decomposed into separable origin production, destination attraction, and distance-decay components. Rather than relying on monolithic end-to-end learning, we show that these key physical and behavioral mechanisms can be estimated independently (recovering decay from aggregate statistics, mapping attraction from local open data, and transferring origin production via learned built-environment features), enabling survey-free cross-city transfer without target-city travel surveys.
 
-Through zero-shot evaluation across 50 metropolitan areas under a strict information firewall, the proposed PCF-CTF framework addresses our three core research questions: (1) origin-destination flows are indeed factorable into separable, city-independent components; (2) a stable set of 22 transferable built-environment features can be mapped from open demographic and spatial repositories; and (3) under zero-shot transfer conditions, the decomposed model matches the predictive performance of unconstrained neural models (CPC of 0.7124 vs 0.7117) while significantly outperforming classical structural baselines.
+Through zero-shot evaluation across 50 metropolitan areas under a strict information firewall, the proposed PCF-CTF framework addresses our three core research questions: (1) origin-destination flows are indeed factorable into separable components (recovered decay, open-data attraction, and transferable origin production); (2) a stable set of 22 built-environment features can be mapped from open demographic and spatial repositories to support cross-city production and attraction modeling; and (3) under zero-shot transfer conditions, the decomposed model matches the predictive performance of unconstrained neural models (CPC of 0.7124 vs 0.7117) while significantly outperforming classical structural baselines.
 
 These results suggest that transferable human mobility structure may be lower-dimensional and more stable than previously assumed. If city-specific spatial interactions were highly complex and non-linear, monolithic neural architectures would decisively outperform gravity-based decomposition. Instead, the competitiveness of our three-component factorization suggests that the fundamental regularities of spatial interaction are well-captured by the multiplicative gravity structure, allowing the model to act as a regularizer that prevents overfitting to local source-city idiosyncrasies.
 
 For policy and planning applications, this framework enables deployability in cities lacking household travel surveys or mobile trajectories, while maintaining complete transparency. Planners can audit predictions, simulate interventions at the individual component level, and engage with public stakeholders using an explainable, component-wise framework that black-box neural networks cannot support.
 
-Unlike traditional gravity models, the proposed framework transfers learned components across cities. Unlike end-to-end neural models, it preserves interpretability while maintaining competitive predictive accuracy. Future work should investigate when and why urban systems satisfy the separability assumption underlying mobility decomposition, working toward a unified theory of transferable mobility structure. Additionally, research should address the framework's limitations through cross-national validation on other continents, meta-learning for few-shot adaptation, temporal robustness under shifts in hybrid work patterns, and finer spatial resolutions. Rather than treating urban mobility prediction as a purely data-hungry learning problem, our findings suggest that identifying and transferring stable structural mechanisms may provide a more scalable path toward globally deployable mobility models.
+Unlike traditional gravity models, the proposed framework bypasses target-city survey calibration by transferring learned production structures and recovering decay from aggregate data. Unlike end-to-end neural models, it preserves interpretability while maintaining competitive predictive accuracy. Future work should investigate when and why urban systems satisfy the separability assumption underlying mobility decomposition, working toward a unified theory of transferable mobility structure. Additionally, research should address the framework's limitations through cross-national validation on other continents, meta-learning for few-shot adaptation, temporal robustness under shifts in hybrid work patterns, and finer spatial resolutions. Rather than treating urban mobility prediction as a purely data-hungry learning problem, our findings suggest that identifying and transferring stable structural mechanisms may provide a more scalable path toward globally deployable mobility models.
 
 \section*{Appendix: Distance Decay Parameter Calibration and Optimization Details}\label{sec:appendix}
 
@@ -886,11 +895,11 @@ To achieve reliable convergence in maximum likelihood estimation (MLE) for the T
 \end{enumerate}
 
 \subsection*{A.2 Log-Space Reparameterization}
-To enforce the parameter bounds ($\beta > 0, \gamma \ge 0$) implicitly and avoid boundary instability during L-BFGS-B optimization, we apply an unconstrained log-space reparameterization:
+To enforce the parameter bounds ($\beta > 0, \gamma \ge 0$) implicitly and avoid boundary instability during L-BFGS-B optimization \citep{byrd1995limited}, we apply an unconstrained log-space reparameterization:
 \begin{equation}
   \tilde{\beta} = \log(\beta), \qquad \tilde{\gamma} = \log(\gamma)
 \end{equation}
-The optimization solver operates in the unconstrained space $(\tilde{\beta}, \tilde{\gamma}, \boldsymbol{\alpha})$, and the parameters are back-transformed via exponentials to evaluate the likelihood.
+The optimization solver \citep{byrd1995limited} operates in the unconstrained space $(\tilde{\beta}, \tilde{\gamma}, \boldsymbol{\alpha})$, and the parameters are back-transformed via exponentials to evaluate the likelihood.
 
 \subsection*{A.3 Multi-Restart L-BFGS-B Optimization}
 To prevent the optimizer from getting trapped in local optima on the likelihood surface, we utilize a multi-restart framework with 10 random restarts. Each restart $m \in \{1, \ldots, 10\}$ applies a Gaussian perturbation to the initial anchors:
@@ -912,7 +921,7 @@ Here, we detail the robustness tests conducted on Layer 1 regarding distance dec
 \end{description}
 
 \subsection*{A.5 GBDT Hyperparameters and Reproducibility Details}
-To ensure the reproducibility of the origin trip production ($O_i$) and destination attractiveness ($A_j$) estimators, the hyperparameter configurations for the Gradient Boosted Decision Tree (GBDT) models are summarized in Table~\ref{tab:gbdt_hyperparameters}. The models are trained using the \texttt{scikit-learn} and \texttt{LightGBM} libraries in Python, and hyperparameters are optimized using 5-fold cross-validation on the 25 source training cities.
+To ensure the reproducibility of the origin trip production ($O_i$) and destination attractiveness ($A_j$) estimators, the hyperparameter configurations for the Gradient Boosted Decision Tree (GBDT) models are summarized in Table~\ref{tab:gbdt_hyperparameters}. The models are trained using the \texttt{scikit-learn} and \texttt{LightGBM} libraries in Python \citep{lightgbm}, and hyperparameters are optimized using 5-fold cross-validation on the 25 source training cities.
 
 \begin{table*}[t]
 \centering

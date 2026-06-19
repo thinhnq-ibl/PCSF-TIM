@@ -1,4 +1,4 @@
-\begin{thebibliography}{13}
+\begin{thebibliography}{26}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -10,29 +10,81 @@
 Alis C, Legara EFT, Monterola C (2021) Generalized radiation model for human
   migration. Scientific Reports 11(1):22707. \doi{10.1038/s41598-021-02109-1}
 
+\bibitem[{Atwal et~al.(2025)Atwal, Anderson, Pfoser, and
+  Z{\"u}fle}]{atwal2025commuting}
+Atwal KS, Anderson T, Pfoser D, et~al (2025) Commuting flow prediction using
+  {OpenStreetMap} data. Computational Urban Science 5(1):2.
+  \doi{10.1007/s43762-025-00161-5}
+
 \bibitem[{Barbosa et~al.(2018)Barbosa, Barthelemy, Ghoshal, James, Lenormand,
   Louail et~al.}]{barbosa2018human}
 Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
-  applications. Physics Reports 734:1--74
+  applications. Physics Reports 734:1--74. \doi{10.1016/j.physrep.2018.01.001}
 
 \bibitem[{Brockmann et~al.(2006)Brockmann, Hufnagel, and
   Geisel}]{brockmann2006scaling}
 Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
   Nature 439(7075):462--465. \doi{10.1038/nature04292}
 
+\bibitem[{Byrd et~al.(1995)Byrd, Lu, Nocedal, and Zhu}]{byrd1995limited}
+Byrd RH, Lu P, Nocedal J, et~al (1995) A limited memory algorithm for bound
+  constrained optimization. SIAM Journal on Scientific and Statistical
+  Computing 16(5):1190--1208. \doi{10.1137/0916069}
+
+\bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
+  De~Domenico}]{gallotti2024distorted}
+Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
+  human mobility data. Communications Physics 7(1):1--10.
+  \doi{10.1038/s42005-024-01909-x}
+
 \bibitem[{Gonz{\'a}lez et~al.(2008)Gonz{\'a}lez, Hidalgo, and
   Barab{\'a}si}]{gonzalez2008understanding}
 Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
   human mobility patterns. Nature 453(7196):779--782. \doi{10.1038/nature06958}
 
+\bibitem[{Jin et~al.(2022)Jin, Wu, Wang, Liang, and Tang}]{jin2022crosstres}
+Jin G, Wu Y, Wang M, et~al (2022) Selective cross-city transfer learning for
+  traffic prediction via source city region re-weighting. In: Proceedings of
+  the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining.
+  Association for Computing Machinery, pp 729--739,
+  \doi{10.1145/3534678.3539345}
+
+\bibitem[{Ke et~al.(2017)Ke, Meng, Finley, Wang, Chen, Ma, Ye, and
+  Liu}]{lightgbm}
+Ke G, Meng Q, Finley T, et~al (2017) Lightgbm: A highly efficient gradient
+  boosting decision tree. In: Advances in Neural Information Processing Systems
+  30. Curran Associates, Inc., p 3146--3154, \doi{10.5555/3294996.3295074}
+
+\bibitem[{Lenormand et~al.(2012)Lenormand, Huet, Gargiulo, and
+  Deffuant}]{lenormand2012universal}
+Lenormand M, Huet S, Gargiulo F, et~al (2012) A universal model of commuting
+  networks. PLoS One 7(10):e45985. \doi{10.1371/journal.pone.0045985}
+
 \bibitem[{Lundberg and Lee(2017)}]{lundberg2017unified}
 Lundberg SM, Lee SI (2017) A unified approach to interpreting model
-  predictions. Advances in Neural Information Processing Systems 30:4765--4774
+  predictions. Advances in Neural Information Processing Systems 30:4765--4774.
+  \doi{10.48550/arXiv.1705.07874}
 
-\bibitem[{Mai et~al.(2022)}]{mai2022geospatial}
-Mai G, et~al (2022) Towards a foundation model for geospatial artificial
-  intelligence. ACM Transactions on Intelligent Systems and Technology
-  13(6):1--25
+\bibitem[{Mai et~al.(2022)Mai, Cundy, Choi, Song, Shofi
+  et~al.}]{mai2022geospatial}
+Mai G, Cundy C, Choi K, et~al (2022) Towards a foundation model for geospatial
+  artificial intelligence. ACM Transactions on Intelligent Systems and
+  Technology 13(6):1--25. \doi{10.1145/3557915.3561043}
+
+\bibitem[{Mendieta et~al.(2023)Mendieta, Han, Shi, Zhu, and
+  Chen}]{mendieta2023geogpt}
+Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
+  continual pretraining. In: Proceedings of the IEEE/CVF International
+  Conference on Computer Vision, pp 16781--16790,
+  \doi{10.1109/ICCV53024.2023.01529}
+
+\bibitem[{{Meta AI} and {Center for International Earth Science Information
+  Network (CIESIN)}(2016)}]{meta_hrsl}
+{Meta AI}, {Center for International Earth Science Information Network
+  (CIESIN)} (2016) High resolution settlement layer ({HRSL}). Tech. rep., Meta
+  Platforms, Inc. / Columbia University, distributed via Humanitarian Data
+  Exchange (HDX).
+  \url{https://data.humdata.org/dataset/highresolutionpopulationdensitymaps}
 
 \bibitem[{Rong et~al.(2023)Rong, Feng, Ding et~al.}]{Rong2023goddag}
 Rong C, Feng J, Ding J, et~al (2023) {GODDAG}: Generating origin-destination
@@ -51,6 +103,10 @@ Simini F, Barlacchi G, Luca M, et~al (2021) A deep gravity model for mobility
   flows generation. Nature Communications 12(1):5647.
   \doi{10.1038/s41467-021-26752-6}
 
+\bibitem[{Song et~al.(2010)Song, Qu, Blumm, and Barab{\'a}si}]{song2010limits}
+Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
+  Science 327(5968):1018--1021. \doi{10.1126/science.1177170}
+
 \bibitem[{Stouffer(1940)}]{stouffer1940intervening}
 Stouffer SA (1940) Intervening opportunities: A theory relating mobility and
   distance. American Sociological Review 5(6):845--867. \doi{10.2307/2084520}
@@ -59,12 +115,36 @@ Stouffer SA (1940) Intervening opportunities: A theory relating mobility and
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
   Paper~51, Road Research Laboratory, London
 
-\bibitem[{Wang et~al.(2019)Wang, Cao, and Yu}]{wang2019origin}
-Wang S, Cao J, Yu P (2019) Origin-destination flow prediction via
-  spatial-temporal relation learning. Pattern Recognition 96:106967
+\bibitem[{Tatem(2017)}]{worldpop2018}
+Tatem AJ (2017) {WorldPop}, open data for spatial demography. Scientific Data
+  4:170004. \doi{10.1038/sdata.2017.4}, worldPop gridded population datasets
+  available at \url{https://www.worldpop.org/}
+
+\bibitem[{Wang et~al.(2018)Wang, Geng, Ma, Yang, Cao, and
+  Zheng}]{wang2018regiontrans}
+Wang L, Geng X, Ma X, et~al (2018) Crowd flow prediction by deep
+  spatio-temporal transfer learning. In: Proceedings of the 27th International
+  Joint Conference on Artificial Intelligence, pp 1341--1347,
+  \doi{10.24963/ijcai.2018/186}
+
+\bibitem[{Wang et~al.(2021)Wang, Cao, and Yu}]{wang2019origin}
+Wang S, Cao J, Yu PS (2021) Deep learning based origin-destination prediction
+  via contextual information fusion. Multimedia Tools and Applications
+  80(20):30427--30449. \doi{10.1007/s11042-020-09355-6}
+
+\bibitem[{Wang et~al.(2022)Wang, Jin, Sun, Chen, Chen, and Li}]{wang2022when}
+Wang X, Jin K, Sun L, et~al (2022) When transfer learning meets cross-city
+  urban flow prediction: Spatio-temporal adaptation matters. In: Proceedings of
+  the Thirty-First International Joint Conference on Artificial Intelligence
+  (IJCAI-22), pp 2219--2225, \doi{10.24963/ijcai.2022/308}
 
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated
   developments. Environment and Planning A 3(1):1--32. \doi{10.1068/a030001}
+
+\bibitem[{Yao et~al.(2019)Yao, Liu, Wei, Tang, and Li}]{yao2020meta}
+Yao H, Liu Y, Wei Y, et~al (2019) Learning from multiple cities: A
+  meta-learning approach for spatial-temporal prediction. In: Proceedings of
+  the Web Conference 2019, pp 2123--2129, \doi{10.1145/3308558.3313577}
 
 \end{thebibliography}
