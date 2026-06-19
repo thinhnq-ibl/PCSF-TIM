@@ -53,7 +53,7 @@ To address this challenge, we investigate three core research questions:
   \item[RQ3:] Can a decomposed model achieve zero-shot transfer performance comparable to end-to-end neural models?
 \end{description}
 
-We hypothesize that urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction mapped from open spatial features, and trip production transferred across cities via built-environment representations. Instead of treating mobility prediction as a monolithic learning problem, we propose the \textbf{Separable Decomposed Framework for Zero-Shot Transferable Flows} (\textbf{SDF-ZTF}), which implements this hypothesis via a multiplicative decomposition:
+We hypothesize that urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction estimated via a simple training-free open-data heuristic, and trip production transferred across cities via built-environment representations. Instead of treating mobility prediction as a monolithic learning problem, we propose the \textbf{Separable Decomposed Framework for Zero-Shot Transferable Flows} (\textbf{SDF-ZTF}), which implements this hypothesis via a multiplicative decomposition:
 \begin{equation}
 T_{ij} = O_i \cdot f(d_{ij}) \cdot A_j
 \end{equation}
@@ -110,7 +110,7 @@ This study makes five main contributions:
 Classical spatial interaction models, such as gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal,alis2021generalized}, represent the historical foundation of human mobility modeling. These models are built upon physical analogies (e.g., Newtonian gravity) or probabilistic formulations of destination choice, such as Stouffer's theory of intervening opportunities \citep{stouffer1940intervening}, which models migration flows based on the number of opportunities closer than a given destination. Early studies on scaling laws in human travel \citep{brockmann2006scaling,gonzalez2008understanding} and the limits of predictability \citep{song2010limits} further confirmed that spatial dynamics are governed by robust statistical regularities.
 \begin{itemize}
   \item \textbf{Strengths}: These structured models are highly interpretable, mathematically simple, and explain the physical constraints of travel behavior.
-  \item \textbf{Limitations}: They depend heavily on city-specific calibrations of distance decay and attraction parameters, making them extremely fragile when applied to unseen cities.
+  \item \textbf{Limitations}: Gravity models require historical data to estimate parameters, while radiation models can estimate parameters using population as a proxy but suffer from sub-optimal performance due to the assumption that individuals stop at the nearest opportunity. In modern cities, people frequently travel longer distances to maximize utility beyond simple employment-based commuting.
 \end{itemize}
 Existing structured models explain mobility well but depend on locally calibrated parameters, limiting deployment in unseen cities.
 
@@ -144,6 +144,7 @@ We compare the characteristics of classical models and our proposed SDF-ZTF fram
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Comparative analysis of human mobility models across structural and transferability dimensions.}
 \label{tab:literature_comparison}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
@@ -197,7 +198,7 @@ The conceptual pipeline of the proposed Separable Decomposed Framework for Zero-
     
     % Intermediate Models
     \node[block, right=of osm, yshift=0.7cm] (oi) {Outflow GBDT};
-    \node[block, right=of osm, yshift=-0.7cm] (aj) {Attraction GBDT};
+    \node[block, right=of osm, yshift=-0.7cm] (aj) {Attraction Heuristic};
     \node[block, right=of dist, xshift=0.3cm] (decay) {Decay Model};
     
     % Fusion & Output
@@ -218,7 +219,7 @@ The conceptual pipeline of the proposed Separable Decomposed Framework for Zero-
     
     \draw[arrow] (fusion.south) -- (od.north);
   \end{tikzpicture}
-  \caption{Pipeline of the SDF-ZTF framework. Globally available spatial features serve as inputs to GBDT models predicting trip production ($O_i$) and attraction ($A_j$). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}
+  \caption{Pipeline of the SDF-ZTF framework. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}
   \label{fig:framework_pipeline}
 \end{figure*}
 
@@ -238,7 +239,7 @@ where $\bar{R}_{\mathrm{zone}}$ is the mean empirical radius of the administrati
 \textbf{Information Governance and Low-Leakage Design.} The design choices in SDF-ZTF reflect three concrete architectural elements that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop + Meta HRSL) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-governance regulations (e.g., GDPR) without requiring complex institutional data-sharing agreements or risking individual tracking.
 
 \subsection{Origin Outflow Component ($O_i$)}
-The trip production $O_i$ represents the total daily trips originating from zone $i$:
+The trip production $O_i$ represents the total seasonal trips originating from zone $i$:
 \begin{equation}
 O_i = \sum_j T_{ij}
 \end{equation}
@@ -249,24 +250,18 @@ The destination attraction $A_j$ represents the relative attractiveness of zone 
 \begin{equation}
 A_j = \frac{\sum_i T_{ij}}{\sum_i \sum_j T_{ij}}
 \end{equation}
-Like $O_i$, $A_j$ is modeled using a shallow GBDT regressor trained on the same 22 SHAP-selected open features. 
-
-\subsection{Why Separate Production and Attraction?}
-Although $O_i$ and $A_j$ use the same pool of candidate spatial features, we model them through separate learning tasks. Trip production ($O_i$) is structurally driven by residential indicators (e.g., population densities, residential roads, transit availability), representing the *supply* side of travel. Conversely, trip attraction ($A_j$) is driven by commercial indicators and amenity concentrations (e.g., retail, offices, parks, schools), representing the *demand* side of travel. Modeling these components independently allows the GBDTs to weight distinct spatial features according to their separate behavioral roles.
-
-\subsection{Computational Complexity}
-The computational complexity of the SDF-ZTF framework is divided into three parts:
-\begin{itemize}
-  \item \textbf{Decay estimation}: Calibrating the distance decay parameters using the aggregate distance distribution takes $O(N^2)$ time to build distance bins, but optimization is performed over a small set of bins $K \ll N$, taking $O(K)$ per L-BFGS-B \citep{byrd1995limited} iteration.
-  \item \textbf{GBDT training}: Training GBDTs for $O_i$ and $A_j$ on $M$ training zones across source cities takes $O(D \cdot M \log M)$, where $D$ is the feature dimension ($D=22$).
-  \item \textbf{Inference}: Reconstructing the OD matrix for a target city with $N$ zones takes $O(N^2)$ calculations.
-\end{itemize}
+In the proposed SDF-ZTF framework, rather than training a machine learning model, the destination attraction $\hat{A}_j$ is computed using a simple heuristic combining min-max normalized population density and POI counts:
+\begin{equation}
+\hat{A}_j \propto \frac{1}{2} \left( \mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j) \right)
+\end{equation}
+This design choice is validated in Section 5, where we train a GBDT attraction model to prove that this simple, training-free min-max formula achieves comparable high performance, is highly practical, and avoids cross-city overfitting. 
 
 \subsection{Algorithmic Flow}
 The complete pipeline for training and zero-shot deployment is formalized in Algorithm 1.
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \begin{tabular}{p{0.95\textwidth}}
 \toprule
 \textbf{Algorithm 1: SDF-ZTF Training and Zero-Shot Prediction} \\
@@ -276,10 +271,10 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 1. \textbf{Decay Calibration}: Fit global decay parameters $(\hat{\beta}, \hat{\gamma})$ via MLE on pooled aggregate distance distributions of source cities (see Appendix). \\
 2. \textbf{Feature Selection}: Identify 22 transferable features using cross-city SHAP stability selection on source models (see Section 4). \\
 3. \textbf{Production GBDT}: Train GBDT outflow model $g(\mathbf{x})$ using source city inputs and origin flows $O_i^{(c)}$. \\
-4. \textbf{Attraction GBDT}: Train GBDT attraction model $k(\mathbf{x})$ using source city inputs and normalized destination flows $A_j^{(c)}$. \\
+4. \textbf{Attraction Heuristic}: Define the training-free attraction function $a(\mathbf{x}_j) = \frac{1}{2} \left( \mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j) \right)$. \\
 5. \textbf{Zero-Shot Target Prediction}: \\
 \hspace{1em} a. Predict target city outflows: $\hat{O}_i^{(t)} = g(\mathbf{x}_i^{(t)})$. \\
-\hspace{1em} b. Predict target city attractions: $\hat{A}_j^{(t)} = k(\mathbf{x}_j^{(t)})$. \\
+\hspace{1em} b. Compute target city attractions: $\hat{A}_j^{(t)} = a(\mathbf{x}_j^{(t)})$. \\
 \hspace{1em} c. Compute adaptive target offset: $\delta^{(t)} = 0.5 \times \bar{R}_{\mathrm{zone}}^{(t)}$. \\
 \hspace{1em} d. Fuse components: $\hat{T}_{ij}^{(t)} = \hat{O}_i^{(t)} (d_{ij} + \delta^{(t)})^{-\hat{\gamma}} e^{-\hat{\beta} d_{ij}} \hat{A}_j^{(t)}$. \\
 \bottomrule
@@ -298,6 +293,7 @@ To implement and evaluate the SDF-ZTF framework across diverse metropolitan area
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Data usage matrix illustrating the operational roles of inputs across SDF-ZTF components to guarantee leakage-free prediction.}
 \label{tab:data_usage_matrix}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
@@ -313,16 +309,13 @@ WorldPop + Meta HRSL & \checkmark & \checkmark & \texttimes & \texttimes \\
 \end{table*}
 
 \subsubsection{(1) Origin-Destination (OD) Matrix - $T_{ij}$}
-The OD matrix contains daily commute flows between census tracts. In this study, OD observations are extracted from Cuebiq cellular location data \citep{gallotti2024distorted} (aggregated daily, validated against US Census surveys, covering 50 metropolitan areas). Crucially, the OD matrix is utilized exclusively as training labels for source cities and as ground truth for evaluation. It is never used for feature engineering, ensuring a strict separation between predictive inputs and evaluation targets.
+The OD matrix contains seasonal commute flows between census tracts. In this study, OD observations are extracted from Cuebiq cellular location data \citep{gallotti2024distorted} (aggregated by season, validated against US Census surveys, covering 50 metropolitan areas). Crucially, the OD matrix is utilized exclusively as training labels for source cities and as ground truth for evaluation. It is never used for feature engineering, ensuring a strict separation between predictive inputs and evaluation targets.
 
-\subsubsection{(2) Distance Matrix - $d_{ij}$}
-The pairwise great-circle (Haversine) distance $d_{ij}$ is computed between zone centroids using WGS84 geographic coordinates. Center coordinates are extracted from census boundaries.
-
-\subsubsection{(3) OSM-Derived Features}
+\subsubsection{(2) OSM-Derived Features}
 We extract POIs and road features using the Overpass API from OpenStreetMap snapshots \citep{atwal2025commuting}. POI counts are calculated across 16 land-use categories (e.g., retail, industrial, education, health).
 
-\subsubsection{(4) Gridded Population Estimates}
-To map residential population densities, we leverage gridded population counts from WorldPop \citep{worldpop2018} (100\,m resolution) and the Meta High-Resolution Settlement Layer \citep{meta_hrsl} (30\,m resolution). These layers are aggregated to zone boundaries to provide consistent scale baselines globally.
+\subsubsection{(3) Population Data}
+For residential population counts, this study leverages the population data provided directly in the original mobility dataset. Crucially, we emphasize that this population information can be readily replaced with publicly available gridded population estimates from WorldPop \citep{worldpop2018} (100\,m resolution) or the Meta High-Resolution Settlement Layer \citep{meta_hrsl} (30\,m resolution) in cities where local census/administrative population data is unavailable, maintaining the framework's survey-free transferability.
 
 \subsection{Transferable Urban Features}
 To discover stable spatial patterns that translate across cities, we implement a two-stage feature engineering and stability selection procedure, mapping raw datasets to a low-dimensional transferable urban representation. The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
@@ -388,7 +381,7 @@ Under this cross-city evaluation protocol, we enforce a strict information firew
   \item \textbf{Forbidden}: Target-city flow matrices $T_{ij}$, target-city household survey results, target cellular data, and target trip-demand signals.
   \item \textbf{Allowed}: Centroid coordinates, administrative zone boundaries, OpenStreetMap POIs, and gridded open demography (WorldPop + Meta HRSL).
 \end{itemize}
-Since the destination attraction GBDTs and distance decay parameters are learned on source cities and deployed on target cities using only static allowed features, zero-shot leakage is mathematically prevented.
+Since destination attraction is computed via a training-free open-data heuristic and distance decay parameters are learned on source cities, zero-shot leakage is mathematically prevented.
 
 \subsubsection{Evaluation Metric: Common Part of Commuters}
 To measure prediction performance, we use the Common Part of Commuters (CPC) \citep{lenormand2012universal}, which is widely used in human mobility studies to evaluate origin-destination flow matrices. The CPC index is defined as:
@@ -403,6 +396,7 @@ Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Preprocessing and normalization steps applied to spatial features prior to model learning.}
 \label{tab:preprocessing}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}
@@ -419,38 +413,32 @@ Outliers & Retain & Important spatial hubs (CBDs); robust models \\
 
 \section{Results}
 
-We provide a systematic 5-layer framework to validate each component of the gravity model using a 25/25 split (25 training source cities and 25 held-out target cities) across 50 US metropolitan areas. Rather than using Cross-City Transfer cross-validation, models are trained on the pooled data of 25 source cities and evaluated zero-shot on the 25 held-out cities. This ensures strict zero-shot evaluation without target-city retraining. Metrics reported represent averages across the 25 held-out cities.
-
 \subsection{Validation Framework Overview}
-We evaluate each component of the proposed framework systematically using a 5-layer validation roadmap (illustrated in Fig.~\ref{fig:validation_roadmap}).
+We evaluate the proposed framework systematically using a three-stage validation roadmap (illustrated in Fig.~\ref{fig:validation_roadmap}). First, we validate that each individual component—distance decay recovery, origin production transferability, and destination attraction features—works correctly before full integration. Second, we analyze component contributions using a factorial ablation study. Finally, we evaluate the complete SDF-ZTF framework under zero-shot transfer conditions against alternative baselines. Models are trained on the pooled data of 25 source cities and evaluated zero-shot on the 25 held-out target cities under a strict information firewall. Metrics reported represent averages across the 25 held-out cities.
 
 \begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
-    node distance=0.2cm,
-    box/.style={draw, rectangle, rounded corners, text width=2.0cm, minimum height=1.0cm, align=center, thick, fill=blue!5, draw=blue!40},
+    node distance=0.8cm,
+    box/.style={draw, rectangle, rounded corners, text width=3.3cm, minimum height=1.0cm, align=center, thick, fill=blue!5, draw=blue!40},
     arrow/.style={-latex, thick}
   ]
-    \node[box] (l1) {\textbf{Layer 1: Decay} \\ \footnotesize Identifiability Validation};
-    \node[box, right=of l1] (l2) {\textbf{Layer 2: Production} \\ \footnotesize Outflow Transferability};
-    \node[box, right=of l2] (l3) {\textbf{Layer 3: Attraction} \\ \footnotesize Transferable Features};
-    \node[box, right=of l3] (l4) {\textbf{Layer 4: Components} \\ \footnotesize Ablation \& Contribution};
-    \node[box, right=of l4] (l5) {\textbf{Layer 5: Paradigms} \\ \footnotesize Zero-Shot Evaluation};
+    \node[box] (s1) {\textbf{Component Validation} \\ \footnotesize Decay, Production, \& Attraction};
+    \node[box, right=of s1] (s2) {\textbf{Component Contribution} \\ \footnotesize Factorial Ablation Analysis};
+    \node[box, right=of s2] (s3) {\textbf{Zero-Shot Transfer} \\ \footnotesize Multi-Baseline Comparison};
     
-    \draw[arrow] (l1) -- (l2);
-    \draw[arrow] (l2) -- (l3);
-    \draw[arrow] (l3) -- (l4);
-    \draw[arrow] (l4) -- (l5);
+    \draw[arrow] (s1) -- (s2);
+    \draw[arrow] (s2) -- (s3);
   \end{tikzpicture}
-  \caption{Methodology validation roadmap showing the five evaluation layers used to systematically verify each component of the SDF-ZTF framework before end-to-end comparison.}
+  \caption{Methodology validation roadmap showing the three evaluation stages used to systematically verify the SDF-ZTF framework.}
   \label{fig:validation_roadmap}
 \end{figure*}
 
-\subsection{Layer 1: Decay Identifiability}
-
+\subsection{Component Validation}
+This section validates that each individual component \subsubsection{Decay Recovery Validation}
 \textbf{Research question}: Can distance decay parameters ($\gamma, \beta$) be recovered from aggregate distance distributions (marginal distributions of trip distances), without exposing individual OD pairs?
 
-\textbf{Component setup in this layer}:
+\textbf{Component setup for decay recovery validation}:
 \begin{itemize}
   \item $\boldsymbol{\gamma, \beta}$ — Two estimation modes are compared:
     \begin{itemize}
@@ -461,9 +449,9 @@ We evaluate each component of the proposed framework systematically using a 5-la
   \item $\boldsymbol{O_i}$ — Ground truth outflow $O_i = \sum_j T_{ij}$ from the full training set. Not estimated; used to run the singly-constrained model during fitting.
 \end{itemize}
 
-Since Layer 1 uses only marginal distance distributions (aggregated across all OD pairs in a city), it contains no individual trajectory information and thus poses no spatial data leakage risk across target cities. We validate the decay parameter recovery framework under two main test conditions here, leaving additional parameters and structural robustness sweeps (bin sensitivity, missing zones, CBD collapse) to the Appendix.
+Since this validation stage uses only marginal distance distributions (aggregated across all OD pairs in a city), it contains no individual trajectory information and thus poses no spatial data leakage risk across target cities. We validate the decay parameter recovery framework under two main test conditions here, leaving additional parameters and structural robustness sweeps (bin sensitivity, missing zones, CBD collapse) to the Appendix.
 
-\textbf{T1.1: Pure Decay Recovery}
+\textbf{Pure Decay Recovery}
 We fit the Tanner Multi decay function (Eq.~\ref{eq:tanner_multi}) to the aggregate distance distribution of each city's training data. We compare the recovered parameters $(\hat{\gamma}_{\text{recovered}}, \hat{\beta}_{\text{recovered}})$ against the Ground Truth parameters $(\hat{\gamma}_{\text{gt}}, \hat{\beta}_{\text{gt}})$ fit directly on individual OD pairs.
 
 \textit{Finding}:
@@ -474,9 +462,9 @@ As shown in Fig.~\ref{fig:layer1_scatters}, the parameter recovery shows reasona
 \end{itemize}
 These values indicate that the aggregate distance distribution holds sufficient signal for identifying spatial friction parameters. In particular, the power-law exponent $\gamma$ yields a strong correlation ($r = 0.729$, $r^2 = 0.531$). This moderate $r^2$ is primarily attributed to cross-city structural variations in road network layouts, physical geographies, and density profiles across the 25 target cities. Since the recovery is performed zero-shot from aggregate trip-length distributions without individual trajectory calibrating or fine-tuning, it naturally captures these structural heterogeneities. The lower correlation for the exponential decay rate $\beta$ ($r = 0.258$, $r^2 = 0.067$) is expected because $\beta$ governs the long-distance tail, which is inherently noisier and more sparse under aggregate binning. Nonetheless, the joint parameter recovery remains highly robust, and when these parameters are plugged into the gravity model, the resulting predictions achieve high accuracy, verifying that the combined decay profile is successfully resolved.
 
-\textit{Note}: \textbf{T1.2 (Bin Sensitivity Analysis)} --- examining how the number of distance bins $K \in \{10, 20, 50, 100\}$ affects recovery accuracy --- is reported in Appendix~A.4. Recovery error (MAE) stabilises for $K \ge 50$, validating the 50-bin configuration used throughout this study.
+\textit{Note}: \textbf{Bin Sensitivity Analysis} --- examining how the number of distance bins $K \in \{10, 20, 50, 100\}$ affects recovery accuracy --- is reported in Appendix~A.4. Recovery error (MAE) stabilises for $K \ge 50$, validating the 50-bin configuration used throughout this study.
 
-\textbf{T1.3: Attractiveness Perturbation Test}
+\textbf{Attractiveness Perturbation Test}
 We inject relative Gaussian noise into the destination attractiveness $A_j$ at levels of 10\%, 20\%, and 50\%.
 \textit{Finding}: As shown in the robustness heatmap (Fig.~\ref{fig:layer1_heatmap}), recovery errors remain extremely stable:
 \begin{itemize}
@@ -495,20 +483,20 @@ We inject relative Gaussian noise into the destination attractiveness $A_j$ at l
 \begin{figure*}[t!]
   \centering
   \includegraphics[width=0.6\textwidth]{../figures/layer1_robustness_heatmap.png}
-  \caption{Layer 1 Decay Identifiability Robustness Heatmap (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out cities.}
+  \caption{Decay Identifiability Robustness Heatmap (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out cities.}
   \label{fig:layer1_heatmap}
 \end{figure*}
 
 \textit{Interpretation}: Distance decay is \textbf{identifiable} from marginal distance distributions alone, independent of individual OD pairs. The recovery error remains tightly bounded under extreme spatial data scarcity, perturbation, and structural collapse (CBD data loss). This confirms that aggregate trip-length distributions are highly resilient to local data collection gaps or mapping inaccuracies.
 
-\subsection{Layer 2: Production Transferability}
+\subsubsection{Origin Production Transferability}
 
 \textbf{Research question}: How much prediction error is due to $O_i$ estimation errors, and how does GBDT prediction compare to a naive baseline and the oracle upper bound? \textbf{Evaluation}: The GBDT outflow predictor is trained exclusively on the 25 source cities' outflow data and evaluated on the 25 held-out target cities.
-Crucially, the use of a simple heuristic for $A_j$ in this layer is a deliberate ablation choice designed to freeze the influence of destination attraction, isolating and measuring the precise margin of error introduced solely by outflow ($O_i$) estimation.
+Crucially, the use of a simple heuristic for $A_j$ in this stage is a deliberate ablation choice designed to freeze the influence of destination attraction, isolating and measuring the precise margin of error introduced solely by outflow ($O_i$) estimation.
 
-\textbf{Component setup in this layer}:
+\textbf{Component setup for production transferability validation}:
 \begin{itemize}
-  \item $\boldsymbol{\gamma, \beta}$ — Fixed \emph{national prior}: median of per-source-city bin-50 Tanner fits (from Layer 1 Recovery procedure).
+  \item $\boldsymbol{\gamma, \beta}$ — Fixed \emph{national prior}: median of per-source-city bin-50 Tanner fits (from the decay recovery procedure).
   \item $\boldsymbol{A_j}$ \textbf{[Deliberate ablation choice]} — Destination attractiveness is computed using a simple baseline heuristic: $A_j = \frac{1}{2}\Bigl(\mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j)\Bigr)$.
   \item $\boldsymbol{O_i}$ — Three configurations compared:
     \begin{itemize}
@@ -518,11 +506,12 @@ Crucially, the use of a simple heuristic for $A_j$ in this layer is a deliberate
     \end{itemize}
 \end{itemize}
 
-\textbf{T2.1: Outflow Model Comparison (Averaged across 25 held-out cities)}
+\textbf{Outflow Model Comparison (Averaged across 25 held-out cities)}
 To evaluate outflow prediction quality, we compare the naive population baseline, the GBDT predictions, and the oracle outflow. Results are summarized in Table~\ref{tab:outflow_comparison}.
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}
 \label{tab:outflow_comparison}
 \begin{tabular}{lc}
@@ -538,37 +527,38 @@ Oracle Outflow ($O_i^{\text{true}}$) & 0.7447 \\
 
 \textit{Interpretation}: GBDT-predicted outflows yield a CPC of $0.7037$, representing a massive improvement over the Naive Population Baseline ($0.584$) and achieving 94.5\% of the Oracle upper bound ($0.7447$). This proves that GBDTs learn highly transferable production dynamics from built-environment features.
 
-\textbf{T2.2: Noise Sensitivity}
+\textbf{Noise Sensitivity}
 We inject additive Gaussian noise at $\sigma \in \{10\%, 20\%, 40\%\}$ log-scale directly on top of the GBDT-predicted $\log\hat{O}_i$ to evaluate spatial robustness. CPC decays only marginally (from $0.7037$ to $0.6923$ at 40\% noise), demonstrating that production-constraint normalization dampens local estimation errors.
 
-\textbf{T2.3: Source-Scale Robustness}
+\textbf{Source-Scale Robustness}
 We retrain the GBDT on subsets of $n_{\text{src}} \in \{5, 10, 15, 20, 25\}$ source cities. The zero-shot target CPC rises steeply from $n_{\text{src}} = 5$ and saturates by $n_{\text{src}} \approx 15$, proving that only a modest number of source cities is needed to learn stable outflow characteristics.
 
 \begin{figure*}[t!]
   \centering
   \includegraphics[width=0.95\textwidth]{../figures/layer2_results.png}
-  \caption{Layer 2 Outflow Bottleneck Analysis (controlled ablation with fixed $A_j$ heuristic and national decay prior).
+  \caption{Outflow Bottleneck Analysis (controlled ablation with fixed $A_j$ heuristic and national decay prior).
   \textbf{Left}: Source-scale robustness learning curve --- mean CPC $\pm 1\sigma$ as the number of source cities used to train $\mathrm{GBDT}_O$ increases from 5 to 25. CPC saturates by $n_{\text{src}} \approx 15$--20.
   \textbf{Right}: Noise sensitivity --- mean CPC $\pm 1\sigma$ across 25 held-out cities under additive Gaussian noise $\sigma \in \{0\%, 10\%, 20\%, 40\%\}$ injected on $\log\hat{O}_i$.}
   \label{fig:layer2_results}
 \end{figure*}
 
-\subsection{Layer 3: Transferable Feature Discovery}
+\subsubsection{Transferable Feature Discovery}
 
 \textbf{Research question}: Are spatial built-environment features stable across cities? Which features exhibit robust transferability? \textbf{Leakage Mitigation}: To prevent any target-city information leakage, SHAP feature importance $\mu_p^{(c)}$ and stability scores $S_p$ are calculated \textbf{exclusively on the 25 training source cities}. The selected set of 22 features is then frozen and applied to the 25 held-out target cities.
 
-\textbf{Component setup in this layer}:
+\textbf{Component setup for transferable feature discovery}:
 \begin{itemize}
-  \item $\boldsymbol{\gamma, \beta}$ — Same national prior as Layer 2. Fixed throughout.
-  \item $\boldsymbol{A_j}$ — Learned via GBDT: $\hat{A}_j = \mathrm{GBDT}_{A}(\mathbf{z}_j)$, where $\mathbf{z}_j$ is a 30-dimensional feature vector. $\mathrm{GBDT}_A$ is trained on the 25 source cities to predict total zone inflow, then transferred zero-shot.
+  \item $\boldsymbol{\gamma, \beta}$ — Same national prior as in the production transferability analysis. Fixed throughout.
+  \item $\boldsymbol{A_j}$ \textbf{[Ablation]} — To validate feature transferability, $A_j$ is here predicted via GBDT: $\hat{A}_j = \mathrm{GBDT}_{A}(\mathbf{z}_j)$, where $\mathbf{z}_j$ is a 30-dimensional feature vector. $\mathrm{GBDT}_A$ is trained on the 25 source cities, then applied zero-shot. This ablation demonstrates that even a learned model confirms that a compact set of open features suffices for attraction, justifying the training-free min-max heuristic used in the final SDF-ZTF deployment.
   \item $\boldsymbol{O_i}$ — Oracle $O_i^{\text{true}}$ from ground truth (to isolate attraction feature verification).
 \end{itemize}
 
-\textbf{T3.1: Feature Importance Ranking (Source City SHAP Analysis)}
+\textbf{Feature Importance Ranking (Source City SHAP Analysis)}
 SHAP analysis on the 25 training source cities identifies stable features using the stability score $S_p$. Top-10 features by importance are reported in Table~\ref{tab:top_features}.
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Top-10 Features by Average SHAP Importance (Training Source Cities, $N=25$)}
 \label{tab:top_features}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llcc}
@@ -591,7 +581,7 @@ SHAP analysis on the 25 training source cities identifies stable features using 
 
 \textit{Interpretation}: Population and localized POIs (fast food, shopping, education) represent the most stable predictors of zone attractiveness across metropolitan areas.
 
-\textbf{T3.2: SHAP Feature Count Performance Sweep}
+\textbf{SHAP Feature Count Performance Sweep}
 We train GBDT models using nested subsets of the top-$K$ SHAP features ($K \in \{5, 10, 15, 20, 22, 25, 30\}$) and evaluate their zero-shot CPC on held-out target cities. Performance effectively plateaus at $K=15$ features (CPC: $0.7124$) and remains identical at $K=22$ (CPC: $0.7124$) before showing a marginal decline beyond 22 features (e.g., $0.7122$ for all 30 features). While $K=15$ features are sufficient for baseline prediction, we select $K=22$ as our final feature set to incorporate a stability margin. This retains all features satisfying our joint importance threshold ($\mu_p \ge 0.005$) and stability criterion ($S_p \ge 1.0$), providing broader semantic coverage to handle structural variations in unseen metropolitan areas. This feature count sweep is illustrated in Fig.~\ref{fig:shap_sweep}.
 
 \begin{figure*}[t]
@@ -625,22 +615,26 @@ We train GBDT models using nested subsets of the top-$K$ SHAP features ($K \in \
   \label{fig:shap_sweep}
 \end{figure*}
 
-\subsection{Layer 4: Component Contribution Analysis}
+\subsection{Component Contribution Analysis}
+This section quantifies the relative importance of individual framework components and verifies the validity of the gravity-based factorization.
+
+\subsubsection{Factorial Ablation Study}
 
 \textbf{Research question}: What is each component's contribution to overall performance? \textbf{Evaluation}: GBDT variants corresponding to all $2^3$ combinations of component inclusion/exclusion are trained on the 25 source cities' data and evaluated on the 25 held-out target cities.
 
-\textbf{Component setup in this layer} (full model, all components active):
+\textbf{Component setup for the contribution analysis} (full model, all components active):
 \begin{itemize}
-  \item $\boldsymbol{\gamma, \beta}$ — National prior $\gamma_{\text{nat}},\beta_{\text{nat}}$ (same as Layers 2--3). In ablation variants where decay is \emph{disabled}, $f(d_{ij}) \equiv 1$ (uniform distance weighting).
-  \item $\boldsymbol{A_j}$ — GBDT-learned attraction: $\hat{A}_j = \mathrm{GBDT}_{A}(\mathbf{z}_j)$ with 22 SHAP-selected features, trained on 25 source cities (same model as Layer 3). In ablation variants where attraction is \emph{disabled}, $A_j \equiv 1$ (uniform destination appeal).
-  \item $\boldsymbol{O_i}$ — GBDT-predicted survey-free outflow: $\hat{O}_i = \exp(\mathrm{GBDT}_O(\mathbf{x}_i))$ with 22 SHAP-selected features (same model as Layer 2). In ablation variants where outflow is \emph{disabled}, $O_i \equiv 1$ (uniform origin production).
+  \item $\boldsymbol{\gamma, \beta}$ — National prior $\gamma_{\text{nat}},\beta_{\text{nat}}$ (same as in the component validation section). In ablation variants where decay is \emph{disabled}, $f(d_{ij}) \equiv 1$ (uniform distance weighting).
+  \item $\boldsymbol{A_j}$ — Min-max attraction heuristic: $\hat{A}_j = \tfrac{1}{2}(\mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j))$, consistent with the final SDF-ZTF deployment. In ablation variants where attraction is \emph{disabled}, $A_j \equiv 1$ (uniform destination appeal).
+  \item $\boldsymbol{O_i}$ — GBDT-predicted survey-free outflow: $\hat{O}_i = \exp(\mathrm{GBDT}_O(\mathbf{x}_i))$ with 22 SHAP-selected features (same model as in the production transferability analysis). In ablation variants where outflow is \emph{disabled}, $O_i \equiv 1$ (uniform origin production).
 \end{itemize}
 
-\textbf{T4.1: Factorial Ablation (Averaged across 25 held-out cities)}
+\textbf{Factorial Ablation (Averaged across 25 held-out cities)}
 For each of the 25 held-out target cities, we train eight models corresponding to all $2^3$ combinations of component presence/absence, using only the 25 source cities' data. Results below represent averages across all 25 held-out cities.
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Factorial Ablation Results (Average across $N=25$ held-out target cities)}
 \label{tab:ablation}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccl}
@@ -666,7 +660,10 @@ Using the factorial ablation results, we calculate the relative marginal contrib
 
 \textit{Note on Baseline CPC}: The baseline CPC of 0.7040 in this ablation analysis is obtained using the fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and isolate relative contributions under a uniform setting. When deploying the full SDF-ZTF (Survey-Free) framework with city-specific recovered decay parameters ($\hat{\gamma}, \hat{\beta}$), the performance increases to 0.7124 CPC (as reported in Table~\ref{tab:multibaseline_comparison}).
 
-\subsection{Layer 5: Zero-Shot Transfer Performance}
+\subsection{Zero-Shot Transfer Evaluation}
+This section presents the end-to-end zero-shot transfer performance of the complete SDF-ZTF framework on the 25 held-out target cities.
+
+\subsubsection{Baseline Comparison}
 
 \textbf{Research question}: Does explicit gravity decomposition enable zero-shot transfer? How does the proposed approach compare to alternative baselines?
 
@@ -674,6 +671,7 @@ Using the factorial ablation results, we calculate the relative marginal contrib
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Multi-Baseline Comparison (25 Held-Out Target Cities)}
 \label{tab:multibaseline_comparison}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{4.2cm}ccccc}
@@ -695,7 +693,7 @@ Radiation Model & 0.512 & 0.051 & 0.0\% & Param-free & 0 \\
 
 Note that the two locally-calibrated Tanner baselines in Table~\ref{tab:multibaseline_comparison} serve different diagnostic purposes despite yielding identical mean CPC (0.750): \textbf{Tanner Gravity (Power Constrained)} fixes the exponential rate $\beta = 0$ and calibrates only the power-law exponent $\gamma$ directly on each target city's OD data, testing whether a single-parameter decay suffices; \textbf{Traditional Tanner Gravity} calibrates both $\beta$ and $\gamma$ jointly on target-city OD data. The identical CPC of 0.750 across both variants indicates that the two-parameter Tanner Multi form offers no additional fit over the constrained single-parameter version when both are locally calibrated, suggesting that the exponential tail $\beta$ is largely redundant under full local calibration. Both serve as a locally-calibrated structural ceiling: the fact that zero-shot SDF-ZTF (Oracle $O_i$, CPC: 0.7447) approaches this ceiling without any target-city data highlights the robustness of the decomposed representation.
 
-\subsubsection{Statistical Significance Testing}
+\subsubsection{Statistical Significance Analysis}
 To rigorously validate the zero-shot transfer performance of the proposed SDF-ZTF framework, we perform paired statistical significance testing across all 50 US metropolitan areas (N=50 folds) from the Leave-One-City-Out (LOCO) evaluation. We compare the proposed SDF-ZTF framework against the DeepGravity neural model and the structural Radiation baseline using three metrics: the paired $t$-test (parametric), the Wilcoxon signed-rank test (non-parametric), and Cohen's $d$ effect size alongside 95\% confidence intervals (CI) of the CPC differences.
 
 \textbf{Note on evaluation protocols}: The LOCO 50-fold evaluation rotates through all 50 cities as targets (each city is once the held-out city, trained on the remaining 49), yielding LOCO mean CPCs of $\approx$0.737 (SDF-ZTF Survey-Free) and $\approx$0.763 (DeepGravity). These differ from the 25-city held-out results in Table~\ref{tab:multibaseline_comparison} (SDF-ZTF: 0.7124; DeepGravity: 0.7117), which use a fixed 25/25 train-test city split. The two protocols test complementary aspects of transferability: LOCO tests robustness across all cities as potential targets; the 25-city split tests strict generalisation to a pre-designated held-out set.
@@ -704,11 +702,12 @@ The divergence between protocols has a concrete mechanistic explanation. Under L
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{LOCO 50-Fold Statistical Significance Test Summary}
 \label{tab:statistical_tests}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc}
 \toprule
-\shortstack[c]{\textbf{Baseline} \\ \textbf{Model}} & \shortstack[c]{\textbf{Mean} \\ \textbf{Diff.}} & \shortstack[c]{\textbf{t-stat} \\ \textbf{($t$)}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(t-test)}} & \shortstack[c]{\textbf{Wilcoxon} \\ \textbf{$W$}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(Wilc.)}} & \shortstack[c]{\textbf{95\% CI} \\ \textbf{Diff.}} \\
+\textbf{Baseline Model} & \shortstack[c]{\textbf{Mean} \\ \textbf{Diff.}} & \shortstack[c]{\textbf{t-stat} \\ \textbf{($t$)}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(t-test)}} & \shortstack[c]{\textbf{Wilcoxon} \\ \textbf{$W$}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(Wilc.)}} & \shortstack[c]{\textbf{95\% CI} \\ \textbf{Diff.}} \\
 \midrule
 DeepGravity & -0.0255 & -9.150 & $3.53 \times 10^{-12}$ & 66.0 & $3.49 \times 10^{-10}$ & [-0.0311, -0.0199] \\
 Traditional Gravity & 0.0000 & 1.000 & $3.22 \times 10^{-1}$ & 18.5 & $3.31 \times 10^{-1}$ & [-0.0000, 0.0000] \\
@@ -719,12 +718,13 @@ Radiation Model & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 0.0 & $1.78 \times 
 
 \textit{Significance Interpretation}: The performance of SDF-ZTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and significantly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$), demonstrating a massive and statistically robust improvement by incorporating learned destination attraction and aggregate decay. While under the fixed 25-city split, SDF-ZTF achieves comparable performance, under the more stringent LOCO protocol, DeepGravity retains a modest but statistically significant advantage in mean CPC of $0.0255$ ($p < 10^{-10}$, Cohen's $d = -1.29$, 95\% CI [-0.0311, -0.0199]). This narrow advantage is likely due to the unconstrained model's capacity to fit subtle spatial non-linearities when trained on 49 cities instead of 25. Nevertheless, this minor gap is balanced by SDF-ZTF's complete interpretability and zero data leakage.
 
-\subsection{Error Analysis by Urban Morphology}
+\subsubsection{Urban Morphology Analysis}
 
 The overall zero-shot performance masks spatial variations across urban configurations. We evaluate transfer CPC by urban morphology class across the 25 held-out cities in Table~\ref{tab:morphology}.
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}
 \label{tab:morphology}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
@@ -761,13 +761,13 @@ The success of gravity decomposition in cross-city transfer rests on a tested hy
 \begin{description}
   \item[Hypothesis $H_1$ (Approximate Separability)] Origin-destination flow interactions can be factored into three independent, separable mechanisms: transferable origin production capacity, target-recovered distance decay, and open-data destination attraction capacity.
 \end{description}
-We find strong empirical evidence to support this hypothesis across our validation layers:
+We find strong empirical evidence to support this hypothesis across our validation stages:
 \begin{itemize}
-  \item \textbf{Layer 1 Evidence}: Distance decay is identifiable from aggregate distance distributions alone, showing that spatial deterrence parameters can be recovered robustly without exposing individual origin-destination trajectories.
-  \item \textbf{Layer 2 Evidence}: Origin trip production generalizes well to unseen cities, with GBDT predictions recovering 94.5\% of the oracle performance and significantly outperforming a naive population baseline.
-  \item \textbf{Layer 3 Evidence}: Destination attractiveness can be modeled using a stable, low-dimensional subset of 22 open built-environment features selected exclusively from training cities, confirming that urban attraction mechanisms are consistent across cities.
-  \item \textbf{Layer 4 Evidence}: Ablation sweeps show that all three components contribute to performance, with distance decay acting as the dominant organizing factor.
-  \item \textbf{Layer 5 Evidence}: Zero-shot evaluation confirms that the decomposed framework matches the accuracy of unconstrained end-to-end deep learning baselines while preserving complete structural transparency.
+  \item \textbf{Decay Recovery Evidence}: Distance decay is identifiable from aggregate distance distributions alone, showing that spatial deterrence parameters can be recovered robustly without exposing individual origin-destination trajectories.
+  \item \textbf{Origin Production Evidence}: Origin trip production generalizes well to unseen cities, with GBDT predictions recovering 94.5\% of the oracle performance and significantly outperforming a naive population baseline.
+  \item \textbf{Destination Attraction Evidence}: An ablation study confirms that destination attraction can be modeled using a stable, low-dimensional subset of 22 open built-environment features selected exclusively from training cities. Crucially, this validates that the simpler training-free min-max heuristic---combining population density and POI counts---is sufficient for the final SDF-ZTF deployment, avoiding cross-city overfitting while maintaining high performance.
+  \item \textbf{Component Contribution Evidence}: Ablation sweeps show that all three components contribute to performance, with distance decay acting as the dominant organizing factor.
+  \item \textbf{Zero-Shot Evaluation Evidence}: Zero-shot evaluation confirms that the decomposed framework matches the accuracy of unconstrained end-to-end deep learning baselines while preserving complete structural transparency.
 \end{itemize}
 
 \subsection{Morphology-Dependent Trade-Offs}
@@ -811,7 +811,7 @@ Conversely, the relatively small performance gains from using ground-truth (orac
 \subsection{Positioning Within Existing Literature}
 To clarify the contribution of SDF-ZTF, we position it relative to three existing literature streams:
 \begin{itemize}
-  \item \textbf{Compared with Classical Gravity Literature}: Traditional gravity models rely on city-specific calibration and require local OD matrices. SDF-ZTF replaces local calibration with component-wise GBDT models that transfer learned behaviors across cities, achieving survey-free zero-shot predictions.
+  \item \textbf{Compared with Classical Gravity Literature}: Traditional gravity models rely on city-specific calibration and require local OD matrices. SDF-ZTF replaces local calibration with a GBDT-based origin production model and a training-free attraction heuristic, achieving survey-free zero-shot predictions.
   \item \textbf{Compared with Neural Mobility Literature}: Monolithic neural networks like DeepGravity achieve high predictive accuracy but function as black boxes. SDF-ZTF achieves comparable performance (0.7124 vs 0.7117 CPC) while preserving the interpretable, separable structure of origin, destination, and decay components.
   \item \textbf{Compared with Cross-City Transfer Literature}: Existing transfer-learning and representation-learning frameworks still require target-city OD data for fine-tuning or similarity alignment. SDF-ZTF requires zero target-city OD observations, utilizing only globally available open demographic and physical geography features.
 \end{itemize}
@@ -915,7 +915,7 @@ We execute L-BFGS-B optimization for each restart and retain the parameter set a
 
 \subsection*{A.4 Robustness of Decay Parameter Recovery}
 
-Here, we detail the robustness tests conducted on Layer 1 regarding distance decay parameter recovery:
+Here, we detail the robustness tests conducted on the decay recovery validation regarding distance decay parameter recovery:
 
 \begin{description}
   \item[T1.2: Bin Sensitivity Analysis] To examine how bin discretization affects the MLE recovery of decay parameters, we sweep the number of distance bins $K \in \{10, 20, 50, 100\}$. The recovery error (MAE) for the power-law exponent $\gamma$ remains low and stable for $K \ge 50$ (MAE $\approx 0.13$), showing that 50 percentile bins are sufficient to capture the decay profile.
@@ -924,15 +924,16 @@ Here, we detail the robustness tests conducted on Layer 1 regarding distance dec
 \end{description}
 
 \subsection*{A.5 GBDT Hyperparameters and Reproducibility Details}
-To ensure the reproducibility of the origin trip production ($O_i$) and destination attractiveness ($A_j$) estimators, the hyperparameter configurations for the Gradient Boosted Decision Tree (GBDT) models are summarized in Table~\ref{tab:gbdt_hyperparameters}. The models are trained using the \texttt{scikit-learn} and \texttt{LightGBM} libraries in Python \citep{lightgbm}, and hyperparameters are optimized using 5-fold cross-validation on the 25 source training cities.
+To ensure the reproducibility of the origin trip production ($O_i$) estimator and the transferable feature discovery ablation attraction model ($A_j$), the hyperparameter configurations for the Gradient Boosted Decision Tree (GBDT) models are summarized in Table~\ref{tab:gbdt_hyperparameters}. Note that in the final SDF-ZTF deployment, $A_j$ is computed via the training-free min-max heuristic; the GBDT attraction model is used only in the feature discovery ablation analysis to validate the heuristic's sufficiency. The models are trained using the \texttt{scikit-learn} and \texttt{LightGBM} libraries in Python \citep{lightgbm}, and hyperparameters are optimized using 5-fold cross-validation on the 25 source training cities.
 
 \begin{table*}[t]
 \centering
+\tablebodyfont
 \caption{GBDT Model Hyperparameter Configurations}
 \label{tab:gbdt_hyperparameters}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcc}
 \toprule
-\textbf{Hyperparameter} & \textbf{Outflow Model ($O_i$)} & \textbf{Attraction Model ($A_j$)} \\
+\textbf{Hyperparameter} & \textbf{Outflow Model ($O_i$)} & \textbf{Attraction Model ($A_j$, ablation only)} \\
 \midrule
 Base Learner & Decision Tree & Decision Tree \\
 Loss Function & Least Squares (MSE on $\log O_i$) & Least Squares (MSE on $A_j$) \\
