@@ -16,12 +16,12 @@
 
 \articletype{RESEARCH ARTICLE}
 
-\title[SDF-CTF: Separable Decomposed Framework for Cross-City Transferable Flows]{A Decomposed and Cross-City Transferable Framework for Intra-City Urban Mobility Prediction: Evidence from SHAP-Based Structure Learning and Zero-Shot OD Modeling}
+\title[SDF-ZTF: Separable Decomposed Framework for Zero-Shot Transferable Flows]{A Separable Decomposed Framework for Zero-Shot Transferable Urban Mobility Prediction: Evidence from SHAP-Based Structure Learning}
 
 \author*[1]{\fnm{Thinh} \sur{Nguyen}}\email{nqt900@gmail.com}
 \affil*[1]{\orgname{Aarista Technologies}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 
-\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. Existing approaches typically rely on historical OD records, travel surveys, or individual mobility traces. However, these data sources are often expensive to collect, difficult to obtain, and subject to administrative, privacy, and regulatory constraints. To address these challenges, we propose the Separable Decomposed Framework for Cross-city Transferable Flows (SDF-CTF), a decomposed mobility modeling framework that factorizes OD flows into three interpretable components: target-recovered distance decay, open-data-driven destination attraction, and cross-city transferable origin production. By relying exclusively on globally available open datasets, including OpenStreetMap, WorldPop, and Meta High-Resolution Population Density data, the framework enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that SDF-CTF achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
+\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. Existing approaches typically rely on historical OD records, travel surveys, or individual mobility traces. However, these data sources are often expensive to collect, difficult to obtain, and subject to administrative, privacy, and regulatory constraints. To address these challenges, we propose the Separable Decomposed Framework for Zero-Shot Transferable Flows (SDF-ZTF), a decomposed mobility modeling framework that factorizes OD flows into three interpretable components: target-recovered distance decay, open-data-driven destination attraction, and cross-city transferable origin production. By relying exclusively on globally available open datasets, including OpenStreetMap, WorldPop, and Meta High-Resolution Population Density data, the framework enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that SDF-ZTF achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
 
 \keywords{Urban mobility, origin-destination flows, gravity models, interpretability, transfer learning, zero-shot transfer, open-data modeling}
 
@@ -32,7 +32,7 @@
   \vspace{-6pt}
   \centering
   \includegraphics[width=0.7\textwidth]{../figures/graphical_abstract.png}
-  \caption{SDF-CTF framework: Three independent components (origin production $O_i$ from features, distance decay $f(d)$ from aggregate data, destination attraction $A_j$ from features)}
+  \caption{SDF-ZTF framework: Three independent components (origin production $O_i$ from features, distance decay $f(d)$ from aggregate data, destination attraction $A_j$ from features)}
   \label{fig:graphical_abstract}
 \end{figure*}
 
@@ -53,7 +53,7 @@ To address this challenge, we investigate three core research questions:
   \item[RQ3:] Can a decomposed model achieve zero-shot transfer performance comparable to end-to-end neural models?
 \end{description}
 
-We hypothesize that urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction mapped from open spatial features, and trip production transferred across cities via built-environment representations. Instead of treating mobility prediction as a monolithic learning problem, we propose the \textbf{Separable Decomposed Framework for Cross-city Transferable Flows} (\textbf{SDF-CTF}), which implements this hypothesis via a multiplicative decomposition:
+We hypothesize that urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction mapped from open spatial features, and trip production transferred across cities via built-environment representations. Instead of treating mobility prediction as a monolithic learning problem, we propose the \textbf{Separable Decomposed Framework for Zero-Shot Transferable Flows} (\textbf{SDF-ZTF}), which implements this hypothesis via a multiplicative decomposition:
 \begin{equation}
 T_{ij} = O_i \cdot f(d_{ij}) \cdot A_j
 \end{equation}
@@ -99,7 +99,7 @@ This study makes five main contributions:
   
   \item \textbf{Zero-Shot OD Prediction}: We implement a production-constrained gravity model with GBDT-learned components that achieves zero-shot transfer without target-city retraining.
   
-  \item \textbf{Paradigm Performance}: Under fully zero-shot, survey-free conditions, SDF-CTF achieves 0.7124 Mean CPC across 25 held-out cities, matching DeepGravity (0.7117 CPC) without any target-city OD data.
+  \item \textbf{Paradigm Performance}: Under fully zero-shot, survey-free conditions, SDF-ZTF achieves 0.7124 Mean CPC across 25 held-out cities, matching DeepGravity (0.7117 CPC) without any target-city OD data.
   
   \item \textbf{Morphology-Dependent Generalization}: We demonstrate that decomposition performance depends on urban configuration, with the highest zero-shot CPC observed in coastal and polycentric regions, while dense transit-oriented cities present greater challenges for the multiplicative gravity structure.
 \end{itemize}
@@ -140,7 +140,7 @@ While explainable AI (XAI) methods, such as SHAP (SHapley Additive exPlanations)
 Most studies use SHAP for post-hoc interpretation rather than identifying transferable urban structure.
 
 \subsection{Research Gap and Positioning}
-We compare the characteristics of classical models and our proposed SDF-CTF framework in Table~\ref{tab:literature_comparison}.
+We compare the characteristics of classical models and our proposed SDF-ZTF framework in Table~\ref{tab:literature_comparison}.
 
 \begin{table*}[t]
 \centering
@@ -154,7 +154,7 @@ Gravity \citep{wilson1971} & \checkmark & \texttimes & \texttimes & \checkmark \
 DeepGravity \citep{simini2021} & \texttimes & Limited & \texttimes & \texttimes \\
 GNN OD \citep{Rong2023goddag} & \texttimes & Limited & \texttimes & \texttimes \\
 RegionTrans \citep{wang2018regiontrans} & Partial & \checkmark & \texttimes & \texttimes \\
-\textbf{SDF-CTF (Ours)} & \checkmark & \checkmark & \checkmark & \checkmark \\
+\textbf{SDF-ZTF (Ours)} & \checkmark & \checkmark & \checkmark & \checkmark \\
 \bottomrule
 \end{tabular*}
 \end{table*}
@@ -180,7 +180,7 @@ T_{ij} = g(O_i) \times h(d_{ij}) \times k(A_j)
 where $g(O_i)$ represents the trip production capacity at the origin, $h(d_{ij})$ represents the spatial friction (distance decay), and $k(A_j)$ represents the destination attraction. We hypothesize that: (1) each component is approximately independent, (2) the underlying mechanisms can be learned from spatial descriptors of the built environment, and (3) the learned origin production relationship transfers directly to unseen target cities, while decay parameters are recovered from target-city aggregate trip-length distributions, and attraction is computed from locally available open data. Section 5 evaluates and validates this hypothesis.
 
 \subsection{Framework Overview}
-The conceptual pipeline of the proposed Separable Decomposed Framework for Cross-city Transferable Flows (SDF-CTF) is illustrated in Fig.~\ref{fig:framework_pipeline}.
+The conceptual pipeline of the proposed Separable Decomposed Framework for Zero-Shot Transferable Flows (SDF-ZTF) is illustrated in Fig.~\ref{fig:framework_pipeline}.
 
 \begin{figure*}[t!]
   \centering
@@ -218,7 +218,7 @@ The conceptual pipeline of the proposed Separable Decomposed Framework for Cross
     
     \draw[arrow] (fusion.south) -- (od.north);
   \end{tikzpicture}
-  \caption{Pipeline of the SDF-CTF framework. Globally available spatial features serve as inputs to GBDT models predicting trip production ($O_i$) and attraction ($A_j$). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}
+  \caption{Pipeline of the SDF-ZTF framework. Globally available spatial features serve as inputs to GBDT models predicting trip production ($O_i$) and attraction ($A_j$). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}
   \label{fig:framework_pipeline}
 \end{figure*}
 
@@ -235,7 +235,7 @@ To prevent singularity for intra-zonal flows ($d_{ij} = 0$) and scale parameter 
 \end{equation}
 where $\bar{R}_{\mathrm{zone}}$ is the mean empirical radius of the administrative zones in the target city. Decay parameters $(\beta, \gamma)$ are estimated via maximum likelihood estimation (MLE) using exclusively the aggregate distance-bin distribution of source cities, preserving privacy. Complete calibration, moment-based initialization, and optimization details are provided in the Appendix.
 
-\textbf{Information Governance and Low-Leakage Design.} The design choices in SDF-CTF reflect three concrete architectural elements that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop + Meta HRSL) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-governance regulations (e.g., GDPR) without requiring complex institutional data-sharing agreements or risking individual tracking.
+\textbf{Information Governance and Low-Leakage Design.} The design choices in SDF-ZTF reflect three concrete architectural elements that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop + Meta HRSL) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-governance regulations (e.g., GDPR) without requiring complex institutional data-sharing agreements or risking individual tracking.
 
 \subsection{Origin Outflow Component ($O_i$)}
 The trip production $O_i$ represents the total daily trips originating from zone $i$:
@@ -255,7 +255,7 @@ Like $O_i$, $A_j$ is modeled using a shallow GBDT regressor trained on the same 
 Although $O_i$ and $A_j$ use the same pool of candidate spatial features, we model them through separate learning tasks. Trip production ($O_i$) is structurally driven by residential indicators (e.g., population densities, residential roads, transit availability), representing the *supply* side of travel. Conversely, trip attraction ($A_j$) is driven by commercial indicators and amenity concentrations (e.g., retail, offices, parks, schools), representing the *demand* side of travel. Modeling these components independently allows the GBDTs to weight distinct spatial features according to their separate behavioral roles.
 
 \subsection{Computational Complexity}
-The computational complexity of the SDF-CTF framework is divided into three parts:
+The computational complexity of the SDF-ZTF framework is divided into three parts:
 \begin{itemize}
   \item \textbf{Decay estimation}: Calibrating the distance decay parameters using the aggregate distance distribution takes $O(N^2)$ time to build distance bins, but optimization is performed over a small set of bins $K \ll N$, taking $O(K)$ per L-BFGS-B \citep{byrd1995limited} iteration.
   \item \textbf{GBDT training}: Training GBDTs for $O_i$ and $A_j$ on $M$ training zones across source cities takes $O(D \cdot M \log M)$, where $D$ is the feature dimension ($D=22$).
@@ -269,7 +269,7 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 \centering
 \begin{tabular}{p{0.95\textwidth}}
 \toprule
-\textbf{Algorithm 1: SDF-CTF Training and Zero-Shot Prediction} \\
+\textbf{Algorithm 1: SDF-ZTF Training and Zero-Shot Prediction} \\
 \midrule
 \textbf{Input}: Source cities data $\{\mathbf{X}^{(c)}, \mathbf{T}^{(c)}\}_{c=1}^{C}$; Target city spatial features $\mathbf{X}^{(t)}$ \\
 \textbf{Output}: Predicted Target City OD Matrix $\mathbf{\hat{T}}^{(t)}$ \\
@@ -289,16 +289,16 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 \label{sec:data}
 
 \subsection{Design Principle: Open-Data-Only Philosophy}
-The central design principle of the proposed SDF-CTF framework is that all transferable mobility components must be derived from globally available open data. Rather than relying on proprietary cellular records, commercial location-based databases, or expensive household travel surveys, SDF-CTF is engineered to construct models using only public, globally reproducible datasets. This design decision directly addresses the challenge of data scarcity and enables zero-shot deployment in any city worldwide.
+The central design principle of the proposed SDF-ZTF framework is that all transferable mobility components must be derived from globally available open data. Rather than relying on proprietary cellular records, commercial location-based databases, or expensive household travel surveys, SDF-ZTF is engineered to construct models using only public, globally reproducible datasets. This design decision directly addresses the challenge of data scarcity and enables zero-shot deployment in any city worldwide.
 
-A key consequence of this design principle is the intentional exclusion of local employment statistics, such as the Longitudinal Employer-Household Dynamics Origin-Destination Employment Statistics (LODES) database commonly used in US-centric human mobility papers. While LODES provides detailed tract-level employment counts, no globally consistent equivalent exists for most cities in developing nations. To ensure universal deployability, SDF-CTF instead absorbs the predictive role of employment registers through publicly mapped commercial, office, and industrial Point of Interest (POI) densities sourced from OpenStreetMap.
+A key consequence of this design principle is the intentional exclusion of local employment statistics, such as the Longitudinal Employer-Household Dynamics Origin-Destination Employment Statistics (LODES) database commonly used in US-centric human mobility papers. While LODES provides detailed tract-level employment counts, no globally consistent equivalent exists for most cities in developing nations. To ensure universal deployability, SDF-ZTF instead absorbs the predictive role of employment registers through publicly mapped commercial, office, and industrial Point of Interest (POI) densities sourced from OpenStreetMap.
 
 \subsection{Data Sources}
-To implement and evaluate the SDF-CTF framework across diverse metropolitan areas, we compile a multi-source dataset combining static urban geography, open features, and evaluation labels. The operational role of each data source is summarized in the Data Usage Matrix in Table~\ref{tab:data_usage_matrix}.
+To implement and evaluate the SDF-ZTF framework across diverse metropolitan areas, we compile a multi-source dataset combining static urban geography, open features, and evaluation labels. The operational role of each data source is summarized in the Data Usage Matrix in Table~\ref{tab:data_usage_matrix}.
 
 \begin{table*}[t]
 \centering
-\caption{Data usage matrix illustrating the operational roles of inputs across SDF-CTF components to guarantee leakage-free prediction.}
+\caption{Data usage matrix illustrating the operational roles of inputs across SDF-ZTF components to guarantee leakage-free prediction.}
 \label{tab:data_usage_matrix}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
@@ -353,7 +353,7 @@ To discover stable spatial patterns that translate across cities, we implement a
         child { node {Total Population} }
       };
   \end{tikzpicture}
-  \caption{Taxonomy of the globally available open data features used in the SDF-CTF framework. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}
+  \caption{Taxonomy of the globally available open data features used in the SDF-ZTF framework. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}
   \label{fig:feature_taxonomy}
 \end{figure*}
 
@@ -442,7 +442,7 @@ We evaluate each component of the proposed framework systematically using a 5-la
     \draw[arrow] (l3) -- (l4);
     \draw[arrow] (l4) -- (l5);
   \end{tikzpicture}
-  \caption{Methodology validation roadmap showing the five evaluation layers used to systematically verify each component of the SDF-CTF framework before end-to-end comparison.}
+  \caption{Methodology validation roadmap showing the five evaluation layers used to systematically verify each component of the SDF-ZTF framework before end-to-end comparison.}
   \label{fig:validation_roadmap}
 \end{figure*}
 
@@ -664,7 +664,7 @@ Using the factorial ablation results, we calculate the relative marginal contrib
   \item Results are consistent across all 25 held-out cities, indicating robust decomposition.
 \end{itemize}
 
-\textit{Note on Baseline CPC}: The baseline CPC of 0.7040 in this ablation analysis is obtained using the fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and isolate relative contributions under a uniform setting. When deploying the full SDF-CTF (Survey-Free) framework with city-specific recovered decay parameters ($\hat{\gamma}, \hat{\beta}$), the performance increases to 0.7124 CPC (as reported in Table~\ref{tab:multibaseline_comparison}).
+\textit{Note on Baseline CPC}: The baseline CPC of 0.7040 in this ablation analysis is obtained using the fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and isolate relative contributions under a uniform setting. When deploying the full SDF-ZTF (Survey-Free) framework with city-specific recovered decay parameters ($\hat{\gamma}, \hat{\beta}$), the performance increases to 0.7124 CPC (as reported in Table~\ref{tab:multibaseline_comparison}).
 
 \subsection{Layer 5: Zero-Shot Transfer Performance}
 
@@ -680,8 +680,8 @@ Using the factorial ablation results, we calculate the relative marginal contrib
 \toprule
 \textbf{Model} & \shortstack[c]{\textbf{Mean} \\ \textbf{CPC}} & \shortstack[c]{\textbf{Std} \\ \textbf{Dev}} & \shortstack[c]{\textbf{Win \%} \\ \textbf{(vs DG)}} & \textbf{Type} & \textbf{Features} \\
 \midrule
-SDF-CTF (Survey-Free) & 0.7124 & 0.0329 & 48.0\% & Decomposed & 22 (selected) \\
-SDF-CTF (Oracle O$_i$) & 0.7447 & 0.028 & 56.0\% & Decomposed & 22 (selected) \\
+SDF-ZTF (Survey-Free) & 0.7124 & 0.0329 & 48.0\% & Decomposed & 22 (selected) \\
+SDF-ZTF (Oracle O$_i$) & 0.7447 & 0.028 & 56.0\% & Decomposed & 22 (selected) \\
 DeepGravity (E2E) & 0.7117 & 0.0332 & -- & Neural E2E & 30 (all) \\
 Tanner Gravity (Power Const.) & 0.750 & 0.026 & 72.0\% & Structure-only & 0 \\
 Traditional Tanner Gravity & 0.750 & 0.027 & 72.0\% & Structure-only & 0 \\
@@ -691,16 +691,16 @@ Radiation Model & 0.512 & 0.051 & 0.0\% & Param-free & 0 \\
 \end{tabular*}
 \end{table*}
 
-\textit{Interpretation}: Under zero-shot transfer conditions, SDF-CTF (Survey-Free) matches the performance of the end-to-end neural baseline (CPC of 0.7124 versus 0.7117 for DeepGravity), while SDF-CTF (Oracle $O_i$) provides a significant improvement (0.7447 CPC). This confirms that explicitly separating production, attraction, and decay dynamics does not sacrifice accuracy compared to deep learning methods, while substantially outperforming parameter-free baselines like the Radiation Model (CPC: 0.512).
+\textit{Interpretation}: Under zero-shot transfer conditions, SDF-ZTF (Survey-Free) matches the performance of the end-to-end neural baseline (CPC of 0.7124 versus 0.7117 for DeepGravity), while SDF-ZTF (Oracle $O_i$) provides a significant improvement (0.7447 CPC). This confirms that explicitly separating production, attraction, and decay dynamics does not sacrifice accuracy compared to deep learning methods, while substantially outperforming parameter-free baselines like the Radiation Model (CPC: 0.512).
 
-Note that the two locally-calibrated Tanner baselines in Table~\ref{tab:multibaseline_comparison} serve different diagnostic purposes despite yielding identical mean CPC (0.750): \textbf{Tanner Gravity (Power Constrained)} fixes the exponential rate $\beta = 0$ and calibrates only the power-law exponent $\gamma$ directly on each target city's OD data, testing whether a single-parameter decay suffices; \textbf{Traditional Tanner Gravity} calibrates both $\beta$ and $\gamma$ jointly on target-city OD data. The identical CPC of 0.750 across both variants indicates that the two-parameter Tanner Multi form offers no additional fit over the constrained single-parameter version when both are locally calibrated, suggesting that the exponential tail $\beta$ is largely redundant under full local calibration. Both serve as a locally-calibrated structural ceiling: the fact that zero-shot SDF-CTF (Oracle $O_i$, CPC: 0.7447) approaches this ceiling without any target-city data highlights the robustness of the decomposed representation.
+Note that the two locally-calibrated Tanner baselines in Table~\ref{tab:multibaseline_comparison} serve different diagnostic purposes despite yielding identical mean CPC (0.750): \textbf{Tanner Gravity (Power Constrained)} fixes the exponential rate $\beta = 0$ and calibrates only the power-law exponent $\gamma$ directly on each target city's OD data, testing whether a single-parameter decay suffices; \textbf{Traditional Tanner Gravity} calibrates both $\beta$ and $\gamma$ jointly on target-city OD data. The identical CPC of 0.750 across both variants indicates that the two-parameter Tanner Multi form offers no additional fit over the constrained single-parameter version when both are locally calibrated, suggesting that the exponential tail $\beta$ is largely redundant under full local calibration. Both serve as a locally-calibrated structural ceiling: the fact that zero-shot SDF-ZTF (Oracle $O_i$, CPC: 0.7447) approaches this ceiling without any target-city data highlights the robustness of the decomposed representation.
 
 \subsubsection{Statistical Significance Testing}
-To rigorously validate the zero-shot transfer performance of the proposed SDF-CTF framework, we perform paired statistical significance testing across all 50 US metropolitan areas (N=50 folds) from the Leave-One-City-Out (LOCO) evaluation. We compare the proposed SDF-CTF framework against the DeepGravity neural model and the structural Radiation baseline using three metrics: the paired $t$-test (parametric), the Wilcoxon signed-rank test (non-parametric), and Cohen's $d$ effect size alongside 95\% confidence intervals (CI) of the CPC differences.
+To rigorously validate the zero-shot transfer performance of the proposed SDF-ZTF framework, we perform paired statistical significance testing across all 50 US metropolitan areas (N=50 folds) from the Leave-One-City-Out (LOCO) evaluation. We compare the proposed SDF-ZTF framework against the DeepGravity neural model and the structural Radiation baseline using three metrics: the paired $t$-test (parametric), the Wilcoxon signed-rank test (non-parametric), and Cohen's $d$ effect size alongside 95\% confidence intervals (CI) of the CPC differences.
 
-\textbf{Note on evaluation protocols}: The LOCO 50-fold evaluation rotates through all 50 cities as targets (each city is once the held-out city, trained on the remaining 49), yielding LOCO mean CPCs of $\approx$0.737 (SDF-CTF Survey-Free) and $\approx$0.763 (DeepGravity). These differ from the 25-city held-out results in Table~\ref{tab:multibaseline_comparison} (SDF-CTF: 0.7124; DeepGravity: 0.7117), which use a fixed 25/25 train-test city split. The two protocols test complementary aspects of transferability: LOCO tests robustness across all cities as potential targets; the 25-city split tests strict generalisation to a pre-designated held-out set.
+\textbf{Note on evaluation protocols}: The LOCO 50-fold evaluation rotates through all 50 cities as targets (each city is once the held-out city, trained on the remaining 49), yielding LOCO mean CPCs of $\approx$0.737 (SDF-ZTF Survey-Free) and $\approx$0.763 (DeepGravity). These differ from the 25-city held-out results in Table~\ref{tab:multibaseline_comparison} (SDF-ZTF: 0.7124; DeepGravity: 0.7117), which use a fixed 25/25 train-test city split. The two protocols test complementary aspects of transferability: LOCO tests robustness across all cities as potential targets; the 25-city split tests strict generalisation to a pre-designated held-out set.
 
-The divergence between protocols has a concrete mechanistic explanation. Under LOCO, each fold trains on 49 cities, providing DeepGravity's unconstrained architecture with substantially more data to fit subtle spatial non-linearities, amplifying its advantage over SDF-CTF. Under the fixed 25/25 split, both models train on only 25 source cities; at this smaller training set size, the structured inductive bias of SDF-CTF (enforced decomposability and open-data features) compensates for the reduced data, closing the gap with DeepGravity. This \emph{data-volume sensitivity} is consistent with findings in transfer learning literature: structured models generalize more efficiently from smaller source pools, while unconstrained neural models require more data to realize their full expressive capacity.
+The divergence between protocols has a concrete mechanistic explanation. Under LOCO, each fold trains on 49 cities, providing DeepGravity's unconstrained architecture with substantially more data to fit subtle spatial non-linearities, amplifying its advantage over SDF-ZTF. Under the fixed 25/25 split, both models train on only 25 source cities; at this smaller training set size, the structured inductive bias of SDF-ZTF (enforced decomposability and open-data features) compensates for the reduced data, closing the gap with DeepGravity. This \emph{data-volume sensitivity} is consistent with findings in transfer learning literature: structured models generalize more efficiently from smaller source pools, while unconstrained neural models require more data to realize their full expressive capacity.
 
 \begin{table*}[t]
 \centering
@@ -717,7 +717,7 @@ Radiation Model & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 0.0 & $1.78 \times 
 \end{tabular*}
 \end{table*}
 
-\textit{Significance Interpretation}: The performance of SDF-CTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and significantly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$), demonstrating a massive and statistically robust improvement by incorporating learned destination attraction and aggregate decay. While under the fixed 25-city split, SDF-CTF achieves comparable performance, under the more stringent LOCO protocol, DeepGravity retains a modest but statistically significant advantage in mean CPC of $0.0255$ ($p < 10^{-10}$, Cohen's $d = -1.29$, 95\% CI [-0.0311, -0.0199]). This narrow advantage is likely due to the unconstrained model's capacity to fit subtle spatial non-linearities when trained on 49 cities instead of 25. Nevertheless, this minor gap is balanced by SDF-CTF's complete interpretability and zero data leakage.
+\textit{Significance Interpretation}: The performance of SDF-ZTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and significantly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$), demonstrating a massive and statistically robust improvement by incorporating learned destination attraction and aggregate decay. While under the fixed 25-city split, SDF-ZTF achieves comparable performance, under the more stringent LOCO protocol, DeepGravity retains a modest but statistically significant advantage in mean CPC of $0.0255$ ($p < 10^{-10}$, Cohen's $d = -1.29$, 95\% CI [-0.0311, -0.0199]). This narrow advantage is likely due to the unconstrained model's capacity to fit subtle spatial non-linearities when trained on 49 cities instead of 25. Nevertheless, this minor gap is balanced by SDF-ZTF's complete interpretability and zero data leakage.
 
 \subsection{Error Analysis by Urban Morphology}
 
@@ -729,7 +729,7 @@ The overall zero-shot performance masks spatial variations across urban configur
 \label{tab:morphology}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
-\textbf{Morphology Type} & \textbf{\# Cities} & \textbf{SDF-CTF CPC} & \textbf{DeepGravity CPC} & \textbf{Gravity Win \%} \\
+\textbf{Morphology Type} & \textbf{\# Cities} & \textbf{SDF-ZTF CPC} & \textbf{DeepGravity CPC} & \textbf{Gravity Win \%} \\
 \midrule
 Dense / Transit & 5 & 0.690 & 0.695 & 20\% \\
 Sprawling / Grid & 11 & 0.715 & 0.718 & 45\% \\
@@ -739,16 +739,16 @@ Coastal & 3 & 0.734 & 0.712 & 66\% \\
 \end{tabular*}
 \end{table*}
 
-\textit{Interpretation}: Neither paradigm appears to be universally superior. Evaluation across the 25 held-out target cities (Table~\ref{tab:morphology}) suggests morphology-dependent advantages: SDF-CTF seems to perform best in coastal and polycentric environments (CPC 0.734 and 0.716 respectively), where distance-driven spatial structure potentially dominates. Conversely, DeepGravity appears to retain a systematic advantage in dense, transit-oriented cities (CPC 0.695 vs 0.690 for SDF-CTF), where multi-modal nonlinear interactions are likely more dominant. This morphology heterogeneity justifies both the city-stratified evaluation protocol and the morphology-specific reporting.
+\textit{Interpretation}: Neither paradigm appears to be universally superior. Evaluation across the 25 held-out target cities (Table~\ref{tab:morphology}) suggests morphology-dependent advantages: SDF-ZTF seems to perform best in coastal and polycentric environments (CPC 0.734 and 0.716 respectively), where distance-driven spatial structure potentially dominates. Conversely, DeepGravity appears to retain a systematic advantage in dense, transit-oriented cities (CPC 0.695 vs 0.690 for SDF-ZTF), where multi-modal nonlinear interactions are likely more dominant. This morphology heterogeneity justifies both the city-stratified evaluation protocol and the morphology-specific reporting.
 
 \textbf{Role of the adaptive anchor $\delta$ across morphologies.}
-A key mediating factor is the per-fold adaptive geometric anchor $\delta = 0.5 \times \bar{R}_{\mathrm{zone}}$ (Eq.~\ref{eq:delta}). In \textbf{dense/transit cities}, census tracts are small (low $\bar{R}_{\mathrm{zone}}$), so $\delta$ is correspondingly small --- the power-law term activates at short distances and the model must accurately resolve fine-grained intra-zonal interactions. In \textbf{sprawling and polycentric cities}, tracts are larger, $\delta$ scales up proportionally, and the offset correctly regularises the decay onset for zones that are spatially extensive. This automatic morphology-sensitive scaling is one reason why SDF-CTF achieves its highest transfer CPC in coastal (0.734) and polycentric (0.716) morphologies, and is most challenged by dense transit-oriented cores (0.690 CPC), where complex nonlinear spillover effects potentially exceed the resolving power of the adaptive Tanner Multi formulation.
+A key mediating factor is the per-fold adaptive geometric anchor $\delta = 0.5 \times \bar{R}_{\mathrm{zone}}$ (Eq.~\ref{eq:delta}). In \textbf{dense/transit cities}, census tracts are small (low $\bar{R}_{\mathrm{zone}}$), so $\delta$ is correspondingly small --- the power-law term activates at short distances and the model must accurately resolve fine-grained intra-zonal interactions. In \textbf{sprawling and polycentric cities}, tracts are larger, $\delta$ scales up proportionally, and the offset correctly regularises the decay onset for zones that are spatially extensive. This automatic morphology-sensitive scaling is one reason why SDF-ZTF achieves its highest transfer CPC in coastal (0.734) and polycentric (0.716) morphologies, and is most challenged by dense transit-oriented cores (0.690 CPC), where complex nonlinear spillover effects potentially exceed the resolving power of the adaptive Tanner Multi formulation.
 
 \begin{itemize}
-  \item \textbf{Coastal cities (3 cities, SDF-CTF CPC 0.734 vs DG 0.712)}: Natural geographic boundaries constrain mobility corridors, potentially reducing the degree of nonlinear spillover that neural models capitalize on. The multiplicative gravity structure appears to align well with these bounded interaction patterns.
-  \item \textbf{Polycentric cities (6 cities, SDF-CTF CPC 0.716 vs DG 0.712)}: Multiple dispersed activity centres create well-separated origin--destination pairs where distance decay appears to be the dominant force. The decomposed model's multiplicative structure seems to mirror this reality.
-  \item \textbf{Sprawling / Grid cities (11 cities, SDF-CTF CPC 0.715 vs DG 0.718, Win\%: 45\%)}: Despite the low-density road-grid structure that might theoretically favour separable gravity decomposition, DeepGravity maintains a slight average advantage (0.718 vs 0.715), winning in 6 of the 11 cities. This suggests that even in weakly-coupled grid metros, unconstrained neural architectures can still capture residual interaction patterns beyond what the multiplicative gravity structure resolves.
-  \item \textbf{Dense / Transit cities (5 cities, SDF-CTF CPC 0.690 vs DG 0.695)}: Tight spatial coupling, multi-modal transit networks, and complex local dynamics create entangled nonlinearities that the standard gravity decomposition potentially oversimplifies. DeepGravity's unconstrained architecture appears to retain a clearer advantage here.
+  \item \textbf{Coastal cities (3 cities, SDF-ZTF CPC 0.734 vs DG 0.712)}: Natural geographic boundaries constrain mobility corridors, potentially reducing the degree of nonlinear spillover that neural models capitalize on. The multiplicative gravity structure appears to align well with these bounded interaction patterns.
+  \item \textbf{Polycentric cities (6 cities, SDF-ZTF CPC 0.716 vs DG 0.712)}: Multiple dispersed activity centres create well-separated origin--destination pairs where distance decay appears to be the dominant force. The decomposed model's multiplicative structure seems to mirror this reality.
+  \item \textbf{Sprawling / Grid cities (11 cities, SDF-ZTF CPC 0.715 vs DG 0.718, Win\%: 45\%)}: Despite the low-density road-grid structure that might theoretically favour separable gravity decomposition, DeepGravity maintains a slight average advantage (0.718 vs 0.715), winning in 6 of the 11 cities. This suggests that even in weakly-coupled grid metros, unconstrained neural architectures can still capture residual interaction patterns beyond what the multiplicative gravity structure resolves.
+  \item \textbf{Dense / Transit cities (5 cities, SDF-ZTF CPC 0.690 vs DG 0.695)}: Tight spatial coupling, multi-modal transit networks, and complex local dynamics create entangled nonlinearities that the standard gravity decomposition potentially oversimplifies. DeepGravity's unconstrained architecture appears to retain a clearer advantage here.
 \end{itemize}
 
 \section{Discussion}
@@ -789,7 +789,7 @@ The overall zero-shot performance masks important spatial structure. Our morphol
     \node[left] at (-4,0) {Dense / Transit};
     \node[right] at (4,0) {Polycentric / Coastal};
     \node[above] at (0,2.5) {DeepGravity};
-    \node[below] at (0,-2.5) {SDF-CTF (Ours)};
+    \node[below] at (0,-2.5) {SDF-ZTF (Ours)};
     
     % Quadrant elements
     \node[box] at (-2.0,1.2) {Dense Core Metros \\ \small (High Non-linearity)};
@@ -797,7 +797,7 @@ The overall zero-shot performance masks important spatial structure. Our morphol
     \draw[dashed, gray] (0,0) circle (0.5);
     \node[align=center, font=\small, gray] at (0,0.7) {Transition \\ Zone};
   \end{tikzpicture}
-  \caption{Paradigm suitability map illustrating when to deploy the monolithic neural architecture (DeepGravity) versus the decomposed gravity structure (SDF-CTF). DeepGravity is best suited for dense, transit-oriented cores with high multi-modal complexity. SDF-CTF is best suited for coastal and polycentric cities where distance decay constraints dominate travel patterns.}
+  \caption{Paradigm suitability map illustrating when to deploy the monolithic neural architecture (DeepGravity) versus the decomposed gravity structure (SDF-ZTF). DeepGravity is best suited for dense, transit-oriented cores with high multi-modal complexity. SDF-ZTF is best suited for coastal and polycentric cities where distance decay constraints dominate travel patterns.}
   \label{fig:paradigm_suitability}
 \end{figure*}
 
@@ -809,21 +809,21 @@ The factorial ablation analysis highlights distance decay $f(d)$ as the single d
 Conversely, the relatively small performance gains from using ground-truth (oracle) origin production rather than GBDT-predicted outflows suggest that origin generation is not the primary bottleneck in transferable modeling. Because human trip production is strongly anchored to population density and basic urban scale features, GBDTs trained on source cities generalize remarkably well to new targets. The binding constraint on zero-shot transferability lies in how decay rates vary across different urban layouts. While traditional models struggle with city-specific parameters, our aggregate decay recovery framework successfully captures these variations from marginal distance histograms.
 
 \subsection{Positioning Within Existing Literature}
-To clarify the contribution of SDF-CTF, we position it relative to three existing literature streams:
+To clarify the contribution of SDF-ZTF, we position it relative to three existing literature streams:
 \begin{itemize}
-  \item \textbf{Compared with Classical Gravity Literature}: Traditional gravity models rely on city-specific calibration and require local OD matrices. SDF-CTF replaces local calibration with component-wise GBDT models that transfer learned behaviors across cities, achieving survey-free zero-shot predictions.
-  \item \textbf{Compared with Neural Mobility Literature}: Monolithic neural networks like DeepGravity achieve high predictive accuracy but function as black boxes. SDF-CTF achieves comparable performance (0.7124 vs 0.7117 CPC) while preserving the interpretable, separable structure of origin, destination, and decay components.
-  \item \textbf{Compared with Cross-City Transfer Literature}: Existing transfer-learning and representation-learning frameworks still require target-city OD data for fine-tuning or similarity alignment. SDF-CTF requires zero target-city OD observations, utilizing only globally available open demographic and physical geography features.
+  \item \textbf{Compared with Classical Gravity Literature}: Traditional gravity models rely on city-specific calibration and require local OD matrices. SDF-ZTF replaces local calibration with component-wise GBDT models that transfer learned behaviors across cities, achieving survey-free zero-shot predictions.
+  \item \textbf{Compared with Neural Mobility Literature}: Monolithic neural networks like DeepGravity achieve high predictive accuracy but function as black boxes. SDF-ZTF achieves comparable performance (0.7124 vs 0.7117 CPC) while preserving the interpretable, separable structure of origin, destination, and decay components.
+  \item \textbf{Compared with Cross-City Transfer Literature}: Existing transfer-learning and representation-learning frameworks still require target-city OD data for fine-tuning or similarity alignment. SDF-ZTF requires zero target-city OD observations, utilizing only globally available open demographic and physical geography features.
 \end{itemize}
 
 \subsection{Practical and Theoretical Implications}
 The proposed framework offers several practical and theoretical advantages over monolithic deep learning models (such as DeepGravity) for urban planning and policy:
 \begin{description}
-  \item[Theoretical Breakthrough over Black-Box Neural Models]: While deep learning models achieve high predictive accuracy at the expense of structural transparency, SDF-CTF proves that human mobility dynamics can be mathematically factorized into independent components (decay, attraction, production) without sacrificing accuracy (0.7124 vs. 0.7117 CPC). By proving that the regularities of spatial interaction are well-approximated by a multiplicative gravity structure, the framework acts as a physics-informed regularizer that prevents overfitting to local training source-city idiosyncrasies.
+  \item[Theoretical Breakthrough over Black-Box Neural Models]: While deep learning models achieve high predictive accuracy at the expense of structural transparency, SDF-ZTF proves that human mobility dynamics can be mathematically factorized into independent components (decay, attraction, production) without sacrificing accuracy (0.7124 vs. 0.7117 CPC). By proving that the regularities of spatial interaction are well-approximated by a multiplicative gravity structure, the framework acts as a physics-informed regularizer that prevents overfitting to local training source-city idiosyncrasies.
   
-  \item[Targeted Policy Simulation]: In monolithic neural architectures, altering local zone amenities shifts the entire network predictions in an uninterpretable, coupled manner. By enforcing strict component separability, SDF-CTF enables clean, decoupled "what-if" simulations. Planners can modify zone-level built environments to evaluate changes in destination attraction $A_j$ or origin production $O_i$ independently, without confounding the global distance deterrence behavior $f(d)$.
+  \item[Targeted Policy Simulation]: In monolithic neural architectures, altering local zone amenities shifts the entire network predictions in an uninterpretable, coupled manner. By enforcing strict component separability, SDF-ZTF enables clean, decoupled "what-if" simulations. Planners can modify zone-level built environments to evaluate changes in destination attraction $A_j$ or origin production $O_i$ independently, without confounding the global distance deterrence behavior $f(d)$.
   
-  \item[Auditable and Policy-Compliant Analytics]: Unlike black-box neural networks, every component in SDF-CTF is auditable. Municipal planners and public stakeholders can examine the physical plausibility of production and attraction estimations separately, which is critical for securing regulatory approvals, justifying infrastructure investments, and supporting public policy dialogues.
+  \item[Auditable and Policy-Compliant Analytics]: Unlike black-box neural networks, every component in SDF-ZTF is auditable. Municipal planners and public stakeholders can examine the physical plausibility of production and attraction estimations separately, which is critical for securing regulatory approvals, justifying infrastructure investments, and supporting public policy dialogues.
   
   \item[Survey-Free Deployability in Data-Scarce Regions]: Because the framework isolates component dependencies, it bypasses the need for target-city travel surveys by recovering global decay parameters from aggregate distance histograms and estimating spatial attractions from open data. This makes it highly applicable to resource-constrained municipalities in developing nations that cannot afford large-scale, proprietary cellular registers or expensive household travel surveys.
 \end{description}
@@ -858,14 +858,14 @@ While robust, the framework is subject to several limitations:
     
     % Core characteristics checklist block below
     \node[draw, rectangle, rounded corners, fill=green!5, draw=green!40, thick, below=0.6cm of feats, xshift=1.4cm, text width=9.5cm, align=left, inner sep=8pt] (chk) {
-      \textbf{Key System Characteristics of SDF-CTF:} \\
+      \textbf{Key System Characteristics of SDF-ZTF:} \\
       \quad $\checkmark$ \textbf{Interpretable Structure}: Components are physically and behaviorally separate. \\
       \quad $\checkmark$ \textbf{Survey-Free Calibration}: Replaces proprietary registers and travel surveys. \\
       \quad $\checkmark$ \textbf{Zero-Shot Transferability}: Fully deployable to unseen cities without target OD data. \\
       \quad $\checkmark$ \textbf{Neural-Comparable Accuracy}: Matches DeepGravity (0.7124 vs 0.7117 CPC) under zero-shot transfer.
     };
   \end{tikzpicture}
-  \caption{Final takeaway diagram summarizing the zero-shot transferable pipeline (top) and key framework characteristics of SDF-CTF (bottom).}
+  \caption{Final takeaway diagram summarizing the zero-shot transferable pipeline (top) and key framework characteristics of SDF-ZTF (bottom).}
   \label{fig:final_takeaway}
 \end{figure*}
 
@@ -875,7 +875,7 @@ Urban mobility prediction typically faces a trade-off between structural interpr
 
 This study resolves this trade-off by demonstrating that urban mobility flows can be successfully decomposed into separable origin production, destination attraction, and distance-decay components. Rather than relying on monolithic end-to-end learning, we show that these key physical and behavioral mechanisms can be estimated independently (recovering decay from aggregate statistics, mapping attraction from local open data, and transferring origin production via learned built-environment features), enabling survey-free cross-city transfer without target-city travel surveys.
 
-Through zero-shot evaluation across 50 metropolitan areas under a strict information firewall, the proposed SDF-CTF framework addresses our three core research questions: (1) origin-destination flows are indeed factorable into separable components (recovered decay, open-data attraction, and transferable origin production); (2) a stable set of 22 built-environment features can be mapped from open demographic and spatial repositories to support cross-city production and attraction modeling; and (3) under zero-shot transfer conditions, the decomposed model matches the predictive performance of unconstrained neural models (CPC of 0.7124 vs 0.7117) while significantly outperforming classical structural baselines.
+Through zero-shot evaluation across 50 metropolitan areas under a strict information firewall, the proposed SDF-ZTF framework addresses our three core research questions: (1) origin-destination flows are indeed factorable into separable components (recovered decay, open-data attraction, and transferable origin production); (2) a stable set of 22 built-environment features can be mapped from open demographic and spatial repositories to support cross-city production and attraction modeling; and (3) under zero-shot transfer conditions, the decomposed model matches the predictive performance of unconstrained neural models (CPC of 0.7124 vs 0.7117) while significantly outperforming classical structural baselines.
 
 These results suggest that transferable human mobility structure may be lower-dimensional and more stable than previously assumed. If city-specific spatial interactions were highly complex and non-linear, monolithic neural architectures would decisively outperform gravity-based decomposition. Instead, the competitiveness of our three-component factorization suggests that the fundamental regularities of spatial interaction are well-captured by the multiplicative gravity structure, allowing the model to act as a regularizer that prevents overfitting to local source-city idiosyncrasies.
 
