@@ -1,4 +1,5 @@
 \begin{thebibliography}{25}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -31,6 +32,11 @@ Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
 Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
   human mobility data. Communications Physics 7(1):1--10.
   \doi{10.1038/s42005-024-01909-x}
+
+\bibitem[{Byrd et~al.(1995)Byrd, Lu, Nocedal, and Zhu}]{byrd1995limited}
+Byrd RH, Lu P, Nocedal J, et~al (1995) A limited memory algorithm for bound
+  constrained optimization. SIAM Journal on Scientific and Statistical
+  Computing 16(5):1190--1208. \doi{10.1137/0916069}
 
 \bibitem[{Gonz{\'a}lez et~al.(2008)Gonz{\'a}lez, Hidalgo, and
   Barab{\'a}si}]{gonzalez2008understanding}
@@ -78,6 +84,10 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
 Pappalardo L, Manley E, Sekara V, et~al (2023) Future directions in human
   mobility science. Nature Computational Science 3:588--600.
   \doi{10.1038/s43588-023-00469-4}
+\bibitem[{{Meta AI}(2026)}]{meta_movement_distribution_maps}
+{Meta AI} (2026) Movement distribution maps.
+  \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps},
+  accessed: 2026-06-20
 
 \bibitem[{Rong et~al.(2023)Rong, Feng, Ding et~al.}]{Rong2023goddag}
 Rong C, Feng J, Ding J, et~al (2023) {GODDAG}: Generating origin-destination
