@@ -31,7 +31,7 @@
 \begin{figure*}[t!]
   \vspace{-6pt}
   \centering
-  \includegraphics[width=0.7\textwidth]{../figures/graphical_abstract.png}
+  \includegraphics[width=0.9\textwidth]{../figures/graphical_abstract.png}
   \caption{SDF-ZTF framework: Three independent components (origin production $O_i$ from features, distance decay $f(d)$ from aggregate data, destination attraction $A_j$ from features)}
   \label{fig:graphical_abstract}
 \end{figure*}
@@ -59,7 +59,7 @@ To investigate these questions, we develop a decomposed zero-shot mobility model
 
 \begin{figure*}[t!]
   \centering
-  \begin{tikzpicture}[
+  \begin{tikzpicture}[font=\footnotesize,
     node distance=1.0cm and 1.2cm,
     box/.style={draw, rectangle, rounded corners, minimum width=2.6cm, minimum height=1cm, align=center, thick, fill=blue!5, draw=blue!40},
     greenbox/.style={draw, rectangle, rounded corners, minimum width=2.6cm, minimum height=1cm, align=center, thick, fill=green!5, draw=green!40},
@@ -143,7 +143,7 @@ We compare the characteristics of classical models and our proposed SDF-ZTF fram
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Comparative analysis of human mobility models across structural and transferability dimensions. ``Calibration-Free Decay'' indicates whether the model recovers the distance decay function without requiring individual OD pair observations from target cities.}
 \label{tab:literature_comparison}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc}
@@ -186,7 +186,7 @@ The conceptual pipeline of the proposed Separable Decomposed Framework for Zero-
 \begin{figure*}[t!]
   \centering
   \begin{tikzpicture}[
-    font=\small,
+    font=\footnotesize,
     node distance=0.8cm and 1.1cm,
     block/.style={draw, rectangle, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, thick, fill=blue!5, draw=blue!40},
     cloud/.style={draw, ellipse, minimum width=2.0cm, minimum height=0.7cm, align=center, fill=green!5, draw=green!40},
@@ -257,7 +257,7 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \begin{tabular}{p{0.95\textwidth}}
 \toprule
 \textbf{Algorithm 1: SDF-ZTF Training and Zero-Shot Prediction} \\
@@ -289,7 +289,7 @@ To implement and evaluate the SDF-ZTF framework across diverse metropolitan area
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Data usage matrix illustrating the operational roles of inputs across SDF-ZTF components to guarantee leakage-free prediction.}
 \label{tab:data_usage_matrix}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
@@ -325,7 +325,7 @@ To discover stable spatial patterns that translate across cities, we implement a
     level distance=3.5cm,
     sibling distance=1.0cm,
     edge from parent/.style={draw, -latex, thick},
-    every node/.style={draw, rectangle, rounded corners, align=center, fill=blue!5, draw=blue!40, thick, font=\small}
+    every node/.style={draw, rectangle, rounded corners, align=center, fill=blue!5, draw=blue!40, thick, font=\footnotesize}
   ]
     \node {Globally Available \\ Open Data}
       child { node {Contextual \\ Features}
@@ -394,7 +394,7 @@ Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Preprocessing and normalization steps applied to spatial features prior to model learning.}
 \label{tab:preprocessing}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}
@@ -416,7 +416,7 @@ We evaluate the proposed framework systematically using a three-stage validation
 
 \begin{figure*}[t!]
   \centering
-  \begin{tikzpicture}[
+  \begin{tikzpicture}[font=\footnotesize,
     node distance=0.8cm,
     box/.style={draw, rectangle, rounded corners, text width=3.3cm, minimum height=1.0cm, align=center, thick, fill=blue!5, draw=blue!40},
     arrow/.style={-latex, thick}
@@ -461,7 +461,7 @@ Recovered parameters show reasonable agreement with OD-fitted parameters, partic
 
 \begin{figure*}[t!]
   \centering
-  \includegraphics[width=0.9\textwidth]{../figures/layer1_scatter_plots.png}
+  \includegraphics[width=0.98\textwidth]{../figures/layer1_scatter_plots.png}
   \caption{Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma$ (left) and exponential decay rate $\beta$ (right) show consistency in spatial decay structure (Pearson $r = 0.729$ for $\gamma$ and $r = 0.258$ for $\beta$).}
   \label{fig:layer1_scatters}
 \end{figure*}
@@ -477,7 +477,7 @@ To evaluate outflow prediction quality, we compare the naive population baseline
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}
 \label{tab:outflow_comparison}
 \begin{tabular}{lc}
@@ -500,7 +500,7 @@ Oracle Outflow ($O_i^{\text{true}}$) & 0.7447 \\
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Top-10 Features by Average SHAP Importance (Training Source Cities, $N=25$)}
 \label{tab:top_features}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llcc}
@@ -546,7 +546,7 @@ For each of the 25 held-out target cities, we train eight models corresponding t
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Factorial Ablation Results (Average across $N=25$ held-out target cities)}
 \label{tab:ablation}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccl}
@@ -582,7 +582,7 @@ RQ3 asks whether interpretable decomposition can remain competitive with state-o
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Multi-Baseline Comparison (25 Held-Out Target Cities)}
 \label{tab:multibaseline_comparison}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{4.2cm}ccccc}
@@ -611,7 +611,7 @@ Under LOCO, DeepGravity achieves a small but statistically significant advantage
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{LOCO 50-Fold Statistical Significance Test Summary}
 \label{tab:statistical_tests}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccccc}
@@ -633,7 +633,7 @@ The overall zero-shot performance masks spatial variations across urban configur
 
 \begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}
 \label{tab:morphology}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
@@ -722,7 +722,7 @@ We evaluate the robustness of our MLE parameter recovery under non-ideal data sc
 
 \begin{figure*}[htbp!]
   \centering
-  \includegraphics[width=0.6\textwidth]{../figures/layer1_robustness_heatmap.png}
+  \includegraphics[width=0.85\textwidth]{../figures/layer1_robustness_heatmap.png}
   \caption{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}
   \label{fig:layer1_heatmap}
 \end{figure*}
@@ -739,7 +739,7 @@ To evaluate the stability of origin transfer under prediction errors, we inject 
 
 \begin{figure*}[htbp!]
   \centering
-  \includegraphics[width=0.95\textwidth]{../figures/layer2_results.png}
+  \includegraphics[width=1.0\textwidth]{../figures/layer2_results.png}
   \caption{Outflow Bottleneck Analysis (controlled ablation with fixed $A_j$ heuristic and national decay prior).
   \textbf{Left}: Source-scale robustness learning curve --- mean CPC $\pm 1\sigma$ as the number of source cities used to train $\mathrm{GBDT}_O$ increases from 5 to 25. CPC saturates by $n_{\text{src}} \approx 15$--20.
   \textbf{Right}: Noise sensitivity --- mean CPC $\pm 1\sigma$ across 25 held-out cities under additive Gaussian noise $\sigma \in \{0\%, 10\%, 20\%, 40\%\}$ injected on $\log\hat{O}_i$.}
@@ -752,7 +752,7 @@ Evaluating the GBDT model performance across nested subsets of top SHAP features
 
 \begin{figure*}[htbp!]
   \centering
-  \begin{tikzpicture}
+  \begin{tikzpicture}[font=\footnotesize]
     \begin{axis}[
       width=0.85\textwidth,
       height=5.5cm,
