@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -85,6 +85,12 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
   Platforms, Inc. / Columbia University, distributed via Humanitarian Data
   Exchange (HDX).
   \url{https://data.humdata.org/dataset/highresolutionpopulationdensitymaps}
+
+\bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
+  Alessandretti}]{pappalardo2023analytical}
+Pappalardo L, Manley E, Sekara V, et~al (2023) Future directions in human
+  mobility science. Nature Computational Science 3:588--600.
+  \doi{10.1038/s43588-023-00469-4}
 
 \bibitem[{Rong et~al.(2023)Rong, Feng, Ding et~al.}]{Rong2023goddag}
 Rong C, Feng J, Ding J, et~al (2023) {GODDAG}: Generating origin-destination
