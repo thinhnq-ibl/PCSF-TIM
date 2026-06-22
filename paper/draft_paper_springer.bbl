@@ -84,13 +84,6 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
   Conference on Computer Vision, pp 16781--16790,
   \doi{10.1109/ICCV53024.2023.01529}
 
-\bibitem[{{Meta AI} and {Center for International Earth Science Information
-  Network (CIESIN)}(2016)}]{meta_hrsl}
-{Meta AI}, {Center for International Earth Science Information Network
-  (CIESIN)} (2016) High resolution settlement layer ({HRSL}). Tech. rep., Meta
-  Platforms, Inc. / Columbia University, distributed via Humanitarian Data
-  Exchange (HDX).
-  \url{https://data.humdata.org/dataset/highresolutionpopulationdensitymaps}
 
 \bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
   Alessandretti}]{pappalardo2023analytical}

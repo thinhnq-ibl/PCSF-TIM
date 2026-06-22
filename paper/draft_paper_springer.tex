@@ -21,7 +21,7 @@
 \author*[1]{\fnm{Thinh} \sur{Nguyen}}\email{nqt900@gmail.com}
 \affil*[1]{\orgname{Aarista Technologies}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 
-\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. Existing approaches typically rely on historical OD records, travel surveys, or individual mobility traces. However, these data sources are often expensive to collect, difficult to obtain, and subject to administrative, privacy, and regulatory constraints. To address these challenges, we introduce the Separable Decomposed Framework for Zero-Shot Transferable Flows (SDF-ZTF), a decomposed mobility modeling approach that factorizes OD flows into three interpretable components: target-recovered distance decay, open-data-driven destination attraction, and cross-city transferable origin production. By relying exclusively on globally available open datasets, including OpenStreetMap, WorldPop, and Meta High-Resolution Population Density data, this methodology enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that our approach achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
+\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. Existing approaches typically rely on historical OD records, travel surveys, or individual mobility traces. However, these data sources are often expensive to collect, difficult to obtain, and subject to administrative, privacy, and regulatory constraints. To address these challenges, we introduce the Separable Decomposed Framework for Zero-Shot Transferable Flows (SDF-ZTF), a decomposed mobility modeling approach that factorizes OD flows into three interpretable components: target-recovered distance decay, open-data-driven destination attraction, and cross-city transferable origin production. By relying exclusively on globally available open datasets, including OpenStreetMap and WorldPop gridded population data, this methodology enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that our approach achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
 
 \keywords{Urban mobility, origin-destination flows, gravity models, interpretability, transfer learning, zero-shot transfer, open-data modeling}
 
@@ -55,7 +55,7 @@ To address these challenges, we investigate three core research questions:
   \item[RQ3:] Can a decomposed model utilizing transferable built-environment features identified from globally available open data achieve zero-shot transfer performance comparable to end-to-end neural models?
 \end{description}
 
-To investigate these questions, we develop a decomposed zero-shot mobility modeling framework. Under this approach, urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction estimated via a simple training-free open-data heuristic, and trip production transferred across cities via built-environment representations. Rather than relying on proprietary cellular data or local survey calibrations, this decomposed zero-shot transferable flows framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap \citep{atwal2025commuting}, WorldPop \citep{worldpop2018}, and Meta HRSL \citep{meta_hrsl}), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
+To investigate these questions, we develop a decomposed zero-shot mobility modeling framework. Under this approach, urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction estimated via a simple training-free open-data heuristic, and trip production transferred across cities via built-environment representations. Rather than relying on proprietary cellular data or local survey calibrations, this decomposed zero-shot transferable flows framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap \citep{atwal2025commuting} and WorldPop \citep{worldpop2018}), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
 
 \begin{figure*}[t!]
   \centering
@@ -236,7 +236,7 @@ To prevent singularity for intra-zonal flows ($d_{ij} = 0$) and scale parameter 
 \end{equation}
 where $\bar{R}_{\mathrm{zone}}$ is the mean empirical radius of the administrative zones in the target city. Decay parameters $(\beta, \gamma)$ are estimated via maximum likelihood estimation (MLE) using exclusively the aggregate distance-bin distribution of source cities, preserving privacy. Complete calibration, moment-based initialization, and optimization details are provided in the Appendix.
 
-\textbf{Information Governance and Low-Leakage Design.} The design choices in SDF-ZTF reflect three concrete architectural elements that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop + Meta HRSL) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-governance regulations (e.g., GDPR) without requiring complex institutional data-sharing agreements or risking individual tracking.
+\textbf{Information Governance and Low-Leakage Design.} The design choices in SDF-ZTF reflect three concrete architectural elements that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-governance regulations (e.g., GDPR) without requiring complex institutional data-sharing agreements or risking individual tracking.
 
 \subsection{Origin Outflow Component ($O_i$)}
 The trip production $O_i$ represents the total seasonal trips originating from zone $i$:
@@ -300,23 +300,20 @@ OD Matrix ($T_{ij}$) & \texttimes & \texttimes & \checkmark & \checkmark \\
 Aggregate Trip-Length Distribution & \texttimes & \texttimes & \checkmark & \texttimes \\
 Distance Matrix ($d_{ij}$) & \texttimes & \texttimes & \checkmark & \checkmark \\
 OpenStreetMap (OSM) & \checkmark & \checkmark & \texttimes & \texttimes \\
-WorldPop + Meta HRSL & \checkmark & \checkmark & \texttimes & \texttimes \\
+WorldPop & \checkmark & \checkmark & \texttimes & \texttimes \\
 \bottomrule
 \end{tabular*}
 \end{table*}
 
-\subsubsection{(1) Origin-Destination (OD) Matrix and Aggregate Trip-Length Distribution - $T_{ij}$}
-The OD matrix contains seasonal commute flows between census tracts. In this study, OD observations are derived from Cuebiq anonymized cellular location data (aggregated by season, validated against US Census surveys, covering 50 metropolitan areas). Crucially, the OD matrix serves two distinct roles that are kept strictly separated:
+First, origin-destination (OD) observations and aggregate trip-length distributions are derived from Cuebiq anonymized cellular location data (aggregated by season, validated against US Census surveys, covering 50 metropolitan areas). The OD matrix contains seasonal commute flows between census tracts and serves two distinct, strictly separated roles: 
 \begin{itemize}
-  \item \textbf{Training labels and evaluation ground truth}: Individual $(i,j,T_{ij})$ records are used only for training origin production ($O_i$) models on source cities and for evaluation. They are never used as features to prevent leakage.
-  \item \textbf{Aggregate trip-length distribution (decay calibration)}: The marginal distance histogram $\{b_k\}_{k=1}^{K}$—i.e., the proportion of total trips falling within each distance bin—is derived from the OD matrix of source cities and used to calibrate the distance decay parameters ($\gamma$, $\beta$) via maximum likelihood estimation. This aggregate representation, which directly corresponds to the type of mobility probability distribution that can be provided by mobile network operators or social platforms under anonymization policies, contains no individual OD pair information. Critically, in a real-world deployment scenario, this histogram can be obtained directly from such aggregate distributions without requiring access to any individual-level trajectory or OD record, which is the key mechanism enabling RQ1.
+  \item \textbf{Training labels and evaluation ground truth}: Individual $(i,j,T_{ij})$ records are used solely for training origin production ($O_i$) models on source cities and for evaluation, and are never used as features to prevent leakage.
+  \item \textbf{Aggregate trip-length distribution (decay calibration)}: The marginal distance histogram $\{b_k\}_{k=1}^{K}$—i.e., the proportion of total trips falling within each distance bin—is derived from the OD matrix of source cities and used to calibrate the distance decay parameters ($\gamma$, $\beta$) via maximum likelihood estimation. This aggregate representation contains no individual OD pair information and can be obtained directly from mobile network operators or social platforms under anonymization policies, enabling deployment without individual-level trajectory access.
 \end{itemize}
 
-\subsubsection{(2) OSM-Derived Features}
-We extract POIs and road features using the Overpass API from OpenStreetMap snapshots \citep{atwal2025commuting}. POI counts are calculated across 16 land-use categories (e.g., retail, industrial, education, health).
+Second, infrastructure and land-use characteristics are extracted from OpenStreetMap (OSM) snapshots \citep{atwal2025commuting} using the Overpass API, calculating Point of Interest (POI) counts across 16 land-use categories (e.g., retail, industrial, education, health). 
 
-\subsubsection{(3) Population Data}
-For residential population counts, this study leverages the population data provided directly in the original mobility dataset. Crucially, we emphasize that this population information can be readily replaced with publicly available gridded population estimates from WorldPop \citep{worldpop2018} (100\,m resolution) or the Meta High-Resolution Settlement Layer \citep{meta_hrsl} (30\,m resolution) in cities where local census/administrative population data is unavailable, maintaining the framework's survey-free transferability.
+Finally, for residential population counts, this study leverages the population data provided directly in the original mobility dataset. Crucially, we emphasize that this population information can be readily replaced with publicly available gridded population estimates from WorldPop \citep{worldpop2018} (100\,m resolution) in cities where local census/administrative population data is unavailable, maintaining the framework's survey-free transferability.
 
 \subsection{Transferable Urban Features}
 To discover stable spatial patterns that translate across cities, we implement a two-stage feature engineering and stability selection procedure, mapping raw datasets to a low-dimensional transferable urban representation. The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
@@ -380,7 +377,7 @@ To test true zero-shot generalization, we design a strict Cross-City Transfer Pr
 Under this cross-city evaluation protocol, we enforce a strict information firewall between the source and target environments. 
 \begin{itemize}
   \item \textbf{Forbidden}: Target-city flow matrices $T_{ij}$, target-city household survey results, target cellular data, and target trip-demand signals.
-  \item \textbf{Allowed}: Centroid coordinates, administrative zone boundaries, OpenStreetMap POIs, and gridded open demography (WorldPop + Meta HRSL).
+  \item \textbf{Allowed}: Centroid coordinates, administrative zone boundaries, OpenStreetMap POIs, and gridded open demography (WorldPop).
 \end{itemize}
 Since destination attraction is computed via a training-free open-data heuristic and distance decay parameters are learned on source cities, zero-shot leakage is mathematically prevented.
 
@@ -695,35 +692,6 @@ While robust, the framework is subject to several limitations:
   \item \textbf{Causality}: Analysis is purely predictive. Causal effects cannot be inferred (e.g., building a grocery store attracts X more trips). Causal inference requires experimental or quasi-experimental design.
 \end{enumerate}
 
-\begin{figure*}[t!]
-  \centering
-  \begin{tikzpicture}[
-    node distance=1.0cm and 0.4cm,
-    stepbox/.style={draw, rectangle, rounded corners, text width=2.4cm, minimum height=1.0cm, align=center, thick, fill=blue!5, draw=blue!40},
-    arrow/.style={-latex, thick}
-  ]
-    % Flowchart Nodes
-    \node[stepbox] (open) {Globally Available \\ Open Data};
-    \node[stepbox, right=of open] (feats) {SHAP Stability-Selected \\ Transferable Features ($K=22$)};
-    \node[stepbox, right=of feats] (comp) {Decomposed GBDT Models \\ ($O_i, f(d), A_j$);};
-    \node[stepbox, right=of comp] (fuse) {Gravity Fusion \\ Zero-Shot OD Prediction};
-    
-    \draw[arrow] (open) -- (feats);
-    \draw[arrow] (feats) -- (comp);
-    \draw[arrow] (comp) -- (fuse);
-    
-    % Core characteristics checklist block below
-    \node[draw, rectangle, rounded corners, fill=green!5, draw=green!40, thick, below=0.6cm of feats, xshift=1.4cm, text width=9.5cm, align=left, inner sep=8pt] (chk) {
-      \textbf{Key System Characteristics of SDF-ZTF:} \\
-      \quad $\checkmark$ \textbf{Interpretable Structure}: Components are physically and behaviorally separate. \\
-      \quad $\checkmark$ \textbf{Survey-Free Calibration}: Replaces proprietary registers and travel surveys. \\
-      \quad $\checkmark$ \textbf{Zero-Shot Transferability}: Fully deployable to unseen cities without target OD data. \\
-      \quad $\checkmark$ \textbf{Neural-Comparable Accuracy}: Matches DeepGravity (0.7124 vs 0.7117 CPC) under zero-shot transfer.
-    };
-  \end{tikzpicture}
-  \caption{Final takeaway diagram summarizing the zero-shot transferable pipeline (top) and key framework characteristics of SDF-ZTF (bottom).}
-  \label{fig:final_takeaway}
-\end{figure*}
 
 \section{Conclusions}
 
@@ -739,86 +707,35 @@ These findings suggest that transferable mobility structure is simpler and more 
 
 \section*{Appendix: Supplementary Materials}\label{sec:appendix}
 
-\subsection*{Appendix A: Distance Decay Parameter Calibration and Robustness}
+\subsection*{Appendix A. Robustness of Aggregate-Based Distance-Decay Recovery}
 
-\subsubsection*{A.1 Parameter Initialization}
-To achieve reliable convergence in maximum likelihood estimation (MLE) for the Tanner Multi deterrence parameters, we adopt dynamic, data-driven initialization:
-\begin{enumerate}
-  \item \textbf{Exponential rate $\beta^{(0)}$}: Calculated per target city using the reciprocal of the mean observed trip distance:
-  \begin{equation}
-    \beta^{(0)} = \frac{1}{\bar{d}_{\mathrm{obs}}}, \quad \text{where } \bar{d}_{\mathrm{obs}} = \sum_{k=1}^{K} b_k \cdot m_k
-  \end{equation}
-  where $b_k$ is the observed trip-share in distance bin $k$, and $m_k$ is the spatial midpoint of that bin.
-  \item \textbf{Power-law exponent $\gamma^{(0)}$}: Anchored at the median of its empirical global urban spectrum: $\gamma^{(0)} = 1.0$, which resides at the center of the typical range $\gamma \in [0.5, 2.0]$ observed in human mobility studies.
-  \item \textbf{Attraction prior $\boldsymbol{\alpha}^{(0)}$}: Set to $\mathbf{0}$, reflecting a uniform attraction prior across all destination zones.
-\end{enumerate}
+\subsubsection*{A.1 Estimation Details}
+The distance decay parameters ($\gamma, \beta$) are estimated via maximum likelihood estimation (MLE) from the aggregate trip-length distribution (marginal distance histogram) of source cities. To ensure numerical stability and enforce parameter bounds ($\beta > 0, \gamma \ge 0$), we perform L-BFGS-B optimization in log-space, parameterizing the variables as $\tilde{\beta} = \log(\beta)$ and $\tilde{\gamma} = \log(\gamma)$. The optimization employs a multi-restart framework with 10 random perturbations initialized around baseline data-driven anchors to prevent the solver from stalling in local optima, retaining the parameter set that maximizes log-likelihood.
 
-\subsubsection*{A.2 Log-Space Reparameterization}
-To enforce the parameter bounds ($\beta > 0, \gamma \ge 0$) implicitly and avoid boundary instability during L-BFGS-B optimization \citep{byrd1995limited}, we apply an unconstrained log-space reparameterization:
-\begin{equation}
-  \tilde{\beta} = \log(\beta), \qquad \tilde{\gamma} = \log(\gamma)
-\end{equation}
-The optimization solver \citep{byrd1995limited} operates in the unconstrained space $(\tilde{\beta}, \tilde{\gamma}, \boldsymbol{\alpha})$, and the parameters are back-transformed via exponentials to evaluate the likelihood.
-
-\subsubsection*{A.3 Multi-Restart L-BFGS-B Optimization}
-To prevent the optimizer from getting trapped in local optima on the likelihood surface, we utilize a multi-restart framework with 10 random restarts. Each restart $m \in \{1, \ldots, 10\}$ applies a Gaussian perturbation to the initial anchors:
-\begin{align*}
-  \tilde{\beta}^{(0)}_m  &\sim \mathcal{N}\!\left(\log\beta^{(0)},\;0.25\right), \\
-  \tilde{\gamma}^{(0)}_m &\sim \mathcal{N}\!\left(0,\;0.25\right), \\
-  \boldsymbol{\alpha}^{(0)}_m &\sim \mathcal{N}\!\left(\mathbf{0},\;0.1\,\mathbf{I}\right).
-\end{align*}
-We execute L-BFGS-B optimization for each restart and retain the parameter set achieving the maximum log-likelihood.
-
-\subsubsection*{A.4 Robustness of Decay Parameter Recovery}
-We evaluate the robustness of our Maximum Likelihood Estimation (MLE) in recovering the decay parameters ($\beta, \gamma$) under non-ideal data scenarios:
-
+\subsubsection*{A.2 Robustness Analysis}
+We evaluate the robustness of our MLE parameter recovery under non-ideal data scenarios:
 \begin{description}
-  \item[T1.2: Bin Sensitivity Analysis] Sweeping the distance bins $K \in \{10, 20, 50, 100\}$ shows that the recovery error for the power-law exponent $\gamma$ stabilizes at a low level (MAE $\approx 0.13$) for $K \ge 50$. This indicates that 50 percentile bins are sufficient to robustly capture the decay profile.
-  \item[T1.4: Missing Attractiveness Data ($A_j$)] Randomly removing 10\%, 20\%, and 50\% of target-city destination attractions $A_j$ yields highly stable decay recovery (e.g., $\gamma_{\text{MAE}} = 0.1312$ under 20\% missing data vs. $0.1313$ baseline). This validates the robustness of aggregate MLE against localized data gaps.
-  \item[T1.5: CBD Collapse (Extreme $A_j$ Distortion)] Setting the attraction $A_j$ of the top 5\% highest attractiveness zones to zero still allows accurate parameter recovery ($\gamma_{\text{MAE}} = 0.1225$). This proves that spatial decay friction can be recovered even when key destination hubs are omitted.
+  \item[Bin Sensitivity Analysis] Sweeping the distance bins $K \in \{10, 20, 50, 100\}$ shows that the recovery error for the power-law exponent $\gamma$ stabilizes at a low level (MAE $\approx 0.13$) for $K \ge 50$. This indicates that 50 percentile bins are sufficient to robustly capture the decay profile.
+  \item[Missing Attractiveness Data ($A_j$)] Randomly removing 10\%, 20\%, and 50\% of target-city destination attractions $A_j$ yields highly stable decay recovery (e.g., $\gamma_{\text{MAE}} = 0.1312$ under 20\% missing data vs. $0.1313$ baseline). This validates the robustness of aggregate MLE against localized data gaps.
+  \item[CBD Collapse (Extreme $A_j$ Distortion)] Setting the attraction $A_j$ of the top 5\% highest attractiveness zones to zero still allows accurate parameter recovery ($\gamma_{\text{MAE}} = 0.1225$). This proves that spatial decay friction can be recovered even when key destination hubs are omitted.
 \end{description}
 
 \begin{figure*}[htbp!]
   \centering
   \includegraphics[width=0.6\textwidth]{../figures/layer1_robustness_heatmap.png}
-  \caption{Decay Identifiability Robustness Heatmap (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}
+  \caption{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}
   \label{fig:layer1_heatmap}
 \end{figure*}
 
-\subsection*{Appendix B: Origin Production Transferability Robustness}
+\subsection*{Appendix B. Robustness of Origin Production Transfer}
 
-\subsubsection*{B.1 GBDT Hyperparameters and Reproducibility Details}
-To ensure the reproducibility of the origin trip production ($O_i$) estimator and the transferable feature discovery ablation attraction model ($A_j$), the hyperparameter configurations for the Gradient Boosted Decision Tree (GBDT) models are summarized in Table~\ref{tab:gbdt_hyperparameters}. Note that in the final SDF-ZTF deployment, $A_j$ is computed via the training-free min-max heuristic; the GBDT attraction model is used only in the feature discovery ablation analysis to validate the heuristic's sufficiency. The models are trained using the \texttt{scikit-learn} and \texttt{LightGBM} libraries in Python \citep{lightgbm}, and hyperparameters are optimized using 5-fold cross-validation on the 25 source training cities.
+The origin trip production ($O_i$) estimator is trained using a Gradient Boosted Decision Tree (GBDT) regressor on source training cities. Complete hyperparameter configurations and implementation scripts are available in the project's code repository. Here, we analyze the sensitivity of the zero-shot production transfer.
 
-\begin{table*}[t]
-\centering
-\tablebodyfont
-\caption{GBDT Model Hyperparameter Configurations}
-\label{tab:gbdt_hyperparameters}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcc}
-\toprule
-\textbf{Hyperparameter} & \textbf{Outflow Model ($O_i$)} & \textbf{Attraction Model ($A_j$, ablation only)} \\
-\midrule
-Base Learner & Decision Tree & Decision Tree \\
-Loss Function & Least Squares (MSE on $\log O_i$) & Least Squares (MSE on $A_j$) \\
-Learning Rate ($\eta$) & 0.05 & 0.05 \\
-Number of Estimators & 150 & 200 \\
-Max Tree Depth & 6 & 6 \\
-Num. Leaves & 31 & 31 \\
-Subsample Ratio & 0.8 & 0.8 \\
-Colsample By Tree & 0.8 & 0.8 \\
-Minimum Child Weight & 1 & 1 \\
-Early Stopping Rounds & 15 & 15 \\
-\bottomrule
-\end{tabular*}
-\end{table*}
+\subsubsection*{B.1 Source-Scale Sensitivity}
+We analyze how the number of training environments affects zero-shot predictability by retraining the GBDT on subsets of $n_{\text{src}} \in \{5, 10, 15, 20, 25\}$ source cities. Target-city evaluation shows that zero-shot prediction performance rises steeply from $n_{\text{src}} = 5$ and saturates around 15–20 source cities. This indicates that only a modest number of source cities is required to learn stable, generalizable outflow characteristics.
 
-\subsubsection*{B.2 Outflow Prediction Robustness: Noise and Source-Scale Analysis}
-To evaluate the stability of our GBDT outflow predictor under different perturbations, we conduct two robustness analyses:
-
-\textbf{Noise Sensitivity:} We inject additive Gaussian noise at $\sigma \in \{10\%, 20\%, 40\%\}$ log-scale directly on top of the GBDT-predicted $\log\hat{O}_i$ to evaluate spatial robustness. CPC decays only marginally (from $0.7037$ to $0.6923$ at 40\% noise), demonstrating that production-constraint normalization dampens local estimation errors.
-
-\textbf{Source-Scale Robustness:} We retrain the GBDT on subsets of $n_{\text{src}} \in \{5, 10, 15, 20, 25\}$ source cities. The zero-shot target CPC rises steeply from $n_{\text{src}} = 5$ and saturates by $n_{\text{src}} \approx 15$, proving that only a modest number of source cities is needed to learn stable outflow characteristics.
+\subsubsection*{B.2 Noise Sensitivity}
+To evaluate the stability of origin transfer under prediction errors, we inject additive Gaussian noise at log-scale ($\sigma \in \{10\%, 20\%, 40\%\}$) directly onto the predicted outflows $\log\hat{O}_i$. Even under substantial injected noise (40\%), the target CPC degrades only marginally (from $0.7037$ to $0.6923$). This demonstrates that production-constraint normalization effectively dampens localized estimation noise.
 
 \begin{figure*}[htbp!]
   \centering
@@ -828,10 +745,10 @@ To evaluate the stability of our GBDT outflow predictor under different perturba
   \textbf{Right}: Noise sensitivity --- mean CPC $\pm 1\sigma$ across 25 held-out cities under additive Gaussian noise $\sigma \in \{0\%, 10\%, 20\%, 40\%\}$ injected on $\log\hat{O}_i$.}
 \end{figure*}
 
-\subsection*{Appendix C: Transferable Feature Discovery Details}
-To analyze how feature set size affects zero-shot predictability, we evaluate model performance under different counts of top SHAP features ($K \in \{5, 10, 15, 20, 22, 25, 30\}$):
+\subsection*{Appendix C. Feature Selection Sensitivity}
 
-\textbf{Feature Selection and Plateau:} The models are trained using nested subsets of these stable features on target cities. Predictive performance plateaus early at $K=15$ features (CPC: $0.7124$) and stays identical at $K=22$ (CPC: $0.7124$), followed by a slight decline beyond 22 features (e.g., $0.7122$ for all 30 features). While $K=15$ features are sufficient to capture the main attraction signals, we choose $K=22$ for the final framework to incorporate a stability buffer. This includes all features meeting the joint criteria of SHAP importance ($\mu_p \ge 0.005$) and stability ($S_p \ge 1.0$).
+\subsubsection*{C.1 Feature Count Sensitivity}
+Evaluating the GBDT model performance across nested subsets of top SHAP features ($K \in \{5, 10, 15, 20, 22, 25, 30\}$) shows that predictive performance plateaus between 15 and 22 features (CPC: $0.7124$). This indicates that most transferable spatial information is captured by a compact set of built-environment indicators, with additional features providing marginal utility.
 
 \begin{figure*}[htbp!]
   \centering
