@@ -1,4 +1,4 @@
-\begin{thebibliography}{28}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -26,11 +26,6 @@ Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
 Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
   Nature 439(7075):462--465. \doi{10.1038/nature04292}
 
-\bibitem[{Byrd et~al.(1995)Byrd, Lu, Nocedal, and Zhu}]{byrd1995limited}
-Byrd RH, Lu P, Nocedal J, et~al (1995) A limited memory algorithm for bound
-  constrained optimization. SIAM Journal on Scientific and Statistical
-  Computing 16(5):1190--1208. \doi{10.1137/0916069}
-
 \bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
   De~Domenico}]{gallotti2024distorted}
 Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
@@ -48,12 +43,6 @@ Jin G, Wu Y, Wang M, et~al (2022) Selective cross-city transfer learning for
   the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining.
   Association for Computing Machinery, pp 729--739,
   \doi{10.1145/3534678.3539345}
-
-\bibitem[{Ke et~al.(2017)Ke, Meng, Finley, Wang, Chen, Ma, Ye, and
-  Liu}]{lightgbm}
-Ke G, Meng Q, Finley T, et~al (2017) Lightgbm: A highly efficient gradient
-  boosting decision tree. In: Advances in Neural Information Processing Systems
-  30. Curran Associates, Inc., p 3146--3154, \doi{10.5555/3294996.3295074}
 
 \bibitem[{Lenormand et~al.(2012)Lenormand, Huet, Gargiulo, and
   Deffuant}]{lenormand2012universal}
@@ -83,7 +72,6 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
   continual pretraining. In: Proceedings of the IEEE/CVF International
   Conference on Computer Vision, pp 16781--16790,
   \doi{10.1109/ICCV53024.2023.01529}
-
 
 \bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
   Alessandretti}]{pappalardo2023analytical}

@@ -12,7 +12,6 @@
 \newlabel{fig:graphical_abstract}{{1}{2}{SDF-ZTF framework: Three independent components (origin production $O_i$ from features, distance decay $f(d)$ from aggregate data, destination attraction $A_j$ from features)}{figure.1}{}}
 \citation{atwal2025commuting}
 \citation{worldpop2018}
-\citation{meta_hrsl}
 \citation{wilson1971,tanner1961}
 \citation{Simini2012universal,alis2021generalized}
 \citation{stouffer1940intervening}
@@ -66,20 +65,16 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Data Sources}{7}{subsection.4.2}\protected@file@percent }
 \citation{atwal2025commuting}
 \citation{worldpop2018}
-\citation{meta_hrsl}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Data usage matrix illustrating the operational roles of inputs across SDF-ZTF components to guarantee leakage-free prediction.}}{8}{table.2}\protected@file@percent }
 \newlabel{tab:data_usage_matrix}{{2}{8}{Data usage matrix illustrating the operational roles of inputs across SDF-ZTF components to guarantee leakage-free prediction}{table.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}(1) Origin-Destination (OD) Matrix and Aggregate Trip-Length Distribution - $T_{ij}$}{8}{subsubsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}(2) OSM-Derived Features}{8}{subsubsection.4.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}(3) Population Data}{8}{subsubsection.4.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Transferable Urban Features}{9}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Transferable Urban Features}{8}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Taxonomy of the globally available open data features used in the SDF-ZTF framework. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}}{9}{figure.4}\protected@file@percent }
+\newlabel{fig:feature_taxonomy}{{4}{9}{Taxonomy of the globally available open data features used in the SDF-ZTF framework. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors}{figure.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Candidate Feature Set (30 dimensions)}{9}{subsubsection.4.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}SHAP Stability Selection}{9}{subsubsection.4.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Cross-City Transfer Evaluation Protocol}{9}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Information Leakage Prevention}{9}{subsubsection.4.4.1}\protected@file@percent }
 \citation{lenormand2012universal}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Taxonomy of the globally available open data features used in the SDF-ZTF framework. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}}{10}{figure.4}\protected@file@percent }
-\newlabel{fig:feature_taxonomy}{{4}{10}{Taxonomy of the globally available open data features used in the SDF-ZTF framework. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Information Leakage Prevention}{10}{subsubsection.4.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}Evaluation Metric: Common Part of Commuters}{10}{subsubsection.4.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Preprocessing \& Normalization}{10}{subsection.4.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Results}{10}{section.5}\protected@file@percent }
@@ -91,27 +86,27 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Methodology validation roadmap showing the three evaluation stages used to systematically verify the SDF-ZTF framework.}}{11}{figure.5}\protected@file@percent }
 \newlabel{fig:validation_roadmap}{{5}{11}{Methodology validation roadmap showing the three evaluation stages used to systematically verify the SDF-ZTF framework}{figure.5}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Origin Production Transferability}{11}{subsubsection.5.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Transferable Feature Discovery}{11}{subsubsection.5.2.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.729$ for $\gamma $ and $r = 0.258$ for $\beta $).}}{12}{figure.6}\protected@file@percent }
 \newlabel{fig:layer1_scatters}{{6}{12}{Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.729$ for $\gamma $ and $r = 0.258$ for $\beta $)}{figure.6}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}}{12}{table.4}\protected@file@percent }
 \newlabel{tab:outflow_comparison}{{4}{12}{Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}{table.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Transferable Feature Discovery}{12}{subsubsection.5.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Component Contribution Analysis}{12}{subsection.5.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Factorial Ablation Study}{12}{subsubsection.5.3.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Top-10 Features by Average SHAP Importance (Training Source Cities, $N=25$)}}{13}{table.5}\protected@file@percent }
 \newlabel{tab:top_features}{{5}{13}{Top-10 Features by Average SHAP Importance (Training Source Cities, $N=25$)}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Zero-Shot Transfer Evaluation}{13}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Baseline Comparison}{13}{subsubsection.5.4.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Factorial Ablation Results (Average across $N=25$ held-out target cities)}}{14}{table.6}\protected@file@percent }
 \newlabel{tab:ablation}{{6}{14}{Factorial Ablation Results (Average across $N=25$ held-out target cities)}{table.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Zero-Shot Transfer Evaluation}{14}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Baseline Comparison}{14}{subsubsection.5.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Statistical Significance Analysis}{14}{subsubsection.5.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.3}Urban Morphology Analysis}{14}{subsubsection.5.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{14}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}What Aggregate Distributions Reveal About Distance Decay}{14}{subsection.6.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{15}{table.7}\protected@file@percent }
 \newlabel{tab:multibaseline_comparison}{{7}{15}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.7}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces LOCO 50-Fold Statistical Significance Test Summary}}{15}{table.8}\protected@file@percent }
 \newlabel{tab:statistical_tests}{{8}{15}{LOCO 50-Fold Statistical Significance Test Summary}{table.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{15}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}What Aggregate Distributions Reveal About Distance Decay}{15}{subsection.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Distance Decay as the Dominant Transferable Mechanism}{15}{subsection.6.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Positioning Within Existing Literature}{15}{subsection.6.3}\protected@file@percent }
 \citation{gallotti2024distorted}
@@ -119,47 +114,37 @@
 \newlabel{tab:morphology}{{9}{16}{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}{table.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Practical Implications}{16}{subsection.6.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Limitations}{16}{subsection.6.5}\protected@file@percent }
-\citation{byrd1995limited}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{17}{section.7}\protected@file@percent }
 \newlabel{sec:appendix}{{7}{17}{Appendix: Supplementary Materials}{section*.3}{}}
-\citation{byrd1995limited}
-\citation{lightgbm}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Final takeaway diagram summarizing the zero-shot transferable pipeline (top) and key framework characteristics of SDF-ZTF (bottom).}}{18}{figure.7}\protected@file@percent }
-\newlabel{fig:final_takeaway}{{7}{18}{Final takeaway diagram summarizing the zero-shot transferable pipeline (top) and key framework characteristics of SDF-ZTF (bottom)}{figure.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Decay Identifiability Robustness Heatmap (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{19}{figure.8}\protected@file@percent }
-\newlabel{fig:layer1_heatmap}{{8}{19}{Decay Identifiability Robustness Heatmap (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
 \bibdata{references}
 \bibcite{alis2021generalized}{{1}{2021}{{Alis et~al.}}{{Alis, Legara, and Monterola}}}
 \bibcite{atwal2025commuting}{{2}{2025}{{Atwal et~al.}}{{Atwal, Anderson, Pfoser, and Z{\"u}fle}}}
 \bibcite{barbosa2018human}{{3}{2018}{{Barbosa et~al.}}{{Barbosa, Barthelemy, Ghoshal, James, Lenormand, Louail et~al.}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{18}{figure.7}\protected@file@percent }
+\newlabel{fig:layer1_heatmap}{{7}{18}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.7}{}}
 \bibcite{brockmann2006scaling}{{4}{2006}{{Brockmann et~al.}}{{Brockmann, Hufnagel, and Geisel}}}
-\bibcite{byrd1995limited}{{5}{1995}{{Byrd et~al.}}{{Byrd, Lu, Nocedal, and Zhu}}}
-\bibcite{gallotti2024distorted}{{6}{2024}{{Gallotti et~al.}}{{Gallotti, Maniscalco, Barthelemy, and De~Domenico}}}
-\bibcite{gonzalez2008understanding}{{7}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
-\bibcite{jin2022crosstres}{{8}{2022}{{Jin et~al.}}{{Jin, Wu, Wang, Liang, and Tang}}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces GBDT Model Hyperparameter Configurations}}{20}{table.10}\protected@file@percent }
-\newlabel{tab:gbdt_hyperparameters}{{10}{20}{GBDT Model Hyperparameter Configurations}{table.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow Bottleneck Analysis (controlled ablation with fixed $A_j$ heuristic and national decay prior). \textbf  {Left}: Source-scale robustness learning curve --- mean CPC $\pm 1\sigma $ as the number of source cities used to train $\mathrm  {GBDT}_O$ increases from 5 to 25. CPC saturates by $n_{\text  {src}} \approx 15$--20. \textbf  {Right}: Noise sensitivity --- mean CPC $\pm 1\sigma $ across 25 held-out cities under additive Gaussian noise $\sigma \in \{0\%, 10\%, 20\%, 40\%\}$ injected on $\log \hat  {O}_i$.}}{20}{figure.9}\protected@file@percent }
-\bibcite{lightgbm}{{9}{2017}{{Ke et~al.}}{{Ke, Meng, Finley, Wang, Chen, Ma, Ye, and Liu}}}
-\bibcite{lenormand2012universal}{{10}{2012}{{Lenormand et~al.}}{{Lenormand, Huet, Gargiulo, and Deffuant}}}
-\bibcite{lenormand2016systematic}{{11}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
-\bibcite{lundberg2017unified}{{12}{2017}{{Lundberg and Lee}}{{}}}
-\bibcite{mai2022geospatial}{{13}{2022}{{Mai et~al.}}{{Mai, Cundy, Choi, Song, Shofi et~al.}}}
-\bibcite{mendieta2023geogpt}{{14}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
-\bibcite{meta_hrsl}{{15}{2016}{{{Meta AI} and {Center for International Earth Science Information Network (CIESIN)}}}{{}}}
-\bibcite{pappalardo2023analytical}{{16}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
-\bibcite{Rong2023goddag}{{17}{2023}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
-\bibcite{Simini2012universal}{{18}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
-\bibcite{simini2021}{{19}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces SHAP feature count performance sweep showing zero-shot Mean CPC across the 25 held-out target cities. Performance plateaus between $K=15$ and $K=22$ (CPC: $0.7124$), validating that selecting $K=22$ features retains stability without sacrificing predictive performance.}}{21}{figure.10}\protected@file@percent }
-\newlabel{fig:shap_sweep}{{10}{21}{SHAP feature count performance sweep showing zero-shot Mean CPC across the 25 held-out target cities. Performance plateaus between $K=15$ and $K=22$ (CPC: $0.7124$), validating that selecting $K=22$ features retains stability without sacrificing predictive performance}{figure.10}{}}
-\bibcite{song2010limits}{{20}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
-\bibcite{stouffer1940intervening}{{21}{1940}{{Stouffer}}{{}}}
-\bibcite{tanner1961}{{22}{1961}{{Tanner}}{{}}}
-\bibcite{worldpop2018}{{23}{2017}{{Tatem}}{{}}}
-\bibcite{wang2018regiontrans}{{24}{2018}{{Wang et~al.}}{{Wang, Geng, Ma, Yang, Cao, and Zheng}}}
-\bibcite{wang2019origin}{{25}{2021}{{Wang et~al.}}{{Wang, Cao, and Yu}}}
-\bibcite{wang2022when}{{26}{2022}{{Wang et~al.}}{{Wang, Jin, Sun, Chen, Chen, and Li}}}
-\bibcite{wilson1971}{{27}{1971}{{Wilson}}{{}}}
-\bibcite{yao2020meta}{{28}{2019}{{Yao et~al.}}{{Yao, Liu, Wei, Tang, and Li}}}
-\gdef \@abspage@last{22}
+\bibcite{gallotti2024distorted}{{5}{2024}{{Gallotti et~al.}}{{Gallotti, Maniscalco, Barthelemy, and De~Domenico}}}
+\bibcite{gonzalez2008understanding}{{6}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
+\bibcite{jin2022crosstres}{{7}{2022}{{Jin et~al.}}{{Jin, Wu, Wang, Liang, and Tang}}}
+\bibcite{lenormand2012universal}{{8}{2012}{{Lenormand et~al.}}{{Lenormand, Huet, Gargiulo, and Deffuant}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Outflow Bottleneck Analysis (controlled ablation with fixed $A_j$ heuristic and national decay prior). \textbf  {Left}: Source-scale robustness learning curve --- mean CPC $\pm 1\sigma $ as the number of source cities used to train $\mathrm  {GBDT}_O$ increases from 5 to 25. CPC saturates by $n_{\text  {src}} \approx 15$--20. \textbf  {Right}: Noise sensitivity --- mean CPC $\pm 1\sigma $ across 25 held-out cities under additive Gaussian noise $\sigma \in \{0\%, 10\%, 20\%, 40\%\}$ injected on $\log \hat  {O}_i$.}}{19}{figure.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces SHAP feature count performance sweep showing zero-shot Mean CPC across the 25 held-out target cities. Performance plateaus between $K=15$ and $K=22$ (CPC: $0.7124$), validating that selecting $K=22$ features retains stability without sacrificing predictive performance.}}{19}{figure.9}\protected@file@percent }
+\newlabel{fig:shap_sweep}{{9}{19}{SHAP feature count performance sweep showing zero-shot Mean CPC across the 25 held-out target cities. Performance plateaus between $K=15$ and $K=22$ (CPC: $0.7124$), validating that selecting $K=22$ features retains stability without sacrificing predictive performance}{figure.9}{}}
+\bibcite{lenormand2016systematic}{{9}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
+\bibcite{lundberg2017unified}{{10}{2017}{{Lundberg and Lee}}{{}}}
+\bibcite{mai2022geospatial}{{11}{2022}{{Mai et~al.}}{{Mai, Cundy, Choi, Song, Shofi et~al.}}}
+\bibcite{mendieta2023geogpt}{{12}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
+\bibcite{pappalardo2023analytical}{{13}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
+\bibcite{Rong2023goddag}{{14}{2023}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
+\bibcite{Simini2012universal}{{15}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
+\bibcite{simini2021}{{16}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
+\bibcite{song2010limits}{{17}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
+\bibcite{stouffer1940intervening}{{18}{1940}{{Stouffer}}{{}}}
+\bibcite{tanner1961}{{19}{1961}{{Tanner}}{{}}}
+\bibcite{worldpop2018}{{20}{2017}{{Tatem}}{{}}}
+\bibcite{wang2018regiontrans}{{21}{2018}{{Wang et~al.}}{{Wang, Geng, Ma, Yang, Cao, and Zheng}}}
+\bibcite{wang2019origin}{{22}{2021}{{Wang et~al.}}{{Wang, Cao, and Yu}}}
+\bibcite{wang2022when}{{23}{2022}{{Wang et~al.}}{{Wang, Jin, Sun, Chen, Chen, and Li}}}
+\bibcite{wilson1971}{{24}{1971}{{Wilson}}{{}}}
+\bibcite{yao2020meta}{{25}{2019}{{Yao et~al.}}{{Yao, Liu, Wei, Tang, and Li}}}
+\gdef \@abspage@last{20}
