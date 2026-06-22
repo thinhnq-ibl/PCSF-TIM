@@ -4,87 +4,45 @@ The top-level auxiliary file: draft_paper_springer.aux
 The style file: sn-basic.bst
 Database file #1: references.bib
 sn-basic.bst [2024/07/19 v1.1 bibliography style]
-<<<<<<< HEAD
-Reallocating 'wiz_functions' (item size: 4) to 6000 items.
-You've used 25 entries,
-            3567 wiz_defined-function locations,
-            900 strings with 10489 characters,
-and the built_in function-call counts, 22098 in all, are:
-= -- 2079
-> -- 897
-< -- 11
-+ -- 360
-- -- 267
-* -- 1899
-:= -- 3187
-add.period$ -- 45
-call.type$ -- 25
-change.case$ -- 226
-chr.to.int$ -- 25
-cite$ -- 25
-duplicate$ -- 1622
-empty$ -- 1775
-format.name$ -- 336
-if$ -- 4643
-int.to.chr$ -- 1
-int.to.str$ -- 1
-missing$ -- 196
-newline$ -- 84
-num.names$ -- 100
-pop$ -- 508
-preamble$ -- 1
-purify$ -- 190
-quote$ -- 0
-skip$ -- 565
-stack$ -- 0
-substring$ -- 1802
-swap$ -- 544
-text.length$ -- 6
-=======
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 25 entries,
+You've used 26 entries,
             3567 wiz_defined-function locations,
-            902 strings with 10567 characters,
-and the built_in function-call counts, 21901 in all, are:
-= -- 2056
-> -- 900
-< -- 13
-+ -- 362
-- -- 269
-* -- 1861
-:= -- 3159
-add.period$ -- 44
-call.type$ -- 25
-change.case$ -- 231
-chr.to.int$ -- 25
-cite$ -- 25
-duplicate$ -- 1596
-empty$ -- 1748
-format.name$ -- 336
-if$ -- 4607
+            906 strings with 10652 characters,
+and the built_in function-call counts, 22474 in all, are:
+= -- 2114
+> -- 907
+< -- 12
++ -- 364
+- -- 270
+* -- 1919
+:= -- 3253
+add.period$ -- 46
+call.type$ -- 26
+change.case$ -- 233
+chr.to.int$ -- 26
+cite$ -- 26
+duplicate$ -- 1653
+empty$ -- 1805
+format.name$ -- 340
+if$ -- 4718
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 192
-newline$ -- 84
-num.names$ -- 100
-pop$ -- 509
+missing$ -- 201
+newline$ -- 87
+num.names$ -- 104
+pop$ -- 519
 preamble$ -- 1
-purify$ -- 192
+purify$ -- 195
 quote$ -- 0
-skip$ -- 581
+skip$ -- 577
 stack$ -- 0
-substring$ -- 1755
-swap$ -- 546
-text.length$ -- 7
->>>>>>> ae391f8 (update format)
+substring$ -- 1815
+swap$ -- 554
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 225
+type$ -- 234
 warning$ -- 0
-<<<<<<< HEAD
-while$ -- 142
-=======
-while$ -- 139
->>>>>>> ae391f8 (update format)
+while$ -- 145
 width$ -- 0
-write$ -- 310
+write$ -- 321

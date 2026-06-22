@@ -238,14 +238,14 @@ where $\bar{R}_{\mathrm{zone}}$ is the mean empirical radius of the administrati
 
 \textbf{Information Governance and Low-Leakage Design.} The design choices in SDF-ZTF reflect three concrete architectural elements that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-governance regulations (e.g., GDPR) without requiring complex institutional data-sharing agreements or risking individual tracking.
 
-\subsection{Origin Outflow Component ($O_i$)}
+\subsection{Origin Outflow Component (\texorpdfstring{$O_i$}{O\_i})}
 The trip production $O_i$ represents the total seasonal trips originating from zone $i$:
 \begin{equation}
 O_i = \sum_j T_{ij}
 \end{equation}
 We model $O_i$ using a Gradient Boosted Decision Tree (GBDT) regressor trained on 22 stable features selected from a 30-dimensional candidate pool of globally available open spatial data. The 22 features are obtained through a cross-city SHAP stability procedure described in Section 4. Tree depth and regularization hyperparameters (see Appendix~B for full specification) are constrained to prevent overfitting and ensure structural generalization across city boundaries.
 
-\subsection{Destination Attraction Component ($A_j$)}
+\subsection{Destination Attraction Component (\texorpdfstring{$A_j$}{A\_j})}
 The destination attraction $A_j$ represents the relative attractiveness of zone $j$. In the proposed SDF-ZTF framework, rather than training a machine learning model, the destination attraction $\hat{A}_j$ is computed using a simple heuristic combining min-max normalized population density and POI counts: $\hat{A}_j \propto \frac{1}{2} \left( \mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j) \right)$. This design choice is validated in Section 5, where we train a GBDT attraction model strictly as a baseline to prove that this simple, training-free min-max formula achieves comparable high performance. By utilizing only the min-max heuristic, we avoid cross-city overfitting and eliminate the need for training an attraction model, maximizing cross-city transferability. 
 
 \subsection{Algorithmic Flow}
@@ -301,7 +301,7 @@ WorldPop & \checkmark & \checkmark & \texttimes & \texttimes \\
 \end{tabular*}
 \end{table*}
 
-\subsubsection{(1) Origin-Destination (OD) Matrix - $T_{ij}$}
+\subsubsection{(1) Origin-Destination (OD) Matrix - \texorpdfstring{$T_{ij}$}{T\_ij}}
 The OD matrix contains seasonal human mobility flows between census tracts. In this study, OD observations are extracted from Meta's Movement Distribution Maps \citep{meta_movement_distribution_maps} (covering 50 metropolitan areas). Crucially, the OD matrix is utilized exclusively as training labels for source cities and as ground truth for evaluation. It is never used for feature engineering, ensuring a strict separation between predictive inputs and evaluation targets.
 
 \subsubsection{(2) OSM-Derived Features}
@@ -791,7 +791,7 @@ Early Stopping Rounds & 15 & 15 \\
 \subsection*{A.6 List of Abbreviations}
 The key abbreviations and acronyms used throughout this paper are summarized and defined in Table~\ref{tab:abbreviations}.
 
-\begin{table*}[h!]
+\begin{table*}[t]
 \centering
 \tablebodyfont
 \caption{List of Abbreviations}
