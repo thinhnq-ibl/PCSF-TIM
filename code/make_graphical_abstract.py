@@ -158,7 +158,6 @@ ax.add_patch(plt.Circle((px_att, py_att + 1.2), 0.9, fc="#E74C3C", ec="#C0392B",
 ax.add_patch(plt.Polygon([[px_att - 0.78, py_att + 0.8], [px_att + 0.78, py_att + 0.8], [px_att, py_att]], fc="#E74C3C", ec="#C0392B", lw=0.6, zorder=5))
 ax.add_patch(plt.Circle((px_att, py_att + 1.2), 0.35, fc="white", zorder=6))
 tx(C2 + 10, 50.0, "Destination A", sz=11.5, c=INK)
-arrow(C2 + 10, 47.5, 44.0, 23.5, c=O, lw=2.2)
 
 # F. Outflow model  [y:48-60, h=12]  (amber = hard part)
 box(C2 + 24, 48, 20, 12, AMBL, ec=AMB, lw=2.5)
@@ -174,7 +173,11 @@ for n_x, n_y in pts_out:
     ax.scatter(n_x, n_y, s=55, c=B, edgecolors=INK, linewidths=0.8, zorder=5)
 tx(C2 + 34, 51.2, "Trip Production O",  sz=11.5, c=INK)
 tx(C2 + 34, 49.5, "hard to transfer",    sz=11.5, bold=True,   c=AMB)
-arrow(C2 + 34, 47.5, 56.0, 23.5, c=AMB, lw=2.2)
+
+# Merged orange/amber arrows
+arrow(C2 + 10, 47.5, 74.0, 35.0, c=O, lw=2.2, style="-")
+arrow(C2 + 34, 47.5, 74.0, 35.0, c=AMB, lw=2.2, style="-")
+arrow(74.0, 35.0, 74.0, 24.2, c=AMB, lw=2.5, ms=15)
 
 
 # ════════════════════════ ASSEMBLY BOX  x:2-96  y:10-23  h=13 ══════════════
