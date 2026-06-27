@@ -23,7 +23,7 @@
 \author*[1]{\fnm{Thinh} \sur{Nguyen}}\email{nqt900@gmail.com}
 \affil*[1]{\orgname{Aarista Technologies}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 
-\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. Existing approaches typically rely on historical OD records, travel surveys, or individual mobility traces. However, these data sources are often expensive to collect, difficult to obtain, and subject to administrative, privacy, and regulatory constraints. To address these challenges, we introduce the Separable Decomposed Framework for Zero-Shot Transferable Flows (SDF-ZTF), a decomposed mobility modeling approach that factorizes OD flows into three interpretable components: target-recovered distance decay, open-data-driven destination attraction, and cross-city transferable origin production. By relying exclusively on globally available open datasets, including OpenStreetMap and WorldPop gridded population data, this methodology enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that our approach achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
+\abstract{Developing transferable mobility models for cities without origin-destination (OD) observations remains an open challenge. To address the difficulties and high costs of collecting individual mobility traces, which are increasingly restricted by strict privacy laws, recent research has shifted toward utilizing open data. However, existing frameworks still exhibit limited transferability. To bridge this gap, we propose the Separable Decomposed Framework for Zero-Shot Transferable Flows (SDF-ZTF), a decomposed mobility modeling approach that generates OD flows by integrating open-data-driven indicators with a production-constrained gravity model. By relying exclusively on globally available open datasets, including OpenStreetMap and WorldPop gridded population data, this methodology enables mobility estimation for previously unseen cities without requiring local OD observations, surveys, or target-city retraining. A key contribution of this work is a cross-city feature transferability analysis that identifies a compact set of stable urban indicators capable of generalizing across heterogeneous cities. The decomposed architecture not only improves interpretability by isolating the contribution of each mobility mechanism but also provides a practical pathway for diagnosing model limitations and guiding future improvements. Experimental results demonstrate that our approach achieves performance comparable to state-of-the-art deep learning models under fully zero-shot transfer settings while maintaining transparency and policy relevance.}
 
 \keywords{Urban mobility, origin-destination flows, gravity models, interpretability, transfer learning, zero-shot transfer, open-data modeling}
 
@@ -40,24 +40,20 @@
 
 \section{Introduction}
 
-Urban mobility modeling is a critical pillar for modern infrastructure planning, epidemiological tracking, and transportation management \citep{barbosa2018human,gonzalez2008understanding,song2010limits}. Accurately predicting origin-destination (OD) flows within a city is essential for addressing municipal challenges ranging from congestion mitigation to transit-oriented development. However, traditional approaches for collecting OD matrices rely on expensive, large-scale household travel surveys that suffer from decade-long update cycles, resulting in persistent data gaps, particularly in developing regions.
+Predicting origin-destination (OD) flows is central to transportation planning and urban management \citep{barbosa2018human,gonzalez2008understanding,song2010limits}. Yet traditional OD data collection relies on household travel surveys that are expensive, slow to update, and unavailable in many cities—especially in developing regions.
 
-To address these data gaps, human mobility researchers have proposed two main paradigms. Classical spatial interaction models, such as gravity and radiation models, assume a structured relationship where travel flows are determined by physical proximity and zone attributes \citep{wilson1971,Simini2012universal,stouffer1940intervening}. Modern deep neural models, such as DeepGravity and graph neural networks, treat mobility prediction as a monolithic learning task, mapping high-dimensional urban features to flow rates using deep multi-layer architectures \citep{simini2021,Rong2023goddag,wang2019origin}.
+Two modeling paradigms have emerged to fill these gaps. Classical gravity and radiation models \citep{wilson1971,Simini2012universal,stouffer1940intervening} offer interpretable, physically motivated predictions but need local calibration data. Deep learning models such as DeepGravity \citep{simini2021} and graph neural networks \citep{Rong2023goddag,wang2019origin} achieve higher accuracy but act as black boxes and require target-city OD data for training. In short, interpretable models lack transferability, and transferable neural models lack transparency.
 
-Despite their success, existing paradigms face a fundamental trade-off: \textbf{interpretability versus transferability}. Classical gravity models provide clear, policy-relevant interpretations but perform poorly when transferred to new cities without local calibration. Conversely, deep neural models achieve high predictive accuracy but function as black boxes, sacrificing structural transparency and requiring extensive local, target-city OD data for training or fine-tuning. Whether an interpretable, structured model can generalize to unseen cities without local mobility observations remains an open question.
+Meanwhile, aggregate trip-length distributions—compiled from mobile devices and location-sharing platforms—are increasingly available even where full OD matrices are not. These summaries do not expose individual trajectories and can be shared under strict anonymization policies. A natural question is whether such aggregate data can calibrate the distance decay function for a new city without requiring individual OD records, and which component of spatial interaction (production, attraction, or decay) matters most for prediction quality.
 
-This represents a critical research gap in spatial interaction modeling. In the modern era, the ubiquity of mobile devices and social networks enables technology corporations to construct highly accurate geographic movement probability distributions of individuals based on opt-in location-sharing data. While certain demographics like the elderly and children may not interact directly with these digital platforms, they represent a minor share of overall daily mobility; the vast majority of active commuters—namely working professionals and students—are heavily active on social media and mobile communication channels for work and leisure. This digital footprint offers a novel source for mobility modeling. However, utilizing such raw individual-level trajectories directly raises significant privacy and administrative concerns.
-
-Thus, a key question is whether we can leverage these aggregate mobility probability distributions (or trip-length distributions) provided by social networks and mobile providers to recover and calibrate the distance decay function without exposing sensitive individual trajectories. Furthermore, we must understand the relative importance of the components: destination attraction, distance decay, and origin production, and identify which of these elements exerts the dominant influence on predictive accuracy.
-
-To address these challenges, we investigate three core research questions:
+We investigate three research questions:
 \begin{enumerate}
-  \item Can travel probability distributions derived from location-sharing mobile devices and social networks—which capture the active commuting population—be utilized to effectively estimate and calibrate the distance decay function?
-  \item Of the three fundamental components of spatial interaction (destination attraction, distance decay, and origin production), which is the most critical factor for accurate flow estimation?
-  \item Can a decomposed model utilizing transferable built-environment features identified from globally available open data achieve zero-shot transfer performance comparable to end-to-end neural models?
+  \item Can aggregate travel-distance distributions calibrate the distance decay function without individual OD trajectories?
+  \item Which component—production, attraction, or distance decay—contributes most to flow prediction accuracy?
+  \item Can a decomposed, interpretable model match neural baselines under zero-shot cross-city transfer using only open data?
 \end{enumerate}
 
-We hypothesize that urban mobility flows can be modeled via three separable mechanisms: distance decay recovered from aggregate distributions, destination attraction estimated via a simple training-free open-data heuristic, and trip production transferred across cities via built-environment representations. Instead of treating mobility prediction as a monolithic learning problem, we propose the \textbf{Separable Decomposed Framework for Zero-Shot Transferable Flows} (\textbf{SDF-ZTF}), which implements this hypothesis by factorizing origin-destination flows into three independent components: origin production capacity, distance decay, and destination attraction. Rather than relying on proprietary cellular data or local survey calibrations, the framework operates on zone-level spatial features extracted from globally available open data (OpenStreetMap \cite{atwal2025commuting} and WorldPop \cite{worldpop2018}), making it globally deployable. A conceptual comparison of our zero-shot transferable paradigm against the existing locally dependent paradigm is shown in Fig.~\ref{fig:conceptual_framework}.
+We propose the \textbf{Separable Decomposed Framework for Zero-Shot Transferable Flows} (\textbf{SDF-ZTF}), which factorizes OD flows into three independent components: origin production, distance decay, and destination attraction. The framework uses only globally available open data—OpenStreetMap \cite{atwal2025commuting} and WorldPop \cite{worldpop2018}—making it deployable in any city without local surveys or retraining. Fig.~\ref{fig:conceptual_framework} compares this zero-shot paradigm with the standard locally dependent approach.
 
 \begin{figure*}[t!]
   \centering
@@ -91,57 +87,40 @@ We hypothesize that urban mobility flows can be modeled via three separable mech
   \label{fig:conceptual_framework}
 \end{figure*}
 
-This study makes three main contributions:
+This study makes three contributions:
 \begin{itemize}
-  \item \textbf{Decay Parameter Recovery}: We demonstrate that aggregate distance distributions contain sufficient information to recover transferable distance-decay parameters without access to individual trajectories.
+  \item \textbf{Decay Recovery}: Aggregate distance distributions are sufficient to recover decay parameters without individual trajectories.
   
-  \item \textbf{Component Contribution}: We quantify the relative importance of production, attraction, and distance-decay components, establishing that distance decay represents the dominant transferable mechanism in cross-city mobility.
+  \item \textbf{Component Ranking}: Distance decay is the dominant mechanism, accounting for 75.7\% of explainable variance in cross-city transfer.
   
-  \item \textbf{Zero-Shot Performance}: We show that an interpretable decomposition architecture can achieve neural-comparable zero-shot performance across unseen cities while using only globally available open data.
+  \item \textbf{Zero-Shot Parity}: The decomposed framework matches DeepGravity under zero-shot conditions while remaining interpretable and using only open data.
 \end{itemize}
 
 \section{Related Work}
 
 \subsection{Classical and Structured Mobility Models}
-Classical spatial interaction models, such as gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal,alis2021generalized}, represent the historical foundation of human mobility modeling. These models are built upon physical analogies (e.g., Newtonian gravity) or probabilistic formulations of destination choice, such as Stouffer's theory of intervening opportunities \citep{stouffer1940intervening}, which models migration flows based on the number of opportunities closer than a given destination. Early studies on scaling laws in human travel \citep{brockmann2006scaling,gonzalez2008understanding} and the limits of predictability \citep{song2010limits} further confirmed that spatial dynamics are governed by robust statistical regularities.
-\begin{itemize}
-  \item \textbf{Strengths}: These structured models are highly interpretable, mathematically simple, and explain the physical constraints of travel behavior.
-  \item \textbf{Limitations}: Gravity models require historical data to estimate parameters, while radiation models can estimate parameters using population as a proxy but suffer from sub-optimal performance due to the assumption that individuals stop at the nearest opportunity. In modern cities, people frequently travel longer distances to maximize utility beyond simple employment-based commuting.
-\end{itemize}
-Existing structured models explain mobility well but depend on locally calibrated parameters, limiting deployment in unseen cities.
+Gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal,alis2021generalized} form the foundation of spatial interaction modeling. Gravity models use physical analogies to relate flows to zone mass and distance, while radiation models \citep{stouffer1940intervening} frame destination choice as a probabilistic process over intervening opportunities. Scaling-law studies \citep{brockmann2006scaling,gonzalez2008understanding} and predictability analyses \citep{song2010limits} have confirmed that travel distances follow robust statistical patterns. These models are interpretable and parsimonious, but gravity models need local OD data for parameter estimation, and radiation models underperform in cities where commuters routinely bypass closer opportunities.
 
 \subsection{Deep Learning for OD Prediction}
-With the rise of deep learning, monolithic architectures have been proposed to predict origin-destination (OD) flows directly from spatial features. Filippo Simini and colleagues introduced DeepGravity \citep{simini2021}, which maps high-dimensional urban features to flow rates using multi-layer perceptrons. Subsequent works have utilized graph neural networks (GNNs) \citep{Rong2023goddag}, spatial-temporal neural networks \citep{wang2019origin}, and OpenStreetMap-derived commute prediction models \citep{atwal2025commuting} to capture nonlinear geographic interactions and network structures.
-\begin{itemize}
-  \item \textbf{Strengths}: These models capture complex, non-linear relationships between variables, significantly improving predictive accuracy in data-rich environments.
-  \item \textbf{Limitations}: They act as black-boxes, require massive amounts of local target-city training data, and suffer from poor out-of-distribution generalization.
-\end{itemize}
-Most neural models are optimized for within-city prediction rather than cross-city generalization.
+DeepGravity \citep{simini2021} maps urban features to flow rates using multi-layer perceptrons. Follow-up work has applied graph neural networks \citep{Rong2023goddag}, spatial-temporal networks \citep{wang2019origin}, and OSM-based commuting models \citep{atwal2025commuting}. These approaches capture non-linear relationships and improve accuracy when training data is abundant, but they operate as black boxes, generalize poorly out of distribution, and require large amounts of target-city OD data.
 
 \subsection{Aggregate Mobility Data for Decay Calibration}
-The widespread adoption of location-aware mobile devices and social network platforms has generated large-scale, population-level mobility signals at unprecedented scale \citep{barbosa2018human,gonzalez2008understanding}. These signals, including anonymized GPS traces from navigation apps, cell tower handoff logs from mobile network operators (CDR data), and opt-in movement summaries from social platforms, have been used to construct aggregate trip-length distributions—i.e., histograms of how far people travel across different distance bins—at city or regional scale. Crucially, unlike individual OD records, these aggregate distributions do not expose zone-to-zone pair flows and can be shared under strict anonymization policies \citep{pappalardo2023analytical}.
-
-Several studies have demonstrated that aggregate trip-length distributions capture the spatial friction characteristics of urban travel, enabling the fitting of distance decay functions without requiring individual-level trajectory data \citep{brockmann2006scaling,lenormand2012universal,lenormand2016systematic}. However, to the best of our knowledge, no prior work has systematically leveraged such aggregate distributions as a privacy-preserving calibration signal specifically for zero-shot cross-city mobility transfer. This represents the first key gap addressed in this study.
+Location-aware mobile devices now generate population-level mobility signals \citep{barbosa2018human,gonzalez2008understanding} that can be aggregated into trip-length distributions—histograms of how far people travel—without exposing individual OD pairs \citep{pappalardo2023analytical}. Several studies have shown that such distributions capture the spatial friction of urban travel and can fit distance decay functions \citep{brockmann2006scaling,lenormand2012universal,lenormand2016systematic}. However, no prior work has used aggregate distributions specifically as a calibration signal for zero-shot cross-city transfer.
 
 \subsection{Cross-City Transfer Learning}
-To predict mobility in cities lacking historical OD surveys, cross-city transfer learning has emerged as a key area of study. Existing approaches can be categorized into three main paradigms:
+Cross-city transfer learning aims to predict mobility in cities without OD surveys. Existing methods fall into three groups:
 \begin{enumerate}
-  \item \textbf{Similarity-based transfer}: Models like RegionTrans \citep{wang2018regiontrans} seek to transfer knowledge by calculating spatial similarity metrics between source and target urban zones, while newer approaches adaptively re-weight source regions using meta-learning networks such as CrossTReS \citep{jin2022crosstres}.
-  \item \textbf{Representation learning}: These approaches utilize geospatial embeddings and foundation models for geographic artificial intelligence (GeoAI) \citep{mai2022geospatial,mendieta2023geogpt} to capture generalized features of urban space.
-  \item \textbf{Domain adaptation and Meta-learning}: Approaches in this category apply meta-learning and domain alignment techniques, such as STAN \citep{wang2022when} or meta-spatiotemporal networks \citep{yao2020meta}, to adapt models trained on source cities to target environments with minimal adjustments.
+  \item \textbf{Similarity-based}: RegionTrans \citep{wang2018regiontrans} matches source and target zones by spatial similarity; CrossTReS \citep{jin2022crosstres} re-weights source regions via meta-learning.
+  \item \textbf{Representation learning}: Geospatial embeddings and GeoAI foundation models \citep{mai2022geospatial,mendieta2023geogpt} learn general-purpose urban features.
+  \item \textbf{Domain adaptation}: STAN \citep{wang2022when} and meta-spatiotemporal networks \citep{yao2020meta} align source-trained models to target environments.
 \end{enumerate}
-Despite progress, existing transfer approaches generally require target-city observations, calibration, or fine-tuning.
+All three groups still require some target-city observations, calibration, or fine-tuning.
 
 \subsection{Explainable and Transferable Urban Representations}
-While explainable AI (XAI) methods, such as SHAP (SHapley Additive exPlanations) \citep{lundberg2017unified}, have gained popularity in spatial modeling, they are typically used for post-hoc explanation of pre-trained neural models rather than structure learning. 
-\begin{itemize}
-  \item \textbf{Existing Work}: Most studies use SHAP to analyze feature importances locally within a single city, verifying that factors such as land-use density and transport availability influence trip generation.
-  \item \textbf{Limitations}: These applications focus on local explanations and do not address whether feature rankings are stable or transferable across different urban environments.
-\end{itemize}
-Most studies use SHAP for post-hoc interpretation rather than identifying transferable urban structure.
+SHAP \citep{lundberg2017unified} is widely used in spatial modeling to explain feature importances, but almost always within a single city. Whether SHAP-based feature rankings are stable across cities—and can therefore guide transferable feature selection—has not been systematically studied.
 
 \subsection{Research Gap and Positioning}
-We compare the characteristics of classical models and our proposed SDF-ZTF framework in Table~\ref{tab:literature_comparison}.
+Table~\ref{tab:literature_comparison} compares existing model classes with our proposed SDF-ZTF.
 
 \begin{table*}[t]
 \centering
@@ -162,21 +141,18 @@ RegionTrans \citep{wang2018regiontrans} & Partial & \checkmark & \texttimes & \t
 \end{tabular*}
 \end{table*}
 
-
-To the best of our knowledge, no prior study simultaneously combines: (1) interpretable decomposition, (2) globally available open-data features, (3) zero-shot cross-city transfer, and (4) explicit transferable feature discovery.
-
-This study directly addresses four critical gaps in the literature:
+No existing approach combines interpretable decomposition, open-data-only features, zero-shot cross-city transfer, and systematic transferable feature discovery. This study addresses four gaps:
 \begin{description}
-  \item[Gap 1 (Calibration):] Existing gravity models require local OD surveys for decay function calibration.
-  \item[Gap 2 (Interpretability):] End-to-end neural models sacrifice transparency for predictive accuracy.
-  \item[Gap 3 (Data-dependency):] Cross-city transfer learning frameworks still require target-city OD data for fine-tuning or similarity alignment.
-  \item[Gap 4 (Feature Generalizability):] There is a lack of systematic frameworks to discover which specific spatial features transfer consistently across distinct urban morphologies.
+  \item[Gap 1 (Calibration):] Gravity models require local OD surveys for decay calibration.
+  \item[Gap 2 (Interpretability):] Neural models sacrifice transparency for accuracy.
+  \item[Gap 3 (Data-dependency):] Transfer frameworks still need target-city OD data.
+  \item[Gap 4 (Feature Generalizability):] No systematic method identifies which spatial features transfer across cities.
 \end{description}
 
 \section{Methodological Design}
 
 \subsection{Decomposition Hypothesis}
-We formalize human mobility prediction through the lens of a multiplicative decomposition. Rather than treating trip flows as a monolithic learning task, we hypothesize that origin-destination interactions are governed by separable, city-independent spatial dynamics:
+We hypothesize that OD flows can be decomposed into three separable, city-independent components:
 \begin{equation}
 T_{ij} = O_i \cdot f(d_{ij}) \cdot A_j
 \end{equation}
@@ -226,29 +202,23 @@ The conceptual pipeline of the proposed Separable Decomposed Framework for Zero-
 \end{figure*}
 
 \subsection{Distance Decay Function}\label{sec:decay_function}
-We adopt the \textbf{Tanner multiplicative deterrence function} \citep{tanner1961}---a combined power-law and exponential formulation---to capture the dual-regime spatial friction governing human travel:
+We use the Tanner multiplicative deterrence function \citep{tanner1961}, which combines power-law and exponential terms:
 \begin{equation}\label{eq:tanner_multi}
 f(d_{ij};\,\beta,\gamma,\delta) = (d_{ij} + \delta)^{-\gamma} \cdot \exp(-\beta\,d_{ij})
 \end{equation}
 where $\beta > 0$ is the exponential decay rate governing long-range trip attenuation, $\gamma \ge 0$ is the power-law exponent modeling short-to-medium range trip distribution, and $\delta > 0$ is the adaptive geometric anchor. 
 
-To prevent singularity for intra-zonal flows ($d_{ij} = 0$) and scale parameter sensitivity automatically to the study layout, the adaptive offset $\delta$ is defined dynamically per target city as:
+The offset $\delta$ prevents singularity at $d_{ij} = 0$ and adapts to zone size:
 \begin{equation}\label{eq:delta}
 \delta = 0.5 \times \bar{R}_{\mathrm{zone}}, \qquad \bar{R}_{\mathrm{zone}} = \frac{1}{N}\sum_{i=1}^{N}\sqrt{\frac{\mathrm{Area}_i}{\pi}}
 \end{equation}
-where $\bar{R}_{\mathrm{zone}}$ is the mean empirical radius of the administrative zones in the target city. Decay parameters $(\beta, \gamma)$ are estimated via maximum likelihood estimation (MLE) using exclusively the aggregate distance-bin distribution of source cities, preserving privacy. Complete calibration, moment-based initialization, and optimization details are provided in the Appendix.
-
-\textbf{Information Governance and Low-Leakage Design.} The design choices in SDF-ZTF reflect three concrete architectural elements that collectively avoid the need to expose or transmit individual mobility trajectories at any stage: (1) \emph{Decay estimation from aggregate histograms}: $\gamma$ and $\beta$ are recovered from the marginal trip-length histogram (binned counts), not from individual $(i,j,T_{ij})$ records, so no OD pair is ever disclosed. (2) \emph{Open-data features only}: $O_i$ and $A_j$ are predicted from zone-level spatial descriptors (OSM POI counts, area, population density from WorldPop) --- all publicly available and non-identifying. (3) \emph{Zero target-city data requirement}: the framework operates entirely without collecting, storing, or sharing any target-city mobility observation, eliminating the principal data-governance risk in cross-city transfer. Together, these choices make the framework deployable in jurisdictions with strict data-governance regulations (e.g., GDPR) without requiring complex institutional data-sharing agreements or risking individual tracking.
+where $\bar{R}_{\mathrm{zone}}$ is the mean zone radius. Parameters $(\beta, \gamma)$ are estimated via MLE on the aggregate distance-bin distribution. Calibration and optimization details are in the Appendix. Because only binned trip-length histograms are used—not individual OD records—this procedure is compatible with strict data-governance regulations (e.g., GDPR).
 
 \subsection{Origin Outflow Component (\texorpdfstring{$O_i$}{O\_i})}
-The trip production $O_i$ represents the total seasonal trips originating from zone $i$:
-\begin{equation}
-O_i = \sum_j T_{ij}
-\end{equation}
-We model $O_i$ using a Gradient Boosted Decision Tree (GBDT) regressor trained on 22 stable features selected from a 30-dimensional candidate pool of globally available open spatial data. The 22 features are obtained through a cross-city SHAP stability procedure described in Section 4. Tree depth and regularization hyperparameters (see Appendix~B for full specification) are constrained to prevent overfitting and ensure structural generalization across city boundaries.
+The trip production $O_i = \sum_j T_{ij}$ is the total trips originating from zone $i$. We predict $O_i$ with a GBDT regressor trained on 22 features selected via cross-city SHAP stability (Section 4) from a 30-dimensional candidate pool of open spatial data. Hyperparameters are in Appendix~B.
 
 \subsection{Destination Attraction Component (\texorpdfstring{$A_j$}{A\_j})}
-The destination attraction $A_j$ represents the relative attractiveness of zone $j$. In the proposed SDF-ZTF framework, rather than training a machine learning model, the destination attraction $\hat{A}_j$ is computed using a simple heuristic combining min-max normalized population density and POI counts: $\hat{A}_j \propto \frac{1}{2} \left( \mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j) \right)$. This design choice is validated in Section 5, where we train a GBDT attraction model strictly as a baseline to prove that this simple, training-free min-max formula achieves comparable high performance. By utilizing only the min-max heuristic, we avoid cross-city overfitting and eliminate the need for training an attraction model, maximizing cross-city transferability. 
+Destination attraction $A_j$ measures how attractive zone $j$ is to travelers. We compute it with a training-free heuristic: $\hat{A}_j \propto \frac{1}{2} \left( \mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j) \right)$. Section 5 validates this choice by showing that a trained GBDT attraction model performs comparably, confirming that the heuristic is sufficient for cross-city transfer.
 
 \subsection{Algorithmic Flow}
 The complete pipeline for training and zero-shot deployment is formalized in Algorithm 1.
@@ -277,13 +247,11 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 \section{Data and Transferable Urban Representation}
 \label{sec:data}
 
-\subsection{Design Principle: Open-Data-Only Philosophy}
-The central design principle of the proposed SDF-ZTF framework is that all transferable mobility components must be derived from globally available open data. Rather than relying on proprietary cellular records, commercial location-based databases, or expensive household travel surveys, SDF-ZTF is engineered to construct models using only public, globally reproducible datasets. This design decision directly addresses the challenge of data scarcity and enables zero-shot deployment in any city worldwide.
-
-A key consequence of this design principle is the intentional exclusion of local employment statistics, such as the Longitudinal Employer-Household Dynamics Origin-Destination Employment Statistics (LODES) database commonly used in US-centric human mobility papers. While LODES provides detailed tract-level employment counts, no globally consistent equivalent exists for most cities in developing nations. To ensure universal deployability, SDF-ZTF instead absorbs the predictive role of employment registers through publicly mapped commercial, office, and industrial Point of Interest (POI) densities sourced from OpenStreetMap.
+\subsection{Design Principle: Open-Data-Only}
+All features in SDF-ZTF come from globally available open data rather than proprietary cellular records or household surveys. This makes the framework deployable in any city. We intentionally exclude local employment databases (e.g., LODES), which lack global equivalents, and instead proxy employment activity through commercial and industrial POI densities from OpenStreetMap.
 
 \subsection{Data Sources}
-To implement and evaluate the SDF-ZTF framework across diverse metropolitan areas, we compile a multi-source dataset combining static urban geography, open features, and evaluation labels. The operational role of each data source is summarized in the Data Usage Matrix in Table~\ref{tab:data_usage_matrix}.
+We use three data sources. Their roles across framework components are shown in Table~\ref{tab:data_usage_matrix}.
 
 \begin{table*}[t]
 \centering
@@ -304,16 +272,16 @@ WorldPop & \checkmark & \checkmark & \texttimes & \texttimes \\
 \end{table*}
 
 \subsubsection{(1) Origin-Destination (OD) Matrix - \texorpdfstring{$T_{ij}$}{T\_ij}}
-The OD matrix contains seasonal human mobility flows between census tracts. In this study, OD observations are extracted from Meta's Movement Distribution Maps \citep{meta_movement_distribution_maps} (covering 50 metropolitan areas). Crucially, the OD matrix is utilized exclusively as training labels for source cities and as ground truth for evaluation. It is never used for feature engineering, ensuring a strict separation between predictive inputs and evaluation targets.
+Seasonal OD flows between census tracts are extracted from Meta's Movement Distribution Maps \citep{meta_movement_distribution_maps} for 50 US metropolitan areas. The OD matrix serves only as training labels for source cities and as evaluation ground truth; it is never used as a predictive feature.
 
 \subsubsection{(2) OSM-Derived Features}
 We extract POIs and road features using the Overpass API from OpenStreetMap snapshots \citep{atwal2025commuting}. POI counts are calculated across 16 land-use categories (e.g., retail, industrial, education, health).
 
 \subsubsection{(3) Population Data}
-For residential population counts, this study leverages the population data provided directly in the original mobility dataset. Crucially, we emphasize that this population information can be readily replaced with publicly available gridded population estimates from WorldPop \citep{worldpop2018} (100\,m resolution) in cities where local census/administrative population data is unavailable, maintaining the framework's survey-free transferability.
+Population counts come from the original mobility dataset but can be replaced with WorldPop \citep{worldpop2018} gridded estimates (100\,m resolution) in cities lacking census data.
 
 \subsection{Transferable Urban Features}
-To discover stable spatial patterns that translate across cities, we implement a two-stage feature engineering and stability selection procedure, mapping raw datasets to a low-dimensional transferable urban representation. The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
+We use a two-stage procedure—feature engineering followed by stability selection—to identify spatial patterns that generalize across cities. The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
 
 \begin{figure*}[t!]
   \centering
@@ -353,7 +321,7 @@ z_{ip} = \frac{x_{ip} - \mu_p^{(c)}}{\sigma_p^{(c)}}
 where $\mu_p^{(c)}$ and $\sigma_p^{(c)}$ represent the mean and standard deviation of feature $p$ across all zones in city $c$. These context features normalize absolute scale differences, capturing the relative hierarchy of zones within their respective metropolitan areas.
 
 \subsubsection{SHAP Stability Selection}
-Rather than relying on empirical feature engineering, we formalize feature selection using a cross-city SHAP stability score $S_p$. For each source city $c$, we train local GBDTs and calculate the mean absolute SHAP value $\mu_p^{(c)}$ for feature $p$ to measure its local importance. The stability score $S_p$ is defined as the signal-to-noise ratio of importances across all $C$ source cities:
+We select features using a cross-city SHAP stability score $S_p$. For each source city $c$, a local GBDT is trained and the mean absolute SHAP value $\mu_p^{(c)}$ is computed for feature $p$. The stability score is the signal-to-noise ratio across cities:
 \begin{equation}
 S_p = \frac{\mu_p}{\sigma_p + \epsilon}
 \end{equation}
@@ -362,9 +330,7 @@ where $\mu_p = \frac{1}{C}\sum_c \mu_p^{(c)}$ is the average feature importance,
 A feature $p$ is retained in the final transfer set if: (1) its average importance is meaningful ($\mu_p \ge 0.005$), and (2) its importance is highly stable across different metropolitan layouts ($S_p \ge 1.0$, indicating that cross-city variance does not exceed the mean). This systematic procedure selects exactly 22 transferable features, achieving a 26.7\% reduction in dimensionality while preserving zero-shot prediction accuracy.
 
 \subsection{Cross-City Transfer Evaluation Protocol}
-Most existing human mobility studies evaluate predictive performance using a random split of origin-destination pairs within the same city. While this protocol measures a model's capacity to interpolate missing flows, it suffers from severe information leakage because the spatial descriptors of test zones are already seen during training, and target-city calibration parameters are known.
-
-To test true zero-shot generalization, we design a strict Cross-City Transfer Protocol consisting of two configurations:
+Standard mobility evaluations split OD pairs within a single city, which leaks spatial information from test zones into training. We instead use a strict cross-city protocol:
 \begin{itemize}
   \item \textbf{25/25 Stratified Split}: The 50 US metropolitan areas are divided into two disjoint sets: 25 training source cities and 25 held-out target cities. Models are trained on the pooled data of the source cities and evaluated on the target cities without any target-city OD data or retraining. To ensure statistical representation, the split is stratified by geographic region and urban morphology.
   \item \textbf{50-Fold Leave-One-City-Out (LOCO)}: The framework is iteratively trained on $C-1$ cities (49 cities) and evaluated on the single remaining held-out city, repeating this cycle for all 50 metropolitan areas to ensure robust out-of-distribution evaluation.
@@ -379,7 +345,7 @@ Under this cross-city evaluation protocol, we enforce a strict information firew
 Since destination attraction is computed via a training-free open-data heuristic and distance decay parameters are learned on source cities, zero-shot leakage is mathematically prevented.
 
 \subsubsection{Evaluation Metric: Common Part of Commuters}
-To measure prediction performance, we use the Common Part of Commuters (CPC) \citep{lenormand2012universal}, which is widely used in human mobility studies to evaluate origin-destination flow matrices. The CPC index is defined as:
+We measure prediction quality with the Common Part of Commuters (CPC) \citep{lenormand2012universal}:
 \begin{equation}
 \text{CPC}(T, \hat{T}) = \frac{2 \sum_{i,j} \min(T_{ij}, \hat{T}_{ij})}{\sum_{i,j} T_{ij} + \sum_{i,j} \hat{T}_{ij}}
 \end{equation}
@@ -409,7 +375,7 @@ Outliers & Retain & Important spatial hubs (CBDs); robust models \\
 \section{Results}
 
 \subsection{Validation Framework Overview}
-We evaluate the proposed framework systematically using a three-stage validation roadmap (illustrated in Fig.~\ref{fig:validation_roadmap}). First, we validate that each individual component—distance decay recovery, origin production transferability, and destination attraction features—works correctly before full integration. Second, we analyze component contributions using a factorial ablation study. Finally, we evaluate the complete SDF-ZTF framework under zero-shot transfer conditions against alternative baselines. Models are trained on the pooled data of 25 source cities and evaluated zero-shot on the 25 held-out target cities under a strict information firewall. Metrics reported represent averages across the 25 held-out cities.
+We evaluate SDF-ZTF in three stages (Fig.~\ref{fig:validation_roadmap}): (1) validate each component individually, (2) quantify component contributions via factorial ablation, and (3) compare zero-shot transfer performance against baselines. All models are trained on 25 source cities and tested on 25 held-out targets with no target-city OD data.
 
 \begin{figure*}[t!]
   \centering
@@ -430,18 +396,16 @@ We evaluate the proposed framework systematically using a three-stage validation
 \end{figure*}
 
 \subsection{Component Validation}
-First, we investigate whether aggregate travel distributions contain sufficient information to recover transferable distance-decay behavior. To answer this question, we systematically validate that each individual component performs reliably.
+We first validate each component in isolation.
 
 \subsubsection{Decay Recovery Validation}
-\textbf{Research question}: Can distance decay parameters ($\gamma, \beta$) be recovered from aggregate distance distributions (marginal distributions of trip distances), without exposing individual OD pairs?
-
-\textbf{Component setup}: We compare two estimation modes for the distance decay parameters ($\gamma, \beta$) under a singly-constrained gravity model using static OSM-based attractiveness heuristics ($A_j$) and ground-truth outflows ($O_i$):
+We compare two estimation modes for $(\gamma, \beta)$ under a singly-constrained gravity model with fixed $A_j$ (OSM heuristic) and ground-truth $O_i$:
 \begin{itemize}
   \item \emph{Ground Truth (GT)}: Fitted directly on individual origin-destination (OD) pairs.
   \item \emph{Recovered}: Fitted on the aggregate distance-bin distribution (marginal histogram of trip lengths, 50 percentile bins) using the aggregate MLE methodology.
 \end{itemize}
 
-Since this validation stage uses only marginal distance distributions, it contains no individual trajectory information and thus poses no spatial data leakage risk. We validate the decay parameter recovery framework under two main test conditions here, leaving additional robustness sweeps to Appendix~A.4.
+Additional robustness sweeps are in Appendix~A.4.
 
 \textbf{Pure Decay Recovery}
 We fit the Tanner Multi decay function (Eq.~\ref{eq:tanner_multi}) to the aggregate distance distribution of each city's training data. We compare the recovered parameters $(\hat{\gamma}_{\text{recovered}}, \hat{\beta}_{\text{recovered}})$ against the Ground Truth parameters $(\hat{\gamma}_{\text{gt}}, \hat{\beta}_{\text{gt}})$ fit directly on individual OD pairs.
@@ -452,7 +416,7 @@ As shown in Fig.~\ref{fig:layer1_scatters}, the parameter recovery shows reasona
   \item \textbf{Power-law exponent ($\gamma$)}: MAE = $0.1313$, RMSE = $0.1558$, Pearson correlation $r = 0.729$.
   \item \textbf{Exponential decay rate ($\beta$)}: MAE = $0.0111$, RMSE = $0.0135$, Pearson correlation $r = 0.258$ (units in $\text{km}^{-1}$).
 \end{itemize}
-Recovered parameters show reasonable agreement with OD-fitted parameters, particularly for $\gamma$ ($r = 0.729$). Despite weaker $\beta$ recovery (expected due to the noisy tail under aggregate binning), the combined decay profile remains sufficiently accurate for high-quality OD prediction.
+Recovery is reasonable for $\gamma$ ($r = 0.729$). The weaker $\beta$ recovery ($r = 0.258$) is expected given the noisy tail under aggregate binning, but the combined decay profile is accurate enough for OD prediction.
 
 \textit{Note}: Bin Sensitivity Analysis (sweeping $K \in \{10, 20, 50, 100\}$ distance bins) is detailed in Appendix~A.4, validating that recovery accuracy stabilizes for $K \ge 50$.
 
@@ -466,11 +430,7 @@ Recovered parameters show reasonable agreement with OD-fitted parameters, partic
 Additional robustness experiments (including sensitivity to distance bin configurations, missing attractiveness data, and CBD collapse scenarios) and the corresponding recovery error heatmap are detailed in Appendix~A.4.
 
 \subsubsection{Origin Production Transferability}
-
-\textbf{Research question}: How much prediction error is due to $O_i$ estimation errors, and how does GBDT prediction compare to a naive baseline and the oracle upper bound? To isolate the error introduced by production estimation, we freeze the destination attractiveness ($A_j$) using a static OSM-based heuristic and the distance decay ($\gamma, \beta$) with a fixed national prior. We train the GBDT outflow predictor on the 25 source cities and evaluate its zero-shot transfer performance on the 25 held-out target cities under three outflow configurations: (1) a \emph{Naive Population Baseline} ($O_i \propto \text{Population}_i$), (2) a \emph{Predicted Outflow (GBDT)} model trained on spatial features, and (3) an \emph{Oracle} upper bound using ground-truth outflows.
-
-\textbf{Outflow Model Comparison (Averaged across 25 held-out cities)}
-To evaluate outflow prediction quality, we compare the naive population baseline, the GBDT predictions, and the oracle outflow. Results are summarized in Table~\ref{tab:outflow_comparison}.
+To isolate the error from $O_i$ estimation, we freeze $A_j$ (OSM heuristic) and $(\gamma, \beta)$ (national prior), then compare three outflow configurations on the 25 held-out cities: a naive population baseline ($O_i \propto \text{Population}_i$), GBDT-predicted outflows, and oracle ground-truth outflows. Results are in Table~\ref{tab:outflow_comparison}.
 
 \begin{table*}[t]
 \centering
@@ -488,12 +448,11 @@ Oracle Outflow ($O_i^{\text{true}}$) & 0.7447 \\
 \end{tabular}
 \end{table*}
 
-\textit{Interpretation}: GBDT-predicted outflows yield a CPC of $0.7037$, substantially outperforming the Naive Population Baseline ($0.584$) and achieving 94.5\% of the Oracle upper bound ($0.7447$), demonstrating strong cross-city transferability of learned production dynamics. Additional robustness analyses (including noise sensitivity and source-scale robustness plots) are reported in Appendix~B.
+GBDT outflows (CPC 0.7037) outperform the naive baseline (0.584) and reach 94.5\% of the oracle upper bound (0.7447). Robustness analyses are in Appendix~B.
 
 
 \subsubsection{Transferable Feature Discovery}
-
-\textbf{Research question}: Are spatial built-environment features stable across cities? Which features exhibit robust transferability? To prevent target-city information leakage, SHAP feature importance and stability scores are calculated exclusively on the 25 training source cities. Under a GBDT configuration using oracle outflows ($O_i^{\text{true}}$) to isolate feature verification, the top-10 features by average SHAP importance are reported in Table~\ref{tab:top_features}.
+SHAP importance and stability scores are computed only on the 25 source cities (no target leakage). Table~\ref{tab:top_features} lists the top-10 features.
 
 \begin{table*}[t]
 \centering
@@ -518,10 +477,10 @@ Oracle Outflow ($O_i^{\text{true}}$) & 0.7447 \\
 \end{tabular*}
 \end{table*}
 
-\textit{Interpretation}: Population and activity-related POIs emerge as the most stable transferable predictors.
+Population and activity-related POIs are the most stable transferable predictors.
 
-\textbf{SHAP Feature Count Performance Sweep}
-We train GBDT models using nested subsets of the top-$K$ SHAP features ($K \in \{5, 10, 15, 20, 22, 25, 30\}$) and evaluate their zero-shot CPC on held-out target cities. Performance effectively plateaus at $K=15$ features (CPC: $0.7124$) and remains identical at $K=22$ (CPC: $0.7124$) before showing a marginal decline beyond 22 features (e.g., $0.7122$ for all 30 features). While $K=15$ features are sufficient for baseline prediction, we select $K=22$ as our final feature set to incorporate a stability margin. This retains all features satisfying our joint importance threshold ($\mu_p \ge 0.005$) and stability criterion ($S_p \ge 1.0$), providing broader semantic coverage to handle structural variations in unseen metropolitan areas. This feature count sweep is illustrated in Fig.~\ref{fig:shap_sweep}.
+\textbf{SHAP Feature Count Sweep.}
+CPC plateaus at $K=15$ features (0.7124) and stays flat through $K=22$. We select $K=22$ to retain all features meeting both thresholds ($\mu_p \ge 0.005$, $S_p \ge 1.0$), providing a stability margin for unseen cities. See Fig.~\ref{fig:shap_sweep}.
 
 \begin{figure*}[t]
   \centering
@@ -557,9 +516,9 @@ We train GBDT models using nested subsets of the top-$K$ SHAP features ($K \in \
 \end{figure*}
 
 \subsection{Component Contribution Analysis}
-To quantify the relative importance of individual framework components and verify the validity of our gravity-based factorization, we perform a factorial ablation study across the 25 held-out target cities. We train variants corresponding to combinations of component presence/absence (with disabled components replaced by uniform weighting or uniform destination appeal/origin production).
+We perform a factorial ablation across the 25 held-out cities, replacing each disabled component with uniform weighting.
 
-The results (Table~\ref{tab:ablation}) demonstrate that the distance decay component $f(d)$ is the most critical factor; its removal causes a severe 31.1\% drop in CPC (representing 75.7\% of the total explainable CPC variance). This highlights that estimating the decay function is the single most important element in human mobility modeling. By contrast, removing destination attraction $A_j$ and origin outflow $O_i$ results in secondary but significant performance drops of 5.3\% and 4.7\% respectively, indicating that all three components are essential for accurate zero-shot predictions.
+Table~\ref{tab:ablation} shows that distance decay $f(d)$ is by far the most important: removing it drops CPC by 31.1\% (75.7\% of explainable variance). Removing $A_j$ and $O_i$ causes 5.3\% and 4.7\% drops respectively (12.9\% and 11.4\% of variance). The ranking $f(d) \gg A_j > O_i$ is consistent across all 25 cities, confirming that all three components contribute but distance decay dominates.
 
 \begin{table*}[t]
 \centering
@@ -578,24 +537,15 @@ $\checkmark$ & $\checkmark$ & $\times$ & 0.666 & A$_j$ removal: 5.3\% loss \\
 \end{tabular*}
 \end{table*}
 
-\textit{Interpretation}:
-The factorial ablation study yields a direct, quantitative answer regarding the hierarchy of organizing forces in spatial interaction. By calculating the relative marginal contribution of each component to the total explainable CPC variance (derived from the performance drops when individual components are removed), we identify a clear distribution of influence: distance decay $f(d)$ represents \textbf{75.7\%} of the variance, destination attraction $A_j$ accounts for \textbf{12.9\%}, and origin production $O_i$ accounts for \textbf{11.4\%}. 
 
-This decomposition reveals critical insights into transferable urban mobility:
-First, we observe the dominance of distance decay $f(d)$, as removing the spatial friction component triggers a massive performance collapse of 31.1\% in CPC (accounting for 75.7\% of explainable variance). This overwhelming contribution confirms that geographical distance remains the structural backbone of intra-city flow systems, even when destination and origin elements are perfectly specified. Conversely, destination attraction $A_j$ plays a secondary but crucial role, where its removal results in a 5.3\% reduction in CPC (12.9\% of explainable variance), showing that localized amenities and attractions shape the specific flow targets within the boundary limits set by distance.
-
-Second, origin production $O_i$ yields the smallest performance drop of 4.7\% (11.4\% of explainable variance) when removed, largely due to its strong structural coupling with population density which generalizes robustly across cities. Crucially, the consistent ranking of contributions ($f(d) \gg A_j > O_i$) across all 25 held-out target cities demonstrates that no single component can be omitted without a statistically significant performance loss. This validates the multiplicative gravity factorization as a robust physical regularizer that preserves structural stability under cross-city transfer.
 
 \textit{Note on Baseline CPC}: The baseline CPC of 0.7040 in this ablation analysis is obtained using the fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and isolate relative contributions under a uniform setting. When deploying the full SDF-ZTF (Survey-Free) framework with city-specific recovered decay parameters ($\hat{\gamma}, \hat{\beta}$), the performance increases to 0.7124 CPC (as reported in Table~\ref{tab:multibaseline_comparison}).
 
 \subsection{Zero-Shot Transfer Evaluation}
-Next, we investigate whether interpretable decomposition can remain competitive with state-of-the-art neural approaches. To address this question, we evaluate the end-to-end zero-shot transfer performance of the complete SDF-ZTF framework on the 25 held-out target cities against alternative baselines.
+We now evaluate the full SDF-ZTF pipeline against baselines.
 
 \subsubsection{Baseline Comparison}
-
-\textbf{Research question}: Does explicit gravity decomposition enable zero-shot transfer? How does the proposed approach compare to alternative baselines?
-
-\textbf{Evaluation Protocol}: Models are trained on the pooled data of 25 source cities and evaluated zero-shot on the 25 held-out target cities. Table~\ref{tab:multibaseline_comparison} summarizes the comparative performance across all baselines.
+All models are trained on 25 source cities and tested zero-shot on 25 held-out targets. Table~\ref{tab:multibaseline_comparison} summarizes results.
 
 \begin{table*}[t]
 \centering
@@ -617,14 +567,10 @@ Radiation Model & 0.512 & 0.051 & 0.0\% & Param-free & 0 \\
 \end{tabular*}
 \end{table*}
 
-\textit{Interpretation}: Under zero-shot transfer conditions, SDF-ZTF (Survey-Free) matches the performance of the end-to-end neural baseline (CPC of 0.7124 versus 0.7117 for DeepGravity), while SDF-ZTF (Oracle $O_i$) provides a significant improvement (0.7447 CPC). This confirms that explicitly separating production, attraction, and decay dynamics does not sacrifice accuracy compared to deep learning methods, while substantially outperforming parameter-free baselines like the Radiation Model (CPC: 0.512).
-
-Note that the two locally-calibrated Tanner baselines serve different diagnostic purposes despite yielding identical mean CPC (0.750): \textbf{Tanner Gravity (Power Constrained)} calibrates only $\gamma$ (fixing $\beta = 0$), while \textbf{Traditional Tanner Gravity} calibrates both $\beta$ and $\gamma$. Their identical CPC suggests the exponential tail $\beta$ is largely redundant under full local calibration. Both serve as a locally-calibrated structural ceiling: zero-shot SDF-ZTF (Oracle $O_i$, CPC: 0.7447) approaching this ceiling without any target-city data highlights the strength of the decomposed representation.
+SDF-ZTF (Survey-Free) matches DeepGravity (CPC 0.7124 vs. 0.7117), and SDF-ZTF (Oracle $O_i$) reaches 0.7447. The two locally-calibrated Tanner baselines both yield CPC 0.750, serving as a structural ceiling; SDF-ZTF (Oracle $O_i$) approaches this ceiling without any target-city data.
 
 \subsubsection{Statistical Significance Analysis}
-To validate the zero-shot transfer performance, we perform paired statistical significance testing across all 50 metropolitan areas from the Leave-One-City-Out (LOCO) evaluation, summarized in Table~\ref{tab:statistical_tests}.
-
-Under LOCO, DeepGravity achieves a small but statistically significant advantage ($\Delta\text{CPC} = 0.0255, p < 10^{-10}$). Under the stricter 25/25 transfer setting, the two models remain effectively tied.
+Table~\ref{tab:statistical_tests} summarizes paired tests across all 50 LOCO folds. DeepGravity holds a small but significant edge under LOCO ($\Delta\text{CPC} = 0.0255, p < 10^{-10}$), but this gap disappears under the 25/25 split.
 
 \begin{table*}[t]
 \centering
@@ -642,7 +588,7 @@ Radiation Model & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 0.0 & $1.78 \times 
 \end{tabular*}
 \end{table*}
 
-\textit{Significance Interpretation}: The performance of SDF-ZTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and significantly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$). The small edge for DeepGravity under LOCO disappears under the 25/25 split, highlighting the robustness of the decomposed gravity structure when training data is limited.
+SDF-ZTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and strongly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$).
 
 \subsubsection{Urban Morphology Analysis}
 
@@ -665,41 +611,54 @@ Coastal & 3 & 0.734 & 0.712 & 66\% \\
 \end{tabular*}
 \end{table*}
 
-\textit{Interpretation}: Neither paradigm is universally superior. As shown in Table~\ref{tab:morphology}, SDF-ZTF performs best in coastal and polycentric cities (CPC of $0.734$ and $0.716$), whereas DeepGravity retains a modest advantage in dense transit-oriented environments ($0.695$ vs. $0.690$). This morphology-dependent performance suggests that structured gravity models are highly suited for environments where distance decay constraints dominate, while unconstrained neural architectures are better equipped for complex, multi-modal transit networks that violate gravity assumptions.
+SDF-ZTF performs best in coastal and polycentric cities (CPC 0.734 and 0.716), while DeepGravity has a slight edge in dense transit environments (0.695 vs. 0.690). This suggests gravity decomposition works well where distance decay dominates, while neural models handle complex multi-modal transit better.
 
 \section{Discussion}
 
 \subsection{What Aggregate Distributions Reveal About Distance Decay}
-The three core research questions posed in Section~1 are answered collectively by the validation results in Section~5. First, aggregate trip-length histograms prove sufficient to calibrate the decay function ($r = 0.729$ for $\gamma$; Fig.~\ref{fig:layer1_scatters}). Second, the factorial ablation (Table~\ref{tab:ablation}) establishes distance decay as the dominant force, accounting for 75.7\% of explainable variance. Third, SDF-ZTF achieves CPC of 0.7124 under fully zero-shot conditions, matching DeepGravity (0.7117) without any target-city OD data (Table~\ref{tab:multibaseline_comparison}).
-
-Taken together, these findings indicate that urban mobility structure is sufficiently regular that a compact set of transferable spatial factors—distance friction, population density, and localized POI activity—can replicate the predictive capacity of unconstrained neural models under strict cross-city transfer conditions.
+The results in Section~5 answer the three research questions from Section~1. Aggregate trip-length histograms calibrate the decay function well ($r = 0.729$ for $\gamma$; Fig.~\ref{fig:layer1_scatters}). Distance decay accounts for 75.7\% of explainable variance (Table~\ref{tab:ablation}). SDF-ZTF achieves CPC of 0.7124 under zero-shot conditions, matching DeepGravity (0.7117) without any target-city OD data (Table~\ref{tab:multibaseline_comparison}). In short, a compact set of spatial factors—distance friction, population density, and POI activity—can match the predictive capacity of neural models under cross-city transfer.
 
 \subsection{Distance Decay as the Dominant Transferable Mechanism}
-Addressing this finding more deeply, the dominance of distance decay $f(d)$—accounting for 75.7\% of the explainable variance in the ablation—reflects both physical constraints and behavioral regularities in urban commuting. Human mobility is fundamentally structured by geographical friction. While local amenities ($A_j$) and zone characteristics ($O_i$) determine the attraction and production potentials of specific locations, the spatial friction of distance defines the feasible interaction boundaries. In metropolitan areas, this is amplified by the physical separation between residential suburbs and employment hubs, making travel distance the primary determinant of trip choices.
-
-From a modeling perspective, the dominance of distance decay highlights it as the key bottleneck for cross-city transferability. The rate of decay varies significantly across urban layouts (e.g., coastal vs. sprawling grid cities). While origin production capacities generalise easily due to basic population scaling, predicting how travelers discount distance in a new city is highly sensitive. Crucially, our framework demonstrates that these target decay parameters can be recovered from anonymized, aggregate trip-length histograms. This bypasses the need for individual origin-destination trajectories, enabling privacy-preserving calibration from mobile network summaries. By focusing calibration on this dominant decay term, the model successfully captures city-specific spatial friction without requiring target-city travel surveys.
+The 75.7\% variance share of $f(d)$ reflects the physical constraint that distance imposes on commuting. While $A_j$ and $O_i$ determine where people want to go and how many trips originate, distance sets the feasible boundaries. Decay rates vary across urban layouts (e.g., coastal vs. grid cities), making this the hardest component to transfer. Our results show that aggregate trip-length histograms are sufficient to recover city-specific decay parameters, bypassing the need for individual OD trajectories and enabling privacy-preserving calibration.
 
 
-\subsection{Positioning Within Existing Literature}
-To clarify the contribution of SDF-ZTF, we position it relative to three existing literature streams:
-\begin{itemize}
-  \item \textbf{Compared with Classical Gravity Literature}: Traditional gravity models rely on city-specific calibration and require local OD matrices. SDF-ZTF replaces local calibration with a GBDT-based origin production model and a training-free attraction heuristic, achieving survey-free zero-shot predictions.
-  \item \textbf{Compared with Neural Mobility Literature}: Monolithic neural networks like DeepGravity achieve high predictive accuracy but function as black boxes. SDF-ZTF achieves comparable performance (0.7124 vs 0.7117 CPC) while preserving the interpretable, separable structure of origin, destination, and decay components.
-  \item \textbf{Compared with Cross-City Transfer Literature}: Existing transfer-learning and representation-learning frameworks still require target-city OD data for fine-tuning or similarity alignment. SDF-ZTF requires zero target-city OD observations, utilizing only globally available open demographic and physical geography features.
-\end{itemize}
+\subsection{Scientific Implications for Transferable Mobility Modeling}
+
+The experimental evidence across 50 US metropolitan areas carries three interconnected implications for how transferable urban mobility should be understood.
+
+\textbf{On recovering distance decay from aggregate distributions.}
+The findings suggest that individual-level OD trajectories are not necessary to characterize city-specific travel friction.
+A Pearson correlation of $r = 0.729$ between aggregate-calibrated and OD-fitted $\gamma$ parameters (Fig.~\ref{fig:layer1_scatters}) indicates that trip-length histograms---which require only anonymized count data---preserve sufficient information to recover the functional form of distance decay.
+This implies that privacy-preserving, aggregate data sources can serve as legitimate calibration signals in mobility modeling, with direct consequences for data governance frameworks that restrict access to individual trajectory records.
+The robustness of this recovery across diverse urban morphologies (Appendix~A) reinforces the interpretation that trip-length distributions encode a structurally stable property of urban travel behavior, rather than a city-specific idiosyncrasy.
+
+\textbf{On the dominance of distance decay among transferable mechanisms.}
+The evidence indicates that distance friction is the primary structural determinant of transferable mobility patterns.
+With 75.7\% of explained variance attributed to $f(d_{ij})$ and a 31.1\% CPC drop upon its removal (Table~\ref{tab:ablation}), these observations imply that the spatial cost of travel---not destination attractiveness or origin production capacity---is the most universal organizing principle of urban flow.
+This changes the framing of what makes a mobility model transferable: rather than learning complex interaction effects between urban features, the results demonstrate that faithfully capturing city-specific distance decay accounts for the dominant share of cross-city predictive accuracy.
+The substantially smaller losses from removing $A_j$ (5.3\%) and $O_i$ (4.7\%) suggest that these components, while necessary, operate within bounds already constrained by distance structure.
+
+\textbf{On decomposability and the structural regularity of transferable mobility.}
+Under the zero-shot 25/25 held-out evaluation protocol, the evidence indicates that a multiplicatively decomposed, interpretable model achieves predictive parity with a neural end-to-end approach: CPC of 0.7124 versus 0.7117 for DeepGravity (Table~\ref{tab:multibaseline_comparison}).
+The results demonstrate that this parity is achieved with only 22 SHAP-selected open-data features, suggesting that the transferable signal embedded in urban form can be accessed without learning distributed latent representations.
+It is important to note the scope of this claim: under leave-one-out cross-validation (LOCO, 50 folds), a statistically significant gap in favor of the neural baseline persists ($\Delta\text{CPC} = 0.0255$, $p < 10^{-10}$, Cohen's $d = 1.29$), likely reflecting reduced source-city diversity available per fold rather than a fundamental limitation of decomposed structure.
+The parity result should therefore be interpreted as specific to the zero-shot transfer regime with balanced training exposure, not as a general performance equivalence claim.
+Within this scope, these observations imply that transferable mobility patterns may follow a more parsimonious generative structure than has been widely assumed: one in which three separable physical mechanisms---spatial friction, population-driven outflow, and environment-driven attraction---account for the majority of cross-city predictive capacity.
+
+\textbf{Directions for zero-shot mobility modeling.}
+Taken together, these findings suggest that progress in zero-shot mobility modeling may depend less on architectural complexity than on the identification and faithful representation of stable physical mechanisms.
+Distance decay, as the dominant transferable component, should be treated not as a nuisance parameter to be absorbed into learned model weights, but as a structurally meaningful quantity that can be recovered from widely available aggregate data.
+Future work in this area may benefit from investigating the conditions under which the separability assumption holds or fails---particularly in dense, transit-integrated cities where multi-modal interaction effects may violate additive independence---rather than scaling neural capacity to absorb ever-larger feature sets.
 
 \subsection{Practical Implications}
-The proposed framework offers several practical advantages over monolithic deep learning models (such as DeepGravity) for urban planning and policy:
+The decomposed structure offers practical advantages for planning:
 \begin{description}
-  \item[Targeted Policy Simulation]: In monolithic neural architectures, altering local zone amenities shifts the entire network predictions in an uninterpretable, coupled manner. By enforcing strict component separability, SDF-ZTF enables clean, decoupled "what-if" simulations. Planners can modify zone-level built environments to evaluate changes in destination attraction $A_j$ or origin production $O_i$ independently, without confounding the global distance deterrence behavior $f(d)$.
-  
-  \item[Auditable and Policy-Compliant Analytics]: Unlike black-box neural networks, every component in SDF-ZTF is auditable. Municipal planners and public stakeholders can examine the physical plausibility of production and attraction estimations separately, which is critical for securing regulatory approvals, justifying infrastructure investments, and supporting public policy dialogues.
-  
-  \item[Survey-Free Deployability in Data-Scarce Regions]: Because the framework isolates component dependencies, it bypasses the need for target-city travel surveys by recovering global decay parameters from aggregate distance histograms and estimating spatial attractions from open data. This makes it highly applicable to resource-constrained municipalities in developing nations that cannot afford large-scale, proprietary cellular registers or expensive household travel surveys.
+  \item[Policy Simulation]: Planners can modify $A_j$ or $O_i$ independently for ``what-if'' analyses without confounding the distance decay behavior.
+  \item[Auditability]: Each component is separately auditable, which supports regulatory approval and public accountability.
+  \item[Survey-Free Deployment]: The framework works in data-scarce regions by recovering decay from aggregate histograms and estimating attractions from open data.
 \end{description}
 
 \subsection{Limitations}
-While robust, the framework is subject to several limitations:
 \begin{enumerate}
   \item \textbf{Separability Assumption}: The model assumes approximate separability between production, attraction, and decay. In cities with highly integrated multi-modal transit networks or strong spatial interaction effects, this independence assumption may be violated, leading to localized prediction errors.
   \item \textbf{Geographic Scope}: The evaluation is limited to US metropolitan areas. Cities in other regions (e.g., highly dense Asian cities or informal settlements in developing countries) may exhibit different travel decay behaviors and feature stability.
@@ -712,15 +671,15 @@ While robust, the framework is subject to several limitations:
 
 \section{Conclusions}
 
-This study investigated three core research questions regarding transferable urban mobility structure. Through zero-shot evaluation across 50 metropolitan areas under a strict information firewall, the findings provide definitive answers to these questions.
+This study addressed three questions about transferable mobility structure through zero-shot evaluation across 50 US metropolitan areas.
 
-First, aggregate travel-distance distributions contain sufficient information to recover transferable decay behavior. We demonstrate that the distance decay function can be effectively calibrated from binned trip-length histograms—of the type routinely provided by mobile network operators and location-sharing platforms under anonymization policies—without exposing individual OD trajectories. The recovered power-law exponent $\gamma$ correlates strongly with parameters fit on individual OD pairs ($r = 0.729$ across 25 held-out cities), confirming that digital footprint summaries can serve as a privacy-preserving calibration signal for cities lacking travel surveys.
+First, aggregate trip-length histograms are sufficient to calibrate distance decay. The recovered $\gamma$ correlates well with OD-fitted parameters ($r = 0.729$ across 25 held-out cities), confirming that anonymized distribution summaries serve as an effective calibration signal.
 
-Second, distance decay is substantially more influential than production or attraction factors. The factorial ablation analysis establishes that distance decay $f(d_{ij})$ is the dominant organizing force in spatial interaction, accounting for 75.7\% of the performance variance. Removing distance decay from the model causes a 31.1\% CPC degradation, far exceeding the losses incurred by removing destination attraction (5.3\%) or origin production (4.7\%). This underscores that spatial friction remains the primary structural determinant of commuting patterns.
+Second, distance decay dominates: it accounts for 75.7\% of explainable variance, with removal causing a 31.1\% CPC drop—far exceeding the losses from removing attraction (5.3\%) or production (4.7\%).
 
-Third, interpretable decomposition can match neural approaches under strict zero-shot transfer. A decomposed model utilizing a compact set of 22 stable built-environment features, selected via cross-city SHAP stability analysis from globally available open data, achieves a zero-shot CPC of 0.7124—matching the performance of the unconstrained DeepGravity neural network (0.7117 CPC) under the same strict cross-city evaluation protocol.
+Third, the decomposed framework matches neural baselines. Using 22 SHAP-selected open-data features, SDF-ZTF achieves zero-shot CPC of 0.7124, on par with DeepGravity (0.7117) under the same protocol.
 
-These findings suggest that transferable mobility structure is simpler and more stable than previously assumed. Rather than treating urban mobility prediction as a purely data-intensive deep learning task, identifying and transferring stable structural mechanisms provides a transparent, auditable, and globally deployable path toward human mobility modeling.
+These results indicate that transferable mobility structure is more regular than commonly assumed. Identifying stable structural mechanisms from open data offers a transparent and globally deployable alternative to data-intensive neural approaches.
 
 \section*{Appendix: Supplementary Materials}\label{sec:appendix}
 
@@ -792,30 +751,24 @@ Early Stopping Rounds & 15 & 15 \\
 \subsection*{A.6 List of Abbreviations}
 The key abbreviations and acronyms used throughout this paper are summarized and defined in Table~\ref{tab:abbreviations}.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
-\tablebodyfont
+\tablebodyfont\small
 \caption{List of Abbreviations}
 \label{tab:abbreviations}
-\begin{tabular}{ll}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llll}
 \toprule
-\textbf{Abbreviation} & \textbf{Definition} \\
+\textbf{Abbreviation} & \textbf{Definition} & \textbf{Abbreviation} & \textbf{Definition} \\
 \midrule
-CBD & Central Business District \\
-CPC & Common Part of Commuters \\
-GBDT & Gradient Boosted Decision Tree \\
-GDPR & General Data Protection Regulation \\
-LOCO & Leave-One-City-Out \\
-MLE & Maximum Likelihood Estimation \\
-MSE & Mean Squared Error \\
-OD & Origin-Destination \\
-OSM & OpenStreetMap \\
-POI & Point of Interest \\
-SDF-ZTF & Separable Decomposed Framework for Zero-Shot Transferable Flows \\
-SHAP & SHapley Additive exPlanations \\
+CBD & Central Business District & MSE & Mean Squared Error \\
+CPC & Common Part of Commuters & OD & Origin-Destination \\
+GBDT & Gradient Boosted Decision Tree & OSM & OpenStreetMap \\
+GDPR & General Data Protection Regulation & POI & Point of Interest \\
+LOCO & Leave-One-City-Out & SDF-ZTF & Separable Decomposed Framework for Zero-Shot Transferable Flows \\
+MLE & Maximum Likelihood Estimation & SHAP & SHapley Additive exPlanations \\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{tabular*}
+\end{table*}
 
 \bibliography{references}
 
