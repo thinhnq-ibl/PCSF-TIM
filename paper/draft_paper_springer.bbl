@@ -73,10 +73,10 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
   Conference on Computer Vision, pp 16781--16790,
   \doi{10.1109/ICCV53024.2023.01529}
 
-\bibitem[{{Meta AI}(2026)}]{meta_movement_distribution_maps}
-{Meta AI} (2026) Movement distribution maps.
-  \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps},
-  accessed: 2026-06-20
+\bibitem[{{Meta}(????)}]{MetaMovementDistributionMaps}
+{Meta} (????) Movement distribution maps.
+  \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps/},
+  aI for Good Datasets. Accessed: 27 June 2026
 
 \bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
   Alessandretti}]{pappalardo2023analytical}

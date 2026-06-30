@@ -20,14 +20,14 @@
 \citation{Rong2023goddag}
 \citation{wang2019origin}
 \citation{atwal2025commuting}
+\citation{barbosa2018human,gonzalez2008understanding}
+\citation{pappalardo2023analytical}
+\citation{brockmann2006scaling,lenormand2012universal,lenormand2016systematic}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces SDF-ZTF framework: Three independent components (origin production $O_i$ from features, distance decay $f(d)$ from aggregate data, destination attraction $A_j$ from features)}}{2}{figure.1}\protected@file@percent }
 \newlabel{fig:graphical_abstract}{{1}{2}{SDF-ZTF framework: Three independent components (origin production $O_i$ from features, distance decay $f(d)$ from aggregate data, destination attraction $A_j$ from features)}{figure.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Classical and Structured Mobility Models}{2}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Deep Learning for OD Prediction}{2}{subsection.2.2}\protected@file@percent }
-\citation{barbosa2018human,gonzalez2008understanding}
-\citation{pappalardo2023analytical}
-\citation{brockmann2006scaling,lenormand2012universal,lenormand2016systematic}
 \citation{wang2018regiontrans}
 \citation{jin2022crosstres}
 \citation{mai2022geospatial,mendieta2023geogpt}
@@ -56,12 +56,12 @@
 \newlabel{eq:tanner_multi}{{2}{4}{Distance Decay Function}{equation.2}{}}
 \newlabel{eq:delta}{{3}{4}{Distance Decay Function}{equation.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Origin Outflow Component ($O_i$)}{4}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Destination Attraction Component ($A_j$)}{4}{subsection.3.5}\protected@file@percent }
-\citation{meta_movement_distribution_maps}
+\citation{MetaMovementDistributionMaps}
 \citation{atwal2025commuting}
 \citation{worldpop2018}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Pipeline of the SDF-ZTF framework. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}}{5}{figure.3}\protected@file@percent }
 \newlabel{fig:framework_pipeline}{{3}{5}{Pipeline of the SDF-ZTF framework. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$)}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Destination Attraction Component ($A_j$)}{5}{subsection.3.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Algorithmic Flow}{5}{subsection.3.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Data and Transferable Urban Representation}{5}{section.4}\protected@file@percent }
 \newlabel{sec:data}{{4}{5}{Data and Transferable Urban Representation}{section.4}{}}
@@ -108,22 +108,24 @@
 \@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{10}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}What Aggregate Distributions Reveal About Distance Decay}{10}{subsection.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Distance Decay as the Dominant Transferable Mechanism}{10}{subsection.6.2}\protected@file@percent }
-\citation{gallotti2024distorted}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Factorial Ablation Results (Average across $N=25$ held-out target cities)}}{11}{table.6}\protected@file@percent }
 \newlabel{tab:ablation}{{6}{11}{Factorial Ablation Results (Average across $N=25$ held-out target cities)}{table.6}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{11}{table.7}\protected@file@percent }
 \newlabel{tab:multibaseline_comparison}{{7}{11}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Positioning Within Existing Literature}{11}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Practical Implications}{11}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Limitations}{11}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Scientific Implications for Transferable Mobility Modeling}{11}{subsection.6.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces LOCO 50-Fold Statistical Significance Test Summary}}{12}{table.8}\protected@file@percent }
 \newlabel{tab:statistical_tests}{{8}{12}{LOCO 50-Fold Statistical Significance Test Summary}{table.8}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}}{12}{table.9}\protected@file@percent }
 \newlabel{tab:morphology}{{9}{12}{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}{table.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{12}{section.7}\protected@file@percent }
-\newlabel{sec:appendix}{{7}{12}{Appendix: Supplementary Materials}{section*.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Practical Implications}{12}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Limitations}{12}{subsection.6.5}\protected@file@percent }
+\citation{gallotti2024distorted}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{13}{section.7}\protected@file@percent }
+\newlabel{sec:appendix}{{7}{13}{Appendix: Supplementary Materials}{section*.3}{}}
 \bibdata{references}
 \bibcite{alis2021generalized}{{1}{2021}{{Alis et~al.}}{{Alis, Legara, and Monterola}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{14}{figure.8}\protected@file@percent }
+\newlabel{fig:layer1_heatmap}{{8}{14}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
 \bibcite{atwal2025commuting}{{2}{2025}{{Atwal et~al.}}{{Atwal, Anderson, Pfoser, and Z{\"u}fle}}}
 \bibcite{barbosa2018human}{{3}{2018}{{Barbosa et~al.}}{{Barbosa, Barthelemy, Ghoshal, James, Lenormand, Louail et~al.}}}
 \bibcite{brockmann2006scaling}{{4}{2006}{{Brockmann et~al.}}{{Brockmann, Hufnagel, and Geisel}}}
@@ -131,30 +133,28 @@
 \bibcite{gonzalez2008understanding}{{6}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
 \bibcite{jin2022crosstres}{{7}{2022}{{Jin et~al.}}{{Jin, Wu, Wang, Liang, and Tang}}}
 \bibcite{lenormand2012universal}{{8}{2012}{{Lenormand et~al.}}{{Lenormand, Huet, Gargiulo, and Deffuant}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{14}{figure.8}\protected@file@percent }
-\newlabel{fig:layer1_heatmap}{{8}{14}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{14}{figure.9}\protected@file@percent }
-\newlabel{fig:layer2_results}{{9}{14}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{15}{figure.9}\protected@file@percent }
+\newlabel{fig:layer2_results}{{9}{15}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces GBDT Model Hyperparameter Configurations}}{15}{table.10}\protected@file@percent }
+\newlabel{tab:gbdt_hyperparameters}{{10}{15}{GBDT Model Hyperparameter Configurations}{table.10}{}}
 \bibcite{lenormand2016systematic}{{9}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
 \bibcite{lundberg2017unified}{{10}{2017}{{Lundberg and Lee}}{{}}}
 \bibcite{mai2022geospatial}{{11}{2022}{{Mai et~al.}}{{Mai, Cundy, Choi, Song, Shofi et~al.}}}
 \bibcite{mendieta2023geogpt}{{12}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
-\bibcite{meta_movement_distribution_maps}{{13}{2026}{{Meta AI}}{{}}}
+\bibcite{MetaMovementDistributionMaps}{{13}{????}{{Meta}}{{}}}
 \bibcite{pappalardo2023analytical}{{14}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
 \bibcite{Rong2023goddag}{{15}{2023}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
 \bibcite{Simini2012universal}{{16}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
 \bibcite{simini2021}{{17}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
 \bibcite{song2010limits}{{18}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces GBDT Model Hyperparameter Configurations}}{15}{table.10}\protected@file@percent }
-\newlabel{tab:gbdt_hyperparameters}{{10}{15}{GBDT Model Hyperparameter Configurations}{table.10}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces List of Abbreviations}}{15}{table.11}\protected@file@percent }
-\newlabel{tab:abbreviations}{{11}{15}{List of Abbreviations}{table.11}{}}
 \bibcite{stouffer1940intervening}{{19}{1940}{{Stouffer}}{{}}}
 \bibcite{tanner1961}{{20}{1961}{{Tanner}}{{}}}
 \bibcite{worldpop2018}{{21}{2017}{{Tatem}}{{}}}
 \bibcite{wang2018regiontrans}{{22}{2018}{{Wang et~al.}}{{Wang, Geng, Ma, Yang, Cao, and Zheng}}}
 \bibcite{wang2019origin}{{23}{2021}{{Wang et~al.}}{{Wang, Cao, and Yu}}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces List of Abbreviations}}{16}{table.11}\protected@file@percent }
+\newlabel{tab:abbreviations}{{11}{16}{List of Abbreviations}{table.11}{}}
 \bibcite{wang2022when}{{24}{2022}{{Wang et~al.}}{{Wang, Jin, Sun, Chen, Chen, and Li}}}
 \bibcite{wilson1971}{{25}{1971}{{Wilson}}{{}}}
 \bibcite{yao2020meta}{{26}{2019}{{Yao et~al.}}{{Yao, Liu, Wei, Tang, and Li}}}
-\gdef \@abspage@last{16}
+\gdef \@abspage@last{17}
