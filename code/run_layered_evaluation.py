@@ -73,6 +73,32 @@ def fit_decay_from_bins_only(df, b_k, edges):
     res = minimize(loss, x0=[1.0, 0.05], bounds=[(0.01, 5.0), (0.001, 2.0)], method="L-BFGS-B")
     return float(res.x[0]), float(res.x[1])
 
+def fit_decay_mle_od(df):
+    """Fits decay parameters using individual OD pairs (MLE Ground Truth)."""
+    d = df["d_clamped"].values
+    A = df["A_j"].values
+    o_idx = df["o_idx"].values
+    trips = df["trip_count"].values
+    
+    unique_o, o_idx_mapped = np.unique(o_idx, return_inverse=True)
+    n_o = len(unique_o)
+    
+    def loss(params):
+        alpha, beta = params
+        log_f = np.log(np.maximum(A, 1e-9)) - alpha * np.log(np.maximum(d, 1e-6)) - beta * d
+        lf_max = np.full(n_o, -np.inf)
+        np.maximum.at(lf_max, o_idx_mapped, log_f)
+        shifted = np.exp(log_f - lf_max[o_idx_mapped])
+        sum_exp = np.zeros(n_o)
+        np.add.at(sum_exp, o_idx_mapped, shifted)
+        log_denom = lf_max + np.log(np.maximum(sum_exp, 1e-300))
+        
+        log_p = log_f - log_denom[o_idx_mapped]
+        return -float(np.sum(trips * log_p))
+
+    res = minimize(loss, x0=[1.5, 0.05], bounds=[(0.01, 5.0), (0.001, 2.0)], method="L-BFGS-B")
+    return float(res.x[0]), float(res.x[1])
+
 def run_layer1(city_cache, source_cities, heldout_cities):
     logging.info("=== LAYER 1: DECAY IDENTIFICATION TEST ===")
     results_t11 = []
@@ -98,18 +124,39 @@ def run_layer1(city_cache, source_cities, heldout_cities):
         # Fit with no OD data, constant Oi (Oi=1.0)
         a_recovered, b_recovered = fit_decay_from_bins_only(df, b_k, edges_20)
         # Fit with actual OD data (ground truth Tanner direct)
-        a_gt, b_gt = _fit_pe_bin50_train(df.iloc[tr])
+        a_gt, b_gt = fit_decay_mle_od(df.iloc[tr])
+        
+        # Calculate downstream CPC using oracle outflow
+        o_sum = df.groupby("o_idx")["trip_count"].sum()
+        O_true_map = o_sum.to_dict()
+        pred_gt = proposed_predict(df, O_true_map, a_gt, b_gt)
+        pred_rec = proposed_predict(df, O_true_map, a_recovered, b_recovered)
+        
+        te = cc["test_mask"]
+        actual = df["trip_count"].values
+        test_idx = np.where(te)[0]
+        
+        cpc_gt = cpc(pred_gt[test_idx], actual[test_idx])
+        cpc_rec = cpc(pred_rec[test_idx], actual[test_idx])
         
         results_t11.append({
             "city": c,
             "alpha_recovered": a_recovered,
             "beta_recovered": b_recovered,
             "alpha_gt": a_gt,
-            "beta_gt": b_gt
+            "beta_gt": b_gt,
+            "cpc_gt": float(cpc_gt),
+            "cpc_recovered": float(cpc_rec)
         })
         
         # T1.2: Bin Robustness sweep K in {3, 5, 10, 20}
         params_k = {}
+        o_sum = df.groupby("o_idx")["trip_count"].sum()
+        O_true_map = o_sum.to_dict()
+        te = cc["test_mask"]
+        actual = df["trip_count"].values
+        test_idx = np.where(te)[0]
+        
         for K in [3, 5, 10, 20]:
             edges_K = np.percentile(d_tr, np.linspace(0, 100, K + 1))
             edges_K[0] = 0.0; edges_K[-1] = np.inf
@@ -120,6 +167,11 @@ def run_layer1(city_cache, source_cities, heldout_cities):
             ak, bk = fit_decay_from_bins_only(df, b_k_K, edges_K)
             params_k[f"alpha_{K}"] = ak
             params_k[f"beta_{K}"] = bk
+            
+            # Downstream CPC prediction
+            pred_k = proposed_predict(df, O_true_map, ak, bk)
+            cpc_val = cpc(pred_k[test_idx], actual[test_idx])
+            params_k[f"cpc_{K}"] = float(cpc_val)
             
         alphas = [params_k[f"alpha_{K}"] for K in [3, 5, 10, 20]]
         betas = [params_k[f"beta_{K}"] for K in [3, 5, 10, 20]]
@@ -203,12 +255,16 @@ def run_layer1(city_cache, source_cities, heldout_cities):
     df_t14 = pd.DataFrame(results_t14)
     df_t15 = pd.DataFrame(results_t15)
     
-    # Calculate recovery errors
+    # Calculate recovery errors and CPC
     alpha_err = np.abs(df_t11["alpha_recovered"] - df_t11["alpha_gt"]).mean()
     beta_err = np.abs(df_t11["beta_recovered"] - df_t11["beta_gt"]).mean()
+    cpc_gt_mean = df_t11["cpc_gt"].mean()
+    cpc_rec_mean = df_t11["cpc_recovered"].mean()
     
     logging.info(f"T1.1 Pure Decay Recovery MAE vs Ground Truth: alpha_MAE={alpha_err:.4f}, beta_MAE={beta_err:.4f}")
+    logging.info(f"T1.1 Downstream CPC under Oracle Outflow: CPC_gt={cpc_gt_mean:.4f}, CPC_rec={cpc_rec_mean:.4f} (Gap={cpc_gt_mean - cpc_rec_mean:.4f})")
     logging.info(f"T1.2 Bin Robustness Parameter Standard Deviation: alpha_std_mean={df_t12['alpha_std'].mean():.4f}, beta_std_mean={df_t12['beta_std'].mean():.4f}")
+    logging.info(f"T1.2 Downstream CPC by Bin Count: CPC_3={df_t12['cpc_3'].mean():.4f}, CPC_5={df_t12['cpc_5'].mean():.4f}, CPC_10={df_t12['cpc_10'].mean():.4f}, CPC_20={df_t12['cpc_20'].mean():.4f}")
     
     logging.info("T1.3 Attractiveness Perturbation Test MAE vs Ground Truth:")
     for noise in [0.1, 0.2, 0.5]:
@@ -732,7 +788,9 @@ def main():
         
         f.write("## 1. Decay Identification (Layer 1)\n")
         f.write(f"- T1.1 Pure Decay Recovery MAE vs Ground Truth: alpha_MAE={np.abs(df_t11['alpha_recovered'] - df_t11['alpha_gt']).mean():.4f}, beta_MAE={np.abs(df_t11['beta_recovered'] - df_t11['beta_gt']).mean():.4f}\n")
+        f.write(f"- T1.1 Downstream CPC under Oracle Outflow: CPC_gt={df_t11['cpc_gt'].mean():.4f}, CPC_rec={df_t11['cpc_recovered'].mean():.4f} (Gap={df_t11['cpc_gt'].mean() - df_t11['cpc_recovered'].mean():.4f})\n")
         f.write(f"- T1.2 Bin Robustness Parameter Std Mean: alpha_std_mean={df_t12['alpha_std'].mean():.4f}, beta_std_mean={df_t12['beta_std'].mean():.4f}\n")
+        f.write(f"- T1.2 Downstream CPC by Bin Count: CPC_3={df_t12['cpc_3'].mean():.4f}, CPC_5={df_t12['cpc_5'].mean():.4f}, CPC_10={df_t12['cpc_10'].mean():.4f}, CPC_20={df_t12['cpc_20'].mean():.4f}\n")
         f.write("- T1.3 Attractiveness Perturbation Test MAE vs Ground Truth:\n")
         for noise in [0.1, 0.2, 0.5]:
             sub = df_t13[df_t13["noise"] == noise]
