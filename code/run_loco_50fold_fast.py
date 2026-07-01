@@ -18,7 +18,7 @@ from utils import (
     cpc, rmse, r2_log, load_road_density
 )
 from conference_benchmark import make_split, TEST_FRAC, SPLIT_SEED, FULL_CITIES
-from run_survey_free_10to40_redesign import (
+from run_survey_free_25to25_redesign import (
     build_city_features_redesign, _fit_pe_bin50_train
 )
 from sklearn.preprocessing import StandardScaler

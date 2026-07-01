@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(dir_path)))
 
 from conference_benchmark import make_split, TEST_FRAC, SPLIT_SEED, cpc
 from utils import load_city, build_pairs_dataframe, apply_origin_normalization, rmse, r2_log
-from run_survey_free_10to40_redesign import (
+from run_survey_free_25to25_redesign import (
     CITIES_50, SOURCE_CITIES, HELDOUT_CITIES,
     load_road_density, proposed_predict, national_decay
 )

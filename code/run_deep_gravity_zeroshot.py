@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(dir_path))
 
 from conference_benchmark import make_split, TEST_FRAC, SPLIT_SEED, cpc, apply_origin_normalization
 from utils import load_city, build_pairs_dataframe
-from run_survey_free_10to40_redesign import (
+from run_survey_free_25to25_redesign import (
     CITIES_50, SOURCE_CITIES, HELDOUT_CITIES,
     load_road_density, build_city_features_redesign, proposed_predict, national_decay
 )
@@ -227,8 +227,8 @@ def main():
     logging.info(f"Training DeepGravity global MLP. Training shape: {X_dg_train_scaled.shape}")
     dg_model = fit_mlp_global(X_dg_train_scaled, y_dg_train, hidden=128, epochs=20, lr=1e-3, seed=0)
     
-    # ── Evaluate Zero-Shot DeepGravity on 40 Held-out Cities ──────────────────
-    logging.info("Evaluating Zero-Shot DeepGravity on 40 held-out cities...")
+    # ── Evaluate Zero-Shot DeepGravity on 25 Held-out Cities ──────────────────
+    logging.info("Evaluating Zero-Shot DeepGravity on 25 held-out cities...")
     results = []
     
     for c in HELDOUT_CITIES:
@@ -286,11 +286,11 @@ def main():
     # Save to CSV
     results_dir = os.path.join(os.path.dirname(dir_path), "results")
     os.makedirs(results_dir, exist_ok=True)
-    df_res.to_csv(os.path.join(results_dir, "us_40heldout_deepgravity_zeroshot.csv"), index=False)
+    df_res.to_csv(os.path.join(results_dir, "us_25heldout_deepgravity_zeroshot.csv"), index=False)
     
     # Display summary
     print("\n" + "="*80)
-    print("ZERO-SHOT DEEPGRAVITY VS PROPOSED GRAVITY MODEL ON 40 HELD-OUT CITIES")
+    print("ZERO-SHOT DEEPGRAVITY VS PROPOSED GRAVITY MODEL ON 25 HELD-OUT CITIES")
     print("="*80)
     print(f"{'Model Configuration':<35} | {'Mean CPC':<15} | {'CPC Std Dev':<12}")
     print("-"*80)
@@ -304,13 +304,13 @@ def main():
     with open(os.path.join(results_dir, "deepgravity_zeroshot_summary.md"), "w") as f:
         f.write("# Zero-Shot DeepGravity Transfer Evaluation Summary\n\n")
         f.write("Generated on: 2026-06-06\n\n")
-        f.write("## 1. Quantitative Performance (40 Held-Out Cities)\n\n")
+        f.write("## 1. Quantitative Performance (25 Held-Out Cities)\n\n")
         f.write("| Model Configuration | Mean CPC | CPC Std Dev | Generalization Status |\n")
         f.write("|---------------------|----------|-------------|-----------------------|\n")
         f.write(f"| Proposed Gravity (Survey-Free) | {df_res['cpc_grav_sf'].mean():.4f} | {df_res['cpc_grav_sf'].std():.4f} | Baseline |\n")
         f.write(f"| Proposed Gravity (Oracle Outflow) | {df_res['cpc_grav_oracle'].mean():.4f} | {df_res['cpc_grav_oracle'].std():.4f} | Upper Bound |\n")
-        f.write(f"| DeepGravity (Survey-Free Zero-Shot) | {df_res['cpc_dg_sf'].mean():.4f} | {df_res['cpc_dg_sf'].std():.4f} | Generalizes Poorly |\n")
-        f.write(f"| DeepGravity (Oracle Outflow Zero-Shot) | {df_res['cpc_dg_oracle'].mean():.4f} | {df_res['cpc_dg_oracle'].std():.4f} | Suffer Overfitting |\n")
+        f.write(f"| DeepGravity (Survey-Free Zero-Shot) | {df_res['cpc_dg_sf'].mean():.4f} | {df_res['cpc_dg_sf'].std():.4f} | Generalizes |\n")
+        f.write(f"| DeepGravity (Oracle Outflow Zero-Shot) | {df_res['cpc_dg_oracle'].mean():.4f} | {df_res['cpc_dg_oracle'].std():.4f} | Upper Bound |\n")
         
         f.write("\n## 2. Key Scientific Findings\n\n")
         f.write("1. **DeepGravity Generalization Gap**: Under zero-shot transfer conditions (trained on 10 cities and tested on 40 unseen cities), DeepGravity suffers a significant drop in performance compared to its supervised in-city benchmark (average CPC drops from ~0.76 to ~0.66-0.67).\n")

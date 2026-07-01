@@ -38,7 +38,7 @@ from feature_builders import (
     build_deep_gravity_pair_features_38,
     SHAP_FEATURES_23
 )
-from run_survey_free_10to40_redesign import CITIES_50
+from run_survey_free_25to25_redesign import CITIES_50
 
 # Logging setup
 logging.basicConfig(
@@ -137,7 +137,7 @@ def run_loco_evaluation(cities_list: List[str]) -> Tuple[pd.DataFrame, Dict]:
     # Compute national decay parameters from ALL cities' training data (LOCO principle: only use source cities)
     def compute_loco_national_decay(cache_dict):
         """Compute national decay from all cities' training data."""
-        from run_survey_free_10to40_redesign import _fit_pe_bin50_train
+        from run_survey_free_25to25_redesign import _fit_pe_bin50_train
         ab = []
         for city, cc in cache_dict.items():
             df = cc["df"]
