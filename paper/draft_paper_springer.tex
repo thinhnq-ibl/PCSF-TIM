@@ -366,8 +366,14 @@ Outliers & Retain & Important spatial hubs (CBDs); robust models \\
 
 \section{Results}
 
-\subsection{Validation Framework Overview}
-We evaluate SDF-ZTF in three stages (Fig.~\ref{fig:validation_roadmap}): (1) validate each component individually, (2) quantify component contributions via factorial ablation, and (3) compare zero-shot transfer performance against baselines. All models are trained on 25 source cities and tested on 25 held-out targets with no target-city OD data.
+\subsection{Framework for Validation Overview}
+SDF-ZTF is validated through three phases (Fig.~\ref{fig:validation_roadmap}):
+(1) validating each component separately, (2) calculating
+the individual contribution of each component by means
+of factorial ablation, and (3) comparing performance to
+the baselines. All models are trained on 25 source
+cities and evaluated on 25 held-out targets, with no
+target-city OD data.
 
 \begin{figure*}[t!]
   \centering
@@ -388,29 +394,32 @@ We evaluate SDF-ZTF in three stages (Fig.~\ref{fig:validation_roadmap}): (1) val
 \end{figure*}
 
 \subsection{Component Validation}
-We first validate each component in isolation.
+The first phase includes the validation of each component separately.
 
 \subsubsection{Decay Recovery Validation}
-We compare two estimation modes for $(\gamma, \beta)$ under a production-constrained gravity model with fixed $A_j$ (OSM heuristic) and ground-truth $O_i$:
+In this phase we compare two estimation modes for ($\gamma$, $\beta$) for the gravity model with production constraints,
+where $A_j$ and $O_i$ remain unchanged (OSM heuristic):
 \begin{itemize}
-  \item \emph{Ground Truth (GT)}: Fitted directly on individual origin-destination (OD) pairs.
-  \item \emph{Recovered}: Fitted on the aggregate distance-bin distribution (marginal histogram of trip lengths, 50 percentile bins) using the aggregate MLE methodology.
+  \item Ground Truth (GT): Estimation is done using individual origin-destination (OD) pairs.
+  \item Recovered: Estimation using aggregated distance
+  bins distribution (trip length marginal histogram, 50
+  percentile bins).
 \end{itemize}
-
-Additional robustness sweeps are in Appendix~A.4.
+Further details can be found in Appendix~A.4.
 
 \textbf{Pure Decay Recovery}
-We fit the Tanner Multi decay function (Eq.~\ref{eq:tanner_multi}) to the aggregate distance distribution of each city's training data. We compare the recovered parameters $(\hat{\gamma}_{\text{recovered}}, \hat{\beta}_{\text{recovered}})$ against the Ground Truth parameters $(\hat{\gamma}_{\text{gt}}, \hat{\beta}_{\text{gt}})$ fit directly on individual OD pairs.
+We estimate the Tanner Multi decay function (see Eq.~\ref{eq:tanner_multi}) on the aggregate distance distributions of the training data for each city. We compare the estimated parameters $(\hat{\gamma}_{\text{recovered}}, \hat{\beta}_{\text{recovered}})$ to the ground truth parameters $(\hat{\gamma}_{\text{gt}}, \hat{\beta}_{\text{gt}})$ estimated directly on OD pairs.
 
-\textit{Finding}:
-As shown in Fig.~\ref{fig:layer1_scatters}, the parameter recovery shows reasonable correlation across the 25 target cities:
+\textit{Result}: The parameter recovery demonstrates moderate correlation across the 25 target cities:
 \begin{itemize}
-  \item \textbf{Power-law exponent ($\gamma$)}: MAE = $0.1313$, RMSE = $0.1558$, Pearson correlation $r = 0.729$.
-  \item \textbf{Exponential decay rate ($\beta$)}: MAE = $0.0111$, RMSE = $0.0135$, Pearson correlation $r = 0.258$ (units in $\text{km}^{-1}$).
+  \item Power-law exponent ($\gamma$): MAE = $0.1313$, RMSE = $0.1558$, Pearson correlation $r = 0.729$.
+  \item Exponential decay rate ($\beta$): MAE = $0.0111$, RMSE = $0.0135$, Pearson correlation $r = 0.258$ (unit in $\text{km}^{-1}$).
 \end{itemize}
-Recovery is reasonable for $\gamma$ ($r = 0.729$). The weaker $\beta$ recovery ($r = 0.258$) is expected given the noisy tail under aggregate binning, but the combined decay profile is accurate enough for OD prediction.
+The parameter recovery is reasonable for $\gamma$ ($r = 0.729$). On the other hand, weaker recovery of $\beta$ ($r = 0.258$) is anticipated due to the noisy tail under aggregation binning. However, the total recovery of the decay curve is good enough for prediction.
 
-\textit{Note}: Bin Sensitivity Analysis (sweeping $K \in \{10, 20, 50, 100\}$ distance bins) is detailed in Appendix~A.4, validating that recovery accuracy stabilizes for $K \ge 50$.
+\textit{Note}: Bin Sensitivity Analysis (varying $K \in \{10,20,50,100\}$ distance bins) is explained in the Appendix~A.4 and proves that recovery accuracy stabilizes for $K \ge 50$.
+
+More robustness experiments (distance bin configurations, missing attractiveness, CBD collapse etc.) along with the recovery error heatmap are described in the Appendix~A.4.
 
 \begin{figure*}[t!]
   \centering
@@ -422,7 +431,13 @@ Recovery is reasonable for $\gamma$ ($r = 0.729$). The weaker $\beta$ recovery (
 Additional robustness experiments (including sensitivity to distance bin configurations, missing attractiveness data, and CBD collapse scenarios) and the corresponding recovery error heatmap are detailed in Appendix~A.4.
 
 \subsubsection{Origin Production Transferability}
-To isolate the error from $O_i$ estimation, we freeze $A_j$ (OSM heuristic) and $(\gamma, \beta)$ (national prior), then compare three outflow configurations on the 25 held-out cities: a naive population baseline ($O_i \propto \text{Population}_i$), GBDT-predicted outflows, and oracle ground-truth outflows. Results are in Table~\ref{tab:outflow_comparison}.
+To control for the effect of $O_i$ estimation,
+we hold $A_j$ (OSM heuristic) and ($\gamma$, $\beta$) (national
+prior) fixed, then test the performance of three different
+outflow strategies in 25 held-out cities: a simple
+population baseline ($O_i \propto \text{Population}_i$), GBDT-predicted
+outflows, and oracle outflows. The results can be seen
+in Table~\ref{tab:outflow_comparison}.
 
 \begin{table*}[t]
 \centering
@@ -440,11 +455,17 @@ Oracle Outflow ($O_i^{\text{true}}$) & 0.7447 \\
 \end{tabular}
 \end{table*}
 
-GBDT outflows (CPC 0.7037) outperform the naive baseline (0.584) and reach 94.5\% of the oracle upper bound (0.7447). Robustness analyses are in Appendix~B.
+GBDT outflows (CPC 0.7037) beat the
+simple baseline (0.584) and achieve 94.5\% of the oracle
+upper bound (0.7447). Robustness experiments are shown
+in Appendix~B.
 
 
 \subsubsection{Transferable Feature Discovery}
-SHAP importance and stability scores are computed only on the 25 source cities (no target leakage). Table~\ref{tab:top_features} lists the top-10 features.
+Feature importance and feature stability is
+measured only with the 25 source cities (no
+target city leakage). Table~\ref{tab:top_features} shows the list of top
+10 features.
 
 \begin{table*}[t]
 \centering
@@ -469,10 +490,14 @@ SHAP importance and stability scores are computed only on the 25 source cities (
 \end{tabular*}
 \end{table*}
 
-Population and activity-related POIs are the most stable transferable predictors.
+Population and activity-related points of interest
+are the most stable transferable predictors.
 
-\textbf{SHAP Feature Count Sweep.}
-CPC plateaus at $K=15$ features (0.7124) and stays flat through $K=22$. We select $K=22$ to retain all features meeting both thresholds ($\mu_p \ge 0.005$, $S_p \ge 1.0$), providing a stability margin for unseen cities. See Fig.~\ref{fig:shap_sweep}.
+\textbf{SHAP Feature Count Sweep.} CPC
+plateaus at $K=15$ features (0.7124) until $K = 22$.
+We use $K=22$ as our number of features because
+it contains all features that pass both cutoffs ($\mu_p \ge
+0.005$, $S_p \ge 1.0$). See Fig.~\ref{fig:shap_sweep}.
 
 \begin{figure*}[t]
   \centering
@@ -507,10 +532,10 @@ CPC plateaus at $K=15$ features (0.7124) and stays flat through $K=22$. We selec
   \label{fig:shap_sweep}
 \end{figure*}
 
-\subsection{Component Contribution Analysis}
-We perform a factorial ablation across the 25 held-out cities, replacing each disabled component with uniform weighting.
+\subsection{Component Contributions Analysis}
+A factorial ablation over the 25 held out cities, with replacement of each disabled component with uniform weighting.
 
-Table~\ref{tab:ablation} shows that distance decay $f(d)$ is by far the most important: removing it drops CPC by 31.1\% (75.7\% of explainable variance). Removing $A_j$ and $O_i$ causes 5.3\% and 4.7\% drops respectively (12.9\% and 11.4\% of variance). The ranking $f(d) \gg A_j > O_i$ is consistent across all 25 cities, confirming that all three components contribute but distance decay dominates.
+It can be seen from Table~\ref{tab:ablation} that the most important is the distance decay $f(d)$: disabling it causes a 31.1\% CPC decrease (75.7\% of variance explanation). Disabling $A_j$ and $O_i$ results in decreases of 5.3\% and 4.7\%, respectively (12.9\% and 11.4\% of variance). The order of importance is always the same for all 25 cities $f(d) \gg A_j > O_i$ and confirms that all three components are important, but the distance decay component is the most important.
 
 \begin{table*}[t]
 \centering
@@ -529,15 +554,16 @@ $\checkmark$ & $\checkmark$ & $\times$ & 0.666 & A$_j$ removal: 5.3\% loss \\
 \end{tabular*}
 \end{table*}
 
+\textbf{Baseline CPC Note:} Baseline CPC value of 0.7040 used in this ablation analysis was achieved using fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and calculate contributions under a uniform setting. Using the full SDF-ZTF (Survey-Free) framework, where decay parameter values ($\hat{\gamma}$, $\hat{\beta}$) were estimated separately for each city, CPC performance improves to 0.7124 CPC (as seen in Table~\ref{tab:multibaseline_comparison}).
 
+\subsection{Evaluating Zero-Shot Transfer Learning Pipeline}
+We now present an evaluation of the full SDF-
+ZTF pipeline against the baselines.
 
-\textit{Note on Baseline CPC}: The baseline CPC of 0.7040 in this ablation analysis is obtained using the fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and isolate relative contributions under a uniform setting. When deploying the full SDF-ZTF (Survey-Free) framework with city-specific recovered decay parameters ($\hat{\gamma}, \hat{\beta}$), the performance increases to 0.7124 CPC (as reported in Table~\ref{tab:multibaseline_comparison}).
-
-\subsection{Zero-Shot Transfer Evaluation}
-We now evaluate the full SDF-ZTF pipeline against baselines.
-
-\subsubsection{Baseline Comparison}
-All models are trained on 25 source cities and tested zero-shot on 25 held-out targets. Table~\ref{tab:multibaseline_comparison} summarizes results.
+\subsubsection{Comparison with Baselines}
+All the models are trained on 25 source cities and
+tested in zero-shot fashion on 25 target cities.
+The findings are summarized in Table~\ref{tab:multibaseline_comparison} below.
 
 \begin{table*}[t]
 \centering
@@ -559,10 +585,20 @@ Radiation Model & 0.512 & 0.051 & 0.0\% & Param-free & 0 \\
 \end{tabular*}
 \end{table*}
 
-SDF-ZTF (Survey-Free) matches DeepGravity (CPC 0.7124 vs. 0.7117), and SDF-ZTF (Oracle $O_i$) reaches 0.7447. The two locally-calibrated Tanner baselines both yield CPC 0.750, serving as a structural ceiling; SDF-ZTF (Oracle $O_i$) approaches this ceiling without any target-city data.
+The Survey-Free version of SDF-ZTF achieves
+the same performance as DeepGravity (CPC 0.7124
+vs 0.7117), whereas the Oracle O$_i$ variant of SDF-
+ZTF achieves CPC 0.7447. Both locally-calibrated
+versions of Tanner baseline reach CPC 0.750,
+which acts as a structure-based upper bound, and
+SDF-ZTF (Oracle O$_i$) gets close to this upper
+bound without using any data about target cities.
 
-\subsubsection{Statistical Significance Analysis}
-Table~\ref{tab:statistical_tests} summarizes paired tests across all 50 LOCO folds. DeepGravity holds a small but significant edge under LOCO ($\Delta\text{CPC} = 0.0255, p < 10^{-10}$), but this gap disappears under the 25/25 split.
+\subsubsection{Statistical Significance Testing}
+Table~\ref{tab:statistical_tests} presents the results of paired tests for all 50
+LOCO folds. DeepGravity has a small but statistically significant advantage under LOCO ($\Delta$CPC =
+0.0255, $p < 10^{-10}$); however, this advantage
+evaporates under the 25/25 split.
 
 \begin{table*}[t]
 \centering
@@ -583,8 +619,10 @@ Radiation Model & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 0.0 & $1.78 \times 
 SDF-ZTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and strongly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$).
 
 \subsubsection{Urban Morphology Analysis}
-
-The overall zero-shot performance masks spatial variations across urban configurations. We evaluate transfer CPC by urban morphology class across the 25 held-out cities in Table~\ref{tab:morphology}.
+In the case of overall zero-shot transfer learning per-
+formance, differences can be observed between spatial
+performance of the two methods. The analysis for transfer
+CPC based on urban morphology is shown in Table~\ref{tab:morphology},
 
 \begin{table*}[t]
 \centering
@@ -603,7 +641,10 @@ Coastal & 3 & 0.734 & 0.712 & 66\% \\
 \end{tabular*}
 \end{table*}
 
-SDF-ZTF performs best in coastal and polycentric cities (CPC 0.734 and 0.716), while DeepGravity has a slight edge in dense transit environments (0.695 vs. 0.690). This suggests gravity decomposition works well where distance decay dominates, while neural models handle complex multi-modal transit better.
+where SDF-ZTF works best for coastal and centricities (CPC 0.734 and 0.716), while DeepGravity works marginally
+better in dense transits (0.695 vs 0.690). It implies that
+Gravity Decomposition method works well when the
+distance decay effect dominates.
 
 \section{Discussion}
 
@@ -748,7 +789,7 @@ The key abbreviations and acronyms used throughout this paper are summarized and
 \tablebodyfont\small
 \caption{List of Abbreviations}
 \label{tab:abbreviations}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llll}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lp{4.2cm}lp{6.0cm}}
 \toprule
 \textbf{Abbreviation} & \textbf{Definition} & \textbf{Abbreviation} & \textbf{Definition} \\
 \midrule
