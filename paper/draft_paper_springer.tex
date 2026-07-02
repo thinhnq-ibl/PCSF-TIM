@@ -163,7 +163,7 @@ p(d) = \sum_{i,j} T_{ij} \cdot \mathbf{1}[d_{ij} \approx d]
 \end{equation}
 This marginal preserves the decay structure embedded in $f(d_{ij})$ while revealing no individual OD pair. Fitting the Tanner decay function to this marginal via MLE (Section~3.3) therefore recovers the same decay parameters that would be obtained from fitting to the full OD matrix---provided that the decomposition separability assumption holds. This is the theoretical basis for RQ1, which is empirically validated in Section~5.
 
-The decomposition pipeline used in this study (referred to as SDF-ZTF, Separable Decomposed Formulation for Zero-Shot Transferable Flows) is illustrated in Fig.~\ref{fig:framework_pipeline}.
+The decomposed gravity formulation used in this study (referred to as the separable decomposed formulation for zero-shot transferable flows) is illustrated in Fig.~\ref{fig:framework_pipeline}.
 
 \begin{figure*}[t!]
   \centering
@@ -201,7 +201,7 @@ The decomposition pipeline used in this study (referred to as SDF-ZTF, Separable
     
     \draw[arrow] (fusion.south) -- (od.north);
   \end{tikzpicture}
-  \caption{Pipeline of the SDF-ZTF methodology. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}
+  \caption{Overview of the aggregate-calibrated gravity model structure. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}
   \label{fig:framework_pipeline}
 \end{figure*}
 
@@ -232,7 +232,7 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 \tablebodyfont\small
 \begin{tabular}{p{0.95\textwidth}}
 \toprule
-\textbf{Algorithm 1: SDF-ZTF Training and Zero-Shot Prediction} \\
+\textbf{Algorithm 1: Aggregate Calibration and Zero-Shot Prediction} \\
 \midrule
 \textbf{Input}: Source cities data $\{\mathbf{X}^{(c)}, \mathbf{T}^{(c)}\}_{c=1}^{C}$; Target city spatial features $\mathbf{X}^{(t)}$ \\
 \textbf{Output}: Predicted Target City OD Matrix $\mathbf{\hat{T}}^{(t)}$ \\
@@ -252,7 +252,7 @@ The complete pipeline for training and zero-shot deployment is formalized in Alg
 \label{sec:data}
 
 \subsection{Design Principle: Open-Data-Only}
-All features in SDF-ZTF come from globally available open data rather than proprietary cellular records or household surveys. This makes the pipeline deployable in any city. We intentionally exclude local employment databases (e.g., LODES), which lack global equivalents, and instead proxy employment activity through commercial and industrial POI densities from OpenStreetMap.
+All features in the proposed approach come from globally available open data rather than proprietary cellular records or household surveys. This makes the methodology deployable in any city. We intentionally exclude local employment databases (e.g., LODES), which lack global equivalents, and instead proxy employment activity through commercial and industrial POI densities from OpenStreetMap.
 
 \subsection{Data Sources}
 We use three data sources. Their roles across the decomposed components are shown in Table~\ref{tab:data_usage_matrix}.
@@ -260,7 +260,7 @@ We use three data sources. Their roles across the decomposed components are show
 \begin{table*}[t]
 \centering
 \tablebodyfont\small
-\caption{Data usage matrix illustrating the operational roles of inputs across the SDF-ZTF pipeline to guarantee leakage-free prediction.}
+\caption{Data usage matrix illustrating the operational roles of inputs across the aggregate calibration workflow to guarantee leakage-free prediction.}
 \label{tab:data_usage_matrix}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
@@ -313,7 +313,7 @@ We use a two-stage procedure—feature engineering followed by stability selecti
         child { node {Total Population} }
       };
   \end{tikzpicture}
-  \caption{Taxonomy of the globally available open data features used in the SDF-ZTF pipeline. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}
+  \caption{Taxonomy of the globally available open data features used in the outflow model. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}
   \label{fig:feature_taxonomy}
 \end{figure*}
 
@@ -383,7 +383,7 @@ Outliers & Retain & Important spatial hubs (CBDs); robust models \\
 \section{Results}
 
 \subsection{Validation Protocol Overview}
-SDF-ZTF is validated through three phases (Fig.~\ref{fig:validation_roadmap}):
+The proposed methodology is validated through three phases:
 (1) validating each component separately (addressing RQ1's recovery and outflow prediction), (2) calculating the individual contribution of each component by means of factorial ablation and Shapley values (addressing RQ2's decay dominance), and (3) comparing zero-shot performance across urban morphologies (addressing RQ3's morphological scope). All models are trained on 25 source cities and evaluated on 25 held-out targets, with no target-city OD data.
 
 \begin{figure*}[t!]
@@ -400,7 +400,7 @@ SDF-ZTF is validated through three phases (Fig.~\ref{fig:validation_roadmap}):
     \draw[arrow] (s1) -- (s2);
     \draw[arrow] (s2) -- (s3);
   \end{tikzpicture}
-  \caption{Methodology validation roadmap showing the three evaluation stages used to systematically verify the SDF-ZTF pipeline.}
+  \caption{Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach.}
   \label{fig:validation_roadmap}
 \end{figure*}
 
@@ -554,11 +554,10 @@ $\checkmark$ & $\checkmark$ & $\times$ & 0.6557 & A$_j$ removal: 4.4\% loss & 0.
 \end{tabular*}
 \end{table*}
 
-\textbf{Baseline CPC Note:} Baseline CPC value of 0.6860 used in this ablation analysis was achieved using fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and calculate contributions under a uniform setting. Using the full SDF-ZTF (Survey-Free) pipeline, CPC performance achieves 0.6860 CPC (as seen in Table~\ref{tab:multibaseline_comparison}).
+\textbf{Baseline CPC Note:} Baseline CPC value of 0.6860 used in this ablation analysis was achieved using fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and calculate contributions under a uniform setting. Using the proposed survey-free calibration workflow, CPC performance achieves 0.6860 CPC (as seen in Table~\ref{tab:multibaseline_comparison}).
 
-\subsection{Evaluating Zero-Shot Transfer Learning Pipeline}
-We now present an evaluation of the full SDF-
-ZTF pipeline against the baselines.
+\subsection{Zero-Shot Transfer Evaluation}
+We now present an evaluation of the proposed aggregate-calibrated model against the baselines.
 
 \subsubsection{Comparison with Baselines}
 The findings are summarized in Table~\ref{tab:multibaseline_comparison} below.
@@ -573,11 +572,11 @@ The findings are summarized in Table~\ref{tab:multibaseline_comparison} below.
 \textbf{Model} & \shortstack[c]{\textbf{Mean} \\ \textbf{CPC}} & \shortstack[c]{\textbf{Std} \\ \textbf{Dev}} & \textbf{Type} & \textbf{Features} \\
 \midrule
 \multicolumn{5}{l}{\textbf{Group 1: Zero-Shot Transfer (No target-city travel survey data)}} \\
-SDF-ZTF (Survey-Free) & 0.6860 & 0.0391 & Decomposed & 22 (selected) \\
+Proposed Model (Survey-Free) & 0.6860 & 0.0391 & Decomposed & 22 (selected) \\
 DeepGravity (Zero-Shot) & 0.7529 & 0.0285 & Neural E2E & 27 (all) \\
 \midrule
 \multicolumn{5}{l}{\textbf{Group 2: Oracle Outflow Transfer (Zero-shot transfer with true outflows $O_i^{\text{true}}$)}} \\
-SDF-ZTF (Oracle O$_i$) & 0.7337 & 0.0256 & Decomposed & 22 (selected) \\
+Proposed Model (Oracle O$_i$) & 0.7337 & 0.0256 & Decomposed & 22 (selected) \\
 DeepGravity (Oracle O$_i$ Zero-Shot) & 0.7526 & 0.0283 & Neural E2E & 27 (all) \\
 \midrule
 \multicolumn{5}{l}{\textbf{Group 3: Locally-Calibrated Baselines (Fitted directly on target cities)}} \\
@@ -588,7 +587,7 @@ Radiation Model & 0.5120 & 0.0510 & Param-free & 0 \\
 \end{tabular*}
 \end{table*}
 
-The Survey-Free version of SDF-ZTF achieves a mean CPC of 0.6860, while the Oracle O$_i$ variant of SDF-ZTF reaches CPC 0.7337. Under zero-shot settings, DeepGravity outperforms SDF-ZTF (CPC 0.7529 vs 0.6860), which is expected as DeepGravity leverages a high-capacity neural network to model complex non-linear feature interactions directly from the pooled training dataset. However, SDF-ZTF maintains a structured, physically interpretable formulation with far fewer features and parameters. Traditional Tanner Gravity calibrated locally on the target cities reaches a mean CPC of 0.7338, which serves as a locally-fit structural benchmark. SDF-ZTF (Oracle O$_i$) closely approaches this locally-fit structural upper bound (0.7337 vs 0.7338) without using any target-city OD data.
+The Survey-Free version of the proposed model achieves a mean CPC of 0.6860, while the Oracle O$_i$ variant reaches CPC 0.7337. Under zero-shot settings, DeepGravity outperforms the proposed model (CPC 0.7529 vs 0.6860), which is expected as DeepGravity leverages a high-capacity neural network to model complex non-linear feature interactions directly from the pooled training dataset. However, the proposed approach maintains a structured, physically interpretable formulation with far fewer features and parameters. Traditional Tanner Gravity calibrated locally on the target cities reaches a mean CPC of 0.7338, which serves as a locally-fit structural benchmark. The proposed model (Oracle O$_i$) closely approaches this locally-fit structural upper bound (0.7337 vs 0.7338) without using any target-city OD data.
 
 \subsubsection{Statistical Significance Testing}
 Table~\ref{tab:statistical_tests} presents the results of paired tests for all 50
@@ -603,9 +602,9 @@ evaporates under the 25/25 split.
 \label{tab:statistical_tests}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc}
 \toprule
-\textbf{Model} & \shortstack[c]{\textbf{Mean} \\ \textbf{CPC}} & \shortstack[c]{\textbf{Std} \\ \textbf{Dev}} & \shortstack[c]{\textbf{Mean Diff.} \\ \textbf{(SDF-ZTF -- Base)}} & \shortstack[c]{\textbf{t-stat} \\ \textbf{($t$)}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(t-test)}} & \shortstack[c]{\textbf{Cohen's} \\ \textbf{$d$}} \\
+\textbf{Model} & \shortstack[c]{\textbf{Mean} \\ \textbf{CPC}} & \shortstack[c]{\textbf{Std} \\ \textbf{Dev}} & \shortstack[c]{\textbf{Mean Diff.} \\ \textbf{(Proposed -- Base)}} & \shortstack[c]{\textbf{t-stat} \\ \textbf{($t$)}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(t-test)}} & \shortstack[c]{\textbf{Cohen's} \\ \textbf{$d$}} \\
 \midrule
-SDF-ZTF (Proposed) & 0.7370 & 0.0271 & -- & -- & -- & -- \\
+Proposed Model & 0.7370 & 0.0271 & -- & -- & -- & -- \\
 DeepGravity & 0.7626 & 0.0308 & -0.0255 & -9.150 & $3.53 \times 10^{-12}$ & -1.29 \\
 Traditional Gravity & 0.7370 & 0.0271 & 0.0000 & 1.000 & $3.22 \times 10^{-1}$ & 0.14 \\
 Radiation Model & 0.4878 & 0.0484 & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 6.28 \\
@@ -613,7 +612,7 @@ Radiation Model & 0.4878 & 0.0484 & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 6
 \end{tabular*}
 \end{table*}
 
-SDF-ZTF is statistically equivalent to Traditional Gravity ($p > 0.3$) and strongly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$).
+The proposed model is statistically equivalent to Traditional Gravity ($p > 0.3$) and strongly outperforms the Radiation Model ($p < 10^{-15}$, Cohen's $d = 6.28$).
 
 \subsubsection{Urban Morphology Analysis (RQ3)}
 To address RQ3 and evaluate how urban morphological features affect zero-shot transfer performance, we analyze performance across the four morphological groups defined in Section~4.4. The transfer CPC results are shown in Table~\ref{tab:morphology}.
@@ -625,7 +624,7 @@ To address RQ3 and evaluate how urban morphological features affect zero-shot tr
 \label{tab:morphology}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
-\textbf{Morphology Type} & \textbf{\# Cities} & \textbf{SDF-ZTF CPC} & \textbf{DeepGravity CPC} & \textbf{CPC Gap (\%)} \\
+\textbf{Morphology Type} & \textbf{\# Cities} & \textbf{Proposed CPC} & \textbf{DeepGravity CPC} & \textbf{CPC Gap (\%)} \\
 \midrule
 Dense / Transit & 5 & 0.651 & 0.726 & 10.3\% \\
 Sprawling / Grid & 10 & 0.688 & 0.760 & 9.5\% \\
@@ -635,7 +634,7 @@ Coastal & 3 & 0.709 & 0.758 & 6.5\% \\
 \end{tabular*}
 \end{table*}
 
-where the structured physical formulation of SDF-ZTF exhibits its strongest performance in Coastal environments (CPC 0.709), representing an 8.9\% improvement over Dense / Transit environments (CPC 0.651). Crucially, the performance gap between the physics-constrained SDF-ZTF and the unconstrained neural DeepGravity model narrows to just 6.5\% in Coastal cities (0.709 vs 0.758) compared to a much wider 10.3\% gap in Dense / Transit cities (0.651 vs 0.726). This significant narrowing of the performance gap demonstrates that in physically fragmented terrains (such as coastlines), physical distance friction acts as a dominant, highly constrained predictor of commuting flow, allowing the structured gravity formulation to perform close to the neural end-to-end model. In contrast, dense transit environments decouple travel from simple geometric distance, allowing DeepGravity's high-capacity feature modeling to widen its lead.
+where the structured physical formulation exhibits its strongest performance in Coastal environments (CPC 0.709), representing an 8.9\% improvement over Dense / Transit environments (CPC 0.651). Crucially, the performance gap between the physics-constrained gravity model and the unconstrained neural DeepGravity model narrows to just 6.5\% in Coastal cities (0.709 vs 0.758) compared to a much wider 10.3\% gap in Dense / Transit cities (0.651 vs 0.726). This significant narrowing of the performance gap demonstrates that in physically fragmented terrains (such as coastlines), physical distance friction acts as a dominant, highly constrained predictor of commuting flow, allowing the structured gravity formulation to perform close to the neural end-to-end model. In contrast, dense transit environments decouple travel from simple geometric distance, allowing DeepGravity's high-capacity feature modeling to widen its lead.
 
 \section{Discussion}
 

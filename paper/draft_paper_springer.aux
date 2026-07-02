@@ -60,23 +60,23 @@
 \citation{MetaMovementDistributionMaps}
 \citation{atwal2025commuting}
 \citation{worldpop2018}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Pipeline of the SDF-ZTF methodology. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}}{6}{figure.3}\protected@file@percent }
-\newlabel{fig:framework_pipeline}{{3}{6}{Pipeline of the SDF-ZTF methodology. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$)}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the aggregate-calibrated gravity model structure. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:framework_pipeline}{{3}{6}{Overview of the aggregate-calibrated gravity model structure. Globally available spatial features are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) exclusively via a training-free min-max heuristic (a GBDT attraction model is trained only during ablation validation to prove that this simple heuristic is sufficient, avoiding unnecessary complexity for cross-city transfer). Distance decay is estimated separately from aggregate distributions. The components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$)}{figure.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Data Sources}{6}{subsection.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}(1) Origin-Destination (OD) Matrix - $T_{ij}$}{6}{subsubsection.4.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}(2) OSM-Derived Features}{6}{subsubsection.4.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}(3) Population Data}{6}{subsubsection.4.2.3}\protected@file@percent }
 \citation{lundberg2017unified}
 \citation{gonzalez2008understanding,brockmann2006scaling}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Data usage matrix illustrating the operational roles of inputs across the SDF-ZTF pipeline to guarantee leakage-free prediction.}}{7}{table.2}\protected@file@percent }
-\newlabel{tab:data_usage_matrix}{{2}{7}{Data usage matrix illustrating the operational roles of inputs across the SDF-ZTF pipeline to guarantee leakage-free prediction}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Data usage matrix illustrating the operational roles of inputs across the aggregate calibration workflow to guarantee leakage-free prediction.}}{7}{table.2}\protected@file@percent }
+\newlabel{tab:data_usage_matrix}{{2}{7}{Data usage matrix illustrating the operational roles of inputs across the aggregate calibration workflow to guarantee leakage-free prediction}{table.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Transferable Urban Features}{7}{subsection.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Candidate Feature Set (30 dimensions)}{7}{subsubsection.4.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}SHAP-Based Component Dominance Analysis (RQ2)}{7}{subsubsection.4.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Urban Morphology Grouping (RQ3)}{7}{subsection.4.4}\protected@file@percent }
 \citation{lenormand2012universal}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Taxonomy of the globally available open data features used in the SDF-ZTF pipeline. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}}{8}{figure.4}\protected@file@percent }
-\newlabel{fig:feature_taxonomy}{{4}{8}{Taxonomy of the globally available open data features used in the SDF-ZTF pipeline. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Taxonomy of the globally available open data features used in the outflow model. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}}{8}{figure.4}\protected@file@percent }
+\newlabel{fig:feature_taxonomy}{{4}{8}{Taxonomy of the globally available open data features used in the outflow model. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors}{figure.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Cross-City Transfer Evaluation Protocol}{8}{subsection.4.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.1}Information Leakage Prevention}{8}{subsubsection.4.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.2}Evaluation Metric: Common Part of Commuters}{8}{subsubsection.4.5.2}\protected@file@percent }
@@ -89,8 +89,8 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Decay Recovery Validation}{9}{subsubsection.5.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Origin Production Transferability}{9}{subsubsection.5.2.2}\protected@file@percent }
 \citation{shapley1953value}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Methodology validation roadmap showing the three evaluation stages used to systematically verify the SDF-ZTF pipeline.}}{10}{figure.5}\protected@file@percent }
-\newlabel{fig:validation_roadmap}{{5}{10}{Methodology validation roadmap showing the three evaluation stages used to systematically verify the SDF-ZTF pipeline}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach.}}{10}{figure.5}\protected@file@percent }
+\newlabel{fig:validation_roadmap}{{5}{10}{Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach}{figure.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities.}}{10}{table.4}\protected@file@percent }
 \newlabel{tab:decay_recovery_metrics}{{4}{10}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities}{table.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.893$ for $\gamma $ and $r = 0.582$ for $\beta $).}}{10}{figure.6}\protected@file@percent }
@@ -100,7 +100,7 @@
 \newlabel{tab:downstream_cpc_comparison}{{5}{11}{Downstream travel flow prediction performance (CPC) comparison between Ground Truth and Recovered decay calibration strategies}{table.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}}{11}{table.6}\protected@file@percent }
 \newlabel{tab:outflow_comparison}{{6}{11}{Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}{table.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Evaluating Zero-Shot Transfer Learning Pipeline}{11}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Zero-Shot Transfer Evaluation}{11}{subsection.5.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Comparison with Baselines}{11}{subsubsection.5.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Statistical Significance Testing}{11}{subsubsection.5.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.3}Urban Morphology Analysis (RQ3)}{11}{subsubsection.5.4.3}\protected@file@percent }
