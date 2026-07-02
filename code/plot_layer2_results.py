@@ -68,12 +68,9 @@ def plot_learning_curve(ax, df_lc, df_t2):
 
     # Reference lines
     oracle_cpc = df_t2["cpc_oracle"].mean()
-    sf_cpc_25  = df_t2["cpc_sf"].mean()
 
     ax.axhline(oracle_cpc, color=GREEN, linewidth=1.6, linestyle="--",
                label=f"Oracle $O_i$ (N=25): {oracle_cpc:.3f}")
-    ax.axhline(sf_cpc_25,  color=ORANGE, linewidth=1.6, linestyle=":",
-               label=f"Survey-free (N=25): {sf_cpc_25:.3f}")
 
     # Annotate each point
     for xi, yi, si in zip(x, y_mean, y_std):
@@ -87,7 +84,7 @@ def plot_learning_curve(ax, df_lc, df_t2):
     ax.set_xticks(x)
     ax.set_xticklabels([str(int(v)) for v in x])
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter("%.3f"))
-    ax.legend(loc="lower right", framealpha=0.9)
+    ax.legend(loc="upper left", framealpha=0.9)
     ax.grid(axis="y", linestyle="--", linewidth=0.6, alpha=0.5)
 
 

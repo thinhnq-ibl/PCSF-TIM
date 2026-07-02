@@ -108,12 +108,9 @@ def plot_learning_curve(ax, df_lc, df_t2):
             ms=8, mfc="white", mew=2.2, label="GBDT $\\hat{O}_i$ (survey-free)")
 
     oracle_cpc = df_t2["cpc_oracle"].mean()
-    sf_cpc_25  = df_t2["cpc_sf"].mean()
 
     ax.axhline(oracle_cpc, color=GREEN,  lw=1.6, ls="--",
                label=f"Oracle $O_i$ (N=25): {oracle_cpc:.3f}")
-    ax.axhline(sf_cpc_25,  color=ORANGE, lw=1.6, ls=":",
-               label=f"Survey-free (N=25): {sf_cpc_25:.3f}")
 
     for xi, yi in zip(x, y_mean):
         ax.annotate(f"{yi:.3f}", xy=(xi, yi),
@@ -125,7 +122,7 @@ def plot_learning_curve(ax, df_lc, df_t2):
     ax.set_title("T2.4  Source-Scale Robustness — Learning Curve", pad=8)
     ax.set_xticks(x)
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter("%.3f"))
-    ax.legend(loc="lower right", framealpha=0.9, fontsize=10)
+    ax.legend(loc="upper left", framealpha=0.9, fontsize=10)
     ax.grid(axis="y", ls="--", lw=0.6, alpha=0.5)
 
 # ══════════════════════════════════════════════════════════════════════════════
