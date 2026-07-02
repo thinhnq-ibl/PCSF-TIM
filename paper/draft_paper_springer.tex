@@ -556,26 +556,28 @@ it contains all features that pass both cutoffs ($\mu_p \ge
 \subsection{Component Contributions Analysis}
 A factorial ablation over the 25 held out cities, with replacement of each disabled component with uniform weighting.
 
-It can be seen from Table~\ref{tab:ablation} that the most important is the distance decay $f(d)$: disabling it causes a 31.1\% CPC decrease (75.7\% of variance explanation). Disabling $A_j$ and $O_i$ results in decreases of 5.3\% and 4.7\%, respectively (12.9\% and 11.4\% of variance). The order of importance is always the same for all 25 cities $f(d) \gg A_j > O_i$ and confirms that all three components are important, but the distance decay component is the most important.
+It can be seen from Table~\ref{tab:ablation} that the most important is the distance decay $f(d)$: disabling it causes a 34.6\% CPC decrease. Disabling $A_j$ and $O_i$ results in decreases of 4.4\% and 3.8\%, respectively. 
+
+To resolve the mathematical asymmetry of one-at-a-time ablation and evaluate the intrinsic marginal value of each component fairly, we implement a game-theoretic analysis using Shapley values \citep{shapley1953value} across all $2^3 = 8$ possible component coalitions. Over the uniform flow baseline (CPC 0.4263), the Shapley values attribute a mean CPC gain of 0.2224 (85.6\% of total gain) to distance decay $f(d)$, 0.0199 (7.7\% of total gain) to attractiveness $A_j$, and 0.0175 (6.7\% of total gain) to outflow production $O_i$. This indicates that while distance decay is the dominant driver of spatial interaction, attraction and production features provide distinct and critical predictive improvements, with attraction having a slightly higher marginal importance.
 
 \begin{table*}[t]
 \centering
 \tablebodyfont\small
-\caption{Factorial Ablation Results (Average across $N=25$ held-out target cities)}
+\caption{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}
 \label{tab:ablation}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccl}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccclc}
 \toprule
-\textbf{O$_i$} & \textbf{f(d)} & \textbf{A$_j$} & \textbf{CPC} & \textbf{Contribution} \\
+\textbf{O$_i$} & \textbf{f(d)} & \textbf{A$_j$} & \textbf{CPC} & \textbf{Factorial Contribution} & \textbf{Shapley Value} \\
 \midrule
-$\checkmark$ & $\checkmark$ & $\checkmark$ & 0.7040 & Baseline (all components) \\
-$\times$ & $\checkmark$ & $\checkmark$ & 0.671 & O$_i$ removal: 4.7\% loss \\
-$\checkmark$ & $\times$ & $\checkmark$ & 0.485 & f(d) removal: 31.1\% loss \\
-$\checkmark$ & $\checkmark$ & $\times$ & 0.666 & A$_j$ removal: 5.3\% loss \\
+$\checkmark$ & $\checkmark$ & $\checkmark$ & 0.6860 & Baseline (all components) & -- \\
+$\times$ & $\checkmark$ & $\checkmark$ & 0.6597 & O$_i$ removal: 3.8\% loss & 0.0175 (6.7\%) \\
+$\checkmark$ & $\times$ & $\checkmark$ & 0.4489 & f(d) removal: 34.6\% loss & 0.2224 (85.6\%) \\
+$\checkmark$ & $\checkmark$ & $\times$ & 0.6557 & A$_j$ removal: 4.4\% loss & 0.0199 (7.7\%) \\
 \bottomrule
 \end{tabular*}
 \end{table*}
 
-\textbf{Baseline CPC Note:} Baseline CPC value of 0.7040 used in this ablation analysis was achieved using fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and calculate contributions under a uniform setting. Using the full SDF-ZTF (Survey-Free) framework, where decay parameter values ($\hat{\gamma}$, $\hat{\beta}$) were estimated separately for each city, CPC performance improves to 0.7124 CPC (as seen in Table~\ref{tab:multibaseline_comparison}).
+\textbf{Baseline CPC Note:} Baseline CPC value of 0.6860 used in this ablation analysis was achieved using fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and calculate contributions under a uniform setting. Using the full SDF-ZTF (Survey-Free) framework, where decay parameter values ($\hat{\gamma}$, $\hat{\beta}$) were estimated separately for each city, CPC performance improves to 0.7124 CPC (as seen in Table~\ref{tab:multibaseline_comparison}).
 
 \subsection{Evaluating Zero-Shot Transfer Learning Pipeline}
 We now present an evaluation of the full SDF-

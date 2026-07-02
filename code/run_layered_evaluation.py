@@ -513,30 +513,61 @@ def run_layer4(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         O_hat_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
         O_flat_map = {z: float(np.mean(np.exp(logO_true))) for z in zones}
         
-        # 1. Full model (Decay, Oi predicted, Aj OSM)
+        # 1. Full model (Decay, Oi predicted, Aj OSM): v(O, d, A)
         pred_full = proposed_predict(df, O_hat_map, alpha_nat, beta_nat)
-        cpc_full = cpc(pred_full[test_idx], actual[test_idx])
+        v_O_d_A = cpc(pred_full[test_idx], actual[test_idx])
         
-        # 2. No attraction (Aj = 1.0 constant)
+        # 2. No attraction (Aj = 1.0 constant): v(O, d)
         df_no_A = df.copy()
         df_no_A["A_j"] = 1.0
         pred_no_A = proposed_predict(df_no_A, O_hat_map, alpha_nat, beta_nat)
-        cpc_no_A = cpc(pred_no_A[test_idx], actual[test_idx])
+        v_O_d = cpc(pred_no_A[test_idx], actual[test_idx])
         
-        # 3. No production (Oi = constant)
+        # 3. No production (Oi = constant): v(d, A)
         pred_no_O = proposed_predict(df, O_flat_map, alpha_nat, beta_nat)
-        cpc_no_O = cpc(pred_no_O[test_idx], actual[test_idx])
+        v_d_A = cpc(pred_no_O[test_idx], actual[test_idx])
         
-        # 4. No decay (alpha=0, beta=0)
+        # 4. No decay (alpha=0, beta=0): v(O, A)
         pred_no_decay = proposed_predict(df, O_hat_map, 0.0, 0.0)
-        cpc_no_decay = cpc(pred_no_decay[test_idx], actual[test_idx])
-        
+        v_O_A = cpc(pred_no_decay[test_idx], actual[test_idx])
+
+        # 5. Only O (decay=0, A=1.0 constant): v(O)
+        pred_only_O = proposed_predict(df_no_A, O_hat_map, 0.0, 0.0)
+        v_O = cpc(pred_only_O[test_idx], actual[test_idx])
+
+        # 6. Only decay (Oi=constant, A=1.0 constant): v(d)
+        pred_only_d = proposed_predict(df_no_A, O_flat_map, alpha_nat, beta_nat)
+        v_d = cpc(pred_only_d[test_idx], actual[test_idx])
+
+        # 7. Only attraction (Oi=constant, decay=0): v(A)
+        pred_only_A = proposed_predict(df, O_flat_map, 0.0, 0.0)
+        v_A = cpc(pred_only_A[test_idx], actual[test_idx])
+
+        # 8. Empty coalition (Oi=constant, decay=0, A=1.0 constant): v(empty)
+        pred_uniform = proposed_predict(df_no_A, O_flat_map, 0.0, 0.0)
+        v_empty = cpc(pred_uniform[test_idx], actual[test_idx])
+
+        # Compute Shapley Values for this city
+        # O contribution
+        phi_O = (1.0/3.0) * (v_O_d_A - v_d_A) + (1.0/6.0) * (v_O_d - v_d + v_O_A - v_A) + (1.0/3.0) * (v_O - v_empty)
+        # Decay (d) contribution
+        phi_d = (1.0/3.0) * (v_O_d_A - v_O_A) + (1.0/6.0) * (v_O_d - v_O + v_d_A - v_A) + (1.0/3.0) * (v_d - v_empty)
+        # Attraction (A) contribution
+        phi_A = (1.0/3.0) * (v_O_d_A - v_O_d) + (1.0/6.0) * (v_O_A - v_O + v_d_A - v_d) + (1.0/3.0) * (v_A - v_empty)
+
         results_t4.append({
             "city": c,
-            "cpc_full": cpc_full,
-            "cpc_no_attraction": cpc_no_A,
-            "cpc_no_production": cpc_no_O,
-            "cpc_no_decay": cpc_no_decay
+            "cpc_full": v_O_d_A,
+            "cpc_no_attraction": v_O_d,
+            "cpc_no_production": v_d_A,
+            "cpc_no_decay": v_O_A,
+            "cpc_only_O": v_O,
+            "cpc_only_d": v_d,
+            "cpc_only_A": v_A,
+            "cpc_uniform": v_empty,
+            "shapley_Oi": phi_O,
+            "shapley_fd": phi_d,
+            "shapley_Aj": phi_A
         })
         
     df_t4 = pd.DataFrame(results_t4)
@@ -551,11 +582,17 @@ def run_layer4(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
     logging.info(f"   No Attraction (Aj): {df_t4['cpc_no_attraction'].mean():.4f}")
     logging.info(f"   No Production (Oi): {df_t4['cpc_no_production'].mean():.4f}")
     logging.info(f"   No Decay (f(d)):    {df_t4['cpc_no_decay'].mean():.4f}")
+    logging.info(f"   Uniform Baseline:   {df_t4['cpc_uniform'].mean():.4f}")
     
     logging.info("T4.2 Marginal Contributions Mean CPC Gain:")
     logging.info(f"   Delta Decay:      {df_t4['delta_decay'].mean():+.4f}")
     logging.info(f"   Delta Production: {df_t4['delta_Oi'].mean():+.4f}")
     logging.info(f"   Delta Attraction: {df_t4['delta_Aj'].mean():+.4f}")
+
+    logging.info("T4.3 Shapley Values Mean Contribution:")
+    logging.info(f"   Shapley Outflow (Oi):    {df_t4['shapley_Oi'].mean():.4f}")
+    logging.info(f"   Shapley Decay (f(d)):    {df_t4['shapley_fd'].mean():.4f}")
+    logging.info(f"   Shapley Attraction (Aj): {df_t4['shapley_Aj'].mean():.4f}")
     return df_t4
 
 def run_layer5(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scaler, road_impute):
@@ -844,7 +881,11 @@ def main():
         f.write("- T4.2 Marginal Contributions Mean CPC Gain:\n")
         f.write(f"  - Delta Decay:      {df_t4['delta_decay'].mean():+.4f}\n")
         f.write(f"  - Delta Production: {df_t4['delta_Oi'].mean():+.4f}\n")
-        f.write(f"  - Delta Attraction: {df_t4['delta_Aj'].mean():+.4f}\n\n")
+        f.write(f"  - Delta Attraction: {df_t4['delta_Aj'].mean():+.4f}\n")
+        f.write("- T4.3 Shapley Values Mean Contribution:\n")
+        f.write(f"  - Shapley Outflow (Oi):    {df_t4['shapley_Oi'].mean():.4f}\n")
+        f.write(f"  - Shapley Decay (f(d)):    {df_t4['shapley_fd'].mean():.4f}\n")
+        f.write(f"  - Shapley Attraction (Aj): {df_t4['shapley_Aj'].mean():.4f}\n\n")
         
         f.write("## 5. Zero-Shot Generalization (Layer 5)\n")
         f.write("- T5.1 Morphology-Based CPC Performance:\n")

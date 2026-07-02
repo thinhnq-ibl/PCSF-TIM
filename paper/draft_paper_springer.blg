@@ -8,45 +8,46 @@ Database file #1: references.bib
 sn-basic.bst [2024/07/19 v1.1 bibliography style]
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
 Warning--empty year in MetaMovementDistributionMaps; set to ????
-You've used 26 entries,
+Warning--can't use both volume and number fields in shapley1953value
+You've used 27 entries,
             3567 wiz_defined-function locations,
-            906 strings with 10695 characters,
-and the built_in function-call counts, 22475 in all, are:
-= -- 2114
-> -- 907
-< -- 12
-+ -- 364
-- -- 270
-* -- 1921
-:= -- 3253
-add.period$ -- 46
-call.type$ -- 26
-change.case$ -- 233
-chr.to.int$ -- 26
-cite$ -- 27
-duplicate$ -- 1652
-empty$ -- 1804
-format.name$ -- 340
-if$ -- 4717
+            914 strings with 10829 characters,
+and the built_in function-call counts, 23153 in all, are:
+= -- 2176
+> -- 917
+< -- 15
++ -- 370
+- -- 273
+* -- 1961
+:= -- 3343
+add.period$ -- 48
+call.type$ -- 27
+change.case$ -- 241
+chr.to.int$ -- 27
+cite$ -- 29
+duplicate$ -- 1709
+empty$ -- 1868
+format.name$ -- 344
+if$ -- 4868
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 201
-newline$ -- 87
-num.names$ -- 104
-pop$ -- 523
+missing$ -- 210
+newline$ -- 90
+num.names$ -- 108
+pop$ -- 544
 preamble$ -- 1
-purify$ -- 195
+purify$ -- 200
 quote$ -- 0
-skip$ -- 574
+skip$ -- 602
 stack$ -- 0
-substring$ -- 1815
-swap$ -- 553
-text.length$ -- 6
+substring$ -- 1860
+swap$ -- 581
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 234
-warning$ -- 1
-while$ -- 145
+type$ -- 243
+warning$ -- 2
+while$ -- 151
 width$ -- 0
-write$ -- 321
-(There was 1 warning)
+write$ -- 334
+(There were 2 warnings)
