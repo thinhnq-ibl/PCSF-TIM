@@ -83,46 +83,46 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Preprocessing \& Normalization}{8}{subsection.4.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Results}{8}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Validation Protocol Overview}{8}{subsection.5.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{9}{table.3}\protected@file@percent }
-\newlabel{tab:preprocessing}{{3}{9}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.3}{}}
+\citation{shapley1953value}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Component Validation}{9}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Decay Recovery Validation}{9}{subsubsection.5.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Origin Production Transferability}{9}{subsubsection.5.2.2}\protected@file@percent }
-\citation{shapley1953value}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Component Contributions Analysis}{9}{subsection.5.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach.}}{10}{figure.5}\protected@file@percent }
 \newlabel{fig:validation_roadmap}{{5}{10}{Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach}{figure.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities.}}{10}{table.4}\protected@file@percent }
-\newlabel{tab:decay_recovery_metrics}{{4}{10}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities}{table.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1).}}{10}{table.3}\protected@file@percent }
+\newlabel{tab:decay_recovery_merged}{{3}{10}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1)}{table.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.893$ for $\gamma $ and $r = 0.582$ for $\beta $).}}{10}{figure.6}\protected@file@percent }
 \newlabel{fig:layer1_scatters}{{6}{10}{Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.893$ for $\gamma $ and $r = 0.582$ for $\beta $)}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Component Contributions Analysis}{10}{subsection.5.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Downstream travel flow prediction performance (CPC) comparison between Ground Truth and Recovered decay calibration strategies.}}{11}{table.5}\protected@file@percent }
-\newlabel{tab:downstream_cpc_comparison}{{5}{11}{Downstream travel flow prediction performance (CPC) comparison between Ground Truth and Recovered decay calibration strategies}{table.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}}{11}{table.6}\protected@file@percent }
-\newlabel{tab:outflow_comparison}{{6}{11}{Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}{table.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Zero-Shot Transfer Evaluation}{11}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Comparison with Baselines}{11}{subsubsection.5.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Zero-Shot Transfer Evaluation}{10}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Comparison with Baselines}{10}{subsubsection.5.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}}{11}{table.4}\protected@file@percent }
+\newlabel{tab:outflow_comparison}{{4}{11}{Comparative Outflow Performance (Average CPC across $N=25$ held-out cities)}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count performance sweep showing zero-shot with 22 features retains stability}}{11}{figure.7}\protected@file@percent }
+\newlabel{fig:shap_sweep}{{7}{11}{SHAP feature count performance sweep showing zero-shot with 22 features retains stability}{figure.7}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Statistical Significance Testing}{11}{subsubsection.5.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.3}Urban Morphology Analysis (RQ3)}{11}{subsubsection.5.4.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count performance sweep showing zero-shot with 22 features retains stability}}{12}{figure.7}\protected@file@percent }
-\newlabel{fig:shap_sweep}{{7}{12}{SHAP feature count performance sweep showing zero-shot with 22 features retains stability}{figure.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}}{12}{table.7}\protected@file@percent }
-\newlabel{tab:ablation}{{7}{12}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}}{12}{table.5}\protected@file@percent }
+\newlabel{tab:ablation}{{5}{12}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{12}{table.6}\protected@file@percent }
+\newlabel{tab:multibaseline_comparison}{{6}{12}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.6}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{12}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}What Aggregate Distributions Reveal About Distance Decay (RQ1)}{12}{subsection.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Distance Decay as the Dominant Transferable Mechanism (RQ2)}{12}{subsection.6.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Scientific and Morphological Implications (RQ3)}{12}{subsection.6.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{13}{table.8}\protected@file@percent }
-\newlabel{tab:multibaseline_comparison}{{8}{13}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces LOCO 50-Fold Statistical Significance Test Summary}}{13}{table.9}\protected@file@percent }
-\newlabel{tab:statistical_tests}{{9}{13}{LOCO 50-Fold Statistical Significance Test Summary}{table.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces LOCO 50-Fold Statistical Significance Test Summary}}{13}{table.7}\protected@file@percent }
+\newlabel{tab:statistical_tests}{{7}{13}{LOCO 50-Fold Statistical Significance Test Summary}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}}{13}{table.8}\protected@file@percent }
+\newlabel{tab:morphology}{{8}{13}{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}{table.8}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Practical and Data Privacy Implications}{13}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Limitations}{13}{subsection.6.5}\protected@file@percent }
 \citation{gallotti2024distorted}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}}{14}{table.10}\protected@file@percent }
-\newlabel{tab:morphology}{{10}{14}{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}{table.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Limitations}{14}{subsection.6.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{14}{section.7}\protected@file@percent }
 \newlabel{sec:appendix}{{7}{14}{Appendix: Supplementary Materials}{section*.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{15}{figure.8}\protected@file@percent }
+\newlabel{fig:layer1_heatmap}{{8}{15}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{15}{table.9}\protected@file@percent }
+\newlabel{tab:preprocessing}{{9}{15}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.9}{}}
 \bibdata{references}
 \bibcite{alis2021generalized}{{1}{2021}{{Alis et~al.}}{{Alis, Legara, and Monterola}}}
 \bibcite{atwal2025commuting}{{2}{2025}{{Atwal et~al.}}{{Atwal, Anderson, Pfoser, and Z{\"u}fle}}}
@@ -132,22 +132,14 @@
 \bibcite{gonzalez2008understanding}{{6}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
 \bibcite{jin2022crosstres}{{7}{2022}{{Jin et~al.}}{{Jin, Wu, Wang, Liang, and Tang}}}
 \bibcite{lenormand2012universal}{{8}{2012}{{Lenormand et~al.}}{{Lenormand, Huet, Gargiulo, and Deffuant}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{16}{figure.8}\protected@file@percent }
-\newlabel{fig:layer1_heatmap}{{8}{16}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{16}{figure.9}\protected@file@percent }
-\newlabel{fig:layer2_results}{{9}{16}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.9}{}}
 \bibcite{lenormand2016systematic}{{9}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
 \bibcite{lundberg2017unified}{{10}{2017}{{Lundberg and Lee}}{{}}}
 \bibcite{mai2022geospatial}{{11}{2022}{{Mai et~al.}}{{Mai, Cundy, Choi, Song, Shofi et~al.}}}
 \bibcite{mendieta2023geogpt}{{12}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
-\bibcite{MetaMovementDistributionMaps}{{13}{????}{{Meta}}{{}}}
+\bibcite{MetaMovementDistributionMaps}{{13}{2026}{{Meta}}{{}}}
 \bibcite{pappalardo2023analytical}{{14}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
 \bibcite{Rong2023goddag}{{15}{2023}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
 \bibcite{shapley1953value}{{16}{1953}{{Shapley}}{{}}}
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces GBDT Model Hyperparameter Configurations}}{17}{table.11}\protected@file@percent }
-\newlabel{tab:gbdt_hyperparameters}{{11}{17}{GBDT Model Hyperparameter Configurations}{table.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces List of Abbreviations}}{17}{table.12}\protected@file@percent }
-\newlabel{tab:abbreviations}{{12}{17}{List of Abbreviations}{table.12}{}}
 \bibcite{Simini2012universal}{{17}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
 \bibcite{simini2021}{{18}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
 \bibcite{song2010limits}{{19}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
@@ -155,8 +147,14 @@
 \bibcite{tanner1961}{{21}{1961}{{Tanner}}{{}}}
 \bibcite{worldpop2018}{{22}{2017}{{Tatem}}{{}}}
 \bibcite{wang2018regiontrans}{{23}{2018}{{Wang et~al.}}{{Wang, Geng, Ma, Yang, Cao, and Zheng}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{17}{figure.9}\protected@file@percent }
+\newlabel{fig:layer2_results}{{9}{17}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces GBDT Model Hyperparameter Configurations}}{17}{table.10}\protected@file@percent }
+\newlabel{tab:gbdt_hyperparameters}{{10}{17}{GBDT Model Hyperparameter Configurations}{table.10}{}}
 \bibcite{wang2019origin}{{24}{2021}{{Wang et~al.}}{{Wang, Cao, and Yu}}}
 \bibcite{wang2022when}{{25}{2022}{{Wang et~al.}}{{Wang, Jin, Sun, Chen, Chen, and Li}}}
 \bibcite{wilson1971}{{26}{1971}{{Wilson}}{{}}}
 \bibcite{yao2020meta}{{27}{2019}{{Yao et~al.}}{{Yao, Liu, Wei, Tang, and Li}}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces List of Abbreviations}}{18}{table.11}\protected@file@percent }
+\newlabel{tab:abbreviations}{{11}{18}{List of Abbreviations}{table.11}{}}
 \gdef \@abspage@last{18}

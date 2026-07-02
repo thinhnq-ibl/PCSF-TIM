@@ -7,47 +7,46 @@ Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
 sn-basic.bst [2024/07/19 v1.1 bibliography style]
 Reallocating 'wiz_functions' (item size: 4) to 6000 items.
-Warning--empty year in MetaMovementDistributionMaps; set to ????
 Warning--can't use both volume and number fields in shapley1953value
 You've used 27 entries,
             3567 wiz_defined-function locations,
-            914 strings with 10829 characters,
-and the built_in function-call counts, 23153 in all, are:
+            915 strings with 10833 characters,
+and the built_in function-call counts, 23152 in all, are:
 = -- 2176
 > -- 917
 < -- 15
 + -- 370
 - -- 273
-* -- 1961
+* -- 1959
 := -- 3343
 add.period$ -- 48
 call.type$ -- 27
 change.case$ -- 241
 chr.to.int$ -- 27
-cite$ -- 29
-duplicate$ -- 1709
-empty$ -- 1868
+cite$ -- 28
+duplicate$ -- 1710
+empty$ -- 1869
 format.name$ -- 344
-if$ -- 4868
+if$ -- 4869
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 210
 newline$ -- 90
 num.names$ -- 108
-pop$ -- 544
+pop$ -- 540
 preamble$ -- 1
 purify$ -- 200
 quote$ -- 0
-skip$ -- 602
+skip$ -- 605
 stack$ -- 0
 substring$ -- 1860
-swap$ -- 581
+swap$ -- 582
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 1
 type$ -- 243
-warning$ -- 2
+warning$ -- 1
 while$ -- 151
 width$ -- 0
 write$ -- 334
-(There were 2 warnings)
+(There was 1 warning)

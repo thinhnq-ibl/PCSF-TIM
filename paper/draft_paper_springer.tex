@@ -361,24 +361,7 @@ where $T_{ij}$ represents the ground-truth commuter flow from zone $i$ to zone $
 
 
 \subsection{Preprocessing \& Normalization}
-Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
-
-\begin{table*}[t]
-\centering
-\tablebodyfont\small
-\caption{Preprocessing and normalization steps applied to spatial features prior to model learning.}
-\label{tab:preprocessing}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}
-\toprule
-\textbf{Step} & \textbf{Treatment} & \textbf{Rationale} \\
-\midrule
-Missing Data & Median imputation & Rare ($<$ 2\%); resolved from spatial neighbors \\
-Log Transform & Population, POI counts & Stabilize right-skewed distributions \\
-Standardization & Per-city (not global) & Preserve relative spatial hierarchy \\
-Outliers & Retain & Important spatial hubs (CBDs); robust models \\
-\bottomrule
-\end{tabular*}
-\end{table*}
+Data preprocessing details are summarized in Table~\ref{tab:preprocessing} in Appendix~A.3.
 
 \section{Results}
 
@@ -412,42 +395,27 @@ In this phase we compare two estimation modes for ($\gamma$, $\beta$) for the gr
 where $A_j$ and $O_i$ remain unchanged (OSM heuristic):
 \begin{itemize}
   \item Ground Truth (GT): Estimation is done using individual origin-destination (OD) pairs.
-  \item Recovered: Estimation using aggregated distance
-  bins distribution (trip length marginal histogram, 50
-  equal-width bins).
+  \item Recovered: Estimation using aggregated distance bins distribution (trip length marginal histogram, 50 equal-width bins).
 \end{itemize}
-Further details can be found in Appendix~A.4.
-
-\textbf{Pure Decay Recovery}
-We estimate the Tanner Multi decay function (see Eq.~\ref{eq:tanner_multi}) on the aggregate distance distributions of the training data for each city. We compare the estimated parameters $(\hat{\gamma}_{\text{recovered}}, \hat{\beta}_{\text{recovered}})$ to the ground truth parameters $(\hat{\gamma}_{\text{gt}}, \hat{\beta}_{\text{gt}})$ estimated directly on OD pairs.
-
-\textit{Result}: The parameter recovery performance metrics are summarized in Table~\ref{tab:decay_recovery_metrics} across the 25 target cities.
 
 \begin{table*}[t]
 \centering
-\caption{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities.}
-\label{tab:decay_recovery_metrics}
-\begin{tabular}{lcccc}
-\hline
-\textbf{Parameter} & \textbf{MAE} & \textbf{RMSE} & \textbf{Pearson $r$} & \textbf{Pearson $r^2$} \\ \hline
-Power-law exponent ($\gamma$) & 0.0394 & 0.0549 & 0.893 & 0.798 \\
-Exponential decay rate ($\beta$, $\text{km}^{-1}$) & 0.0024 & 0.0052 & 0.582 & 0.338 \\ \hline
-\end{tabular}
+\caption{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1).}
+\label{tab:decay_recovery_merged}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc}
+\toprule
+\textbf{Parameter / Strategy} & \textbf{MAE} & \textbf{RMSE} & \textbf{Pearson $r$} & \textbf{Pearson $r^2$} & \textbf{Downstream CPC} \\
+\midrule
+Power-law exponent ($\gamma$) & 0.0394 & 0.0549 & 0.893 & 0.798 & -- \\
+Exponential decay rate ($\beta$, $\text{km}^{-1}$) & 0.0024 & 0.0052 & 0.582 & 0.338 & -- \\
+\midrule
+Ground Truth (GT) Decay & -- & -- & Reference & -- & 0.7411 \\
+Recovered (Proposed) Decay & -- & -- & -- & -- & 0.7398 (Gap: -0.18\%) \\
+\bottomrule
+\end{tabular*}
 \end{table*}
 
-Crucially, evaluating downstream OD prediction under oracle outflow (isolating the impact of the decay function) demonstrates that using the recovered parameters yields virtually identical performance to the ground truth parameters (Table~\ref{tab:downstream_cpc_comparison}). The mean CPC is $0.7411$ under ground truth parameters and $0.7398$ under recovered parameters, resulting in an extremely small average gap of just $0.0013$ ($0.18\%$). This confirms that aggregate-spaced recovery is functionally equivalent to fitting on individual OD trajectories for prediction.
-
-\begin{table*}[t]
-\centering
-\caption{Downstream travel flow prediction performance (CPC) comparison between Ground Truth and Recovered decay calibration strategies.}
-\label{tab:downstream_cpc_comparison}
-\begin{tabular}{lccc}
-\hline
-\textbf{Calibration Strategy} & \textbf{Data Requirement} & \textbf{Mean CPC} & \textbf{CPC Gap} \\ \hline
-Ground Truth (GT) & Individual OD Trajectories & 0.7411 & Reference \\
-Recovered (Proposed) & Aggregate Distance Bins & 0.7398 & -0.0013 (-0.18\%) \\ \hline
-\end{tabular}
-\end{table*}
+Crucially, evaluating downstream OD prediction under oracle outflow (isolating the impact of the decay function) demonstrates that using the recovered parameters yields virtually identical performance to the ground truth parameters (Table~\ref{tab:decay_recovery_merged}). The mean CPC is $0.7411$ under ground truth parameters and $0.7398$ under recovered parameters, resulting in an extremely small average gap of just $0.0013$ ($0.18\%$). This confirms that aggregate-spaced recovery is functionally equivalent to fitting on individual OD trajectories for prediction.
 
 The parameter recovery is strong for both $\gamma$ ($r = 0.893$) and $\beta$ ($r = 0.582$). A weaker recovery for $\beta$ relative to $\gamma$ is anticipated due to the noisy tail under aggregation binning. However, the downstream prediction evaluation proves that the recovered decay curve is robust and sufficient for prediction.
 
@@ -600,14 +568,14 @@ evaporates under the 25/25 split.
 \tablebodyfont\small
 \caption{LOCO 50-Fold Statistical Significance Test Summary}
 \label{tab:statistical_tests}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
-\textbf{Model} & \shortstack[c]{\textbf{Mean} \\ \textbf{CPC}} & \shortstack[c]{\textbf{Std} \\ \textbf{Dev}} & \shortstack[c]{\textbf{Mean Diff.} \\ \textbf{(Proposed -- Base)}} & \shortstack[c]{\textbf{t-stat} \\ \textbf{($t$)}} & \shortstack[c]{\textbf{p-value} \\ \textbf{(t-test)}} & \shortstack[c]{\textbf{Cohen's} \\ \textbf{$d$}} \\
+\textbf{Model} & \textbf{Mean CPC} & \textbf{Mean Diff. (Proposed -- Base)} & \textbf{p-value (ttest)} & \textbf{Cohen's $d$} \\
 \midrule
-Proposed Model & 0.7370 & 0.0271 & -- & -- & -- & -- \\
-DeepGravity & 0.7626 & 0.0308 & -0.0255 & -9.150 & $3.53 \times 10^{-12}$ & -1.29 \\
-Traditional Gravity & 0.7370 & 0.0271 & 0.0000 & 1.000 & $3.22 \times 10^{-1}$ & 0.14 \\
-Radiation Model & 0.4878 & 0.0484 & 0.2492 & 44.416 & $3.01 \times 10^{-41}$ & 6.28 \\
+Proposed Model & 0.7370 & -- & -- & -- \\
+DeepGravity & 0.7626 & -0.0255 & $3.53 \times 10^{-12}$ & -1.29 \\
+Traditional Gravity & 0.7370 & 0.0000 & $3.22 \times 10^{-1}$ & 0.14 \\
+Radiation Model & 0.4878 & 0.2492 & $3.01 \times 10^{-41}$ & 6.28 \\
 \bottomrule
 \end{tabular*}
 \end{table*}
@@ -703,6 +671,26 @@ We evaluate the robustness of our MLE parameter recovery under non-ideal data sc
   \label{fig:layer1_heatmap}
 \end{figure*}
 
+\subsubsection*{A.3 Preprocessing and Normalization}
+Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
+
+\begin{table*}[h!]
+\centering
+\tablebodyfont\small
+\caption{Preprocessing and normalization steps applied to spatial features prior to model learning.}
+\label{tab:preprocessing}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}
+\toprule
+\textbf{Step} & \textbf{Treatment} & \textbf{Rationale} \\
+\midrule
+Missing Data & Median imputation & Rare ($<$ 2\%); resolved from spatial neighbors \\
+Log Transform & Population, POI counts & Stabilize right-skewed distributions \\
+Standardization & Per-city (not global) & Preserve relative spatial hierarchy \\
+Outliers & Retain & Important spatial hubs (CBDs); robust models \\
+\bottomrule
+\end{tabular*}
+\end{table*}
+
 \subsection*{Appendix B. Robustness of Origin Production Transfer}
 
 We analyze the sensitivity of zero-shot production transfer across two dimensions: training-set scale and prediction noise.
@@ -725,7 +713,7 @@ To evaluate the stability of origin transfer under prediction errors, we inject 
 \subsubsection*{C.1 Feature Count Sensitivity}
 Evaluating the GBDT model performance across nested subsets of top SHAP features ($K \in \{5, 10, 15, 20, 22, 25, 30\}$) shows that predictive performance plateaus between 15 and 22 features (CPC: $0.7124$). This indicates that most transferable spatial information is captured by a compact set of built-environment indicators, with additional features providing marginal utility.
 
-\begin{table*}[t]
+\begin{table*}[htbp!]
 \centering
 \tablebodyfont
 \caption{GBDT Model Hyperparameter Configurations}
