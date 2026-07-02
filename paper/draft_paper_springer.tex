@@ -387,10 +387,10 @@ The proposed methodology is validated through three phases:
   \label{fig:validation_roadmap}
 \end{figure*}
 
-\subsection{Component Validation}
-The first phase includes the validation of each component separately.
+\subsection{Component Validation (Answering RQ1)}
+The first phase validates each component separately to address whether aggregate distributions contain sufficient information for calibration (RQ1).
 
-\subsubsection{Decay Recovery Validation}
+\subsubsection{Decay Recovery Validation (RQ1)}
 In this phase we compare two estimation modes for ($\gamma$, $\beta$) for the gravity model with production constraints,
 where $A_j$ and $O_i$ remain unchanged (OSM heuristic):
 \begin{itemize}
@@ -463,7 +463,7 @@ in Appendix~B.
 
 Population and activity-related points of interest are the most stable transferable predictors.
 
-\textbf{Supporting Analysis: SHAP Feature Count Sweep.} To determine the optimal size of our transferable feature set for outflow prediction, we evaluate prediction performance as a function of the number of selected features. CPC plateaus at $K=15$ features (0.7124) until $K = 22$. We use $K=22$ as our number of features because it contains all features that pass both cutoffs ($\mu_p \ge 0.005$, $S_p \ge 1.0$). See Fig.~\ref{fig:shap_sweep}.
+\textbf{Supporting Analysis: SHAP Feature Count Sweep (Supporting RQ2).} To determine the optimal size of our transferable feature set for outflow prediction, we evaluate prediction performance as a function of the number of selected features. CPC plateaus at $K=15$ features (0.7124) until $K = 22$. We use $K=22$ as our number of features because it contains all features that pass both cutoffs ($\mu_p \ge 0.005$, $S_p \ge 1.0$). See Fig.~\ref{fig:shap_sweep}.
 
 \begin{figure*}[t]
   \centering
@@ -498,8 +498,8 @@ Population and activity-related points of interest are the most stable transfera
   \label{fig:shap_sweep}
 \end{figure*}
 
-\subsection{Component Contributions Analysis}
-A factorial ablation over the 25 held out cities, with replacement of each disabled component with uniform weighting.
+\subsection{Component Contributions Analysis (Answering RQ2)}
+A factorial ablation over the 25 held out cities, with replacement of each disabled component with uniform weighting, evaluates why decay calibration is sufficient for transfer (RQ2).
 
 It can be seen from Table~\ref{tab:ablation} that the most important is the distance decay $f(d)$: disabling it causes a 34.6\% CPC decrease. Disabling $A_j$ and $O_i$ results in decreases of 4.4\% and 3.8\%, respectively. 
 
@@ -524,10 +524,10 @@ $\checkmark$ & $\checkmark$ & $\times$ & 0.6557 & A$_j$ removal: 4.4\% loss & 0.
 
 \textbf{Baseline CPC Note:} Baseline CPC value of 0.6860 used in this ablation analysis was achieved using fixed national decay prior ($\gamma_{\text{nat}},\beta_{\text{nat}}$) to freeze the decay component and calculate contributions under a uniform setting. Using the proposed survey-free calibration workflow, CPC performance achieves 0.6860 CPC (as seen in Table~\ref{tab:multibaseline_comparison}).
 
-\subsection{Zero-Shot Transfer Evaluation}
-We now present an evaluation of the proposed aggregate-calibrated model against the baselines.
+\subsection{Zero-Shot Transfer Evaluation (Answering RQ3)}
+We now present an evaluation of the proposed aggregate-calibrated model against the baselines to determine the urban morphological conditions under which this is most effective (RQ3).
 
-\subsubsection{Comparison with Baselines}
+\subsubsection{Comparison with Baselines (RQ3)}
 The findings are summarized in Table~\ref{tab:multibaseline_comparison} below.
 
 \begin{table*}[t]
