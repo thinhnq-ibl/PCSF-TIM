@@ -72,13 +72,13 @@ def build_city_features_redesign(city_data: dict, road_map: dict, road_impute: f
     X = np.stack([POI, P, area, rho_pop, rho_poi, rho_road], axis=1).astype(np.float32)
     return X, logO, nodes["idx"].values
 
-def proposed_predict(df: pd.DataFrame, O_hat: Dict[int, float], alpha: float, beta: float) -> np.ndarray:
+def proposed_predict(df: pd.DataFrame, O_hat: Dict[int, float], gamma: float, beta: float) -> np.ndarray:
     O_vec = np.array([O_hat.get(int(oid), 1.0) for oid in df["o_idx"]], dtype=np.float32)
     A_j = df["A_j"].values
     d = df["d_clamped"].values
     
     # Tanner friction function
-    f_d = A_j * (np.maximum(d, 1e-6) ** (-alpha)) * np.exp(-beta * d)
+    f_d = A_j * (np.maximum(d, 1e-6) ** (-gamma)) * np.exp(-beta * d)
     
     tmp = df[["o_idx"]].copy()
     tmp["f_d"] = f_d

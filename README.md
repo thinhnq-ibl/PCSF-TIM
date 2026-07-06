@@ -21,7 +21,6 @@ PCSF-TIM/
 │   ├── run_deep_gravity_zeroshot.py   ➔ Zero-shot deep learning benchmark execution
 │   ├── run_shap_feature_selection.py  ➔ SHAP importance analysis for outflow prediction
 │   ├── run_shap_validation_sweep.py   ➔ Supporting sweep determining optimal feature counts
-│   ├── run_loco_statistical_tests.py ➔ Paired significance testing (LOCO 50 folds)
 │   ├── plot_layer1_results.py         ➔ Generates decay parameter recovery scatter plots
 │   ├── plot_layer2_results.py         ➔ Generates source-scale & noise sensitivity plots
 │   ├── baselines.py                   ➔ Baseline models (Radiation, traditional Gravity)
@@ -73,9 +72,7 @@ python run_shap_validation_sweep.py
 Evaluate zero-shot transfer CPC across held-out target cities and urban morphological classifications:
 ```bash
 python run_deep_gravity_zeroshot.py
-python run_loco_statistical_tests.py
 ```
-* **Statistical Summary**: Output to stdout detailing Wilcoxon signed-rank tests and Cohen's $d$ against traditional baselines.
 
 ---
 

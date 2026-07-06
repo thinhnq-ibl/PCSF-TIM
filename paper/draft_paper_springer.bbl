@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -139,6 +139,10 @@ Wang X, Jin K, Sun L, et~al (2022) When transfer learning meets cross-city
   urban flow prediction: Spatio-temporal adaptation matters. In: Proceedings of
   the Thirty-First International Joint Conference on Artificial Intelligence
   (IJCAI-22), pp 2219--2225, \doi{10.24963/ijcai.2022/308}
+
+\bibitem[{Wilcoxon(1945)}]{wilcoxon1945}
+Wilcoxon F (1945) Individual comparisons by ranking methods. Biometrics
+  Bulletin 1(6):80--83. \doi{10.2307/3001968}
 
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated

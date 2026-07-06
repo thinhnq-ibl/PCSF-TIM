@@ -146,7 +146,23 @@ def main():
             "road_map": rm
         }
     road_impute = float(np.median(road_vals)) if road_vals else 1e-4
-    alpha_nat, beta_nat = national_decay(city_cache)
+    # Pre-compute aggregate-recovered decay parameters for all 50 cities
+    from run_layered_evaluation import fit_decay_from_bins_only
+    logging.info("Pre-computing aggregate-recovered decay parameters for all 50 cities...")
+    decay_params_map = {}
+    for c in CITIES_50:
+        cc = city_cache[c]
+        df = cc["df"]
+        tr = cc["train_mask"]
+        d_tr = df["d_clamped"].values[tr]
+        actual_tr = df["trip_count"].values[tr]
+        edges_20 = np.percentile(d_tr, np.linspace(0, 100, 21))
+        edges_20[0] = 0.0; edges_20[-1] = np.inf
+        bin_idx_tr = np.clip(np.searchsorted(edges_20[1:-1], d_tr), 0, 19)
+        b_k = np.array([actual_tr[bin_idx_tr == k].sum() for k in range(20)], float)
+        b_k /= b_k.sum()
+        g_rec, b_rec = fit_decay_from_bins_only(df, b_k, edges_20)
+        decay_params_map[c] = (g_rec, b_rec)
     
     # Train base GBDT outflow on all 30 features
     logging.info("STEP 2: Training base GBDT outflow model on 30 features...")
@@ -221,7 +237,7 @@ def main():
     ranked_features = df_stats.sort_values(by="mean_importance", ascending=False)["feature"].tolist()
     feature_to_idx = {name: idx for idx, name in enumerate(feat_names_30)}
     
-    k_values = [5, 10, 15, 20, 25, len(feat_names_30)]
+    k_values = [5, 6, 7, 10, 15, 20, 25, len(feat_names_30)]
     results = []
     
     print("\n" + "="*80)
@@ -256,7 +272,8 @@ def main():
             logO_pred = clf.predict(scaler_sub.transform(X_c_sub))
             
             O_hat_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
-            pred = proposed_predict(df, O_hat_map, alpha_nat, beta_nat)
+            g_val, b_val = decay_params_map[c]
+            pred = proposed_predict(df, O_hat_map, g_val, b_val)
             
             cpc_scores.append(cpc(pred[test_idx], actual[test_idx]))
             r2_scores.append(r2_log(np.exp(logO_pred), np.exp(logO_true)))

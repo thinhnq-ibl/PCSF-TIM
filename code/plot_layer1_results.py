@@ -23,16 +23,16 @@ def plot_scatters():
     fig, axes = plt.subplots(1, 2, figsize=(13, 6))
     props = dict(boxstyle='round', facecolor='white', alpha=0.9, edgecolor='silver')
     
-    # --- Alpha (Gamma) Plot ---
-    x_alpha = df_rec["alpha_gt"].values
-    y_alpha = df_rec["alpha_recovered"].values
-    corr_alpha, _ = pearsonr(x_alpha, y_alpha)
-    r2_alpha = corr_alpha ** 2  # Explained variance (Pearson r^2)
-    mae_alpha = np.mean(np.abs(x_alpha - y_alpha))
-    rmse_alpha = np.sqrt(np.mean((x_alpha - y_alpha)**2))
+    # --- Gamma Plot ---
+    x_gamma = df_rec["gamma_gt"].values
+    y_gamma = df_rec["gamma_recovered"].values
+    corr_gamma, _ = pearsonr(x_gamma, y_gamma)
+    r2_gamma = corr_gamma ** 2  # Explained variance (Pearson r^2)
+    mae_gamma = np.mean(np.abs(x_gamma - y_gamma))
+    rmse_gamma = np.sqrt(np.mean((x_gamma - y_gamma)**2))
     
-    sns.scatterplot(x=x_alpha, y=y_alpha, ax=axes[0], s=80, color="#1f77b4", edgecolor="w", alpha=0.8)
-    lims = [min(x_alpha.min(), y_alpha.min()) - 0.1, max(x_alpha.max(), y_alpha.max()) + 0.1]
+    sns.scatterplot(x=x_gamma, y=y_gamma, ax=axes[0], s=80, color="#1f77b4", edgecolor="w", alpha=0.8)
+    lims = [min(x_gamma.min(), y_gamma.min()) - 0.1, max(x_gamma.max(), y_gamma.max()) + 0.1]
     axes[0].plot(lims, lims, "k--", alpha=0.7, zorder=0, label="Perfect Recovery ($y=x$)")
     axes[0].set_xlim(lims)
     axes[0].set_ylim(lims)
@@ -41,8 +41,8 @@ def plot_scatters():
     axes[0].set_title("Power-law Decay $\\gamma$ Recovery")
     axes[0].legend(loc="upper left")
     
-    text_alpha = f"Pearson $r^2 = {r2_alpha:.3f}$\nPearson $r = {corr_alpha:.3f}$\nMAE = {mae_alpha:.4f}\nRMSE = {rmse_alpha:.4f}"
-    axes[0].text(0.58, 0.06, text_alpha, transform=axes[0].transAxes, fontsize=11,
+    text_gamma = f"Pearson $r^2 = {r2_gamma:.3f}$\nPearson $r = {corr_gamma:.3f}$\nMAE = {mae_gamma:.4f}\nRMSE = {rmse_gamma:.4f}"
+    axes[0].text(0.58, 0.06, text_gamma, transform=axes[0].transAxes, fontsize=11,
                  verticalalignment='bottom', bbox=props)
     
     # --- Beta Plot ---
@@ -85,7 +85,7 @@ def plot_heatmap():
     # 1. Baseline
     scenarios.append({
         "Scenario": "T1.1 Baseline (0% Noise)",
-        "alpha_MAE": np.abs(df_t11["alpha_recovered"] - df_t11["alpha_gt"]).mean(),
+        "gamma_MAE": np.abs(df_t11["gamma_recovered"] - df_t11["gamma_gt"]).mean(),
         "beta_MAE": np.abs(df_t11["beta_recovered"] - df_t11["beta_gt"]).mean()
     })
     
@@ -94,7 +94,7 @@ def plot_heatmap():
         sub = df_t13[df_t13["noise"] == noise]
         scenarios.append({
             "Scenario": f"T1.3 Perturbation {int(noise*100)}% Noise",
-            "alpha_MAE": np.abs(sub["alpha_pert"] - sub["alpha_gt"]).mean(),
+            "gamma_MAE": np.abs(sub["gamma_pert"] - sub["gamma_gt"]).mean(),
             "beta_MAE": np.abs(sub["beta_pert"] - sub["beta_gt"]).mean()
         })
         
@@ -103,19 +103,19 @@ def plot_heatmap():
         sub = df_t14[df_t14["mask_pct"] == mask]
         scenarios.append({
             "Scenario": f"T1.4 Masking {int(mask*100)}% Zones",
-            "alpha_MAE": np.abs(sub["alpha_mask"] - sub["alpha_gt"]).mean(),
+            "gamma_MAE": np.abs(sub["gamma_mask"] - sub["gamma_gt"]).mean(),
             "beta_MAE": np.abs(sub["beta_mask"] - sub["beta_gt"]).mean()
         })
         
     # 4. CBD collapse
     scenarios.append({
         "Scenario": "T1.5a CBD Collapse (Mean)",
-        "alpha_MAE": np.abs(df_t15["alpha_cbd_mean"] - df_t15["alpha_gt"]).mean(),
+        "gamma_MAE": np.abs(df_t15["gamma_cbd_mean"] - df_t15["gamma_gt"]).mean(),
         "beta_MAE": np.abs(df_t15["beta_cbd_mean"] - df_t15["beta_gt"]).mean()
     })
     scenarios.append({
         "Scenario": "T1.5b CBD Collapse (80% Drop)",
-        "alpha_MAE": np.abs(df_t15["alpha_cbd_reduce"] - df_t15["alpha_gt"]).mean(),
+        "gamma_MAE": np.abs(df_t15["gamma_cbd_reduce"] - df_t15["gamma_gt"]).mean(),
         "beta_MAE": np.abs(df_t15["beta_cbd_reduce"] - df_t15["beta_gt"]).mean()
     })
     

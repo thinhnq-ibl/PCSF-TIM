@@ -39,9 +39,9 @@ MORPHOLOGY_GROUPS = {
     "Coastal": ["San_Diego", "Seattle", "Portland", "Miami", "Tampa", "Virginia_Beach"]
 }
 
-def predict_tanner_singly(o_idx, A, d, alpha, beta):
+def predict_tanner_singly(o_idx, A, d, gamma, beta):
     """Production-constrained Tanner gravity with constant/variable outflows."""
-    log_f = np.log(A.clip(1e-9)) - alpha * np.log(d.clip(1e-6)) - beta * d
+    log_f = np.log(A.clip(1e-9)) - gamma * np.log(d.clip(1e-6)) - beta * d
     n_o = int(o_idx.max()) + 1
     lf_max = np.full(n_o, -np.inf)
     np.maximum.at(lf_max, o_idx, log_f)
@@ -84,8 +84,8 @@ def fit_decay_mle_od(df):
     n_o = len(unique_o)
     
     def loss(params):
-        alpha, beta = params
-        log_f = np.log(np.maximum(A, 1e-9)) - alpha * np.log(np.maximum(d, 1e-6)) - beta * d
+        gamma, beta = params
+        log_f = np.log(np.maximum(A, 1e-9)) - gamma * np.log(np.maximum(d, 1e-6)) - beta * d
         lf_max = np.full(n_o, -np.inf)
         np.maximum.at(lf_max, o_idx_mapped, log_f)
         shifted = np.exp(log_f - lf_max[o_idx_mapped])
@@ -122,15 +122,15 @@ def run_layer1(city_cache, source_cities, heldout_cities):
         b_k /= b_k.sum()
         
         # Fit with no OD data, constant Oi (Oi=1.0)
-        a_recovered, b_recovered = fit_decay_from_bins_only(df, b_k, edges_20)
+        g_recovered, b_recovered = fit_decay_from_bins_only(df, b_k, edges_20)
         # Fit with actual OD data (ground truth Tanner direct)
-        a_gt, b_gt = fit_decay_mle_od(df.iloc[tr])
+        g_gt, b_gt = fit_decay_mle_od(df.iloc[tr])
         
         # Calculate downstream CPC using oracle outflow
         o_sum = df.groupby("o_idx")["trip_count"].sum()
         O_true_map = o_sum.to_dict()
-        pred_gt = proposed_predict(df, O_true_map, a_gt, b_gt)
-        pred_rec = proposed_predict(df, O_true_map, a_recovered, b_recovered)
+        pred_gt = proposed_predict(df, O_true_map, g_gt, b_gt)
+        pred_rec = proposed_predict(df, O_true_map, g_recovered, b_recovered)
         
         te = cc["test_mask"]
         actual = df["trip_count"].values
@@ -141,9 +141,9 @@ def run_layer1(city_cache, source_cities, heldout_cities):
         
         results_t11.append({
             "city": c,
-            "alpha_recovered": a_recovered,
+            "gamma_recovered": g_recovered,
             "beta_recovered": b_recovered,
-            "alpha_gt": a_gt,
+            "gamma_gt": g_gt,
             "beta_gt": b_gt,
             "cpc_gt": float(cpc_gt),
             "cpc_recovered": float(cpc_rec)
@@ -164,24 +164,24 @@ def run_layer1(city_cache, source_cities, heldout_cities):
             b_k_K = np.array([actual_tr[bin_idx_tr_K == k].sum() for k in range(K)], float)
             b_k_K /= b_k_K.sum()
             
-            ak, bk = fit_decay_from_bins_only(df, b_k_K, edges_K)
-            params_k[f"alpha_{K}"] = ak
+            gk, bk = fit_decay_from_bins_only(df, b_k_K, edges_K)
+            params_k[f"gamma_{K}"] = gk
             params_k[f"beta_{K}"] = bk
             
             # Downstream CPC prediction
-            pred_k = proposed_predict(df, O_true_map, ak, bk)
+            pred_k = proposed_predict(df, O_true_map, gk, bk)
             cpc_val = cpc(pred_k[test_idx], actual[test_idx])
             params_k[f"cpc_{K}"] = float(cpc_val)
             
-        alphas = [params_k[f"alpha_{K}"] for K in [3, 5, 10, 20]]
+        gammas = [params_k[f"gamma_{K}"] for K in [3, 5, 10, 20]]
         betas = [params_k[f"beta_{K}"] for K in [3, 5, 10, 20]]
         results_t12.append({
             "city": c,
-            "alpha_std": np.std(alphas),
+            "gamma_std": np.std(gammas),
             "beta_std": np.std(betas),
             **params_k
         })
-
+ 
         # T1.3: Attractiveness Perturbation Test (noise: 10%, 20%, 50%)
         rng = np.random.default_rng(SPLIT_SEED)
         for noise in [0.1, 0.2, 0.5]:
@@ -189,16 +189,16 @@ def run_layer1(city_cache, source_cities, heldout_cities):
             noise_factor = rng.normal(0, noise, len(df_pert))
             df_pert["A_j"] = np.clip(df_pert["A_j"] * (1.0 + noise_factor), 0.0, None)
             
-            a_pert, b_pert = fit_decay_from_bins_only(df_pert, b_k, edges_20)
+            g_pert, b_pert = fit_decay_from_bins_only(df_pert, b_k, edges_20)
             results_t13.append({
                 "city": c,
                 "noise": noise,
-                "alpha_pert": a_pert,
+                "gamma_pert": g_pert,
                 "beta_pert": b_pert,
-                "alpha_gt": a_gt,
+                "gamma_gt": g_gt,
                 "beta_gt": b_gt
             })
-
+ 
         # T1.4: Missing Attractiveness Information Test (masking: 10%, 20%, 50%)
         unique_zones = df["d_idx"].unique()
         n_zones = len(unique_zones)
@@ -214,16 +214,16 @@ def run_layer1(city_cache, source_cities, heldout_cities):
             is_masked = df_mask["d_idx"].isin(masked_zones)
             df_mask.loc[is_masked, "A_j"] = mean_attraction
             
-            a_mask, b_mask = fit_decay_from_bins_only(df_mask, b_k, edges_20)
+            g_mask, b_mask = fit_decay_from_bins_only(df_mask, b_k, edges_20)
             results_t14.append({
                 "city": c,
                 "mask_pct": mask_pct,
-                "alpha_mask": a_mask,
+                "gamma_mask": g_mask,
                 "beta_mask": b_mask,
-                "alpha_gt": a_gt,
+                "gamma_gt": g_gt,
                 "beta_gt": b_gt
             })
-
+ 
         # T1.5: CBD Collapse Test (top 10% zones with highest attractiveness A_j)
         zone_attractions_full = df.groupby("d_idx")["A_j"].mean()
         n_top = max(1, int(len(zone_attractions_full) * 0.1))
@@ -232,20 +232,20 @@ def run_layer1(city_cache, source_cities, heldout_cities):
         # Scenario T1.5a: Replace top 10% zones with mean attraction
         df_cbd_mean = df.copy()
         df_cbd_mean.loc[df_cbd_mean["d_idx"].isin(top_cbd_zones), "A_j"] = mean_attraction
-        a_cbd_mean, b_cbd_mean = fit_decay_from_bins_only(df_cbd_mean, b_k, edges_20)
+        g_cbd_mean, b_cbd_mean = fit_decay_from_bins_only(df_cbd_mean, b_k, edges_20)
         
         # Scenario T1.5b: Scale down top 10% zones by 0.2 (80% reduction)
         df_cbd_reduce = df.copy()
         df_cbd_reduce.loc[df_cbd_reduce["d_idx"].isin(top_cbd_zones), "A_j"] *= 0.2
-        a_cbd_red, b_cbd_red = fit_decay_from_bins_only(df_cbd_reduce, b_k, edges_20)
+        g_cbd_red, b_cbd_red = fit_decay_from_bins_only(df_cbd_reduce, b_k, edges_20)
         
         results_t15.append({
             "city": c,
-            "alpha_cbd_mean": a_cbd_mean,
+            "gamma_cbd_mean": g_cbd_mean,
             "beta_cbd_mean": b_cbd_mean,
-            "alpha_cbd_reduce": a_cbd_red,
+            "gamma_cbd_reduce": g_cbd_red,
             "beta_cbd_reduce": b_cbd_red,
-            "alpha_gt": a_gt,
+            "gamma_gt": g_gt,
             "beta_gt": b_gt
         })
         
@@ -256,41 +256,41 @@ def run_layer1(city_cache, source_cities, heldout_cities):
     df_t15 = pd.DataFrame(results_t15)
     
     # Calculate recovery errors and CPC
-    alpha_err = np.abs(df_t11["alpha_recovered"] - df_t11["alpha_gt"]).mean()
+    gamma_err = np.abs(df_t11["gamma_recovered"] - df_t11["gamma_gt"]).mean()
     beta_err = np.abs(df_t11["beta_recovered"] - df_t11["beta_gt"]).mean()
     cpc_gt_mean = df_t11["cpc_gt"].mean()
     cpc_rec_mean = df_t11["cpc_recovered"].mean()
     
-    logging.info(f"T1.1 Pure Decay Recovery MAE vs Ground Truth: alpha_MAE={alpha_err:.4f}, beta_MAE={beta_err:.4f}")
+    logging.info(f"T1.1 Pure Decay Recovery MAE vs Ground Truth: gamma_MAE={gamma_err:.4f}, beta_MAE={beta_err:.4f}")
     logging.info(f"T1.1 Downstream CPC under Oracle Outflow: CPC_gt={cpc_gt_mean:.4f}, CPC_rec={cpc_rec_mean:.4f} (Gap={cpc_gt_mean - cpc_rec_mean:.4f})")
-    logging.info(f"T1.2 Bin Robustness Parameter Standard Deviation: alpha_std_mean={df_t12['alpha_std'].mean():.4f}, beta_std_mean={df_t12['beta_std'].mean():.4f}")
+    logging.info(f"T1.2 Bin Robustness Parameter Standard Deviation: gamma_std_mean={df_t12['gamma_std'].mean():.4f}, beta_std_mean={df_t12['beta_std'].mean():.4f}")
     logging.info(f"T1.2 Downstream CPC by Bin Count: CPC_3={df_t12['cpc_3'].mean():.4f}, CPC_5={df_t12['cpc_5'].mean():.4f}, CPC_10={df_t12['cpc_10'].mean():.4f}, CPC_20={df_t12['cpc_20'].mean():.4f}")
     
     logging.info("T1.3 Attractiveness Perturbation Test MAE vs Ground Truth:")
     for noise in [0.1, 0.2, 0.5]:
         sub = df_t13[df_t13["noise"] == noise]
-        a_err = np.abs(sub["alpha_pert"] - sub["alpha_gt"]).mean()
+        g_err = np.abs(sub["gamma_pert"] - sub["gamma_gt"]).mean()
         b_err = np.abs(sub["beta_pert"] - sub["beta_gt"]).mean()
-        logging.info(f"   Noise {int(noise*100)}%: alpha_MAE={a_err:.4f}, beta_MAE={b_err:.4f}")
+        logging.info(f"   Noise {int(noise*100)}%: gamma_MAE={g_err:.4f}, beta_MAE={b_err:.4f}")
  
     logging.info("T1.4 Missing Attractiveness Information Test MAE vs Ground Truth:")
     for mask_pct in [0.1, 0.2, 0.5]:
         sub = df_t14[df_t14["mask_pct"] == mask_pct]
-        a_err = np.abs(sub["alpha_mask"] - sub["alpha_gt"]).mean()
+        g_err = np.abs(sub["gamma_mask"] - sub["gamma_gt"]).mean()
         b_err = np.abs(sub["beta_mask"] - sub["beta_gt"]).mean()
-        logging.info(f"   Mask {int(mask_pct*100)}%: alpha_MAE={a_err:.4f}, beta_MAE={b_err:.4f}")
+        logging.info(f"   Mask {int(mask_pct*100)}%: gamma_MAE={g_err:.4f}, beta_MAE={b_err:.4f}")
 
     logging.info("T1.5 CBD Collapse Test MAE vs Ground Truth:")
-    a_err_mean = np.abs(df_t15["alpha_cbd_mean"] - df_t15["alpha_gt"]).mean()
+    g_err_mean = np.abs(df_t15["gamma_cbd_mean"] - df_t15["gamma_gt"]).mean()
     b_err_mean = np.abs(df_t15["beta_cbd_mean"] - df_t15["beta_gt"]).mean()
-    a_err_red = np.abs(df_t15["alpha_cbd_reduce"] - df_t15["alpha_gt"]).mean()
+    g_err_red = np.abs(df_t15["gamma_cbd_reduce"] - df_t15["gamma_gt"]).mean()
     b_err_red = np.abs(df_t15["beta_cbd_reduce"] - df_t15["beta_gt"]).mean()
-    logging.info(f"   T1.5a (Mean Replacement): alpha_MAE={a_err_mean:.4f}, beta_MAE={b_err_mean:.4f}")
-    logging.info(f"   T1.5b (80% Reduction):    alpha_MAE={a_err_red:.4f}, beta_MAE={b_err_red:.4f}")
+    logging.info(f"   T1.5a (Mean Replacement): gamma_MAE={g_err_mean:.4f}, beta_MAE={b_err_mean:.4f}")
+    logging.info(f"   T1.5b (80% Reduction):    gamma_MAE={g_err_red:.4f}, beta_MAE={b_err_red:.4f}")
 
     return df_t11, df_t12, df_t13, df_t14, df_t15
 
-def run_layer2(city_cache, source_cities, heldout_cities, road_impute, alpha_nat, beta_nat):
+def run_layer2(city_cache, source_cities, heldout_cities, road_impute, decay_params_map):
     logging.info("=== LAYER 2: OUTFLOW (Oi) ESTIMATION TEST ===")
     
     # Train outflow GBDT on source cities
@@ -325,10 +325,13 @@ def run_layer2(city_cache, source_cities, heldout_cities, road_impute, alpha_nat
         O_hat_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
         oi_logs.append((logO_true, logO_pred))
         
+        # Get city-specific recovered decay parameters
+        g_val, b_val = decay_params_map[c]
+        
         # T2.1 Oracle Upper Bound vs Survey Free
-        pred_sf = proposed_predict(df, O_hat_map, alpha_nat, beta_nat)
+        pred_sf = proposed_predict(df, O_hat_map, g_val, b_val)
         O_true_map = dict(zip(zones, np.exp(logO_true)))
-        pred_oracle = proposed_predict(df, O_true_map, alpha_nat, beta_nat)
+        pred_oracle = proposed_predict(df, O_true_map, g_val, b_val)
         
         cpc_sf = cpc(pred_sf[test_idx], actual[test_idx])
         cpc_oracle = cpc(pred_oracle[test_idx], actual[test_idx])
@@ -344,7 +347,7 @@ def run_layer2(city_cache, source_cities, heldout_cities, road_impute, alpha_nat
                 rng = np.random.default_rng(SPLIT_SEED)
                 noise = rng.normal(0, noise_pct, len(logO_pred))
                 O_noise_map = {z: float(np.maximum(1.0, np.exp(lp + n))) for z, lp, n in zip(zones, logO_pred, noise)}
-                pred_noise = proposed_predict(df, O_noise_map, alpha_nat, beta_nat)
+                pred_noise = proposed_predict(df, O_noise_map, g_val, b_val)
                 noise_results[f"cpc_noise_{int(noise_pct*100)}"] = cpc(pred_noise[test_idx], actual[test_idx])
                 
         results_t2.append({
@@ -399,7 +402,8 @@ def run_layer2(city_cache, source_cities, heldout_cities, road_impute, alpha_nat
                 X_h, _, zones_h = build_city_features_redesign(cc["city_data"], cc["road_map"], road_impute)
                 logO_pred_h = clf_sub.predict(sc_sub.transform(X_h))
                 O_hat_h = {z: float(np.exp(lp)) for z, lp in zip(zones_h, logO_pred_h)}
-                pred_h = proposed_predict(df_h, O_hat_h, alpha_nat, beta_nat)
+                g_val, b_val = decay_params_map[c]
+                pred_h = proposed_predict(df_h, O_hat_h, g_val, b_val)
                 cpcs_h.append(cpc(pred_h[test_idx_h], actual_h[test_idx_h]))
             seed_cpcs.append(float(np.mean(cpcs_h)))
         lc_rows.append({
@@ -419,7 +423,7 @@ def run_layer2(city_cache, source_cities, heldout_cities, road_impute, alpha_nat
     logging.info(f"T2.3 Cross-City Transfer Outflow R2_log: {r2_oi:.6f}")
     return df_t2, r2_oi, df_t24
 
-def run_layer3(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scaler, road_impute):
+def run_layer3(city_cache, heldout_cities, decay_params_map, GBDT_model, scaler, road_impute):
     logging.info("=== LAYER 3: ATTRACTION MODEL (Aj) ABLATION ===")
     results_t3 = []
     
@@ -435,11 +439,13 @@ def run_layer3(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         logO_pred = GBDT_model.predict(scaler.transform(X))
         O_hat_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
         
+        g_val, b_val = decay_params_map[c]
+        
         # Helper to run prediction with specific Attraction vector
         def run_ablation_pred(A_vec):
             df_temp = df.copy()
             df_temp["A_j"] = A_vec
-            pred = proposed_predict(df_temp, O_hat_map, alpha_nat, beta_nat)
+            pred = proposed_predict(df_temp, O_hat_map, g_val, b_val)
             return cpc(pred[test_idx], actual[test_idx])
             
         # T3.1 Feature Knockout
@@ -497,7 +503,7 @@ def run_layer3(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
     logging.info(f"   Z-Score:         {df_t3['cpc_zscore'].mean():.4f}")
     return df_t3
 
-def run_layer4(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scaler, road_impute):
+def run_layer4(city_cache, heldout_cities, decay_params_map, GBDT_model, scaler, road_impute):
     logging.info("=== LAYER 4: FULL SYSTEM DECOMPOSITION TEST ===")
     results_t4 = []
     
@@ -513,21 +519,23 @@ def run_layer4(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         O_hat_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
         O_flat_map = {z: float(np.mean(np.exp(logO_true))) for z in zones}
         
+        g_val, b_val = decay_params_map[c]
+        
         # 1. Full model (Decay, Oi predicted, Aj OSM): v(O, d, A)
-        pred_full = proposed_predict(df, O_hat_map, alpha_nat, beta_nat)
+        pred_full = proposed_predict(df, O_hat_map, g_val, b_val)
         v_O_d_A = cpc(pred_full[test_idx], actual[test_idx])
         
         # 2. No attraction (Aj = 1.0 constant): v(O, d)
         df_no_A = df.copy()
         df_no_A["A_j"] = 1.0
-        pred_no_A = proposed_predict(df_no_A, O_hat_map, alpha_nat, beta_nat)
+        pred_no_A = proposed_predict(df_no_A, O_hat_map, g_val, b_val)
         v_O_d = cpc(pred_no_A[test_idx], actual[test_idx])
         
         # 3. No production (Oi = constant): v(d, A)
-        pred_no_O = proposed_predict(df, O_flat_map, alpha_nat, beta_nat)
+        pred_no_O = proposed_predict(df, O_flat_map, g_val, b_val)
         v_d_A = cpc(pred_no_O[test_idx], actual[test_idx])
         
-        # 4. No decay (alpha=0, beta=0): v(O, A)
+        # 4. No decay (gamma=0, beta=0): v(O, A)
         pred_no_decay = proposed_predict(df, O_hat_map, 0.0, 0.0)
         v_O_A = cpc(pred_no_decay[test_idx], actual[test_idx])
 
@@ -536,7 +544,7 @@ def run_layer4(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         v_O = cpc(pred_only_O[test_idx], actual[test_idx])
 
         # 6. Only decay (Oi=constant, A=1.0 constant): v(d)
-        pred_only_d = proposed_predict(df_no_A, O_flat_map, alpha_nat, beta_nat)
+        pred_only_d = proposed_predict(df_no_A, O_flat_map, g_val, b_val)
         v_d = cpc(pred_only_d[test_idx], actual[test_idx])
 
         # 7. Only attraction (Oi=constant, decay=0): v(A)
@@ -595,7 +603,7 @@ def run_layer4(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
     logging.info(f"   Shapley Attraction (Aj): {df_t4['shapley_Aj'].mean():.4f}")
     return df_t4
 
-def run_layer5(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scaler, road_impute):
+def run_layer5(city_cache, heldout_cities, decay_params_map, GBDT_model, scaler, road_impute):
     logging.info("=== LAYER 5: ZERO-SHOT GENERALIZATION TEST ===")
     
     results_t5 = []
@@ -619,8 +627,10 @@ def run_layer5(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         logO_pred = GBDT_model.predict(scaler.transform(X))
         O_hat_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
         
+        g_val, b_val = decay_params_map[c]
+        
         # Standard survey-free CPC
-        pred_sf = proposed_predict(df, O_hat_map, alpha_nat, beta_nat)
+        pred_sf = proposed_predict(df, O_hat_map, g_val, b_val)
         cpc_sf = cpc(pred_sf[test_idx], actual[test_idx])
         
         # T5.3 Feature Perturbation Stress Test
@@ -651,7 +661,7 @@ def run_layer5(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         logO_pert = GBDT_model.predict(scaler.transform(X_pert))
         O_pert_map = {z: float(np.exp(lp)) for z, lp in zip(zones_pert, logO_pert)}
         
-        pred_pert = proposed_predict(df, O_pert_map, alpha_nat, beta_nat)
+        pred_pert = proposed_predict(df, O_pert_map, g_val, b_val)
         cpc_pert = cpc(pred_pert[test_idx], actual[test_idx])
         
         results_t5.append({
@@ -707,7 +717,8 @@ def run_layer5(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         X, logO_true, zones = build_city_features_redesign(cc["city_data"], cc["road_map"], road_impute)
         logO_pred = clf_nyc.predict(scaler_nyc.transform(X))
         O_pred_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
-        pred = proposed_predict(df, O_pred_map, alpha_nat, beta_nat)
+        g_val, b_val = decay_params_map[c]
+        pred = proposed_predict(df, O_pred_map, g_val, b_val)
         cpc_nyc_to_sprawl.append(cpc(pred[test_idx], actual[test_idx]))
         
     # Evaluate LA -> Sprawling/Grid
@@ -722,7 +733,8 @@ def run_layer5(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         X, logO_true, zones = build_city_features_redesign(cc["city_data"], cc["road_map"], road_impute)
         logO_pred = clf_la.predict(scaler_la.transform(X))
         O_pred_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
-        pred = proposed_predict(df, O_pred_map, alpha_nat, beta_nat)
+        g_val, b_val = decay_params_map[c]
+        pred = proposed_predict(df, O_pred_map, g_val, b_val)
         cpc_la_to_grid.append(cpc(pred[test_idx], actual[test_idx]))
         
     # Evaluate Houston -> Dense
@@ -738,7 +750,8 @@ def run_layer5(city_cache, heldout_cities, alpha_nat, beta_nat, GBDT_model, scal
         X, logO_true, zones = build_city_features_redesign(cc["city_data"], cc["road_map"], road_impute)
         logO_pred = clf_hou.predict(scaler_hou.transform(X))
         O_pred_map = {z: float(np.exp(lp)) for z, lp in zip(zones, logO_pred)}
-        pred = proposed_predict(df, O_pred_map, alpha_nat, beta_nat)
+        g_val, b_val = decay_params_map[c]
+        pred = proposed_predict(df, O_pred_map, g_val, b_val)
         cpc_houston_to_dense.append(cpc(pred[test_idx], actual[test_idx]))
         
     logging.info(f"   NYC model -> Sprawling Cities CPC Mean:     {np.mean(cpc_nyc_to_sprawl):.4f}")
@@ -778,8 +791,25 @@ def main():
     logging.info(f"Data loading complete in {time.time() - t0:.1f}s.")
     
     # Get national decay parameters (median of source city fits)
-    alpha_nat, beta_nat = national_decay(city_cache)
+    gamma_nat, beta_nat = national_decay(city_cache)
     
+    # Pre-compute aggregate-recovered decay parameters for all cities (to be used in downstream Zero-Shot layers)
+    logging.info("Pre-computing aggregate-recovered decay parameters for all 50 cities...")
+    decay_params_map = {}
+    for c in CITIES_50:
+        cc = city_cache[c]
+        df = cc["df"]
+        tr = cc["train_mask"]
+        d_tr = df["d_clamped"].values[tr]
+        actual_tr = df["trip_count"].values[tr]
+        edges_20 = np.percentile(d_tr, np.linspace(0, 100, 21))
+        edges_20[0] = 0.0; edges_20[-1] = np.inf
+        bin_idx_tr = np.clip(np.searchsorted(edges_20[1:-1], d_tr), 0, 19)
+        b_k = np.array([actual_tr[bin_idx_tr == k].sum() for k in range(20)], float)
+        b_k /= b_k.sum()
+        g_rec, b_rec = fit_decay_from_bins_only(df, b_k, edges_20)
+        decay_params_map[c] = (g_rec, b_rec)
+        
     # Train GBDT outflow model on source cities for downstream tests
     Xs, ys = [], []
     for c in SOURCE_CITIES:
@@ -798,10 +828,10 @@ def main():
     
     # Run the layers
     df_t11, df_t12, df_t13, df_t14, df_t15 = run_layer1(city_cache, SOURCE_CITIES, HELDOUT_CITIES)
-    df_t2, r2_oi, df_t24 = run_layer2(city_cache, SOURCE_CITIES, HELDOUT_CITIES, road_impute, alpha_nat, beta_nat)
-    df_t3 = run_layer3(city_cache, HELDOUT_CITIES, alpha_nat, beta_nat, clf, scaler, road_impute)
-    df_t4 = run_layer4(city_cache, HELDOUT_CITIES, alpha_nat, beta_nat, clf, scaler, road_impute)
-    df_t5, ext_transfer = run_layer5(city_cache, HELDOUT_CITIES, alpha_nat, beta_nat, clf, scaler, road_impute)
+    df_t2, r2_oi, df_t24 = run_layer2(city_cache, SOURCE_CITIES, HELDOUT_CITIES, road_impute, decay_params_map)
+    df_t3 = run_layer3(city_cache, HELDOUT_CITIES, decay_params_map, clf, scaler, road_impute)
+    df_t4 = run_layer4(city_cache, HELDOUT_CITIES, decay_params_map, clf, scaler, road_impute)
+    df_t5, ext_transfer = run_layer5(city_cache, HELDOUT_CITIES, decay_params_map, clf, scaler, road_impute)
     
     # Save results to prepare_for_paper/results
     results_dir = os.path.join(os.path.dirname(dir_path), "results")
@@ -824,29 +854,29 @@ def main():
         f.write(f"Generated at: 2026-06-06\n\n")
         
         f.write("## 1. Decay Identification (Layer 1)\n")
-        f.write(f"- T1.1 Pure Decay Recovery MAE vs Ground Truth: alpha_MAE={np.abs(df_t11['alpha_recovered'] - df_t11['alpha_gt']).mean():.4f}, beta_MAE={np.abs(df_t11['beta_recovered'] - df_t11['beta_gt']).mean():.4f}\n")
+        f.write(f"- T1.1 Pure Decay Recovery MAE vs Ground Truth: gamma_MAE={np.abs(df_t11['gamma_recovered'] - df_t11['gamma_gt']).mean():.4f}, beta_MAE={np.abs(df_t11['beta_recovered'] - df_t11['beta_gt']).mean():.4f}\n")
         f.write(f"- T1.1 Downstream CPC under Oracle Outflow: CPC_gt={df_t11['cpc_gt'].mean():.4f}, CPC_rec={df_t11['cpc_recovered'].mean():.4f} (Gap={df_t11['cpc_gt'].mean() - df_t11['cpc_recovered'].mean():.4f})\n")
-        f.write(f"- T1.2 Bin Robustness Parameter Std Mean: alpha_std_mean={df_t12['alpha_std'].mean():.4f}, beta_std_mean={df_t12['beta_std'].mean():.4f}\n")
+        f.write(f"- T1.2 Bin Robustness Parameter Std Mean: gamma_std_mean={df_t12['gamma_std'].mean():.4f}, beta_std_mean={df_t12['beta_std'].mean():.4f}\n")
         f.write(f"- T1.2 Downstream CPC by Bin Count: CPC_3={df_t12['cpc_3'].mean():.4f}, CPC_5={df_t12['cpc_5'].mean():.4f}, CPC_10={df_t12['cpc_10'].mean():.4f}, CPC_20={df_t12['cpc_20'].mean():.4f}\n")
         f.write("- T1.3 Attractiveness Perturbation Test MAE vs Ground Truth:\n")
         for noise in [0.1, 0.2, 0.5]:
             sub = df_t13[df_t13["noise"] == noise]
-            a_err = np.abs(sub["alpha_pert"] - sub["alpha_gt"]).mean()
+            g_err = np.abs(sub["gamma_pert"] - sub["gamma_gt"]).mean()
             b_err = np.abs(sub["beta_pert"] - sub["beta_gt"]).mean()
-            f.write(f"  - Noise {int(noise*100)}%: alpha_MAE={a_err:.4f}, beta_MAE={b_err:.4f}\n")
+            f.write(f"  - Noise {int(noise*100)}%: gamma_MAE={g_err:.4f}, beta_MAE={b_err:.4f}\n")
         f.write("- T1.4 Missing Attractiveness Information Test MAE vs Ground Truth:\n")
         for mask_pct in [0.1, 0.2, 0.5]:
             sub = df_t14[df_t14["mask_pct"] == mask_pct]
-            a_err = np.abs(sub["alpha_mask"] - sub["alpha_gt"]).mean()
+            g_err = np.abs(sub["gamma_mask"] - sub["gamma_gt"]).mean()
             b_err = np.abs(sub["beta_mask"] - sub["beta_gt"]).mean()
-            f.write(f"  - Mask {int(mask_pct*100)}%: alpha_MAE={a_err:.4f}, beta_MAE={b_err:.4f}\n")
+            f.write(f"  - Mask {int(mask_pct*100)}%: gamma_MAE={g_err:.4f}, beta_MAE={b_err:.4f}\n")
         f.write("- T1.5 CBD Collapse Test MAE vs Ground Truth:\n")
-        a_err_mean = np.abs(df_t15["alpha_cbd_mean"] - df_t15["alpha_gt"]).mean()
+        g_err_mean = np.abs(df_t15["gamma_cbd_mean"] - df_t15["gamma_gt"]).mean()
         b_err_mean = np.abs(df_t15["beta_cbd_mean"] - df_t15["beta_gt"]).mean()
-        a_err_red = np.abs(df_t15["alpha_cbd_reduce"] - df_t15["alpha_gt"]).mean()
+        g_err_red = np.abs(df_t15["gamma_cbd_reduce"] - df_t15["gamma_gt"]).mean()
         b_err_red = np.abs(df_t15["beta_cbd_reduce"] - df_t15["beta_gt"]).mean()
-        f.write(f"  - T1.5a (Mean Replacement): alpha_MAE={a_err_mean:.4f}, beta_MAE={b_err_mean:.4f}\n")
-        f.write(f"  - T1.5b (80% Reduction):    alpha_MAE={a_err_red:.4f}, beta_MAE={b_err_red:.4f}\n")
+        f.write(f"  - T1.5a (Mean Replacement): gamma_MAE={g_err_mean:.4f}, beta_MAE={b_err_mean:.4f}\n")
+        f.write(f"  - T1.5b (80% Reduction):    gamma_MAE={g_err_red:.4f}, beta_MAE={b_err_red:.4f}\n")
         f.write("\n")
         
         f.write("## 2. Outflow (Oi) Estimation (Layer 2)\n")
