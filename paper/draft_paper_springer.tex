@@ -56,7 +56,7 @@ To verify this discovery systematically, we organize the investigation around th
 Our empirical investigation across 50 US metropolitan areas provides the following evidence supporting these research questions:
 \begin{enumerate}
   \item \textbf{Aggregate-to-Individual Equivalence (RQ1)}: Distance-decay parameters ($\gamma, \beta$) estimated solely from anonymized trip-length histograms correlate strongly ($r = 0.893$) with parameters fitted from full individual-level OD matrices, confirming that aggregate distributions encode the necessary friction structure.
-  \item \textbf{Dominance of Distance Decay (RQ2)}: Factorial ablation and Shapley value analysis show that distance decay explains 85.8\% of cross-city predictive capacity over a uniform baseline---far exceeding origin production (3.6\%) and destination attraction (4.7\%)---establishing decay recovery as the critical factor for zero-shot transfer.
+  \item \textbf{Dominance of Distance Decay (RQ2)}: Shapley value analysis attributes 85.8\% of total transferable CPC gain to distance decay (vs.\ 7.9\% for attraction $A_j$ and 6.4\% for production $O_i$). Independently, factorial one-at-a-time ablation confirms that removing decay alone causes a 34.9\% CPC drop, far exceeding the 3.6\% and 4.7\% drops from removing production and attraction respectively---establishing decay recovery as the critical factor for zero-shot transfer.
   \item \textbf{Downstream Validation (RQ1+RQ2)}: Feeding the aggregate-recovered decay into a decomposed gravity model achieves a zero-shot CPC of 0.6893, confirming that aggregate calibration is practically equivalent to full OD-based calibration in downstream prediction tasks.
   \item \textbf{Morphological Scope of Aggregate Calibration (RQ3)}: In cities where physical geography naturally constrains travel corridors (coastal metropolitan areas), distance decay is most dominant---and consequently aggregate calibration is most effective---with the gap to unconstrained neural approaches shrinking from 10.3\% to just 5.9\%, identifying the conditions under which the aggregate calibration approach is most powerful.
 \end{enumerate}
@@ -349,7 +349,7 @@ z_{ip} = \frac{x_{ip} - \mu_p^{(c)}}{\sigma_p^{(c)}}
 where $\mu_p^{(c)}$ and $\sigma_p^{(c)}$ represent the mean and standard deviation of feature $p$ across all zones in city $c$. These context features normalize absolute scale differences, capturing the relative hierarchy of zones within their respective metropolitan areas.
 
 \subsubsection{SHAP-Based Component Dominance Analysis (RQ2)}
-To quantify the relative contribution of each gravity component to zero-shot transfer performance (RQ2), we apply Shapley value decomposition \citep{lundberg2017unified} at the component level. Each component ($O_i$, $f(d)$, $A_j$) is treated as a player in a cooperative game, with the CPC metric as the outcome. The Shapley value of each component represents its average marginal contribution across all possible orderings of removal. Features are ranked by a cross-city stability score $S_p = \mu_p\,/\,(\sigma_p + \epsilon)$, where $\mu_p$ and $\sigma_p$ denote the mean and standard deviation of per-city GBDT SHAP importances and $\epsilon = 10^{-5}$. A feature is retained if $\mu_p \ge 0.005$ and $S_p \ge 1.0$, ensuring both relevance and cross-city consistency. This procedure selects 23 features (23.3\% dimensionality reduction) without loss of zero-shot prediction accuracy (Appendix~C).
+To quantify the relative contribution of each gravity component to zero-shot transfer performance (RQ2), we apply Shapley value decomposition \citep{lundberg2017unified} at the component level. Each component ($O_i$, $f(d)$, $A_j$) is treated as a player in a cooperative game, with the CPC metric as the outcome. The Shapley value of each component represents its average marginal contribution across all possible orderings of removal. Features are ranked by a cross-city stability score $S_p = \mu_p\,/\,(\sigma_p + \epsilon)$, where $\mu_p$ and $\sigma_p$ denote the mean and standard deviation of per-city GBDT SHAP importances and $\epsilon = 10^{-5}$. A feature is retained if $\mu_p \ge 0.005$ and $S_p \ge 1.0$, ensuring both relevance and cross-city consistency. This analysis identifies 23 stable features from the 30-candidate space (23.3\% dimensionality reduction) and confirms that the 6 core structural features used in the deployed model (Section~3.4) are among the dominant and most stable predictors, with no accuracy loss relative to the full candidate set (Appendix~C).
 
 \subsection{Urban Morphology Grouping (RQ3)}
 To investigate RQ3---under what morphological conditions aggregate-calibrated decay is most effective---the 25 held-out target cities are classified into four morphological groups based on physical geography and urban structure. The grouping follows established urban morphology criteria \citep{gonzalez2008understanding,brockmann2006scaling}:
@@ -414,7 +414,7 @@ The first phase validates each component separately to address whether aggregate
 To isolate the effect of the decay calibration strategy, we fix $O_i$ to oracle outflows and $A_j$ to the OSM heuristic, then compare two modes of estimating $(\gamma, \beta)$:
 \begin{itemize}
   \item \textbf{Ground Truth (GT)}: Parameters $(\gamma, \beta)$ are fitted directly on individual origin-destination (OD) pairs.
-  \item \textbf{Recovered}: Parameters are fitted on aggregated distance-bin distributions (trip-length marginal histogram, 50 equal-width bins) without access to individual OD pairs.
+  \item \textbf{Recovered}: Parameters are fitted on aggregated distance-bin distributions (trip-length marginal histogram, 20 equal-width bins) without access to individual OD pairs.
 \end{itemize}
 
 \begin{table*}[t]
@@ -439,7 +439,7 @@ Crucially, evaluating downstream OD prediction under oracle outflow (isolating t
 The parameter recovery is strong for both $\gamma$ ($r = 0.893$) and $\beta$ ($r = 0.582$). A weaker recovery for $\beta$ relative to $\gamma$ is anticipated due to the noisy tail under aggregation binning. However, the downstream prediction evaluation proves that the recovered decay curve is robust and sufficient for prediction.
 
 \subsubsection{Validation via Real-World Meta Mobility Prior (RQ1)}
-To verify the practical feasibility of using tech-platform telemetry for survey-free modeling, we evaluate the decay parameters recovered from Meta's actual county-level Movement Distribution Maps prior (\texttt{Meta MDM Prior (3-Bin)}) on the 25 held-out target cities. We compare its downstream CPC performance under oracle outflows against models calibrated on third-party mobility databases aggregated into 3 bins (\texttt{Third-Party Baseline (3-Bin)}) and 20 percentile bins (\texttt{Third-Party Oracle (20-Bin)}), as well as the supervised zero-shot DeepGravity baseline.
+To verify the practical feasibility of using tech-platform telemetry for survey-free modeling, we evaluate the decay parameters recovered from Meta's actual county-level Movement Distribution Maps prior (\texttt{Meta MDM Prior (3-Bin)}) on the 25 held-out target cities. We compare its downstream CPC performance under oracle outflows against models calibrated on third-party mobility databases aggregated into 3 bins (\texttt{Third-Party Baseline (3-Bin)}) and 20 equal-width bins (\texttt{Third-Party Oracle (20-Bin)}), as well as the supervised zero-shot DeepGravity baseline (shown as a reference point; DeepGravity is an end-to-end model that does not use oracle outflows).
 
 \begin{table*}[t]
 \centering
@@ -452,7 +452,7 @@ To verify the practical feasibility of using tech-platform telemetry for survey-
 \midrule
 \texttt{Meta MDM Prior (3-Bin)} (Survey-Free Prior) & Meta Movement Maps & 3 Physical Bins & 0.7080 \\
 \texttt{Third-Party Baseline (3-Bin)} (Survey-Based) & Third-Party Mobility Data & 3 Physical Bins & 0.7348 \\
-\texttt{Third-Party Oracle (20-Bin)} (Survey-Based) & Third-Party Mobility Data & 20 Percentile Bins & 0.7403 \\
+\texttt{Third-Party Oracle (20-Bin)} (Survey-Based) & Third-Party Mobility Data & 20 Equal-Width Bins & 0.7403 \\
 \texttt{DeepGravity (Zero-Shot)} (Supervised Baseline) & Multi-Source Features & Neural MLP & 0.7727 \\
 \bottomrule
 \end{tabular*}
@@ -460,7 +460,7 @@ To verify the practical feasibility of using tech-platform telemetry for survey-
 
 As shown in Table~\ref{tab:meta_prior_evaluation}, the survey-free \texttt{Meta MDM Prior (3-Bin)} calibration yields a mean CPC of $0.7080$ across the 25 target cities. This represents a minor performance gap of only $-4.36\%$ compared to the \texttt{Third-Party Oracle (20-Bin)} survey oracle ($0.7403$), which requires complete target-city commuting matrices. When compared to the same 3-bin resolution baseline (\texttt{Third-Party Baseline (3-Bin)}, $0.7348$), the gap narrows to $-3.65\%$. This minor performance trade-off demonstrates that the aggregate location fractions collected by Meta are highly effective substitutes for traditional household surveys.
 
-To evaluate the model's robustness under extreme data sparsity where even aggregate target-city distributions are missing, we evaluate the National Decay Fallback strategy (using parameters $\gamma = 1.5, \beta = 0.05$ derived from source cities). This fallback yields a mean CPC of $0.6839$ across the 25 target cities, retaining $92.6\%$ of the Third-Party Oracle's performance and strongly outperforming the Uniform baseline ($0.5290$) which completely omits distance decay. This confirms that even a coarse national decay fallback offers high predictive utility under severe data sparsity.
+To evaluate the model's robustness under extreme data sparsity where even aggregate target-city distributions are missing, we evaluate the National Decay Fallback strategy (using parameters $\gamma = 1.5, \beta = 0.05$ derived from source cities). This fallback yields a mean CPC of $0.6839$ across the 25 target cities, retaining $92.4\%$ of the Third-Party Oracle's performance and strongly outperforming the Uniform baseline ($0.5290$) which completely omits distance decay. This confirms that even a coarse national decay fallback offers high predictive utility under severe data sparsity.
 
 \subsubsection{Decay Bin Sensitivity Analysis (RQ1)}
 Sweeping the number of distance bins $K \in \{3, 5, 10, 20\}$ demonstrates that downstream CPC stabilizes rapidly: mean CPC is $0.7346$ at $K=3$, $0.7367$ at $K=5$, $0.7391$ at $K=10$, and $0.7398$ at $K=20$, compared to the full OD ground truth of $0.7411$. This indicates that even extremely coarse histograms ($K = 5$--$10$ equal-width bins) are sufficient to robustly capture the city-specific decay profile. Full sensitivity details and the recovery error heatmap are in Appendix~A.2.
@@ -477,7 +477,7 @@ To isolate the contribution of $O_i$, we hold $A_j$ (OSM heuristic) and $(\gamma
 
 We find that GBDT outflows (CPC 0.6893) beat the naive population baseline (0.6758) and achieve 93.2\% of the oracle upper bound (0.7398) under zero-shot transfer. These results are integrated into our multi-baseline comparison in Table~\ref{tab:multibaseline_comparison}. Robustness experiments are shown in Appendix~B. SHAP analysis further identifies population density and activity-related POIs as the most stable transferable predictors across source cities.
 
-\textbf{Supporting Analysis: SHAP Feature Count Sweep (Supporting RQ2).} To determine the optimal size of our transferable feature set for outflow prediction, we evaluate prediction performance as a function of the number of selected features. CPC plateaus at $K=10$ features (0.7010) until $K = 23$. We use $K=23$ as our number of features because it contains all features that pass both cutoffs ($\mu_p \ge 0.005$, $S_p \ge 1.0$). See Fig.~\ref{fig:shap_sweep}.
+\textbf{Supporting Analysis: SHAP Feature Count Sweep (Supporting RQ2).} To validate the compactness of the transferable feature space, we evaluate prediction performance as a function of the number of SHAP-ranked features drawn from the 30-candidate set. CPC first reaches $0.7010$ at $K=10$ features and stabilizes in the range $0.7010$--$0.7014$ until $K = 23$. The stability analysis retains $K=23$ as the validated candidate scope (all passing both thresholds: $\mu_p \ge 0.005$, $S_p \ge 1.0$); the final deployed model uses the 6 core structural features defined in Section~3.4, which this sweep confirms are the dominant contributors. See Fig.~\ref{fig:shap_sweep}.
 
 \begin{figure*}[t]
   \centering
@@ -510,7 +510,7 @@ We find that GBDT outflows (CPC 0.6893) beat the naive population baseline (0.67
       \node[red, above, font=\footnotesize] at (axis cs:23,0.7010) {$K=23$};
     \end{axis}
   \end{tikzpicture}
-  \caption{SHAP feature count sweep: zero-shot CPC plateaus at $0.7010$ from $K=10$ onward, with $K=23$ selected as it retains all features passing both stability thresholds ($\mu_p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss.}
+  \caption{SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu_p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~3.4), confirmed by this sweep as the dominant contributors.}
   \label{fig:shap_sweep}
 \end{figure*}
 
@@ -577,7 +577,7 @@ The Survey-Free version of the proposed model achieves a mean CPC of 0.6893, whi
 \subsubsection{Statistical Significance Testing}
 To assess the statistical reliability of our comparisons, we apply the Wilcoxon signed-rank test~\citep{wilcoxon1945} across the 25 held-out target cities under the 25/25 stratified split---a non-parametric paired test appropriate for our small, non-Gaussian sample size. 
 
-The proposed model (Oracle $O_i$) is statistically close to locally-calibrated Traditional Gravity (Wilcoxon $p = 0.0136$, Cohen's $d = -0.50$, with a small mean difference of only $0.0013$ in CPC), confirming that survey-free zero-shot transfer achieves practically the same predictive fidelity as a model fitted directly on the target city using local OD matrices. It strongly and significantly outperforms the Radiation Model baseline ($\Delta\text{CPC} = +0.2547$, Wilcoxon $p = 5.96 \times 10^{-8}$, Cohen's $d = +6.85$). The gap versus DeepGravity (Oracle $O_i$) is statistically significant ($\Delta\text{CPC} = -0.0127$, Wilcoxon $p = 5.56 \times 10^{-4}$, Cohen's $d = -0.82$), reflecting the expected advantage of a high-capacity neural model over a parsimonious, interpretable structure.
+The proposed model (Oracle $O_i$) is practically equivalent to locally-calibrated Traditional Gravity: despite a statistically detectable difference (Wilcoxon $p = 0.0136$, Cohen's $d = -0.50$), the mean CPC gap is only $0.0013$ ($0.18\%$ relative), which is negligible for mobility planning purposes---confirming that survey-free zero-shot transfer achieves practically the same predictive fidelity as a model fitted directly on the target city using local OD matrices. It strongly and significantly outperforms the Radiation Model baseline ($\Delta\text{CPC} = +0.2547$, Wilcoxon $p = 5.96 \times 10^{-8}$, Cohen's $d = +6.85$). The gap versus DeepGravity (Oracle $O_i$) is statistically significant ($\Delta\text{CPC} = -0.0127$, Wilcoxon $p = 5.56 \times 10^{-4}$, Cohen's $d = -0.82$), reflecting the expected advantage of a high-capacity neural model over a parsimonious, interpretable structure.
 
 \subsubsection{Urban Morphology Analysis (RQ3)}
 To address RQ3 and evaluate how urban morphological features affect zero-shot transfer performance, we analyze performance across the four morphological groups defined in Section~4.4. The transfer CPC results are shown in Table~\ref{tab:morphology}.
@@ -647,7 +647,7 @@ Specifically, we have shown that:
   \item Anonymized trip-length histograms successfully recover city-specific distance-decay parameters with high fidelity ($r = 0.893$ against OD-fitted parameters).
   \item Distance decay is the dominant transferable component of spatial interaction, explaining 85.8\% of cross-city predictive capacity.
   \item Consequently, using aggregate-recovered decay in downstream flow models achieves zero-shot predictive performance comparable to utilizing full OD matrices, with the relative gap to neural baselines shrinking to 5.9\% in physically fragmented coastal environments.
-  \item Under the 25/25 stratified evaluation, the proposed model is statistically close to locally-calibrated Traditional Gravity (Wilcoxon $p = 0.0136$, Cohen's $d = -0.50$, with a small mean difference of only $0.0013$) while requiring no target-city OD data, demonstrating robust zero-shot generalizability across diverse US metropolitan areas.
+  \item Under the 25/25 stratified evaluation, the proposed model is practically equivalent to locally-calibrated Traditional Gravity---despite a statistically detectable difference (Wilcoxon $p = 0.0136$, Cohen's $d = -0.50$), the mean CPC gap is only $0.0013$ ($0.18\%$ relative)---while requiring no target-city OD data, demonstrating robust zero-shot generalizability across diverse US metropolitan areas.
 \end{itemize}
 
 By demonstrating that aggregate mobility data can effectively replace individual trajectories for calibration, this work establishes a privacy-preserving and structurally transparent pathway for zero-shot transfer in urban planning.
@@ -664,7 +664,7 @@ We evaluate the robustness of our MLE parameter recovery under non-ideal data sc
 \begin{description}
   \item[Bin Sensitivity Analysis] Sweeping the distance bins $K \in \{3, 5, 10, 20\}$ shows that downstream prediction performance stabilizes at a high level. Specifically, the mean CPC across target cities is $0.7346$ for $K=3$, $0.7367$ for $K=5$, $0.7391$ for $K=10$, and $0.7398$ for $K=20$ (compared to the full OD ground truth baseline of $0.7411$). This indicates that even extremely coarse spatial data (e.g., 5 to 10 equal-width bins) is sufficient to robustly capture the decay profile and predict commuting flows.
   \item[Missing Attractiveness Data ($A_j$)] Randomly removing 10\%, 20\%, and 50\% of target-city destination attractions $A_j$ yields highly stable decay recovery (e.g., $\gamma_{\text{MAE}} = 0.0452$ under 20\% missing data vs. $0.0394$ baseline). This validates the robustness of aggregate MLE against localized data gaps.
-  \item[CBD Collapse (Extreme $A_j$ Distortion)] Setting the attraction $A_j$ of the top 5\% highest attractiveness zones to zero (CBD collapse) still allows accurate parameter recovery (e.g., $\gamma_{\text{MAE}} = 0.0541$ under mean replacement and $0.0600$ under 80\% reduction). This proves that spatial decay friction can be recovered even when key destination hubs are omitted.
+  \item[CBD Collapse (Extreme $A_j$ Distortion)] Disrupting the attraction $A_j$ of the top 10\% highest attractiveness zones (CBD collapse) still allows accurate parameter recovery under two scenarios: replacing affected zones with the city-wide mean attraction ($\gamma_{\text{MAE}} = 0.0541$) and scaling them down by 80\% ($\gamma_{\text{MAE}} = 0.0600$). This proves that spatial decay friction can be recovered even when key destination hubs are heavily distorted.
 \end{description}
 
 \begin{figure*}[htbp!]

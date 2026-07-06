@@ -142,9 +142,9 @@ def setup_splits(df, b_k_override=None):
     d_tr  = d_all[train_idx]
     T_tr  = actual[train_idx]
 
-    # Bin edges from training distances
-    edges = np.percentile(d_tr, np.linspace(0, 100, K + 1))
-    edges[0] = 0.0; edges[-1] = np.inf
+    # Bin edges from training distances (equal-width over physical distance)
+    edges = np.linspace(0, d_tr.max(), K + 1)
+    edges[-1] = np.inf
     bin_idx_all = np.clip(np.searchsorted(edges[1:-1], d_all), 0, K - 1)
     bin_idx_tr  = np.clip(np.searchsorted(edges[1:-1], d_tr),  0, K - 1)
 

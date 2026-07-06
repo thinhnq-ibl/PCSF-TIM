@@ -115,8 +115,8 @@ def run_layer1(city_cache, source_cities, heldout_cities):
         # T1.1: Pure Decay Recovery (K=20)
         d_tr = df["d_clamped"].values[tr]
         actual_tr = df["trip_count"].values[tr]
-        edges_20 = np.percentile(d_tr, np.linspace(0, 100, 21))
-        edges_20[0] = 0.0; edges_20[-1] = np.inf
+        edges_20 = np.linspace(0, d_tr.max(), 21)
+        edges_20[-1] = np.inf
         bin_idx_tr = np.clip(np.searchsorted(edges_20[1:-1], d_tr), 0, 19)
         b_k = np.array([actual_tr[bin_idx_tr == k].sum() for k in range(20)], float)
         b_k /= b_k.sum()
@@ -157,9 +157,10 @@ def run_layer1(city_cache, source_cities, heldout_cities):
         actual = df["trip_count"].values
         test_idx = np.where(te)[0]
         
+        d_max = d_tr.max()
         for K in [3, 5, 10, 20]:
-            edges_K = np.percentile(d_tr, np.linspace(0, 100, K + 1))
-            edges_K[0] = 0.0; edges_K[-1] = np.inf
+            edges_K = np.linspace(0, d_max, K + 1)
+            edges_K[-1] = np.inf
             bin_idx_tr_K = np.clip(np.searchsorted(edges_K[1:-1], d_tr), 0, K - 1)
             b_k_K = np.array([actual_tr[bin_idx_tr_K == k].sum() for k in range(K)], float)
             b_k_K /= b_k_K.sum()
@@ -802,8 +803,8 @@ def main():
         tr = cc["train_mask"]
         d_tr = df["d_clamped"].values[tr]
         actual_tr = df["trip_count"].values[tr]
-        edges_20 = np.percentile(d_tr, np.linspace(0, 100, 21))
-        edges_20[0] = 0.0; edges_20[-1] = np.inf
+        edges_20 = np.linspace(0, d_tr.max(), 21)
+        edges_20[-1] = np.inf
         bin_idx_tr = np.clip(np.searchsorted(edges_20[1:-1], d_tr), 0, 19)
         b_k = np.array([actual_tr[bin_idx_tr == k].sum() for k in range(20)], float)
         b_k /= b_k.sum()

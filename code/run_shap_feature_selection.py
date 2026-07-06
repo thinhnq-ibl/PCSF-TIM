@@ -134,8 +134,8 @@ def main():
         tr = cc["train_mask"]
         d_tr = df["d_clamped"].values[tr]
         actual_tr = df["trip_count"].values[tr]
-        edges_20 = np.percentile(d_tr, np.linspace(0, 100, 21))
-        edges_20[0] = 0.0; edges_20[-1] = np.inf
+        edges_20 = np.linspace(0, d_tr.max(), 21)
+        edges_20[-1] = np.inf
         bin_idx_tr = np.clip(np.searchsorted(edges_20[1:-1], d_tr), 0, 19)
         b_k = np.array([actual_tr[bin_idx_tr == k].sum() for k in range(20)], float)
         b_k /= b_k.sum()
