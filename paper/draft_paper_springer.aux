@@ -118,24 +118,24 @@
 \newlabel{tab:decay_recovery_merged}{{3}{14}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1)}{table.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Decay Bin Sensitivity Analysis (RQ1)}{14}{subsubsection.6.2.3}\protected@file@percent }
 \citation{lundberg2017unified}
+\citation{shapley1953value}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Downstream CPC performance on the held-out target cities \textit  {where Meta MDM data is available} (a subset of the full 25-city evaluation) under different decay calibration strategies using real Meta prior data (RQ1). See Table~\ref {tab:multibaseline_comparison} for results over the complete 25-city split.}}{15}{table.4}\protected@file@percent }
 \newlabel{tab:meta_prior_evaluation}{{4}{15}{Downstream CPC performance on the held-out target cities \textit {where Meta MDM data is available} (a subset of the full 25-city evaluation) under different decay calibration strategies using real Meta prior data (RQ1). See Table~\ref {tab:multibaseline_comparison} for results over the complete 25-city split}{table.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $).}}{15}{figure.6}\protected@file@percent }
-\newlabel{fig:layer1_scatters}{{6}{15}{Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $)}{figure.6}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Origin Production Transferability}{15}{subsubsection.6.2.4}\protected@file@percent }
-\citation{shapley1953value}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Component Contributions via Shapley Game (Answering RQ2)}{15}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:shapley_game}{{6.3}{15}{Component Contributions via Shapley Game (Answering RQ2)}{subsection.6.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $).}}{16}{figure.6}\protected@file@percent }
+\newlabel{fig:layer1_scatters}{{6}{16}{Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $)}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~\ref {sec:origin_outflow}), confirmed by this sweep as the dominant contributors.}}{16}{figure.7}\protected@file@percent }
+\newlabel{fig:shap_sweep}{{7}{16}{SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~\ref {sec:origin_outflow}), confirmed by this sweep as the dominant contributors}{figure.7}{}}
 \citation{simini2021}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Component Contributions via Shapley Game (Answering RQ2)}{16}{subsection.6.3}\protected@file@percent }
-\newlabel{sec:shapley_game}{{6.3}{16}{Component Contributions via Shapley Game (Answering RQ2)}{subsection.6.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Experiment B: Downstream Survey-Free Flow Prediction (Answering RQ2)}{16}{subsection.6.4}\protected@file@percent }
-\newlabel{sec:experiment_b}{{6.4}{16}{Experiment B: Downstream Survey-Free Flow Prediction (Answering RQ2)}{subsection.6.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Comparison with Baselines}{16}{subsubsection.6.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~\ref {sec:origin_outflow}), confirmed by this sweep as the dominant contributors.}}{17}{figure.7}\protected@file@percent }
-\newlabel{fig:shap_sweep}{{7}{17}{SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~\ref {sec:origin_outflow}), confirmed by this sweep as the dominant contributors}{figure.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model.}}{17}{table.5}\protected@file@percent }
-\newlabel{tab:ablation}{{5}{17}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model}{table.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Statistical Significance Testing}{17}{subsubsection.6.4.2}\protected@file@percent }
 \citation{wilcoxon1945}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Experiment B: Downstream Survey-Free Flow Prediction (Answering RQ2)}{17}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:experiment_b}{{6.4}{17}{Experiment B: Downstream Survey-Free Flow Prediction (Answering RQ2)}{subsection.6.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Comparison with Baselines}{17}{subsubsection.6.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Statistical Significance Testing}{17}{subsubsection.6.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model.}}{18}{table.5}\protected@file@percent }
+\newlabel{tab:ablation}{{5}{18}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model}{table.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{18}{table.6}\protected@file@percent }
 \newlabel{tab:multibaseline_comparison}{{6}{18}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Experiment C: Exploratory Urban Morphology Analysis (Answering RQ3)}{19}{subsection.6.5}\protected@file@percent }
@@ -147,34 +147,32 @@
 \newlabel{tab:morphology}{{7}{20}{Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}{table.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Conceptual Intuition: Marginal Projection under Separability}{20}{subsection.7.2}\protected@file@percent }
 \newlabel{sec:conceptual_intuition}{{7.2}{20}{Conceptual Intuition: Marginal Projection under Separability}{subsection.7.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Hypotheses Requiring Further Verification}{20}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Hypotheses Requiring Further Verification}{21}{subsection.7.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Practical Deployment Implications}{21}{subsection.7.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8}Threats to Validity}{21}{section.8}\protected@file@percent }
 \newlabel{sec:threats_to_validity}{{8}{21}{Threats to Validity}{section.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusions}{21}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusions}{22}{section.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.1}What Did We Discover?}{22}{subsection.9.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Why Does It Matter?}{22}{subsection.9.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.3}What Remains Unknown?}{22}{subsection.9.3}\protected@file@percent }
-\newlabel{sec:appendix}{{9.3}{22}{Appendix: Supplementary Materials}{section*.3}{}}
+\newlabel{sec:appendix}{{9.3}{23}{Appendix: Supplementary Materials}{section*.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{24}{figure.8}\protected@file@percent }
+\newlabel{fig:layer1_heatmap}{{8}{24}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{24}{table.8}\protected@file@percent }
+\newlabel{tab:preprocessing}{{8}{24}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.8}{}}
 \bibdata{references}
 \bibcite{alis2021generalized}{{1}{2021}{{Alis et~al.}}{{Alis, Legara, and Monterola}}}
 \bibcite{atwal2025commuting}{{2}{2025}{{Atwal et~al.}}{{Atwal, Anderson, Pfoser, and Z{\"u}fle}}}
 \bibcite{barbosa2018human}{{3}{2018}{{Barbosa et~al.}}{{Barbosa, Barthelemy, Ghoshal, James, Lenormand, Louail et~al.}}}
 \bibcite{brockmann2006scaling}{{4}{2006}{{Brockmann et~al.}}{{Brockmann, Hufnagel, and Geisel}}}
 \bibcite{gonzalez2008understanding}{{5}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{24}{figure.8}\protected@file@percent }
-\newlabel{fig:layer1_heatmap}{{8}{24}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{24}{table.8}\protected@file@percent }
-\newlabel{tab:preprocessing}{{8}{24}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces GBDT Model Hyperparameter Configurations}}{24}{table.9}\protected@file@percent }
-\newlabel{tab:gbdt_hyperparameters}{{9}{24}{GBDT Model Hyperparameter Configurations}{table.9}{}}
 \bibcite{jin2022crosstres}{{6}{2022}{{Jin et~al.}}{{Jin, Wu, Wang, Liang, and Tang}}}
-\bibcite{lenormand2012universal}{{7}{2012}{{Lenormand et~al.}}{{Lenormand, Huet, Gargiulo, and Deffuant}}}
-\bibcite{lenormand2016systematic}{{8}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{25}{figure.9}\protected@file@percent }
 \newlabel{fig:layer2_results}{{9}{25}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces List of Abbreviations}}{25}{table.10}\protected@file@percent }
-\newlabel{tab:abbreviations}{{10}{25}{List of Abbreviations}{table.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces GBDT Model Hyperparameter Configurations}}{25}{table.9}\protected@file@percent }
+\newlabel{tab:gbdt_hyperparameters}{{9}{25}{GBDT Model Hyperparameter Configurations}{table.9}{}}
+\bibcite{lenormand2012universal}{{7}{2012}{{Lenormand et~al.}}{{Lenormand, Huet, Gargiulo, and Deffuant}}}
+\bibcite{lenormand2016systematic}{{8}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
 \bibcite{lundberg2017unified}{{9}{2017}{{Lundberg and Lee}}{{}}}
 \bibcite{mai2022geospatial}{{10}{2022}{{Mai et~al.}}{{Mai, Cundy, Choi, Song, Shofi et~al.}}}
 \bibcite{mendieta2023geogpt}{{11}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
@@ -187,6 +185,8 @@
 \bibcite{song2010limits}{{18}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
 \bibcite{stouffer1940intervening}{{19}{1940}{{Stouffer}}{{}}}
 \bibcite{tanner1961}{{20}{1961}{{Tanner}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces List of Abbreviations}}{26}{table.10}\protected@file@percent }
+\newlabel{tab:abbreviations}{{10}{26}{List of Abbreviations}{table.10}{}}
 \bibcite{worldpop2018}{{21}{2017}{{Tatem}}{{}}}
 \bibcite{wang2018regiontrans}{{22}{2018}{{Wang et~al.}}{{Wang, Geng, Ma, Yang, Cao, and Zheng}}}
 \bibcite{wang2019origin}{{23}{2021}{{Wang et~al.}}{{Wang, Cao, and Yu}}}
