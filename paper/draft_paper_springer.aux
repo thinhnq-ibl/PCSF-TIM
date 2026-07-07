@@ -4,11 +4,11 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{barbosa2018human,gonzalez2008understanding,song2010limits}
+\citation{wilson1971}
 \Newlabel{2}{2}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
-\citation{wilson1971}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the core findings: Aggregate trip-length distributions contain the necessary information to recover city-specific distance decay $f(d)$, which acts as a primary transferable component for predicting zero-shot flows within the investigated gravity framework.}}{2}{figure.1}\protected@file@percent }
-\newlabel{fig:graphical_abstract}{{1}{2}{Overview of the core findings: Aggregate trip-length distributions contain the necessary information to recover city-specific distance decay $f(d)$, which acts as a primary transferable component for predicting zero-shot flows within the investigated gravity framework}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the core findings: Aggregate trip-length distributions contain sufficient information to recover city-specific distance decay $f(d)$, which acts as a primary transferable component for predicting zero-shot flows within the investigated gravity framework. Prediction performance is bounded by the model's structural gravity assumptions.}}{2}{figure.1}\protected@file@percent }
+\newlabel{fig:graphical_abstract}{{1}{2}{Overview of the core findings: Aggregate trip-length distributions contain sufficient information to recover city-specific distance decay $f(d)$, which acts as a primary transferable component for predicting zero-shot flows within the investigated gravity framework. Prediction performance is bounded by the model's structural gravity assumptions}{figure.1}{}}
 \citation{wilson1971,tanner1961}
 \citation{Simini2012universal,alis2021generalized}
 \citation{stouffer1940intervening}
@@ -24,21 +24,21 @@
 \citation{wang2018regiontrans}
 \citation{jin2022crosstres}
 \citation{mai2022geospatial,mendieta2023geogpt}
-\citation{wang2022when}
-\citation{yao2020meta}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{3}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Classical and Structured Mobility Models}{3}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Deep Learning for OD Prediction}{3}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Aggregate Mobility Data for Decay Calibration}{3}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Cross-City Transfer Learning}{3}{subsection.2.4}\protected@file@percent }
+\citation{wang2022when}
+\citation{yao2020meta}
 \citation{lundberg2017unified}
 \citation{wilson1971}
 \citation{Simini2012universal}
 \citation{simini2021}
 \citation{Rong2023goddag}
 \citation{wang2018regiontrans}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling zero-shot transfer without target-city OD surveys.}}{4}{figure.2}\protected@file@percent }
-\newlabel{fig:conceptual_framework}{{2}{4}{Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling zero-shot transfer without target-city OD surveys}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:conceptual_framework}{{2}{4}{Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys}{figure.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Quantifying the Relative Role of Distance Decay in Transfer}{4}{subsection.2.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Research Gap and Positioning}{4}{subsection.2.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Problem Setting}{4}{section.3}\protected@file@percent }
@@ -49,110 +49,132 @@
 \newlabel{sec:methodology}{{4}{5}{Methodological Design}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Decomposition Hypothesis}{5}{subsection.4.1}\protected@file@percent }
 \newlabel{eq:decomposition}{{1}{5}{Decomposition Hypothesis}{equation.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Aggregate-Based Decay Calibration}{5}{subsection.4.2}\protected@file@percent }
 \citation{tanner1961}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Aggregate-Based Decay Calibration}{6}{subsection.4.2}\protected@file@percent }
 \newlabel{eq:predicted_flow_mle}{{3}{6}{Aggregate-Based Decay Calibration}{equation.3}{}}
 \newlabel{eq:predicted_prob_mle}{{4}{6}{Aggregate-Based Decay Calibration}{equation.4}{}}
 \newlabel{eq:likelihood_mle}{{5}{6}{Aggregate-Based Decay Calibration}{equation.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Distance Decay Function}{6}{subsection.4.3}\protected@file@percent }
-\newlabel{sec:decay_function}{{4.3}{6}{Distance Decay Function}{subsection.4.3}{}}
-\newlabel{eq:tanner_multi}{{6}{6}{Distance Decay Function}{equation.6}{}}
-\newlabel{eq:delta}{{7}{6}{Distance Decay Function}{equation.7}{}}
 \citation{wilson1971,Simini2012universal}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf  {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat  {\gamma }, \hat  {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$).}}{7}{figure.3}\protected@file@percent }
-\newlabel{fig:framework_pipeline}{{3}{7}{Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat {\gamma }, \hat {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict zero-shot flow matrices ($T_{ij}$)}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf  {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat  {\gamma }, \hat  {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$).}}{7}{figure.3}\protected@file@percent }
+\newlabel{fig:framework_pipeline}{{3}{7}{Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat {\gamma }, \hat {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$)}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Distance Decay Function}{7}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:decay_function}{{4.3}{7}{Distance Decay Function}{subsection.4.3}{}}
+\newlabel{eq:tanner_multi}{{6}{7}{Distance Decay Function}{equation.6}{}}
+\newlabel{eq:delta}{{7}{7}{Distance Decay Function}{equation.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Origin Outflow Component ($O_i$)}{7}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:origin_outflow}{{4.4}{7}{Origin Outflow Component (\texorpdfstring {$O_i$}{O\_i})}{subsection.4.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Destination Attraction Component ($A_j$)}{7}{subsection.4.5}\protected@file@percent }
-\newlabel{eq:attraction_heuristic}{{8}{7}{Destination Attraction Component (\texorpdfstring {$A_j$}{A\_j})}{equation.8}{}}
-\newlabel{eq:minmax}{{9}{7}{Destination Attraction Component (\texorpdfstring {$A_j$}{A\_j})}{equation.9}{}}
+\newlabel{sec:destination_attraction}{{4.5}{7}{Destination Attraction Component (\texorpdfstring {$A_j$}{A\_j})}{subsection.4.5}{}}
 \citation{worldpop2018}
-\citation{MetaMovementDistributionMaps}
-\citation{atwal2025commuting}
+\newlabel{eq:attraction_heuristic}{{8}{8}{Destination Attraction Component (\texorpdfstring {$A_j$}{A\_j})}{equation.8}{}}
+\newlabel{eq:minmax}{{9}{8}{Destination Attraction Component (\texorpdfstring {$A_j$}{A\_j})}{equation.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Algorithmic Flow}{8}{subsection.4.6}\protected@file@percent }
+\newlabel{sec:algorithmic_flow}{{4.6}{8}{Algorithmic Flow}{subsection.4.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Data Firewall and Zero-Leakage Protocol}{8}{subsection.4.7}\protected@file@percent }
 \newlabel{sec:data_firewall}{{4.7}{8}{Data Firewall and Zero-Leakage Protocol}{subsection.4.7}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Data and Transferable Urban Representation}{8}{section.5}\protected@file@percent }
 \newlabel{sec:data}{{5}{8}{Data and Transferable Urban Representation}{section.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Design Principle: Open-Data-Compatible}{8}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Data Sources}{8}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:open_data_compatible}{{5.1}{8}{Design Principle: Open-Data-Compatible}{subsection.5.1}{}}
+\citation{MetaMovementDistributionMaps}
+\citation{atwal2025commuting}
 \citation{worldpop2018}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Data leakage protocol mapping the strict isolation between source-city and target-city datasets across training, calibration, prediction, and evaluation phases.}}{9}{table.2}\protected@file@percent }
-\newlabel{tab:data_usage_matrix}{{2}{9}{Data leakage protocol mapping the strict isolation between source-city and target-city datasets across training, calibration, prediction, and evaluation phases}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Data Sources}{9}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:data_sources}{{5.2}{9}{Data Sources}{subsection.5.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}OSM-Derived Features}{9}{subsubsection.5.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Population Data}{9}{subsubsection.5.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Transferable Urban Features}{9}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Meta MDM Harmonization}{9}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:meta_mdm_harmonization}{{5.3}{9}{Meta MDM Harmonization}{subsection.5.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Data leakage protocol mapping the strict isolation between source-city and target-city datasets across training, calibration, prediction, and evaluation phases.}}{10}{table.2}\protected@file@percent }
+\newlabel{tab:data_usage_matrix}{{2}{10}{Data leakage protocol mapping the strict isolation between source-city and target-city datasets across training, calibration, prediction, and evaluation phases}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Transferable Urban Features}{10}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:transferable_features}{{5.4}{10}{Transferable Urban Features}{subsection.5.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Candidate Feature Set (30 dimensions)}{10}{subsubsection.5.4.1}\protected@file@percent }
 \citation{lundberg2017unified}
 \citation{gonzalez2008understanding,brockmann2006scaling}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Taxonomy of the globally available open data features used in the outflow model. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}}{10}{figure.4}\protected@file@percent }
-\newlabel{fig:feature_taxonomy}{{4}{10}{Taxonomy of the globally available open data features used in the outflow model. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Candidate Feature Set (30 dimensions)}{10}{subsubsection.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}SHAP-Based Feature Stability Selection}{10}{subsubsection.5.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Urban Morphology Grouping (RQ3)}{10}{subsection.5.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Taxonomy of the globally available open data features used in the outflow model. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors.}}{11}{figure.4}\protected@file@percent }
+\newlabel{fig:feature_taxonomy}{{4}{11}{Taxonomy of the globally available open data features used in the outflow model. Features are categorized into four dimensions: population, land use, infrastructure, and contextual scale factors}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}SHAP-Based Feature Stability Selection}{11}{subsubsection.5.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Urban Morphology Grouping (RQ3)}{11}{subsection.5.5}\protected@file@percent }
+\newlabel{sec:urban_morphology}{{5.5}{11}{Urban Morphology Grouping (RQ3)}{subsection.5.5}{}}
 \citation{lenormand2012universal}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Cross-City Transfer Evaluation Protocol}{11}{subsection.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.5.1}Information Leakage Prevention}{11}{subsubsection.5.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.5.2}Evaluation Metric: Common Part of Commuters}{11}{subsubsection.5.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Preprocessing \& Normalization}{11}{subsection.5.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{11}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Validation Protocol Overview}{11}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Experiment A: Decay Parameter Recovery (Answering RQ1)}{12}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Decay Recovery Results}{12}{subsubsection.6.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Validation via Real-World Meta Mobility Prior (RQ1)}{12}{subsubsection.6.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Cross-City Transfer Evaluation Protocol}{12}{subsection.5.6}\protected@file@percent }
+\newlabel{sec:transfer_protocol}{{5.6}{12}{Cross-City Transfer Evaluation Protocol}{subsection.5.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.6.1}Information Leakage Prevention}{12}{subsubsection.5.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.6.2}Evaluation Metric: Common Part of Commuters}{12}{subsubsection.5.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}Preprocessing \& Normalization}{12}{subsection.5.7}\protected@file@percent }
+\newlabel{sec:preprocessing}{{5.7}{12}{Preprocessing \& Normalization}{subsection.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{12}{section.6}\protected@file@percent }
+\newlabel{sec:results}{{6}{12}{Results}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Validation Protocol Overview}{12}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:validation_protocol}{{6.1}{12}{Validation Protocol Overview}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Experiment A: Decay Parameter Recovery (Answering RQ1)}{13}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:experiment_a}{{6.2}{13}{Experiment A: Decay Parameter Recovery (Answering RQ1)}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Decay Recovery Results}{13}{subsubsection.6.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Validation via Real-World Meta Mobility Prior (RQ1)}{13}{subsubsection.6.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach.}}{14}{figure.5}\protected@file@percent }
+\newlabel{fig:validation_roadmap}{{5}{14}{Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach}{figure.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1).}}{14}{table.3}\protected@file@percent }
+\newlabel{tab:decay_recovery_merged}{{3}{14}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1)}{table.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Decay Bin Sensitivity Analysis (RQ1)}{14}{subsubsection.6.2.3}\protected@file@percent }
 \citation{lundberg2017unified}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach.}}{13}{figure.5}\protected@file@percent }
-\newlabel{fig:validation_roadmap}{{5}{13}{Evidence supporting RQ1--RQ3 showing the three evaluation stages used to systematically verify the aggregate calibration approach}{figure.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1).}}{13}{table.3}\protected@file@percent }
-\newlabel{tab:decay_recovery_merged}{{3}{13}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1)}{table.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Decay Bin Sensitivity Analysis (RQ1)}{13}{subsubsection.6.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Origin Production Transferability}{13}{subsubsection.6.2.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies using real Meta prior data (RQ1).}}{14}{table.4}\protected@file@percent }
-\newlabel{tab:meta_prior_evaluation}{{4}{14}{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies using real Meta prior data (RQ1)}{table.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $).}}{14}{figure.6}\protected@file@percent }
-\newlabel{fig:layer1_scatters}{{6}{14}{Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $)}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Component Contributions via Shapley Game (Answering RQ2)}{14}{subsection.6.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Downstream CPC performance on the held-out target cities \textit  {where Meta MDM data is available} (a subset of the full 25-city evaluation) under different decay calibration strategies using real Meta prior data (RQ1). See Table~\ref {tab:multibaseline_comparison} for results over the complete 25-city split.}}{15}{table.4}\protected@file@percent }
+\newlabel{tab:meta_prior_evaluation}{{4}{15}{Downstream CPC performance on the held-out target cities \textit {where Meta MDM data is available} (a subset of the full 25-city evaluation) under different decay calibration strategies using real Meta prior data (RQ1). See Table~\ref {tab:multibaseline_comparison} for results over the complete 25-city split}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $).}}{15}{figure.6}\protected@file@percent }
+\newlabel{fig:layer1_scatters}{{6}{15}{Decay parameter recovery comparison between Ground Truth (fitted on individual OD pairs) and Recovered parameters (fitted on aggregate distance bins) across all 25 held-out target cities. Power-law exponent $\gamma $ (left) and exponential decay rate $\beta $ (right) show consistency in spatial decay structure (Pearson $r = 0.909$ for $\gamma $ and $r = 0.427$ for $\beta $)}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Origin Production Transferability}{15}{subsubsection.6.2.4}\protected@file@percent }
 \citation{shapley1953value}
 \citation{simini2021}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~3.4), confirmed by this sweep as the dominant contributors.}}{15}{figure.7}\protected@file@percent }
-\newlabel{fig:shap_sweep}{{7}{15}{SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~3.4), confirmed by this sweep as the dominant contributors}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Experiment B: Downstream Survey-Free Flow Prediction (Answering RQ2)}{15}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Comparison with Baselines}{15}{subsubsection.6.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Component Contributions via Shapley Game (Answering RQ2)}{16}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:shapley_game}{{6.3}{16}{Component Contributions via Shapley Game (Answering RQ2)}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Experiment B: Downstream Survey-Free Flow Prediction (Answering RQ2)}{16}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:experiment_b}{{6.4}{16}{Experiment B: Downstream Survey-Free Flow Prediction (Answering RQ2)}{subsection.6.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Comparison with Baselines}{16}{subsubsection.6.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~\ref {sec:origin_outflow}), confirmed by this sweep as the dominant contributors.}}{17}{figure.7}\protected@file@percent }
+\newlabel{fig:shap_sweep}{{7}{17}{SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$. The stability analysis retains $K=23$ features (all passing both thresholds: $\mu _p \ge 0.005$, $S_p \ge 1.0$), achieving 23.3\% dimensionality reduction without performance loss. The final deployed model uses the 6 core structural features (Section~\ref {sec:origin_outflow}), confirmed by this sweep as the dominant contributors}{figure.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model.}}{17}{table.5}\protected@file@percent }
+\newlabel{tab:ablation}{{5}{17}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model}{table.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Statistical Significance Testing}{17}{subsubsection.6.4.2}\protected@file@percent }
 \citation{wilcoxon1945}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model.}}{16}{table.5}\protected@file@percent }
-\newlabel{tab:ablation}{{5}{16}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger }$ to isolate component contributions; this should not be confused with the aggregate-recovered decay used in the final proposed model}{table.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{16}{table.6}\protected@file@percent }
-\newlabel{tab:multibaseline_comparison}{{6}{16}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.6}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Statistical Significance Testing}{16}{subsubsection.6.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Experiment C: Exploratory Urban Morphology Analysis (Answering RQ3)}{17}{subsection.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{17}{section.7}\protected@file@percent }
-\newlabel{sec:discussion}{{7}{17}{Discussion}{section.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}What is Proven (Empirical Evidence)}{17}{subsection.7.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}}{18}{table.7}\protected@file@percent }
-\newlabel{tab:morphology}{{7}{18}{Zero-Shot Performance by Urban Morphology (25 Held-Out Target Cities)}{table.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}What Remains a Hypothesis (What is Not Proven)}{18}{subsection.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Practical Deployment Implications}{18}{subsection.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Threats to Validity}{18}{section.8}\protected@file@percent }
-\newlabel{sec:threats_to_validity}{{8}{18}{Threats to Validity}{section.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusions}{19}{section.9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{18}{table.6}\protected@file@percent }
+\newlabel{tab:multibaseline_comparison}{{6}{18}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Experiment C: Exploratory Urban Morphology Analysis (Answering RQ3)}{19}{subsection.6.5}\protected@file@percent }
+\newlabel{sec:experiment_c}{{6.5}{19}{Experiment C: Exploratory Urban Morphology Analysis (Answering RQ3)}{subsection.6.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{19}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{19}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Empirical Evidence (Established Findings)}{19}{subsection.7.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}}{20}{table.7}\protected@file@percent }
+\newlabel{tab:morphology}{{7}{20}{Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Conceptual Intuition: Marginal Projection under Separability}{20}{subsection.7.2}\protected@file@percent }
+\newlabel{sec:conceptual_intuition}{{7.2}{20}{Conceptual Intuition: Marginal Projection under Separability}{subsection.7.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Hypotheses Requiring Further Verification}{20}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Practical Deployment Implications}{21}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Threats to Validity}{21}{section.8}\protected@file@percent }
+\newlabel{sec:threats_to_validity}{{8}{21}{Threats to Validity}{section.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusions}{21}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}What Did We Discover?}{22}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Why Does It Matter?}{22}{subsection.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}What Remains Unknown?}{22}{subsection.9.3}\protected@file@percent }
+\newlabel{sec:appendix}{{9.3}{22}{Appendix: Supplementary Materials}{section*.3}{}}
 \bibdata{references}
 \bibcite{alis2021generalized}{{1}{2021}{{Alis et~al.}}{{Alis, Legara, and Monterola}}}
-\newlabel{sec:appendix}{{9}{20}{Appendix: Supplementary Materials}{section*.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{21}{figure.8}\protected@file@percent }
-\newlabel{fig:layer1_heatmap}{{8}{21}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{21}{table.8}\protected@file@percent }
-\newlabel{tab:preprocessing}{{8}{21}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces GBDT Model Hyperparameter Configurations}}{21}{table.9}\protected@file@percent }
-\newlabel{tab:gbdt_hyperparameters}{{9}{21}{GBDT Model Hyperparameter Configurations}{table.9}{}}
 \bibcite{atwal2025commuting}{{2}{2025}{{Atwal et~al.}}{{Atwal, Anderson, Pfoser, and Z{\"u}fle}}}
 \bibcite{barbosa2018human}{{3}{2018}{{Barbosa et~al.}}{{Barbosa, Barthelemy, Ghoshal, James, Lenormand, Louail et~al.}}}
 \bibcite{brockmann2006scaling}{{4}{2006}{{Brockmann et~al.}}{{Brockmann, Hufnagel, and Geisel}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{22}{figure.9}\protected@file@percent }
-\newlabel{fig:layer2_results}{{9}{22}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces List of Abbreviations}}{22}{table.10}\protected@file@percent }
-\newlabel{tab:abbreviations}{{10}{22}{List of Abbreviations}{table.10}{}}
 \bibcite{gonzalez2008understanding}{{5}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{24}{figure.8}\protected@file@percent }
+\newlabel{fig:layer1_heatmap}{{8}{24}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{24}{table.8}\protected@file@percent }
+\newlabel{tab:preprocessing}{{8}{24}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces GBDT Model Hyperparameter Configurations}}{24}{table.9}\protected@file@percent }
+\newlabel{tab:gbdt_hyperparameters}{{9}{24}{GBDT Model Hyperparameter Configurations}{table.9}{}}
 \bibcite{jin2022crosstres}{{6}{2022}{{Jin et~al.}}{{Jin, Wu, Wang, Liang, and Tang}}}
 \bibcite{lenormand2012universal}{{7}{2012}{{Lenormand et~al.}}{{Lenormand, Huet, Gargiulo, and Deffuant}}}
 \bibcite{lenormand2016systematic}{{8}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{25}{figure.9}\protected@file@percent }
+\newlabel{fig:layer2_results}{{9}{25}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces List of Abbreviations}}{25}{table.10}\protected@file@percent }
+\newlabel{tab:abbreviations}{{10}{25}{List of Abbreviations}{table.10}{}}
 \bibcite{lundberg2017unified}{{9}{2017}{{Lundberg and Lee}}{{}}}
 \bibcite{mai2022geospatial}{{10}{2022}{{Mai et~al.}}{{Mai, Cundy, Choi, Song, Shofi et~al.}}}
 \bibcite{mendieta2023geogpt}{{11}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
@@ -172,4 +194,4 @@
 \bibcite{wilcoxon1945}{{25}{1945}{{Wilcoxon}}{{}}}
 \bibcite{wilson1971}{{26}{1971}{{Wilson}}{{}}}
 \bibcite{yao2020meta}{{27}{2019}{{Yao et~al.}}{{Yao, Liu, Wei, Tang, and Li}}}
-\gdef \@abspage@last{24}
+\gdef \@abspage@last{27}
