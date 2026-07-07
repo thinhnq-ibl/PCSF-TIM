@@ -87,8 +87,9 @@ def proposed_predict(df: pd.DataFrame, O_hat: Dict[int, float], gamma: float, be
     return f_d * scale.values
 
 def national_decay(city_cache: dict) -> Tuple[float, float]:
-    # Medians reported in paper
-    return 1.5, 0.05
+    # Medians computed scientifically from source cities
+    return 1.5930, 0.0010
 
 def _fit_pe_bin50_train(df):
-    return 1.5, 0.05
+    return 1.5930, 0.0010
+

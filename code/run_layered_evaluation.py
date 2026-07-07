@@ -60,9 +60,32 @@ def fit_decay_from_bins_only(df, b_k, edges):
     K = len(b_k)
     bin_idx = np.clip(np.searchsorted(edges[1:-1], d), 0, K - 1)
     
-    def loss(params):
-        a, b = params
-        T_hat = predict_tanner_singly(o_idx, A, d, a, b)
+    # Calculate midpoints of bins for moment estimation
+    midpoints = []
+    for i in range(K):
+        left = edges[i]
+        right = edges[i+1]
+        if np.isinf(right):
+            # Fallback for last bin: use 1.5 * left boundary
+            midpoints.append(1.5 * left)
+        else:
+            midpoints.append(0.5 * (left + right))
+    midpoints = np.array(midpoints)
+    d_obs = float(np.sum(b_k * midpoints))
+    
+    # Scientific initialization
+    beta_init = np.clip(1.0 / np.maximum(d_obs, 1e-3), 0.001, 2.0)
+    gamma_init = 1.0
+    
+    best_loss = np.inf
+    best_params = [gamma_init, beta_init]
+    
+    # Reparameterized optimization with restarts to avoid local minima
+    # optimization variables: theta = [log_gamma, log_beta]
+    def loss_reparam(theta):
+        g = np.exp(theta[0])
+        b = np.exp(theta[1])
+        T_hat = predict_tanner_singly(o_idx, A, d, g, b)
         p_k = np.bincount(bin_idx, weights=T_hat, minlength=K).astype(float)
         tot = p_k.sum()
         if tot < 1e-12:
@@ -70,8 +93,25 @@ def fit_decay_from_bins_only(df, b_k, edges):
         p_k = (p_k / tot).clip(1e-15)
         return -float(np.sum(b_k * np.log(p_k)))
         
-    res = minimize(loss, x0=[1.0, 0.05], bounds=[(0.01, 5.0), (0.001, 2.0)], method="L-BFGS-B")
-    return float(res.x[0]), float(res.x[1])
+    rng = np.random.default_rng(42)
+    for run in range(10):
+        if run == 0:
+            theta_start = [np.log(gamma_init), np.log(beta_init)]
+        else:
+            theta_start = [
+                rng.normal(np.log(gamma_init), 0.25),
+                rng.normal(np.log(beta_init), 0.25)
+            ]
+        
+        # Optimize in unconstrained log space
+        res = minimize(loss_reparam, x0=theta_start, method="L-BFGS-B", 
+                       bounds=[(np.log(0.01), np.log(5.0)), (np.log(0.0001), np.log(2.0))])
+        
+        if res.success and res.fun < best_loss:
+            best_loss = res.fun
+            best_params = [np.exp(res.x[0]), np.exp(res.x[1])]
+            
+    return float(best_params[0]), float(best_params[1])
 
 def fit_decay_mle_od(df):
     """Fits decay parameters using individual OD pairs (MLE Ground Truth)."""
@@ -83,9 +123,25 @@ def fit_decay_mle_od(df):
     unique_o, o_idx_mapped = np.unique(o_idx, return_inverse=True)
     n_o = len(unique_o)
     
-    def loss(params):
-        gamma, beta = params
-        log_f = np.log(np.maximum(A, 1e-9)) - gamma * np.log(np.maximum(d, 1e-6)) - beta * d
+    # Calculate empirical mean trip distance from ground truth trips
+    total_trips = trips.sum()
+    if total_trips > 0:
+        d_obs = float(np.sum(trips * d) / total_trips)
+    else:
+        d_obs = 10.0
+        
+    # Scientific initialization
+    beta_init = np.clip(1.0 / np.maximum(d_obs, 1e-3), 0.001, 2.0)
+    gamma_init = 1.0
+    
+    best_loss = np.inf
+    best_params = [gamma_init, beta_init]
+    
+    # Reparameterized loss function: theta = [log_gamma, log_beta]
+    def loss_reparam(theta):
+        g = np.exp(theta[0])
+        b = np.exp(theta[1])
+        log_f = np.log(np.maximum(A, 1e-9)) - g * np.log(np.maximum(d, 1e-6)) - b * d
         lf_max = np.full(n_o, -np.inf)
         np.maximum.at(lf_max, o_idx_mapped, log_f)
         shifted = np.exp(log_f - lf_max[o_idx_mapped])
@@ -96,8 +152,25 @@ def fit_decay_mle_od(df):
         log_p = log_f - log_denom[o_idx_mapped]
         return -float(np.sum(trips * log_p))
 
-    res = minimize(loss, x0=[1.5, 0.05], bounds=[(0.01, 5.0), (0.001, 2.0)], method="L-BFGS-B")
-    return float(res.x[0]), float(res.x[1])
+    rng = np.random.default_rng(42)
+    for run in range(10):
+        if run == 0:
+            theta_start = [np.log(gamma_init), np.log(beta_init)]
+        else:
+            theta_start = [
+                rng.normal(np.log(gamma_init), 0.25),
+                rng.normal(np.log(beta_init), 0.25)
+            ]
+            
+        res = minimize(loss_reparam, x0=theta_start, method="L-BFGS-B",
+                       bounds=[(np.log(0.01), np.log(5.0)), (np.log(0.0001), np.log(2.0))])
+                       
+        if res.success and res.fun < best_loss:
+            best_loss = res.fun
+            best_params = [np.exp(res.x[0]), np.exp(res.x[1])]
+            
+    return float(best_params[0]), float(best_params[1])
+
 
 def run_layer1(city_cache, source_cities, heldout_cities):
     logging.info("=== LAYER 1: DECAY IDENTIFICATION TEST ===")
