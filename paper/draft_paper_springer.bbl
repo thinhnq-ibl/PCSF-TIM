@@ -1,14 +1,10 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{18}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{\url{https://doi.org/#1}}
 \providecommand{\eprint}[2][]{\url{#2}}
  \bibcommenthead
-
-\bibitem[{Alis et~al.(2021)Alis, Legara, and Monterola}]{alis2021generalized}
-Alis C, Legara EFT, Monterola C (2021) Generalized radiation model for human
-  migration. Scientific Reports 11(1):22707. \doi{10.1038/s41598-021-02109-1}
 
 \bibitem[{Atwal et~al.(2025)Atwal, Anderson, Pfoser, and
   Z{\"u}fle}]{atwal2025commuting}
@@ -31,18 +27,6 @@ Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
 Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
   human mobility patterns. Nature 453(7196):779--782. \doi{10.1038/nature06958}
 
-\bibitem[{Jin et~al.(2022)Jin, Wu, Wang, Liang, and Tang}]{jin2022crosstres}
-Jin G, Wu Y, Wang M, et~al (2022) Selective cross-city transfer learning for
-  traffic prediction via source city region re-weighting. In: Proceedings of
-  the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining.
-  Association for Computing Machinery, pp 729--739,
-  \doi{10.1145/3534678.3539345}
-
-\bibitem[{Lenormand et~al.(2012)Lenormand, Huet, Gargiulo, and
-  Deffuant}]{lenormand2012universal}
-Lenormand M, Huet S, Gargiulo F, et~al (2012) A universal model of commuting
-  networks. PLoS One 7(10):e45985. \doi{10.1371/journal.pone.0045985}
-
 \bibitem[{Lenormand et~al.(2016)Lenormand, Bassolas, and
   Ramasco}]{lenormand2016systematic}
 Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
@@ -53,12 +37,6 @@ Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
 Lundberg SM, Lee SI (2017) A unified approach to interpreting model
   predictions. Advances in Neural Information Processing Systems 30:4765--4774.
   \doi{10.48550/arXiv.1705.07874}
-
-\bibitem[{Mai et~al.(2022)Mai, Cundy, Choi, Song, Shofi
-  et~al.}]{mai2022geospatial}
-Mai G, Cundy C, Choi K, et~al (2022) Towards a foundation model for geospatial
-  artificial intelligence. ACM Transactions on Intelligent Systems and
-  Technology 13(6):1--25. \doi{10.1145/3557915.3561043}
 
 \bibitem[{Mendieta et~al.(2023)Mendieta, Han, Shi, Zhu, and
   Chen}]{mendieta2023geogpt}
@@ -103,18 +81,9 @@ Simini F, Barlacchi G, Luca M, et~al (2021) A deep gravity model for mobility
 Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
   Science 327(5968):1018--1021. \doi{10.1126/science.1177170}
 
-\bibitem[{Stouffer(1940)}]{stouffer1940intervening}
-Stouffer SA (1940) Intervening opportunities: A theory relating mobility and
-  distance. American Sociological Review 5(6):845--867. \doi{10.2307/2084520}
-
 \bibitem[{Tanner(1961)}]{tanner1961}
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
   Paper~51, Road Research Laboratory, London
-
-\bibitem[{Tatem(2017)}]{worldpop2018}
-Tatem AJ (2017) {WorldPop}, open data for spatial demography. Scientific Data
-  4:170004. \doi{10.1038/sdata.2017.4}, worldPop gridded population datasets
-  available at \url{https://www.worldpop.org/}
 
 \bibitem[{Wang et~al.(2018)Wang, Geng, Ma, Yang, Cao, and
   Zheng}]{wang2018regiontrans}
@@ -123,28 +92,14 @@ Wang L, Geng X, Ma X, et~al (2018) Crowd flow prediction by deep
   Joint Conference on Artificial Intelligence, pp 1341--1347,
   \doi{10.24963/ijcai.2018/186}
 
-\bibitem[{Wang et~al.(2021)Wang, Cao, and Yu}]{wang2019origin}
-Wang S, Cao J, Yu PS (2021) Deep learning based origin-destination prediction
-  via contextual information fusion. Multimedia Tools and Applications
-  80(20):30427--30449. \doi{10.1007/s11042-020-09355-6}
-
 \bibitem[{Wang et~al.(2022)Wang, Jin, Sun, Chen, Chen, and Li}]{wang2022when}
 Wang X, Jin K, Sun L, et~al (2022) When transfer learning meets cross-city
   urban flow prediction: Spatio-temporal adaptation matters. In: Proceedings of
   the Thirty-First International Joint Conference on Artificial Intelligence
   (IJCAI-22), pp 2219--2225, \doi{10.24963/ijcai.2022/308}
 
-\bibitem[{Wilcoxon(1945)}]{wilcoxon1945}
-Wilcoxon F (1945) Individual comparisons by ranking methods. Biometrics
-  Bulletin 1(6):80--83. \doi{10.2307/3001968}
-
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated
   developments. Environment and Planning A 3(1):1--32. \doi{10.1068/a030001}
-
-\bibitem[{Yao et~al.(2019)Yao, Liu, Wei, Tang, and Li}]{yao2020meta}
-Yao H, Liu Y, Wei Y, et~al (2019) Learning from multiple cities: A
-  meta-learning approach for spatial-temporal prediction. In: Proceedings of
-  the Web Conference 2019, pp 2123--2129, \doi{10.1145/3308558.3313577}
 
 \end{thebibliography}
