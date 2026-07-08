@@ -27,9 +27,9 @@
 
 This study investigates whether trip-length distributions (TLDs)—aggregate, population-level histograms of traveled distances—are empirically sufficient to recover city-specific distance-decay parameters for OD-free gravity model calibration. We evaluate two scenarios: an \emph{OD-free calibration} setting utilizing target-city TLDs without exposing individual zone-to-zone records, and a \emph{pure zero-shot fallback} employing a source-derived national decay prior. 
 
-Our framework is evaluated across 50 US metropolitan areas (25 source, 25 held-out target cities). The parameters recovered from aggregate TLDs correlate strongly with the power-law exponent $\gamma$ fitted from complete OD matrices ($r = 0.893$) and moderately with the exponential rate $\beta$ ($r = 0.582$). Under oracle outflows, recovered parameters yield a negligible performance gap in downstream flow predictions. 
+Our framework is evaluated across 50 US metropolitan areas with 25/25 test. The parameters recovered from aggregate TLDs correlate strongly with the power-law exponent fitted from complete OD matrices and moderately with the exponential rate. Under oracle outflows, recovered parameters yield a negligible performance gap in downstream flow predictions. 
 
-Through a game-theoretic Shapley value analysis, we show that the distance-decay component dominates predictive capacity (accounting for 85.8\% of the total CPC gain), suggesting that it acts as the dominant transferable factor in spatial interaction. The proposed model using target-city Meta Movement Distribution Maps (MDM) decay achieves downstream performance statistically equivalent to the locally-calibrated traditional Tanner baseline within a 0.01 CPC margin. In fully survey-free evaluations under predicted outflows, although the model's accuracy remains below the high-capacity, black-box DeepGravity neural benchmark (CPC 0.6860 vs. 0.7529), it provides a highly interpretable, data-efficient, and privacy-preserving alternative.}
+Through a game-theoretic Shapley value analysis, we show that the distance-decay component dominates predictive capacity (accounting for 85.8\% of the total CPC gain), suggesting that it acts as the dominant transferable factor in spatial interaction. The proposed model using target-city Meta Movement Distribution Maps (MDM) decay achieves downstream performance statistically equivalent to the locally-calibrated traditional Tanner baseline within a 0.01 CPC margin. In fully survey-free evaluations under predicted outflows, although the model's accuracy remains below the high-capacity, black-box DeepGravity neural benchmark, it provides a highly interpretable, data-efficient, and privacy-preserving alternative.}
 
 \keywords{Urban mobility, distance decay calibration, gravity models, aggregate mobility data, zero-shot transfer, open-data modeling}
 
@@ -54,12 +54,12 @@ In this paper, we address this question by proposing a three-tier conceptual fra
 
 To investigate these relationships systematically, we organize the investigation around three research questions:
 \begin{enumerate}
-  \item[\textbf{RQ1}] \textbf{(Decay Recovery)} Can aggregate trip-length distributions recover the city-specific distance-decay structure without access to individual OD trajectories?
-  \item[\textbf{RQ2}] \textbf{(Decay Impact)} How does distance decay impact zero-shot gravity transfer of commuting flows, and to what extent does its recovery from trip-length distributions drive transfer performance?
-  \item[\textbf{RQ3}] \textbf{(Morphological Scope)} Under what urban morphological conditions does aggregate-calibrated decay perform most effectively, and what physical geography factors govern those conditions?
+  \item[\textbf{RQ1}] Can aggregate trip-length distributions recover the city-specific distance-decay structure without access to individual OD trajectories?
+  \item[\textbf{RQ2}] How does distance decay impact zero-shot gravity transfer of commuting flows, and to what extent does its recovery from trip-length distributions drive transfer performance?
+  \item[\textbf{RQ3}] Under what urban morphological conditions does aggregate-calibrated decay perform most effectively, and what physical geography factors govern those conditions?
 \end{enumerate}
 
-Our empirical investigation across 50 US metropolitan areas (25 source cities and 25 held-out target cities) evaluates these assumptions. The results indicate that distance decay represents a dominant transferable factor across metropolitan areas, and that projecting spatial interactions onto the TLD provides a summary representation sufficient to identify this component. Although the proposed model's overall predictive accuracy remains below the black-box neural DeepGravity benchmark (average CPC 0.6860 vs. 0.7529), it achieves strong performance across diverse urban morphologies, while remaining completely survey-free, highly interpretable, and privacy-compliant. The rest of this paper is organized around the three research questions (RQ1--RQ3) detailed above.
+Our empirical investigation across 50 US metropolitan areas (25 source cities and 25 held-out target cities) evaluates these assumptions. The results indicate that distance decay represents a dominant transferable factor across metropolitan areas, and that projecting spatial interactions onto the TLD provides a summary representation sufficient to identify this component. Although the proposed model's overall predictive accuracy remains below the black-box neural DeepGravity benchmark (average CPC 0.6860 vs. 0.7529), it achieves strong performance across diverse urban morphologies, while remaining completely survey-free, highly interpretable, and privacy-compliant. The rest of this paper is organized around the three research questions detailed above.
 
 
 
@@ -109,23 +109,23 @@ To establish data-efficient modeling pipelines, researchers have explored aggreg
 Cross-city transfer learning applies predictive knowledge from data-rich source cities to data-scarce target cities. Current transfer methodologies rely on region representation alignment \citep{wang2018regiontrans}, generative geographic pre-training \citep{mendieta2023geogpt}, or domain adaptation \citep{wang2022when}. Nonetheless, these methods generally assume that some target-city flow samples are accessible during training, or they fail to account for city-specific variations in spatial friction, limiting their effectiveness in zero-shot settings.
 
 \subsection{Research Gap and Positioning}
-Table~\ref{tab:literature_comparison} compares how existing model classes address the core challenge of zero-shot cross-city transfer. The comparison reveals three critical literature gaps: G1 (the lack of an aggregate-based decay calibration method for zero-shot transfer), G2 (the absence of a quantitative analysis regarding the impact of distance decay on zero-shot transfer), and G3 (unidentified urban morphological conditions that influence the performance of aggregate calibration). These gaps map directly to the research questions (RQ1--RQ3) evaluated throughout this study.
+Table~\ref{tab:literature_comparison} compares how existing model classes address the core challenge of zero-shot cross-city transfer. The comparison reveals three critical literature gaps: G1 (the lack of an aggregate-based decay calibration method for zero-shot transfer), G2 (the absence of a quantitative analysis regarding the impact of distance decay on zero-shot transfer), and G3 (unidentified urban morphological conditions that influence the performance of aggregate calibration). These gaps map directly to the research questions evaluated throughout this study.
 
 \begin{table*}[t]
 \centering
-\tablebodyfont\small
-\caption{Comparative analysis of human mobility models across structural, transferability, and performance dimensions. ``Calibration-Free Decay'' indicates whether the model recovers the distance decay function without requiring individual OD pair observations from target cities. ``Empirical Accuracy (CPC)'' indicates zero-shot target performance under predicted outflows.}
+\tablebodyfont\footnotesize
+\caption{Comparative analysis of human mobility models across structural and transferability dimensions. ``Calibration-Free Decay'' indicates whether the model recovers the distance decay function without requiring individual OD pair observations from target cities.}
 \label{tab:literature_comparison}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{2.5cm} c c c p{2.2cm} c}
 \toprule
-\shortstack[c]{\textbf{Model} \\ \textbf{Class}} & \shortstack[c]{\textbf{Decomposed} \\ \textbf{Structure}} & \shortstack[c]{\textbf{Cross-City} \\ \textbf{Transfer}} & \shortstack[c]{\textbf{Zero-Shot} \\ \textbf{Target}} & \textbf{Interpretability} & \shortstack[c]{\textbf{Calibration-Free} \\ \textbf{Decay}} & \shortstack[c]{\textbf{Empirical} \\ \textbf{Accuracy (CPC)}} \\
+\shortstack[c]{\textbf{Model} \\ \textbf{Class}} & \shortstack[c]{\textbf{Decomposed} \\ \textbf{Structure}} & \shortstack[c]{\textbf{Cross-City} \\ \textbf{Transfer}} & \shortstack[c]{\textbf{Zero-Shot} \\ \textbf{Target}} & \textbf{Interpretability} & \shortstack[c]{\textbf{Calibration-Free} \\ \textbf{Decay}} \\
 \midrule
-Gravity \citep{wilson1971} & \checkmark & \texttimes & \texttimes & \checkmark & \texttimes & High (Locally Fit) \\
-Radiation \citep{Simini2012universal} & \texttimes & \checkmark & \checkmark & \checkmark & \checkmark & Low (0.4851) \\
-DeepGravity \citep{simini2021} & \texttimes & Limited & \texttimes & \texttimes & \texttimes & Very High (0.7529) \\
-GNN OD \citep{Rong2023goddag} & \texttimes & Limited & \texttimes & \texttimes & \texttimes & Very High \\
-RegionTrans \citep{wang2018regiontrans} & Partial & \checkmark & \texttimes & \texttimes & \texttimes & Moderate \\
-\textbf{SDF-ZTF (Ours)} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & High (0.6860) \\
+Gravity \citep{wilson1971} & \checkmark & \texttimes & \texttimes & \checkmark & \texttimes \\
+Radiation \citep{Simini2012universal} & \texttimes & \checkmark & \checkmark & \checkmark & \checkmark \\
+DeepGravity \citep{simini2021} & \texttimes & Limited & \texttimes & \texttimes & \texttimes \\
+GNN OD \citep{Rong2023goddag} & \texttimes & Limited & \texttimes & \texttimes & \texttimes \\
+RegionTrans \citep{wang2018regiontrans} & Partial & \checkmark & \texttimes & \texttimes & \texttimes \\
+\textbf{SDF-ZTF (Ours)} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
 \bottomrule
 \end{tabular*}
 \end{table*}
@@ -138,8 +138,8 @@ In a traditional local calibration setting, models are optimized using detailed 
 
 To analyze the performance of urban mobility prediction under different data constraints and privacy regulations, we define three operational and diagnostic evaluation settings, which are summarized in Table~\ref{tab:evaluation_settings}. These settings represent distinct scenarios of data availability:
 \begin{itemize}
-  \item \textbf{Setting 1: Pure Zero-Shot Fallback}: This configuration assumes that absolutely no target-city mobility data is accessible. The model relies entirely on open spatial features and a national distance-decay prior derived from source cities.
-  \item \textbf{Setting 2: OD-Free Calibration}: This is our primary proposed pipeline. The model has access to an aggregate, one-dimensional trip-length distribution (TLD) of the target city but cannot observe any individual origin-destination pairs.
+  \item \textbf{Pure Zero-Shot Fallback}: This configuration assumes that absolutely no target-city mobility data is accessible. The model relies entirely on open spatial features and a national distance-decay prior derived from source cities.
+  \item \textbf{OD-Free Calibration}: This is our primary proposed pipeline. The model has access to an aggregate, one-dimensional trip-length distribution (TLD) of the target city but cannot observe any individual origin-destination pairs.
   \item \textbf{Oracle Diagnostic Control}: This setting serves as an analytical benchmark to isolate the errors of the distance-decay recovery from those of the origin production predictions. In this control, the target-city origin outflows are set to their ground-truth values.
 \end{itemize}
 
@@ -148,12 +148,12 @@ To analyze the performance of urban mobility prediction under different data con
 \tablebodyfont\small
 \caption{Operational and diagnostic evaluation settings.}
 \label{tab:evaluation_settings}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{3.5cm}p{3.8cm}p{7.0cm}}
 \toprule
-\textbf{Setting / Control} & \textbf{Target City Mobility Data} & \textbf{Deployment / Analytical Purpose} \\
+\textbf{Setting} & \textbf{Target City Mobility Data} & \textbf{Deployment / Analytical Purpose} \\
 \midrule
-Setting 1: Pure Zero-Shot Fallback & None (Open spatial features only) & Fallback scenario under extreme data scarcity; uses national decay prior. \\
-Setting 2: OD-Free Calibration & Aggregate 1D TLD (no individual OD flows) & Primary proposed pipeline; enables local calibration while protecting privacy. \\
+Pure Zero-Shot Fallback & None (Open spatial features only) & Fallback scenario under extreme data scarcity; uses national decay prior. \\
+OD-Free Calibration & Aggregate 1D TLD (no individual OD flows) & Primary proposed pipeline; enables local calibration while protecting privacy. \\
 Oracle Diagnostic Control & Target outflows $O_i$ controlled & Diagnostic benchmark; isolates decay recovery from production prediction errors. \\
 \bottomrule
 \end{tabular*}
@@ -165,7 +165,7 @@ The methodological design of this study is grounded in a separable formulation o
 \begin{equation}\label{eq:decomposition}
 T_{ij} = O_i \cdot \frac{A_j f(d_{ij})}{\sum_{k} A_k f(d_{ik})}
 \end{equation}
-where flows are decomposed into origin production ($O_i$), destination attraction ($A_j$), and distance decay ($f(d_{ij})$). We structure our investigation around three core hypotheses: (1) distance decay represents the dominant transferable factor of spatial interaction across cities (RQ2); (2) aggregate trip-length distributions (TLDs) contain sufficient information to recover this decay structure without requiring individual origin-destination records (RQ1); and (3) the recovered decay parameters can be integrated with machine learning models for production and open-data heuristics for attraction to enable survey-free target-city flow prediction (RQ3).
+where flows are decomposed into origin production ($O_i$), destination attraction ($A_j$), and distance decay ($f(d_{ij})$). We structure our investigation around three core hypotheses: (1) distance decay represents the dominant transferable factor of spatial interaction across cities; (2) aggregate trip-length distributions (TLDs) contain sufficient information to recover this decay structure without requiring individual origin-destination records; and (3) the recovered decay parameters can be integrated with machine learning models for production and open-data heuristics for attraction to enable survey-free target-city flow prediction.
 
 \subsection{Aggregate-Based Decay Calibration}\label{sec:aggregate_calibration}
 We recover the distance-decay parameters $\theta = (\gamma, \beta)$ from the aggregate trip-length distribution (TLD) $p(d)$ --- a marginal histogram of trip distances. Formally:
@@ -199,10 +199,7 @@ Minimizing $-\mathcal{L}(\theta)$ recovers the parameters from aggregate data wi
   ]
     % Inputs (open data)
     \node[cloud] (osm) {OSM / Population};
-    \node[cloud, below=1.5cm of osm] (dist) {Distance Matrix};
- 
-    % Key contribution: Aggregate trip-length histogram (privacy-preserving)
-    \node[agg, below=0.7cm of dist] (hist) {Aggregate \\ Trip-Length Hist.};
+    \node[agg, below=1.5cm of osm] (dist) {Aggregate \\ Trip-Length data};
  
     % Intermediate Models
     \node[block, right=of osm, yshift=0.7cm] (oi) {Outflow GBDT};
@@ -218,9 +215,6 @@ Minimizing $-\mathcal{L}(\theta)$ recovers the parameters from aggregate data wi
     \draw[arrow] (osm.east) -- ++(0.5,0) |- (aj.west);
     \draw[arrow] (dist.east) -- (decay.west);
  
-    % Aggregate histogram feeds Decay MLE (dashed = privacy-preserving source)
-    \draw[dasharrow] (hist.east) -- ++(0.55,0) |- (decay.south west);
- 
     % Merging arrows into Gravity Fusion
     \coordinate (joint) at (6.5, 0);
     \draw[-] (oi.east) -| (joint);
@@ -230,10 +224,6 @@ Minimizing $-\mathcal{L}(\theta)$ recovers the parameters from aggregate data wi
  
     \draw[arrow] (fusion.south) -- (od.north);
  
-    % Legend
-    \node[cloud, minimum width=1.5cm, minimum height=0.5cm, font=\tiny] at (9.0, 0.55) {Open Data};
-    \node[agg, minimum width=1.5cm, minimum height=0.5cm, font=\tiny] at (9.0, -0.15) {Aggregate Histogram};
-    \node[block, minimum width=1.5cm, minimum height=0.5cm, font=\tiny] at (9.0, -0.85) {Model / Process};
   \end{tikzpicture}
   \caption{Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf{Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat{\gamma}, \hat{\beta})$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$).}
   \label{fig:framework_pipeline}
@@ -302,7 +292,7 @@ Meta MDM provides aggregate travel fractions at the county level grouped into 3 
   \item The predicted probability of a flow falling into Meta bin $b$ is computed by summing and normalizing predicted tract-level flows in that bin: $P_\theta(b) = \sum_{i,j : d_{ij} \in \text{Range}(b)} \hat{T}_{ij}(\theta) / \sum_{i,j} \hat{T}_{ij}(\theta)$. This normalization bridges the continuous gravity formulation with Meta's 3-bin telemetry.
 \end{enumerate}
 
-\subsection{Urban Morphology Grouping (RQ3)}\label{sec:urban_morphology}
+\subsection{Urban Morphology Grouping}\label{sec:urban_morphology}
 To investigate how physical geography modulates the role of distance decay in spatial interactions, the 25 target cities are classified into four morphological groups based on their urban structure and geography \citep{gonzalez2008understanding}. This classification is summarized in Table~\ref{tab:morphology_classification}.
 
 \begin{table*}[h!]
@@ -310,7 +300,7 @@ To investigate how physical geography modulates the role of distance decay in sp
 \tablebodyfont\small
 \caption{Morphological classification of target cities.}
 \label{tab:morphology_classification}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llp{6.0cm}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{2.8cm}p{4.8cm}p{6.8cm}}
 \toprule
 \textbf{Morphology Group} & \textbf{Cities} & \textbf{Description} \\
 \midrule
@@ -324,16 +314,16 @@ Coastal ($n=3$) & Portland, Seattle, Virginia Beach & Coastline/topographic barr
 
 \section{Results}\label{sec:results}
 
-\subsection{RQ1: Can aggregate distributions recover distance decay?}\label{sec:rq1}
+\subsection{Can aggregate distributions recover distance decay?}\label{sec:rq1}
 The evaluation of downstream origin-destination (OD) flow prediction under the oracle outflow control demonstrates that employing the distance-decay parameters recovered from aggregate trip-length distributions (TLDs) yields predictive accuracy that closely matches the accuracy obtained with parameters fitted on full zone-to-zone OD surveys (Table~\ref{tab:decay_recovery_merged}). Specifically, the average difference in the Common Part of Commuters (CPC) index between using recovered parameters and using survey-calibrated parameters is $0.11\%$, with GBDT production prediction remaining the primary performance bottleneck in full zero-shot deployments (Table~\ref{tab:multibaseline_comparison}).
 
 The parameter recovery performance varies between the two decay exponents, showing a correlation of $r = 0.893$ for the power-law exponent $\gamma$ and $r = 0.582$ for the exponential rate $\beta$ (Table~\ref{tab:decay_recovery_merged}).
 
 \begin{table*}[t]
 \centering
-\caption{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities (RQ1).}
+\caption{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities.}
 \label{tab:decay_recovery_merged}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{4.2cm}ccccc}
 \toprule
 \textbf{Parameter / Strategy} & \textbf{MAE} & \textbf{RMSE} & \textbf{Pearson $r$} & \textbf{Pearson $r^2$} & \textbf{Downstream CPC} \\
 \midrule
@@ -346,7 +336,7 @@ Recovered (Proposed) Decay & -- & -- & -- & -- & 0.7403 (Gap: -0.11\%) \\
 \end{tabular*}
 \end{table*}
 
-\subsubsection{Validation via Real-World Meta Mobility Prior (RQ1)}
+\subsubsection{Validation via Real-World Meta Mobility Prior}
 To verify the practical feasibility of using tech-platform telemetry, we evaluate the decay parameters recovered from Meta's actual Movement Distribution Maps prior (\texttt{Meta MDM Prior (3-Bin)}) across the 25 target cities. We compare its downstream CPC performance under oracle outflows against models calibrated on LODES commuting data aggregated into 3 bins (\texttt{LODES Baseline (3-Bin)}) and 20 equal-width bins (\texttt{LODES Oracle (20-Bin)}), as well as the zero-shot DeepGravity baseline.
 
 As shown in Table~\ref{tab:meta_prior_evaluation}, the survey-free \texttt{Meta MDM Prior (3-Bin)} calibration yields a mean CPC of $0.7080$ across the 25 target cities, compared to $0.7348$ for the 3-bin survey baseline and $0.7403$ for the 20-bin survey oracle.
@@ -354,9 +344,9 @@ As shown in Table~\ref{tab:meta_prior_evaluation}, the survey-free \texttt{Meta 
 \begin{table*}[t]
 \centering
 \tablebodyfont\small
-\caption{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies using real Meta prior data (RQ1).}
+\caption{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies using real Meta prior data.}
 \label{tab:meta_prior_evaluation}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{3.8cm}ccc}
 \toprule
 \textbf{Calibration Strategy} & \textbf{Data Source} & \textbf{Bin Configuration} & \textbf{Downstream CPC (Mean)} \\
 \midrule
@@ -368,15 +358,15 @@ As shown in Table~\ref{tab:meta_prior_evaluation}, the survey-free \texttt{Meta 
 \end{tabular*}
 \end{table*}
 
-To evaluate performance under extreme data scarcity where target TLDs are completely missing, we evaluate the National Decay Fallback (Setting 1), where the national prior parameters are derived as the median of estimates fitted on source cities. Under oracle outflows, the National prior model achieves a CPC of 0.7398, and under GBDT-predicted outflows it yields a CPC of 0.6896 (Table~\ref{tab:multibaseline_comparison}).
+To evaluate performance under extreme data scarcity where target TLDs are completely missing, we evaluate the National Decay Fallback, where the national prior parameters are derived as the median of estimates fitted on source cities. Under oracle outflows, the National prior model achieves a CPC of 0.7398, and under GBDT-predicted outflows it yields a CPC of 0.6896 (Table~\ref{tab:multibaseline_comparison}).
 
 The performance of the localized Meta MDM calibration is sensitive to local outlier dynamics. Specifically, Atlanta serves as an outlier, exhibiting a localized drop compared to the 3-bin baseline (Appendix~A.2).
 
-\subsubsection{Decay Bin Sensitivity Analysis (RQ1)}
+\subsubsection{Decay Bin Sensitivity Analysis}
 Sweeping the distance bins $K \in \{3, 5, 10, 20\}$ shows that downstream CPC stabilizes at $K \ge 5$, with a CPC of $0.7174$ for $K=3$, $0.7346$ for $K=5$, $0.7394$ for $K=10$, and $0.7403$ for $K=20$ (Appendix~A.2, Fig.~\ref{fig:layer1_heatmap}).
 
-\subsection{RQ2: Why is recovery sufficient?}\label{sec:rq2}
-To address RQ2, we first evaluate the origin production component ($O_i$) in isolation to validate the predictive quality of GBDT outflows, and then implement a game-theoretic Shapley value analysis to quantify the relative contributions of the model components.
+\subsection{Why is recovery sufficient?}\label{sec:rq2}
+To address research question 2, we first evaluate the origin production component ($O_i$) in isolation to validate the predictive quality of GBDT outflows, and then implement a game-theoretic Shapley value analysis to quantify the relative contributions of the model components.
 
 \subsubsection{Origin Production Transferability}
 To isolate the contribution of $O_i$, we hold $A_j$ (OSM heuristic) and $(\gamma, \beta)$ (national prior) fixed, then compare three outflow strategies across 25 target cities: a naive population baseline ($O_i \propto \text{Population}_i$), GBDT-predicted outflows, and oracle outflows.
@@ -386,7 +376,7 @@ We find that GBDT outflows (CPC 0.6896) beat the naive population baseline (0.67
 \textbf{Feature Selection via SHAP Stability Analysis.} Evaluating GBDT model performance across nested subsets of top SHAP features indicates that zero-shot prediction performance plateaus at $K \approx 10$ features. The detailed feature taxonomy, SHAP stability criteria, and feature count sensitivity are provided in Appendix~C (Fig.~\ref{fig:feature_taxonomy} and Fig.~\ref{fig:shap_sweep}).
 
 \subsubsection{Factorial Ablation and Shapley Value Analysis}
-To evaluate the relative structural importance of each gravity component for zero-shot transfer (RQ2), we conduct a factorial ablation across the 25 target cities. Each component is disabled in turn---replaced by a uniform-weight fallback---to isolate its marginal contribution under our gravity equations.
+To evaluate the relative structural importance of each gravity component for zero-shot transfer, we conduct a factorial ablation across the 25 target cities. Each component is disabled in turn---replaced by a uniform-weight fallback---to isolate its marginal contribution under our gravity equations.
 
 We implement a game-theoretic analysis using Shapley values \citep{shapley1953value} across all $2^3 = 8$ component coalitions. Over the uniform flow baseline (CPC 0.4263), the Shapley values attribute a mean CPC gain of 0.2258 (85.8\% of total gain) to distance decay $f(d)$, 0.0208 (7.9\% of total gain) to attractiveness $A_j$, and 0.0167 (6.4\% of total gain) to outflow production $O_i$. Note that the factorial ablation baseline in Table~\ref{tab:ablation} is the full model using the national decay prior (CPC 0.6896), where $f(d)$ removal yields a CPC of 0.4489.
 
@@ -397,7 +387,7 @@ We implement a game-theoretic analysis using Shapley values \citep{shapley1953va
 \tablebodyfont\small
 \caption{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities). The full-model baseline (top row) uses a fixed national decay prior $^{\ddagger}$ to isolate component contributions.}
 \label{tab:ablation}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccclc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccc p{5.5cm} c}
 \toprule
 \textbf{O$_i$} & \textbf{f(d)} & \textbf{A$_j$} & \textbf{CPC} & \textbf{Factorial Contribution} & \textbf{Shapley Value} \\
 \midrule
@@ -406,12 +396,12 @@ $\times$ & $\checkmark^{\ddagger}$ & $\checkmark$ & 0.6645 & O$_i$ removal: 3.6\
 $\checkmark$ & $\times$ & $\checkmark$ & 0.4489 & f(d) removal: 34.9\% loss & 0.2258 (85.8\%) \\
 $\checkmark$ & $\checkmark^{\ddagger}$ & $\times$ & 0.6574 & A$_j$ removal: 4.7\% loss & 0.0208 (7.9\%) \\
 \bottomrule
-\multicolumn{6}{l}{\footnotesize $^{\ddagger}$In all ablation rows, $f(d)$ is frozen at the national prior $(\gamma_{\text{nat}}, \beta_{\text{nat}})$ to isolate the contribution of $O_i$ and $A_j$. The full pipeline uses aggregate-recovered per-city decay (see Table~\ref{tab:multibaseline_comparison}).}
+\multicolumn{6}{p{14.2cm}}{\footnotesize $^{\ddagger}$In all ablation rows, $f(d)$ is frozen at the national prior $(\gamma_{\text{nat}}, \beta_{\text{nat}})$ to isolate the contribution of $O_i$ and $A_j$. The full pipeline uses aggregate-recovered per-city decay (see Table~\ref{tab:multibaseline_comparison}).}
 \end{tabular*}
 \end{table*}
 
-\subsection{RQ3: Does aggregate-calibrated decay provide a practically deployable alternative to survey-based calibration?}\label{sec:rq3}
-To address RQ3, we evaluate whether our proposed aggregate-calibrated gravity model can serve as a deployable, survey-free alternative to traditional locally-calibrated frameworks. We compare our model against zero-shot neural architectures and locally calibrated structures across the 25 held-out target cities. The results of these comparative evaluations are summarized in Table~\ref{tab:multibaseline_comparison}.
+\subsection{Does aggregate-calibrated decay provide a practically deployable alternative to survey-based calibration?}\label{sec:rq3}
+To address last research question, we evaluate whether our proposed aggregate-calibrated gravity model can serve as a deployable, survey-free alternative to traditional locally-calibrated frameworks. We compare our model against zero-shot neural architectures and locally calibrated structures across the 25 held-out target cities. The results of these comparative evaluations are summarized in Table~\ref{tab:multibaseline_comparison}.
 
 \begin{table*}[t]
 \centering
@@ -445,7 +435,7 @@ An analysis of the multi-baseline comparison yields several key insights. First,
 
 To statistically validate these findings, we perform a Wilcoxon signed-rank test across the 25 target cities. The difference in CPC between our proposed model using Meta MDM decay (CPC 0.7337) and the locally-calibrated Traditional Tanner baseline (CPC 0.7382) is statistically significant but practically minor (raw $p = 0.00737$). Furthermore, a Two One-Sided Test (TOST) of equivalence confirms that our aggregate-calibrated model is equivalent to the locally-fitted Tanner baseline within a tight margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$). Additionally, the proposed model statistically outperforms the parameter-free Radiation Model baseline (Wilcoxon test with Bonferroni adjustment, $p < 10^{-6}$).
 
-\subsubsection{Exploratory Urban Morphology Analysis (RQ3)}\label{sec:urban_morphology_analysis}
+\subsubsection{Exploratory Urban Morphology Analysis}\label{sec:urban_morphology_analysis}
 To examine how different physical environments modulate model performance, we evaluate the proposed framework across the four morphological groupings described in Section~\ref{sec:urban_morphology}.
 
 \begin{table*}[t]
@@ -473,7 +463,7 @@ In summary, these results suggest that our aggregate-calibrated model provides a
 
 \section{Discussion}\label{sec:discussion}
 
-The three research questions (RQ1--RQ3) address the gaps (G1--G3) identified in Table~\ref{tab:literature_comparison}. The following discussion synthesizes the established findings and outlines practical implications of our decomposed gravity framework.
+The three research questions address the gaps identified in Table~\ref{tab:literature_comparison}. The following discussion synthesizes the established findings and outlines practical implications of our decomposed gravity framework.
 
 \subsection{Empirical Evidence and Deconvolution Mechanics}\label{sec:conceptual_intuition}
 Our results across 50 US metropolitan areas show that aggregate trip-length histograms preserve sufficient signal to estimate per-city distance decay curves. The recovered parameters correlate strongly with the power-law exponent $\gamma$ ($r = 0.893$) and moderately with the exponential rate $\beta$ ($r = 0.582$) fitted from complete OD flows. Under oracle outflows, our analysis indicates through a Two One-Sided Test (TOST) that the aggregate-calibrated gravity model is equivalent to the locally-calibrated Tanner model within a margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$). Additionally, Shapley analysis reveals that distance decay is the dominant transferable factor, accounting for 85.8\% of the total CPC gain.
@@ -532,7 +522,10 @@ and optimize the objective in the unconstrained log-transformed space $\theta_{\
 
 To guard against convergence to local optima due to the potential non-convexity of the exposure-corrected likelihood surface (especially under highly binned or noisy data), we run the L-BFGS-B optimization algorithm from 10 random restarts. The first run is initialized at the theoretical values $\theta_{\text{log}}^{(0)} = (\log \gamma^{(0)}, \log \beta^{(0)})$. The remaining 9 runs are initialized by perturbing this central starting point with Gaussian noise:
 \begin{equation}\label{eq:restarts_noise}
-\tilde{\gamma}_{\text{start}}^{(r)} \sim \mathcal{N}(\log \gamma^{(0)},\, 0.25), \quad \tilde{\beta}_{\text{start}}^{(r)} \sim \mathcal{N}(\log \beta^{(0)},\, 0.25)
+\begin{split}
+\tilde{\gamma}_{\text{start}}^{(r)} &\sim \mathcal{N}(\log \gamma^{(0)},\, 0.25), \\
+\tilde{\beta}_{\text{start}}^{(r)} &\sim \mathcal{N}(\log \beta^{(0)},\, 0.25)
+\end{split}
 \end{equation}
 The optimization is executed for each restart run, and the parameter set yielding the highest likelihood value $\mathcal{L}(\theta)$ (Equation~\ref{eq:likelihood_mle}) is recovered via exponential back-transformation: $\hat{\gamma} = \exp(\tilde{\gamma}^*)$ and $\hat{\beta} = \exp(\tilde{\beta}^*)$.
 
@@ -657,11 +650,12 @@ Evaluating the GBDT model performance across nested subsets of top SHAP features
         (25, 0.7010)
         (30, 0.7010)
       };
-      \draw[red, dashed, thick] (axis cs:23, 0.68) -- (axis cs:23, 0.7010);
-      \node[red, above, font=\footnotesize] at (axis cs:23,0.7010) {$K=23$};
+      \draw[red, dashed, thick] (axis cs:6, 0.68) -- (axis cs:6, 0.6992);
+      \draw[red, dashed, thick] (axis cs:3, 0.6992) -- (axis cs:6, 0.6992);
+      \node[red, above right, font=\footnotesize] at (axis cs:6,0.6992) {$K=6$ (CPC: 0.6992)};
     \end{axis}
   \end{tikzpicture}
-  \caption{SHAP feature count sweep over the 30-candidate feature set: zero-shot CPC first reaches $0.7010$ at $K=10$ and stabilizes in the range $0.7010$--$0.7014$ through $K=23$.}
+  \caption{SHAP feature count sweep over the 30-candidate feature set: even though higher 6 features can get high accurancy but they have a tthreat overfitting with cultural features.}
   \label{fig:shap_sweep}
 \end{figure*}
 
