@@ -20,17 +20,17 @@
 \citation{wang2018regiontrans}
 \citation{mendieta2023geogpt}
 \citation{wang2022when}
+\citation{wilson1971}
+\citation{Simini2012universal}
+\citation{simini2021}
+\citation{Rong2023goddag}
+\citation{wang2018regiontrans}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys.}}{3}{figure.2}\protected@file@percent }
 \newlabel{fig:conceptual_framework}{{2}{3}{Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys}{figure.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Deep Learning for OD Prediction}{3}{subsection.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Aggregate Mobility Data for Decay Calibration}{3}{subsection.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Cross-City Transfer Learning}{3}{subsection.1.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Research Gap and Positioning}{3}{subsection.1.5}\protected@file@percent }
-\citation{wilson1971}
-\citation{Simini2012universal}
-\citation{simini2021}
-\citation{Rong2023goddag}
-\citation{wang2018regiontrans}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Problem Setting}{4}{section.2}\protected@file@percent }
 \newlabel{sec:problem_setting}{{2}{4}{Problem Setting}{section.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodological Design}{4}{section.3}\protected@file@percent }
@@ -38,12 +38,12 @@
 \newlabel{eq:decomposition}{{1}{4}{Methodological Design}{equation.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Aggregate-Based Decay Calibration}{4}{subsection.3.1}\protected@file@percent }
 \newlabel{sec:aggregate_calibration}{{3.1}{4}{Aggregate-Based Decay Calibration}{subsection.3.1}{}}
+\newlabel{eq:predicted_flow_mle}{{3}{4}{Aggregate-Based Decay Calibration}{equation.3}{}}
 \citation{tanner1961}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparative analysis of human mobility models across structural and transferability dimensions. ``Calibration-Free Decay'' indicates whether the model recovers the distance decay function without requiring individual OD pair observations from target cities.}}{5}{table.1}\protected@file@percent }
 \newlabel{tab:literature_comparison}{{1}{5}{Comparative analysis of human mobility models across structural and transferability dimensions. ``Calibration-Free Decay'' indicates whether the model recovers the distance decay function without requiring individual OD pair observations from target cities}{table.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Operational and diagnostic evaluation settings.}}{5}{table.2}\protected@file@percent }
 \newlabel{tab:evaluation_settings}{{2}{5}{Operational and diagnostic evaluation settings}{table.2}{}}
-\newlabel{eq:predicted_flow_mle}{{3}{5}{Aggregate-Based Decay Calibration}{equation.3}{}}
 \newlabel{eq:predicted_prob_mle}{{4}{5}{Aggregate-Based Decay Calibration}{equation.4}{}}
 \newlabel{eq:likelihood_mle}{{5}{5}{Aggregate-Based Decay Calibration}{equation.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Distance Decay Function}{5}{subsection.3.2}\protected@file@percent }
@@ -71,18 +71,18 @@
 \newlabel{sec:results}{{4}{7}{Results}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Can aggregate distributions recover distance decay?}{7}{subsection.4.1}\protected@file@percent }
 \newlabel{sec:rq1}{{4.1}{7}{Can aggregate distributions recover distance decay?}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Validation via Real-World Meta Mobility Prior}{7}{subsubsection.4.1.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Morphological classification of target cities.}}{8}{table.3}\protected@file@percent }
 \newlabel{tab:morphology_classification}{{3}{8}{Morphological classification of target cities}{table.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Validation via Real-World Meta Mobility Prior}{8}{subsubsection.4.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities.}}{8}{table.4}\protected@file@percent }
+\newlabel{tab:decay_recovery_merged}{{4}{8}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities}{table.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Decay Bin Sensitivity Analysis}{8}{subsubsection.4.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Why is recovery sufficient?}{8}{subsection.4.2}\protected@file@percent }
-\newlabel{sec:rq2}{{4.2}{8}{Why is recovery sufficient?}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Origin Production Transferability}{8}{subsubsection.4.2.1}\protected@file@percent }
 \citation{shapley1953value}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities.}}{9}{table.4}\protected@file@percent }
-\newlabel{tab:decay_recovery_merged}{{4}{9}{Decay parameter recovery performance metrics and downstream CPC under oracle outflow across the 25 target cities}{table.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies using real Meta prior data.}}{9}{table.5}\protected@file@percent }
 \newlabel{tab:meta_prior_evaluation}{{5}{9}{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies using real Meta prior data}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Why is recovery sufficient?}{9}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:rq2}{{4.2}{9}{Why is recovery sufficient?}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Origin Production Transferability}{9}{subsubsection.4.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Factorial Ablation and Shapley Value Analysis}{9}{subsubsection.4.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Does aggregate-calibrated decay provide a practically deployable alternative to survey-based calibration?}{9}{subsection.4.3}\protected@file@percent }
 \newlabel{sec:rq3}{{4.3}{9}{Does aggregate-calibrated decay provide a practically deployable alternative to survey-based calibration?}{subsection.4.3}{}}
@@ -127,8 +127,8 @@
 \newlabel{fig:layer2_results}{{5}{17}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Taxonomy of the globally available open data features used in the outflow model.}}{17}{figure.6}\protected@file@percent }
 \newlabel{fig:feature_taxonomy}{{6}{17}{Taxonomy of the globally available open data features used in the outflow model}{figure.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count sweep over the 30-candidate feature set: even though higher 6 features can get high accurancy but they have a tthreat overfitting with cultural features.}}{17}{figure.7}\protected@file@percent }
-\newlabel{fig:shap_sweep}{{7}{17}{SHAP feature count sweep over the 30-candidate feature set: even though higher 6 features can get high accurancy but they have a tthreat overfitting with cultural features}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SHAP feature count sweep over the 37-candidate feature set. Although utilizing more than 6 features yields marginally higher accuracy, it introduces a significant risk of overfitting to localized built-environment features.}}{17}{figure.7}\protected@file@percent }
+\newlabel{fig:shap_sweep}{{7}{17}{SHAP feature count sweep over the 37-candidate feature set. Although utilizing more than 6 features yields marginally higher accuracy, it introduces a significant risk of overfitting to localized built-environment features}{figure.7}{}}
 \bibcite{mendieta2023geogpt}{{7}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
 \bibcite{MetaMovementDistributionMaps}{{8}{2026}{{Meta}}{{}}}
 \bibcite{pappalardo2023analytical}{{9}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}

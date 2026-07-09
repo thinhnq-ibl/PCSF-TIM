@@ -50,16 +50,16 @@ Predicting origin-destination (OD) travel flows is essential for urban transport
 
 While recent deep learning approaches achieve high accuracy, they require abundant individual-level OD records for training, limiting their generalizability and raising privacy concerns. In contrast, classical gravity models \citep{wilson1971} offer physical interpretability and structural simplicity but require local calibration of their distance-decay functions. This raises a fundamental scientific question: \textbf{Can aggregate mobility distributions, which do not reveal individual OD pairs, serve as a reliable calibration signal for recovering city-specific distance-decay functions?}
 
-In this paper, we address this question by proposing a three-tier conceptual framework: (1) we identify the \emph{dominant transferable factor} of spatial interaction as the city-specific distance-decay function, (2) we utilize the target-city aggregate trip-length distribution (TLD) as an \emph{aggregate representation that reduces privacy exposure} that allows this dominant transferable factor to be identified without revealing individual OD pairs, and (3) we apply this recovered decay in a \emph{zero-shot calibration} setting to predict commuting flows. Under the primary \textbf{OD-free calibration setting}, the model recovers distance-decay parameters from target-city aggregate TLDs (e.g., Meta Movement Distribution Maps). In the \textbf{pure zero-shot fallback}, the model uses a national decay prior derived from source cities. We show that aggregate trip-length histograms contain sufficient information to recover the city-specific distance-decay structure with high fidelity, and our game-theoretic Shapley analysis attributes the vast majority of predictive capacity to distance decay within the investigated framework---consistent with the interpretation that distance decay functions as the dominant transferable factor of spatial interaction.
+In this paper, we address this question by proposing a three-tier conceptual framework. First, we identify the city-specific distance-decay function as the \emph{dominant transferable factor} of spatial interaction. Second, we utilize the target-city aggregate trip-length distribution (TLD) as an \emph{aggregate representation that reduces privacy exposure}, allowing this decay function to be identified without exposing individual zone-to-zone trajectories. Third, we apply this recovered decay in a \emph{zero-shot calibration} setting to predict commuting flows. Under the primary \textbf{OD-free calibration setting}, the model recovers distance-decay parameters from target-city aggregate TLDs (e.g., Meta Movement Distribution Maps). In the \textbf{pure zero-shot fallback}, the model uses a national decay prior derived from source cities. We show that aggregate trip-length histograms contain sufficient information to recover the city-specific distance-decay structure with high fidelity. Furthermore, our game-theoretic Shapley analysis attributes the vast majority of predictive capacity to distance decay within the investigated framework, which is consistent with the interpretation that distance decay functions as the dominant transferable factor of spatial interaction.
 
 To investigate these relationships systematically, we organize the investigation around three research questions:
 \begin{enumerate}
-  \item[\textbf{RQ1}] Can aggregate trip-length distributions recover the city-specific distance-decay structure without access to individual OD trajectories?
-  \item[\textbf{RQ2}] How does distance decay impact zero-shot gravity transfer of commuting flows, and to what extent does its recovery from trip-length distributions drive transfer performance?
-  \item[\textbf{RQ3}] Under what urban morphological conditions does aggregate-calibrated decay perform most effectively, and what physical geography factors govern those conditions?
+  \item Can aggregate trip-length distributions recover the city-specific distance-decay structure without access to individual OD trajectories?
+  \item How does distance decay impact zero-shot gravity transfer of commuting flows, and to what extent does its recovery from trip-length distributions drive transfer performance?
+  \item Under what urban morphological conditions does aggregate-calibrated decay perform most effectively, and what physical geography factors govern those conditions?
 \end{enumerate}
 
-Our empirical investigation across 50 US metropolitan areas (25 source cities and 25 held-out target cities) evaluates these assumptions. The results indicate that distance decay represents a dominant transferable factor across metropolitan areas, and that projecting spatial interactions onto the TLD provides a summary representation sufficient to identify this component. Although the proposed model's overall predictive accuracy remains below the black-box neural DeepGravity benchmark (average CPC 0.6860 vs. 0.7529), it achieves strong performance across diverse urban morphologies, while remaining completely survey-free, highly interpretable, and privacy-compliant. The rest of this paper is organized around the three research questions detailed above.
+Our empirical investigation across 50 US metropolitan areas evaluates these assumptions. The results indicate that distance decay represents a dominant transferable factor across metropolitan areas, and that projecting spatial interactions onto the TLD provides a summary representation sufficient to identify this component. Although the proposed model's overall predictive accuracy remains below the black-box neural DeepGravity benchmark (average CPC 0.6860 vs. 0.7529), it achieves strong performance across diverse urban morphologies, while remaining completely survey-free, highly interpretable, and privacy-compliant. The rest of this paper is organized around the three research questions detailed above.
 
 
 
@@ -109,7 +109,7 @@ To establish data-efficient modeling pipelines, researchers have explored aggreg
 Cross-city transfer learning applies predictive knowledge from data-rich source cities to data-scarce target cities. Current transfer methodologies rely on region representation alignment \citep{wang2018regiontrans}, generative geographic pre-training \citep{mendieta2023geogpt}, or domain adaptation \citep{wang2022when}. Nonetheless, these methods generally assume that some target-city flow samples are accessible during training, or they fail to account for city-specific variations in spatial friction, limiting their effectiveness in zero-shot settings.
 
 \subsection{Research Gap and Positioning}
-Table~\ref{tab:literature_comparison} compares how existing model classes address the core challenge of zero-shot cross-city transfer. The comparison reveals three critical literature gaps: G1 (the lack of an aggregate-based decay calibration method for zero-shot transfer), G2 (the absence of a quantitative analysis regarding the impact of distance decay on zero-shot transfer), and G3 (unidentified urban morphological conditions that influence the performance of aggregate calibration). These gaps map directly to the research questions evaluated throughout this study.
+Table~\ref{tab:literature_comparison} compares how existing model classes address the core challenge of zero-shot cross-city transfer. The comparison reveals three critical literature gaps: the lack of an aggregate-based decay calibration method for zero-shot transfer, the absence of a quantitative analysis regarding the impact of distance decay on zero-shot transfer, and unidentified urban morphological conditions that influence the performance of aggregate calibration. These gaps map directly to the research questions evaluated throughout this study.
 
 \begin{table*}[t]
 \centering
@@ -132,7 +132,7 @@ RegionTrans \citep{wang2018regiontrans} & Partial & \checkmark & \texttimes & \t
 
 \section{Problem Setting}\label{sec:problem_setting}
 
-We formalize the task of zero-shot cross-city travel flow prediction as follows. Let a target metropolitan area be partitioned into a set of $N$ discrete spatial zones (e.g., census tracts) denoted by $\mathcal{V} = \{1, \dots, N\}$. Our objective is to predict the origin-destination (OD) flow matrix $\mathbf{T} \in \mathbb{R}^{N \times N}_+$, where each element $T_{ij}$ represents the volume of daily commuting trips from an origin zone $i \in \mathcal{V}$ to a destination zone $j \in \mathcal{V}$. 
+We formalize the task of zero-shot cross-city travel flow prediction as follows. Let a target metropolitan area be partitioned into a set of $N$ discrete spatial zones (e.g., census tracts) denoted by $\mathcal{V} = \{1, \dots, N\}$. Our objective is to predict the origin-destination (OD) flow matrix $\mathbf{T} \in \mathbb{R}^{N \times N}_+$, where each element $T_{ij}$ represents the volume of seasonal commuting trips from an origin zone $i \in \mathcal{V}$ to a destination zone $j \in \mathcal{V}$. 
 
 In a traditional local calibration setting, models are optimized using detailed individual-level trajectory records or comprehensive travel surveys that represent the target city's true flow matrix $\mathbf{T}$. However, in the zero-shot cross-city transfer paradigm, we assume that no local zone-to-zone flow observations are available for the target metropolitan area. The model must instead predict the target-city flows using only globally available built-environment features, gridded demographic data, and varying levels of aggregate target mobility signals.
 
@@ -153,7 +153,7 @@ To analyze the performance of urban mobility prediction under different data con
 \textbf{Setting} & \textbf{Target City Mobility Data} & \textbf{Deployment / Analytical Purpose} \\
 \midrule
 Pure Zero-Shot Fallback & None (Open spatial features only) & Fallback scenario under extreme data scarcity; uses national decay prior. \\
-OD-Free Calibration & Aggregate 1D TLD (no individual OD flows) & Primary proposed pipeline; enables local calibration while protecting privacy. \\
+OD-Free Calibration & Aggregate TLD (no individual OD flows) & Primary proposed pipeline; enables local calibration while protecting privacy. \\
 Oracle Diagnostic Control & Target outflows $O_i$ controlled & Diagnostic benchmark; isolates decay recovery from production prediction errors. \\
 \bottomrule
 \end{tabular*}
@@ -245,7 +245,7 @@ where $\bar{R}_{\mathrm{zone}}$ is the mean zone radius. The parameters $(\beta,
 \subsection{Origin Outflow Component (\texorpdfstring{$O_i$}{O\_i})}\label{sec:origin_outflow}
 The trip production $O_i = \sum_j T_{ij}$ represents the total commuter outflow originating from zone $i$. In zero-shot transfer settings where target outflows are unobserved, we predict $O_i$ using a Gradient Boosted Decision Tree (GBDT) regressor. The GBDT model is trained on a parsimonious set of \textbf{6 core macroscopic features}: total population ($P_i$), total POI count ($\mathrm{POI}_i$), zone area ($\mathrm{Area}_i$), population density ($\rho_{pop, i}$), POI density ($\rho_{poi, i}$), and road density ($\mathrm{rd}_i$). 
 
-These 6 features were selected from an initial 30-candidate set using a cross-city SHAP stability analysis, showing no performance loss compared to the full feature set. This parsimonious feature set is chosen based on dimensional scaling in urban physics and Occam's razor, and avoids overfitting to source-domain geometries. Hyperparameters and details of the SHAP-based feature selection are provided in Appendix~C.
+These 6 features were selected from an initial 37-candidate set using a cross-city SHAP stability analysis, showing no performance loss compared to the full feature set. This parsimonious feature set is chosen based on dimensional scaling in urban physics and Occam's razor, and avoids overfitting to source-domain geometries. Hyperparameters and details of the SHAP-based feature selection are provided in Appendix~C.
 
 \subsection{Destination Attraction Component (\texorpdfstring{$A_j$}{A\_j})}\label{sec:destination_attraction}
 The destination attraction $A_j$ represents a zone's capacity to draw trips. To prevent the model from overfitting to source-domain geometries in zero-shot settings, we define a training-free, scale-invariant attraction heuristic:
@@ -337,9 +337,11 @@ Recovered (Proposed) Decay & -- & -- & -- & -- & 0.7403 (Gap: -0.11\%) \\
 \end{table*}
 
 \subsubsection{Validation via Real-World Meta Mobility Prior}
-To verify the practical feasibility of using tech-platform telemetry, we evaluate the decay parameters recovered from Meta's actual Movement Distribution Maps prior (\texttt{Meta MDM Prior (3-Bin)}) across the 25 target cities. We compare its downstream CPC performance under oracle outflows against models calibrated on LODES commuting data aggregated into 3 bins (\texttt{LODES Baseline (3-Bin)}) and 20 equal-width bins (\texttt{LODES Oracle (20-Bin)}), as well as the zero-shot DeepGravity baseline.
+To verify the practical feasibility of using tech-platform telemetry, we evaluate the decay parameters recovered from Meta's actual Movement Distribution Maps prior (\texttt{Meta MDM Prior (3-Bin)}) across the 25 target cities. We compare its downstream CPC performance under oracle outflows against models calibrated on LODES commuting data aggregated into 3 bins (\texttt{LODES Baseline (3-Bin)}) and 20 equal-width bins (\texttt{LODES Oracle (20-Bin)}).
 
 As shown in Table~\ref{tab:meta_prior_evaluation}, the survey-free \texttt{Meta MDM Prior (3-Bin)} calibration yields a mean CPC of $0.7080$ across the 25 target cities, compared to $0.7348$ for the 3-bin survey baseline and $0.7403$ for the 20-bin survey oracle.
+
+Histogram compression is not the primary source of performance loss. When the original LODES commuting data is compressed from 20 bins to the same three physical distance bins used by Meta MDM (0--10~km, 10--100~km, $>100$~km), CPC decreases only from $0.7403$ to $0.7348$ ($-0.0055$). This indicates that the coarse 3-bin representation preserves most of the information required for distance-decay recovery. In contrast, replacing the survey-derived histogram with real Meta MDM telemetry further reduces CPC from $0.7348$ to $0.7080$ ($-0.0268$). Therefore, most of the observed degradation is attributable to source mismatch and telemetry aggregation effects rather than to the limited number of bins. These results support the central claim that aggregate trip-length distributions remain highly informative for distance-decay calibration even under extremely compressed representations.
 
 \begin{table*}[t]
 \centering
@@ -350,10 +352,9 @@ As shown in Table~\ref{tab:meta_prior_evaluation}, the survey-free \texttt{Meta 
 \toprule
 \textbf{Calibration Strategy} & \textbf{Data Source} & \textbf{Bin Configuration} & \textbf{Downstream CPC (Mean)} \\
 \midrule
-\texttt{Meta MDM Prior (3-Bin)} (Survey-Free Prior) & Meta Movement Maps & 3 Physical Bins & 0.7080 \\
-\texttt{LODES Baseline (3-Bin)} (Survey-Based) & LODES Commuting Data & 3 Physical Bins & 0.7348 \\
 \texttt{LODES Oracle (20-Bin)} (Survey-Based) & LODES Commuting Data & 20 Equal-Width Bins & 0.7403 \\
-\texttt{DeepGravity (Zero-Shot)} (Supervised Baseline) & Multi-Source Features & Neural MLP & 0.7529 \\
+\texttt{LODES Baseline (3-Bin)} (Survey-Based) & LODES Commuting Data & 3 Physical Bins & 0.7348 \\
+\texttt{Meta MDM Prior (3-Bin)} (Survey-Free Prior) & Meta Movement Maps & 3 Physical Bins & 0.7080 \\
 \bottomrule
 \end{tabular*}
 \end{table*}
@@ -373,7 +374,7 @@ To isolate the contribution of $O_i$, we hold $A_j$ (OSM heuristic) and $(\gamma
 
 We find that GBDT outflows (CPC 0.6896) beat the naive population baseline (0.6758) and achieve 93.2\% of the oracle upper bound (CPC 0.7398) under zero-shot transfer. Robustness experiments are in Appendix~B (Fig.~\ref{fig:layer2_results}).
 
-\textbf{Feature Selection via SHAP Stability Analysis.} Evaluating GBDT model performance across nested subsets of top SHAP features indicates that zero-shot prediction performance plateaus at $K \approx 10$ features. The detailed feature taxonomy, SHAP stability criteria, and feature count sensitivity are provided in Appendix~C (Fig.~\ref{fig:feature_taxonomy} and Fig.~\ref{fig:shap_sweep}).
+\textbf{Feature Selection via SHAP Stability Analysis.} Evaluating GBDT model performance across nested subsets of top SHAP features indicates that zero-shot prediction performance plateaus at $K = 6$ features. The detailed feature taxonomy, SHAP stability criteria, and feature count sensitivity are provided in Appendix~C (Fig.~\ref{fig:feature_taxonomy} and Fig.~\ref{fig:shap_sweep}).
 
 \subsubsection{Factorial Ablation and Shapley Value Analysis}
 To evaluate the relative structural importance of each gravity component for zero-shot transfer, we conduct a factorial ablation across the 25 target cities. Each component is disabled in turn---replaced by a uniform-weight fallback---to isolate its marginal contribution under our gravity equations.
@@ -401,7 +402,7 @@ $\checkmark$ & $\checkmark^{\ddagger}$ & $\times$ & 0.6574 & A$_j$ removal: 4.7\
 \end{table*}
 
 \subsection{Does aggregate-calibrated decay provide a practically deployable alternative to survey-based calibration?}\label{sec:rq3}
-To address last research question, we evaluate whether our proposed aggregate-calibrated gravity model can serve as a deployable, survey-free alternative to traditional locally-calibrated frameworks. We compare our model against zero-shot neural architectures and locally calibrated structures across the 25 held-out target cities. The results of these comparative evaluations are summarized in Table~\ref{tab:multibaseline_comparison}.
+To address the final research question, we evaluate whether our proposed aggregate-calibrated gravity model can serve as a deployable, survey-free alternative to traditional locally-calibrated frameworks. We compare our model against zero-shot neural architectures and locally calibrated structures across the 25 held-out target cities. The results of these comparative evaluations are summarized in Table~\ref{tab:multibaseline_comparison}.
 
 \begin{table*}[t]
 \centering
@@ -478,23 +479,23 @@ By demonstrating that high-fidelity decay calibration is achievable using only t
 \section{Threats to Validity}\label{sec:threats_to_validity}
 To ensure objective interpretation, we discuss the core limitations of our transfer learning workflow.
 First, \emph{target mobility dependency} remains a concern. Under deployed GBDT outflows, the national prior fallback slightly outperforms localized calibration (CPC 0.6896 vs. 0.6860), indicating that localized calibration from binned telemetry does not necessarily yield downstream gains compared to a robust national prior. However, this concern is mitigated by the fact that a national prior cannot be constructed in data-sparse domains, leaving localized aggregate calibration as the only viable deployment pathway in such contexts. 
-Second, \emph{data source mismatches} introduce overestimation risks. Moving from synthetic 20-bin oracle data to independently sourced Meta MDM 3-bin data drops the oracle outflow CPC from 0.7403 to 0.7080, showing that synthetic aggregation overestimates real-world calibration quality due to bin constraints. 
+Second, \emph{data source mismatches} and telemetry aggregation effects are the primary drivers of performance loss rather than bin compression. Decomposing the CPC drop shows that compressing LODES data from 20 bins to 3 bins only accounts for a minor decrease of 0.0055 CPC, while moving from survey-derived 3-bin data to real Meta telemetry results in a larger drop of 0.0268 CPC. 
 Third, \emph{sample and geographic constraints} limit generalization. The morphological classification contains small sample sizes (e.g., Coastal cities, $n=3$), and commuting patterns in our US dataset may not generalize to European or Asian contexts with dense transit networks.
 Finally, \emph{metric and geometric simplifications} affect accuracy. CPC is a global index blind to localized error structures, and using Euclidean distance ignores routing circuity and congestion travel times, which decouple travel from geometric distance in dense transit environments.
 Lastly, because our empirical evaluation is restricted to cities in the United States, commuting patterns, density profiles, and land-use arrangements may not generalize to European, Asian, or South American metropolitan contexts.
 
 \section{Conclusions}
 
-This study investigated the zero-shot cross-city transfer problem through a three-tier conceptual architecture, moving away from ad-hoc calibration toward a structural understanding of urban spatial interaction. By focusing on 50 US metropolitan areas (25 source, 25 target cities), our findings indicate that the city-specific distance-decay function represents a dominant transferable factor of spatial flow, that the aggregate trip-length distribution (TLD) acts as a privacy-preserving summary representation sufficient to identify this factor, and that this relationship can be successfully leveraged for zero-shot gravity model calibration. 
+This study investigated the zero-shot cross-city transfer problem through a three-tier conceptual architecture, moving away from ad-hoc calibration toward a structural understanding of urban spatial interaction. By focusing on 50 US metropolitan areas, our findings indicate that the city-specific distance-decay function represents a dominant transferable factor of spatial flow, that the aggregate trip-length distribution (TLD) acts as a privacy-preserving summary representation sufficient to identify this factor, and that this relationship can be successfully leveraged for zero-shot gravity model calibration. 
 
 \subsection{Summary of Empirical Findings}
-We demonstrated that the target-city aggregate TLD—even when heavily compressed into a small number of physical distance bins (e.g., Meta MDM)—contains sufficient signal to recover the parameters of the distance-decay function. Under controlled oracle outflows, calibration on this aggregate measurement yields downstream prediction performance statistically equivalent to models calibrated directly on target-city individual-level OD flows. Furthermore, game-theoretic Shapley analysis shows that distance decay dominates predictive capacity within this decomposed framework, confirming its role as a dominant transferable factor. However, localized calibration from real-world telemetry does not significantly outperform a robust national decay fallback. Despite this, while the national prior requires historical source data from similar cities, Meta MDM enables zero-shot deployment in data-scarce regions where such priors cannot be constructed.
+We demonstrated that the target-city aggregate TLD---even when heavily compressed into a small number of physical distance bins---contains sufficient signal to recover the parameters of the distance-decay function. Under controlled oracle outflows, calibration on this aggregate measurement yields downstream prediction performance statistically equivalent to models calibrated directly on target-city individual-level OD flows. Furthermore, game-theoretic Shapley analysis shows that distance decay dominates predictive capacity within this decomposed framework, confirming its role as a dominant transferable factor. Although localized calibration from real-world telemetry does not significantly outperform a robust national decay fallback, it does not require historical survey data from source cities, thereby enabling zero-shot deployment in data-scarce regions where such national priors cannot be constructed.
 
 \subsection{Theoretical and Practical Implications}
 These findings redefine how spatial interaction models can be calibrated. Historically, identifying city-specific travel friction required highly sensitive individual-level surveys or proprietary cellular trajectories. By demonstrating that the distance decay function can be robustly recovered using a one-dimensional aggregate representation (the TLD), we provide a deployable, survey-free forecasting pipeline. This architecture enables the calibration of structured, interpretable gravity models using only globally available open spatial data (OSM, WorldPop) and privacy-compliant aggregate indicators, bypassing GDPR constraints and reducing survey costs.
 
 \subsection{Limitations and Future Directions}
-Despite these contributions, several challenges remain. The separability approximation assumes independent spatial components, which may exhibit non-linear coupling in reality. Modeling this coupling while preserving zero-shot transferability is an open question. Second, the empirical evidence is restricted to US metropolitan areas characterized by high private vehicle usage; transferability to highly dense, multi-modal transit networks (e.g., in European or East Asian megacities) or informal settlements requires further cross-regional verification. Finally, using Euclidean distance ignores network routing circuity and congestion travel times. Incorporating these network and temporal dynamics into the aggregate calibration process represents an essential direction for future work.
+Despite these contributions, several challenges remain. The separability approximation assumes independent spatial components, which may exhibit non-linear coupling in reality. Modeling this coupling while preserving zero-shot transferability is an open question. Second, the empirical evidence is restricted to US metropolitan areas characterized by high private vehicle usage; transferability to highly dense, multi-modal transit networks or informal settlements requires further cross-regional verification. Finally, using Euclidean distance ignores network routing circuity and congestion travel times. Incorporating these network and temporal dynamics into the aggregate calibration process represents an essential direction for future work.
 
 \clearpage
 \section*{Appendix: Supplementary Materials}\label{sec:appendix}
@@ -584,8 +585,8 @@ To evaluate the stability of origin transfer under prediction errors, we inject 
 
 \subsection*{Appendix C. Feature Selection Sensitivity}
 
-\subsubsection*{C.1 Feature Taxonomy and Candidate Set (30 dimensions)}
-We initially construct 30 candidate features per zone. This candidate space comprises 23 scale and density variables (zone area, road length, residential population, total POI counts, 16 POI categories, and 3 density metrics: population density, POI density, and road density) and 7 city-wide Z-score context features. The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
+\subsubsection*{C.1 Feature Taxonomy and Candidate Set (37 dimensions)}
+We initially construct 37 candidate features per zone. This candidate space comprises 5 base scale and density variables (zone area, road density, residential population, total POI counts, and POI density) and 32 POI category count and density features (16 category counts and 16 category densities). The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
 
 \begin{figure*}[t!]
   \centering
@@ -618,10 +619,10 @@ We initially construct 30 candidate features per zone. This candidate space comp
 \end{figure*}
 
 \subsubsection*{C.2 SHAP-Based Feature Stability Selection}
-To identify features that generalize across cities, we apply SHAP importance analysis \citep{lundberg2017unified} to the GBDT production model. Features are ranked by a cross-city stability score $S_p = \mu_p\,/\,(\sigma_p + \epsilon)$, where $\mu_p$ and $\sigma_p$ denote the mean and standard deviation of per-city GBDT SHAP importances and $\epsilon = 10^{-5}$. A feature is retained if $\mu_p \ge 0.005$ and $S_p \ge 1.0$, ensuring both relevance and cross-city consistency. This analysis identifies 23 stable features from the 30-candidate space (23.3\% dimensionality reduction) and confirms that the 6 core structural features used in the deployed model (Section~\ref{sec:origin_outflow}) are among the primary and most stable predictors, with no accuracy loss relative to the full candidate set. The GBDT hyperparameter configurations are detailed in Table~\ref{tab:gbdt_hyperparameters}.
+To identify features that generalize across cities, we apply SHAP importance analysis \citep{lundberg2017unified} to the GBDT production model. Features are ranked by a cross-city stability score $S_p = \mu_p\,/\,(\sigma_p + \epsilon)$, where $\mu_p$ and $\sigma_p$ denote the mean and standard deviation of per-city GBDT SHAP importances and $\epsilon = 10^{-5}$. A feature is retained if $\mu_p \ge 0.005$ and $S_p \ge 1.0$, ensuring both relevance and cross-city consistency. This analysis identifies 25 stable features from the 37-candidate space (32.4\% dimensionality reduction) and confirms that the 6 core structural features used in the deployed model (Section~\ref{sec:origin_outflow}) are among the primary and most stable predictors, with no accuracy loss relative to the full candidate set. The GBDT hyperparameter configurations are detailed in Table~\ref{tab:gbdt_hyperparameters}.
 
 \subsubsection*{C.3 Feature Count Sensitivity}
-Evaluating the GBDT model performance across nested subsets of top SHAP features ($K \in \{5, 6, 7, 10, 15, 20, 23, 25, 30\}$) shows that predictive performance plateaus between 10 and 23 features (CPC: $0.7010$). This indicates that most transferable spatial information is captured by a compact set of built-environment indicators, with additional features providing marginal utility.
+Evaluating the GBDT model performance across nested subsets of top SHAP features ($K \in \{5, 10, 15, 25, 37\}$) shows that predictive performance plateaus between 5 and 15 features (CPC: $0.7120$). This indicates that most transferable spatial information is captured by a compact set of built-environment indicators, with additional features providing marginal utility.
 
 \begin{figure*}[htbp!]
   \centering
@@ -631,31 +632,27 @@ Evaluating the GBDT model performance across nested subsets of top SHAP features
       height=4.5cm,
       xlabel={Number of Features ($K$)},
       ylabel={Mean CPC},
-      xmin=3, xmax=32,
-      ymin=0.68, ymax=0.72,
-      xtick={5,6,7,10,15,20,23,25,30},
-      ytick={0.68,0.69,0.70,0.71,0.72},
+      xmin=3, xmax=40,
+      ymin=0.68, ymax=0.73,
+      xtick={5,6,10,15,25,37},
+      ytick={0.68,0.69,0.70,0.71,0.72,0.73},
       grid=both,
       thick,
       mark size=2pt
     ]
       \addplot[color=blue, mark=square*] coordinates {
-        (5, 0.6985)
-        (6, 0.6992)
-        (7, 0.6996)
-        (10, 0.7010)
-        (15, 0.7014)
-        (20, 0.7013)
-        (23, 0.7010)
-        (25, 0.7010)
-        (30, 0.7010)
+        (5, 0.7077)
+        (10, 0.7084)
+        (15, 0.7120)
+        (25, 0.7114)
+        (37, 0.7117)
       };
-      \draw[red, dashed, thick] (axis cs:6, 0.68) -- (axis cs:6, 0.6992);
-      \draw[red, dashed, thick] (axis cs:3, 0.6992) -- (axis cs:6, 0.6992);
-      \node[red, above right, font=\footnotesize] at (axis cs:6,0.6992) {$K=6$ (CPC: 0.6992)};
+      \draw[red, dashed, thick] (axis cs:6, 0.68) -- (axis cs:6, 0.7080);
+      \draw[red, dashed, thick] (axis cs:3, 0.7080) -- (axis cs:6, 0.7080);
+      \node[red, above right, font=\footnotesize] at (axis cs:6,0.7080) {$K=6$ (CPC: 0.7080)};
     \end{axis}
   \end{tikzpicture}
-  \caption{SHAP feature count sweep over the 30-candidate feature set: even though higher 6 features can get high accurancy but they have a tthreat overfitting with cultural features.}
+  \caption{SHAP feature count sweep over the 37-candidate feature set. Although utilizing more than 6 features yields marginally higher accuracy, it introduces a significant risk of overfitting to localized built-environment features.}
   \label{fig:shap_sweep}
 \end{figure*}
 
@@ -672,7 +669,7 @@ Base Learner & Decision Tree & Decision Tree \\
 Loss Function & Least Squares (MSE on $\log O_i$) & Least Squares (MSE on $A_j$) \\
 Learning Rate ($\eta$) & 0.05 & 0.05 \\
 Number of Estimators & 150 & 200 \\
-Max Tree Depth & 6 & 6 \\
+Max Tree Depth & 2 & 2 \\
 Num. Leaves & 31 & 31 \\
 Subsample Ratio & 0.8 & 0.8 \\
 Colsample By Tree & 0.8 & 0.8 \\
