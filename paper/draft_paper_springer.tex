@@ -324,7 +324,7 @@ The parameter recovery performance varies between the two decay exponents, showi
 \textbf{Parameter} & \textbf{Pearson $r$} & \textbf{MAE} & \textbf{Median Relative Error} & \textbf{Cities within $\pm$10\%} \\
 \midrule
 Power-law exponent ($\gamma$) & 0.909 & 0.035 & 1.7\% & 100.0\% \\
-Exponential decay rate ($\beta$, $\text{km}^{-1}$) & 0.427 & 0.0026 & 0.0\% & 72.0\% \\
+Exponential decay rate ($\beta$) & 0.427 & 0.0026 & 0.0\% & 72.0\% \\
 \bottomrule
 \end{tabular*}
 \end{table*}
@@ -341,14 +341,14 @@ Histogram compression is not the primary source of performance loss. When the or
 \tablebodyfont\small
 \caption{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows).}
 \label{tab:meta_prior_evaluation}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{4.5cm}cccc}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{4.5cm}ccc}
 \toprule
-\textbf{Calibration Strategy} & \textbf{Data Source} & \textbf{Bin Configuration} & \textbf{Downstream CPC} & \textbf{CPC Gap vs. Oracle} \\
+\textbf{Calibration Strategy} & \textbf{Data Source} & \shortstack[c]{\textbf{Downstream} \\ \textbf{CPC}} & \shortstack[c]{\textbf{CPC Gap} \\ \textbf{vs. Oracle}} \\
 \midrule
-Ground Truth (GT) Decay (Oracle) & Full OD Commuting Data & Continuous (Unbinned) & 0.7411 & Reference \\
-Recovered (Proposed) Decay & TLD (LODES) & 20 Equal-Width Bins & 0.7403 & -0.0008 \\
-LODES Baseline (3-Bin) & TLD (LODES) & 3 Physical Bins & 0.7348 & -0.0063 \\
-Meta MDM Prior (3-Bin) & Meta Movement Dist. Maps & 3 Physical Bins & 0.7080 & -0.0331 \\
+Ground Truth Decay & Ground truth data  & 0.7411 & Reference \\
+20 equal width bins & TLD from GT data  & 0.7403 & -0.0008 \\
+3 unequal width bins & TLD from GT data  & 0.7348 & -0.0063 \\
+3 unequal width bins & Meta Movement Dist. Maps & 0.7080 & -0.0331 \\
 \bottomrule
 \end{tabular*}
 \end{table*}
