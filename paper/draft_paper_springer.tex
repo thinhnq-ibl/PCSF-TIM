@@ -230,11 +230,11 @@ f(d_{ij};\,\beta,\gamma,\delta) = (d_{ij} + \delta)^{-\gamma} \cdot \exp(-\beta\
 \end{equation}
 where $\beta > 0$ represents the exponential decay rate governing long-range trip attenuation, $\gamma \ge 0$ is the power-law exponent modeling short-to-medium range trip distribution, and $\delta > 0$ serves as an adaptive geometric offset.
 
-The offset $\delta$ prevents singularity at $d_{ij} = 0$ and adapts to zone size:
+The offset~$\delta$~prevents singularity at $d_{ij} = 0$ and adapts to zone size:
 \begin{equation}\label{eq:delta}
 \delta = 0.5 \times \bar{R}_{\mathrm{zone}}, \qquad \bar{R}_{\mathrm{zone}} = \frac{1}{N}\sum_{i=1}^{N}\sqrt{\frac{\mathrm{Area}_i}{\pi}}
 \end{equation}
-where $\bar{R}_{\mathrm{zone}}$ is the mean zone radius. The parameters $(\beta, \gamma)$ are estimated via MLE on the aggregate distance-bin distribution, with further optimization details provided in Appendix~A. Because only binned trip-length histograms are used for calibration, this procedure is compatible with strict data-governance regulations (e.g., GDPR). For numerical implementation and computational efficiency, the theoretical offset $\delta$ is regularized by clamping the minimum distance to a small epsilon ($d_{\mathrm{min}} = 10^{-6}$), which yields mathematically equivalent results since $d_{ij} \gg d_{\mathrm{min}}$ for all cross-zone flows ($i \ne j$).
+where $\bar{R}_{\mathrm{zone}}$ is the mean zone radius. The parameters $(\beta, \gamma)$ are estimated via MLE on the aggregate distance-bin distribution, with further optimization details provided in Appendix~A. Because only binned trip-length histograms are used for calibration, this procedure is compatible with strict data-governance regulations (e.g., GDPR). For numerical implementation and computational efficiency, the theoretical offset~$\delta$~is regularized by clamping the minimum distance to a small epsilon ($d_{\mathrm{min}} = 10^{-6}$), which yields mathematically equivalent results since $d_{ij} \gg d_{\mathrm{min}}$ for all cross-zone flows ($i \ne j$).
 
 \subsection{Origin Outflow Component (\texorpdfstring{$O_i$}{O\_i})}\label{sec:origin_outflow}
 The trip production $O_i = \sum_j T_{ij}$ represents the total commuter outflow originating from zone $i$. In zero-shot transfer settings where target outflows are unobserved, we predict $O_i$ using a Gradient Boosted Decision Tree (GBDT) regressor. The GBDT model is trained on a parsimonious set of \textbf{6 core macroscopic features}: total population ($P_i$), total POI count ($\mathrm{POI}_i$), zone area ($\mathrm{Area}_i$), population density ($\rho_{pop, i}$), POI density ($\rho_{poi, i}$), and road density ($\mathrm{rd}_i$). 
