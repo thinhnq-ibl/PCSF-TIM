@@ -1,4 +1,4 @@
-\begin{thebibliography}{28}
+\begin{thebibliography}{32}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -44,6 +44,11 @@ Guo J, Bai S, Li X, et~al (2025) A universal geography neural network for
   mobility flow prediction in planning scenarios. Computer-Aided Civil and
   Infrastructure Engineering 40:5769--5789. \doi{10.1111/mice.13398}
 
+\bibitem[{Houssiau et~al.(2022)}]{houssiau2022dpaggregate}
+Houssiau F, et~al (2022) On the difficulty of achieving differential privacy in
+  practice: user-level guarantees in aggregate location data. Nature
+  Communications 13(1):19. \doi{10.1038/s41467-021-27566-0}
+
 \bibitem[{Hu et~al.(2020)Hu, Yang, Li, Liang, Qu, and Yang}]{hu2020mpgcn}
 Hu J, Yang G, Li K, et~al (2020) Predicting origin-destination flow via
   multi-perspective graph convolutional network. In: IEEE 36th International
@@ -73,6 +78,11 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
   \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps/},
   aI for Good Datasets. Accessed: 27 June 2026. No DOI assigned.
 
+\bibitem[{Ozaki et~al.(2025)}]{ozaki2025privacysynthetic}
+Ozaki J, et~al (2025) Privacy-preserving synthetic dataset of individual daily
+  trajectories for city-scale mobility analytics. In: 2025 IEEE International
+  Conference on Big Data (BigData), \doi{10.1109/BIGDATA66926.2025.11401071}
+
 \bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
   Alessandretti}]{pappalardo2023analytical}
 Pappalardo L, Manley E, Sekara V, et~al (2023) Future directions in human
@@ -91,6 +101,12 @@ Rong C, Wang H, Li Y (2023{\natexlab{b}}) Origin-destination network generation
   via gravity-guided gan. \urlprefix\url{https://arxiv.org/abs/2306.03390},
   arXiv preprint; no DOI assigned,
   {\href{https://arxiv.org/abs/2306.03390}{{arXiv:2306.03390}}}
+
+\bibitem[{Seong et~al.(2023)Seong, Kang, Choi, Jeon, Shin, and
+  Kim}]{seong2023multimodalregion}
+Seong G, Kang Y, Choi M, et~al (2023) Multi-modal based region representation
+  learning considering mobility data in seoul. Procedia Computer Science
+  225:2495--2504. \doi{10.1016/j.procs.2023.03.153}
 
 \bibitem[{Shapley(1953)}]{shapley1953value}
 Shapley LS (1953) A value for n-person games. In: Contributions to the Theory
@@ -111,6 +127,11 @@ Simini F, Barlacchi G, Luca M, et~al (2021) A deep gravity model for mobility
 \bibitem[{Song et~al.(2010)Song, Qu, Blumm, and Barab{\'a}si}]{song2010limits}
 Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
   Science 327(5968):1018--1021. \doi{10.1126/science.1177170}
+
+\bibitem[{Stickel et~al.(2026)}]{stickel2026hyperaoe}
+Stickel J, et~al (2026) Hyperaoe: Generalizing zero-shot cross-city trajectory
+  prediction with hypernetworks. Research Square
+  \doi{10.21203/rs.3.rs-8728806/v1}, preprint
 
 \bibitem[{Tanner(1961)}]{tanner1961}
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
