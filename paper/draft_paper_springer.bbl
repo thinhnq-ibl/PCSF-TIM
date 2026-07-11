@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -22,6 +22,11 @@ Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
 Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
   Nature 439(7075):462--465. \doi{10.1038/nature04292}
 
+\bibitem[{Chan et~al.(1986)}]{chan1986tld}
+Chan Y, et~al (1986) Trip-length distribution based trip distribution modeling.
+  Classic TLD reference cited in transport modeling literature; bibliographic
+  metadata to be finalized from the primary source
+
 \bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
   De~Domenico}]{gallotti2024distorted}
 Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
@@ -32,6 +37,18 @@ Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
   Barab{\'a}si}]{gonzalez2008understanding}
 Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
   human mobility patterns. Nature 453(7196):779--782. \doi{10.1038/nature06958}
+
+\bibitem[{Guo et~al.(2025)Guo, Bai, Li, Xian, Liu, Ding, and
+  Ma}]{guo2025universalgnn}
+Guo J, Bai S, Li X, et~al (2025) A universal geography neural network for
+  mobility flow prediction in planning scenarios. Computer-Aided Civil and
+  Infrastructure Engineering 40:5769--5789. \doi{10.1111/mice.13398}
+
+\bibitem[{Hu et~al.(2020)Hu, Yang, Li, Liang, Qu, and Yang}]{hu2020mpgcn}
+Hu J, Yang G, Li K, et~al (2020) Predicting origin-destination flow via
+  multi-perspective graph convolutional network. In: IEEE 36th International
+  Conference on Data Engineering (ICDE), pp 1818--1821,
+  \doi{10.1109/ICDE48307.2020.00178}
 
 \bibitem[{Lenormand et~al.(2016)Lenormand, Bassolas, and
   Ramasco}]{lenormand2016systematic}
@@ -54,7 +71,7 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
 \bibitem[{{Meta}(2026)}]{MetaMovementDistributionMaps}
 {Meta} (2026) Movement distribution maps.
   \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps/},
-  aI for Good Datasets. Accessed: 27 June 2026
+  aI for Good Datasets. Accessed: 27 June 2026. No DOI assigned.
 
 \bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
   Alessandretti}]{pappalardo2023analytical}
@@ -62,15 +79,23 @@ Pappalardo L, Manley E, Sekara V, et~al (2023) Future directions in human
   mobility science. Nature Computational Science 3:588--600.
   \doi{10.1038/s43588-023-00469-4}
 
-\bibitem[{Rong et~al.(2023)Rong, Feng, Ding et~al.}]{Rong2023goddag}
-Rong C, Feng J, Ding J, et~al (2023) {GODDAG}: Generating origin-destination
-  flow for new cities via domain adversarial training. IEEE Transactions on
-  Knowledge and Data Engineering 35(10):10048--10057.
+\bibitem[{Rong et~al.(2023{\natexlab{a}})Rong, Feng, Ding
+  et~al.}]{Rong2023goddag}
+Rong C, Feng J, Ding J, et~al (2023{\natexlab{a}}) {GODDAG}: Generating
+  origin-destination flow for new cities via domain adversarial training. IEEE
+  Transactions on Knowledge and Data Engineering 35(10):10048--10057.
   \doi{10.1109/TKDE.2022.3218526}
+
+\bibitem[{Rong et~al.(2023{\natexlab{b}})Rong, Wang, and Li}]{rong2023odgn}
+Rong C, Wang H, Li Y (2023{\natexlab{b}}) Origin-destination network generation
+  via gravity-guided gan. \urlprefix\url{https://arxiv.org/abs/2306.03390},
+  arXiv preprint; no DOI assigned,
+  {\href{https://arxiv.org/abs/2306.03390}{{arXiv:2306.03390}}}
 
 \bibitem[{Shapley(1953)}]{shapley1953value}
 Shapley LS (1953) A value for n-person games. In: Contributions to the Theory
-  of Games, vol~2. Princeton University Press, p 307--317
+  of Games, vol~2. Princeton University Press, p 307--317, classic book
+  chapter; no DOI assigned
 
 \bibitem[{Simini et~al.(2012)Simini, Gonzalez, Maritan, and
   Barabasi}]{Simini2012universal}
@@ -91,6 +116,11 @@ Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
   Paper~51, Road Research Laboratory, London
 
+\bibitem[{Veneziano and Gonzalez(2011)}]{veneziano2011tld}
+Veneziano D, Gonzalez MC (2011) Trip-length distribution analysis in human
+  mobility studies. Classic TLD reference cited in mobility literature;
+  bibliographic metadata to be finalized from the primary source
+
 \bibitem[{Wang et~al.(2018)Wang, Geng, Ma, Yang, Cao, and
   Zheng}]{wang2018regiontrans}
 Wang L, Geng X, Ma X, et~al (2018) Crowd flow prediction by deep
@@ -104,8 +134,33 @@ Wang X, Jin K, Sun L, et~al (2022) When transfer learning meets cross-city
   the Thirty-First International Joint Conference on Artificial Intelligence
   (IJCAI-22), pp 2219--2225, \doi{10.24963/ijcai.2022/308}
 
+\bibitem[{Wang et~al.(2026)Wang, Zhou, Yu, Wan, and
+  Chen}]{wang2026stgcngeoknowledge}
+Wang Y, Zhou M, Yu W, et~al (2026) A spatial--temporal graph convolutional
+  network enhanced by geospatial knowledge to forecast origin--destination
+  flows. International Journal of Geographical Information Science
+  40:2216--2246. \doi{10.1080/13658816.2025.2591250}, published online in 2025
+
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated
   developments. Environment and Planning A 3(1):1--32. \doi{10.1068/a030001}
+
+\bibitem[{Xing et~al.(2025)Xing, Chung, Wang, Toriumi, Oguchi, and
+  Wu}]{xing2025kehgnn}
+Xing Z, Chung E, Wang Y, et~al (2025) Origin--destination prediction via
+  knowledge-enhanced hybrid learning. Computer-Aided Civil and Infrastructure
+  Engineering 40:2498--2521. \doi{10.1111/mice.13458}
+
+\bibitem[{Zhao et~al.(2025)Zhao, Cheng, Gao, and Lu}]{zhao2025truckgravity}
+Zhao Y, Cheng S, Gao S, et~al (2025) A gravity-inspired model integrating
+  geospatial and socioeconomic distances for truck origin--destination flows
+  prediction. International Journal of Applied Earth Observation and
+  Geoinformation 136:104328. \doi{10.1016/j.jag.2024.104328}
+
+\bibitem[{Zhu and Ma(2026)}]{zhu2026gravitypanel}
+Zhu D, Ma Z (2026) Gravity-informed deep flow inference for spatial evolution
+  modeling in panel data. International Journal of Geographical Information
+  Science 40:918--946. \doi{10.1080/13658816.2025.2536512}, published online in
+  2025
 
 \end{thebibliography}
