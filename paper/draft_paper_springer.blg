@@ -6,45 +6,45 @@ Database file #1: references.bib
 sn-basic.bst [2024/07/19 v1.1 bibliography style]
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--can't use both volume and number fields in shapley1953value
-You've used 18 entries,
+You've used 19 entries,
             3567 wiz_defined-function locations,
-            851 strings with 8814 characters,
-and the built_in function-call counts, 15104 in all, are:
-= -- 1417
-> -- 608
+            858 strings with 9020 characters,
+and the built_in function-call counts, 16018 in all, are:
+= -- 1503
+> -- 649
 < -- 11
-+ -- 248
-- -- 181
-* -- 1267
-:= -- 2192
-add.period$ -- 31
-call.type$ -- 18
-change.case$ -- 160
-chr.to.int$ -- 18
-cite$ -- 19
-duplicate$ -- 1103
-empty$ -- 1204
-format.name$ -- 229
-if$ -- 3167
++ -- 264
+- -- 193
+* -- 1350
+:= -- 2325
+add.period$ -- 33
+call.type$ -- 19
+change.case$ -- 169
+chr.to.int$ -- 19
+cite$ -- 20
+duplicate$ -- 1171
+empty$ -- 1276
+format.name$ -- 244
+if$ -- 3357
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 138
-newline$ -- 63
-num.names$ -- 72
-pop$ -- 359
+missing$ -- 146
+newline$ -- 66
+num.names$ -- 76
+pop$ -- 379
 preamble$ -- 1
-purify$ -- 133
+purify$ -- 141
 quote$ -- 0
-skip$ -- 406
+skip$ -- 427
 stack$ -- 0
-substring$ -- 1184
-swap$ -- 379
+substring$ -- 1255
+swap$ -- 401
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 162
+type$ -- 171
 warning$ -- 1
-while$ -- 100
+while$ -- 106
 width$ -- 0
-write$ -- 224
+write$ -- 236
 (There was 1 warning)
