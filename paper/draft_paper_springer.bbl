@@ -1,4 +1,4 @@
-\begin{thebibliography}{32}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -21,11 +21,6 @@ Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   Geisel}]{brockmann2006scaling}
 Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
   Nature 439(7075):462--465. \doi{10.1038/nature04292}
-
-\bibitem[{Chan et~al.(1986)}]{chan1986tld}
-Chan Y, et~al (1986) Trip-length distribution based trip distribution modeling.
-  Classic TLD reference cited in transport modeling literature; bibliographic
-  metadata to be finalized from the primary source
 
 \bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
   De~Domenico}]{gallotti2024distorted}
