@@ -23,6 +23,7 @@
 \citation{mendieta2023geogpt}
 \citation{wang2022when}
 \citation{pappalardo2023analytical,brockmann2006scaling,lenormand2016systematic}
+\citation{simini2021,mendieta2023geogpt,atwal2025commuting}
 \citation{wang2018regiontrans,mendieta2023geogpt,wang2022when}
 \citation{gallotti2024distorted}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys.}}{3}{figure.2}\protected@file@percent }
@@ -40,21 +41,21 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodological Design}{4}{section.3}\protected@file@percent }
 \newlabel{sec:methodology}{{3}{4}{Methodological Design}{section.3}{}}
 \newlabel{eq:decomposition}{{1}{4}{Methodological Design}{equation.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Aggregate-Based Decay Calibration}{4}{subsection.3.1}\protected@file@percent }
-\newlabel{sec:aggregate_calibration}{{3.1}{4}{Aggregate-Based Decay Calibration}{subsection.3.1}{}}
 \citation{tanner1961}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparative analysis of human mobility models across structural and transferability dimensions.}}{5}{table.1}\protected@file@percent }
 \newlabel{tab:literature_comparison}{{1}{5}{Comparative analysis of human mobility models across structural and transferability dimensions}{table.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Operational and diagnostic evaluation settings.}}{5}{table.2}\protected@file@percent }
 \newlabel{tab:evaluation_settings}{{2}{5}{Operational and diagnostic evaluation settings}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Aggregate-Based Decay Calibration}{5}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:aggregate_calibration}{{3.1}{5}{Aggregate-Based Decay Calibration}{subsection.3.1}{}}
 \newlabel{eq:predicted_flow_mle}{{3}{5}{Aggregate-Based Decay Calibration}{equation.3}{}}
 \newlabel{eq:predicted_prob_mle}{{4}{5}{Aggregate-Based Decay Calibration}{equation.4}{}}
 \newlabel{eq:likelihood_mle}{{5}{5}{Aggregate-Based Decay Calibration}{equation.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Distance-Decay Component}{5}{subsection.3.2}\protected@file@percent }
-\newlabel{sec:decay_function}{{3.2}{5}{Distance-Decay Component}{subsection.3.2}{}}
-\newlabel{eq:tanner_multi}{{6}{5}{Distance-Decay Component}{equation.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf  {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat  {\gamma }, \hat  {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$).}}{6}{figure.3}\protected@file@percent }
 \newlabel{fig:framework_pipeline}{{3}{6}{Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat {\gamma }, \hat {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$)}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Distance-Decay Component}{6}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:decay_function}{{3.2}{6}{Distance-Decay Component}{subsection.3.2}{}}
+\newlabel{eq:tanner_multi}{{6}{6}{Distance-Decay Component}{equation.6}{}}
 \newlabel{eq:delta}{{7}{6}{Distance-Decay Component}{equation.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Origin Production Component ($O_i$)}{6}{subsection.3.3}\protected@file@percent }
 \newlabel{sec:origin_outflow}{{3.3}{6}{Origin Production Component (\texorpdfstring {$O_i$}{O\_i})}{subsection.3.3}{}}
