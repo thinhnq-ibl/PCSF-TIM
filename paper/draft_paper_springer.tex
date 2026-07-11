@@ -42,21 +42,55 @@
 
 Predicting origin-destination (OD) travel flows is essential for urban transport planning and infrastructure design \citep{barbosa2018human,gonzalez2008understanding,song2010limits}. However, traditional travel surveys and proprietary cellular records are highly restricted due to cost, commercial licensing, and privacy concerns. Consequently, a central challenge in urban mobility modeling is the zero-shot cross-city transfer problem: predicting commuting flows in a target city where no local OD surveys are available.
 
-While recent deep learning approaches achieve high accuracy, they require abundant individual-level OD records for training, limiting their generalizability and raising privacy concerns. In contrast, classical gravity models \citep{wilson1971} offer physical interpretability and structural simplicity but require local calibration of their distance-decay parameters. This highlights a critical unresolved question: \textbf{we do not yet know whether the most important component of spatial interaction can be recovered from aggregate mobility data.}
+Although aggregate mobility products are becoming increasingly available, it remains unclear which structural information they actually preserve for spatial interaction modeling.
 
-In this paper, we address this gap by proposing a three-tier conceptual framework, referred to as \textbf{SDF-ZTF} (Separable Decomposed Formulation for Zero-Shot Transferable Flows). First, we utilize the target-city aggregate trip-length distribution (TLD) as an \emph{aggregate representation that reduces privacy exposure}, and test whether city-specific distance-decay parameters can be recovered without using individual zone-to-zone trajectories. Second, we quantify the predictive importance of the distance-decay component within the investigated gravity framework. Third, we apply the recovered distance-decay parameters in a \emph{zero-shot calibration} setting to evaluate downstream utility for commuting-flow prediction. Under the primary \textbf{OD-free calibration setting}, the model recovers distance-decay parameters from target-city aggregate TLDs (e.g., TLDs derived from Meta Movement Distribution Maps). In the \textbf{pure zero-shot fallback}, the model uses a national decay prior derived from source cities. We show that aggregate trip-length histograms contain sufficient information to recover city-specific distance-decay parameters with high fidelity. Furthermore, our game-theoretic Shapley analysis shows that distance decay accounts for the majority of predictive gain in this framework.
+While recent deep learning approaches achieve high accuracy, they require abundant individual-level OD records for training, limiting their generalizability and raising privacy concerns. In contrast, classical gravity models \citep{wilson1971} offer physical interpretability and structural simplicity but require local calibration of their distance-decay parameters. This highlights a critical unresolved question: \textbf{it remains unknown whether aggregate trip-length distributions preserve sufficient information to identify the dominant predictive component of gravity-based spatial interaction.}
+
+In this paper, we address this gap through \textbf{SDF-ZTF} (Separable Decomposed Formulation for Zero-Shot Transferable Flows). We investigate three sequential questions: whether aggregate TLDs provide sufficient calibration information to recover city-specific distance-decay parameters, to what extent the distance-decay component contributes to predictive performance, and whether recovered parameters enable competitive survey-free deployment without individual OD data. Under the primary \textbf{OD-free calibration setting}, the model recovers distance-decay parameters from target-city aggregate TLDs (e.g., TLDs derived from Meta Movement Distribution Maps). In the \textbf{pure zero-shot fallback}, the model uses a national decay prior derived from source cities. We show that aggregate trip-length histograms provide sufficient calibration information to recover city-specific distance-decay parameters with high fidelity. Furthermore, our game-theoretic Shapley analysis shows that distance decay accounts for the majority of predictive gain in this framework.
 
 We systematically address this through three research questions:
 \begin{enumerate}
   \item Can aggregate trip-length distributions reliably recover city-specific distance-decay parameters?
   \item To what extent does distance decay contribute to predictive performance within gravity-based mobility modeling?
-  \item Can recovering distance decay from aggregate trip-length distributions preserve predictive performance without access to individual OD data?
+  \item Can recovering distance decay from aggregate trip-length distributions enable competitive predictive performance without access to individual OD data?
 \end{enumerate}
 
 Our empirical investigation across 50 US metropolitan areas evaluates these assumptions. The results indicate that distance decay represents the dominant predictive component within the investigated gravity framework, and that projecting spatial interactions onto the TLD provides a summary representation sufficient to recover this component. Although our model underperforms DeepGravity (average CPC 0.6860 vs. 0.7529), the results show that aggregate mobility distributions contain sufficient information to recover the dominant predictive component. Consequently, survey-free calibration from aggregate data can achieve competitive performance without requiring access to individual-level mobility trajectories. The rest of this paper is organized around the three research questions detailed above.
+\subsection{Classical and Structured Mobility Models}
+Classical spatial interaction models, such as gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal}, form the theoretical foundation of urban flow modeling. Gravity formulations relate traffic flows directly to zone masses and inversely to travel distance, while radiation models simulate destination choice based on the distribution of intervening opportunities. Although highly interpretable due to explicit physical constraints, gravity models require local origin-destination (OD) surveys to calibrate their distance-decay parameters. Meanwhile, radiation models tend to perform poorly in urban regions characterized by highly directional commuting patterns or constrained transport networks.
 
+\subsection{Deep Learning for OD Prediction}
+To address the limitations of classical frameworks, deep learning techniques have been introduced to capture non-linear relationships in spatial interactions. Models like DeepGravity \citep{simini2021} employ deep neural networks to map built-environment variables directly to flow volumes, and subsequent works incorporate graph neural networks \citep{Rong2023goddag} or OpenStreetMap representations \citep{atwal2025commuting}. Although these high-capacity neural models achieve superior predictive performance when training data is abundant, they require extensive individual-level OD records for local adaptation, which restricts their generalizability to data-poor or privacy-sensitive cities.
 
+\subsection{Aggregate Mobility Data for Decay Calibration}
+To establish data-efficient modeling pipelines, researchers have explored aggregated mobility datasets that minimize privacy risks. These datasets can be compressed into trip-length distributions (TLDs), which represent one-dimensional marginal histograms of travel distances without disclosing individual zone-to-zone trajectories \citep{pappalardo2023analytical}. At the same time, cross-source differences in mobility data collection and preprocessing can significantly distort inferred displacement patterns and downstream conclusions \citep{gallotti2024distorted}. Although TLD shapes correspond to standard parametric decay functions \citep{brockmann2006scaling,lenormand2016systematic}, it remains unclear how to reliably invert these aggregate distributions into city-specific distance-decay parameters for zero-shot calibration.
 
+Beyond privacy, aggregate mobility products provide scalable summaries of displacement behavior (e.g., movement-distance histograms and distribution maps) that are increasingly available across regions and platforms. However, their utility for parameter identification remains under-characterized: even when aggregate shape statistics are informative, reliable inversion into city-specific distance-decay parameters requires controlling for geometry, attraction structure, and exposure effects.
+
+\subsection{Cross-City Transfer Learning}
+Cross-city transfer learning applies predictive knowledge from data-rich source cities to data-scarce target cities. Current transfer methodologies rely on region representation alignment \citep{wang2018regiontrans}, generative geographic pre-training \citep{mendieta2023geogpt}, or domain adaptation \citep{wang2022when}. However, these methods generally assume that some target-city flow samples are accessible during training, or they do not explicitly calibrate city-specific spatial friction, limiting their effectiveness in strict zero-shot settings.
+
+\subsection{Research Gap and Positioning}
+Table~\ref{tab:literature_comparison} compares how existing model classes address the core challenge of zero-shot cross-city transfer. Although TLDs are known to reflect parametric distance laws, to our knowledge prior work has not established a practical inversion pipeline that recovers city-specific distance-decay parameters from aggregate TLDs for zero-shot calibration \citep{pappalardo2023analytical,brockmann2006scaling,lenormand2016systematic}. Recent deep-learning advances in OD prediction and geospatial representation learning have improved predictive performance, but they still rely on high-capacity architectures and substantial training data \citep{simini2021,mendieta2023geogpt,atwal2025commuting}. Existing cross-city transfer approaches either rely on target-domain flow signals during adaptation or do not explicitly calibrate city-specific spatial friction \citep{wang2018regiontrans,mendieta2023geogpt,wang2022when}. Moreover, documented cross-source distortions in mobility datasets motivate methods that remain robust under privacy-preserving aggregation \citep{gallotti2024distorted}. Consequently, whether the dominant predictive component of spatial interaction, distance decay, can be reliably recovered from privacy-preserving aggregate trip-length distributions remains an open question. Concretely, existing work lacks (i) a practical aggregate-based recovery method for city-specific distance-decay parameters, and (ii) a quantitative decomposition showing how much predictive performance depends on the distance-decay component. In addition, we explore whether urban morphology may influence the effectiveness of aggregate calibration. To the best of our knowledge, this is the first study that systematically evaluates whether city-specific distance-decay parameters can be recovered from aggregate TLDs with high fidelity for survey-free zero-shot gravity calibration. These gaps and exploratory questions map directly to the research questions evaluated throughout this study.
+
+\begin{table*}[t]
+\centering
+\tablebodyfont\footnotesize
+\caption{Comparative analysis of human mobility models across structural and transferability dimensions.}
+\label{tab:literature_comparison}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{2.2cm} c c c c c}
+\toprule
+\shortstack[l]{\textbf{Model} \\ \textbf{Class}} & \shortstack[c]{\textbf{Decomposed} \\ \textbf{Structure}} & \shortstack[c]{\textbf{Transferable} \\ \textbf{Across Cities}} & \shortstack[c]{\textbf{Requires} \\ \textbf{Target OD}} & \textbf{Interpretable} & \shortstack[c]{\textbf{Decay Explicitly} \\ \textbf{Modeled}} \\
+\midrule
+Gravity \citep{wilson1971} & Yes & No & Yes & High & Yes \\
+Radiation \citep{Simini2012universal} & No & Yes & No & High & Yes \\
+DeepGravity \citep{simini2021} & No & Limited & Yes & Low & No \\
+GNN OD \citep{Rong2023goddag} & No & Limited & Yes & Low & No \\
+RegionTrans \citep{wang2018regiontrans} & Partial & Yes & Yes & Low & No \\
+\textbf{SDF-ZTF (Ours)} & Yes & Yes & No & High & Yes \\
+\bottomrule
+\end{tabular*}
+\end{table*}
 
 \begin{figure*}[t!]
   \centering
@@ -89,40 +123,6 @@ Our empirical investigation across 50 US metropolitan areas evaluates these assu
   \caption{Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys.}
   \label{fig:conceptual_framework}
 \end{figure*}
-
-\subsection{Classical and Structured Mobility Models}
-Classical spatial interaction models, such as gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal}, form the theoretical foundation of urban flow modeling. Gravity formulations relate traffic flows directly to zone masses and inversely to travel distance, while radiation models simulate destination choice based on the distribution of intervening opportunities. Although highly interpretable due to explicit physical constraints, gravity models require local origin-destination (OD) surveys to calibrate their distance-decay parameters. Meanwhile, radiation models tend to perform poorly in urban regions characterized by highly directional commuting patterns or constrained transport networks.
-
-\subsection{Deep Learning for OD Prediction}
-To address the limitations of classical frameworks, deep learning techniques have been introduced to capture non-linear relationships in spatial interactions. Models like DeepGravity \citep{simini2021} employ deep neural networks to map built-environment variables directly to flow volumes, and subsequent works incorporate graph neural networks \citep{Rong2023goddag} or OpenStreetMap representations \citep{atwal2025commuting}. Although these high-capacity neural models achieve superior predictive performance when training data is abundant, they require extensive individual-level OD records for local adaptation, which restricts their generalizability to data-poor or privacy-sensitive cities.
-
-\subsection{Aggregate Mobility Data for Decay Calibration}
-To establish data-efficient modeling pipelines, researchers have explored aggregated mobility datasets that minimize privacy risks. These datasets can be compressed into trip-length distributions (TLDs), which represent one-dimensional marginal histograms of travel distances without disclosing individual zone-to-zone trajectories \citep{pappalardo2023analytical}. At the same time, cross-source differences in mobility data collection and preprocessing can significantly distort inferred displacement patterns and downstream conclusions \citep{gallotti2024distorted}. Although TLD shapes correspond to standard parametric decay functions \citep{brockmann2006scaling,lenormand2016systematic}, it remains unclear how to reliably invert these aggregate distributions into city-specific distance-decay parameters for zero-shot calibration.
-
-\subsection{Cross-City Transfer Learning}
-Cross-city transfer learning applies predictive knowledge from data-rich source cities to data-scarce target cities. Current transfer methodologies rely on region representation alignment \citep{wang2018regiontrans}, generative geographic pre-training \citep{mendieta2023geogpt}, or domain adaptation \citep{wang2022when}. However, these methods generally assume that some target-city flow samples are accessible during training, or they do not explicitly calibrate city-specific spatial friction, limiting their effectiveness in strict zero-shot settings.
-
-\subsection{Research Gap and Positioning}
-Table~\ref{tab:literature_comparison} compares how existing model classes address the core challenge of zero-shot cross-city transfer. Although TLDs are known to reflect parametric distance laws, to our knowledge prior work has not established a practical inversion pipeline that recovers city-specific distance-decay parameters from aggregate TLDs for zero-shot calibration \citep{pappalardo2023analytical,brockmann2006scaling,lenormand2016systematic}. Recent deep-learning advances in OD prediction and geospatial representation learning have improved predictive performance, but they still rely on high-capacity architectures and substantial training data \citep{simini2021,mendieta2023geogpt,atwal2025commuting}. Existing cross-city transfer approaches either rely on target-domain flow signals during adaptation or do not explicitly calibrate city-specific spatial friction \citep{wang2018regiontrans,mendieta2023geogpt,wang2022when}. Moreover, documented cross-source distortions in mobility datasets motivate methods that remain robust under privacy-preserving aggregation \citep{gallotti2024distorted}. Consequently, whether the dominant predictive component of spatial interaction, distance decay, can be reliably recovered from privacy-preserving aggregate trip-length distributions remains an open question. Concretely, existing work lacks (i) a practical aggregate-based recovery method for city-specific distance-decay parameters, and (ii) a quantitative decomposition showing how much predictive performance depends on the distance-decay component. In addition, we explore whether urban morphology may influence the effectiveness of aggregate calibration. To the best of our knowledge, this study is the first to demonstrate that city-specific distance-decay parameters can be recovered from aggregate TLDs with high fidelity, enabling survey-free zero-shot gravity calibration. These gaps and exploratory questions map directly to the research questions evaluated throughout this study.
-
-\begin{table*}[t]
-\centering
-\tablebodyfont\footnotesize
-\caption{Comparative analysis of human mobility models across structural and transferability dimensions.}
-\label{tab:literature_comparison}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{2.2cm} c c c c c}
-\toprule
-\shortstack[l]{\textbf{Model} \\ \textbf{Class}} & \shortstack[c]{\textbf{Decomposed} \\ \textbf{Structure}} & \shortstack[c]{\textbf{Transferable} \\ \textbf{Across Cities}} & \shortstack[c]{\textbf{Requires} \\ \textbf{Target OD}} & \textbf{Interpretable} & \shortstack[c]{\textbf{Decay Explicitly} \\ \textbf{Modeled}} \\
-\midrule
-Gravity \citep{wilson1971} & Yes & No & Yes & High & Yes \\
-Radiation \citep{Simini2012universal} & No & Yes & No & High & Yes \\
-DeepGravity \citep{simini2021} & No & Limited & Yes & Low & No \\
-GNN OD \citep{Rong2023goddag} & No & Limited & Yes & Low & No \\
-RegionTrans \citep{wang2018regiontrans} & Partial & Yes & Yes & Low & No \\
-\textbf{SDF-ZTF (Ours)} & Yes & Yes & No & High & Yes \\
-\bottomrule
-\end{tabular*}
-\end{table*}
 
 \section{Problem Setting}\label{sec:problem_setting}
 
@@ -393,7 +393,7 @@ Origin Production $O_i$ & -3.6\% & 0.0167 & 6.4\% \\
 \end{tabular*}
 \end{table*}
 
-\subsection{Can recovering distance decay from aggregate trip-length distributions preserve predictive performance without access to individual OD data?}\label{sec:rq3}
+\subsection{Can recovering distance decay from aggregate trip-length distributions enable competitive predictive performance without access to individual OD data?}\label{sec:rq3}
 To address the final research question, we evaluate whether our proposed aggregate-calibrated gravity model can serve as a deployable, survey-free alternative to traditional locally-calibrated frameworks. We compare our model against zero-shot neural architectures and locally calibrated structures across the 25 held-out target cities. The results of these comparative evaluations are summarized in Table~\ref{tab:multibaseline_comparison}.
 
 \begin{table*}[t]
