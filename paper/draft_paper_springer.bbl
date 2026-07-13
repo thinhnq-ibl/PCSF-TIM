@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{35}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -21,6 +21,12 @@ Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   Geisel}]{brockmann2006scaling}
 Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
   Nature 439(7075):462--465. \doi{10.1038/nature04292}
+
+\bibitem[{Enaya et~al.(2026)Enaya, Zhong, Batty, Morphet, and
+  Lopane}]{transgm2026}
+Enaya A, Zhong C, Batty M, et~al (2026) {TransGM}: Transferable gravity models
+  for cross-city policy transfer. Computers, Environment and Urban Systems
+  \doi{10.1016/j.compenvurbsys.2026.102455}
 
 \bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
   De~Domenico}]{gallotti2024distorted}
@@ -133,9 +139,15 @@ Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
   Paper~51, Road Research Laboratory, London
 
 \bibitem[{Veneziano and Gonzalez(2011)}]{veneziano2011tld}
-Veneziano D, Gonzalez MC (2011) Trip-length distribution analysis in human
-  mobility studies. Classic TLD reference cited in mobility literature;
-  bibliographic metadata to be finalized from the primary source
+Veneziano D, Gonzalez MC (2011) Trip length distribution under multiplicative
+  spatial models of supply and demand: Theory and sensitivity analysis.
+  \urlprefix\url{https://arxiv.org/abs/1101.3719}, arXiv preprint; no DOI
+  assigned, {\href{https://arxiv.org/abs/1101.3719}{{arXiv:1101.3719}}}
+
+\bibitem[{Verma and Ukkusuri(2025)}]{verma2025determinants}
+Verma R, Ukkusuri SV (2025) What determines travel time and distance decay in
+  spatial interaction and accessibility? Journal of Transport Geography
+  122:104061. \doi{10.1016/j.jtrangeo.2024.104061}
 
 \bibitem[{Wang et~al.(2018)Wang, Geng, Ma, Yang, Cao, and
   Zheng}]{wang2018regiontrans}
@@ -166,6 +178,18 @@ Wilson A (1971) A family of spatial interaction models, and associated
 Xing Z, Chung E, Wang Y, et~al (2025) Origin--destination prediction via
   knowledge-enhanced hybrid learning. Computer-Aided Civil and Infrastructure
   Engineering 40:2498--2521. \doi{10.1111/mice.13458}
+
+\bibitem[{Yang et~al.(2026)Yang, Huang, Huang, Jin, Cao, and
+  Gonz{\'a}lez}]{neurogravity2026}
+Yang J, Huang S, Huang Z, et~al (2026) Transferable human mobility network
+  reconstruction with neurogravity. Nature Computational Science
+  \doi{10.1038/s43588-026-01003-y}
+
+\bibitem[{Yang et~al.(2014)Yang, Herrera, Eagle, and
+  Gonz{\'a}lez}]{yang2014limits}
+Yang Y, Herrera C, Eagle N, et~al (2014) Limits of predictability in commuting
+  flows in the absence of data for calibration. Scientific Reports 4:5662.
+  \doi{10.1038/srep05662}
 
 \bibitem[{Zhao et~al.(2025)Zhao, Cheng, Gao, and Lu}]{zhao2025truckgravity}
 Zhao Y, Cheng S, Gao S, et~al (2025) A gravity-inspired model integrating
