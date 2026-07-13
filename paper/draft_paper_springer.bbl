@@ -1,4 +1,4 @@
-\begin{thebibliography}{37}
+\begin{thebibliography}{34}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -27,6 +27,12 @@ Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
 Enaya A, Zhong C, Batty M, et~al (2026) {TransGM}: Transferable gravity models
   for cross-city policy transfer. Computers, Environment and Urban Systems
   \doi{10.1016/j.compenvurbsys.2026.102455}
+
+\bibitem[{Feldman et~al.(2012)Feldman, Forero-Martinez, and
+  Coombe}]{feldman2012alternative}
+Feldman O, Forero-Martinez J, Coombe D (2012) Alternative gravity modelling
+  approaches for trip matrix synthesis. In: Proceedings of the European
+  Transport Conference. Association for European Transport and Contributors
 
 \bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
   De~Domenico}]{gallotti2024distorted}
@@ -85,6 +91,11 @@ Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
   Conference on Computer Vision, pp 16781--16790,
   \doi{10.1109/ICCV53024.2023.01529}
 
+\bibitem[{Merlin(2020)}]{merlin2020medians}
+Merlin LA (2020) A new method using medians to calibrate single-parameter
+  spatial interaction models. Journal of Transport and Land Use 13(1):49--70.
+  \doi{10.5198/jtlu.2020.1614}
+
 \bibitem[{{Meta}(2026)}]{MetaMovementDistributionMaps}
 {Meta} (2026) Movement distribution maps.
   \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps/},
@@ -114,11 +125,10 @@ Rong C, Wang H, Li Y (2023{\natexlab{b}}) Origin-destination network generation
   arXiv preprint; no DOI assigned,
   {\href{https://arxiv.org/abs/2306.03390}{{arXiv:2306.03390}}}
 
-\bibitem[{Seong et~al.(2023)Seong, Kang, Choi, Jeon, Shin, and
-  Kim}]{seong2023multimodalregion}
-Seong G, Kang Y, Choi M, et~al (2023) Multi-modal based region representation
-  learning considering mobility data in seoul. Procedia Computer Science
-  225:2495--2504. \doi{10.1016/j.procs.2023.03.153}
+\bibitem[{Rubio-Herrero and Mu{\~n}uzuri(2023)}]{rubioherrero2023sparse}
+Rubio-Herrero J, Mu{\~n}uzuri J (2023) Sparse regression for data-driven
+  deterrence functions in gravity models. Annals of Operations Research
+  323(1--2):153--174. \doi{10.1007/s10479-022-04803-y}
 
 \bibitem[{Shapley(1953)}]{shapley1953value}
 Shapley LS (1953) A value for n-person games. In: Contributions to the Theory
@@ -139,11 +149,6 @@ Simini F, Barlacchi G, Luca M, et~al (2021) A deep gravity model for mobility
 \bibitem[{Song et~al.(2010)Song, Qu, Blumm, and Barab{\'a}si}]{song2010limits}
 Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
   Science 327(5968):1018--1021. \doi{10.1126/science.1177170}
-
-\bibitem[{Stickel et~al.(2026)}]{stickel2026hyperaoe}
-Stickel J, et~al (2026) Hyperaoe: Generalizing zero-shot cross-city trajectory
-  prediction with hypernetworks. Research Square
-  \doi{10.21203/rs.3.rs-8728806/v1}, preprint
 
 \bibitem[{Tanner(1961)}]{tanner1961}
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
@@ -173,27 +178,14 @@ Wang X, Jin K, Sun L, et~al (2022) When transfer learning meets cross-city
   the Thirty-First International Joint Conference on Artificial Intelligence
   (IJCAI-22), pp 2219--2225, \doi{10.24963/ijcai.2022/308}
 
-\bibitem[{Wang et~al.(2026)Wang, Zhou, Yu, Wan, and
-  Chen}]{wang2026stgcngeoknowledge}
-Wang Y, Zhou M, Yu W, et~al (2026) A spatial--temporal graph convolutional
-  network enhanced by geospatial knowledge to forecast origin--destination
-  flows. International Journal of Geographical Information Science
-  40:2216--2246. \doi{10.1080/13658816.2025.2591250}, published online in 2025
-
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated
   developments. Environment and Planning A 3(1):1--32. \doi{10.1068/a030001}
 
-\bibitem[{Xing et~al.(2025)Xing, Chung, Wang, Toriumi, Oguchi, and
-  Wu}]{xing2025kehgnn}
-Xing Z, Chung E, Wang Y, et~al (2025) Origin--destination prediction via
-  knowledge-enhanced hybrid learning. Computer-Aided Civil and Infrastructure
-  Engineering 40:2498--2521. \doi{10.1111/mice.13458}
-
-\bibitem[{Yang et~al.(2026)Yang, Huang, Huang, Jin, Cao, and
-  Gonz{\'a}lez}]{neurogravity2026}
+\bibitem[{Yang et~al.(2026)Yang, Huang, Huang, Jin, Yang, Gonz{\'a}lez, and
+  Xu}]{neurogravity2026}
 Yang J, Huang S, Huang Z, et~al (2026) Transferable human mobility network
-  reconstruction with neurogravity. Nature Computational Science
+  reconstruction with neurogravity. Nature Computational Science 6:630--641.
   \doi{10.1038/s43588-026-01003-y}
 
 \bibitem[{Yang et~al.(2014)Yang, Herrera, Eagle, and
@@ -201,17 +193,5 @@ Yang J, Huang S, Huang Z, et~al (2026) Transferable human mobility network
 Yang Y, Herrera C, Eagle N, et~al (2014) Limits of predictability in commuting
   flows in the absence of data for calibration. Scientific Reports 4:5662.
   \doi{10.1038/srep05662}
-
-\bibitem[{Zhao et~al.(2025)Zhao, Cheng, Gao, and Lu}]{zhao2025truckgravity}
-Zhao Y, Cheng S, Gao S, et~al (2025) A gravity-inspired model integrating
-  geospatial and socioeconomic distances for truck origin--destination flows
-  prediction. International Journal of Applied Earth Observation and
-  Geoinformation 136:104328. \doi{10.1016/j.jag.2024.104328}
-
-\bibitem[{Zhu and Ma(2026)}]{zhu2026gravitypanel}
-Zhu D, Ma Z (2026) Gravity-informed deep flow inference for spatial evolution
-  modeling in panel data. International Journal of Geographical Information
-  Science 40:918--946. \doi{10.1080/13658816.2025.2536512}, published online in
-  2025
 
 \end{thebibliography}
