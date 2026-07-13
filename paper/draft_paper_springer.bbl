@@ -1,4 +1,4 @@
-\begin{thebibliography}{35}
+\begin{thebibliography}{37}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -62,10 +62,21 @@ Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
   distribution laws and models. Journal of Transport Geography 51:158--169.
   \doi{10.1016/j.jtrangeo.2016.02.003}
 
+\bibitem[{Liu et~al.(2024)Liu, Xu, Ma, and Chen}]{gravigbm2024}
+Liu J, Xu L, Ma L, et~al (2024) Modeling population mobility flows: A hybrid
+  approach integrating a gravity model and machine learning. ISPRS
+  International Journal of Geo-Information 13(11):379.
+  \doi{10.3390/ijgi13110379}
+
 \bibitem[{Lundberg and Lee(2017)}]{lundberg2017unified}
 Lundberg SM, Lee SI (2017) A unified approach to interpreting model
   predictions. Advances in Neural Information Processing Systems 30:4765--4774.
   \doi{10.48550/arXiv.1705.07874}
+
+\bibitem[{Mart{\'\i}nez and Viegas(2013)}]{martinez2013distance}
+Mart{\'\i}nez LM, Viegas JM (2013) A new approach to modelling distance-decay
+  functions for accessibility assessment in transport studies. Journal of
+  Transport Geography 26:87--96. \doi{10.1016/j.jtrangeo.2012.03.021}
 
 \bibitem[{Mendieta et~al.(2023)Mendieta, Han, Shi, Zhu, and
   Chen}]{mendieta2023geogpt}

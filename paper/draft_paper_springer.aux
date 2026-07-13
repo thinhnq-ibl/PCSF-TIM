@@ -4,18 +4,23 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{barbosa2018human,gonzalez2008understanding,song2010limits}
-\citation{wilson1971}
+\citation{wilson1971,tanner1961,martinez2013distance}
+\citation{lenormand2016systematic}
+\citation{gravigbm2024}
 \Newlabel{2}{2}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{simini2021}
 \citation{yang2014limits}
 \citation{verma2025determinants}
 \citation{wilson1971,tanner1961}
 \citation{Simini2012universal}
+\citation{martinez2013distance}
+\citation{lenormand2016systematic}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the core findings: Aggregate trip-length distributions provide sufficient information for recovering city-specific distance decay $f(d)$, which acts as the dominant predictive component of gravity-based mobility prediction within the investigated framework. Prediction performance is bounded by the model's structural gravity assumptions.}}{2}{figure.1}\protected@file@percent }
 \newlabel{fig:graphical_abstract}{{1}{2}{Overview of the core findings: Aggregate trip-length distributions provide sufficient information for recovering city-specific distance decay $f(d)$, which acts as the dominant predictive component of gravity-based mobility prediction within the investigated framework. Prediction performance is bounded by the model's structural gravity assumptions}{figure.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Classical and Structured Mobility Models}{2}{subsection.1.1}\protected@file@percent }
 \citation{simini2021,hu2020mpgcn,Rong2023goddag,guo2025universalgnn,xing2025kehgnn,wang2026stgcngeoknowledge,seong2023multimodalregion,atwal2025commuting}
-\citation{rong2023odgn,zhu2026gravitypanel,zhao2025truckgravity}
+\citation{rong2023odgn,zhu2026gravitypanel,zhao2025truckgravity,gravigbm2024}
 \citation{pappalardo2023analytical}
 \citation{gallotti2024distorted}
 \citation{brockmann2006scaling,lenormand2016systematic,veneziano2011tld,pappalardo2023analytical}
@@ -47,12 +52,12 @@
 \newlabel{tab:literature_comparison}{{1}{5}{Comparative analysis of human mobility models across structural and transferability dimensions}{table.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys.}}{5}{figure.2}\protected@file@percent }
 \newlabel{fig:conceptual_framework}{{2}{5}{Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys}{figure.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Operational and diagnostic evaluation settings.}}{5}{table.2}\protected@file@percent }
-\newlabel{tab:evaluation_settings}{{2}{5}{Operational and diagnostic evaluation settings}{table.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodological Design}{5}{section.3}\protected@file@percent }
 \newlabel{sec:methodology}{{3}{5}{Methodological Design}{section.3}{}}
+\newlabel{eq:decomposition}{{1}{5}{Methodological Design}{equation.1}{}}
 \citation{tanner1961}
-\newlabel{eq:decomposition}{{1}{6}{Methodological Design}{equation.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Operational and diagnostic evaluation settings.}}{6}{table.2}\protected@file@percent }
+\newlabel{tab:evaluation_settings}{{2}{6}{Operational and diagnostic evaluation settings}{table.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Aggregate-Based Decay Calibration}{6}{subsection.3.1}\protected@file@percent }
 \newlabel{sec:aggregate_calibration}{{3.1}{6}{Aggregate-Based Decay Calibration}{subsection.3.1}{}}
 \newlabel{eq:predicted_flow_mle}{{3}{6}{Aggregate-Based Decay Calibration}{equation.3}{}}
@@ -61,10 +66,10 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Distance-Decay Component}{6}{subsection.3.2}\protected@file@percent }
 \newlabel{sec:decay_function}{{3.2}{6}{Distance-Decay Component}{subsection.3.2}{}}
 \newlabel{eq:tanner_multi}{{6}{6}{Distance-Decay Component}{equation.6}{}}
-\newlabel{eq:delta}{{7}{6}{Distance-Decay Component}{equation.7}{}}
 \citation{MetaMovementDistributionMaps}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf  {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat  {\gamma }, \hat  {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$).}}{7}{figure.3}\protected@file@percent }
 \newlabel{fig:framework_pipeline}{{3}{7}{Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat {\gamma }, \hat {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$)}{figure.3}{}}
+\newlabel{eq:delta}{{7}{7}{Distance-Decay Component}{equation.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Origin Production Component ($O_i$)}{7}{subsection.3.3}\protected@file@percent }
 \newlabel{sec:origin_outflow}{{3.3}{7}{Origin Production Component (\texorpdfstring {$O_i$}{O\_i})}{subsection.3.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Destination Attraction Component ($A_j$)}{7}{subsection.3.4}\protected@file@percent }
@@ -72,29 +77,29 @@
 \newlabel{eq:attraction_heuristic}{{8}{7}{Destination Attraction Component (\texorpdfstring {$A_j$}{A\_j})}{equation.8}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Algorithmic Flow}{7}{subsection.3.5}\protected@file@percent }
 \newlabel{sec:algorithmic_flow}{{3.5}{7}{Algorithmic Flow}{subsection.3.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Data Sources}{7}{subsection.3.6}\protected@file@percent }
-\newlabel{sec:data_sources}{{3.6}{7}{Data Sources}{subsection.3.6}{}}
 \citation{gonzalez2008understanding}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Data Sources}{8}{subsection.3.6}\protected@file@percent }
+\newlabel{sec:data_sources}{{3.6}{8}{Data Sources}{subsection.3.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Calibration from Aggregate Trip-Length Distributions: Meta MDM Case Study}{8}{subsection.3.7}\protected@file@percent }
 \newlabel{sec:meta_harmonization}{{3.7}{8}{Calibration from Aggregate Trip-Length Distributions: Meta MDM Case Study}{subsection.3.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Exploratory Urban Morphology Categorization}{8}{subsection.3.8}\protected@file@percent }
 \newlabel{sec:urban_morphology}{{3.8}{8}{Exploratory Urban Morphology Categorization}{subsection.3.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Morphological classification of target cities.}}{9}{table.3}\protected@file@percent }
-\newlabel{tab:morphology_classification}{{3}{9}{Morphological classification of target cities}{table.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Results}{9}{section.4}\protected@file@percent }
 \newlabel{sec:results}{{4}{9}{Results}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Can aggregate trip-length distributions reliably recover city-specific distance-decay parameters?}{9}{subsection.4.1}\protected@file@percent }
 \newlabel{sec:rq1}{{4.1}{9}{Can aggregate trip-length distributions reliably recover city-specific distance-decay parameters?}{subsection.4.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Validation via Trip-Length Distributions (Meta MDM Case Study)}{9}{subsubsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Decay Bin Sensitivity Analysis}{9}{subsubsection.4.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Morphological classification of target cities.}}{10}{table.3}\protected@file@percent }
+\newlabel{tab:morphology_classification}{{3}{10}{Morphological classification of target cities}{table.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Decay parameter recovery performance metrics across the 25 target cities.}}{10}{table.4}\protected@file@percent }
 \newlabel{tab:decay_recovery_merged}{{4}{10}{Decay parameter recovery performance metrics across the 25 target cities}{table.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows).}}{10}{table.5}\protected@file@percent }
-\newlabel{tab:meta_prior_evaluation}{{5}{10}{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows)}{table.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Decay Bin Sensitivity Analysis}{10}{subsubsection.4.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}To what extent does distance decay contribute to predictive performance within gravity-based mobility modeling?}{10}{subsection.4.2}\protected@file@percent }
 \newlabel{sec:rq2}{{4.2}{10}{To what extent does distance decay contribute to predictive performance within gravity-based mobility modeling?}{subsection.4.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Origin Production Transferability}{10}{subsubsection.4.2.1}\protected@file@percent }
 \citation{shapley1953value}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows).}}{11}{table.5}\protected@file@percent }
+\newlabel{tab:meta_prior_evaluation}{{5}{11}{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows)}{table.5}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Factorial Ablation and Shapley Value Analysis}{11}{subsubsection.4.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Can recovering distance decay from aggregate trip-length distributions enable competitive predictive performance without access to individual OD data?}{11}{subsection.4.3}\protected@file@percent }
 \newlabel{sec:rq3}{{4.3}{11}{Can recovering distance decay from aggregate trip-length distributions enable competitive predictive performance without access to individual OD data?}{subsection.4.3}{}}
@@ -144,33 +149,35 @@
 \bibcite{houssiau2022dpaggregate}{{8}{2022}{{Houssiau et~al.}}{{}}}
 \bibcite{hu2020mpgcn}{{9}{2020}{{Hu et~al.}}{{Hu, Yang, Li, Liang, Qu, and Yang}}}
 \bibcite{lenormand2016systematic}{{10}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
-\bibcite{lundberg2017unified}{{11}{2017}{{Lundberg and Lee}}{{}}}
-\bibcite{mendieta2023geogpt}{{12}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
-\bibcite{MetaMovementDistributionMaps}{{13}{2026}{{Meta}}{{}}}
-\bibcite{ozaki2025privacysynthetic}{{14}{2025}{{Ozaki et~al.}}{{}}}
+\bibcite{gravigbm2024}{{11}{2024}{{Liu et~al.}}{{Liu, Xu, Ma, and Chen}}}
+\bibcite{lundberg2017unified}{{12}{2017}{{Lundberg and Lee}}{{}}}
+\bibcite{martinez2013distance}{{13}{2013}{{Mart{\'\i }nez and Viegas}}{{}}}
+\bibcite{mendieta2023geogpt}{{14}{2023}{{Mendieta et~al.}}{{Mendieta, Han, Shi, Zhu, and Chen}}}
 \@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces GBDT Model Hyperparameter Configurations}}{20}{table.10}\protected@file@percent }
 \newlabel{tab:gbdt_hyperparameters}{{10}{20}{GBDT Model Hyperparameter Configurations}{table.10}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces List of Abbreviations}}{20}{table.11}\protected@file@percent }
 \newlabel{tab:abbreviations}{{11}{20}{List of Abbreviations}{table.11}{}}
-\bibcite{pappalardo2023analytical}{{15}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
-\bibcite{Rong2023goddag}{{16}{2023{a}}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
-\bibcite{rong2023odgn}{{17}{2023{b}}{{Rong et~al.}}{{Rong, Wang, and Li}}}
-\bibcite{seong2023multimodalregion}{{18}{2023}{{Seong et~al.}}{{Seong, Kang, Choi, Jeon, Shin, and Kim}}}
-\bibcite{shapley1953value}{{19}{1953}{{Shapley}}{{}}}
-\bibcite{Simini2012universal}{{20}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
-\bibcite{simini2021}{{21}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
-\bibcite{song2010limits}{{22}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
-\bibcite{stickel2026hyperaoe}{{23}{2026}{{Stickel et~al.}}{{}}}
-\bibcite{tanner1961}{{24}{1961}{{Tanner}}{{}}}
-\bibcite{veneziano2011tld}{{25}{2011}{{Veneziano and Gonzalez}}{{}}}
-\bibcite{verma2025determinants}{{26}{2025}{{Verma and Ukkusuri}}{{}}}
-\bibcite{wang2018regiontrans}{{27}{2018}{{Wang et~al.}}{{Wang, Geng, Ma, Yang, Cao, and Zheng}}}
-\bibcite{wang2022when}{{28}{2022}{{Wang et~al.}}{{Wang, Jin, Sun, Chen, Chen, and Li}}}
-\bibcite{wang2026stgcngeoknowledge}{{29}{2026}{{Wang et~al.}}{{Wang, Zhou, Yu, Wan, and Chen}}}
-\bibcite{wilson1971}{{30}{1971}{{Wilson}}{{}}}
-\bibcite{xing2025kehgnn}{{31}{2025}{{Xing et~al.}}{{Xing, Chung, Wang, Toriumi, Oguchi, and Wu}}}
-\bibcite{neurogravity2026}{{32}{2026}{{Yang et~al.}}{{Yang, Huang, Huang, Jin, Cao, and Gonz{\'a}lez}}}
-\bibcite{yang2014limits}{{33}{2014}{{Yang et~al.}}{{Yang, Herrera, Eagle, and Gonz{\'a}lez}}}
-\bibcite{zhao2025truckgravity}{{34}{2025}{{Zhao et~al.}}{{Zhao, Cheng, Gao, and Lu}}}
-\bibcite{zhu2026gravitypanel}{{35}{2026}{{Zhu and Ma}}{{}}}
+\bibcite{MetaMovementDistributionMaps}{{15}{2026}{{Meta}}{{}}}
+\bibcite{ozaki2025privacysynthetic}{{16}{2025}{{Ozaki et~al.}}{{}}}
+\bibcite{pappalardo2023analytical}{{17}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
+\bibcite{Rong2023goddag}{{18}{2023{a}}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
+\bibcite{rong2023odgn}{{19}{2023{b}}{{Rong et~al.}}{{Rong, Wang, and Li}}}
+\bibcite{seong2023multimodalregion}{{20}{2023}{{Seong et~al.}}{{Seong, Kang, Choi, Jeon, Shin, and Kim}}}
+\bibcite{shapley1953value}{{21}{1953}{{Shapley}}{{}}}
+\bibcite{Simini2012universal}{{22}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
+\bibcite{simini2021}{{23}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
+\bibcite{song2010limits}{{24}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
+\bibcite{stickel2026hyperaoe}{{25}{2026}{{Stickel et~al.}}{{}}}
+\bibcite{tanner1961}{{26}{1961}{{Tanner}}{{}}}
+\bibcite{veneziano2011tld}{{27}{2011}{{Veneziano and Gonzalez}}{{}}}
+\bibcite{verma2025determinants}{{28}{2025}{{Verma and Ukkusuri}}{{}}}
+\bibcite{wang2018regiontrans}{{29}{2018}{{Wang et~al.}}{{Wang, Geng, Ma, Yang, Cao, and Zheng}}}
+\bibcite{wang2022when}{{30}{2022}{{Wang et~al.}}{{Wang, Jin, Sun, Chen, Chen, and Li}}}
+\bibcite{wang2026stgcngeoknowledge}{{31}{2026}{{Wang et~al.}}{{Wang, Zhou, Yu, Wan, and Chen}}}
+\bibcite{wilson1971}{{32}{1971}{{Wilson}}{{}}}
+\bibcite{xing2025kehgnn}{{33}{2025}{{Xing et~al.}}{{Xing, Chung, Wang, Toriumi, Oguchi, and Wu}}}
+\bibcite{neurogravity2026}{{34}{2026}{{Yang et~al.}}{{Yang, Huang, Huang, Jin, Cao, and Gonz{\'a}lez}}}
+\bibcite{yang2014limits}{{35}{2014}{{Yang et~al.}}{{Yang, Herrera, Eagle, and Gonz{\'a}lez}}}
+\bibcite{zhao2025truckgravity}{{36}{2025}{{Zhao et~al.}}{{Zhao, Cheng, Gao, and Lu}}}
+\bibcite{zhu2026gravitypanel}{{37}{2026}{{Zhu and Ma}}{{}}}
 \gdef \@abspage@last{22}
