@@ -180,7 +180,7 @@ The methodological design of this study is grounded in a separable formulation o
 
 \subsection{Gravity Model Foundation}\label{sec:gravity_foundation}
 
-Spatial interaction has long been modeled using gravity-based formulations, which describe travel demand as the combined effect of trip generation, destination attractiveness, and travel impedance. Owing to their physical interpretability and theoretical consistency, gravity models remain one of the most widely adopted frameworks for modeling aggregate human mobility and transportation flows.
+Spatial interaction has long been modeled using gravity-based formulations~\citep{wilson1971,barbosa2018human}, which describe travel demand as the combined effect of trip generation, destination attractiveness, and travel impedance. Owing to their physical interpretability and theoretical consistency, gravity models remain one of the most widely adopted frameworks for modeling aggregate human mobility and transportation flows.
 
 Under the singly constrained gravity formulation, the expected flow from origin zone $i$ to destination zone $j$ is expressed as
 \begin{equation}\label{eq:decomposition}
@@ -194,7 +194,7 @@ This separation has an important implication for survey-free mobility modeling. 
 
 \subsection{Aggregate Trip-Length Distributions as a Projection}\label{sec:aggregate_projection}
 
-The gravity formulation presented in the previous section provides a natural interpretation of aggregate trip-length distributions. Rather than representing an independent mobility descriptor, a trip-length distribution can be viewed as the distance-domain projection of the underlying origin--destination interaction process. This interpretation establishes the theoretical connection between aggregate mobility observations and the latent distance-decay mechanism that governs spatial interaction.
+The gravity formulation presented in the previous section provides a natural interpretation of aggregate trip-length distributions. Rather than representing an independent mobility descriptor, a trip-length distribution can be viewed as the distance-domain projection of the underlying origin--destination interaction process. This interpretation establishes the theoretical connection between aggregate mobility observations~\citep{MetaMovementDistributionMaps,pappalardo2023analytical} and the latent distance-decay mechanism that governs spatial interaction.
 
 Let the travel distance domain be partitioned into a set of distance intervals $\{b\}_{b=1}^{K}$. The aggregate trip-length distribution is defined as
 \begin{equation}
@@ -204,13 +204,13 @@ where $P(d_b)$ denotes the proportion of trips whose travel distance falls withi
 
 Unlike the OD matrix, which explicitly preserves the identities of origins and destinations, the projection removes all location-specific information and retains only the statistical distribution of travel distances. Consequently, aggregate trip-length distributions cannot directly reconstruct the complete OD matrix. Nevertheless, because the gravity formulation separates production, attraction, and distance-dependent behavioral effects, the projection continues to preserve the characteristic statistical signature of the distance-decay component.
 
-However, the observed trip-length distribution is not equivalent to the distance-decay function itself. The projection is simultaneously influenced by urban geometry, the spatial distribution of opportunities, and the unequal number of OD pairs contributing to each distance interval. These structural effects introduce systematic \textbf{exposure biases}, implying that identical behavioral distance-decay functions may produce different aggregate trip-length distributions across cities with different spatial configurations. Therefore, directly fitting a deterrence function to the observed histogram would generally yield biased parameter estimates.
+However, the observed trip-length distribution is not equivalent to the distance-decay function itself. The projection is simultaneously influenced by urban geometry, the spatial distribution of opportunities, and the unequal number of OD pairs contributing to each distance interval. These structural effects introduce systematic \textbf{exposure biases}~\citep{lenormand2016systematic}, implying that identical behavioral distance-decay functions may produce different aggregate trip-length distributions across cities with different spatial configurations. Therefore, directly fitting a deterrence function to the observed histogram would generally yield biased parameter estimates.
 
 This observation transforms survey-free gravity calibration into an \textbf{inverse inference problem}. Rather than estimating the complete OD matrix, the objective becomes identifying the latent distance-dependent behavioral mechanism whose exposure-corrected projection best explains the observed aggregate trip-length distribution.
 
 \subsection{Distance-Decay Parameterization}\label{sec:decay_function}
 
-To represent travelers' sensitivity to travel distance, we adopt the \textbf{Tanner deterrence function}~\citep{tanner1961,feldman2012alternative}, a flexible two-parameter formulation that combines power-law and exponential decay and has been shown to outperform single-family alternatives across diverse urban settings~\citep{verma2025determinants}. The distance-decay function is expressed as
+To represent travelers' sensitivity to travel distance, we adopt the \textbf{Tanner deterrence function}~\citep{tanner1961}, a flexible two-parameter formulation that combines power-law and exponential decay and has been shown to outperform single-family alternatives across diverse urban settings~\citep{verma2025determinants}. The distance-decay function is expressed as
 \begin{equation}\label{eq:tanner_multi}
 f(d_{ij};\,\theta) = (d_{ij} + \delta)^{-\alpha} \exp(-\beta d_{ij}),
 \end{equation}
@@ -294,9 +294,9 @@ Unlike conventional gravity calibration, which requires observed OD matrices, th
 
 Within the gravity formulation, origin production represents the total number of trips generated by each spatial zone and is conceptually independent of the behavioral interaction mechanism recovered in the previous section. While distance decay governs travelers' destination choices, origin production is primarily determined by relatively stable demographic and built-environment characteristics. This distinction enables the two components to be estimated independently.
 
-For each spatial zone $i$, we construct an open spatial feature vector $\mathbf{x}_i$ consisting of publicly available variables that describe local urban characteristics. These features include population, land-use composition, point-of-interest (POI) distributions, road-network density, and other built-environment indicators derived from open geospatial datasets such as OpenStreetMap and WorldPop. Because these variables are available for virtually all cities without requiring mobility observations, they provide a transferable basis for estimating trip generation.
+For each spatial zone $i$, we construct an open spatial feature vector $\mathbf{x}_i$ consisting of publicly available variables that describe local urban characteristics. These features include population, land-use composition, point-of-interest (POI) distributions, road-network density, and other built-environment indicators derived from open geospatial datasets such as OpenStreetMap and WorldPop~\citep{haklay2008openstreetmap,worldpop2018}. Because these variables are available for virtually all cities without requiring mobility observations, they provide a transferable basis for estimating trip generation.
 
-The mapping between spatial features and origin production is learned from source cities using a Gradient Boosting Decision Tree (GBDT) regression model,
+The mapping between spatial features and origin production is learned from source cities using a Gradient Boosting Decision Tree (GBDT) regression model~\citep{friedman2001greedy},
 \begin{equation}
 \hat{O}_i = g(\mathbf{x}_i),
 \end{equation}

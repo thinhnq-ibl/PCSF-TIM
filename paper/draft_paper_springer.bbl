@@ -1,4 +1,4 @@
-\begin{thebibliography}{35}
+\begin{thebibliography}{38}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -41,6 +41,10 @@ Feldman O, Forero-Martinez J, Coombe D (2012) Alternative gravity modelling
   approaches for trip matrix synthesis. In: Proceedings of the European
   Transport Conference. Association for European Transport and Contributors
 
+\bibitem[{Friedman(2001)}]{friedman2001greedy}
+Friedman JH (2001) Greedy function approximation: a gradient boosting machine.
+  Annals of statistics pp 1189--1232
+
 \bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
   De~Domenico}]{gallotti2024distorted}
 Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
@@ -57,6 +61,10 @@ Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
 Guo J, Bai S, Li X, et~al (2025) A universal geography neural network for
   mobility flow prediction in planning scenarios. Computer-Aided Civil and
   Infrastructure Engineering 40:5769--5789. \doi{10.1111/mice.13398}
+
+\bibitem[{Haklay and Weber(2008)}]{haklay2008openstreetmap}
+Haklay M, Weber P (2008) Openstreetmap: User-generated street maps. IEEE
+  Pervasive Computing 7(4):12--18
 
 \bibitem[{Houssiau et~al.(2022)}]{houssiau2022dpaggregate}
 Houssiau F, et~al (2022) On the difficulty of achieving differential privacy in
@@ -166,6 +174,11 @@ Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
 \bibitem[{Tanner(1961)}]{tanner1961}
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
   Paper~51, Road Research Laboratory, London
+
+\bibitem[{Tatem(2017)}]{worldpop2018}
+Tatem AJ (2017) {WorldPop}, open data for spatial demography. Scientific Data
+  4:170004. \doi{10.1038/sdata.2017.4}, worldPop gridded population datasets
+  available at \url{https://www.worldpop.org/}
 
 \bibitem[{Veneziano and Gonzalez(2011)}]{veneziano2011tld}
 Veneziano D, Gonzalez MC (2011) Trip length distribution under multiplicative
