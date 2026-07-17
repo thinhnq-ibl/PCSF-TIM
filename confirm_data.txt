@@ -1,4 +1,4 @@
 Tập thuộc tính chung: Có tổng cộng 37 thuộc tính
 Đối với O_i (Dự báo Outflow bằng GBDT): Chỉ chọn lọc 6 thuộc tính vĩ mô cốt lõi
 Đối với A_j (Trong mô hình học máy DeepGravity): Trích xuất ra 17 thuộc tính điểm
-Đối với A_j (Trong mô hình đề xuất SDF-ZTF của chúng ta): Để đảm bảo không cần huấn luyện (training-free) và chống overfitting tốt nhất, sức hút được tính toán Heuristic chỉ từ 2 thuộc tính chuẩn hóa là Dân số và POIs.
+Đối với A_j (Trong mô hình đề xuất PIGF của chúng ta): Để đảm bảo không cần huấn luyện (training-free) và chống overfitting tốt nhất, sức hút được tính toán Heuristic chỉ từ 2 thuộc tính chuẩn hóa là Dân số và POIs.

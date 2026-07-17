@@ -1,52 +1,50 @@
-This is BibTeX, Version 0.99e
+This is BibTeX, Version 0.99e (TeX Live 2026)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: draft_paper_springer.aux
-Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: sn-basic.bst
-Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
 sn-basic.bst [2024/07/19 v1.1 bibliography style]
-Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--can't use both volume and number fields in shapley1953value
-You've used 33 entries,
+You've used 35 entries,
             3567 wiz_defined-function locations,
-            948 strings with 12279 characters,
-and the built_in function-call counts, 27811 in all, are:
-= -- 2622
-> -- 1102
-< -- 19
-+ -- 445
-- -- 328
-* -- 2386
-:= -- 4033
-add.period$ -- 56
-call.type$ -- 33
-change.case$ -- 294
-chr.to.int$ -- 32
-cite$ -- 34
-duplicate$ -- 2078
-empty$ -- 2240
-format.name$ -- 429
-if$ -- 5826
+            962 strings with 12848 characters,
+and the built_in function-call counts, 30018 in all, are:
+= -- 2844
+> -- 1154
+< -- 20
++ -- 465
+- -- 343
+* -- 2591
+:= -- 4332
+add.period$ -- 60
+call.type$ -- 35
+change.case$ -- 309
+chr.to.int$ -- 34
+cite$ -- 36
+duplicate$ -- 2269
+empty$ -- 2444
+format.name$ -- 452
+if$ -- 6298
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 247
-newline$ -- 108
-num.names$ -- 132
-pop$ -- 662
+missing$ -- 263
+newline$ -- 114
+num.names$ -- 140
+pop$ -- 701
 preamble$ -- 1
-purify$ -- 243
+purify$ -- 256
 quote$ -- 0
-skip$ -- 697
+skip$ -- 730
 stack$ -- 0
-substring$ -- 2229
-swap$ -- 651
+substring$ -- 2502
+swap$ -- 688
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 297
+type$ -- 315
 warning$ -- 1
-while$ -- 173
+while$ -- 184
 width$ -- 0
-write$ -- 402
+write$ -- 426
 (There was 1 warning)

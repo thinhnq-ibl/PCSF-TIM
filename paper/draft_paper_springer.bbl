@@ -1,4 +1,4 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{35}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -21,6 +21,13 @@ Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   Geisel}]{brockmann2006scaling}
 Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
   Nature 439(7075):462--465. \doi{10.1038/nature04292}
+
+\bibitem[{Egu and Bonnel(2020)}]{egu2020comparable}
+Egu O, Bonnel P (2020) How comparable are origin--destination matrices
+  estimated from automatic fare collection, origin--destination surveys and
+  household travel survey? an empirical investigation in lyon. Transportation
+  Research Part A: Policy and Practice 138:267--282.
+  \doi{10.1016/j.tra.2020.05.021}
 
 \bibitem[{Enaya et~al.(2026)Enaya, Zhong, Batty, Morphet, and
   Lopane}]{transgm2026}
@@ -61,6 +68,12 @@ Hu J, Yang G, Li K, et~al (2020) Predicting origin-destination flow via
   multi-perspective graph convolutional network. In: IEEE 36th International
   Conference on Data Engineering (ICDE), pp 1818--1821,
   \doi{10.1109/ICDE48307.2020.00178}
+
+\bibitem[{Hussain et~al.(2021)Hussain, Bhaskar, and Chung}]{hussain2021transit}
+Hussain E, Bhaskar A, Chung E (2021) Transit od matrix estimation using
+  smartcard data: Recent developments and future research challenges.
+  Transportation Research Part C: Emerging Technologies 125:103044.
+  \doi{10.1016/j.trc.2021.103044}
 
 \bibitem[{Lenormand et~al.(2016)Lenormand, Bassolas, and
   Ramasco}]{lenormand2016systematic}
