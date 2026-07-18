@@ -16,7 +16,7 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--can't use both volume and number fields in shapley1953value
 You've used 25 entries,
             3567 wiz_defined-function locations,
-            906 strings with 10371 characters,
+            905 strings with 10367 characters,
 and the built_in function-call counts, 21196 in all, are:
 = -- 2024
 > -- 738
