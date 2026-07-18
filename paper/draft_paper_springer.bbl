@@ -1,4 +1,4 @@
-\begin{thebibliography}{38}
+\begin{thebibliography}{26}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -17,11 +17,6 @@ Atwal KS, Anderson T, Pfoser D, et~al (2025) Commuting flow prediction using
 Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   applications. Physics Reports 734:1--74. \doi{10.1016/j.physrep.2018.01.001}
 
-\bibitem[{Brockmann et~al.(2006)Brockmann, Hufnagel, and
-  Geisel}]{brockmann2006scaling}
-Brockmann D, Hufnagel L, Geisel T (2006) The scaling laws of human travel.
-  Nature 439(7075):462--465. \doi{10.1038/nature04292}
-
 \bibitem[{Egu and Bonnel(2020)}]{egu2020comparable}
 Egu O, Bonnel P (2020) How comparable are origin--destination matrices
   estimated from automatic fare collection, origin--destination surveys and
@@ -35,41 +30,18 @@ Enaya A, Zhong C, Batty M, et~al (2026) {TransGM}: Transferable gravity models
   for cross-city policy transfer. Computers, Environment and Urban Systems
   \doi{10.1016/j.compenvurbsys.2026.102455}
 
-\bibitem[{Feldman et~al.(2012)Feldman, Forero-Martinez, and
-  Coombe}]{feldman2012alternative}
-Feldman O, Forero-Martinez J, Coombe D (2012) Alternative gravity modelling
-  approaches for trip matrix synthesis. In: Proceedings of the European
-  Transport Conference. Association for European Transport and Contributors
-
 \bibitem[{Friedman(2001)}]{friedman2001greedy}
 Friedman JH (2001) Greedy function approximation: a gradient boosting machine.
   Annals of statistics pp 1189--1232
-
-\bibitem[{Gallotti et~al.(2024)Gallotti, Maniscalco, Barthelemy, and
-  De~Domenico}]{gallotti2024distorted}
-Gallotti R, Maniscalco D, Barthelemy M, et~al (2024) Distorted insights from
-  human mobility data. Communications Physics 7(1):1--10.
-  \doi{10.1038/s42005-024-01909-x}
 
 \bibitem[{Gonz{\'a}lez et~al.(2008)Gonz{\'a}lez, Hidalgo, and
   Barab{\'a}si}]{gonzalez2008understanding}
 Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
   human mobility patterns. Nature 453(7196):779--782. \doi{10.1038/nature06958}
 
-\bibitem[{Guo et~al.(2025)Guo, Bai, Li, Xian, Liu, Ding, and
-  Ma}]{guo2025universalgnn}
-Guo J, Bai S, Li X, et~al (2025) A universal geography neural network for
-  mobility flow prediction in planning scenarios. Computer-Aided Civil and
-  Infrastructure Engineering 40:5769--5789. \doi{10.1111/mice.13398}
-
 \bibitem[{Haklay and Weber(2008)}]{haklay2008openstreetmap}
 Haklay M, Weber P (2008) Openstreetmap: User-generated street maps. IEEE
   Pervasive Computing 7(4):12--18
-
-\bibitem[{Houssiau et~al.(2022)}]{houssiau2022dpaggregate}
-Houssiau F, et~al (2022) On the difficulty of achieving differential privacy in
-  practice: user-level guarantees in aggregate location data. Nature
-  Communications 13(1):19. \doi{10.1038/s41467-021-27566-0}
 
 \bibitem[{Hu et~al.(2020)Hu, Yang, Li, Liang, Qu, and Yang}]{hu2020mpgcn}
 Hu J, Yang G, Li K, et~al (2020) Predicting origin-destination flow via
@@ -89,28 +61,10 @@ Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
   distribution laws and models. Journal of Transport Geography 51:158--169.
   \doi{10.1016/j.jtrangeo.2016.02.003}
 
-\bibitem[{Liu et~al.(2024)Liu, Xu, Ma, and Chen}]{gravigbm2024}
-Liu J, Xu L, Ma L, et~al (2024) Modeling population mobility flows: A hybrid
-  approach integrating a gravity model and machine learning. ISPRS
-  International Journal of Geo-Information 13(11):379.
-  \doi{10.3390/ijgi13110379}
-
 \bibitem[{Lundberg and Lee(2017)}]{lundberg2017unified}
 Lundberg SM, Lee SI (2017) A unified approach to interpreting model
   predictions. Advances in Neural Information Processing Systems 30:4765--4774.
   \doi{10.48550/arXiv.1705.07874}
-
-\bibitem[{Mart{\'\i}nez and Viegas(2013)}]{martinez2013distance}
-Mart{\'\i}nez LM, Viegas JM (2013) A new approach to modelling distance-decay
-  functions for accessibility assessment in transport studies. Journal of
-  Transport Geography 26:87--96. \doi{10.1016/j.jtrangeo.2012.03.021}
-
-\bibitem[{Mendieta et~al.(2023)Mendieta, Han, Shi, Zhu, and
-  Chen}]{mendieta2023geogpt}
-Mendieta M, Han B, Shi X, et~al (2023) Towards geospatial foundation models via
-  continual pretraining. In: Proceedings of the IEEE/CVF International
-  Conference on Computer Vision, pp 16781--16790,
-  \doi{10.1109/ICCV53024.2023.01529}
 
 \bibitem[{Merlin(2020)}]{merlin2020medians}
 Merlin LA (2020) A new method using medians to calibrate single-parameter
@@ -121,11 +75,6 @@ Merlin LA (2020) A new method using medians to calibrate single-parameter
 {Meta} (2026) Movement distribution maps.
   \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps/},
   aI for Good Datasets. Accessed: 27 June 2026. No DOI assigned.
-
-\bibitem[{Ozaki et~al.(2025)}]{ozaki2025privacysynthetic}
-Ozaki J, et~al (2025) Privacy-preserving synthetic dataset of individual daily
-  trajectories for city-scale mobility analytics. In: 2025 IEEE International
-  Conference on Big Data (BigData), \doi{10.1109/BIGDATA66926.2025.11401071}
 
 \bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
   Alessandretti}]{pappalardo2023analytical}
@@ -180,29 +129,10 @@ Tatem AJ (2017) {WorldPop}, open data for spatial demography. Scientific Data
   4:170004. \doi{10.1038/sdata.2017.4}, worldPop gridded population datasets
   available at \url{https://www.worldpop.org/}
 
-\bibitem[{Veneziano and Gonzalez(2011)}]{veneziano2011tld}
-Veneziano D, Gonzalez MC (2011) Trip length distribution under multiplicative
-  spatial models of supply and demand: Theory and sensitivity analysis.
-  \urlprefix\url{https://arxiv.org/abs/1101.3719}, arXiv preprint; no DOI
-  assigned, {\href{https://arxiv.org/abs/1101.3719}{{arXiv:1101.3719}}}
-
 \bibitem[{Verma and Ukkusuri(2025)}]{verma2025determinants}
 Verma R, Ukkusuri SV (2025) What determines travel time and distance decay in
   spatial interaction and accessibility? Journal of Transport Geography
   122:104061. \doi{10.1016/j.jtrangeo.2024.104061}
-
-\bibitem[{Wang et~al.(2018)Wang, Geng, Ma, Yang, Cao, and
-  Zheng}]{wang2018regiontrans}
-Wang L, Geng X, Ma X, et~al (2018) Crowd flow prediction by deep
-  spatio-temporal transfer learning. In: Proceedings of the 27th International
-  Joint Conference on Artificial Intelligence, pp 1341--1347,
-  \doi{10.24963/ijcai.2018/186}
-
-\bibitem[{Wang et~al.(2022)Wang, Jin, Sun, Chen, Chen, and Li}]{wang2022when}
-Wang X, Jin K, Sun L, et~al (2022) When transfer learning meets cross-city
-  urban flow prediction: Spatio-temporal adaptation matters. In: Proceedings of
-  the Thirty-First International Joint Conference on Artificial Intelligence
-  (IJCAI-22), pp 2219--2225, \doi{10.24963/ijcai.2022/308}
 
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated

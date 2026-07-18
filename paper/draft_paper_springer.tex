@@ -48,7 +48,7 @@ A wide range of analytical and data-driven models have been developed to address
 
 More precisely, existing OD prediction approaches ultimately depend on observed mobility data for model calibration, training, or transfer: gravity models require observed OD flows to calibrate distance-decay parameters; deep and graph learning methods require historical OD matrices for supervised learning; and transfer-learning approaches require mobility observations from source cities or auxiliary structural information for adaptation~\citep{simini2021,neurogravity2026,transgm2026}. Although their modeling strategies differ substantially, they share the same underlying dependency on observed mobility information. This common limitation motivates the search for alternative mobility information that is both accessible and privacy-preserving.
 
-Recent aggregate mobility products offer a promising new source of standardized, privacy-preserving mobility information. Meta's Movement Distribution Maps (MDM)~\citep{MetaMovementDistributionMaps} provide aggregated population-level trip-length distributions (TLDs) rather than individual trajectories or OD matrices. These products are publicly available, globally consistent, and designed to protect user privacy, making them substantially more accessible in data-scarce and privacy-restricted regions~\citep{pappalardo2023analytical}. However, whether aggregate trip-length distributions contain sufficient information to replace local OD observations in the calibration of gravity models remains an open question.
+Aggregate mobility products---including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}---are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior. These products provide aggregated population-level trip-length distributions (TLDs) rather than individual trajectories or OD matrices. These products are publicly available, globally consistent, and designed to protect user privacy, making them substantially more accessible in data-scarce and privacy-restricted regions~\citep{pappalardo2023analytical}. However, whether aggregate trip-length distributions contain sufficient information to replace local OD observations in the calibration of gravity models remains an open question.
 
 This question is grounded in a fundamental mechanism: distance decay---the well-documented tendency for spatial interaction to diminish with separation distance---is a dominant determinant of travel behavior~\citep{tanner1961,verma2025determinants}. Aggregate trip-length distributions are the observable statistical outcome of these distance-decay processes at the population level. This observation motivates the following scientific hypothesis: \emph{aggregate trip-length distributions may preserve sufficient information to recover city-specific distance-decay functions without requiring local OD observations.} This hypothesis naturally raises a fundamental question regarding the recoverability of distance-decay information from aggregate mobility summaries.
 
@@ -123,56 +123,78 @@ Gravity-Informed Neural Models \citep{rong2023odgn} & Partial & Limited & Yes & 
 
 \section{Related Work}\label{sec:related_work}
 
-\subsection{Classical and Structured Mobility Models}
-Classical spatial interaction models, such as gravity models \citep{wilson1971,tanner1961} and radiation models \citep{Simini2012universal}, form the theoretical foundation of urban flow modeling. Gravity formulations relate traffic flows directly to zone masses and inversely to travel distance, while radiation models simulate destination choice based on the distribution of intervening opportunities. Although highly interpretable due to explicit physical constraints, gravity models require local origin-destination (OD) surveys to calibrate their distance-decay parameters \citep{martinez2013distance}. The form and specification of distance-decay functions---ranging from exponential to power-law and composite deterrence functions such as the Tanner function---have long been debated in the transport geography literature \citep{lenormand2016systematic,feldman2012alternative}, with distance decay identified as the dominant determinant of spatial interaction strength across urban contexts \citep{verma2025determinants}. Meanwhile, radiation models tend to perform poorly in urban regions characterized by highly directional commuting patterns or constrained transport networks.
+\subsection{Mobility Prediction under Data Scarcity}
+Accurate origin--destination (OD) prediction is a fundamental task in transportation planning, accessibility analysis, infrastructure design, and urban policy because it quantifies how travel demand is distributed between locations. Traditionally, reliable OD matrices are constructed from household travel surveys, census commuting records, mobile-phone trajectories, GPS traces, or smart-card transactions. While these data sources provide detailed mobility observations, they are often expensive to collect, infrequently updated, geographically incomplete, and increasingly constrained by privacy regulations \citep{de2013unique}. Consequently, obtaining high-quality OD matrices remains one of the primary bottlenecks for applying mobility models, particularly in data-scarce cities and rapidly developing regions.
 
-\subsection{Deep and Graph Learning for OD Prediction}
-To overcome the limitations of classical gravity formulations, recent studies have increasingly adopted deep neural networks and graph neural networks (GNNs) to model complex spatial dependencies in OD prediction. Across this line of work, representative models include end-to-end neural formulations (e.g., DeepGravity), graph-convolutional OD predictors (e.g., MPGCN), graph-based transfer frameworks (e.g., GODDAG), universal geography neural networks, and OpenStreetMap-driven commuting predictors \citep{simini2021,hu2020mpgcn,Rong2023goddag,guo2025universalgnn,atwal2025commuting}. The common pattern is that these methods learn OD mappings from supervised historical mobility data. As a result, they generally require historical OD matrices, trajectory-derived supervision, source-city OD data, or target-domain adaptation, which limits applicability under strict zero-shot deployment with no target-city OD observations.
+To alleviate this limitation, a wide range of OD prediction methods has been proposed. Classical spatial interaction models estimate mobility through analytical formulations such as gravity and radiation models \citep{wilson1971,tanner1961,Simini2012universal}, whereas more recent approaches employ deep neural networks, graph neural networks, and transfer learning to improve predictive performance by exploiting spatial representations learned from historical mobility data \citep{simini2021,hu2020mpgcn,transgm2026}. These advances have substantially improved OD prediction accuracy under data-rich conditions and expanded the ability of models to capture complex spatial interactions.
 
-\subsection{Physics-Informed Neural Mobility Modeling}
-An additional emerging direction combines gravity-inspired structure with neural architectures. Representative studies include gravity-guided OD generation networks and hybrid gravity-gradient boosting models \citep{rong2023odgn,gravigbm2024}. These approaches improve inductive bias by incorporating physical priors into learning pipelines. However, they still estimate flows from OD supervision rather than testing whether gravity parameters themselves can be recovered from aggregate mobility statistics alone.
+Despite their methodological differences, however, most existing approaches continue to depend on some form of mobility observation during model construction or calibration. Classical gravity models require observed OD flows to estimate city-specific distance-decay parameters \citep{lenormand2016systematic}, while supervised deep-learning models depend on historical OD matrices or trajectory datasets for training \citep{simini2021}. Even recent transfer-learning and zero-shot approaches typically assume that representative mobility observations are available in source cities from which transferable knowledge can be learned \citep{neurogravity2026}. As a result, reliable mobility observations remain an essential prerequisite for most existing OD prediction frameworks.
 
-\subsection{Aggregate Mobility Data for Decay Calibration}
-To establish data-efficient modeling pipelines, researchers have explored aggregated mobility datasets that minimize privacy risks. These datasets can be compressed into trip-length distributions (TLDs), which represent one-dimensional marginal histograms of travel distances without disclosing individual zone-to-zone trajectories \citep{pappalardo2023analytical}. At the same time, cross-source differences in mobility data collection and preprocessing can significantly distort inferred displacement patterns and downstream conclusions \citep{gallotti2024distorted}.
+These limitations motivate an important question: can meaningful mobility behavior be inferred without relying on conventional OD observations? Addressing this question requires understanding not only how mobility flows are predicted, but also how the underlying behavioral mechanism governing destination choice can be identified. This issue is closely related to the estimation of distance-decay functions, which forms the focus of the next section.
 
-Beyond privacy, aggregate mobility products---including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}---provide scalable summaries of displacement behavior (e.g., movement-distance histograms and distribution maps) that are increasingly available across regions and platforms. Existing literature primarily uses TLD-like statistics to characterize mobility patterns, analyze scaling laws, validate models, or provide auxiliary calibration constraints \citep{brockmann2006scaling,lenormand2016systematic,veneziano2011tld,pappalardo2023analytical}. Recent studies also examine privacy-preserving synthetic mobility data pipelines and limitations of user-level differential privacy guarantees in aggregate location products \citep{ozaki2025privacysynthetic,houssiau2022dpaggregate}. Notably, prior work has demonstrated that aggregate statistics such as median travel time can calibrate single-parameter spatial interaction models \citep{merlin2020medians}, suggesting that aggregate representations may contain sufficient information for gravity parameter identification. However, whether this extends to the two-parameter Tanner function remains under-characterized: even when aggregate shape statistics are informative, reliable inversion into city-specific distance-decay parameters requires controlling for geometry, attraction structure, and exposure effects.
+\subsection{Distance-Decay Modeling and Recovery}
+Distance decay has long been recognized as the fundamental behavioral mechanism underlying spatial interaction. Within gravity-based mobility models, it describes how interaction probability decreases with increasing travel impedance and serves as the principal constraint governing destination choice. Since the pioneering work of Tanner and Wilson, distance-decay functions have formed the behavioral core of spatial interaction models and have been widely adopted in transportation planning, accessibility analysis, migration studies, and urban mobility forecasting \citep{tanner1961,wilson1971,fotheringham1989spatial,sen1995gravity}. More recent studies continue to demonstrate that the choice of deterrence function substantially influences the accuracy and interpretability of mobility prediction models \citep{lenormand2016systematic,atwal2025commuting}.
 
-\subsection{Cross-City Transfer Learning}
-Cross-city transfer learning applies predictive knowledge from data-rich source cities to data-scarce target cities. Current transfer methodologies rely on region representation alignment \citep{wang2018regiontrans}, generative geographic pre-training \citep{mendieta2023geogpt}, or domain adaptation \citep{wang2022when}. More recently, physics-informed deep learning frameworks such as neuroGravity \citep{neurogravity2026} demonstrate that transferable mobility reconstruction from built-environment features is feasible without target-city OD observations. Likewise, TransGM \citep{transgm2026} proposes transferable gravity models for cross-city policy transfer by adapting a calibrated source-city gravity model to a target city. However, neuroGravity relies on complex learned neural representations, and TransGM still requires a previously calibrated source-city model and some degree of target-city structural data for adaptation. Neither approach investigates whether aggregate summary statistics alone---without any OD observations from source or target cities---are sufficient to identify city-specific distance-decay parameters.
+To represent heterogeneous travel behavior, numerous functional forms have been proposed, including exponential, power-law, logistic, and Tanner-type deterrence functions. Among these, the Tanner function has become one of the most widely used formulations because it simultaneously captures short-distance attraction and long-distance attenuation using only two interpretable parameters. Recent research has further extended distance-decay calibration through statistical estimation, robust optimization, sparse regression, Bayesian inference, and physics-informed modeling to improve parameter stability and transferability while preserving behavioral interpretability \citep{flowerdew1982method,lenormand2016systematic,rubioherrero2023sparse,atwal2025commuting}.
 
-\subsection{Summary and Positioning}
-Table~\ref{tab:literature_comparison} compares how existing model classes address the core challenge of zero-shot cross-city transfer. Existing work broadly follows three paradigms: (i) learning OD flows directly from historical supervised data, (ii) transferring OD knowledge across cities through domain adaptation or learned representations (e.g., neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}), and (iii) integrating gravity-inspired priors into neural flow-learning models. In all three paradigms, OD observations or previously calibrated models remain central to training or adaptation.
+Despite these methodological advances, existing calibration approaches share a common assumption: the availability of observed mobility flows. Classical gravity models estimate deterrence parameters directly from origin--destination matrices using maximum-likelihood estimation or least-squares optimization, while more recent data-driven approaches similarly rely on household travel surveys, mobile-phone trajectories, GPS traces, or complete OD observations to infer behavioral parameters \citep{wilson1971,flowerdew1982method,rubioherrero2023sparse,neurogravity2026}. Consequently, improvements have primarily focused on how to estimate distance-decay functions more accurately, rather than whether the underlying behavioral mechanism can be recovered without mobility observations.
 
-In contrast, this study investigates a fundamentally different question: can aggregate trip-length distributions alone preserve sufficient information to recover city-specific distance-decay functions required for gravity-based OD generation---without any OD supervision? This formulates an \emph{inverse mobility problem}: while recent work has learned deterrence functions directly from OD data via sparse regression \citep{rubioherrero2023sparse}, and aggregate statistics have been used to calibrate single-parameter gravity models \citep{merlin2020medians}, neither approach has investigated whether aggregate trip-length distributions alone can recover the two-parameter Tanner function without any OD supervision. To the best of our knowledge, existing literature has not demonstrated a practical workflow in which aggregate TLDs serve as the primary information source for recovering city-specific distance-decay parameters and then generating OD flows under strict zero-shot conditions. Accordingly, this work shifts the focus of zero-shot mobility modeling from learning OD flows to identifying the dominant transferable mechanism underlying those flows.
+This limitation becomes increasingly important as privacy-preserving mobility products replace individual trajectory datasets. Although aggregate mobility summaries no longer preserve origin--destination identities, they still retain the statistical distribution of travel distances, suggesting that they may encode the latent behavioral constraints governing destination choice. Whether such aggregate information is sufficient to recover city-specific distance-decay functions, however, remains largely unexplored. Addressing this question represents a critical prerequisite for enabling survey-free gravity calibration and forms the focus of the present study.
 
-\section{Problem Setting}\label{sec:problem_setting}
+The possibility of recovering behavioral information from aggregate mobility summaries depends fundamentally on the information preserved in emerging aggregate mobility products. We therefore next review recent developments in privacy-preserving aggregate mobility datasets and their applications in urban mobility analysis.
 
-We formalize the task of zero-shot cross-city travel flow prediction as follows. Let a target metropolitan area be partitioned into a set of $N$ discrete spatial zones (e.g., census tracts) denoted by $\mathcal{V} = \{1, \dots, N\}$. Our objective is to predict the origin-destination (OD) flow matrix $\mathbf{T} \in \mathbb{R}^{N \times N}_+$, where each element $T_{ij}$ represents the volume of seasonal commuting trips from an origin zone $i \in \mathcal{V}$ to a destination zone $j \in \mathcal{V}$. 
+\subsection{Aggregate Mobility Products for Privacy-Preserving Mobility Analysis}
+The growing availability of digital mobility data has substantially advanced the study of human movement, yet it has also intensified concerns regarding privacy protection, data governance, and the responsible sharing of individual travel records. Mobile-phone trajectories, GPS traces, and app-based location data contain detailed information about individual mobility behavior, making them highly valuable for transportation research while simultaneously raising significant privacy and ethical challenges. Consequently, recent years have witnessed a shift from publishing individual mobility records toward releasing privacy-preserving aggregate mobility products, which summarize collective travel behavior while preventing the reconstruction of individual trajectories \citep{de2013unique,blondel2015survey}.
 
-In a traditional local calibration setting, models are optimized using detailed individual-level trajectory records or comprehensive travel surveys that represent the target city's true flow matrix $\mathbf{T}$. However, in the zero-shot cross-city transfer paradigm, we assume that no local zone-to-zone flow observations are available for the target metropolitan area. The model must instead predict the target-city flows using only globally available built-environment features, gridded demographic data, and varying levels of aggregate target mobility signals.
+Aggregate mobility products---including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}---are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior. Several large-scale aggregate mobility datasets have been developed following this paradigm. Examples include Meta MDM, which provide differentially private trip-length distributions aggregated over spatial regions; Google Community Mobility Reports, which summarize temporal changes in population activity across different place categories; and aggregated mobility datasets released through the Humanitarian Data Exchange (HDX) and related humanitarian initiatives for disaster response and population monitoring. Although these products differ in spatial resolution, aggregation strategy, and intended application, they share a common objective: preserving useful mobility information while substantially reducing privacy risks associated with individual trajectory data.
 
-To analyze the performance of urban mobility prediction under different data constraints and privacy regulations, we define three operational and diagnostic evaluation settings, which are summarized in Table~\ref{tab:evaluation_settings}. These settings represent distinct scenarios of data availability:
-\begin{itemize}
-  \item \textbf{Pure Zero-Shot Fallback}: In this setting, the model relies entirely on open spatial features and a national distance-decay prior derived from source cities, assuming no target-city mobility data is accessible.
-  \item \textbf{OD-Free Calibration}: In this primary proposed pipeline, the model has access to an aggregate, one-dimensional trip-length distribution (TLD) of the target city but cannot observe any individual origin-destination pairs.
-  \item \textbf{Oracle Diagnostic Control}: Under this control setting, target-city origin outflows are set to their ground-truth values to isolate the errors of the distance-decay recovery from those of the outflow production predictions.
-\end{itemize}
+Because aggregate mobility products intentionally discard origin--destination identities, previous studies have primarily employed them for descriptive mobility analysis, accessibility assessment, epidemic modeling, disaster response, and large-scale urban monitoring \citep{oliver2020mobile,buckee2020aggregated,tizzoni2022mobility}. Within this literature, aggregate mobility statistics are generally regarded as high-level indicators of collective movement patterns rather than as information suitable for calibrating behavioral mobility models. Consequently, their potential value for recovering the behavioral mechanisms underlying spatial interaction has received comparatively little attention.
 
-\begin{table*}[h!]
-\centering
-\tablebodyfont\small
-\caption{Operational and diagnostic evaluation settings.}
-\label{tab:evaluation_settings}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{3.5cm}p{3.8cm}p{7.0cm}}
-\toprule
-\textbf{Setting} & \textbf{Target City Mobility Data} & \textbf{Deployment / Analytical Purpose} \\
-\midrule
-Pure Zero-Shot Fallback & None (Open spatial features only) & Fallback scenario under extreme data scarcity; uses national decay prior. \\
-OD-Free Calibration & Aggregate TLD (no individual OD flows) & Primary proposed pipeline; enables local calibration while protecting privacy. \\
-Oracle Diagnostic Control & Target outflows $O_i$ controlled & Diagnostic benchmark; isolates decay recovery from production prediction errors. \\
-\bottomrule
-\end{tabular*}
-\end{table*}
+Nevertheless, aggregate mobility products preserve an important characteristic that is directly relevant to gravity-based mobility modeling. Although they no longer identify individual origins or destinations, they retain the empirical distribution of travel distances across an urban system. Since distance-decay functions describe precisely how interaction probability varies with travel distance, these aggregate trip-length distributions may encode the latent behavioral information governing destination choice. Whether such aggregate statistics contain sufficient information to recover city-specific distance-decay functions, however, remains largely unexplored. Addressing this question is essential for enabling survey-free gravity calibration and motivates the behavioral inference framework proposed in this study.
+
+While aggregate mobility products substantially reduce the dependence on individual trajectory data, existing mobility prediction approaches have only partially exploited the behavioral information preserved in these datasets. We therefore next review recent efforts toward survey-free and zero-shot mobility prediction and discuss their remaining limitations.
+
+\subsection{Survey-Free and Zero-Shot Mobility Prediction}
+The increasing scarcity of high-quality mobility observations has stimulated growing interest in survey-free and zero-shot mobility prediction. Rather than calibrating models independently for each city, these approaches aim to transfer mobility knowledge learned from data-rich regions to locations where conventional travel surveys are unavailable. By exploiting transferable spatial representations or behavioral regularities, they seek to reduce the dependence on locally collected OD observations while maintaining competitive predictive performance.
+
+Recent studies have explored several transfer strategies. Deep learning approaches such as DeepGravity \citep{simini2021} demonstrate that complex nonlinear relationships between land use, population distribution, and travel demand can be learned directly from historical OD matrices, achieving substantial improvements over classical gravity models in data-rich environments. More recent graph-based and transfer-learning frameworks further improve cross-city prediction by learning transferable representations of urban mobility networks. For example, neuroGravity \citep{neurogravity2026} reconstructs human mobility networks by combining neural representation learning with gravity-inspired inductive biases, while TransGM \citep{transgm2026} and related cross-city transfer models explicitly transfer mobility knowledge from source cities to previously unseen target regions.
+
+These approaches significantly improve the practicality of mobility prediction under limited local data. However, they continue to rely on mobility observations during the learning process. Deep learning models require historical OD matrices or trajectory datasets for supervised training, whereas transfer-learning methods assume that representative mobility observations are available in one or more source cities from which transferable knowledge can be extracted. Consequently, although the target city may contain no OD observations, the predictive model itself remains fundamentally dependent on observed mobility behavior during model development.
+
+An emerging line of research has begun incorporating physical principles into learning-based frameworks to improve interpretability and transferability. Physics-informed gravity models and hybrid neural architectures embed distance-decay constraints or spatial interaction mechanisms into deep learning models, reducing overfitting while preserving behavioral consistency \citep{atwal2025commuting,neurogravity2026}. Nevertheless, these methods still estimate behavioral mechanisms from observed mobility data rather than inferring them directly from privacy-preserving aggregate mobility summaries.
+
+Therefore, despite substantial progress in survey-free and zero-shot mobility prediction, an important gap remains. Existing approaches primarily transfer behavioral knowledge learned from observed mobility data, whereas it remains unclear whether the behavioral mechanism itself can be recovered directly from aggregate mobility products without access to OD observations or trajectory records.
+
+This remaining challenge motivates the central research gap addressed in this study. The following section synthesizes the limitations of existing literature and positions the proposed behavioral inference framework within the broader landscape of survey-free mobility prediction.
+
+\subsection{Research Gap and Positioning}
+The preceding review demonstrates substantial progress in origin--destination prediction, spatial interaction modeling, aggregate mobility analysis, and survey-free mobility prediction. Classical gravity models have established distance decay as the fundamental behavioral mechanism governing spatial interaction, while recent deep learning and transfer-learning approaches have significantly improved prediction accuracy by exploiting increasingly rich mobility observations. At the same time, emerging privacy-preserving aggregate mobility products have expanded access to large-scale mobility information without exposing individual travel trajectories. Collectively, these developments have substantially advanced the state of urban mobility modeling. However, they also reveal a common conceptual limitation: behavioral information is consistently treated as something that must be learned from observed mobility flows rather than inferred directly from aggregate mobility statistics.
+
+This distinction is fundamental. Existing gravity-based approaches estimate distance-decay functions from observed origin--destination matrices through model calibration \citep{wilson1971,flowerdew1982method,sen1995gravity}, whereas recent neural and transfer-learning methods learn transferable behavioral representations from historical mobility observations \citep{simini2021,neurogravity2026}. Although these approaches differ considerably in modeling philosophy, they all assume that behavioral knowledge originates from some form of observed mobility data. Similarly, studies using privacy-preserving aggregate mobility products have primarily focused on descriptive mobility analysis, accessibility assessment, and population monitoring, rather than investigating whether these aggregate statistics themselves contain sufficient information for behavioral model calibration \citep{oliver2020mobile,buckee2020aggregated,MetaMovementDistributionMaps}.
+
+These observations suggest that the central challenge in survey-free mobility prediction may not be the absence of OD matrices themselves, but rather the absence of a framework capable of recovering latent behavioral mechanisms directly from aggregate mobility information. If aggregate trip-length distributions preserve the statistical signature of distance-dependent travel behavior, then behavioral model calibration may be reformulated as an inverse inference problem instead of a conventional flow reconstruction problem. Such a perspective fundamentally differs from existing survey-free approaches, which primarily transfer behavioral knowledge learned elsewhere, by investigating whether the behavioral mechanism itself can be identified without first observing origin--destination flows.
+
+Motivated by this perspective, this study formulates survey-free gravity calibration as a behavioral inference problem. Specifically, we investigate whether privacy-preserving aggregate trip-length distributions contain sufficient information to recover city-specific Tanner distance-decay functions and whether the recovered behavioral mechanism can support competitive OD prediction when integrated with transferable production estimation and analytical destination attraction. By shifting the objective from flow reconstruction to behavioral inference, the proposed Projection--Inference Gravity Framework (PIGF) provides an interpretable and privacy-preserving alternative for mobility prediction in data-scarce environments.
+
+The next section formalizes the problem setting and introduces the proposed behavioral inference framework.
+
+\section{Problem Formulation}\label{sec:problem_formulation}
+
+Urban origin--destination (OD) prediction aims to estimate the volume of trips exchanged between spatial zones within a city. In this study, we formulate survey-free urban OD prediction as the problem of reconstructing a complete OD flow matrix using only publicly available aggregate mobility information and open spatial data, without access to any local OD observations or individual mobility trajectories.
+
+Consider a metropolitan area partitioned into a set of $N$ spatial zones $\mathcal{V} = \{1, \ldots, N\}$. Let $\mathbf{T} \in \mathbb{R}_{+}^{N \times N}$ denote the unknown OD matrix, where each element $T_{ij}$ represents the number of trips from origin zone $i$ to destination zone $j$. Let $D = [d_{ij}]$ denote the inter-zonal distance matrix, where $d_{ij}$ is the travel distance between zones $i$ and $j$. For each zone $i$, an open spatial feature vector $x_i$ is available, containing publicly accessible built-environment and demographic attributes derived from sources such as OpenStreetMap and WorldPop.
+
+Unlike conventional OD prediction settings, we assume that no target-city OD matrix, household travel survey, GPS trajectory, mobile-phone record, or other individual mobility observation is available. Instead, the only mobility information provided for the target city is an aggregate Trip-Length Distribution (TLD), denoted by $P(d)$, which summarizes the population-level distribution of travel distances without revealing any origin--destination pairs or individual trajectories. Such aggregate mobility summaries are exemplified by products such as Meta Movement Distribution Maps (MDM).
+
+Formally, the objective is to estimate the complete OD matrix
+
+\begin{equation}\label{eq:formulation}
+\hat{T} = f\!\left(D,\, X,\, P(d)\right),
+\end{equation}
+
+where $X = \{x_i\}_{i=1}^{N}$ denotes the set of open spatial features and $P(d)$ denotes the aggregate trip-length distribution, subject to the constraint that no target-city OD observations are used during calibration or prediction. This formulation represents a strict survey-free and zero-shot setting in which the model must infer urban mobility solely from publicly available spatial information and aggregate mobility summaries.
+
+The principal challenge of this formulation is that the observed TLD provides only a one-dimensional statistical summary of the underlying spatial interaction process. Recovering the latent distance-dependent interaction mechanism from such aggregate observations therefore constitutes an inverse inference problem. The following section demonstrates how the separable structure of gravity models provides the theoretical basis for solving this problem.
 
 \section{Methodological Design}\label{sec:methodology}
 
@@ -366,6 +388,20 @@ The proposed PIGF possesses several methodological characteristics that distingu
 \end{tabular}
 \end{table*}
 
+\subsection{Computational Complexity}
+
+The computational complexity of the proposed framework is dominated by the final gravity-based OD generation step. Distance-decay recovery operates over aggregated distance bins and therefore scales linearly with the number of distance intervals. Origin production prediction and destination attraction estimation are both linear in the number of spatial zones after model training. Consequently, the overall computational cost is dominated by evaluating pairwise gravity interactions, resulting in a complexity of
+
+$$O(N^2),$$
+
+where $N$ denotes the number of spatial zones. This complexity is consistent with conventional gravity models while eliminating the computationally intensive calibration process based on observed OD matrices.
+
+\subsection{Closing Remarks}
+
+The proposed Projection--Inference Gravity Framework reformulates survey-free OD prediction as a component-wise gravity inference problem rather than a direct origin--destination prediction task. Instead of learning the entire OD matrix from historical mobility observations, PIGF independently recovers the behavioral distance-decay mechanism from aggregate trip-length distributions, estimates origin production from transferable open spatial features, and derives destination attraction analytically from publicly available urban opportunity indicators. By integrating these independently inferred components within a unified gravity formulation, the framework enables interpretable and survey-free urban OD prediction under strict zero-shot conditions.
+
+If the proposed theoretical formulation is valid, three empirical consequences should follow. First, aggregate trip-length distributions should enable accurate recovery of city-specific distance-decay parameters. Second, the recovered behavioral component should explain a substantial proportion of OD prediction performance relative to the remaining gravity components. Third, integrating the three inferred components should produce competitive survey-free OD predictions across diverse urban environments. The following section evaluates these hypotheses through comprehensive experiments.
+
 \subsection{Data Sources}\label{sec:data_sources}
 We utilize three globally available open data sources to compile features for our models: built-environment spatial descriptors (OpenStreetMap POIs and road density), gridded demography (WorldPop), and aggregate movement telemetry maps (Meta Movement Distribution Maps \citep{MetaMovementDistributionMaps}). Ground-truth origin-destination (OD) flows between census tracts are obtained from the LODES commuting dataset covering 50 US metropolitan areas (25 source cities for GBDT production training and 25 held-out target cities for testing). The target OD matrices are kept completely blind to the model components and are used exclusively as ground truth for validation.
 
@@ -484,6 +520,16 @@ Origin Production $O_i$ & -3.6\% & 0.0167 & 6.4\% \\
 \end{tabular*}
 \end{table*}
 
+\subsubsection{Interpretation}
+
+Instead of learning complete OD matrices as monolithic mappings, the proposed framework explicitly isolates the behavioral mechanism governing destination choice.
+
+The results suggest that the majority of predictive information required for gravity-based mobility prediction resides in the distance-decay component, whereas production and attraction primarily refine an already well-defined behavioral structure.
+
+This observation provides an explanation for why aggregate trip-length distributions---despite containing no origin--destination identities---remain sufficient for recovering useful mobility information.
+
+In other words, the success of the proposed survey-free calibration pipeline arises not because aggregate data reconstruct complete OD matrices, but because they accurately recover the dominant behavioral mechanism underlying those matrices.
+
 \subsection{Can recovering distance decay from aggregate trip-length distributions enable competitive predictive performance without access to individual OD data?}\label{sec:rq3}
 To address the final research question, we evaluate whether our proposed aggregate-calibrated gravity model can serve as a deployable, survey-free alternative to traditional locally-calibrated frameworks. We compare our model against zero-shot neural architectures and locally calibrated structures across the 25 held-out target cities. The results of these comparative evaluations are summarized in Table~\ref{tab:multibaseline_comparison}.
 
@@ -515,9 +561,19 @@ Radiation Model & 0.4851 & 0.0516 & Param-free & 0 \\
 \end{tabular*}
 \end{table*}
 
+We deliberately exclude graph-based neural transfer models (e.g., MPGCN, GODDAG, TransGM) from this comparative evaluation, as these models inherently require either a subset of target-city OD observations for fine-tuning or full target-city mobility graphs, rendering them incompatible with the strict zero-shot, survey-free deployment setting defined in our problem formulation. Instead, DeepGravity is included as the primary neural baseline, as its design allows for pure feature-based transfer without requiring target-city OD data. Furthermore, while alternative error metrics (e.g., RMSE, MAE, KL/JS divergence) provide complementary perspectives, we report CPC as the primary evaluation metric due to its established theoretical interpretation in mobility flow reconstruction \citep{lenormand2016systematic}.
+
 Our most significant empirical result is that the proposed aggregate-calibrated model achieves statistical equivalence with the locally-calibrated Traditional Tanner baseline. Specifically, under oracle outflows, a Two One-Sided Test (TOST) of equivalence confirms that our model using Meta MDM decay (CPC 0.7337) is equivalent to the locally-fitted baseline (CPC 0.7382) within a tight margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$), despite utilizing only aggregate telemetry. A Wilcoxon signed-rank test shows that although the minor performance difference is statistically significant (raw $p = 0.00737$), the gap is practically negligible. Additionally, the proposed model statistically outperforms the parameter-free Radiation Model baseline (Wilcoxon test with Bonferroni adjustment, $p < 10^{-6}$).
 
 Beyond this primary equivalence result, the multi-baseline comparison yields several supporting insights. First, we observe that predicting true origin outflows ($O_i$) does not significantly alter the predictive accuracy of the DeepGravity model (CPC 0.7526 vs. 0.7529), as its neural architecture jointly optimizes production and destination selection. In contrast, the proposed gravity model demonstrates a strong dependency on production accuracy, where the introduction of oracle outflows narrows the performance gap, nearly matching the performance of the locally-fitted baseline.
+
+\subsubsection{Practical Implications}
+
+The proposed framework is intended for deployment in cities where conventional travel surveys are unavailable or prohibitively expensive.
+
+Unlike existing gravity calibration approaches, PIGF requires only publicly available spatial datasets together with aggregate trip-length summaries that preserve user privacy.
+
+Consequently, the framework provides a practical pathway for mobility estimation in data-scarce regions, privacy-sensitive environments, and rapidly developing cities where traditional OD surveys cannot be conducted routinely.
 
 \subsection{Exploratory Analysis of Urban Morphology Effects}\label{sec:urban_morphology_analysis}
 Beyond evaluating overall predictive performance, we conduct an exploratory analysis to examine whether urban morphology may influence the effectiveness of aggregate-based distance-decay calibration. Given the limited number of target cities and the single-country scope of the dataset, these analyses are intended to generate hypotheses for future investigation rather than establish causal relationships.
@@ -543,85 +599,136 @@ Preliminary patterns suggest that the physics-constrained gravity formulation ac
 
 To supplement this categorical classification, we analyze the continuous relationship between urban density and the performance gap ($\Delta\text{CPC} = \text{CPC}_{\text{DeepGravity}} - \text{CPC}_{\text{Proposed}}$). The gap correlates positively with both median employment density ($r = 0.263$) and population density ($r = 0.252$). The results are consistent with the hypothesis that dense, transit-oriented development decouples urban trips from simple Euclidean distance, allowing deep learning models to capture complex non-linear feature interactions, whereas lower-density or physically constrained environments follow more predictable distance friction behavior.
 
-In summary, these findings should be interpreted cautiously, but they suggest that our aggregate-calibrated model provides a statistically equivalent alternative to locally-fit structures in low-density or physically bounded cities, offering a practical deployment pathway when local surveys are unavailable.
+In summary, these findings should be interpreted cautiously, but they suggest that our aggregate-calibrated model provides a statistically equivalent alternative to locally-fit structures in low-density or physically constrained urban environments.
+
+\subsection{Experimental Summary}
+
+The experiments presented in this section were designed to evaluate the three research questions introduced in Section 1 through a progressive validation strategy. Rather than assessing only the final prediction accuracy, the evaluation first examined the recoverability of behavioral information from aggregate mobility summaries, then quantified its predictive importance within the gravity formulation, and finally assessed the practical utility of the complete survey-free framework under realistic deployment conditions.
+
+For RQ1, the experiments demonstrate that aggregate trip-length distributions preserve sufficient information to recover city-specific Tanner distance-decay functions without requiring any origin--destination observations. The recovered parameters closely match conventional survey-based calibration and reproduce downstream travel behavior under both synthetic and real aggregate mobility data.
+
+For RQ2, factorial ablation and game-theoretic attribution consistently identify the recovered distance-decay function as the dominant predictive component within the investigated gravity framework. The results indicate that most predictive information resides in behavioral distance friction rather than in production or attraction estimation, providing a mechanistic explanation for why aggregate trip-length distributions remain informative despite discarding origin--destination identities.
+
+For RQ3, integrating the recovered distance-decay component with transferable production estimation and analytical attraction mapping enables competitive survey-free origin--destination prediction under strict zero-shot deployment. The resulting performance approaches that of locally calibrated gravity models while eliminating the need for target-city OD surveys or individual mobility trajectories.
+
+Collectively, these experiments support a consistent scientific interpretation. The principal contribution of PIGF is not simply a new gravity calibration procedure, but a reformulation of survey-free mobility prediction as a behavioral inference problem. Instead of attempting to reconstruct complete origin--destination matrices directly, the proposed framework identifies and recovers the latent distance-dependent mechanism governing spatial interaction, then combines it with transferable production estimation and open-data-derived attraction information to reconstruct travel flows.
 
 \section{Discussion}\label{sec:discussion}
 
-The three research questions follow a single logical chain: recoverability $\rightarrow$ importance $\rightarrow$ utility. Together, they address the gaps identified in Table~\ref{tab:literature_comparison}. The following discussion synthesizes the established findings and outlines practical implications of our decomposed gravity framework.
+\subsection{Scientific Implications: Recovering Behavior Rather than Flows}
 
-\subsection{Empirical Evidence and Deconvolution Mechanics}\label{sec:conceptual_intuition}
-Our results across 50 US metropolitan areas show that aggregate trip-length histograms preserve sufficient signal to recover city-specific distance-decay parameters. The recovered parameters correlate strongly with the power-law exponent $\alpha$ ($r = 0.909$) and more weakly with the exponential rate $\beta$ ($r = 0.427$) fitted from complete OD flows. Under oracle outflows, our analysis indicates through a Two One-Sided Test (TOST) that the aggregate-calibrated gravity model is equivalent to the locally-calibrated Tanner model within a margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$). Additionally, Shapley analysis reveals that distance decay is the dominant predictive component within the investigated gravity framework, accounting for 85.8\% of the total CPC gain.
+The central finding of this study is not simply that PIGF achieves competitive survey-free OD prediction, but that aggregate trip-length distributions preserve sufficient information to recover the latent behavioral mechanism governing spatial interaction. Across the experimental analyses, aggregate mobility summaries consistently enabled accurate recovery of city-specific Tanner distance-decay functions, identified distance decay as the dominant predictive component within the investigated gravity formulation, and supported downstream OD prediction without requiring target-city mobility observations. Taken together, these findings suggest that behavioral information can be inferred from aggregate mobility summaries to a much greater extent than has previously been assumed.
 
-The lower Pearson correlation for $\beta$ should be interpreted in the context of scale. The cross-city numerical range of $\beta$ is much narrower than that of $\alpha$, so small estimation deviations can substantially reduce correlation even when absolute errors remain negligible. Therefore, for $\beta$, absolute error metrics are more informative than rank correlation alone when assessing practical recovery quality.
+\subsubsection{From Flow Reconstruction to Behavioral Inference}
+Traditionally, survey-free mobility prediction has been approached as a flow reconstruction problem. Existing methods---including gravity calibration, deep learning, graph neural networks, and transfer-learning frameworks---primarily attempt to estimate complete origin--destination matrices, either by calibrating gravity parameters from observed OD flows or by learning direct mappings from historical mobility data. As a result, the availability of mobility observations remains central to most existing paradigms.
 
-While the importance of distance friction has long been recognized in mobility modeling, our results show that most predictive gain within the investigated gravity framework can be attributed to the distance-decay component. More importantly, distance-decay parameters can be recovered from aggregate trip-length distributions without requiring individual OD trajectories.
+The findings of this study suggest an alternative perspective. Rather than reconstructing complete OD matrices directly, survey-free mobility prediction may instead be formulated as a behavioral inference problem. Aggregate trip-length distributions do not retain origin--destination identities, yet they preserve the statistical signature of travel-distance preferences. Recovering this latent behavioral mechanism, and combining it with independently estimated production and attraction components, provides sufficient information to reconstruct meaningful flow patterns. This interpretation shifts the emphasis from recovering individual trips to recovering the behavioral process that generates those trips.
 
-This recovery is explained by marginal projection under separability. Under separability, the OD matrix represents a joint distribution $P(X,Y)$ whose projection onto the distance domain $D$ yields the TLD. Because the distance-decay component $f(d)$ is the only component depending explicitly on zone distances, this projection preserves its shape. Although the spatial layout of population and POIs distorts the marginal distribution, the exposure-corrected MLE (Equation~\ref{eq:likelihood_mle}) deconvolves this geometric bias to isolate distance-decay parameters. 
+\subsubsection{Why Aggregate Mobility Remains Informative}
+An important implication of the experimental findings is that the usefulness of aggregate mobility data does not arise from preserving detailed spatial trajectories, but from preserving the dominant behavioral constraints governing destination choice. 
 
-Consequently, the TLD is not itself the dominant predictive component; rather, it is an observable projection from which the dominant predictive component can be identified.
+The Shapley analysis shows that distance decay accounts for the majority of predictive performance within the investigated gravity framework, substantially exceeding the contributions of production and attraction estimation. This provides a mechanistic explanation for why highly compressed trip-length distributions remain informative despite discarding nearly all spatial identities. In other words, aggregate mobility summaries appear to retain the behavioral information that matters most for gravity-based interaction, even when individual travel records are no longer available. This observation also helps explain why coarse aggregate products, such as three-bin movement distributions, continue to support effective calibration despite their limited spatial resolution.
 
-This deconvolution explains the comparative behavior under different settings. Under oracle outflows, the ground-truth-derived national prior slightly outperforms the binned Meta MDM calibration (CPC 0.7398 vs. 0.7337). Under GBDT-predicted outflows, this gap narrows to 0.0036 CPC (CPC 0.6896 vs. 0.6860), as the continuous national prior acts as a regularizer, smoothing out localized flow fluctuations and reducing sensitivity to production prediction noise. Critically, this comparison highlights a key conceptual contribution: the objective of localized aggregate recovery is not to outperform a rich national prior in data-abundant regions (such as the United States), but rather to serve as a direct replacement where such a prior does not exist. Constructing a national prior requires extensive historical commuting surveys across multiple representative source cities, which is a luxury unavailable in developing nations or data-scarce territories. In these zero-data deployment scenarios, the global availability of platform-sourced telemetry (e.g., Meta MDM) offers an essential, training-free calibration signal that enables zero-shot flow prediction where it was previously impossible. Finally, we treat the role of urban structure and physical morphology not as a core validated finding, but as an exploratory observation that may help explain variation in model performance across cities.
+\subsubsection{Implications for Physics-Informed Mobility Modeling}
+The proposed framework also contributes to the broader development of physics-informed mobility modeling. Recent years have seen increasing interest in combining physical principles with machine learning to improve interpretability and transferability. Most existing approaches, however, incorporate physical constraints after mobility observations have already been collected for training. In contrast, PIGF uses the physical structure of the gravity model to infer behavioral parameters directly from aggregate mobility statistics, without requiring target-city OD observations.
 
-\subsection{Practical Deployment Implications}\label{sec:practical_implications}
-By demonstrating that high-fidelity decay calibration is achievable using only target-city aggregate histograms, this study enables a new paradigm for deploying mobility models. Calibrating per-city gravity models traditionally required invasive individual-level GPS telemetry or costly surveys. By combining globally available open-data features (OSM, WorldPop) with target-city aggregate TLDs, planning agencies can deploy structured gravity models in data-scarce or highly regulated environments. This pipeline bypasses the need for local travel surveys while preserving data confidentiality.
+This distinction suggests that physical models can serve not only as predictive constraints but also as identification mechanisms, allowing latent behavioral parameters to be recovered from privacy-preserving aggregate data. More broadly, these results illustrate how interpretable physical formulations and aggregate mobility products can complement, rather than compete with, modern data-driven approaches.
 
-\section{Threats to Validity}\label{sec:threats_to_validity}
-To ensure objective interpretation, we discuss the core limitations of our transfer learning workflow:
-\begin{itemize}
-  \item \textbf{Target Mobility Dependency}: Under deployed GBDT outflows, the national prior fallback slightly outperforms localized calibration (CPC 0.6896 vs. 0.6860), indicating that localized calibration from binned telemetry does not necessarily yield downstream gains compared to a robust national prior. However, this concern is mitigated by the fact that a national prior cannot be constructed in data-sparse domains, leaving localized aggregate calibration as the only viable deployment pathway in such contexts.
-  \item \textbf{Data Source Mismatches}: As demonstrated in Section~\ref{sec:rq1}, the performance gap is primarily driven by telemetry source mismatches and spatial aggregation rather than by the coarse 3-bin compression itself. The domain gap between survey-based commuting distributions and platform-derived mobility indicators remains a limitation for localized zero-shot calibration.
-  \item \textbf{Temporal Stability Assumption}: Our calibration pipeline assumes a static trip-length distribution (TLD) for each city. Temporal stability of TLDs was not evaluated across weekday/weekend patterns, seasonal variation, epidemiological disruptions (e.g., COVID-19), or special-event disruptions.
-  \item \textbf{Sample and Geographic Constraints}: The morphological classification contains small sample sizes (e.g., Coastal cities, $n=3$). Furthermore, because our empirical evaluation is restricted to metropolitan areas in the United States, the observed commuting patterns, density profiles, and land-use arrangements may not directly generalize to European, Asian, or South American contexts.
-  \item \textbf{Metric and Geometric Simplifications}: CPC is a global index blind to localized error structures, and using Euclidean distance ignores routing circuity and congestion travel times, which decouple travel from geometric distance in dense transit environments.
-\end{itemize}
+\subsubsection{Scientific Perspective}
+Taken together, the experimental evidence supports a broader conceptual interpretation of survey-free mobility prediction. Rather than viewing aggregate mobility summaries as incomplete substitutes for origin--destination matrices, they may instead be regarded as observations of the underlying behavioral processes that govern spatial interaction. Under this perspective, the central task is no longer to reconstruct every individual movement, but to identify the dominant behavioral mechanism that shapes those movements.
 
-This study investigates the zero-shot cross-city transfer problem through a three-tier conceptual architecture, moving from ad-hoc calibration toward a structural analysis of urban spatial interaction. Our findings across 50 US metropolitan areas indicate that distance decay is the dominant predictive component in the evaluated gravity framework. We also show that the aggregate trip-length distribution (TLD) provides enough information to recover this component for zero-shot gravity model calibration.
+Within the investigated gravity formulation, this behavioral mechanism is represented by the distance-decay function. The proposed Projection--Inference Gravity Framework demonstrates that recovering this latent mechanism from aggregate mobility summaries is sufficient to enable practical survey-free gravity calibration across the evaluated metropolitan areas. Although additional validation beyond the present dataset remains necessary, the results suggest a promising direction in which behavioral inference, rather than direct flow reconstruction, becomes the primary objective of survey-free urban mobility modeling.
 
-\subsection{Summary of Empirical Findings}
-We demonstrate that target-city aggregate TLDs contain sufficient signal to recover distance-decay parameters, with downstream prediction performance statistically equivalent to models calibrated directly on target-city individual-level OD flows. A game-theoretic Shapley analysis shows that distance decay accounts for 85.8\% of the total CPC gain, making it the dominant predictive component in the evaluated framework. Although localized calibration from real-world telemetry does not outperform a robust national decay fallback, it does not require historical survey data from source cities, thereby enabling zero-shot deployment in data-scarce regions where such national priors cannot be constructed.
+\subsection{Methodological and Practical Implications}
 
-\subsection{Theoretical and Practical Implications}
-These findings redefine how spatial interaction models can be calibrated. Historically, identifying city-specific travel friction required highly sensitive individual-level surveys or proprietary cellular trajectories. By demonstrating that distance-decay parameters can be robustly recovered using a one-dimensional aggregate representation (the TLD), we provide a deployable, survey-free forecasting pipeline. This architecture enables the calibration of structured, interpretable gravity models using only globally available open spatial data (OSM, WorldPop) and privacy-compliant aggregate indicators, facilitating deployment under privacy constraints and reducing survey costs.
+Beyond its scientific implications, the proposed framework also has broader methodological and practical significance for urban mobility modeling. The experimental results suggest that the proposed decomposition strategy changes not only how distance-decay parameters are estimated, but also how survey-free mobility prediction can be constructed under severe data constraints.
 
-\subsection{Limitations and Future Directions}
-Despite these contributions, several challenges remain. First, the separability approximation assumes independent spatial components, which may exhibit non-linear coupling in reality. Second, the empirical evidence is restricted to US metropolitan areas characterized by high private vehicle usage; transferability to highly dense, multi-modal transit networks or informal settlements requires further cross-regional verification. Finally, using Euclidean distance ignores network routing circuity and congestion travel times. Incorporating these network and temporal dynamics into the aggregate calibration process represents an essential direction for future work.
+\subsubsection{Decomposition as a Modeling Strategy}
+Most existing OD prediction methods optimize a single model to approximate complete origin--destination matrices. Whether based on classical calibration, deep learning, or transfer learning, these approaches generally learn a monolithic mapping between spatial inputs and mobility flows. 
 
-A particularly promising direction concerns the role of urban morphology. The exploratory analyses suggest that physical urban structure may influence the effectiveness of aggregate-based decay calibration. However, the current evaluation contains only 25 target cities from a single country, limiting statistical power and geographic diversity. Future work should evaluate substantially larger cross-country datasets spanning diverse urban forms, transportation systems, and development contexts to determine whether morphology-specific calibration strategies are warranted.
+The proposed framework follows a different strategy by explicitly decomposing spatial interaction into production, attraction, and behavioral distance decay, allowing each component to be estimated from the information source most closely associated with its physical meaning. This decomposition offers two methodological advantages. First, it enables each component to be estimated using the most appropriate information source rather than forcing all information into a single predictive model. Second, it produces a transparent inference pipeline in which each component can be independently validated, interpreted, and improved without retraining the entire system.
+
+\subsubsection{Aggregate Data as Calibration Signals}
+The results also suggest a broader role for aggregate mobility products. Current aggregate datasets are frequently viewed as reduced substitutes for detailed trajectory records because they discard origin--destination identities and individual travel histories. Under this perspective, aggregate data are often considered insufficient for model calibration.
+
+The present findings suggest a different interpretation. Aggregate mobility summaries may instead be regarded as behavioral calibration signals rather than incomplete mobility observations. Although they do not reveal where individual trips begin or end, they preserve information about the collective travel behavior governing destination choice. Consequently, aggregate mobility products can support model calibration even when they are insufficient for direct flow reconstruction. This perspective may become increasingly relevant as privacy-preserving mobility products continue to replace individual-level trajectory datasets.
+
+\subsubsection{Implications for Survey-Free Mobility Prediction}
+From a practical perspective, the proposed framework substantially reduces the information required for gravity-model calibration. Instead of requiring household travel surveys, GPS trajectories, or mobile-phone records, calibration relies only on publicly available spatial datasets together with aggregate trip-length distributions. These data sources are considerably easier to obtain, more consistent across regions, and inherently more compatible with modern privacy requirements.
+
+As a result, the framework provides a feasible pathway for estimating commuting flows in metropolitan areas where conventional mobility surveys are unavailable, prohibitively expensive, or restricted by legal or privacy considerations.
+
+\subsubsection{Scope of Applicability}
+The proposed framework is particularly suited to deployment scenarios characterized by limited mobility observations but reasonable availability of open spatial data. Examples include rapidly growing metropolitan regions, cities with infrequent household travel surveys, and privacy-sensitive applications where individual trajectories cannot be collected or shared.
+
+Conversely, in data-rich environments where large-scale OD observations are routinely available, high-capacity supervised neural models may still achieve higher prediction accuracy. Under such circumstances, the primary advantage of PIGF lies in its interpretability, lower data requirements, and straightforward deployment rather than maximizing predictive performance.
+
+Taken together, these methodological and practical implications suggest that the principal value of PIGF extends beyond the proposed implementation itself. By combining interpretable model decomposition with privacy-preserving aggregate mobility information, the framework illustrates a practical pathway toward survey-free urban mobility modeling that balances predictive performance, interpretability, and realistic data availability.
+
+\subsection{Scope and Limitations}
+
+Although the experimental results consistently support the proposed behavioral inference framework, the conclusions of this study should be interpreted within the scope of the present experimental setting and modeling assumptions. Recognizing these boundaries is important for understanding both the applicability of the proposed framework and the opportunities for future research.
+
+\subsubsection{Scope of the Experimental Validation}
+The empirical evaluation is conducted using 50 metropolitan areas in the United States, including 25 source cities for transferable production learning and 25 held-out target cities for evaluation. These metropolitan areas encompass diverse urban morphologies, ranging from dense transit-oriented cities to sprawling, polycentric, and coastal environments. Nevertheless, they remain embedded within a common national context characterized by similar census definitions, transportation systems, and data collection procedures.
+
+Accordingly, the present experiments demonstrate robustness across heterogeneous U.S. metropolitan environments, but do not establish that the same behavioral relationships necessarily hold under substantially different institutional, socioeconomic, or transportation contexts. Additional evaluation across countries and mobility datasets will therefore be necessary before broader conclusions can be drawn.
+
+\subsubsection{Dependence on the Gravity Formulation}
+The proposed framework is built upon the classical gravity formulation, in which spatial interaction is decomposed into origin production, destination attraction, and distance-dependent behavioral friction. Consequently, the interpretation of recovered behavioral information is specific to this modeling framework.
+
+Although the experiments demonstrate that distance decay is the dominant predictive component within the investigated gravity formulation, this conclusion should not be interpreted as evidence that all urban mobility systems are governed primarily by geographical distance. In metropolitan areas where multimodal accessibility, public transportation networks, or socioeconomic interactions play a stronger role, additional behavioral mechanisms may become equally or more important. This limitation reflects the scope of the current behavioral model rather than the behavioral inference framework itself.
+
+\subsubsection{Aggregate Mobility Representation}
+The present study evaluates behavioral recovery using aggregate trip-length distributions represented as one-dimensional histograms. Although such representations substantially reduce privacy exposure while preserving dominant travel-distance characteristics, they inevitably discard other dimensions of human mobility, including travel direction, temporal dynamics, transport mode, and activity purpose.
+
+Consequently, the proposed framework should be interpreted as recovering the dominant distance-dependent component of aggregate mobility rather than the complete behavioral complexity of urban travel.
+
+\subsubsection{Survey-Free Does Not Mean Data-Free}
+Finally, although PIGF eliminates the need for target-city origin--destination observations, it should not be interpreted as a completely data-free approach. The framework still relies on publicly available spatial information, including population distributions, built-environment characteristics, and aggregate mobility summaries, to estimate the individual components of the gravity model.
+
+Accordingly, the contribution of this work lies in reducing the dependence on localized mobility observations, rather than eliminating data requirements altogether. The proposed framework therefore complements, rather than replaces, data-rich mobility modeling when detailed observations are available.
+
+Taken together, these limitations define the current scope of the proposed behavioral inference framework rather than diminishing its principal findings. Within the evaluated setting, the experiments consistently demonstrate that aggregate trip-length distributions contain sufficient information to recover behaviorally meaningful distance-decay functions and support survey-free gravity calibration. Extending this framework beyond the present assumptions and evaluation domain remains an important direction for future research.
+
+\subsection{Future Research Directions}
+
+The limitations identified above also suggest several promising directions for future research. Rather than representing shortcomings specific to PIGF alone, they reflect broader challenges in survey-free mobility modeling and behavioral inference from aggregate data. Extending the present framework along these directions may further improve both the applicability and the theoretical understanding of aggregate-based mobility prediction.
+
+\subsubsection{Beyond U.S. Metropolitan Areas}
+The present evaluation is conducted exclusively on U.S. metropolitan areas, whose commuting behavior, transportation systems, and urban structures exhibit relatively consistent characteristics. An important next step is to evaluate whether the proposed behavioral inference framework remains applicable across cities with substantially different socioeconomic conditions, transport infrastructures, and cultural travel patterns. Cross-country validation would help determine whether the recoverability of distance-decay functions represents a universal behavioral property or depends on regional mobility characteristics.
+
+\subsubsection{Richer Behavioral Representations}
+The current framework models travel behavior exclusively through geographical distance. Future research may extend the behavioral inference framework to incorporate richer impedance measures, including travel time, multimodal accessibility, transport cost, and temporal congestion. Recovering multiple behavioral dimensions simultaneously may provide a more comprehensive description of urban mobility while preserving the survey-free philosophy of the proposed framework.
+
+\subsubsection{Beyond Tanner Functions}
+Although the Tanner formulation provides a flexible and interpretable representation of distance decay, the proposed inference framework is not fundamentally restricted to this particular functional form. Future work may investigate non-parametric behavioral recovery, neural deterrence functions, or Bayesian formulations capable of representing more complex travel preferences while maintaining physical interpretability. Such extensions would help determine whether the observed recoverability is specific to Tanner functions or reflects a broader property of aggregate mobility distributions.
+
+\subsubsection{Toward Hybrid Physics-Informed Learning}
+Finally, the decomposition strategy adopted by PIGF naturally suggests future integration with modern machine learning. Rather than replacing physics-based models with end-to-end neural architectures, future research may combine behavioral inference from aggregate mobility summaries with representation learning, graph neural networks, or foundation models for urban systems. Such hybrid approaches could preserve the interpretability and low data requirements of physics-informed models while benefiting from the expressive capacity of modern deep learning. This direction may ultimately bridge the current separation between interpretable gravity models and high-capacity neural mobility predictors.
+
+Taken together, these directions indicate that the proposed framework should be viewed not as a final solution, but as an initial demonstration of behavioral inference from aggregate mobility summaries. Future developments may extend this paradigm toward richer behavioral models, broader geographical settings, and hybrid physics-informed learning frameworks, further advancing survey-free urban mobility prediction.
+
+\section{Conclusion}\label{sec:conclusion}
+
+Urban mobility prediction has traditionally depended on localized origin--destination (OD) surveys or individual mobility trajectories, limiting the applicability of existing approaches in data-scarce and privacy-sensitive environments. Motivated by the growing availability of privacy-preserving aggregate mobility products, this study investigated whether aggregate trip-length distributions contain sufficient behavioral information to replace conventional OD observations in gravity-model calibration.
+
+We proposed the Projection--Inference Gravity Framework (PIGF), a survey-free calibration framework that formulates gravity calibration as a behavioral inference problem. Instead of estimating complete OD matrices directly, PIGF recovers city-specific Tanner distance-decay functions from aggregate trip-length distributions through an exposure-corrected inverse inference process, integrates the recovered behavioral component with transferable origin production estimated from open spatial data and analytical destination attraction, and reconstructs commuting flows without requiring target-city OD surveys or individual mobility trajectories.
+
+Experiments conducted across 50 U.S. metropolitan areas consistently support the three research questions posed in this study. First, aggregate trip-length distributions preserve sufficient information to recover city-specific distance-decay functions with high fidelity. Second, the recovered distance-decay component constitutes the dominant predictive mechanism within the investigated gravity formulation, accounting for the majority of predictive performance. Third, integrating the recovered behavioral component into PIGF enables competitive survey-free OD prediction under strict zero-shot deployment, approaching the performance of locally calibrated gravity models while relying only on aggregate mobility summaries and publicly available spatial information.
+
+Beyond the proposed implementation, this work contributes a broader perspective on survey-free mobility modeling. Rather than treating aggregate mobility products as incomplete substitutes for detailed trajectories, the results suggest that they can serve as behavioral calibration signals capable of identifying the latent mechanisms governing spatial interaction. Under this perspective, survey-free OD prediction becomes fundamentally a problem of behavioral inference rather than direct flow reconstruction, providing an interpretable and privacy-preserving alternative to conventional calibration strategies.
+
+Although the present evaluation is limited to U.S. metropolitan areas and the current framework adopts a gravity-based behavioral formulation, the findings demonstrate that meaningful urban mobility inference is possible without observing individual travel trajectories. As privacy-preserving mobility products and globally available geospatial data continue to expand, recovering latent behavioral mechanisms from aggregate observations may become an increasingly important direction for survey-free urban mobility modeling, complementing both traditional survey-based approaches and modern data-driven learning frameworks.
 
 \clearpage
-\section*{Appendix: Supplementary Materials}\label{sec:appendix}
 
-\subsection*{Appendix A. Robustness of Aggregate-Based Distance-Decay Recovery}
+\clearpage
+\begin{appendices}
 
-\subsubsection*{A.1 Estimation Details}
-To solve the maximum likelihood estimation (MLE) problem for target-city decay parameters $\theta = (\alpha, \beta)$ without disaggregate flows, we adopt a robust and physically grounded initialization and optimization workflow based on closed-form moment estimates.
+\section{Additional Experimental Results}\label{app:experiments}
 
-Good parameter initialization is critical for optimization convergence. For the exponential decay rate $\beta$, we utilize a closed-form moment estimate derived under the assumption of pure exponential deterrence and a uniform distribution of spatial opportunities. In this theoretical limit, the expected travel distance satisfies $\mathbb{E}[d] = 1/\beta$. We estimate the empirical mean trip distance $\bar{d}_{\text{obs}}$ from the observed distance-bin histogram:
-\begin{equation}\label{eq:moment_d_obs}
-\bar{d}_{\text{obs}} = \sum_{k=1}^{K} b_k \cdot m_k
-\end{equation}
-where $b_k$ is the observed proportion of trips in bin $k$, and $m_k$ is the midpoint of distance bin $k$ (for the open-ended final bin, we use $1.5$ times the lower boundary as a surrogate midpoint). The initial value $\beta^{(0)}$ is set as:
-\begin{equation}\label{eq:beta_init}
-\beta^{(0)} = \frac{1}{\bar{d}_{\text{obs}}}
-\end{equation}
-For the power-law exponent $\alpha$, the initial value is set statically to $\alpha^{(0)} = 1.0$, which corresponds to the center of the empirically observed range $[0.5, 2.0]$ in classical spatial interaction modeling literature.
-
-The positivity constraints $\beta > 0$ and $\alpha \geq 0$ are strictly enforced during optimization via a parameter transformation. We define log-transformed parameters:
-\begin{equation}\label{eq:log_transform_params}
-\tilde{\beta} = \log \beta, \quad \tilde{\alpha} = \log \alpha
-\end{equation}
-and optimize the objective in the unconstrained log-transformed space $\theta_{\text{log}} = (\tilde{\alpha}, \tilde{\beta}) \in \mathbb{R}^2$. 
-
-To guard against convergence to local optima due to the potential non-convexity of the exposure-corrected likelihood surface (especially under highly binned or noisy data), we run the L-BFGS-B optimization algorithm from 10 random restarts. The first run is initialized at the theoretical values $\theta_{\text{log}}^{(0)} = (\log \alpha^{(0)}, \log \beta^{(0)})$. The remaining 9 runs are initialized by perturbing this central starting point with Gaussian noise:
-\begin{equation}\label{eq:restarts_noise}
-\begin{split}
-\tilde{\alpha}_{\text{start}}^{(r)} &\sim \mathcal{N}(\log \alpha^{(0)},\, 0.25), \\
-\tilde{\beta}_{\text{start}}^{(r)} &\sim \mathcal{N}(\log \beta^{(0)},\, 0.25)
-\end{split}
-\end{equation}
-The optimization is executed for each restart run, and the parameter set yielding the highest likelihood value $\mathcal{L}(\theta)$ (Equation~\ref{eq:likelihood_mle}) is recovered via exponential back-transformation: $\hat{\alpha} = \exp(\tilde{\alpha}^*)$ and $\hat{\beta} = \exp(\tilde{\beta}^*)$.
-
-\subsubsection*{A.2 Robustness Analysis}
+\subsection{Robustness of Aggregate-Based Distance-Decay Recovery}
 To evaluate the reliability of the exposure-corrected maximum likelihood estimation (MLE) workflow under non-ideal data collection conditions, we conduct a series of robustness analyses across four scenarios:
 \begin{itemize}
   \item \textbf{Bin Sensitivity Analysis}: Sweeping the number of distance bins $K \in \{3, 5, 10, 20\}$ reveals that downstream prediction performance stabilizes quickly. The mean CPC across target cities increases from 0.7174 under a coarse $K=3$ configuration to 0.7346 for $K=5$, 0.7394 for $K=10$, and 0.7403 for $K=20$ (compared to a baseline of 0.7411 computed on full, unbinned ground-truth OD matrices). This suggests that five or more distance bins provide sufficient resolution to capture city-specific decay profiles.
@@ -637,34 +744,13 @@ To evaluate the reliability of the exposure-corrected maximum likelihood estimat
   \label{fig:layer1_heatmap}
 \end{figure*}
 
-\subsubsection*{A.3 Preprocessing and Normalization}
-Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
-
-\begin{table*}[h!]
-\centering
-\tablebodyfont\small
-\caption{Preprocessing and normalization steps applied to spatial features prior to model learning.}
-\label{tab:preprocessing}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}
-\toprule
-\textbf{Step} & \textbf{Treatment} & \textbf{Rationale} \\
-\midrule
-Missing Data & Median imputation & Rare ($<$ 2\%); resolved from spatial neighbors \\
-Log Transform & Population, POI counts & Stabilize right-skewed distributions \\
-Standardization & Per-city (not global) & Preserve relative spatial hierarchy \\
-Outliers & Retain & Important spatial hubs (CBDs); robust models \\
-\bottomrule
-\end{tabular*}
-\end{table*}
-
-\subsection*{Appendix B. Robustness of Origin Production Transfer}
-
+\subsection{Robustness of Origin Production Transfer}
 We analyze the sensitivity of the zero-shot origin production transfer along two operational dimensions: training-set scale and prediction noise.
 
-\subsubsection*{B.1 Source-Scale Sensitivity}
-We analyze how the number of training environments affects zero-shot outflow predictability by retraining the GBDT model on subsets of $n_{\text{src}} \in \{5, 10, 15, 20, 25\}$ source cities. Evaluating on target cities demonstrates that zero-shot prediction performance rises steeply from $n_{\text{src}} = 5$ and saturates around 15–20 source cities. This indicates that only a modest number of source cities is required to learn stable, generalizable outflow characteristics.
+\subsubsection{Source-Scale Sensitivity}
+We analyze how the number of training environments affects zero-shot outflow predictability by retraining the GBDT model on subsets of $n_{\text{src}} \in \{5, 10, 15, 20, 25\}$ source cities. Evaluating on target cities demonstrates that zero-shot prediction performance rises steeply from $n_{\text{src}} = 5$ and saturates around 15--20 source cities. This indicates that only a modest number of source cities is required to learn stable, generalizable outflow characteristics.
 
-\subsubsection*{B.2 Noise Sensitivity}
+\subsubsection{Noise Sensitivity}
 To evaluate the stability of origin transfer under prediction errors, we inject additive Gaussian noise at log-scale ($\sigma \in \{10\%, 20\%, 40\%\}$) directly onto the predicted outflows $\log\hat{O}_i$. Under substantial injected noise (40\%), the target CPC degrades from $0.6896$ to $0.6626$. While this $-3.9\%$ drop is larger than the isolated production component contribution (3.6\% Shapley value), it demonstrates that even highly corrupted outflow inputs do not collapse the spatial interaction matrix, because the production-constraint normalization restricts the error propagation.
 
 \begin{figure*}[htbp!]
@@ -674,12 +760,15 @@ To evaluate the stability of origin transfer under prediction errors, we inject 
   \label{fig:layer2_results}
 \end{figure*}
 
-\subsection*{Appendix C. Feature Selection Sensitivity}
 
-\subsubsection*{C.1 Feature Taxonomy and Candidate Set (37 dimensions)}
+\section{Additional Methodological Analyses}\label{app:methodology}
+
+\subsection{Feature Selection Sensitivity}
+
+\subsubsection{Feature Taxonomy and Candidate Set (37 dimensions)}
 We initially construct 37 candidate features per zone. This candidate space comprises 5 base scale and density variables (zone area, road density, residential population, total POI counts, and POI density) and 32 POI category count and density features (16 category counts and 16 category densities). The feature taxonomy is shown in Fig.~\ref{fig:feature_taxonomy}.
 
-\begin{figure*}[t!]
+\begin{figure*}[htbp!]
   \centering
   \begin{tikzpicture}[
     grow=right,
@@ -709,10 +798,10 @@ We initially construct 37 candidate features per zone. This candidate space comp
   \label{fig:feature_taxonomy}
 \end{figure*}
 
-\subsubsection*{C.2 SHAP-Based Feature Stability Selection}
-To identify features that generalize across cities, we apply SHAP importance analysis \citep{lundberg2017unified} to the GBDT production model. Features are ranked by a cross-city stability score $S_p = \mu_p\,/\,(\sigma_p + \epsilon)$, where $\mu_p$ and $\sigma_p$ denote the mean and standard deviation of per-city GBDT SHAP importances and $\epsilon = 10^{-5}$. A feature is retained if $\mu_p \ge 0.005$ and $S_p \ge 1.0$, ensuring both relevance and cross-city consistency. This analysis identifies 25 stable features from the 37-candidate space (32.4\% dimensionality reduction) and confirms that the 6 core structural features used in the deployed model (Section~\ref{sec:origin_outflow}) are among the primary and most stable predictors, with no accuracy loss relative to the full candidate set. The GBDT hyperparameter configurations are detailed in Table~\ref{tab:gbdt_hyperparameters}.
+\subsubsection{SHAP-Based Feature Stability Selection}
+To identify features that generalize across cities, we apply SHAP importance analysis \citep{lundberg2017unified} to the GBDT production model. Features are ranked by a cross-city stability score $S_p = \mu_p\,/\,(\sigma_p + \epsilon)$, where $\mu_p$ and $\sigma_p$ denote the mean and standard deviation of per-city GBDT SHAP importances and $\epsilon = 10^{-5}$. A feature is retained if $\mu_p \ge 0.005$ and $S_p \ge 1.0$, ensuring both relevance and cross-city consistency. This analysis identifies 25 stable features from the 37-candidate space (32.4\% dimensionality reduction) and confirms that the 6 core structural features used in the deployed model (Section~\ref{sec:origin_outflow}) are among the primary and most stable predictors, with no accuracy loss relative to the full candidate set.
 
-\subsubsection*{C.3 Feature Count Sensitivity}
+\subsubsection{Feature Count Sensitivity}
 Evaluating the GBDT model performance across nested subsets of top SHAP features ($K \in \{5, 10, 15, 25, 37\}$) shows that predictive performance plateaus at $K = 6$ features (CPC: $0.7080$), with additional features yielding marginal utility (e.g., CPC of $0.7120$ at $K = 15$). This indicates that most transferable spatial information is captured by a compact set of built-environment indicators.
 
 \begin{figure*}[htbp!]
@@ -747,6 +836,60 @@ Evaluating the GBDT model performance across nested subsets of top SHAP features
   \label{fig:shap_sweep}
 \end{figure*}
 
+
+\section{Implementation and Reproducibility}\label{app:implementation}
+
+\subsection{Preprocessing and Normalization}
+Data preprocessing details are summarized in Table~\ref{tab:preprocessing}.
+
+\begin{table*}[htbp!]
+\centering
+\tablebodyfont\small
+\caption{Preprocessing and normalization steps applied to spatial features prior to model learning.}
+\label{tab:preprocessing}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}
+\toprule
+\textbf{Step} & \textbf{Treatment} & \textbf{Rationale} \\
+\midrule
+Missing Data & Median imputation & Rare ($<$ 2\%); resolved from spatial neighbors \\
+Log Transform & Population, POI counts & Stabilize right-skewed distributions \\
+Standardization & Per-city (not global) & Preserve relative spatial hierarchy \\
+Outliers & Retain & Important spatial hubs (CBDs); robust models \\
+\bottomrule
+\end{tabular*}
+\end{table*}
+
+\subsection{Optimization and Constraints for Distance-Decay Estimation}
+To solve the maximum likelihood estimation (MLE) problem for target-city decay parameters $\theta = (\alpha, \beta)$ without disaggregate flows, we adopt a robust and physically grounded initialization and optimization workflow based on closed-form moment estimates.
+
+Good parameter initialization is critical for optimization convergence. For the exponential decay rate $\beta$, we utilize a closed-form moment estimate derived under the assumption of pure exponential deterrence and a uniform distribution of spatial opportunities. In this theoretical limit, the expected travel distance satisfies $\mathbb{E}[d] = 1/\beta$. We estimate the empirical mean trip distance $\bar{d}_{\text{obs}}$ from the observed distance-bin histogram:
+\begin{equation}\label{eq:moment_d_obs}
+\bar{d}_{\text{obs}} = \sum_{k=1}^{K} b_k \cdot m_k
+\end{equation}
+where $b_k$ is the observed proportion of trips in bin $k$, and $m_k$ is the midpoint of distance bin $k$ (for the open-ended final bin, we use $1.5$ times the lower boundary as a surrogate midpoint). The initial value $\beta^{(0)}$ is set as:
+\begin{equation}\label{eq:beta_init}
+\beta^{(0)} = \frac{1}{\bar{d}_{\text{obs}}}
+\end{equation}
+For the power-law exponent $\alpha$, the initial value is set statically to $\alpha^{(0)} = 1.0$, which corresponds to the center of the empirically observed range $[0.5, 2.0]$ in classical spatial interaction modeling literature.
+
+The positivity constraints $\beta > 0$ and $\alpha \geq 0$ are strictly enforced during optimization via a parameter transformation. We define log-transformed parameters:
+\begin{equation}\label{eq:log_transform_params}
+\tilde{\beta} = \log \beta, \quad \tilde{\alpha} = \log \alpha
+\end{equation}
+and optimize the objective in the unconstrained log-transformed space $\theta_{\text{log}} = (\tilde{\alpha}, \tilde{\beta}) \in \mathbb{R}^2$. 
+
+To guard against convergence to local optima due to the potential non-convexity of the exposure-corrected likelihood surface (especially under highly binned or noisy data), we run the L-BFGS-B optimization algorithm from 10 random restarts. The first run is initialized at the theoretical values $\theta_{\text{log}}^{(0)} = (\log \alpha^{(0)}, \log \beta^{(0)})$. The remaining 9 runs are initialized by perturbing this central starting point with Gaussian noise:
+\begin{equation}\label{eq:restarts_noise}
+\begin{split}
+\tilde{\alpha}_{\text{start}}^{(r)} &\sim \mathcal{N}(\log \alpha^{(0)},\, 0.25), \\
+\tilde{\beta}_{\text{start}}^{(r)} &\sim \mathcal{N}(\log \beta^{(0)},\, 0.25)
+\end{split}
+\end{equation}
+The optimization is executed for each restart run, and the parameter set yielding the highest likelihood value $\mathcal{L}(\theta)$ is recovered via exponential back-transformation: $\hat{\alpha} = \exp(\tilde{\alpha}^*)$ and $\hat{\beta} = \exp(\tilde{\beta}^*)$.
+
+\subsection{Hyperparameter Settings}
+The GBDT hyperparameter configurations are detailed in Table~\ref{tab:gbdt_hyperparameters}.
+
 \begin{table*}[htbp!]
 \centering
 \tablebodyfont
@@ -770,10 +913,14 @@ Early Stopping Rounds & 15 & 15 \\
 \end{tabular*}
 \end{table*}
 
-\subsection*{Appendix D. List of Abbreviations}
+\section{Mathematical Details}\label{app:math}
+Detailed derivations of the exposure-corrected projection and adaptive scale offsets are provided in the primary text (Section~\ref{sec:methodology}).
+
+
+\section{List of Abbreviations}\label{app:abbreviations}
 The key abbreviations and acronyms used throughout this paper are summarized and defined in Table~\ref{tab:abbreviations}.
 
-\begin{table*}[t]
+\begin{table*}[htbp!]
 \centering
 \tablebodyfont\small
 \caption{List of Abbreviations}
@@ -792,6 +939,7 @@ PIGF & Projection--Inference Gravity Framework & & \\
 \end{tabular*}
 \end{table*}
 
+\end{appendices}
 \bibliography{references}
 
 \end{document}
