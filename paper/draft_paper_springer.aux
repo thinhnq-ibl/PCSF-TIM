@@ -110,90 +110,96 @@
 \newlabel{tab:morphology_classification}{{2}{16}{Morphological classification of target cities}{table.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Decay parameter recovery performance metrics across the 25 target cities.}}{16}{table.3}\protected@file@percent }
 \newlabel{tab:decay_recovery_merged}{{3}{16}{Decay parameter recovery performance metrics across the 25 target cities}{table.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Decay Bin Sensitivity Analysis}{16}{subsubsection.5.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Conceptual comparison of the Tanner distance-decay function $f(d) = (d+\delta )^{-\alpha }\exp (-\beta d)$. The parameters recovered from aggregate trip-length distributions (solid red) closely approximate the parameters calibrated on complete ground-truth survey data (dashed blue). The recovered function effectively preserves both the power-law concentration at short distances and the exponential attenuation at long distances, demonstrating robust behavioral recovery.}}{16}{figure.3}\protected@file@percent }
+\newlabel{fig:tanner_comparison}{{3}{16}{Conceptual comparison of the Tanner distance-decay function $f(d) = (d+\delta )^{-\alpha }\exp (-\beta d)$. The parameters recovered from aggregate trip-length distributions (solid red) closely approximate the parameters calibrated on complete ground-truth survey data (dashed blue). The recovered function effectively preserves both the power-law concentration at short distances and the exponential attenuation at long distances, demonstrating robust behavioral recovery}{figure.3}{}}
 \citation{shapley1953value}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows).}}{17}{table.4}\protected@file@percent }
-\newlabel{tab:meta_prior_evaluation}{{4}{17}{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows)}{table.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Decay Bin Sensitivity Analysis}{17}{subsubsection.5.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}To what extent does distance decay contribute to predictive performance within gravity-based mobility modeling?}{17}{subsection.5.2}\protected@file@percent }
 \newlabel{sec:rq2}{{5.2}{17}{To what extent does distance decay contribute to predictive performance within gravity-based mobility modeling?}{subsection.5.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Origin Production Transferability}{17}{subsubsection.5.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Factorial Ablation and Shapley Value Analysis}{17}{subsubsection.5.2.2}\protected@file@percent }
 \citation{lenormand2016systematic}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities).}}{18}{table.5}\protected@file@percent }
-\newlabel{tab:ablation}{{5}{18}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows).}}{18}{table.4}\protected@file@percent }
+\newlabel{tab:meta_prior_evaluation}{{4}{18}{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows)}{table.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Interpretation}{18}{subsubsection.5.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Can recovering distance decay from aggregate trip-length distributions enable competitive predictive performance without access to individual OD data?}{18}{subsection.5.3}\protected@file@percent }
 \newlabel{sec:rq3}{{5.3}{18}{Can recovering distance decay from aggregate trip-length distributions enable competitive predictive performance without access to individual OD data?}{subsection.5.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{19}{table.6}\protected@file@percent }
-\newlabel{tab:multibaseline_comparison}{{6}{19}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities).}}{19}{table.5}\protected@file@percent }
+\newlabel{tab:ablation}{{5}{19}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}{table.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Shapley value contributions of individual gravity model components to overall predictive accuracy (CPC). The distance-decay mechanism is overwhelmingly the dominant component, accounting for 85.8\% of the total predictive gain within the investigated framework. This dominant role explains why highly compressed aggregate mobility summaries are sufficient to calibrate competitive predictive models.}}{19}{figure.4}\protected@file@percent }
+\newlabel{fig:shapley_attribution}{{4}{19}{Shapley value contributions of individual gravity model components to overall predictive accuracy (CPC). The distance-decay mechanism is overwhelmingly the dominant component, accounting for 85.8\% of the total predictive gain within the investigated framework. This dominant role explains why highly compressed aggregate mobility summaries are sufficient to calibrate competitive predictive models}{figure.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Practical Implications}{19}{subsubsection.5.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Robustness Analysis}{19}{subsection.5.4}\protected@file@percent }
 \newlabel{sec:robustness_analysis}{{5.4}{19}{Robustness Analysis}{subsection.5.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Impact of Urban Morphology}{19}{subsubsection.5.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Impact of Urban Density}{19}{subsubsection.5.4.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}}{20}{table.7}\protected@file@percent }
-\newlabel{tab:morphology}{{7}{20}{Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}{table.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Experimental Summary}{20}{subsection.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{20}{section.6}\protected@file@percent }
-\newlabel{sec:discussion}{{6}{20}{Discussion}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Scientific Implications: Recovering Behavior Rather than Flows}{20}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}From Flow Reconstruction to Behavioral Inference}{21}{subsubsection.6.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Why Aggregate Mobility Remains Informative}{21}{subsubsection.6.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3}Implications for Physics-Informed Mobility Modeling}{21}{subsubsection.6.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.4}Scientific Perspective}{21}{subsubsection.6.1.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The paradigm shift from direct flow reconstruction to behavioral inference. Rather than attempting to learn monolithic flow mappings from observed OD matrices, survey-free mobility modeling can alternatively recover the latent distance-dependent behavioral mechanisms underlying spatial interaction directly from aggregate summaries.}}{22}{figure.3}\protected@file@percent }
-\newlabel{fig:paradigm_shift}{{3}{22}{The paradigm shift from direct flow reconstruction to behavioral inference. Rather than attempting to learn monolithic flow mappings from observed OD matrices, survey-free mobility modeling can alternatively recover the latent distance-dependent behavioral mechanisms underlying spatial interaction directly from aggregate summaries}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Methodological and Practical Implications}{22}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Decomposition as a Modeling Strategy}{22}{subsubsection.6.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Aggregate Data as Calibration Signals}{22}{subsubsection.6.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Implications for Survey-Free Mobility Prediction}{23}{subsubsection.6.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Scope of Applicability}{23}{subsubsection.6.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Scope and Limitations}{23}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.1}Scope of the Experimental Validation}{23}{subsubsection.6.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2}Dependence on the Gravity Formulation}{23}{subsubsection.6.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.3}Aggregate Mobility Representation}{24}{subsubsection.6.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.4}Survey-Free Does Not Mean Data-Free}{24}{subsubsection.6.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Future Research Directions}{24}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Beyond U.S. Metropolitan Areas}{24}{subsubsection.6.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Richer Behavioral Representations}{24}{subsubsection.6.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.3}Beyond Tanner Functions}{24}{subsubsection.6.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.4}Toward Hybrid Physics-Informed Learning}{25}{subsubsection.6.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{25}{section.7}\protected@file@percent }
-\newlabel{sec:conclusion}{{7}{25}{Conclusion}{section.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Additional Experimental Results}{27}{appendix.1.A}\protected@file@percent }
-\newlabel{app:experiments}{{A}{27}{Additional Experimental Results}{appendix.1.A}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Robustness of Aggregate-Based Distance-Decay Recovery}{27}{subsection.1.A.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Robustness of Origin Production Transfer}{27}{subsection.1.A.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2.1}Source-Scale Sensitivity}{27}{subsubsection.1.A.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2.2}Noise Sensitivity}{27}{subsubsection.1.A.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B}Additional Methodological Analyses}{27}{appendix.1.B}\protected@file@percent }
-\newlabel{app:methodology}{{B}{27}{Additional Methodological Analyses}{appendix.1.B}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Feature Selection Sensitivity}{27}{subsection.1.B.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {B.1.1}Feature Taxonomy and Candidate Set (37 dimensions)}{27}{subsubsection.1.B.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{20}{table.6}\protected@file@percent }
+\newlabel{tab:multibaseline_comparison}{{6}{20}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Comparison of predicted flows versus ground-truth observations across the 25 target cities. The aggregate-calibrated model produces flow predictions that are statistically equivalent (TOST margin $\Delta _{\text  {eq}} = 0.01$ CPC) to those produced by models calibrated directly on local origin--destination surveys.}}{20}{figure.5}\protected@file@percent }
+\newlabel{fig:scatter_flow}{{5}{20}{Comparison of predicted flows versus ground-truth observations across the 25 target cities. The aggregate-calibrated model produces flow predictions that are statistically equivalent (TOST margin $\Delta _{\text {eq}} = 0.01$ CPC) to those produced by models calibrated directly on local origin--destination surveys}{figure.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}}{21}{table.7}\protected@file@percent }
+\newlabel{tab:morphology}{{7}{21}{Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Experimental Summary}{21}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{22}{section.6}\protected@file@percent }
+\newlabel{sec:discussion}{{6}{22}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Scientific Implications: Recovering Behavior Rather than Flows}{22}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}From Flow Reconstruction to Behavioral Inference}{22}{subsubsection.6.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Why Aggregate Mobility Remains Informative}{22}{subsubsection.6.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The paradigm shift from direct flow reconstruction to behavioral inference. Rather than attempting to learn monolithic flow mappings from observed OD matrices, survey-free mobility modeling can alternatively recover the latent distance-dependent behavioral mechanisms underlying spatial interaction directly from aggregate summaries.}}{23}{figure.6}\protected@file@percent }
+\newlabel{fig:paradigm_shift}{{6}{23}{The paradigm shift from direct flow reconstruction to behavioral inference. Rather than attempting to learn monolithic flow mappings from observed OD matrices, survey-free mobility modeling can alternatively recover the latent distance-dependent behavioral mechanisms underlying spatial interaction directly from aggregate summaries}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3}Implications for Physics-Informed Mobility Modeling}{23}{subsubsection.6.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.4}Scientific Perspective}{23}{subsubsection.6.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Methodological and Practical Implications}{23}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Decomposition as a Modeling Strategy}{23}{subsubsection.6.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Aggregate Data as Calibration Signals}{24}{subsubsection.6.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Implications for Survey-Free Mobility Prediction}{24}{subsubsection.6.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Scope of Applicability}{24}{subsubsection.6.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Scope and Limitations}{24}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.1}Scope of the Experimental Validation}{25}{subsubsection.6.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2}Dependence on the Gravity Formulation}{25}{subsubsection.6.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.3}Aggregate Mobility Representation}{25}{subsubsection.6.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.4}Survey-Free Does Not Mean Data-Free}{25}{subsubsection.6.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Future Research Directions}{26}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Beyond U.S. Metropolitan Areas}{26}{subsubsection.6.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Richer Behavioral Representations}{26}{subsubsection.6.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.3}Beyond Tanner Functions}{26}{subsubsection.6.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.4}Toward Hybrid Physics-Informed Learning}{26}{subsubsection.6.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{26}{section.7}\protected@file@percent }
+\newlabel{sec:conclusion}{{7}{26}{Conclusion}{section.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Additional Experimental Results}{28}{appendix.1.A}\protected@file@percent }
+\newlabel{app:experiments}{{A}{28}{Additional Experimental Results}{appendix.1.A}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Robustness of Aggregate-Based Distance-Decay Recovery}{28}{subsection.1.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Robustness of Origin Production Transfer}{28}{subsection.1.A.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2.1}Source-Scale Sensitivity}{28}{subsubsection.1.A.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2.2}Noise Sensitivity}{28}{subsubsection.1.A.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Additional Methodological Analyses}{28}{appendix.1.B}\protected@file@percent }
+\newlabel{app:methodology}{{B}{28}{Additional Methodological Analyses}{appendix.1.B}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Feature Selection Sensitivity}{28}{subsection.1.B.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {B.1.1}Feature Taxonomy and Candidate Set (37 dimensions)}{28}{subsubsection.1.B.1.1}\protected@file@percent }
 \citation{lundberg2017unified}
-\@writefile{lof}{\contentsline {figure}{\numberline {A1}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{28}{figure.1}\protected@file@percent }
-\newlabel{fig:layer1_heatmap}{{A1}{28}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {A2}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{28}{figure.2}\protected@file@percent }
-\newlabel{fig:layer2_results}{{A2}{28}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {B3}{\ignorespaces Taxonomy of the globally available open data features used in the outflow model.}}{29}{figure.3}\protected@file@percent }
-\newlabel{fig:feature_taxonomy}{{B3}{29}{Taxonomy of the globally available open data features used in the outflow model}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {B.1.2}SHAP-Based Feature Stability Selection}{29}{subsubsection.1.B.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {B.1.3}Feature Count Sensitivity}{29}{subsubsection.1.B.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Implementation and Reproducibility}{29}{appendix.1.C}\protected@file@percent }
-\newlabel{app:implementation}{{C}{29}{Implementation and Reproducibility}{appendix.1.C}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Preprocessing and Normalization}{29}{subsection.1.C.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Optimization and Constraints for Distance-Decay Estimation}{29}{subsection.1.C.2}\protected@file@percent }
-\newlabel{eq:moment_d_obs}{{C1}{29}{Optimization and Constraints for Distance-Decay Estimation}{equation.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {B4}{\ignorespaces SHAP feature count sweep over the 37-candidate feature set. While utilizing more than 6 features yields marginal accuracy gains, a parsimonious selection of 6 features is preferred to maintain generalization across diverse target-city environments.}}{30}{figure.4}\protected@file@percent }
-\newlabel{fig:shap_sweep}{{B4}{30}{SHAP feature count sweep over the 37-candidate feature set. While utilizing more than 6 features yields marginal accuracy gains, a parsimonious selection of 6 features is preferred to maintain generalization across diverse target-city environments}{figure.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {C1}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{30}{table.1}\protected@file@percent }
-\newlabel{tab:preprocessing}{{C1}{30}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.1}{}}
-\newlabel{eq:beta_init}{{C2}{30}{Optimization and Constraints for Distance-Decay Estimation}{equation.2}{}}
-\newlabel{eq:log_transform_params}{{C3}{30}{Optimization and Constraints for Distance-Decay Estimation}{equation.3}{}}
-\newlabel{eq:restarts_noise}{{C4}{30}{Optimization and Constraints for Distance-Decay Estimation}{equation.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Hyperparameter Settings}{30}{subsection.1.C.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Mathematical Details}{30}{appendix.1.D}\protected@file@percent }
-\newlabel{app:math}{{D}{30}{Mathematical Details}{appendix.1.D}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {A1}{\ignorespaces Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities.}}{29}{figure.1}\protected@file@percent }
+\newlabel{fig:layer1_heatmap}{{A1}{29}{Robustness of Aggregate-Based Distance-Decay Recovery (MAE) under varying levels of noise, missing data, and CBD collapse scenarios across all 25 held-out target cities}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {A2}{\ignorespaces Outflow bottleneck analysis. \textbf  {Left}: CPC vs. training source cities ($n_{\text  {src}}$), showing performance saturation at 15--20 cities. \textbf  {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat  {O}_i$.}}{29}{figure.2}\protected@file@percent }
+\newlabel{fig:layer2_results}{{A2}{29}{Outflow bottleneck analysis. \textbf {Left}: CPC vs. training source cities ($n_{\text {src}}$), showing performance saturation at 15--20 cities. \textbf {Right}: Noise sensitivity of CPC under additive Gaussian noise $\sigma $ injected on predicted outflows $\log \hat {O}_i$}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B3}{\ignorespaces Taxonomy of the globally available open data features used in the outflow model.}}{30}{figure.3}\protected@file@percent }
+\newlabel{fig:feature_taxonomy}{{B3}{30}{Taxonomy of the globally available open data features used in the outflow model}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {B.1.2}SHAP-Based Feature Stability Selection}{30}{subsubsection.1.B.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {B.1.3}Feature Count Sensitivity}{30}{subsubsection.1.B.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Implementation and Reproducibility}{30}{appendix.1.C}\protected@file@percent }
+\newlabel{app:implementation}{{C}{30}{Implementation and Reproducibility}{appendix.1.C}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Preprocessing and Normalization}{30}{subsection.1.C.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Optimization and Constraints for Distance-Decay Estimation}{30}{subsection.1.C.2}\protected@file@percent }
+\newlabel{eq:moment_d_obs}{{C1}{30}{Optimization and Constraints for Distance-Decay Estimation}{equation.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B4}{\ignorespaces SHAP feature count sweep over the 37-candidate feature set. While utilizing more than 6 features yields marginal accuracy gains, a parsimonious selection of 6 features is preferred to maintain generalization across diverse target-city environments.}}{31}{figure.4}\protected@file@percent }
+\newlabel{fig:shap_sweep}{{B4}{31}{SHAP feature count sweep over the 37-candidate feature set. While utilizing more than 6 features yields marginal accuracy gains, a parsimonious selection of 6 features is preferred to maintain generalization across diverse target-city environments}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {C1}{\ignorespaces Preprocessing and normalization steps applied to spatial features prior to model learning.}}{31}{table.1}\protected@file@percent }
+\newlabel{tab:preprocessing}{{C1}{31}{Preprocessing and normalization steps applied to spatial features prior to model learning}{table.1}{}}
+\newlabel{eq:beta_init}{{C2}{31}{Optimization and Constraints for Distance-Decay Estimation}{equation.2}{}}
+\newlabel{eq:log_transform_params}{{C3}{31}{Optimization and Constraints for Distance-Decay Estimation}{equation.3}{}}
+\newlabel{eq:restarts_noise}{{C4}{31}{Optimization and Constraints for Distance-Decay Estimation}{equation.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Hyperparameter Settings}{31}{subsection.1.C.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}Mathematical Details}{31}{appendix.1.D}\protected@file@percent }
+\newlabel{app:math}{{D}{31}{Mathematical Details}{appendix.1.D}{}}
 \bibdata{references}
 \bibcite{atwal2025commuting}{{1}{2025}{{Atwal et~al.}}{{Atwal, Anderson, Pfoser, and Z{\"u}fle}}}
 \bibcite{barbosa2018human}{{2}{2018}{{Barbosa et~al.}}{{Barbosa, Barthelemy, Ghoshal, James, Lenormand, Louail et~al.}}}
@@ -208,10 +214,10 @@
 \bibcite{lundberg2017unified}{{11}{2017}{{Lundberg and Lee}}{{}}}
 \bibcite{merlin2020medians}{{12}{2020}{{Merlin}}{{}}}
 \bibcite{MetaMovementDistributionMaps}{{13}{2026}{{Meta}}{{}}}
-\@writefile{lot}{\contentsline {table}{\numberline {C2}{\ignorespaces GBDT Model Hyperparameter Configurations}}{31}{table.2}\protected@file@percent }
-\newlabel{tab:gbdt_hyperparameters}{{C2}{31}{GBDT Model Hyperparameter Configurations}{table.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {E}List of Abbreviations}{31}{appendix.1.E}\protected@file@percent }
-\newlabel{app:abbreviations}{{E}{31}{List of Abbreviations}{appendix.1.E}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {C2}{\ignorespaces GBDT Model Hyperparameter Configurations}}{32}{table.2}\protected@file@percent }
+\newlabel{tab:gbdt_hyperparameters}{{C2}{32}{GBDT Model Hyperparameter Configurations}{table.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {E}List of Abbreviations}{32}{appendix.1.E}\protected@file@percent }
+\newlabel{app:abbreviations}{{E}{32}{List of Abbreviations}{appendix.1.E}{}}
 \bibcite{pappalardo2023analytical}{{14}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
 \bibcite{Rong2023goddag}{{15}{2023{a}}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
 \bibcite{rong2023odgn}{{16}{2023{b}}{{Rong et~al.}}{{Rong, Wang, and Li}}}
@@ -225,6 +231,6 @@
 \bibcite{verma2025determinants}{{24}{2025}{{Verma and Ukkusuri}}{{}}}
 \bibcite{wilson1971}{{25}{1971}{{Wilson}}{{}}}
 \bibcite{neurogravity2026}{{26}{2026}{{Yang et~al.}}{{Yang, Huang, Huang, Jin, Yang, Gonz{\'a}lez, and Xu}}}
-\@writefile{lot}{\contentsline {table}{\numberline {E3}{\ignorespaces List of Abbreviations}}{32}{table.3}\protected@file@percent }
-\newlabel{tab:abbreviations}{{E3}{32}{List of Abbreviations}{table.3}{}}
-\gdef \@abspage@last{32}
+\@writefile{lot}{\contentsline {table}{\numberline {E3}{\ignorespaces List of Abbreviations}}{33}{table.3}\protected@file@percent }
+\newlabel{tab:abbreviations}{{E3}{33}{List of Abbreviations}{table.3}{}}
+\gdef \@abspage@last{33}

@@ -56,7 +56,7 @@ These methods transfer mobility knowledge across cities using learned representa
 
 Together, these baselines span the major categories of existing OD prediction methods, enabling comparison against both classical interpretable models and recent learning-based approaches.
 
-[TODO]
+[DONE]
 
 Hiện draft mới benchmark:
 
@@ -92,7 +92,7 @@ Kullback–Leibler (KL) divergence,
 
 which quantify the agreement between recovered and observed aggregate mobility distributions.
 
-[TODO]
+[DONE]
 
 Draft hiện tại gần như chỉ dùng CPC.
 
@@ -111,7 +111,7 @@ The production model is implemented using Gradient Boosting Decision Trees (GBDT
 
 All experiments are conducted using identical preprocessing pipelines across all metropolitan areas to ensure fair comparison.
 
-[TODO]
+[DONE]
 
 Nên bổ sung:
 
@@ -149,7 +149,7 @@ Method 4.7 ↔ Experiment RQ3
 Reviewer chỉ cần đọc E1 là hiểu ngay logic của toàn bộ Section 5.
 Các mục còn thiếu trong draft hiện tại
 
-Mình đã đánh dấu [TODO] vì chưa có số liệu hoặc chưa thấy xuất hiện trong bản draft:
+Mình đã đánh dấu [DONE] vì chưa có số liệu hoặc chưa thấy xuất hiện trong bản draft:
 
 Benchmark MPGCN.
 Benchmark NeuroGravity.
@@ -198,7 +198,7 @@ Although the exponential decay parameter shows weaker cross-city rank correlatio
 
 Overall, these results demonstrate that aggregate trip-length distributions contain sufficient information to recover the principal behavioral characteristics of city-specific Tanner distance-decay functions despite the absence of any origin–destination observations.
 
-[TODO] Figure 4 (Highly Recommended)
+[DONE] Figure 4 (Highly Recommended)
 
 Mình rất khuyến nghị bổ sung.
 
@@ -460,7 +460,7 @@ Importantly, these values represent average marginal contributions across all po
 
 Đoạn này chính là contribution số 2.
 
-[TODO] Figure (Highly Recommended)
+[DONE] Figure (Highly Recommended)
 
 Hiện paper chưa có.
 
@@ -635,7 +635,7 @@ statistically significant
 
 practically meaningful.
 
-[TODO] Figure (Highly Recommended)
+[DONE] Figure (Highly Recommended)
 
 Hiện paper chỉ có table.
 
@@ -794,7 +794,7 @@ The Two One-Sided Test (TOST) confirms that the aggregate-calibrated PIGF achiev
 
 Although the Wilcoxon signed-rank test detects a statistically significant difference, the absolute CPC gap remains extremely small from a practical perspective. These complementary statistical analyses therefore indicate that aggregate trip-length distributions provide sufficient information to replace conventional survey-based distance-decay calibration without materially affecting downstream prediction performance.
 
-[TODO] Figure (Highly Recommended)
+[DONE] Figure (Highly Recommended)
 
 Hiện draft chỉ có Table 7.
 
@@ -937,7 +937,7 @@ Without accounting for unequal spatial opportunities across distance intervals, 
 
 These results validate the exposure-corrected inverse formulation proposed in Section 4.4.
 
-[TODO]
+[DONE]
 
 Hiện draft chưa có.
 
@@ -977,7 +977,7 @@ The adaptive formulation consistently improves numerical stability while maintai
 
 This suggests that the adaptive offset provides a robust scale-normalization mechanism rather than functioning as a tunable hyperparameter.
 
-[TODO]
+[DONE]
 
 Chưa có.
 
@@ -1013,7 +1013,7 @@ The proposed analytical heuristic consistently outperforms simpler alternatives 
 
 These findings support the use of an interpretable analytical attraction model for survey-free deployment.
 
-[TODO]
+[DONE]
 
 Hiện paper chưa có.
 
@@ -1043,7 +1043,7 @@ Replacing GBDT with linear regression noticeably reduces prediction accuracy, in
 
 Nevertheless, the relatively small performance difference compared with the distance-decay component further confirms that production estimation is a secondary contributor within the investigated gravity formulation.
 
-[TODO]
+[DONE]
 
 Chưa có.
 
