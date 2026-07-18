@@ -1,11 +1,49 @@
-7 Conclusion
+# CONCLUSION BLUEPRINT V2.0
 
-Urban mobility prediction has traditionally depended on localized origin–destination (OD) surveys or individual mobility trajectories, limiting the applicability of existing approaches in data-scarce and privacy-sensitive environments. Motivated by the growing availability of privacy-preserving aggregate mobility products, this study investigated whether aggregate trip-length distributions contain sufficient behavioral information to replace conventional OD observations in gravity-model calibration.
+## Overall Strategy: Elevate the Scientific Discovery
+The Conclusion must not end merely by summarizing the framework (PIGF) and its predictive results. It must elevate the narrative to highlight the fundamental scientific discovery that aggregate mobility preserves latent behavioral parameters.
 
-We proposed the Projection–Inference Gravity Framework (PIGF), a survey-free calibration framework that formulates gravity calibration as a behavioral inference problem. Instead of estimating complete OD matrices directly, PIGF recovers city-specific Tanner distance-decay functions from aggregate trip-length distributions through an exposure-corrected inverse inference process, integrates the recovered behavioral component with transferable origin production estimated from open spatial data and analytical destination attraction, and reconstructs commuting flows without requiring target-city OD surveys or individual mobility trajectories.
+### Narrative Flow
+`Problem $\to$ Scientific discovery $\to$ Methodological contribution $\to$ Experimental evidence $\to$ Conceptual implication $\to$ Future vision`
 
-Experiments conducted across 50 U.S. metropolitan areas consistently support the three research questions posed in this study. First, aggregate trip-length distributions preserve sufficient information to recover city-specific distance-decay functions with high fidelity. Second, the recovered distance-decay component constitutes the dominant predictive mechanism within the investigated gravity formulation, accounting for the majority of predictive performance. Third, integrating the recovered behavioral component into PIGF enables competitive survey-free OD prediction under strict zero-shot deployment, approaching the performance of locally calibrated gravity models while relying only on aggregate mobility summaries and publicly available spatial information.
+---
 
-Beyond the proposed implementation, this work contributes a broader perspective on survey-free mobility modeling. Rather than treating aggregate mobility products as incomplete substitutes for detailed trajectories, the results suggest that they can serve as behavioral calibration signals capable of identifying the latent mechanisms governing spatial interaction. Under this perspective, survey-free OD prediction becomes fundamentally a problem of behavioral inference rather than direct flow reconstruction, providing an interpretable and privacy-preserving alternative to conventional calibration strategies.
+## Section Guidelines
 
-Although the present evaluation is limited to U.S. metropolitan areas and the current framework adopts a gravity-based behavioral formulation, the findings demonstrate that meaningful urban mobility inference is possible without observing individual travel trajectories. As privacy-preserving mobility products and globally available geospatial data continue to expand, recovering latent behavioral mechanisms from aggregate observations may become an increasingly important direction for survey-free urban mobility modeling, complementing both traditional survey-based approaches and modern data-driven learning frameworks.
+### Paragraph 1: Restate the Scientific Problem
+**Objective**: Frame the problem around calibration needs and behavioral information, not just OD estimation.
+**Constraint**: Do not mention the framework (PIGF) in this paragraph.
+
+*Template:*
+> Urban mobility modeling has traditionally depended on localized origin–destination (OD) observations for gravity-model calibration, limiting its applicability in data-scarce and privacy-sensitive environments. This study investigated a more fundamental question: whether aggregate mobility summaries preserve sufficient behavioral information to recover the latent distance-decay mechanism governing spatial interaction.
+
+### Paragraph 2: The Scientific Discovery
+**Objective**: State the core finding first.
+**Logic**: The discovery must precede the framework.
+
+*Template:*
+> The experimental evidence consistently indicates that aggregate trip-length distributions preserve sufficient information to recover city-specific distance-decay functions. The recovered behavioral parameters closely match locally calibrated references and constitute the dominant predictive component within the investigated gravity formulation, demonstrating that latent behavioral mechanisms can be identified without observing individual trips or OD matrices.
+
+### Paragraph 3: The Methodological Contribution
+**Objective**: Introduce the framework as a consequence of the discovery.
+
+*Template:*
+> Building on this finding, we proposed the Projection–Inference Gravity Framework (PIGF), which reformulates survey-free gravity calibration as a behavioral inference problem. By integrating recovered behavioral parameters with transferable production estimation and analytical attraction modeling, PIGF enables competitive zero-shot OD estimation without target-city mobility observations.
+
+### Paragraph 4: The Conceptual Contribution
+**Objective**: Deliver the conceptual payoff of the paper.
+
+*Template:*
+> More broadly, this work suggests a conceptual shift in survey-free mobility modeling. Rather than treating aggregate mobility products as incomplete substitutes for origin–destination matrices, they may be viewed as observations of the latent behavioral processes that generate those matrices. Under this perspective, the primary objective of survey-free mobility modeling becomes behavioral inference rather than flow reconstruction.
+
+### Paragraph 5: Future Vision
+**Objective**: Provide a forward-looking conclusion centered on behavioral inference, not privacy.
+
+*Template:*
+> Although the present study is limited to the investigated gravity formulation and U.S. metropolitan areas, the results suggest a broader direction for future research. As aggregate mobility products become increasingly available, recovering latent behavioral mechanisms from compressed mobility observations may provide a general foundation for transferable, interpretable, and data-efficient urban mobility modeling, complementing both traditional survey-based approaches and modern data-driven learning frameworks.
+
+---
+
+## Final Review Criteria
+- **One-Sentence Takeaway**: The reviewer must walk away with this exact conclusion: *This study demonstrates that aggregate mobility data preserve sufficient information to recover the latent distance-decay mechanism governing spatial interaction, enabling zero-shot gravity calibration and transferable OD estimation without observed OD matrices.*
+- **Core Message Check**: Ensure the text concludes that meaningful *behavioral inference* is possible without individual trajectories.
