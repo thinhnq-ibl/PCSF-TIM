@@ -29,15 +29,6 @@
 
 \maketitle
 
-%% ── Graphical Abstract ─────────────────────────────────────────────────────
-\begin{figure}[t!]
-  \centering
-  \includegraphics[width=0.98\columnwidth]{../figures/graphical_abstract.png}
-  \vspace{-2pt}
-  \caption{Overview of the core findings: Aggregate trip-length distributions provide sufficient information for recovering city-specific distance decay $f(d)$, which acts as the dominant predictive component of gravity-based mobility prediction within the investigated framework. Prediction performance is bounded by the model's structural gravity assumptions.}
-  \label{fig:graphical_abstract}
-\end{figure}
-
 \section{Introduction}
 
 Accurate prediction of origin--destination (OD) travel flows is fundamental to transportation planning, infrastructure investment, and accessibility analysis~\citep{barbosa2018human,gonzalez2008understanding,song2010limits}. Reliable OD information enables evidence-based infrastructure prioritization, travel demand forecasting, and urban mobility policy analysis across cities of all sizes. Consequently, accurate OD estimation has long been a central problem in transportation science.
@@ -91,33 +82,8 @@ Gravity-Informed Neural Models \citep{rong2023odgn} & Partial & Limited & Yes & 
 
 \begin{figure*}[t!]
   \centering
-  \begin{tikzpicture}[font=\footnotesize,
-    node distance=1.0cm and 1.2cm,
-    box/.style={draw, rectangle, rounded corners, minimum width=2.6cm, minimum height=1cm, align=center, thick, fill=blue!5, draw=blue!40},
-    greenbox/.style={draw, rectangle, rounded corners, minimum width=2.6cm, minimum height=1cm, align=center, thick, fill=green!5, draw=green!40},
-    arrow/.style={-latex, thick}
-  ]
-    % Existing Paradigm
-    \node[box] (cityA_ex) {City A \\ \small (OD survey data)};
-    \node[box, right=of cityA_ex] (model_ex) {Model Calibration \\ \small (monolithic learning)};
-    \node[box, right=of model_ex] (cityB_ex) {City B \\ \small (requires target OD)};
-    
-    \draw[arrow] (cityA_ex) -- (model_ex);
-    \draw[arrow] (model_ex) -- (cityB_ex);
-    
-    \node[above=0.2cm of model_ex] {\textbf{Existing Paradigm (Locally Dependent)}};
-    
-    % Our Paradigm
-    \node[greenbox, below=1.6cm of cityA_ex] (cityA_our) {City A \\ \small (Source city OD)};
-    \node[greenbox, right=of cityA_our] (model_our) {Decomposed Structure \\ \small ($O_i$ transferable, $f(d_{ij})$ recovered, $A_j$ mapped)};
-    \node[greenbox, right=of model_our] (cityB_our) {City B \\ \small (Zero target OD)};
-    
-    \draw[arrow] (cityA_our) -- (model_our);
-    \draw[arrow] (model_our) -- (cityB_our);
-    
-    \node[above=0.2cm of model_our] {\textbf{Decomposed Gravity Paradigm (Survey-Free Transferable)}};
-  \end{tikzpicture}
-  \caption{Conceptual comparison of the existing locally dependent modeling paradigm versus the decomposed gravity paradigm investigated in this study. Under the existing paradigm, models require target-city OD observations to retrain or calibrate parameters. In the decomposed paradigm, transferable origin production structures are learned from source cities, decay is recovered from target aggregate data, and attraction is mapped from local open features, enabling survey-free transfer without target-city OD surveys.}
+  \includegraphics[width=\textwidth]{Fig1.png}
+  \caption{Conceptual comparison between conventional survey-based mobility modeling and the proposed Projection--Inference Gravity Framework (PIGF). Existing approaches estimate behavioral mechanisms from observed origin--destination flows or individual trajectories before predicting mobility patterns. In contrast, PIGF reformulates survey-free mobility prediction as a behavioral inference problem by recovering city-specific distance-decay functions directly from aggregate trip-length distributions and integrating them with transferable production estimation and analytical destination attraction.}
   \label{fig:conceptual_framework}
 \end{figure*}
 
@@ -196,7 +162,7 @@ where $X = \{x_i\}_{i=1}^{N}$ denotes the set of open spatial features and $P(d)
 
 The principal challenge of this formulation is that the observed TLD provides only a one-dimensional statistical summary of the underlying spatial interaction process. Recovering the latent distance-dependent interaction mechanism from such aggregate observations therefore constitutes an inverse inference problem. The following section demonstrates how the separable structure of gravity models provides the theoretical basis for solving this problem.
 
-\section{Methodological Design}\label{sec:methodology}
+\section{Projection--Inference Gravity Framework}\label{sec:methodology}
 
 The methodological design of this study is grounded in a separable formulation of the classical spatial gravity framework. Under this formulation, the commuter flow between an origin zone and a destination zone is modeled as a multiplicative product of distinct spatial components. This decomposition allows us to isolate the dominant components of spatial interaction from local, city-specific variables. We structure our investigation around three core hypotheses: (1) aggregate trip-length distributions (TLDs) contain sufficient information to recover city-specific distance-decay parameters without requiring individual origin-destination records; (2) the distance-decay component is the dominant predictive component within the investigated gravity framework; and (3) integrating recovered distance-decay parameters with machine learning models for production and open-data heuristics for attraction preserves strong survey-free target-city flow prediction utility.
 
@@ -435,7 +401,7 @@ Coastal ($n=3$) & Portland, Seattle, Virginia Beach & Coastline/topographic barr
 \end{tabular*}
 \end{table*}
 
-\section{Results}\label{sec:results}
+\section{Experimental Validation}\label{sec:results}
 
 \subsection{Can aggregate trip-length distributions reliably recover city-specific distance-decay parameters?}\label{sec:rq1}
 We begin by evaluating direct parameter recoverability from aggregate trip-length distributions (TLDs). The recovery metrics reveal different aspects of fit quality across the two decay exponents: the power-law exponent $\alpha$ shows strong structural recovery across cities ($r = 0.909$), while the exponential rate $\beta$ shows weaker cross-city rank correlation ($r = 0.427$) but remains close in absolute magnitude (MAE $= 0.0026$) (Table~\ref{tab:decay_recovery_merged}).
@@ -575,8 +541,10 @@ Unlike existing gravity calibration approaches, PIGF requires only publicly avai
 
 Consequently, the framework provides a practical pathway for mobility estimation in data-scarce regions, privacy-sensitive environments, and rapidly developing cities where traditional OD surveys cannot be conducted routinely.
 
-\subsection{Exploratory Analysis of Urban Morphology Effects}\label{sec:urban_morphology_analysis}
-Beyond evaluating overall predictive performance, we conduct an exploratory analysis to examine whether urban morphology may influence the effectiveness of aggregate-based distance-decay calibration. Given the limited number of target cities and the single-country scope of the dataset, these analyses are intended to generate hypotheses for future investigation rather than establish causal relationships.
+\subsection{Robustness Analysis}\label{sec:robustness_analysis}
+Beyond evaluating overall predictive performance, we conduct an exploratory analysis to examine whether urban morphology and density may influence the effectiveness of aggregate-based distance-decay calibration. Given the limited number of target cities and the single-country scope of the dataset, these analyses are intended to generate hypotheses for future investigation rather than establish causal relationships.
+
+\subsubsection{Impact of Urban Morphology}
 
 \begin{table*}[t]
 \centering
@@ -597,6 +565,8 @@ Coastal & 3 & 0.714 & 0.758 & 5.8\% \\
 
 Preliminary patterns suggest that the physics-constrained gravity formulation achieves its highest predictive performance in Coastal environments (mean CPC of 0.714). The relative performance gap between the proposed gravity model and the neural DeepGravity baseline narrows to 5.8\% in Coastal cities, compared to a larger 10.3\% gap in Dense / Transit environments. The observations are consistent with physical geographical barriers restricting alternative routes and a greater explanatory role of distance decay in commuting flows. We note, however, that these morphology-specific findings should be interpreted cautiously due to several key statistical limitations: the overall sample size of target cities is small ($N=25$), the morphology groups are highly unbalanced (e.g., only 3 Coastal cities and 5 Dense / Transit cities), and the resulting statistical power is limited.
 
+\subsubsection{Impact of Urban Density}
+
 To supplement this categorical classification, we analyze the continuous relationship between urban density and the performance gap ($\Delta\text{CPC} = \text{CPC}_{\text{DeepGravity}} - \text{CPC}_{\text{Proposed}}$). The gap correlates positively with both median employment density ($r = 0.263$) and population density ($r = 0.252$). The results are consistent with the hypothesis that dense, transit-oriented development decouples urban trips from simple Euclidean distance, allowing deep learning models to capture complex non-linear feature interactions, whereas lower-density or physically constrained environments follow more predictable distance friction behavior.
 
 In summary, these findings should be interpreted cautiously, but they suggest that our aggregate-calibrated model provides a statistically equivalent alternative to locally-fit structures in low-density or physically constrained urban environments.
@@ -611,7 +581,7 @@ For RQ2, factorial ablation and game-theoretic attribution consistently identify
 
 For RQ3, integrating the recovered distance-decay component with transferable production estimation and analytical attraction mapping enables competitive survey-free origin--destination prediction under strict zero-shot deployment. The resulting performance approaches that of locally calibrated gravity models while eliminating the need for target-city OD surveys or individual mobility trajectories.
 
-Collectively, these experiments support a consistent scientific interpretation. The principal contribution of PIGF is not simply a new gravity calibration procedure, but a reformulation of survey-free mobility prediction as a behavioral inference problem. Instead of attempting to reconstruct complete origin--destination matrices directly, the proposed framework identifies and recovers the latent distance-dependent mechanism governing spatial interaction, then combines it with transferable production estimation and open-data-derived attraction information to reconstruct travel flows.
+Collectively, the experiments support the central hypothesis formulated in the introduction: aggregate trip-length distributions preserve sufficient information to recover city-specific distance-decay functions without requiring local OD observations. The principal contribution of PIGF is not simply a new gravity calibration procedure, but a fundamental shift from direct flow reconstruction to behavioral inference. By demonstrating that the latent distance-dependent mechanism governing spatial interaction can be recovered from aggregate data and used for accurate flow prediction, these results motivate a broader discussion on how survey-free mobility modeling should be approached, which we explore in the following section.
 
 \section{Discussion}\label{sec:discussion}
 
@@ -620,6 +590,25 @@ Collectively, these experiments support a consistent scientific interpretation. 
 The central finding of this study is not simply that PIGF achieves competitive survey-free OD prediction, but that aggregate trip-length distributions preserve sufficient information to recover the latent behavioral mechanism governing spatial interaction. Across the experimental analyses, aggregate mobility summaries consistently enabled accurate recovery of city-specific Tanner distance-decay functions, identified distance decay as the dominant predictive component within the investigated gravity formulation, and supported downstream OD prediction without requiring target-city mobility observations. Taken together, these findings suggest that behavioral information can be inferred from aggregate mobility summaries to a much greater extent than has previously been assumed.
 
 \subsubsection{From Flow Reconstruction to Behavioral Inference}
+
+\begin{figure*}[t!]
+  \centering
+  \begin{tikzpicture}[font=\footnotesize,
+    node distance=1.0cm and 1.5cm,
+    box/.style={draw, rectangle, rounded corners, minimum width=3.5cm, minimum height=1.2cm, align=center, thick},
+    arrow/.style={-latex, thick}
+  ]
+    % Flow Reconstruction
+    \node[box, fill=red!5, draw=red!40] (recon) {\textbf{Flow Reconstruction} \\ \vspace{2pt} \small Goal: Reconstruct OD matrices \\ \small Requirement: Local OD data \\ \small Output: Point-to-point flows};
+    
+    % Behavioral Inference
+    \node[box, fill=green!5, draw=green!40, right=2cm of recon] (infer) {\textbf{Behavioral Inference} \\ \vspace{2pt} \small Goal: Recover latent mechanisms \\ \small Requirement: Aggregate statistics \\ \small Output: Generalizable behavior};
+    
+    \draw[arrow, line width=1.5pt] (recon) -- node[above] {\textbf{Paradigm Shift}} (infer);
+  \end{tikzpicture}
+  \caption{The paradigm shift from direct flow reconstruction to behavioral inference. Rather than attempting to learn monolithic flow mappings from observed OD matrices, survey-free mobility modeling can alternatively recover the latent distance-dependent behavioral mechanisms underlying spatial interaction directly from aggregate summaries.}
+  \label{fig:paradigm_shift}
+\end{figure*}
 Traditionally, survey-free mobility prediction has been approached as a flow reconstruction problem. Existing methods---including gravity calibration, deep learning, graph neural networks, and transfer-learning frameworks---primarily attempt to estimate complete origin--destination matrices, either by calibrating gravity parameters from observed OD flows or by learning direct mappings from historical mobility data. As a result, the availability of mobility observations remains central to most existing paradigms.
 
 The findings of this study suggest an alternative perspective. Rather than reconstructing complete OD matrices directly, survey-free mobility prediction may instead be formulated as a behavioral inference problem. Aggregate trip-length distributions do not retain origin--destination identities, yet they preserve the statistical signature of travel-distance preferences. Recovering this latent behavioral mechanism, and combining it with independently estimated production and attraction components, provides sufficient information to reconstruct meaningful flow patterns. This interpretation shifts the emphasis from recovering individual trips to recovering the behavioral process that generates those trips.
