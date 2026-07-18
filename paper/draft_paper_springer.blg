@@ -14,45 +14,45 @@ Warning--I didn't find a database entry for "tizzoni2022mobility"
 sn-basic.bst [2024/07/19 v1.1 bibliography style]
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--can't use both volume and number fields in shapley1953value
-You've used 26 entries,
+You've used 25 entries,
             3567 wiz_defined-function locations,
-            913 strings with 10561 characters,
-and the built_in function-call counts, 22278 in all, are:
-= -- 2135
-> -- 759
-< -- 17
-+ -- 307
-- -- 225
-* -- 1909
-:= -- 3203
-add.period$ -- 45
-call.type$ -- 26
-change.case$ -- 214
-chr.to.int$ -- 25
-cite$ -- 27
-duplicate$ -- 1738
-empty$ -- 1874
-format.name$ -- 299
-if$ -- 4685
+            906 strings with 10371 characters,
+and the built_in function-call counts, 21196 in all, are:
+= -- 2024
+> -- 738
+< -- 16
++ -- 297
+- -- 219
+* -- 1811
+:= -- 3058
+add.period$ -- 43
+call.type$ -- 25
+change.case$ -- 207
+chr.to.int$ -- 24
+cite$ -- 26
+duplicate$ -- 1646
+empty$ -- 1773
+format.name$ -- 288
+if$ -- 4454
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 200
-newline$ -- 87
-num.names$ -- 104
-pop$ -- 494
+missing$ -- 192
+newline$ -- 84
+num.names$ -- 100
+pop$ -- 476
 preamble$ -- 1
-purify$ -- 180
+purify$ -- 174
 quote$ -- 0
-skip$ -- 505
+skip$ -- 489
 stack$ -- 0
-substring$ -- 2006
-swap$ -- 509
+substring$ -- 1864
+swap$ -- 490
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 234
+type$ -- 225
 warning$ -- 1
-while$ -- 141
+while$ -- 135
 width$ -- 0
-write$ -- 319
+write$ -- 307
 (There were 9 warnings)

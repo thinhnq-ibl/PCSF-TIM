@@ -129,7 +129,7 @@ Motivated by this perspective, this study formulates survey-free gravity calibra
 
 The next section formalizes the problem setting and introduces the proposed behavioral inference framework.
 
-\section{Problem Formulation}\label{sec:problem_formulation}
+\section{Behavioral Inference Problem Formulation}\label{sec:problem_formulation}
 
 This study formulates survey-free gravity calibration as the problem of recovering the latent city-specific distance-decay parameter from aggregate mobility observations. Once recovered, the parameter is integrated into a gravity model to estimate origin--destination flows. This formulation fundamentally shifts the focus from predicting an OD matrix directly to inferring the underlying spatial interaction behavior.
 
@@ -759,7 +759,7 @@ The experimental results across 50 US metropolitan areas validated three key fin
 
 These findings support a conceptual shift in mobility modeling: privacy-preserving aggregate mobility datasets are not merely incomplete substitutes for origin--destination matrices, but powerful behavioral calibration signals.
 
-This study demonstrates that aggregate mobility data preserve sufficient information to recover latent city-specific distance-decay functions, establishing a robust foundation for survey-free behavioral inference and enabling zero-shot gravity-model calibration across urban systems.
+Ultimately, this study demonstrates that aggregate mobility preserves recoverable behavioral information.
 
 \clearpage
 
@@ -856,6 +856,9 @@ Demonstration that the multiplicative fusion step perfectly preserves origin-sid
 
 \subsection{D6. Gravity Factorization Details}
 Extended mathematical discussion on separating distance friction from opportunity distribution within spatial interaction matrices.
+
+\subsection{D7. Identifiability Discussion}
+A conceptual discussion bridging the methodological design and its theoretical underpinnings, detailing precisely why one-dimensional aggregate trip-length histograms preserve sufficient structural information to robustly identify the latent distance-decay parameters ($\beta$), even in the absence of origin--destination identities.
 
 \end{appendices}
 \bibliography{references}
