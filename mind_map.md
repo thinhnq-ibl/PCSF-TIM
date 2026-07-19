@@ -1,699 +1,284 @@
-# Human Mobility Handbook
-## Knowledge Graph v0.1
-### Philosophy: Observation → Mechanism → Inference
-
-> Status:
-> - 🟢 Established Knowledge
-> - 🔵 Accepted Theory
-> - 🟡 Mechanistic Interpretation
-> - 🔴 Handbook Synthesis (Our Ontology)
-> - ❓ Open Question / Hypothesis
+Đây là bản **State Map** mình đề xuất. Sau này khi chúng ta mở một chat mới, chỉ cần khôi phục đúng state này là có thể tiếp tục xây dựng Handbook mà không bị lặp lại.
 
 ---
 
-# 1. Core Philosophy
+# Human Mobility Handbook — Current State (v0.1)
 
-Reality
+```text
+Human Mobility
 │
-├── Humans live and perform activities
-├── Cities provide opportunities and constraints
-└── Human-Urban interaction generates mobility
-
-↓
-
-Observation
-
-↓
-
-Mechanism
-
-↓
-
-Inference
-
-↓
-
-Prediction / Reconstruction
-
-Status: 🔴 Handbook Synthesis
+├── Part I. Foundations                    ✅ (đang xây dựng)
+│   │
+│   ├── 1. What is Human Mobility?
+│   │
+│   ├── 2. Mobility Data
+│   │      ├── Individual Data
+│   │      ├── Aggregate Data
+│   │      └── Aggregate Statistics
+│   │
+│   ├── 3. Information Hierarchy
+│   │      ├── Individual Trajectory
+│   │      ├── Individual Trips
+│   │      ├── OD Matrix
+│   │      ├── Trip Length Distribution
+│   │      ├── Distance-decay Function
+│   │      └── Mobility Indicators
+│   │
+│   └── 4. Mobility Objects
+│          ├── People
+│          ├── Locations
+│          ├── Trips
+│          ├── Flows
+│          ├── Networks
+│          ├── Space
+│          └── Time
+│
+├── Part II. Empirical Laws                ⏳
+│      ├── Trip Length Distribution
+│      ├── Distance Decay
+│      ├── Radius of Gyration
+│      ├── Scaling Laws
+│      ├── Exploration vs Return
+│      └── Temporal Regularity
+│
+├── Part III. Spatial Interaction Models   ⏳
+│      ├── Gravity Model
+│      ├── Radiation Model
+│      ├── Intervening Opportunity
+│      ├── Entropy Models
+│      └── Opportunity Models
+│
+├── Part IV. Network Perspective           ⏳
+│
+├── Part V. Prediction Models              ⏳
+│
+├── Part VI. Aggregate Mobility Products   ⏳
+│
+├── Part VII. Applications                 ⏳
+│
+└── Part VIII. Frontier Research           ⏳
+```
 
 ---
 
-# 2. Three Layers of Human Mobility
+# Những khái niệm đã thống nhất
 
-Level 1
-──────────────
-Observation
+## 1. Information Hierarchy
 
-What do we observe?
+Đây là **phân cấp lượng thông tin**, **không phải pipeline dữ liệu**.
 
-• GPS
-• CDR
-• Smart Card
-• Surveys
-• Meta Movement Distribution Maps
-• OD Matrix
-• Aggregate Statistics
+```text
+Rich Information
+│
+├── Individual Trajectory
+├── Individual Trips
+├── OD Matrix
+├── Trip Length Distribution
+├── Distance-decay Function
+└── Mobility Indicators
+```
 
-↓
+Đi xuống dưới nghĩa là **mức độ biểu diễn ngày càng cô đọng hơn**, chứ **không ngụ ý rằng dữ liệu luôn được sinh ra theo chuỗi này**.
 
-Level 2
-──────────────
-Mechanism
+Ví dụ:
 
-What generates these observations?
-
-• Spatial Interaction
-• Distance Decay
-• Attraction
-• Accessibility
-• Opportunity
-• Human Decision
-
-↓
-
-Level 3
-──────────────
-Inference
-
-How do we recover hidden mechanisms?
-
-• Gravity Model
-• Radiation Model
-• Entropy Models
-• Random Utility
-• Machine Learning
-• Physics-informed Models
-• Our Framework
-
-Status: 🔴 Handbook Synthesis
+* Meta công bố trực tiếp TLD.
+* Cơ quan thống kê công bố trực tiếp OD.
+* Paper chỉ báo cáo distance-decay parameter.
 
 ---
 
-# 3. Reality Layer
+## 2. Mobility Objects
 
-Reality
+Toàn bộ Human Mobility có thể nhìn dưới góc độ các "đối tượng".
 
-├── Human System
-│
-│   Need
-│
-│   Activity
-│
-│   Preference
-│
-│   Habit
-│
-│   Memory
-│
-│   Social Influence
-│
-│   Decision
-│
-└── Urban System
+```text
+People
+Locations
+Trips
+Flows
+Networks
+Space
+Time
+```
 
-    Land Use
-
-    Population
-
-    POI
-
-    Transportation
-
-    Accessibility
-
-    Opportunities
-
-    Constraints
-
-↓
-
-Interaction
-
-↓
-
-Movement
-
-↓
-
-Observed Mobility
-
-Status: 🔴 Handbook Synthesis
+Mọi mô hình đều cố gắng mô hình hóa mối quan hệ giữa các đối tượng này.
 
 ---
 
-# 4. Observation Layer
+## 3. Định vị bài báo của bạn
 
-Observed Mobility
+Đây là phần rất quan trọng mà chúng ta đã thống nhất.
 
-↓
+Bài báo **không sử dụng trajectory**.
 
-Trajectory
+Bài báo **không dự đoán trajectory**.
 
-↓
+Bài báo làm việc hoàn toàn ở **mức aggregate**.
 
-Trip
+Pipeline của bài báo là
 
-↓
+```text
+Ground Truth OD Matrix
+        │
+        ├────────► Evaluation
+        │
+        ▼
+Trip Length Distribution
+        │
+        ▼
+Recover Distance-decay
+        │
+        ▼
+Calibrate Gravity Model
+        │
+        ▼
+Generate OD Matrix
+        │
+        ▼
+Compare with Ground Truth
+```
 
-OD Flow
+Ngoài ra còn có
 
-↓
+```text
+Meta Movement Distribution Maps
+        │
+        ▼
+Meta Trip Length Distribution
+        │
+        ▼
+Recover Distance-decay
+        │
+        ▼
+Calibrate Gravity
+        │
+        ▼
+Generate OD Matrix
+```
 
+Nghĩa là bài báo có hai nhóm thí nghiệm:
+
+* **Ideal case:** dùng TLD trích xuất từ Ground Truth OD để kiểm tra liệu chỉ riêng TLD có đủ thông tin để hiệu chỉnh gravity model hay không.
+* **Real-world case:** dùng TLD do Meta cung cấp để đánh giá khả năng áp dụng trong thực tế.
+
+---
+
+# Nguyên tắc xây dựng Handbook
+
+Chúng ta cũng đã thống nhất một số nguyên tắc sẽ áp dụng xuyên suốt:
+
+### 1. Không học theo paper
+
+Mà học theo
+
+```text
+Concept
+    ↓
+Theory
+    ↓
+Model
+    ↓
+Representative Papers
+```
+
+---
+
+### 2. Mọi khái niệm đều phải đặt vào bức tranh lớn
+
+Không học rời rạc.
+
+Ví dụ
+
+```text
 Trip Length Distribution
 
 ↓
 
-Aggregate Mobility Statistics
-
-↓
-
-Population Indicators
-
-Important
-
-Observation ≠ Mechanism
-
-OD Matrix is an observation.
-
-Trip-length Distribution is an observation.
-
-Status
-
-🟢 Established Knowledge
-
-Interpretation
-
-🟡
-
----
-
-# 5. Spatial Interaction
-
-Individual Movement
-
-↓
-
-Collective Movement
-
-↓
-
-Spatial Interaction
-
-↓
-
-OD Flow
-
-Spatial Interaction
-
-=
-
-Interaction intensity
-
-between places
-
-NOT
-
-individual movement
-
-Status
-
-🟢 + 🟡
-
----
-
-# 6. Human Mobility
-
-Human Mobility studies
-
-NOT
-
-People only
-
-NOT
-
-Cities only
-
-BUT
-
-Interaction
-
-between
-
-Human System
-
-and
-
-Urban System
-
-Status
-
-🔴 Handbook Synthesis
-
----
-
-# 7. Decision Process (Current Hypothesis)
-
-Need
-
-↓
-
-Possible Goals
-
-↓
-
-Feasible Set
-
-↓
-
-Perceived Benefit
-
-↓
-
-Perceived Cost
-
-↓
-
-Decision
-
-↓
-
-Movement
-
-Status
-
-❓
-
-Need verification
-
-Travel Behavior
-
-Random Utility
-
-Activity-Based Models
-
----
-
-# 8. Perceived Cost
-
-Distance
-
-↓
-
-Travel Time
-
-↓
-
-Money
-
-↓
-
-Comfort
-
-↓
-
-Safety
-
-↓
-
-Reliability
-
-↓
-
-Accessibility
-
-↓
-
-Personal Preference
-
-↓
-
-Perceived Cost
-
-Distance
-
-≠
-
-Cost
-
-Distance
-
-≈
-
-Proxy of Cost
-
-Status
-
-🟡
-
-Need verification
-
-Transportation Economics
-
-Random Utility
-
-Discrete Choice
-
----
-
-# 9. Emergence
-
-Millions of Decisions
-
-↓
-
-Collective Behavior
-
-↓
-
-Spatial Interaction
-
-↓
-
-OD Matrix
-
-OD Matrix
-
-is
-
-Emergent Pattern
-
-Status
-
-🟡
-
-Support
-
-Complex Systems
-
-Statistical Mechanics
-
----
-
-# 10. Gravity Model
-
-Gravity
-
-models
-
-Interaction Intensity
-
-between places
-
-NOT
-
-Individual Decisions
-
-Gravity
-
-operates
-
-at
-
-Macro Level
-
-Status
-
-🟢 + 🟡
-
----
-
-# 11. Macro vs Micro
-
-Micro
-
-Need
-
-↓
-
-Decision
-
-↓
-
-Movement
-
-Macro
-
-Millions of Movements
-
-↓
-
-Spatial Interaction
-
-↓
-
-OD Matrix
-
-↓
-
-Gravity
-
-Gravity
-
-does NOT model
-
-individual behavior
-
-Gravity
-
-models
-
-collective interaction
-
-Status
-
-🟡
-
----
-
-# 12. Aggregate Mobility Data
-
-Aggregate Statistics
-
-↓
-
-Contain
-
-Population-level information
-
-↓
-
-Potentially sufficient
-
-to recover
-
-Macro Mechanisms
-
-NOT
-
-because
-
-they contain
-
-individual decisions
-
-BUT
-
-because
-
-Gravity
-
-is
-
-Macro Model
-
-Status
-
-❓
-
-Scientific Hypothesis
-
-Core idea of our paper
-
----
-
-# 13. Paper Position
-
-Observation
-
-↓
-
-Trip-length Distribution
-
-↓
-
-Recover
-
 Distance Decay
 
 ↓
-
-Calibrate
 
 Gravity Model
 
 ↓
 
-Generate
-
 OD Matrix
 
-Contribution
+↓
 
-NOT
+OD Prediction
+```
 
-transfer data
-
-NOT
-
-predict trajectory
-
-BUT
-
-recover
-
-macro interaction mechanism
-
-from
-
-aggregate mobility observations
-
-Status
-
-🔴
+để thấy được vai trò của từng khái niệm.
 
 ---
 
-# 14. Transferability
+### 3. Luôn phân biệt
 
-Transfer
+```text
+Knowledge Map
+```
 
-ONLY
+và
 
-Machine Learning
+```text
+Paper Pipeline
+```
 
-for O_i
+Knowledge Map mô tả cấu trúc của lĩnh vực.
 
-Local
+Paper Pipeline mô tả quy trình nghiên cứu cụ thể.
 
-A_j
+Không được trộn hai thứ này.
 
-← Population + POI
+---
 
-Local
+### 4. Luôn xác định object trung tâm
 
+Ví dụ
+
+| Research Direction    | Central Object                                  |
+| --------------------- | ----------------------------------------------- |
+| Trajectory Prediction | Individual Trajectory                           |
+| Activity-based Models | Trip                                            |
+| Gravity Models        | Flow                                            |
+| GNN for Mobility      | Mobility Network                                |
+| OD Prediction         | OD Matrix                                       |
+| **Bài báo của bạn**   | **Trip Length Distribution → Flow (OD Matrix)** |
+
+---
+
+# State hiện tại
+
+Theo mình, chúng ta mới hoàn thành khoảng **10–15%** Handbook, nhưng đây là phần nền móng quan trọng nhất. Các chương tiếp theo sẽ được xây dựng trên nền này theo thứ tự:
+
+```text
+Foundations                    ✅
+        │
+        ▼
+Trip                           ← tiếp theo
+        │
+        ▼
+Distance
+        │
+        ▼
+Trip Length Distribution
+        │
+        ▼
 Distance Decay
+        │
+        ▼
+Gravity Model
+        │
+        ▼
+OD Matrix
+        │
+        ▼
+Mobility Network
+        │
+        ▼
+Modern Deep Learning Methods
+```
 
-← Trip-length Distribution
-
-Aggregate Data
-
-NOT transferred
-
-Status
-
-🟢
-
----
-
-# 15. Scientific Hypothesis of Our Paper
-
-Gravity
-
-↓
-
-Macro Model
-
-↓
-
-Requires
-
-Macro Mechanisms
-
-↓
-
-Question
-
-Can
-
-Aggregate Mobility Statistics
-
-recover
-
-those mechanisms?
-
-↓
-
-Paper
-
-tests
-
-this hypothesis
-
-Status
-
-🔴
-
----
-
-# 16. Open Questions
-
-□ Is perceived cost the true origin of distance decay?
-
-□ Can Random Utility explain Gravity?
-
-□ Can Gravity be derived as an emergent macro model?
-
-□ Which macro parameters encode collective behavior?
-
-□ How much information is preserved in aggregate mobility statistics?
-
-□ Why do trip-length distributions preserve distance decay?
-
----
-
-# 17. Handbook Principles
-
-Rule 1
-
-Never replace one black box with another.
-
-Rule 2
-
-Always distinguish
-
-Observation
-
-Mechanism
-
-Inference.
-
-Rule 3
-
-Always identify
-
-Micro
-
-vs
-
-Macro.
-
-Rule 4
-
-Every insight must be labeled
-
-Fact
-
-Theory
-
-Interpretation
-
-or
-
-Hypothesis.
-
-Rule 5
-
-Every chapter must connect to
-
-Our Paper.
+Mình nghĩ đây sẽ là **"checkpoint" chính thức** của Handbook. Từ lần sau, mình có thể dùng checkpoint này để xác định ngay trạng thái hiện tại của quá trình học và tiếp tục từ đúng vị trí, thay vì phải xây dựng lại từ đầu.
