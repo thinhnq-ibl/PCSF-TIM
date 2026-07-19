@@ -3,56 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: draft_paper_springer.aux
 The style file: sn-basic.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "de2013unique"
-Warning--I didn't find a database entry for "fotheringham1989spatial"
-Warning--I didn't find a database entry for "sen1995gravity"
-Warning--I didn't find a database entry for "flowerdew1982method"
-Warning--I didn't find a database entry for "blondel2015survey"
-Warning--I didn't find a database entry for "oliver2020mobile"
-Warning--I didn't find a database entry for "buckee2020aggregated"
-Warning--I didn't find a database entry for "tizzoni2022mobility"
 sn-basic.bst [2024/07/19 v1.1 bibliography style]
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--can't use both volume and number fields in shapley1953value
-You've used 25 entries,
+You've used 33 entries,
             3567 wiz_defined-function locations,
-            906 strings with 10371 characters,
-and the built_in function-call counts, 21196 in all, are:
-= -- 2024
-> -- 738
-< -- 16
-+ -- 297
-- -- 219
-* -- 1811
-:= -- 3058
-add.period$ -- 43
-call.type$ -- 25
-change.case$ -- 207
-chr.to.int$ -- 24
-cite$ -- 26
-duplicate$ -- 1646
-empty$ -- 1773
-format.name$ -- 288
-if$ -- 4454
+            946 strings with 11895 characters,
+and the built_in function-call counts, 27423 in all, are:
+= -- 2580
+> -- 1054
+< -- 20
++ -- 421
+- -- 316
+* -- 2334
+:= -- 4002
+add.period$ -- 51
+call.type$ -- 33
+change.case$ -- 279
+chr.to.int$ -- 32
+cite$ -- 34
+duplicate$ -- 2078
+empty$ -- 2247
+format.name$ -- 416
+if$ -- 5735
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 192
-newline$ -- 84
-num.names$ -- 100
-pop$ -- 476
+missing$ -- 250
+newline$ -- 108
+num.names$ -- 132
+pop$ -- 663
 preamble$ -- 1
-purify$ -- 174
+purify$ -- 240
 quote$ -- 0
-skip$ -- 489
+skip$ -- 654
 stack$ -- 0
-substring$ -- 1864
-swap$ -- 490
+substring$ -- 2259
+swap$ -- 618
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 225
+type$ -- 291
 warning$ -- 1
-while$ -- 135
+while$ -- 173
 width$ -- 0
-write$ -- 307
-(There were 9 warnings)
+write$ -- 392
+(There was 1 warning)

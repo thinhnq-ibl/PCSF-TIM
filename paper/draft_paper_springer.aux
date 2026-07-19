@@ -31,8 +31,8 @@
 \citation{lenormand2016systematic,atwal2025commuting}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparative analysis of human mobility models across structural and transferability dimensions.}}{3}{table.1}\protected@file@percent }
 \newlabel{tab:literature_comparison}{{1}{3}{Comparative analysis of human mobility models across structural and transferability dimensions}{table.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual comparison between conventional survey-based mobility modeling and the proposed Projection--Inference Gravity Framework (PIGF). Instead of requiring observed OD matrices to calibrate spatial friction, PIGF reformulates mobility prediction as a behavioral inference problem, recovering distance-decay functions directly from privacy-preserving aggregate trip-length distributions.}}{3}{figure.1}\protected@file@percent }
-\newlabel{fig:conceptual_framework}{{1}{3}{Conceptual comparison between conventional survey-based mobility modeling and the proposed Projection--Inference Gravity Framework (PIGF). Instead of requiring observed OD matrices to calibrate spatial friction, PIGF reformulates mobility prediction as a behavioral inference problem, recovering distance-decay functions directly from privacy-preserving aggregate trip-length distributions}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Comparison between the conventional survey-based paradigm and the proposed Projection--Inference Gravity Framework (PIGF). Rather than reconstructing mobility flows from observed OD matrices, PIGF treats survey-free mobility modeling as a behavioral inference problem by recovering the latent city-specific distance-decay mechanism from aggregate mobility summaries before estimating OD flows.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:conceptual_framework}{{1}{3}{Comparison between the conventional survey-based paradigm and the proposed Projection--Inference Gravity Framework (PIGF). Rather than reconstructing mobility flows from observed OD matrices, PIGF treats survey-free mobility modeling as a behavioral inference problem by recovering the latent city-specific distance-decay mechanism from aggregate mobility summaries before estimating OD flows}{figure.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Distance-Decay as Behavioral Representation}{3}{subsection.2.2}\protected@file@percent }
 \citation{flowerdew1982method,lenormand2016systematic,rubioherrero2023sparse,atwal2025commuting}
 \citation{wilson1971,flowerdew1982method,rubioherrero2023sparse,neurogravity2026}
@@ -43,8 +43,8 @@
 \citation{simini2021}
 \citation{neurogravity2026}
 \citation{transgm2026}
-\citation{atwal2025commuting,neurogravity2026}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Behavior Transfer in Zero-Shot Prediction}{5}{subsection.2.4}\protected@file@percent }
+\citation{atwal2025commuting,neurogravity2026}
 \citation{wilson1971,flowerdew1982method,sen1995gravity}
 \citation{simini2021,neurogravity2026}
 \citation{oliver2020mobile,buckee2020aggregated,MetaMovementDistributionMaps}
@@ -58,13 +58,13 @@
 \newlabel{sec:methodology}{{4}{7}{Behavioral Inference Framework}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Gravity Model Foundation}{7}{subsection.4.1}\protected@file@percent }
 \newlabel{sec:gravity_foundation}{{4.1}{7}{Gravity Model Foundation}{subsection.4.1}{}}
-\newlabel{eq:decomposition}{{3}{7}{Gravity Model Foundation}{equation.3}{}}
 \citation{MetaMovementDistributionMaps,pappalardo2023analytical}
 \citation{lenormand2016systematic}
-\citation{tanner1961}
-\citation{verma2025determinants}
+\newlabel{eq:decomposition}{{3}{8}{Gravity Model Foundation}{equation.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Aggregate Trip-Length Distributions as a Projection}{8}{subsection.4.2}\protected@file@percent }
 \newlabel{sec:aggregate_projection}{{4.2}{8}{Aggregate Trip-Length Distributions as a Projection}{subsection.4.2}{}}
+\citation{tanner1961}
+\citation{verma2025determinants}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Distance-Decay Parameterization}{9}{subsection.4.3}\protected@file@percent }
 \newlabel{sec:decay_function}{{4.3}{9}{Distance-Decay Parameterization}{subsection.4.3}{}}
 \newlabel{eq:tanner_multi}{{5}{9}{Distance-Decay Parameterization}{equation.5}{}}
@@ -80,60 +80,60 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Destination Attraction Estimation ($A_j$)}{10}{subsection.4.6}\protected@file@percent }
 \newlabel{sec:destination_attraction}{{4.6}{10}{Destination Attraction Estimation (\texorpdfstring {$A_j$}{A\_j})}{subsection.4.6}{}}
 \newlabel{eq:attraction_heuristic}{{11}{10}{Destination Attraction Estimation (\texorpdfstring {$A_j$}{A\_j})}{equation.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf  {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat  {\alpha }, \hat  {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$).}}{11}{figure.2}\protected@file@percent }
-\newlabel{fig:framework_pipeline}{{2}{11}{Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf {Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat {\alpha }, \hat {\beta })$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$)}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Technical realization of the behavioral inference paradigm. Instead of calibrating gravity models from observed origin--destination (OD) flows, PIGF recovers the latent city-specific distance-decay mechanism from aggregate trip-length distributions and combines it with transferable production and attraction components derived from open spatial data to perform survey-free, zero-shot OD estimation.}}{11}{figure.2}\protected@file@percent }
+\newlabel{fig:framework_pipeline}{{2}{11}{Technical realization of the behavioral inference paradigm. Instead of calibrating gravity models from observed origin--destination (OD) flows, PIGF recovers the latent city-specific distance-decay mechanism from aggregate trip-length distributions and combines it with transferable production and attraction components derived from open spatial data to perform survey-free, zero-shot OD estimation}{figure.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Survey-Free Origin--Destination Flow Generation}{11}{subsection.4.7}\protected@file@percent }
 \newlabel{sec:algorithmic_flow}{{4.7}{11}{Survey-Free Origin--Destination Flow Generation}{subsection.4.7}{}}
 \newlabel{eq:predicted_flow_mle}{{12}{11}{Survey-Free Origin--Destination Flow Generation}{equation.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Properties of the Behavioral Inference Framework}{11}{subsection.4.8}\protected@file@percent }
-\citation{MetaMovementDistributionMaps}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Properties of the Behavioral Inference Framework}{12}{subsection.4.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.9}Computational Complexity}{12}{subsection.4.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.10}Closing Remarks}{12}{subsection.4.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11}Data Sources}{12}{subsection.4.11}\protected@file@percent }
-\newlabel{sec:data_sources}{{4.11}{12}{Data Sources}{subsection.4.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.12}Behavioral Recovery from Real Aggregate Mobility Products}{12}{subsection.4.12}\protected@file@percent }
-\newlabel{sec:meta_harmonization}{{4.12}{12}{Behavioral Recovery from Real Aggregate Mobility Products}{subsection.4.12}{}}
+\citation{MetaMovementDistributionMaps}
 \citation{gonzalez2008understanding}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.13}Exploratory Urban Morphology Categorization}{13}{subsection.4.13}\protected@file@percent }
-\newlabel{sec:urban_morphology}{{4.13}{13}{Exploratory Urban Morphology Categorization}{subsection.4.13}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Validation}{13}{section.5}\protected@file@percent }
-\newlabel{sec:results}{{5}{13}{Experimental Validation}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}RQ1: Can latent behavior be recovered?}{13}{subsection.5.1}\protected@file@percent }
-\newlabel{sec:rq1}{{5.1}{13}{RQ1: Can latent behavior be recovered?}{subsection.5.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Morphological classification of target cities.}}{14}{table.2}\protected@file@percent }
-\newlabel{tab:morphology_classification}{{2}{14}{Morphological classification of target cities}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11}Data Sources}{13}{subsection.4.11}\protected@file@percent }
+\newlabel{sec:data_sources}{{4.11}{13}{Data Sources}{subsection.4.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.12}Behavioral Recovery from Real Aggregate Mobility Products}{13}{subsection.4.12}\protected@file@percent }
+\newlabel{sec:meta_harmonization}{{4.12}{13}{Behavioral Recovery from Real Aggregate Mobility Products}{subsection.4.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.13}Exploratory Urban Morphology Categorization}{14}{subsection.4.13}\protected@file@percent }
+\newlabel{sec:urban_morphology}{{4.13}{14}{Exploratory Urban Morphology Categorization}{subsection.4.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Validation}{14}{section.5}\protected@file@percent }
+\newlabel{sec:results}{{5}{14}{Experimental Validation}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}RQ1: Can latent behavior be recovered?}{14}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:rq1}{{5.1}{14}{RQ1: Can latent behavior be recovered?}{subsection.5.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Validation via Trip-Length Distributions (Meta MDM Case Study)}{14}{subsubsection.5.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Decay Bin Sensitivity Analysis}{14}{subsubsection.5.1.2}\protected@file@percent }
-\citation{shapley1953value}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Morphological classification of target cities.}}{15}{table.2}\protected@file@percent }
+\newlabel{tab:morphology_classification}{{2}{15}{Morphological classification of target cities}{table.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Decay parameter recovery performance metrics across the 25 target cities.}}{15}{table.3}\protected@file@percent }
 \newlabel{tab:decay_recovery_merged}{{3}{15}{Decay parameter recovery performance metrics across the 25 target cities}{table.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Conceptual comparison of the Tanner distance-decay function $f(d) = (d+\delta )^{-\alpha }\exp (-\beta d)$. The parameters recovered from aggregate trip-length distributions (solid red) closely approximate the parameters calibrated on complete ground-truth survey data (dashed blue). The recovered function effectively preserves both the power-law concentration at short distances and the exponential attenuation at long distances, demonstrating robust behavioral recovery.}}{15}{figure.3}\protected@file@percent }
 \newlabel{fig:tanner_comparison}{{3}{15}{Conceptual comparison of the Tanner distance-decay function $f(d) = (d+\delta )^{-\alpha }\exp (-\beta d)$. The parameters recovered from aggregate trip-length distributions (solid red) closely approximate the parameters calibrated on complete ground-truth survey data (dashed blue). The recovered function effectively preserves both the power-law concentration at short distances and the exponential attenuation at long distances, demonstrating robust behavioral recovery}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}RQ2: Is recovered behavior informative?}{15}{subsection.5.2}\protected@file@percent }
-\newlabel{sec:rq2}{{5.2}{15}{RQ2: Is recovered behavior informative?}{subsection.5.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Factorial Ablation and Shapley Value Analysis}{15}{subsubsection.5.2.1}\protected@file@percent }
-\citation{lenormand2016systematic}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Decay Bin Sensitivity Analysis}{15}{subsubsection.5.1.2}\protected@file@percent }
+\citation{shapley1953value}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows).}}{16}{table.4}\protected@file@percent }
 \newlabel{tab:meta_prior_evaluation}{{4}{16}{Downstream CPC performance on the 25 held-out target cities under different decay calibration strategies (Oracle Outflows)}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}RQ2: Is recovered behavior informative?}{16}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:rq2}{{5.2}{16}{RQ2: Is recovered behavior informative?}{subsection.5.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Factorial Ablation and Shapley Value Analysis}{16}{subsubsection.5.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Interpretation of Behavioral Dominance}{16}{subsubsection.5.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Interpretation}{16}{subsubsection.5.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}RQ3: Can recovered behavior enable transferable gravity calibration?}{16}{subsection.5.3}\protected@file@percent }
-\newlabel{sec:rq3}{{5.3}{16}{RQ3: Can recovered behavior enable transferable gravity calibration?}{subsection.5.3}{}}
+\citation{lenormand2016systematic}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities).}}{17}{table.5}\protected@file@percent }
 \newlabel{tab:ablation}{{5}{17}{Factorial Ablation and Shapley Value Contributions (Average across $N=25$ held-out target cities)}{table.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Shapley value contributions of individual gravity model components to overall predictive accuracy (CPC). The distance-decay mechanism is overwhelmingly the dominant component, accounting for 85.8\% of the total predictive gain within the investigated framework. This dominant role explains why highly compressed aggregate mobility summaries are sufficient to calibrate competitive predictive models.}}{17}{figure.4}\protected@file@percent }
 \newlabel{fig:shapley_attribution}{{4}{17}{Shapley value contributions of individual gravity model components to overall predictive accuracy (CPC). The distance-decay mechanism is overwhelmingly the dominant component, accounting for 85.8\% of the total predictive gain within the investigated framework. This dominant role explains why highly compressed aggregate mobility summaries are sufficient to calibrate competitive predictive models}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Practical Implications}{17}{subsubsection.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Methodological Validation}{17}{subsection.5.4}\protected@file@percent }
-\newlabel{sec:robustness_analysis}{{5.4}{17}{Methodological Validation}{subsection.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}RQ3: Can recovered behavior enable transferable gravity calibration?}{17}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:rq3}{{5.3}{17}{RQ3: Can recovered behavior enable transferable gravity calibration?}{subsection.5.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Multi-Baseline Comparison (25 Held-Out Target Cities)}}{18}{table.6}\protected@file@percent }
 \newlabel{tab:multibaseline_comparison}{{6}{18}{Multi-Baseline Comparison (25 Held-Out Target Cities)}{table.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Comparison of predicted flows versus ground-truth observations across the 25 target cities. The aggregate-calibrated model produces flow predictions that are statistically equivalent (TOST margin $\Delta _{\text  {eq}} = 0.01$ CPC) to those produced by models calibrated directly on local origin--destination surveys.}}{18}{figure.5}\protected@file@percent }
-\newlabel{fig:scatter_flow}{{5}{18}{Comparison of predicted flows versus ground-truth observations across the 25 target cities. The aggregate-calibrated model produces flow predictions that are statistically equivalent (TOST margin $\Delta _{\text {eq}} = 0.01$ CPC) to those produced by models calibrated directly on local origin--destination surveys}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Impact of Urban Morphology}{19}{subsubsection.5.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Practical Implications}{18}{subsubsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Methodological Validation}{18}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:robustness_analysis}{{5.4}{18}{Methodological Validation}{subsection.5.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Impact of Urban Morphology}{18}{subsubsection.5.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Comparison of predicted flows versus ground-truth observations across the 25 target cities. The aggregate-calibrated model produces flow predictions that are statistically equivalent (TOST margin $\Delta _{\text  {eq}} = 0.01$ CPC) to those produced by models calibrated directly on local origin--destination surveys.}}{19}{figure.5}\protected@file@percent }
+\newlabel{fig:scatter_flow}{{5}{19}{Comparison of predicted flows versus ground-truth observations across the 25 target cities. The aggregate-calibrated model produces flow predictions that are statistically equivalent (TOST margin $\Delta _{\text {eq}} = 0.01$ CPC) to those produced by models calibrated directly on local origin--destination surveys}{figure.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}}{19}{table.7}\protected@file@percent }
+\newlabel{tab:morphology}{{7}{19}{Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}{table.7}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Impact of Urban Density}{19}{subsubsection.5.4.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}}{20}{table.7}\protected@file@percent }
-\newlabel{tab:morphology}{{7}{20}{Survey-Free Performance by Urban Morphology (25 Held-Out Target Cities)}{table.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Scientific Findings}{20}{subsection.5.5}\protected@file@percent }
 \newlabel{sec:findings}{{5.5}{20}{Scientific Findings}{subsection.5.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{20}{section.6}\protected@file@percent }
@@ -149,12 +149,12 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Decomposition as a Modeling Strategy}{22}{subsubsection.6.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Aggregate Data as Calibration Signals}{22}{subsubsection.6.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Implications for Survey-Free Mobility Prediction}{22}{subsubsection.6.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Scope of Applicability}{23}{subsubsection.6.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Scope of Applicability}{22}{subsubsection.6.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Scope and Limitations}{23}{subsection.6.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.1}Scope of the Experimental Validation}{23}{subsubsection.6.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2}Dependence on the Gravity Formulation}{23}{subsubsection.6.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.3}Aggregate Mobility Representation}{23}{subsubsection.6.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.4}Survey-Free Does Not Mean Data-Free}{24}{subsubsection.6.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.4}Survey-Free Does Not Mean Data-Free}{23}{subsubsection.6.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Future Research Directions}{24}{subsection.6.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Beyond U.S. Metropolitan Areas}{24}{subsubsection.6.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Richer Behavioral Representations}{24}{subsubsection.6.4.2}\protected@file@percent }
@@ -201,29 +201,37 @@
 \bibdata{references}
 \bibcite{atwal2025commuting}{{1}{2025}{{Atwal et~al.}}{{Atwal, Anderson, Pfoser, and Z{\"u}fle}}}
 \bibcite{barbosa2018human}{{2}{2018}{{Barbosa et~al.}}{{Barbosa, Barthelemy, Ghoshal, James, Lenormand, Louail et~al.}}}
-\bibcite{egu2020comparable}{{3}{2020}{{Egu and Bonnel}}{{}}}
-\bibcite{transgm2026}{{4}{2026}{{Enaya et~al.}}{{Enaya, Zhong, Batty, Morphet, and Lopane}}}
-\bibcite{friedman2001greedy}{{5}{2001}{{Friedman}}{{}}}
-\bibcite{gonzalez2008understanding}{{6}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
-\bibcite{haklay2008openstreetmap}{{7}{2008}{{Haklay and Weber}}{{}}}
-\bibcite{hu2020mpgcn}{{8}{2020}{{Hu et~al.}}{{Hu, Yang, Li, Liang, Qu, and Yang}}}
-\bibcite{hussain2021transit}{{9}{2021}{{Hussain et~al.}}{{Hussain, Bhaskar, and Chung}}}
-\bibcite{lenormand2016systematic}{{10}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
-\bibcite{merlin2020medians}{{11}{2020}{{Merlin}}{{}}}
-\bibcite{MetaMovementDistributionMaps}{{12}{2026}{{Meta}}{{}}}
-\bibcite{pappalardo2023analytical}{{13}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
-\bibcite{Rong2023goddag}{{14}{2023{a}}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
-\bibcite{rong2023odgn}{{15}{2023{b}}{{Rong et~al.}}{{Rong, Wang, and Li}}}
-\bibcite{rubioherrero2023sparse}{{16}{2023}{{Rubio-Herrero and Mu{\~n}uzuri}}{{}}}
+\bibcite{blondel2015survey}{{3}{2015}{{Blondel et~al.}}{{Blondel, Decuyper, and Krings}}}
+\bibcite{buckee2020aggregated}{{4}{2020}{{Buckee et~al.}}{{Buckee, Balsari, Chan, Crosas, Dominici, Gasser, Grad, Grenfell, Halloran, Kraemer et~al.}}}
+\bibcite{egu2020comparable}{{5}{2020}{{Egu and Bonnel}}{{}}}
+\bibcite{transgm2026}{{6}{2026}{{Enaya et~al.}}{{Enaya, Zhong, Batty, Morphet, and Lopane}}}
+\bibcite{flowerdew1982method}{{7}{1982}{{Flowerdew and Aitkin}}{{}}}
+\bibcite{fotheringham1989spatial}{{8}{1989}{{Fotheringham and O'Kelly}}{{}}}
+\bibcite{friedman2001greedy}{{9}{2001}{{Friedman}}{{}}}
+\bibcite{gonzalez2008understanding}{{10}{2008}{{Gonz{\'a}lez et~al.}}{{Gonz{\'a}lez, Hidalgo, and Barab{\'a}si}}}
+\bibcite{haklay2008openstreetmap}{{11}{2008}{{Haklay and Weber}}{{}}}
+\bibcite{hu2020mpgcn}{{12}{2020}{{Hu et~al.}}{{Hu, Yang, Li, Liang, Qu, and Yang}}}
+\bibcite{hussain2021transit}{{13}{2021}{{Hussain et~al.}}{{Hussain, Bhaskar, and Chung}}}
+\bibcite{lenormand2016systematic}{{14}{2016}{{Lenormand et~al.}}{{Lenormand, Bassolas, and Ramasco}}}
+\bibcite{merlin2020medians}{{15}{2020}{{Merlin}}{{}}}
+\bibcite{MetaMovementDistributionMaps}{{16}{2026}{{Meta}}{{}}}
+\bibcite{de2013unique}{{17}{2013}{{de~Montjoye et~al.}}{{de~Montjoye, Hidalgo, Verleysen, and Blondel}}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {D.6}D6. Gravity Factorization Details}{28}{subsection.1.D.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {D.7}D7. Identifiability Discussion}{28}{subsection.1.D.7}\protected@file@percent }
-\bibcite{shapley1953value}{{17}{1953}{{Shapley}}{{}}}
-\bibcite{Simini2012universal}{{18}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
-\bibcite{simini2021}{{19}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
-\bibcite{song2010limits}{{20}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
-\bibcite{tanner1961}{{21}{1961}{{Tanner}}{{}}}
-\bibcite{worldpop2018}{{22}{2017}{{Tatem}}{{}}}
-\bibcite{verma2025determinants}{{23}{2025}{{Verma and Ukkusuri}}{{}}}
-\bibcite{wilson1971}{{24}{1971}{{Wilson}}{{}}}
-\bibcite{neurogravity2026}{{25}{2026}{{Yang et~al.}}{{Yang, Huang, Huang, Jin, Yang, Gonz{\'a}lez, and Xu}}}
+\bibcite{oliver2020mobile}{{18}{2020}{{Oliver et~al.}}{{Oliver, Lepri, Sterly, Lambiotte, Deletaille, De~Nadai, Letouz{\'e}, Salah, Bowman, Chen et~al.}}}
+\bibcite{pappalardo2023analytical}{{19}{2023}{{Pappalardo et~al.}}{{Pappalardo, Manley, Sekara, and Alessandretti}}}
+\bibcite{Rong2023goddag}{{20}{2023{a}}{{Rong et~al.}}{{Rong, Feng, Ding et~al.}}}
+\bibcite{rong2023odgn}{{21}{2023{b}}{{Rong et~al.}}{{Rong, Wang, and Li}}}
+\bibcite{rubioherrero2023sparse}{{22}{2023}{{Rubio-Herrero and Mu{\~n}uzuri}}{{}}}
+\bibcite{sen1995gravity}{{23}{1995}{{Sen and Smith}}{{}}}
+\bibcite{shapley1953value}{{24}{1953}{{Shapley}}{{}}}
+\bibcite{Simini2012universal}{{25}{2012}{{Simini et~al.}}{{Simini, Gonzalez, Maritan, and Barabasi}}}
+\bibcite{simini2021}{{26}{2021}{{Simini et~al.}}{{Simini, Barlacchi, Luca, and Pappalardo}}}
+\bibcite{song2010limits}{{27}{2010}{{Song et~al.}}{{Song, Qu, Blumm, and Barab{\'a}si}}}
+\bibcite{tanner1961}{{28}{1961}{{Tanner}}{{}}}
+\bibcite{worldpop2018}{{29}{2017}{{Tatem}}{{}}}
+\bibcite{tizzoni2022mobility}{{30}{2022}{{Tizzoni et~al.}}{{}}}
+\bibcite{verma2025determinants}{{31}{2025}{{Verma and Ukkusuri}}{{}}}
+\bibcite{wilson1971}{{32}{1971}{{Wilson}}{{}}}
+\bibcite{neurogravity2026}{{33}{2026}{{Yang et~al.}}{{Yang, Huang, Huang, Jin, Yang, Gonz{\'a}lez, and Xu}}}
 \gdef \@abspage@last{29}

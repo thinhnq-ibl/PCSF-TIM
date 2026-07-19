@@ -66,7 +66,7 @@ Gravity-Informed Neural Models \citep{rong2023odgn} & Partial & Limited & Yes & 
 \begin{figure*}[t!]
   \centering
   \includegraphics[width=\textwidth]{Fig1.png}
-  \caption{Conceptual comparison between conventional survey-based mobility modeling and the proposed Projection--Inference Gravity Framework (PIGF). Instead of requiring observed OD matrices to calibrate spatial friction, PIGF reformulates mobility prediction as a behavioral inference problem, recovering distance-decay functions directly from privacy-preserving aggregate trip-length distributions.}
+  \caption{Comparison between the conventional survey-based paradigm and the proposed Projection--Inference Gravity Framework (PIGF). Rather than reconstructing mobility flows from observed OD matrices, PIGF treats survey-free mobility modeling as a behavioral inference problem by recovering the latent city-specific distance-decay mechanism from aggregate mobility summaries before estimating OD flows.}
   \label{fig:conceptual_framework}
 \end{figure*}
 
@@ -232,44 +232,8 @@ Unlike conventional gravity calibration, which requires observed OD matrices to 
 
 \begin{figure*}[t!]
   \centering
-  \begin{tikzpicture}[
-    font=\footnotesize,
-    node distance=0.8cm and 1.1cm,
-    block/.style={draw, rectangle, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, thick, fill=blue!5, draw=blue!40},
-    cloud/.style={draw, ellipse, minimum width=2.0cm, minimum height=0.7cm, align=center, fill=green!5, draw=green!40},
-    agg/.style={draw, ellipse, minimum width=2.2cm, minimum height=0.7cm, align=center, fill=orange!10, draw=orange!60, thick},
-    arrow/.style={-latex, thick},
-    dasharrow/.style={-latex, thick, dashed, draw=orange!70}
-  ]
-    % Inputs (open data)
-    \node[cloud] (osm) {OSM / Population};
-    \node[agg, below=1.5cm of osm] (dist) {Aggregate \\ Trip-Length data};
- 
-    % Intermediate Models
-    \node[block, right=of osm, yshift=0.7cm] (oi) {Outflow GBDT};
-    \node[block, right=of osm, yshift=-0.7cm] (aj) {Attraction Heuristic};
-    \node[block, right=of dist, xshift=0.3cm] (decay) {Decay MLE \\ $(\hat{\alpha},\,\hat{\beta})$};
- 
-    % Fusion & Output
-    \node[block, right=5cm of osm] (fusion) {Gravity Fusion};
-    \node[cloud, below=0.8cm of fusion] (od) {Predicted OD};
- 
-    % Connections: open-data inputs
-    \draw[arrow] (osm.east) -- ++(0.5,0) |- (oi.west);
-    \draw[arrow] (osm.east) -- ++(0.5,0) |- (aj.west);
-    \draw[arrow] (dist.east) -- (decay.west);
- 
-    % Merging arrows into Gravity Fusion
-    \coordinate (joint) at (6.5, 0);
-    \draw[-] (oi.east) -| (joint);
-    \draw[-] (aj.east) -| (joint);
-    \draw[-] (decay.east) -| (joint);
-    \draw[arrow] (joint) -- (fusion.west);
- 
-    \draw[arrow] (fusion.south) -- (od.north);
- 
-  \end{tikzpicture}
-  \caption{Overview of the aggregate-calibrated gravity model structure. Globally available open-data features (green ellipses) are used to predict trip production ($O_i$) via a GBDT model and to compute destination attraction ($A_j$) via a training-free min-max heuristic. The \textbf{Aggregate Trip-Length Histogram} (orange ellipse, dashed arrow)---which provides aggregate summaries that significantly reduce privacy exposure compared with individual trajectories---feeds the Decay MLE block to recover city-specific parameters $(\hat{\alpha}, \hat{\beta})$ without requiring any individual OD trajectories. The three components are combined via multiplicative gravity fusion to predict survey-free flow matrices ($T_{ij}$).}
+  \includegraphics[width=\textwidth]{Fig2.png}
+  \caption{Technical realization of the behavioral inference paradigm. Instead of calibrating gravity models from observed origin--destination (OD) flows, PIGF recovers the latent city-specific distance-decay mechanism from aggregate trip-length distributions and combines it with transferable production and attraction components derived from open spatial data to perform survey-free, zero-shot OD estimation.}
   \label{fig:framework_pipeline}
 \end{figure*}
 

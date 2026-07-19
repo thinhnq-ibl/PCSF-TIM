@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{33}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -17,6 +17,16 @@ Atwal KS, Anderson T, Pfoser D, et~al (2025) Commuting flow prediction using
 Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   applications. Physics Reports 734:1--74. \doi{10.1016/j.physrep.2018.01.001}
 
+\bibitem[{Blondel et~al.(2015)Blondel, Decuyper, and
+  Krings}]{blondel2015survey}
+Blondel VD, Decuyper A, Krings G (2015) A survey of results on mobile phone
+  datasets analysis. EPJ data science 4(1):10
+
+\bibitem[{Buckee et~al.(2020)Buckee, Balsari, Chan, Crosas, Dominici, Gasser,
+  Grad, Grenfell, Halloran, Kraemer et~al.}]{buckee2020aggregated}
+Buckee CO, Balsari S, Chan J, et~al (2020) Aggregated mobility data could help
+  fight covid-19. Science 368(6487):145--146
+
 \bibitem[{Egu and Bonnel(2020)}]{egu2020comparable}
 Egu O, Bonnel P (2020) How comparable are origin--destination matrices
   estimated from automatic fare collection, origin--destination surveys and
@@ -29,6 +39,14 @@ Egu O, Bonnel P (2020) How comparable are origin--destination matrices
 Enaya A, Zhong C, Batty M, et~al (2026) {TransGM}: Transferable gravity models
   for cross-city policy transfer. Computers, Environment and Urban Systems
   \doi{10.1016/j.compenvurbsys.2026.102455}
+
+\bibitem[{Flowerdew and Aitkin(1982)}]{flowerdew1982method}
+Flowerdew R, Aitkin M (1982) A method of fitting the gravity model based on the
+  poisson distribution. Journal of regional science 22(2):191--202
+
+\bibitem[{Fotheringham and O'Kelly(1989)}]{fotheringham1989spatial}
+Fotheringham AS, O'Kelly ME (1989) Spatial interaction models: formulations and
+  applications. Kluwer Academic Publishers
 
 \bibitem[{Friedman(2001)}]{friedman2001greedy}
 Friedman JH (2001) Greedy function approximation: a gradient boosting machine.
@@ -71,6 +89,17 @@ Merlin LA (2020) A new method using medians to calibrate single-parameter
   \url{https://ai.meta.com/ai-for-good/datasets/movement-distribution-maps/},
   aI for Good Datasets. Accessed: 27 June 2026. No DOI assigned.
 
+\bibitem[{de~Montjoye et~al.(2013)de~Montjoye, Hidalgo, Verleysen, and
+  Blondel}]{de2013unique}
+de~Montjoye YA, Hidalgo CA, Verleysen M, et~al (2013) Unique in the crowd: The
+  privacy bounds of human mobility. Scientific reports 3(1):1--5
+
+\bibitem[{Oliver et~al.(2020)Oliver, Lepri, Sterly, Lambiotte, Deletaille,
+  De~Nadai, Letouz{\'e}, Salah, Bowman, Chen et~al.}]{oliver2020mobile}
+Oliver N, Lepri B, Sterly H, et~al (2020) Mobile phone data for informing
+  public health actions across the covid-19 pandemic life cycle. Science
+  advances 6(23):eabc0764
+
 \bibitem[{Pappalardo et~al.(2023)Pappalardo, Manley, Sekara, and
   Alessandretti}]{pappalardo2023analytical}
 Pappalardo L, Manley E, Sekara V, et~al (2023) Future directions in human
@@ -94,6 +123,9 @@ Rong C, Wang H, Li Y (2023{\natexlab{b}}) Origin-destination network generation
 Rubio-Herrero J, Mu{\~n}uzuri J (2023) Sparse regression for data-driven
   deterrence functions in gravity models. Annals of Operations Research
   323(1--2):153--174. \doi{10.1007/s10479-022-04803-y}
+
+\bibitem[{Sen and Smith(1995)}]{sen1995gravity}
+Sen A, Smith TE (1995) Gravity models of spatial interaction behavior. Springer
 
 \bibitem[{Shapley(1953)}]{shapley1953value}
 Shapley LS (1953) A value for n-person games. In: Contributions to the Theory
@@ -123,6 +155,10 @@ Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
 Tatem AJ (2017) {WorldPop}, open data for spatial demography. Scientific Data
   4:170004. \doi{10.1038/sdata.2017.4}, worldPop gridded population datasets
   available at \url{https://www.worldpop.org/}
+
+\bibitem[{Tizzoni et~al.(2022)}]{tizzoni2022mobility}
+Tizzoni M, et~al (2022) Addressing the socioeconomic divide in computational
+  modeling for infectious diseases. Nature communications
 
 \bibitem[{Verma and Ukkusuri(2025)}]{verma2025determinants}
 Verma R, Ukkusuri SV (2025) What determines travel time and distance decay in
