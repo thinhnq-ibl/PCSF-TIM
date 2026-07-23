@@ -37,9 +37,9 @@ However, existing approaches share a common dependency: they require observed OD
 
 In recent years, aggregate mobility products---such as Meta's Movement Distribution Maps (MDM)~\citep{MetaMovementDistributionMaps}---have become increasingly available across platforms and regions. These products provide aggregated, population-level trip-length distributions (TLDs) rather than individual trajectories or OD matrices. Because they are publicly available, globally consistent, and designed to preserve privacy, aggregate mobility summaries offer a highly accessible data source in data-scarce and privacy-restricted environments~\citep{pappalardo2023analytical}. 
 
-This availability creates a significant scientific opportunity, yet it leaves a fundamental knowledge gap: existing gravity-model calibration approaches rely on observed OD matrices, leaving it unclear whether aggregate mobility data preserve sufficient information to recover the latent city-specific distance-decay parameter governing spatial interactions. Prior work has demonstrated that simple aggregate statistics---such as median travel time---can calibrate single-parameter spatial interaction models~\citep{merlin2020medians}. However, whether this extends to recovering expressive, two-parameter distance-decay functions (e.g., the Tanner deterrence function) under realistic urban conditions remains uncharacterized.
+This availability creates a significant scientific opportunity, yet it leaves a fundamental knowledge gap: existing gravity-model calibration approaches rely on observed OD matrices, leaving it unclear whether aggregate mobility data preserve sufficient information to recover the city-specific distance-decay behavior associated with the underlying urban environment. In transportation science, travel behavior is recognized as an emergent response to urban infrastructure and spatial accessibility. However, whether privacy-preserving aggregate summaries retain sufficient information to recover expressive, two-parameter distance-decay functions (e.g., the Tanner deterrence function) remains uncharacterized.
 
-To address this knowledge gap, this study asks the following central scientific question: \emph{Does aggregate mobility data preserve sufficient information to recover the latent city-specific distance-decay parameter?} From this question, we formulate our central hypothesis: \emph{Aggregate trip-length distributions contain sufficient information to recover city-specific distance-decay parameters without requiring local OD observations. If successfully recovered, this latent behavioral parameter can replace conventional OD-based calibration, enabling transferable gravity models for cities without observed OD matrices.}
+To address this knowledge gap, this study asks the following central scientific question: \emph{Does aggregate mobility data preserve sufficient information to recover city-specific distance-decay behavior?} From this question, we formulate our central hypothesis: \emph{Aggregate trip-length distributions contain sufficient information to recover latent distance-decay parameters without requiring local OD observations. If successfully recovered, this latent behavioral parameter can replace conventional OD-based calibration, enabling transferable gravity models for cities without observed OD matrices.}
 
 The rest of this paper is organized as follows. Section~\ref{sec:related_work} reviews related work. Section~\ref{sec:problem_formulation} formalizes the problem setting. Section~\ref{sec:methodology} presents the behavioral inference framework. Section~\ref{sec:results} reports the experimental validation. Section~\ref{sec:discussion} discusses the implications of our findings, and Section~\ref{sec:conclusion} addresses threats to validity.
 
@@ -199,6 +199,8 @@ To represent travelers' sensitivity to travel distance, we adopt the \textbf{Tan
 f(d_{ij};\,\theta) = (d_{ij} + \delta)^{-\alpha} \exp(-\beta d_{ij}),
 \end{equation}
 where $\theta = (\alpha,\, \beta)$ denotes the unknown behavioral parameters. The power-law exponent $\alpha \ge 0$ controls the concentration of short-to-medium distance trips, whereas the exponential parameter $\beta > 0$ governs the attenuation of long-distance interactions.
+
+Importantly, from a transportation science perspective, the decay parameters $\theta = (\alpha, \beta)$ do not represent intrinsic or fixed personal traits of individual residents. Rather, they parameterize an emergent property of \textbf{human--environment interaction}: transit network layout and urban land use determine spatial accessibility, which conditions travelers' destination choices, ultimately manifesting as the observed empirical distance-decay response ($\text{Transit/Infrastructure} \to \text{Spatial Accessibility} \to \text{Travel Behavior} \to (\alpha, \beta)$).
 
 To avoid numerical singularities when travel distance approaches zero while maintaining consistent behavior across different spatial partitioning schemes, we introduce an \textbf{adaptive geometric offset}
 \begin{equation}\label{eq:delta}
@@ -482,10 +484,10 @@ Ground Truth Decay & Ground truth data  & 0.7411 & Reference \\
 
 To evaluate performance under extreme data scarcity where target trip-length distributions (TLDs) are completely missing, we analyze the National Decay Fallback strategy. Under this strategy, the target city's distance-decay parameters are set to a national prior defined as the median parameter estimates fitted across the set of source cities. Under oracle outflows, this national prior model achieves a mean CPC of 0.7398, and under GBDT-predicted outflows, it yields a mean CPC of 0.6896 (as reported in Table~\ref{tab:multibaseline_comparison}).
 
-Furthermore, we observe that the localized Meta MDM calibration is sensitive to specific local outlier dynamics. For instance, the metropolitan area of Atlanta serves as a prominent outlier in our evaluation, exhibiting a localized performance drop compared to the 3-bin LODES baseline. A detailed discussion of this outlier behavior is provided in Appendix~A.2.
+Furthermore, we observe that the localized Meta MDM calibration is sensitive to specific local outlier dynamics. For instance, the metropolitan area of Atlanta serves as a prominent outlier in our evaluation, exhibiting a localized performance drop compared to the 3-bin LODES baseline. A detailed discussion of this outlier behavior is provided in Appendix~\ref{app:param_morphologies}.
 
 \subsubsection{Decay Bin Sensitivity Analysis}
-To investigate how the granularity of distance binning affects model performance, we sweep the number of distance bins $K$ across $\{3, 5, 10, 20\}$. The results show that predictive performance improves substantially from $K=3$ to $K=5$ and then exhibits diminishing returns, with mean CPC values of $0.7174$ ($K=3$), $0.7346$ ($K=5$), $0.7394$ ($K=10$), and $0.7403$ ($K=20$). Detailed comparisons and the corresponding sensitivity heatmap are provided in Appendix~A.2 (Fig.~\ref{fig:layer1_heatmap}).
+To investigate how the granularity of distance binning affects model performance, we sweep the number of distance bins $K$ across $\{3, 5, 10, 20\}$. The results show that predictive performance improves substantially from $K=3$ to $K=5$ and then exhibits diminishing returns, with mean CPC values of $0.7174$ ($K=3$), $0.7346$ ($K=5$), $0.7394$ ($K=10$), and $0.7403$ ($K=20$). Detailed comparisons and sensitivity analysis are provided in Appendix~\ref{app:bin_robustness}.
 
 \subsection{RQ2: Is recovered behavior informative?}\label{sec:rq2}
 Having established that distance-decay behavior can be recovered from aggregate mobility data, we now investigate its relative importance within the spatial interaction process. We execute a game-theoretic Shapley value analysis and a factorial ablation study to quantify how much of the predictive information originates from the behavioral component versus structural characteristics (production and attraction).
@@ -646,7 +648,13 @@ Collectively, the experiments support the central hypothesis: aggregate mobility
 
 \subsection{Scientific Implications: Recoverable Behavioral Information in Aggregate Mobility}
 
-The central finding of this study is not simply that PIGF achieves competitive survey-free OD prediction, but that aggregate trip-length distributions preserve sufficient information to recover the latent behavioral mechanism governing spatial interaction. Across the experimental analyses, aggregate mobility summaries consistently enabled accurate recovery of city-specific Tanner distance-decay functions, identified distance decay as the dominant predictive component within the investigated gravity formulation, and supported downstream OD prediction without requiring target-city mobility observations. Taken together, these findings suggest that behavioral information can be inferred from aggregate mobility summaries to a much greater extent than has previously been assumed.
+The central finding of this study is not simply that PIGF achieves competitive survey-free OD prediction, but that aggregate trip-length distributions preserve sufficient information to recover the latent behavioral mechanism governing spatial interaction. Across the experimental analyses, aggregate mobility summaries consistently enabled accurate recovery of city-specific Tanner distance-decay functions, identified distance decay as the dominant predictive component within the investigated gravity formulation, and supported downstream OD prediction without requiring target-city mobility observations.
+
+Crucially, this result clarifies the transportation-scientific interpretation of the recovered distance-decay parameters $(\alpha, \beta)$. In spatial interaction modeling, deterrence parameters should not be viewed as static, intrinsic traits of individual residents in isolation. Rather, they represent an emergent property of \textbf{human--environment interaction}:
+\begin{equation}
+\text{Transit \& Built Environment} \longrightarrow \text{Spatial Accessibility} \longrightarrow \text{Observed Travel Behavior} \longrightarrow (\alpha, \beta).
+\end{equation}
+Urban infrastructure, transit network density, and opportunity distributions shape regional spatial accessibility, which conditions how travelers navigate the city. By recovering $(\alpha, \beta)$ directly from aggregate trip-length distributions, the proposed framework captures a behavioral response consistent with the city's spatial structure. Taken together, these findings suggest that behavioral information can be inferred from aggregate mobility summaries to a much greater extent than has previously been assumed.
 
 \subsection{Extreme Information Compression and Behavioral Identifiability}\label{sec:information_compression}
 
@@ -693,7 +701,7 @@ This distinction suggests that physical models can serve not only as predictive 
 \subsubsection{Scientific Perspective}
 Taken together, the experimental evidence supports a broader conceptual interpretation of survey-free mobility prediction. Rather than viewing aggregate mobility summaries as incomplete substitutes for origin--destination matrices, they may instead be regarded as observations of the underlying behavioral processes that govern spatial interaction. Under this perspective, the central task is no longer to reconstruct every individual movement, but to identify the dominant behavioral mechanism that shapes those movements.
 
-Within the investigated gravity formulation, this behavioral mechanism is represented by the distance-decay function. The proposed Projection--Inference Gravity Framework demonstrates that recovering this latent mechanism from aggregate mobility summaries is sufficient to enable practical survey-free gravity calibration across the evaluated metropolitan areas. Although additional validation beyond the present dataset remains necessary, the results suggest a promising direction in which behavioral inference, rather than direct flow reconstruction, becomes the primary objective of survey-free urban mobility modeling.
+Traditional mobility modeling asks: \textit{"Can we reconstruct flows?"} This work asks a fundamentally different question: \textit{"Can we recover the behavioral mechanism that generated those flows?"} If the underlying behavioral mechanism can be identified, origin--destination flow reconstruction becomes an emergent downstream consequence rather than the primary modeling objective.
 
 \subsection{Methodological and Practical Implications}
 
@@ -749,21 +757,22 @@ Taken together, these limitations define the current scope of the proposed behav
 
 \subsection{Future Research Directions}
 
-The limitations identified above also suggest several promising directions for future research. Rather than representing shortcomings specific to PIGF alone, they reflect broader challenges in survey-free mobility modeling and behavioral inference from aggregate data. Extending the present framework along these directions may further improve both the applicability and the theoretical understanding of aggregate-based mobility prediction.
+The limitations identified above suggest several promising directions for future research. Rather than representing shortcomings specific to PIGF alone, they reflect broader challenges in survey-free mobility modeling and behavioral inference from aggregate data.
 
-\subsubsection{Beyond U.S. Metropolitan Areas}
-The present evaluation is conducted exclusively on U.S. metropolitan areas, whose commuting behavior, transportation systems, and urban structures exhibit relatively consistent characteristics. An important next step is to evaluate whether the proposed behavioral inference framework remains applicable across cities with substantially different socioeconomic conditions, transport infrastructures, and cultural travel patterns. Cross-country validation would help determine whether the recoverability of distance-decay functions represents a universal behavioral property or depends on regional mobility characteristics.
+\subsubsection{From Behavioral Recovery to Environmental Generation}
 
-\subsubsection{Richer Behavioral Representations}
-The current framework models travel behavior exclusively through geographical distance. Future research may extend the behavioral inference framework to incorporate richer impedance measures, including travel time, multimodal accessibility, transport cost, and temporal congestion. Recovering multiple behavioral dimensions simultaneously may provide a more comprehensive description of urban mobility while preserving the survey-free philosophy of the proposed framework.
+While this study demonstrates that latent distance-decay parameters can be recovered from aggregate mobility summaries, the next fundamental scientific frontier is moving from behavioral recovery to environmental generation: modeling how the physical urban structure and built environment generate and induce travel behavior in the first place ($\text{Urban Structure \& Infrastructure} \to \text{Behavioral Friction} \to \text{Observed Mobility}$). Investigating how transit network topology, spatial density, and opportunity distributions causally shape the recovered decay parameters $(\alpha, \beta)$ opens a compelling new research question at the intersection of urban morphology, transportation science, and spatial interaction theory.
 
-\subsubsection{Beyond Tanner Functions}
-Although the Tanner formulation provides a flexible and interpretable representation of distance decay, the proposed inference framework is not fundamentally restricted to this particular functional form. Future work may investigate non-parametric behavioral recovery, neural deterrence functions, or Bayesian formulations capable of representing more complex travel preferences while maintaining physical interpretability. Such extensions would help determine whether the observed recoverability is specific to Tanner functions or reflects a broader property of aggregate mobility distributions.
+\subsubsection{Richer Behavioral Impedance Representations}
+While the current framework models travel behavior through geographical distance, future research may extend the behavioral inference framework to incorporate multi-dimensional impedance measures, including travel time, transit accessibility, monetary cost, and temporal congestion. Recovering multiple behavioral dimensions simultaneously may provide a more comprehensive description of urban mobility while preserving the survey-free philosophy of the proposed framework.
+
+\subsubsection{Cross-Country and Cross-Cultural Validation}
+The present evaluation is conducted on U.S. metropolitan areas. An important next step is to evaluate whether the proposed behavioral inference framework remains applicable across global cities with substantially different socioeconomic conditions, public transport infrastructures, and cultural travel patterns, determining whether behavioral recoverability represents a universal property across diverse urban systems.
 
 \subsubsection{Toward Hybrid Physics-Informed Learning}
-Finally, the decomposition strategy adopted by PIGF naturally suggests future integration with modern machine learning. Rather than replacing physics-based models with end-to-end neural architectures, future research may combine behavioral inference from aggregate mobility summaries with representation learning, graph neural networks, or foundation models for urban systems. Such hybrid approaches could preserve the interpretability and low data requirements of physics-informed models while benefiting from the expressive capacity of modern deep learning. This direction may ultimately bridge the current separation between interpretable gravity models and high-capacity neural mobility predictors.
+Finally, the explicit behavioral recovery formulation of PIGF provides a natural theoretical bridge to neural representation learning architectures such as neuroGravity~\citep{neurogravity2026}. While neuroGravity demonstrates that urban environments shape implicit neural representations of mobility networks ($\text{Urban Environment} \to \text{Neural Representation} \to \text{Mobility}$), PIGF recovers explicit, exposure-corrected behavioral friction parameters ($\text{Urban Environment} \to \text{Spatial Accessibility} \to \text{Behavioral Response } (\alpha, \beta) \to \text{Mobility}$). Combining neural representation learning of urban socioeconomic and built-environment structure with explicit behavioral recovery from aggregate telemetry offers a promising path toward unified, physics-informed foundation models for urban spatial interaction.
 
-Taken together, these directions indicate that the proposed framework should be viewed not as a final solution, but as an initial demonstration of behavioral inference from aggregate mobility summaries. Future developments may extend this paradigm toward richer behavioral models, broader geographical settings, and hybrid physics-informed learning frameworks, further advancing survey-free urban mobility prediction.
+Taken together, these directions indicate that the proposed framework should be viewed not merely as an engineering solution, but as an initial demonstration of behavioral inference from aggregate mobility summaries. Future developments may extend this paradigm toward modeling environmental behavior generation, broader geographical settings, and hybrid physics-informed learning frameworks.
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -775,102 +784,100 @@ The experimental results across 50 US metropolitan areas validated three key fin
 
 These findings support a conceptual shift in mobility modeling: privacy-preserving aggregate mobility datasets are not merely incomplete substitutes for origin--destination matrices, but powerful behavioral calibration signals.
 
-Ultimately, this study demonstrates that aggregate mobility preserves recoverable behavioral information.
-
-\clearpage
+Ultimately, this study demonstrates that aggregate trip-length distributions preserve behaviorally meaningful responses that are consistent with city-specific spatial interaction patterns.
 
 \clearpage
 \begin{appendices}
 
 \section{Behavioral Recovery Evidence}\label{app:evidence}
-\subsection{A1. Parameter Recovery Curves}
+\subsection{Parameter Recovery Curves}\label{app:param_curves}
 Detailed visualizations of parameter convergence and cross-entropy optimization surfaces during the L-BFGS-B optimization.
 
-\subsection{A2. Parameter Recovery across Morphologies}
+\subsection{Parameter Recovery across Morphologies}\label{app:param_morphologies}
 Statistical distribution of recovered $\alpha$ and $\beta$ parameters stratified by the urban morphology classes defined in the main text.
 
-\subsection{A3. Representative City Profiles}
+\subsection{Representative City Profiles}\label{app:rep_cities}
 Case studies of behavioral recovery in specific metropolitan areas (e.g., Atlanta vs. Boston), highlighting how urban structure influences inference.
 
-\subsection{A4. Behavioral Consistency Over Time}
+\subsection{Behavioral Consistency Over Time}\label{app:time_consistency}
 (Placeholder) Future longitudinal studies demonstrating the stability of the recovered distance-decay parameters across different temporal slices.
 
-\subsection{A5. Distance-Bin Histogram Robustness}
+\subsection{Distance-Bin Histogram Robustness}\label{app:bin_robustness}
 Analysis showing how varying the number of distance intervals $K$ (e.g., 3, 5, 10, 20 bins) impacts the precision of behavioral inference.
 
-\subsection{A6. Cross-City Distance Distribution Comparisons}
+\subsection{Cross-City Distance Distribution Comparisons}\label{app:dist_comparisons}
 Empirical density plots comparing observed aggregate trip-length distributions against the expected theoretical distributions generated by the recovered parameters.
 
 \section{Methodological Validation}\label{app:validation}
-\subsection{B1. Full Factorial Ablation Results}
+\subsection{Full Factorial Ablation Results}\label{app:full_ablation}
 Complete tabular results for all $2^3 = 8$ component coalitions evaluated during the Shapley value analysis.
 
-\subsection{B2. Shapley Value Calculations}
+\subsection{Shapley Value Calculations}\label{app:shapley_calc}
 Mathematical details of the cooperative game formulation used to attribute predictive performance to individual gravity components.
 
-\subsection{B3. Outflow Transferability (GBDT)}
+\subsection{Outflow Transferability (GBDT)}\label{app:gbdt_transfer}
 Performance metrics and learning curves for the zero-shot origin production model across different source-city training sizes.
 
-\subsection{B4. Feature Selection Stability}
+\subsection{Feature Selection Stability}\label{app:feature_stability}
 SHAP summary plots justifying the reduction from the 37-candidate spatial feature set to the final 6 core variables.
 
-\subsection{B5. Noise Sensitivity Analysis}
+\subsection{Noise Sensitivity Analysis}\label{app:noise_sensitivity}
 Evaluation of downstream CPC degradation when additive Gaussian noise is injected into the intermediate production predictions.
 
-\subsection{B6. Missing Attraction Data Robustness}
+\subsection{Missing Attraction Data Robustness}\label{app:missing_attraction}
 Performance stability when varying percentages (10\%, 20\%, 50\%) of destination attraction values are randomly masked.
 
-\subsection{B7. CBD Collapse Simulation}
+\subsection{CBD Collapse Simulation}\label{app:cbd_collapse}
 Simulated resilience of the distance-decay recovery when the most attractive urban zones are subjected to artificial extreme density reductions.
 
 \section{Reproducibility Details}\label{app:reproducibility}
-\subsection{C1. Environment \& Hardware Configuration}
+\subsection{Environment \& Hardware Configuration}\label{app:env_hardware}
 (Placeholder) Compute cluster specifications, GPU/CPU details, and software environments utilized for experiments.
 
-\subsection{C2. Training Hyperparameters}
+\subsection{Training Hyperparameters}\label{app:hyperparams}
 Complete listing of GBDT hyperparameters, learning rates, tree depths, and early stopping criteria.
 
-\subsection{C3. Random Seed Sensitivity}
+\subsection{Random Seed Sensitivity}\label{app:seed_sensitivity}
 Variance analysis of model predictions across multiple random seed initializations.
 
-\subsection{C4. Dataset Versioning}
+\subsection{Dataset Versioning}\label{app:data_versioning}
 Specific timestamps, API versions, and access dates for OpenStreetMap, WorldPop, and Meta Movement Distribution Maps data.
 
-\subsection{C5. Feature Engineering Pipeline}
+\subsection{Feature Engineering Pipeline}\label{app:feature_pipeline}
 Step-by-step documentation of spatial aggregation, coordinate projection, and normalization procedures.
 
-\subsection{C6. Code Repository Structure}
+\subsection{Code Repository Structure}\label{app:code_structure}
 (Placeholder) Overview of the accompanying open-source GitHub repository architecture.
 
-\subsection{C7. Pre-trained Model Checkpoints}
+\subsection{Pre-trained Model Checkpoints}\label{app:model_checkpoints}
 (Placeholder) Information regarding the availability and formats of pre-trained GBDT production models.
 
-\subsection{C8. Open Data Access Restrictions}
+\subsection{Open Data Access Restrictions}\label{app:data_restrictions}
 Details regarding licensing and geographical availability limitations for the utilized telemetry products.
 
-\subsection{C9. Evaluation Metric Implementations}
+\subsection{Evaluation Metric Implementations}\label{app:metrics_impl}
 Mathematical formulas and boundary conditions used for CPC, RMSE, and MAE calculations within the evaluation codebase.
 
-\subsection{C10. Troubleshooting Common Issues}
+\subsection{Troubleshooting Common Issues}\label{app:troubleshooting}
 (Placeholder) Solutions to potential numerical instabilities or data ingestion errors encountered during replication.
 
 \section{Mathematical Foundations}\label{app:math}
-\subsection{D1. MLE Derivation}
+\subsection{MLE Derivation}\label{app:mle_derivation}
 Step-by-step derivation of the exposure-corrected log-likelihood objective function.
 
-\subsection{D2. Parameter Identifiability Bounds}
+\subsection{Parameter Identifiability Bounds}\label{app:identifiability}
 Theoretical conditions necessary for unique identifiability of the Tanner parameters from aggregate distributions.
 
-\subsection{D3. Optimization Constraints}
+\subsection{Optimization Constraints}\label{app:optimization_constraints}
 Log-space transformations used to strictly enforce positivity constraints ($\alpha \ge 0, \beta > 0$) during L-BFGS-B optimization.
 
-\subsection{D4. Adaptive Geometric Offset Derivations}
+\subsection{Adaptive Geometric Offset Derivations}\label{app:offset_derivations}
 Proof illustrating how the adaptive offset $\delta$ maintains scale invariance across differing spatial zone resolutions.
 
-\subsection{D5. Normalization Consistency Proofs}
+\subsection{Normalization Consistency Proofs}\label{app:normalization_proofs}
 Demonstration that the multiplicative fusion step perfectly preserves origin-side trip production totals.
 
-\subsection{D6. Gravity Factorization Details}
+\subsection{Gravity Factorization Details}\label{app:gravity_factorization}
 Extended mathematical discussion on separating distance friction from opportunity distribution within spatial interaction matrices.
 
 \subsection{D7. Identifiability Discussion}
