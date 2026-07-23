@@ -38,10 +38,10 @@ The Method section (Section 4) must be framed as a **Behavioral Inference Framew
 **Objective**: Describe the chosen functional form.
 
 ### 4.4 Exposure Correction & Inverse Inference
-**Objective**: Present the core methodological novelty.
+**Objective**: Present the core methodological novelty and statistical foundation.
 **Logic**: 
-`Observed histogram $\to$ Projection $\to$ Exposure correction $\to$ Recover latent behavior`
-**Constraint**: Explicitly use the term "latent behavioral inference". The section details how behavior is statistically identified from structural spatial exposure.
+`Raw OD Counts $\to$ Histogram Counts $\to$ Normalized Histogram $\implies$ Exact same (\alpha, \beta)`
+**Constraint**: Explicitly use the terms "latent behavioral inference" and "Normalization Invariance". Minimizing cross-entropy over normalized distributions is exactly equivalent to maximizing multinomial log-likelihood, differing only by a positive constant scaling factor ($N$). The section details how behavior is statistically identified from structural spatial exposure under privacy-preserving aggregate distributions (e.g., Meta MDM).
 
 ### 4.5 Origin Production
 **Objective**: Describe the machine learning pipeline for production estimation.

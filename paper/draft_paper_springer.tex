@@ -237,28 +237,42 @@ To guarantee the positivity constraints $\alpha \ge 0$, $\beta > 0$, optimizatio
 
 Unlike conventional gravity calibration requiring disaggregate OD flow matrices, the proposed formulation isolates and infers only the latent behavioral mechanism. By explicitly correcting for spatial exposure, gravity calibration is transformed from a data-intensive flow-fitting problem into an information-theoretically grounded distribution matching problem requiring only aggregate trip-length fractions. The overall architecture is illustrated in Fig.~\ref{fig:framework_pipeline}.
 
-\subsection{Relationship Between Cross-Entropy Minimization and Maximum Likelihood Estimation}\label{sec:mle_relationship}
+\subsection{Statistical Foundations of Behavioral Recovery}\label{sec:mle_relationship}
 
-To establish the statistical foundations of the proposed behavioral recovery module, we clarify the mathematical connection between cross-entropy minimization over aggregate travel fractions and classical maximum likelihood estimation (MLE) over disaggregate trip observations.
+To establish the statistical foundations of the proposed behavioral recovery module, we clarify the relationship between classical gravity model calibration and the proposed aggregate distribution matching objective through three progressive stages.
 
-Let $\mathbf{y} = (y_1, y_2, \dots, y_K)^\top$ represent an empirical vector of trip counts across $K$ distance intervals, with total sample size $N = \sum_{k=1}^K y_k$. When individual mobility traces are unobservable due to privacy restrictions, telemetry products (such as Meta Movement Distribution Maps) release normalized travel fractions $\mathbf{b} = (b_1, b_2, \dots, b_K)^\top$, where $b_k = y_k / N$ and $\sum_{k=1}^K b_k = 1.0$.
+\subsubsection{Classical Poisson Gravity Calibration}
 
-Under a multinomial sampling assumption, the log-likelihood of observing count vector $\mathbf{y}$ given exposure-corrected model probabilities $\boldsymbol{\pi}(\theta)$ is
+In classical spatial interaction literature, origin--destination travel flows $T_{ij}$ are modeled as discrete count observations. Consequently, Poisson likelihood (and related count-based likelihood formulations) serves as the classical statistical foundation for gravity calibration from observed OD trip counts~\citep{flowerdew1982method,sen1995gravity,lenormand2016systematic}. Under a Poisson specification, deterrence parameters are estimated by maximizing the Poisson log-likelihood over individual OD matrix cells:
+\begin{equation}\label{eq:poisson_likelihood}
+\log \mathcal{L}_{\mathrm{Poisson}}(\theta; \mathbf{T}) = \sum_{i,j} \left[ T_{ij} \log \hat{T}_{ij}(\theta) - \hat{T}_{ij}(\theta) - \log(T_{ij}!) \right],
+\end{equation}
+where $\hat{T}_{ij}(\theta)$ represents the gravity model prediction. While mathematically rigorous for complete flow matrices, Poisson likelihood estimation inherently depends on observing full, unaggregated $N \times N$ OD matrices ($T_{ij}$), which are unavailable under privacy-preserving telemetry constraints.
+
+\subsubsection{Aggregate Histogram Likelihood}
+
+In contrast, our framework operates on aggregate trip-length distributions rather than individual trip counts. When individual mobility traces are unobservable due to privacy restrictions, telemetry products (such as Meta Movement Distribution Maps) release normalized travel fractions $\mathbf{b} = (b_1, b_2, \dots, b_K)^\top$, where $b_k = y_k / N$, $\sum_{k=1}^K b_k = 1.0$, and $y_k$ represents the unobserved trip count in distance bin $k$.
+
+Because individual OD counts are unobservable, the calibration target shifts from matrix-level Poisson likelihood to bin-level distribution matching. If histogram count vector $\mathbf{y}$ were observed, the natural log-likelihood under a multinomial sampling assumption over distance bins would be
 \begin{equation}\label{eq:multinomial_loglik}
-\log \mathcal{L}(\theta; \mathbf{y}) = \log \left( \frac{N!}{\prod_{k=1}^K y_k!} \right) + \sum_{k=1}^K y_k \log \pi_k(\theta) = C + N \sum_{k=1}^K b_k \log \pi_k(\theta),
+\log \mathcal{L}_{\mathrm{Multi}}(\theta; \mathbf{y}) = \log \left( \frac{N!}{\prod_{k=1}^K y_k!} \right) + \sum_{k=1}^K y_k \log \pi_k(\theta) = C + N \sum_{k=1}^K b_k \log \pi_k(\theta),
 \end{equation}
-where $C$ is a constant independent of $\theta$. Rearranging Eq.~(\ref{eq:multinomial_loglik}) yields
+where $C$ is a constant independent of parameter vector $\theta = (\alpha, \beta)$.
+
+\subsubsection{Cross-Entropy Equivalence \& Normalization Invariance}
+
+Rearranging Eq.~(\ref{eq:multinomial_loglik}) connects the multinomial likelihood directly to the proposed cross-entropy objective:
 \begin{equation}\label{eq:mle_cross_entropy_relation}
-\log \mathcal{L}(\theta; \mathbf{y}) = C - N \cdot H(\mathbf{b}, \boldsymbol{\pi}_\theta) = C - N \left[ H(\mathbf{b}) + D_{\mathrm{KL}}(\mathbf{b} \parallel \boldsymbol{\pi}_\theta) \right],
+\log \mathcal{L}_{\mathrm{Multi}}(\theta; \mathbf{y}) = C - N \cdot H(\mathbf{b}, \boldsymbol{\pi}_\theta) = C - N \left[ H(\mathbf{b}) + D_{\mathrm{KL}}(\mathbf{b} \parallel \boldsymbol{\pi}_\theta) \right],
 \end{equation}
-where $H(\mathbf{b}, \boldsymbol{\pi}_\theta) = -\sum b_k \log \pi_k(\theta)$ is the cross-entropy, $H(\mathbf{b})$ is the empirical entropy of the aggregate telemetry, and $D_{\mathrm{KL}}(\mathbf{b} \parallel \boldsymbol{\pi}_\theta)$ is the Kullback--Leibler (KL) divergence (relative entropy).
+where $H(\mathbf{b}, \boldsymbol{\pi}_\theta) = -\sum b_k \log \pi_k(\theta)$ is the cross-entropy, $H(\mathbf{b})$ is the empirical entropy of the aggregate telemetry, and $D_{\mathrm{KL}}(\mathbf{b} \parallel \boldsymbol{\pi}_\theta)$ is the Kullback--Leibler (KL) divergence.
 
 Taking the gradient with respect to parameter vector $\theta$, the score equation satisfies
 \begin{equation}\label{eq:score_invariance}
-\nabla_\theta \log \mathcal{L}(\theta; \mathbf{y}) = -N \cdot \nabla_\theta H(\mathbf{b}, \boldsymbol{\pi}_\theta) = 0 \iff \nabla_\theta H(\mathbf{b}, \boldsymbol{\pi}_\hat{\theta}) = 0 \quad (\text{for } N > 0).
+\nabla_\theta \log \mathcal{L}_{\mathrm{Multi}}(\theta; \mathbf{y}) = -N \cdot \nabla_\theta H(\mathbf{b}, \boldsymbol{\pi}_\theta) = 0 \iff \nabla_\theta H(\mathbf{b}, \boldsymbol{\pi}_\hat{\theta}) = 0 \quad (\text{for } N > 0).
 \end{equation}
 
-Equation~(\ref{eq:score_invariance}) shows that the recovered parameters are invariant to the total sample size ($N$). Consequently, optimizing normalized aggregate fractions yields the same optimum as multinomial maximum likelihood whenever multinomial counts are available, while remaining directly applicable to privacy-preserving aggregate mobility products that release only normalized distributions. Therefore, cross-entropy minimization can be viewed as the normalized counterpart of multinomial maximum likelihood estimation. This formulation preserves the same optimal parameter estimates while naturally supporting privacy-preserving aggregate mobility products that provide normalized trip-length distributions instead of raw trip counts.
+Poisson likelihood serves as the classical statistical foundation for gravity calibration from observed OD trip counts. In contrast, our framework operates on aggregate trip-length distributions rather than individual trip counts. Consequently, the proposed objective is formulated as cross-entropy minimization over normalized distance distributions, which is mathematically equivalent to multinomial maximum likelihood estimation up to a positive constant scaling factor ($N$). This property—**Normalization Invariance**—ensures that moving from raw OD counts $\mathbf{T} \to$ aggregate histogram counts $\mathbf{y} \to$ normalized histogram fractions $\mathbf{b}$ preserves the exact optimal behavioral parameters $(\alpha, \beta)$. Thus, the proposed framework can operate directly on privacy-preserving aggregate telemetry without requiring disaggregate OD matrices or raw trip counts.
 
 \begin{figure*}[t!]
   \centering
