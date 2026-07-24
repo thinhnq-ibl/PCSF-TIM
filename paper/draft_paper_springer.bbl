@@ -1,4 +1,4 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -6,21 +6,10 @@
 \providecommand{\eprint}[2][]{\url{#2}}
  \bibcommenthead
 
-\bibitem[{Atwal et~al.(2025)Atwal, Anderson, Pfoser, and
-  Z{\"u}fle}]{atwal2025commuting}
-Atwal KS, Anderson T, Pfoser D, et~al (2025) Commuting flow prediction using
-  {OpenStreetMap} data. Computational Urban Science 5(1):2.
-  \doi{10.1007/s43762-025-00161-5}
-
 \bibitem[{Barbosa et~al.(2018)Barbosa, Barthelemy, Ghoshal, James, Lenormand,
   Louail et~al.}]{barbosa2018human}
 Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   applications. Physics Reports 734:1--74. \doi{10.1016/j.physrep.2018.01.001}
-
-\bibitem[{Blondel et~al.(2015)Blondel, Decuyper, and
-  Krings}]{blondel2015survey}
-Blondel VD, Decuyper A, Krings G (2015) A survey of results on mobile phone
-  datasets analysis. EPJ data science 4(1):10
 
 \bibitem[{Buckee et~al.(2020)Buckee, Balsari, Chan, Crosas, Dominici, Gasser,
   Grad, Grenfell, Halloran, Kraemer et~al.}]{buckee2020aggregated}
@@ -48,18 +37,10 @@ Flowerdew R, Aitkin M (1982) A method of fitting the gravity model based on the
 Fotheringham AS, O'Kelly ME (1989) Spatial interaction models: formulations and
   applications. Kluwer Academic Publishers
 
-\bibitem[{Friedman(2001)}]{friedman2001greedy}
-Friedman JH (2001) Greedy function approximation: a gradient boosting machine.
-  Annals of statistics pp 1189--1232
-
 \bibitem[{Gonz{\'a}lez et~al.(2008)Gonz{\'a}lez, Hidalgo, and
   Barab{\'a}si}]{gonzalez2008understanding}
 Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
   human mobility patterns. Nature 453(7196):779--782. \doi{10.1038/nature06958}
-
-\bibitem[{Haklay and Weber(2008)}]{haklay2008openstreetmap}
-Haklay M, Weber P (2008) Openstreetmap: User-generated street maps. IEEE
-  Pervasive Computing 7(4):12--18
 
 \bibitem[{Hu et~al.(2020)Hu, Yang, Li, Liang, Qu, and Yang}]{hu2020mpgcn}
 Hu J, Yang G, Li K, et~al (2020) Predicting origin-destination flow via
@@ -78,11 +59,6 @@ Hussain E, Bhaskar A, Chung E (2021) Transit od matrix estimation using
 Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
   distribution laws and models. Journal of Transport Geography 51:158--169.
   \doi{10.1016/j.jtrangeo.2016.02.003}
-
-\bibitem[{Merlin(2020)}]{merlin2020medians}
-Merlin LA (2020) A new method using medians to calibrate single-parameter
-  spatial interaction models. Journal of Transport and Land Use 13(1):49--70.
-  \doi{10.5198/jtlu.2020.1614}
 
 \bibitem[{{Meta}(2026)}]{MetaMovementDistributionMaps}
 {Meta} (2026) Movement distribution maps.
@@ -150,20 +126,6 @@ Song C, Qu Z, Blumm N, et~al (2010) Limits of predictability in human mobility.
 \bibitem[{Tanner(1961)}]{tanner1961}
 Tanner J (1961) Factors affecting the amount of travel. Road Research Technical
   Paper~51, Road Research Laboratory, London
-
-\bibitem[{Tatem(2017)}]{worldpop2018}
-Tatem AJ (2017) {WorldPop}, open data for spatial demography. Scientific Data
-  4:170004. \doi{10.1038/sdata.2017.4}, worldPop gridded population datasets
-  available at \url{https://www.worldpop.org/}
-
-\bibitem[{Tizzoni et~al.(2022)}]{tizzoni2022mobility}
-Tizzoni M, et~al (2022) Addressing the socioeconomic divide in computational
-  modeling for infectious diseases. Nature communications
-
-\bibitem[{Verma and Ukkusuri(2025)}]{verma2025determinants}
-Verma R, Ukkusuri SV (2025) What determines travel time and distance decay in
-  spatial interaction and accessibility? Journal of Transport Geography
-  122:104061. \doi{10.1016/j.jtrangeo.2024.104061}
 
 \bibitem[{Wilson(1971)}]{wilson1971}
 Wilson A (1971) A family of spatial interaction models, and associated

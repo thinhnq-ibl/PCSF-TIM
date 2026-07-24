@@ -18,49 +18,57 @@
 
 \articletype{RESEARCH ARTICLE}
 
-\title[Observation Theory of Mobility Inference]{Observation Theory of Mobility Inference: Fisher Information Sufficiency in Aggregate Travel-Distance Representations}
+\title[Recovering Latent Distance-Decay Behavior from Aggregate Mobility]{Recovering Latent Distance-Decay Behavior from Aggregate Mobility Data for Survey-Free Spatial Interaction Inference}
 
 \author*[1]{\fnm{Thinh} \sur{Nguyen}}\email{nqt900@gmail.com}
 \affil*[1]{\orgname{Aarista Technologies}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 
-\abstract{Accurate spatial interaction modeling traditionally relies on complete origin--destination (OD) flow observations, operating under the implicit \emph{Data Richness Paradigm} that disaggregate trajectory data are indispensable for mobility inference. Challenging this paradigm, this study formulates a formal \emph{Observation Theory of Mobility Inference}. We establish the \emph{Observation Sufficiency Principle}: an observation space $\mathcal{H}$ is valid for identifying the parameters $\theta$ of a spatial interaction process $\mathcal{M}(\theta)$ if and only if its image under an observation operator $\mathcal{P}$ preserves sufficient Fisher information to uniquely identify $\theta$. Structuring the theory from general distance-deterrence models down to Tanner gravity parameterizations, we derive a 4-stage \emph{Statistical Representation Layer} connecting spatial interaction processes to aggregate distance histograms. Deductively derived theoretical predictions assert that aggregate distance representations induce equivalent statistical evidence for parameter identification compared to complete OD matrices. Empirical validation across 50 US metropolitan areas confirms these predictions: distance-decay parameters identified from aggregate summaries match those calibrated on complete OD matrices, and downstream spatial interaction predictions achieve statistical equivalence within a 0.01 Common Part of Commuters (CPC) margin. A game-theoretic Shapley analysis confirms that recovered distance friction accounts for 85.8\% of total predictive performance. Rather than asking how to reconstruct point-to-point flows from big data, this work establishes what information is fundamentally required to identify spatial interaction models.}
+\abstract{Accurate spatial interaction modeling traditionally relies on complete origin--destination (OD) flow observations to calibrate distance-deterrence parameters. However, collecting complete OD interactions is expensive, privacy-sensitive, and frequently unavailable in data-scarce regions. Conversely, aggregate travel-distance distributions have become increasingly accessible across global platforms. This study investigates the fundamental question: \emph{Can distance-deterrence parameters be identified without observing origin--destination interactions?} We hypothesize that aggregate travel-distance distributions preserve sufficient statistical information to identify city-specific distance-decay parameters. To evaluate this hypothesis, we present the Projection-Inference Gravity Framework (PIGF), establishing a probabilistic observation model that connects spatial interaction processes to aggregate distance observations. We derive three testable predictions: (1) a valid multinomial likelihood can be derived directly from aggregate distance distributions; (2) parameters identified from aggregate distributions match those calibrated on complete OD matrices; and (3) inferred parameters preserve the downstream predictive consequences of spatial interaction models. Empirical validation across 50 US metropolitan areas confirms these predictions: distance-decay parameters recovered from aggregate histograms closely match local OD-calibrated references, and downstream OD reconstruction achieves statistical equivalence within a 0.01 Common Part of Commuters (CPC) margin. Game-theoretic Shapley attribution demonstrates that recovered distance friction accounts for 85.8\% of total predictive gain. This work establishes a zero-shot, privacy-preserving calibration paradigm for spatial interaction modeling in data-scarce environments.}
 
-\keywords{Urban mobility, observation theory, Fisher information, distance decay calibration, gravity models, statistical representation layer, parameter identification}
+\keywords{Spatial interaction, distance deterrence, gravity models, aggregate mobility data, parameter identification, zero-shot calibration, privacy-preserving mobility}
 
 \maketitle
 
 \section{Introduction}
 
-\subsection{Big Scientific Problem}
-Accurate origin--destination (OD) flow estimation is fundamental to transportation planning, infrastructure prioritization, and urban mobility policy analysis~\citep{barbosa2018human,gonzalez2008understanding,song2010limits}. To model spatial interaction, spatial interaction frameworks such as gravity models~\citep{wilson1971,tanner1961} rely on distance-decay parameters to capture the behavioral friction of travel distance. Recent learning-based frameworks, including DeepGravity and graph neural networks~\citep{simini2021,hu2020mpgcn}, similarly depend on estimating spatial friction representations from observed data.
+\subsection{The Field Problem}
+Accurate origin--destination (OD) flow modeling is fundamental to urban transportation planning, accessibility assessment, and infrastructure decision-making~\citep{barbosa2018human,gonzalez2008understanding,song2010limits}. Spatial interaction frameworks, such as gravity models~\citep{wilson1971,tanner1961}, rely on distance-deterrence functions to capture the behavioral friction governing travel impedance. Distance-deterrence models are traditionally calibrated directly from observed origin--destination interactions.
 
-However, existing mobility inference approaches share a fundamental dependency: they operate under an implicit \textbf{Data Richness Paradigm}, assuming that complete origin--destination observations or disaggregate travel trajectories are indispensable for parameter calibration or model training. Acquiring complete OD observations remains a major practical challenge. Household travel surveys require substantial financial resources, limiting their coverage to a small fraction of cities worldwide~\citep{egu2020comparable,hussain2021transit}. Mobile-phone and GPS trajectory records, while richer in spatial detail, are frequently unavailable due to commercial licensing restrictions and strict privacy regulations~\citep{de2013unique}. As a result, complete OD observations are difficult to obtain for the majority of urban regions globally. Meanwhile, aggregate mobility products—including Meta's Movement Distribution Maps (MDM)~\citep{MetaMovementDistributionMaps}—are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior without revealing origin--destination pairs.
+However, collecting complete OD interactions remains a critical bottleneck. Comprehensive household travel surveys require substantial financial resources and are conducted infrequently~\citep{egu2020comparable,hussain2021transit}. Mobile-phone and GPS trajectory records, while spatial-rich, are tightly restricted by commercial licensing and strict data privacy regulations~\citep{de2013unique}. Consequently, observed OD interactions are largely unavailable for the vast majority of cities globally.
 
-\subsection{Research Gap}
-Existing work has focused on reconstructing or predicting mobility flows from alternative data sources or transferring learned representations from data-rich regions. However, it remains unknown whether aggregate travel-distance distributions preserve sufficient statistical information for identifying the parameters of distance-deterrence mobility models.
+\subsection{The Observation Challenge}
+Meanwhile, privacy-preserving aggregate mobility products—including Meta's Movement Distribution Maps (MDM)~\citep{MetaMovementDistributionMaps}—are becoming increasingly available across platforms and regions, providing summaries of population travel behavior without revealing origin--destination pairs.
 
-\subsection{Research Question}
-To address this gap, this paper addresses one central research question:
+Despite the growing accessibility of aggregate mobility summaries, existing distance-decay calibration methods assume the availability of complete OD matrices or individual trajectory traces. Aggregate data has traditionally been viewed merely as a descriptive visualization tool rather than a vehicle for rigorous statistical parameter identification. It remains an unaddressed observation challenge whether aggregate travel-distance distributions preserve sufficient information to recover latent spatial interaction parameters.
+
+\subsection{Research Question \& Central Hypothesis}
+To address this gap, this study addresses one central research question:
 \begin{quote}
-\emph{Can aggregate travel-distance distributions replace complete OD observations for identifying the parameters of distance-deterrence mobility models?}
+\emph{Can distance-deterrence parameters be identified without observing origin--destination interactions?}
 \end{quote}
 
-\subsection{Central Hypothesis}
-We evaluate the following central hypothesis:
+We evaluate the central hypothesis that:
 \begin{quote}
-\emph{Aggregate travel-distance distributions constitute a statistical representation of the underlying spatial interaction process that preserves sufficient Fisher information to identify latent distance-decay parameters.}
+\emph{Aggregate travel-distance distributions preserve sufficient statistical information to identify latent distance-deterrence parameters.}
 \end{quote}
 
-\subsection{Contributions}
-The contributions of this study establish a formal Observation Theory:
+From this central hypothesis, three deductive predictions structure our investigation:
 \begin{enumerate}
-    \item \textbf{Formulation of the Observation Theory Framework:} We formalize the Observation Sufficiency Principle, defining an observation operator $\mathcal{P}$ mapping spatial interaction space onto a Statistical Representation Layer.
-    \item \textbf{Deductive Theoretical Derivations:} We derive the Fisher Information backbone and aggregate multinomial log-likelihood, proving that maximum likelihood estimation over distance fractions is optimized via cross-entropy.
-    \item \textbf{Demonstration of Statistical Evidence Equivalence:} We demonstrate empirically across 50 metropolitan areas that aggregate distance representations induce essentially the same statistical evidence for parameter identification as complete OD matrices.
-    \item \textbf{Demonstration of Preservation of Predictive Consequences:} We demonstrate that parameters identified under aggregate representations preserve downstream predictive capability in spatial interaction modeling, accounting for 85.8\% of total flow prediction accuracy.
+    \item \textbf{Prediction 1 (Likelihood Derivation):} A valid multinomial likelihood function can be derived directly from aggregate travel-distance observations to enable parameter inference.
+    \item \textbf{Prediction 2 (Parameter Consistency):} Parameters identified from aggregate distance observations are statistically consistent with parameters calibrated from complete OD interactions.
+    \item \textbf{Prediction 3 (Predictive Equivalence):} Inferred distance-decay parameters preserve the predictive consequences of the underlying spatial interaction model in downstream OD matrix reconstruction.
 \end{enumerate}
 
-The remainder of this paper is organized as follows. Section~\ref{sec:related_work} reviews related work. Section~\ref{sec:methodology} formalizes Observation Theory, the Observation Sufficiency Principle, the Statistical Representation Layer, and Fisher Information derivations. Section~\ref{sec:results} evaluates the theoretical predictions. Section~\ref{sec:discussion} explores the Information Sufficiency Paradigm, conceptual negative results, explicit limitations, and the multi-paper Research Program, and Section~\ref{sec:conclusion} concludes the paper.
+\subsection{Contributions}
+The contributions of this study operate across three distinct layers:
+\begin{enumerate}
+    \item \textbf{Layer 1 — Scientific Discovery (Core Contribution):} We demonstrate that aggregate travel-distance distributions preserve sufficient statistical information to identify city-specific distance-decay parameters without observing OD pairs.
+    \item \textbf{Layer 2 — Methodological Contribution:} We establish the Projection-Inference Gravity Framework (PIGF), providing a probabilistic formulation for zero-shot gravity calibration without target OD matrices.
+    \item \textbf{Layer 3 — Practical Contribution:} We enable scalable, privacy-preserving spatial interaction modeling and transferable OD estimation for data-scarce urban regions worldwide.
+\end{enumerate}
+
+\subsection{Paper Organization}
+The remainder of this paper is organized as follows. Section~\ref{sec:related_work} reviews traditional and learning-based spatial interaction models, distance-decay calibration limitations, and aggregate mobility products. Section~\ref{sec:theory} formalizes Observation Theory, the Observation Sufficiency Principle, and Fisher Information identifiability. Section~\ref{sec:pigf} presents the Projection-Inference Gravity Framework (PIGF) and the zero-shot calibration algorithm. Section~\ref{sec:results} empirically validates predictions across 50 US metropolitan areas. Section~\ref{sec:discussion} discusses theoretical and practical implications, limitations, and future research directions, and Section~\ref{sec:conclusion} concludes the paper.
 
 \begin{table*}[t]
 \centering
@@ -91,26 +99,29 @@ Gravity-Informed Neural Models \citep{rong2023odgn} & Partial & Limited & Yes & 
 
 \section{Related Work}\label{sec:related_work}
 
-\subsection{Mobility Modeling under Limited Behavioral Information}
+\subsection{Traditional \& Learning-based Spatial Interaction Models}
 Accurate origin--destination (OD) flow modeling is a core task in spatial interaction analysis, travel demand forecasting, and urban policy evaluation. Traditionally, OD matrices are constructed from household travel surveys, census commuting records, mobile-phone trajectories, or GPS traces. While these data sources provide detailed mobility observations, they are expensive to collect, infrequently updated, and increasingly constrained by privacy regulations \citep{de2013unique}. Consequently, acquiring complete OD observations remains a major bottleneck for spatial interaction modeling, particularly in data-scarce regions.
 
 To address data scarcity, classical spatial interaction models estimate mobility through analytical formulations \citep{wilson1971,Simini2012universal}, whereas recent deep learning methods exploit spatial representations learned from historical mobility data \citep{simini2021,transgm2026}. Despite methodological differences, existing approaches share a common dependency: they rely on observed OD flows or individual trajectories to estimate distance decay or to train spatial interaction models \citep{lenormand2016systematic,simini2021}. Even recent transfer-learning and zero-shot frameworks assume that representative OD observations are available in source domains \citep{neurogravity2026}.
 
-\subsection{Distance Decay in Spatial Interaction}
+\subsection{Distance-Decay Calibration \& Its Limitations}
 Distance decay forms the core behavioral constraint in spatial interaction models, describing how interaction probability diminishes with travel impedance \citep{tanner1961,wilson1971,fotheringham1989spatial,sen1995gravity}. Heterogeneous travel behavior is commonly represented using functional forms such as exponential, power-law, or Tanner deterrence functions. The two-parameter Tanner function is widely adopted because it simultaneously captures short-distance concentration and long-distance attenuation.
 
 Existing distance-decay calibration methods, however, assume the availability of observed origin--destination matrices to fit parameters via maximum-likelihood or least-squares estimation \citep{flowerdew1982method,lenormand2016systematic,rubioherrero2023sparse}. Consequently, methodological efforts have focused primarily on how to fit deterrence functions given complete OD data, rather than investigating whether deterrence parameters can be identified without observed OD matrices.
 
-\subsection{Information Content of Aggregate Mobility Summaries}
+\subsection{Aggregate Mobility Data \& Privacy-Preserving Approaches}
 Privacy-preserving aggregate mobility products—such as Meta Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—summarize population travel behavior into trip-length distributions (TLDs) while discarding origin--destination identities \citep{oliver2020mobile,buckee2020aggregated,pappalardo2023analytical}. Previous studies have used aggregate mobility statistics primarily for descriptive mobility analysis, epidemic monitoring, and accessibility assessment.
 
 Although aggregate mobility summaries omit location identities, they retain the empirical distribution of travel distances across an urban region. Whether aggregate distance distributions preserve sufficient statistical information to identify distance-decay parameters of underlying spatial interaction models remains uncharacterized, defining the central research gap addressed in this study.
 
-\section{Observation Theory and Probabilistic Model}\label{sec:methodology}
+\subsection{Theoretical Foundations: Fisher Information \& Identifiability}
+Mathematical statistics establishes that parameter identifiability of a latent probabilistic model depends on whether the observation space preserves non-singular Fisher information. In spatial interaction literature, identifiability has traditionally been studied strictly over point-to-point flow matrices. Establishing whether projected aggregate distance representations retain non-singular Fisher information forms the theoretical foundation connecting data accessibility to parameter identification.
 
-This section formalizes Observation Theory, introducing its mathematical objects, the Observation Sufficiency Principle, the Statistical Representation Layer, and the Fisher Information backbone.
+\section{Observation Theory}\label{sec:theory}
 
-\subsection{Hierarchical Formulation and Objects of Observation Theory}\label{sec:obs_objects}
+This section formalizes Observation Theory, introducing its mathematical objects, the Observation Sufficiency Principle, the Fisher Information backbone, likelihood derivation from aggregate projections, and a conceptual negative result.
+
+\subsection{Hierarchical Formulation \& Mathematical Objects}\label{sec:obs_objects}
 To establish Observation Theory as a general theoretical framework, we structure it hierarchically from general principles to specific parameterizations:
 \begin{equation}\label{eq:theory_hierarchy}
 \text{Observation Theory} \to \text{Distance Decay} \to \text{Gravity} \to \text{Tanner}.
@@ -137,21 +148,13 @@ We state the fundamental principle of Observation Theory:
 Under this principle, an observation (whether complete OD matrix, GPS trajectory, or distance histogram) is not defined by its physical storage format, but as a mapping $\mathcal{P}: \mathcal{M} \to \mathcal{H}$. If the mapping preserves Fisher information $\mathcal{I}(\theta)$, parameter inference is mathematically guaranteed.
 
 \subsection{Fisher Information Backbone}\label{sec:fisher_info}
-Let $\log \mathcal{L}(\theta; \mathbf{y})$ denote the log-likelihood of observing representation vector $\mathbf{y} \in \mathcal{H}$. The **Fisher Information Matrix** $\mathcal{I}(\theta) \in \mathbb{R}^{p \times p}$ is defined as:
+Let $\log \mathcal{L}(\theta; \mathbf{y})$ denote the log-likelihood of observing representation vector $\mathbf{y} \in \mathcal{H}$. The \textbf{Fisher Information Matrix} $\mathcal{I}(\theta) \in \mathbb{R}^{p \times p}$ is defined as:
 \begin{equation}\label{eq:fisher_matrix}
 \mathcal{I}(\theta) = -\mathbb{E}_{\mathbf{y} \sim \boldsymbol{\pi}_\theta} \left[ \nabla_\theta^2 \log \mathcal{L}(\theta; \mathbf{y}) \right].
 \end{equation}
 Parameter vector $\theta$ is strictly identifiable from observation space $\mathcal{H}$ if and only if the Fisher Information Matrix $\mathcal{I}(\theta)$ is non-singular ($\det \mathcal{I}(\theta) > 0$).
 
-\subsection{Theoretical Predictions Derived from the Principle}\label{sec:deductive_predictions}
-From the Observation Sufficiency Principle, three theoretical predictions follow deductively:
-\begin{itemize}
-    \item \textbf{Prediction 1 (Existence of Probabilistic Observation Model):} The projection $\mathcal{P}(\mathcal{M})$ yields a discrete probability distribution $\boldsymbol{\pi}(\theta)$ that induces a well-defined Multinomial log-likelihood whose Fisher information matrix $\mathcal{I}(\theta)$ is non-singular.
-    \item \textbf{Prediction 2 (Statistical Evidence Equivalence):} If observation space $\mathcal{H}$ preserves sufficient Fisher information, parameter estimates $\hat{\theta}_{\mathcal{H}}$ identified from $\mathcal{H}$ induce equivalent statistical evidence to parameters $\hat{\theta}_{\mathcal{M}}$ calibrated on complete OD matrices $\mathcal{M}$.
-    \item \textbf{Prediction 3 (Preservation of Predictive Consequences):} Spatial interaction predictions generated using parameters identified from $\mathcal{H}$ preserve downstream predictive consequences in flow modeling.
-\end{itemize}
-
-\subsection{Statistical Representation Layer & Likelihood Derivation}\label{sec:representation_likelihood}
+\subsection{Derivation of Likelihood from Aggregate Projections}\label{sec:representation_likelihood}
 For distance-deterrence models under the singly constrained gravity formulation, joint trip probability $P(i, j \mid \theta)$ is projected onto distance bins via operator $\mathcal{P}$, yielding model probability $\pi_b(\theta)$:
 \begin{equation}\label{eq:predicted_prob_mle}
 \pi_b(\theta) = \sum_{i,j: d_{ij} \in b} P(i, j \mid \theta) = \frac{E(b) \, f(d_b; \theta)}{\sum_{b'} E(b') \, f(d_{b'}; \theta)},
@@ -173,9 +176,14 @@ This property—\textbf{Normalization Invariance}—guarantees scale-invariant p
 \subsection{Conceptual Negative Result: Informative vs. Uninformative Observation Spaces}\label{sec:negative_result}
 To illustrate the necessity of Fisher information sufficiency, consider two alternative aggregate observation spaces:
 \begin{enumerate}
-    \item \textbf{Scalar Observation Space ($\mathcal{H}_{\text{scalar}}$):} Observing only the mean trip distance $\bar{d} = \frac{1}{N}\sum d_{ij}$. Projecting onto $\mathcal{H}_{\text{scalar}}$ yields a single scalar constraint ($K=1$), leaving a 2-parameter deterrence function $\theta = (\alpha, \beta)$ mathematically underdetermined (underconstrained system, $\det \mathcal{I}(\theta) = 0$). Scalar summaries are therefore **uninformative observation spaces**.
-    \item \textbf{Histogram Observation Space ($\mathcal{H}_{\text{hist}}$):} Observing a distance fraction vector $\mathbf{b}$ across $K \ge 3$ bins. This representation retains $K-1 \ge 2$ independent degrees of freedom, satisfying non-singularity of $\mathcal{I}(\theta)$. Histogram vectors are therefore **informative observation spaces**.
+    \item \textbf{Scalar Observation Space ($\mathcal{H}_{\text{scalar}}$):} Observing only the mean trip distance $\bar{d} = \frac{1}{N}\sum d_{ij}$. Projecting onto $\mathcal{H}_{\text{scalar}}$ yields a single scalar constraint ($K=1$), leaving a 2-parameter deterrence function $\theta = (\alpha, \beta)$ mathematically underdetermined (underconstrained system, $\det \mathcal{I}(\theta) = 0$). Scalar summaries are therefore \textbf{uninformative observation spaces}.
+    \item \textbf{Histogram Observation Space ($\mathcal{H}_{\text{hist}}$):} Observing a distance fraction vector $\mathbf{b}$ across $K \ge 3$ bins. This representation retains $K-1 \ge 2$ independent degrees of freedom, satisfying non-singularity of $\mathcal{I}(\theta)$. Histogram vectors are therefore \textbf{informative observation spaces}.
 \end{enumerate}
+
+\section{Projection-Inference Gravity Framework (PIGF)}\label{sec:pigf}
+
+\subsection{Framework Overview}
+Building upon Observation Theory, we instantiate the Projection-Inference Gravity Framework (PIGF). PIGF operationalizes zero-shot parameter recovery by decoupling scientific parameter inference from downstream spatial interaction generation (Figure~\ref{fig:conceptual_framework} and Figure~\ref{fig:framework_pipeline}).
 
 \begin{figure*}[t!]
   \centering
@@ -184,21 +192,53 @@ To illustrate the necessity of Fisher information sufficiency, consider two alte
   \label{fig:framework_pipeline}
 \end{figure*}
 
-\section{Results}\label{sec:results}
+\subsection{Tanner Deterrence with Exposure Correction}
+PIGF explicitly models travel impedance using the two-parameter Tanner deterrence function $f(d) = (d+\delta)^{-\alpha}\exp(-\beta d)$. Crucially, PIGF applies geometric spatial exposure correction $E(b) = \sum_{i,j} O_i A_j \mathbf{1}(d_{ij} \in b)$ to isolate true behavioral friction from underlying urban land-use morphology and zonal layout.
 
-The empirical evaluation tests the three theoretical predictions derived from the Observation Sufficiency Principle.
+\subsection{Zero-shot Calibration Procedure}
+The zero-shot calibration procedure recovers parameters directly from aggregate histograms and evaluates downstream flows using bridge components (Algorithm 1).
 
-\subsection{Validation of Prediction 1: Existence of a Probabilistic Observation Model}\label{sec:pred1}
-\textbf{Prediction 1:} \emph{An observation operator $\mathcal{P}$ and probabilistic observation model exist that connect spatial interaction processes to aggregate distance representations while preserving likelihood identifiability.}
+\begin{table*}[t]
+\centering
+\tablebodyfont\small
+\begin{tabular}{p{0.95\textwidth}}
+\toprule
+\textbf{Algorithm 1: Parameter Identification and Downstream Spatial Interaction Framework} \\
+\midrule
+\textbf{Input}: Source cities spatial data $\{\mathbf{X}^{(c)}, \mathbf{T}^{(c)}\}$; Target city spatial features $\mathbf{X}^{(t)}$; Target city aggregate distance distribution $\{b_k\}_{k=1}^{K}$ \\
+\textbf{Output}: Identified deterrence parameters $\hat{\theta}^{(t)} = (\hat{\alpha}, \hat{\beta})$ and predicted target OD matrix $\mathbf{\hat{T}}^{(t)}$ \\
+\midrule
+\textbf{Phase 1: Parameter Identification (Scientific Inference Layer)} \\
+1. Compute geometric spatial exposure $E(b)$ for target city using spatial layout $\mathbf{X}^{(t)}$ via Eq.~(\ref{eq:predicted_prob_mle}). \\
+2. Recover latent Tanner parameters $(\hat{\alpha}, \hat{\beta})$ by minimizing cross-entropy $H(\mathbf{b}, \boldsymbol{\pi}_\theta)$ via Eq.~(\ref{eq:optimization_obj}). \\
+\midrule
+\textbf{Phase 2: Spatial Interaction Generation (Mobility Generation Layer)} \\
+3. Predict target city origin production: $\hat{O}_i^{(t)} = g(\mathbf{x}_i^{(t)})$. \\
+4. Compute target city destination attraction: $\hat{A}_j^{(t)} = \frac{1}{2} [\mathrm{minmax}(P_j^{(t)}) + \mathrm{minmax}(\mathrm{POI}_j^{(t)})]$. \\
+5. Generate downstream OD flows $\hat{T}_{ij}^{(t)}$ using Eq.~(\ref{eq:predicted_flow_mle}) with inferred parameters $(\hat{\alpha}, \hat{\beta})$. \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
-\textbf{Evidence:} The probabilistic derivation in Section~\ref{sec:obs_objects} and Section~\ref{sec:representation_likelihood} provides mathematical proof of Prediction 1. Equation~(\ref{eq:predicted_prob_mle}) proves that applying operator $\mathcal{P}$ yields discrete bin distribution $\pi_b(\theta)$ that explicitly isolates behavioral deterrence $f(d_b; \theta)$ from structural spatial exposure $E(b)$. Furthermore, Eq.~(\ref{eq:multinomial_loglik}) demonstrates that aggregate distance histograms induce a Multinomial log-likelihood whose score equations $\nabla_\theta \log \mathcal{L}(\theta; \mathbf{y}) = 0$ uniquely identify Tanner parameters $\theta = (\alpha, \beta)$.
+\subsection{Connection to Observation Theory}
+PIGF provides the concrete algorithmic instantiation of Observation Theory. Phase 1 maps aggregate telemetry onto parameter space via cross-entropy minimization, while Phase 2 evaluates the predictive consequences of the identified parameters.
 
-\subsection{Validation of Prediction 2: Statistical Evidence Equivalence for Parameter Identification}\label{sec:pred2}
-\textbf{Prediction 2:} \emph{The aggregate travel-distance observation space induces essentially the same statistical evidence for identifying distance-decay parameters as the complete origin--destination observation space.}
+\section{Empirical Validation}\label{sec:results}
 
-\textbf{Evidence:} We evaluate parameter recovery across 25 held-out target metropolitan areas by comparing parameters identified from aggregate distance representations ($\theta_{\text{hist}}$) against reference parameters calibrated on complete LODES OD matrices ($\theta_{\text{OD}}$).
+\subsection{Data \& Experimental Setup}
+We evaluate the framework across 50 US metropolitan areas using LODES commuting origin--destination matrices, OpenStreetMap land-use features, and Meta Movement Distribution Maps (MDM) telemetry. The dataset is partitioned into 25 training source cities and 25 held-out target cities.
 
-As shown in Table~\ref{tab:decay_recovery_merged}, recovered power-law exponent $\alpha$ exhibits strong consistency with reference OD parameters ($r = 0.909$, median relative error $1.7\%$, 100\% of cities within $\pm 10\%$). Exponential decay rate $\beta$ shows a tight absolute margin of error (MAE $= 0.0026$). Figure~\ref{fig:tanner_comparison} illustrates that deterrence curves generated by parameters identified from aggregate representations closely track reference curves calibrated on complete OD matrices.
+\subsection{Prediction 1: Likelihood Derivation \& Recovery Accuracy}\label{sec:pred1}
+\textbf{Prediction 1:} \emph{A valid likelihood function can be derived directly from aggregate travel-distance observations to enable parameter inference.}
+
+\textbf{Evidence:} Section~\ref{sec:representation_likelihood} provides mathematical proof of Prediction 1. Equation~(\ref{eq:predicted_prob_mle}) isolates behavioral deterrence from structural spatial exposure, while Eq.~(\ref{eq:multinomial_loglik}) proves that aggregate distance histograms induce a well-defined Multinomial log-likelihood whose score equations uniquely identify Tanner parameters $\theta = (\alpha, \beta)$.
+
+\subsection{Prediction 2: Parameter Consistency}\label{sec:pred2}
+\textbf{Prediction 2:} \emph{Parameters identified from aggregate distance observations are statistically consistent with parameters calibrated from complete OD interactions.}
+
+\textbf{Evidence:} We compare parameters identified from aggregate distance representations ($\theta_{\text{hist}}$) against reference parameters calibrated on complete LODES OD matrices ($\theta_{\text{OD}}$) across 25 target cities.
+
+As shown in Table~\ref{tab:decay_recovery_merged}, recovered power-law exponent $\alpha$ exhibits strong structural consistency with reference OD parameters ($r = 0.909$, median relative error $1.7\%$, 100\% of cities within $\pm 10\%$). Exponential decay rate $\beta$ shows a tight absolute margin of error (MAE $= 0.0026$). Figure~\ref{fig:tanner_comparison} illustrates that deterrence curves generated by aggregate-identified parameters closely track reference curves calibrated on complete OD matrices.
 
 \begin{table*}[t]
 \centering
@@ -241,7 +281,7 @@ Exponential rate ($\beta$) & 0.427 & 0.0026 & 0.0\% & 72.0\% & Tight absolute er
 \end{figure*}
 
 \subsubsection{Case Study: Meta Movement Distribution Maps Telemetry}
-To test Prediction 2 under real-world telemetry constraints, parameters were identified using 3-bin travel-distance fractions from Meta Movement Distribution Maps (\texttt{Meta MDM (3-Bin)}). Under oracle outflow conditions, models using Meta MDM identified parameters achieve a mean Common Part of Commuters (CPC) of 0.7080, compared to 0.7348 for 3-bin LODES histograms and 0.7403 for 20-bin LODES histograms (Table~\ref{tab:meta_prior_evaluation}). Histogram bin compression from 20 bins to 3 bins causes only a minor CPC reduction ($-0.0055$), confirming that coarse aggregate representations preserve sufficient statistical information for parameter identification.
+To test Prediction 2 under real-world telemetry constraints, parameters were identified using 3-bin travel-distance fractions from Meta Movement Distribution Maps (\texttt{Meta MDM (3-Bin)}). Under oracle outflow conditions, models using Meta MDM identified parameters achieve a mean Common Part of Commuters (CPC) of 0.7080, compared to 0.7348 for 3-bin LODES histograms and 0.7403 for 20-bin LODES histograms (Table~\ref{tab:meta_prior_evaluation}). Bin compression from 20 to 3 bins causes only a minor CPC reduction ($-0.0055$), confirming that coarse aggregate representations preserve sufficient statistical information for parameter identification.
 
 \begin{table*}[t]
 \centering
@@ -260,49 +300,12 @@ Reference Calibration & Complete OD matrix  & 0.7411 & Reference \\
 \end{tabular*}
 \end{table*}
 
-\subsection{Interlude: Enabling Bridge Components for Spatial Interaction Generation}\label{sec:bridge_components}
-Having established parameter identification in Section~\ref{sec:pred2}, evaluating downstream predictive consequences requires constructing complete spatial interaction matrices. For this purpose, two enabling bridge components are introduced:
-1. \textbf{Origin Production Estimation ($\hat{O}_i$):} Predicted using a Gradient Boosting Decision Tree (GBDT) model $g(\mathbf{x}_i)$ trained on source cities using 6 core macroscopic features: population ($P_i$), POI count ($\mathrm{POI}_i$), zone area ($\mathrm{Area}_i$), population density ($\rho_{\text{pop}, i}$), POI density ($\rho_{\text{poi}, i}$), and road density ($\mathrm{rd}_i$).
-2. \textbf{Destination Attraction Estimation ($\hat{A}_j$):} Derived using a training-free, scale-invariant attraction heuristic:
-\begin{equation}\label{eq:attraction_heuristic}
-\hat{A}_j = \frac{1}{2} \left[ \mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j) \right].
-\end{equation}
+\subsection{Prediction 3: Predictive Equivalence}\label{sec:pred3}
+\textbf{Prediction 3:} \emph{Inferred distance-decay parameters preserve the predictive consequences of the underlying spatial interaction model in downstream OD matrix reconstruction.}
 
-Substituting identified deterrence parameters $\hat{\theta}$ and bridge estimates $\hat{O}_i, \hat{A}_j$ into the gravity formulation yields predicted OD flows:
-\begin{equation}\label{eq:predicted_flow_mle}
-\hat{T}_{ij} = \hat{O}_i \frac{\hat{A}_j \, f(d_{ij}; \hat{\theta})}{\sum_{k} \hat{A}_k \, f(d_{ik}; \hat{\theta})}.
-\end{equation}
+\textbf{Evidence:} We evaluate downstream flow predictions generated using aggregate-identified parameters against baseline models across 25 held-out target cities (Table~\ref{tab:multibaseline_comparison}).
 
-These bridge components serve strictly as downstream enabling tools to evaluate predictive consequences, keeping the scientific contribution focused on parameter identification.
-
-\begin{table*}[t]
-\centering
-\tablebodyfont\small
-\begin{tabular}{p{0.95\textwidth}}
-\toprule
-\textbf{Algorithm 1: Parameter Identification and Downstream Spatial Interaction Framework} \\
-\midrule
-\textbf{Input}: Source cities spatial data $\{\mathbf{X}^{(c)}, \mathbf{T}^{(c)}\}$; Target city spatial features $\mathbf{X}^{(t)}$; Target city aggregate distance distribution $\{b_k\}_{k=1}^{K}$ \\
-\textbf{Output}: Identified deterrence parameters $\hat{\theta}^{(t)} = (\hat{\alpha}, \hat{\beta})$ and predicted target OD matrix $\mathbf{\hat{T}}^{(t)}$ \\
-\midrule
-\textbf{Phase 1: Parameter Identification (Scientific Inference Layer)} \\
-1. Compute geometric spatial exposure $E(b)$ for target city using spatial layout $\mathbf{X}^{(t)}$ via Eq.~(\ref{eq:exposure}). \\
-2. Recover latent Tanner parameters $(\hat{\alpha}, \hat{\beta})$ by minimizing cross-entropy $H(\mathbf{b}, \boldsymbol{\pi}_\theta)$ via Eq.~(\ref{eq:optimization_obj}). \\
-\midrule
-\textbf{Phase 2: Spatial Interaction Generation (Mobility Generation Layer)} \\
-3. Predict target city origin production: $\hat{O}_i^{(t)} = g(\mathbf{x}_i^{(t)})$. \\
-4. Compute target city destination attraction: $\hat{A}_j^{(t)} = \frac{1}{2} [\mathrm{minmax}(P_j^{(t)}) + \mathrm{minmax}(\mathrm{POI}_j^{(t)})]$. \\
-5. Generate downstream OD flows $\hat{T}_{ij}^{(t)}$ using Eq.~(\ref{eq:predicted_flow_mle}) with inferred parameters $(\hat{\alpha}, \hat{\beta})$. \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
-\subsection{Validation of Prediction 3: Preservation of Predictive Consequences}\label{sec:pred3}
-\textbf{Prediction 3:} \emph{Deterrence parameters identified from aggregate travel-distance representations preserve downstream predictive capability in spatial interaction modeling.}
-
-\textbf{Evidence:} We evaluate downstream flow predictions generated using aggregate-identified parameters against baseline models across 25 held-out target cities (Table~\ref{tab:multibaseline_comparison}). Downstream flow predictions serve as a measurement of predictive consequences rather than an engineering end in itself.
-
-Under oracle outflow control, a Two One-Sided Test (TOST) confirms that spatial interaction models using Meta MDM identified decay parameters (CPC 0.7337) achieve statistical equivalence with models calibrated on complete local OD surveys (CPC 0.7382) within an equivalence margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$). Furthermore, models using aggregate-identified parameters statistically outperform parameter-free Radiation baselines ($p < 10^{-6}$).
+Under oracle outflow control, a Two One-Sided Test (TOST) confirms that spatial interaction models using Meta MDM identified decay parameters (CPC 0.7337) achieve statistical equivalence with models calibrated on complete local OD surveys (CPC 0.7382) within an equivalence margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$). Furthermore, models using aggregate-identified parameters statistically outperform parameter-free Radiation baselines ($p < 10^{-6}$). Figure~\ref{fig:scatter_flow} illustrates predicted vs. observed flow agreement.
 
 \begin{table*}[t]
 \centering
@@ -333,9 +336,7 @@ Radiation Model & 0.4851 & 0.0516 & Param-free & No \\
 \end{table*}
 
 \subsubsection{Game-Theoretic Information Attribution}
-To quantify the predictive contribution of the identified distance-decay parameters relative to structural bridge components, we conduct a game-theoretic Shapley value analysis \citep{shapley1953value} across all $2^3 = 8$ component coalitions (Table~\ref{tab:ablation}). Relative to a uniform flow baseline (CPC 0.4263), distance-decay behavior $f(d)$ contributes a mean CPC gain of 0.2258 (accounting for \textbf{85.8\% of total predictive gain}), whereas attraction $A_j$ contributes 7.9\% (0.0208) and production $O_i$ contributes 6.4\% (0.0167) (Figure~\ref{fig:shapley_attribution}).
-
-This attribution demonstrates that distance-decay parameters represent the primary predictive mechanism in spatial interaction modeling, explaining why aggregate travel-distance representations preserve downstream predictive consequences.
+To quantify the predictive contribution of identified parameters, we conduct a game-theoretic Shapley value analysis \citep{shapley1953value} across all $2^3 = 8$ coalitions (Table~\ref{tab:ablation}). Relative to a uniform flow baseline (CPC 0.4263), distance-decay behavior $f(d)$ contributes a mean CPC gain of 0.2258 (accounting for \textbf{85.8\% of total predictive gain}), whereas attraction $A_j$ contributes 7.9\% (0.0208) and production $O_i$ contributes 6.4\% (0.0167) (Figure~\ref{fig:shapley_attribution}).
 
 \begin{table*}[t]
 \centering
@@ -377,36 +378,33 @@ Origin Production $O_i$ & -3.6\% & 0.0167 & 6.4\% \\
   \label{fig:scatter_flow}
 \end{figure*}
 
+\subsection{Robustness \& Morphology Analysis}
+Parameter recovery remains consistent across diverse urban morphologies, ranging from monocentric dense hubs (e.g., Boston) to polycentric sprawled metros (e.g., Atlanta), demonstrating robust parameter identification regardless of spatial layout.
+
 \section{Discussion}\label{sec:discussion}
 
-\subsection{Philosophical Implication: Paradigm Shift to Information Sufficiency}\label{sec:paradigm_shift}
-The core discovery of this study marks a paradigm shift in urban mobility science: moving from the conventional **Data Richness Paradigm** to the proposed **Information Sufficiency Paradigm**.
+\subsection{Theoretical Implications: Information Sufficiency Paradigm}\label{sec:paradigm_shift}
+The core discovery of this study marks a paradigm shift in urban mobility science: moving from the conventional \textbf{Data Richness Paradigm} to the proposed \textbf{Information Sufficiency Paradigm}.
 
-For decades, mobility modeling has operated under the assumption that disaggregate trajectory records or complete origin--destination matrices are inherently necessary, viewing aggregate summaries as compromised fallbacks. Observation Theory demonstrates that data is merely a vehicle for information. An observation space $\mathcal{H}$ does not need to store individual spatial coordinates; it only needs to preserve sufficient Fisher information $\mathcal{I}(\theta)$ to identify model parameters. By proving that aggregate travel-distance distributions satisfy Fisher information sufficiency, this study establishes that privacy-preserving telemetry is an information-preserving observation space for spatial interaction modeling.
+For decades, mobility modeling has operated under the assumption that disaggregate trajectory records or complete origin--destination matrices are inherently necessary. Observation Theory demonstrates that data is merely a vehicle for information. An observation space $\mathcal{H}$ does not need to store individual spatial coordinates; it only needs to preserve sufficient Fisher information $\mathcal{I}(\theta)$ to identify model parameters.
 
-\subsection{Methodological & Practical Implications}
-Methodologically, this work establishes a \textbf{new observation strategy for statistically principled mobility inference}. Practically, it provides a viable pathway for spatial interaction modeling in data-scarce regions, privacy-sensitive jurisdictions, and rapidly growing urban areas where comprehensive travel surveys are unaffordable or legally restricted.
+\subsection{Practical Implications \& Zero-Shot Applications}
+Practically, this framework enables zero-shot spatial interaction modeling in data-scarce regions, privacy-sensitive jurisdictions, and rapidly growing urban areas where comprehensive travel surveys are unaffordable or legally restricted.
 
-\subsection{Explicit Scope and Limitations}
-To prevent overreaching claims, we define explicit boundaries:
-\begin{enumerate}
-    \item \textbf{No Claim of Individual Behavior Preservation:} This study does *not* claim to model individual traveler psychology, decision-making processes, or activity choices.
-    \item \textbf{No Claim of Universal Transferability:} Parameter identification is evaluated within the distance-decay structure of the assumed spatial interaction model; we do not claim universal cross-cultural transferability without local aggregate telemetry.
-    \item \textbf{Model-Dependent Identification:} Findings demonstrate *information preservation for parameter identification under the assumed distance-deterrence mobility model*, not total recovery of all urban spatial dynamics.
-\end{enumerate}
+\subsection{Limitations \& Future Research Program}\label{sec:research_program}
+We define explicit limitations: parameter identification is evaluated within the distance-decay structure of the assumed spatial interaction model, and does not claim individual psychological modeling.
 
-\subsection{The Observation Theory Research Program}\label{sec:research_program}
-Rather than an isolated modeling technique, this study initiates a multi-stage **Observation Theory Research Program**:
+This study initiates a multi-stage \textbf{Observation Theory Research Program}:
 \begin{itemize}
-    \item \textbf{Paper 1 (Present Study): Behavioral Inference Layer} – Proving parameter identification of distance decay $\theta$ from aggregate travel-distance representations.
-    \item \textbf{Paper 2: Structural Inference Layer} – Testing the hypothesis that open spatial features preserve sufficient structural information to infer production $O_i$ and attraction $A_j$ without travel surveys.
-    \item \textbf{Paper 3: Environmental Generation & Behavior Transfer} – Modeling how urban infrastructure causally generates parameter vector $\theta$ ($\text{Urban Structure} \to \text{Accessibility} \to \theta$).
-    \item \textbf{Paper 4: Zero-Shot Policy & Scenario Simulation} – Deploying Observation Theory foundation models for urban policy, transit expansion, and disaster response forecasting under zero-shot conditions.
+    \item \textbf{Paper 1 (Present Study): Behavioral Inference Layer} -- Proving parameter identification of distance decay $\theta$ from aggregate travel-distance representations.
+    \item \textbf{Paper 2: Structural Inference Layer} -- Testing the hypothesis that open spatial features preserve sufficient structural information to infer production $O_i$ and attraction $A_j$ without travel surveys.
+    \item \textbf{Paper 3: Environmental Generation \& Behavior Transfer} -- Modeling how urban infrastructure causally generates parameter vector $\theta$ ($\text{Urban Structure} \to \text{Accessibility} \to \theta$).
+    \item \textbf{Paper 4: Zero-Shot Policy \& Scenario Simulation} -- Deploying Observation Theory foundation models for urban policy, transit expansion, and disaster response forecasting under zero-shot conditions.
 \end{itemize}
 
 \section{Conclusion}\label{sec:conclusion}
 
-Rather than asking how to reconstruct complete OD matrices from big data, this study asks what information is fundamentally required to identify mobility models. By formalizing an Observation Theory of Mobility Inference, establishing the Observation Sufficiency Principle, and deriving the probabilistic observation model connecting spatial interaction processes to aggregate distance representations, we demonstrated parameter identification equivalence between complete OD matrices and aggregate distance distributions across 50 US metropolitan areas. Downstream spatial interaction predictions using aggregate-identified parameters achieved statistical equivalence with local OD-calibrated models, with distance friction accounting for 85.8\% of total predictive gain. These findings confirm that aggregate travel-distance distributions constitute an information-preserving observation space for distance-decay parameter identification.
+Rather than asking how to reconstruct complete OD matrices from big data, this study asks what information is fundamentally required to identify mobility models. By formalizing Observation Theory, establishing the Observation Sufficiency Principle, and deriving the probabilistic observation model connecting spatial interaction processes to aggregate distance representations, we demonstrated parameter identification equivalence between complete OD matrices and aggregate distance distributions across 50 US metropolitan areas. Downstream spatial interaction predictions using aggregate-identified parameters achieved statistical equivalence with local OD-calibrated models, with distance friction accounting for 85.8\% of total predictive gain. These findings confirm that aggregate travel-distance distributions constitute an information-preserving observation space for distance-decay parameter identification.
 
 \clearpage
 \begin{appendices}
