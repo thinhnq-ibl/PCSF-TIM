@@ -23,7 +23,7 @@
 \author*[1]{\fnm{Thinh} \sur{Nguyen}}\email{nqt900@gmail.com}
 \affil*[1]{\orgname{Aarista Technologies}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 
-\abstract{Accurate origin--destination (OD) flow estimation is fundamental to transportation planning, accessibility analysis, infrastructure assessment, and urban decision-making. Gravity-model calibration requires identifying city-specific distance-deterrence parameters from observed OD interactions. Although privacy-preserving aggregate mobility data are increasingly available, it remains unknown whether aggregate travel-distance distributions preserve sufficient statistical information for parameter identification without observing OD interactions. This study investigates whether latent distance-deterrence parameters can be identified directly from aggregate travel-distance distributions without observed OD interactions. Aggregate travel-distance distributions are extracted from Meta Movement Distribution Maps and formulated within a multinomial likelihood framework to infer latent distance-deterrence parameters. The recovered parameters are subsequently used to calibrate a gravity model for OD estimation. The inferred parameters closely match locally calibrated references and produce statistically comparable OD prediction performance across multiple metropolitan areas without requiring target-city OD observations. The findings demonstrate that aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters. Building on this finding, the proposed probabilistic calibration framework enables transferable and privacy-preserving gravity-model calibration for data-scarce cities using only aggregate mobility observations.}
+\abstract{Accurate origin--destination (OD) flow estimation is fundamental to transportation planning, accessibility analysis, infrastructure assessment, and urban decision-making. Gravity-model calibration traditionally requires identifying city-specific distance-deterrence parameters from complete observed OD matrices. Although privacy-preserving aggregate mobility data are increasingly available, it remains unknown whether aggregate travel-distance distributions preserve sufficient statistical information for parameter identification without observing OD interactions. This study investigates whether latent distance-deterrence parameters can be identified directly from aggregate travel-distance distributions. Aggregate travel-distance distributions are extracted from Meta Movement Distribution Maps and formulated within a multinomial likelihood framework to infer latent distance-deterrence parameters. The inferred parameters closely match locally calibrated references and produce statistically comparable OD prediction performance across multiple metropolitan areas without requiring target-city OD observations. The findings demonstrate that aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters. Building on this finding, the proposed probabilistic calibration framework enables transferable and privacy-preserving gravity-model calibration for data-scarce cities using only aggregate mobility observations.}
 
 \keywords{Spatial interaction, distance deterrence, gravity models, aggregate mobility data, parameter identification, zero-shot calibration, privacy-preserving mobility}
 
@@ -31,42 +31,17 @@
 
 \section{Introduction}
 
-\subsection{Background}
 Accurate origin--destination (OD) flow estimation is fundamental to transportation planning, accessibility analysis, infrastructure assessment, and urban decision-making~\citep{barbosa2018human,gonzalez2008understanding,song2010limits}. Spatial interaction modeling represents the core analytical engine for estimating population mobility patterns across urban spaces. Gravity models~\citep{wilson1971,tanner1961} provide one of the most widely used probabilistic formulations of spatial interaction because they explicitly characterize how travel demand emerges from the interplay between origin production, destination attractiveness, and distance deterrence. Their predictive capability, however, depends critically on identifying appropriate city-specific distance-deterrence parameters.
 
-\subsection{Observation Challenge}
 The fundamental bottleneck in spatial interaction modeling lies in observation rather than model formulation. Identifying distance-deterrence parameters traditionally requires observing complete origin--destination flow matrices or individual mobility trajectories. However, comprehensive travel surveys are expensive and conducted infrequently~\citep{egu2020comparable,hussain2021transit}, while trajectory records are tightly restricted by data privacy regulations and commercial licensing~\citep{de2013unique}. Consequently, conventional calibration methods fail in data-scarce urban regions worldwide because the necessary origin--destination observations are unavailable.
 
-\subsection{Opportunity from Aggregate Mobility}
-Aggregate mobility products—including Meta's Movement Distribution Maps (MDM)~\citep{MetaMovementDistributionMaps}—are becoming increasingly available across global platforms and regions, providing privacy-preserving summaries of population travel patterns without revealing origin--destination pairs. Aggregate travel-distance distributions remove origin--destination identities while preserving the statistical distribution of travel distances across an urban area, suggesting a fundamentally different observation layer for spatial interaction systems.
+Aggregate mobility products—including Meta's Movement Distribution Maps (MDM)~\citep{MetaMovementDistributionMaps}—are becoming increasingly available across global platforms and regions, providing privacy-preserving summaries of population travel patterns without revealing origin--destination pairs. Aggregate travel-distance distributions remove origin--destination identities while preserving the statistical distribution of travel distances across an urban area, suggesting a fundamentally different observation layer for spatial interaction systems. Existing studies have demonstrated that aggregate mobility products are valuable for descriptive travel analysis, accessibility assessment, and epidemiological monitoring~\citep{oliver2020mobile,buckee2020aggregated,pappalardo2023analytical}. Whether aggregate travel-distance distributions preserve sufficient statistical information for identifying latent spatial interaction parameters without observing origin--destination interactions, however, has not been established. Resolving this fundamental observation gap forms the central focus of this study.
 
-\subsection{Knowledge Gap}
-Existing studies have demonstrated that aggregate mobility products are valuable for descriptive travel analysis, accessibility assessment, and epidemiological monitoring~\citep{oliver2020mobile,buckee2020aggregated,pappalardo2023analytical}. Whether aggregate travel-distance distributions preserve sufficient statistical information for identifying latent spatial interaction parameters without observing origin--destination interactions, however, has not been established. Resolving this fundamental observation gap forms the central focus of this study.
+This study is founded on the central scientific hypothesis that \emph{aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters}. To systematically evaluate this hypothesis, we test three sequential scientific expectations. First, aggregate travel-distance observations induce a statistically valid multinomial likelihood for identifying latent distance-deterrence parameters. Second, building on this likelihood, distance-deterrence parameters identified from aggregate travel-distance distributions are statistically consistent with reference parameters calibrated from complete origin--destination interactions. Third, building on parameter consistency, distance-deterrence parameters identified from aggregate observations preserve the downstream predictive performance of gravity-model calibration in unobserved target cities.
 
-\subsection{Central Hypothesis}
-This study is founded on the following central scientific hypothesis:
-\begin{quote}
-\emph{Aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters.}
-\end{quote}
+The scientific contributions of this study operate through a logical dependency structure across three distinct layers. At the core layer (\textbf{Layer 1 — Scientific Discovery}), we demonstrate that aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters without observing origin--destination interactions. Building on this discovery (\textbf{Layer 2 — Methodological Contribution}), we establish a probabilistic parameter-identification framework to infer latent distance-deterrence parameters directly from aggregate travel-distance observations and integrate them into gravity-model calibration. Finally (\textbf{Layer 3 — Practical Contribution}), we enable transferable, survey-free, and privacy-preserving gravity-model calibration for data-scarce cities lacking target-city OD observations.
 
-\subsection{Three Predictions}
-To systematically evaluate this hypothesis, we construct a sequential chain of three testable scientific predictions:
-\begin{enumerate}
-    \item \textbf{Prediction 1 (Statistical Identifiability):} Aggregate travel-distance observations induce a statistically valid multinomial likelihood for identifying latent distance-deterrence parameters.
-    \item \textbf{Prediction 2 (Parameter Consistency):} Building on Prediction~1, distance-deterrence parameters identified from aggregate travel-distance distributions are statistically consistent with reference parameters calibrated from complete origin--destination interactions.
-    \item \textbf{Prediction 3 (Predictive Consequence):} Building on Prediction~2, distance-deterrence parameters identified from aggregate observations preserve the downstream predictive performance of gravity-model calibration in unobserved target cities.
-\end{enumerate}
-
-\subsection{Contributions}
-The scientific contributions of this study operate through a logical dependency structure across three distinct layers:
-\begin{enumerate}
-    \item \textbf{Layer 1 — Scientific Discovery (Core Contribution):} We demonstrate that aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters without observing origin--destination interactions.
-    \item \textbf{Layer 2 — Methodological Contribution:} Building on this discovery, we establish a probabilistic parameter-identification framework to infer latent distance-deterrence parameters directly from aggregate travel-distance observations and integrate them into gravity-model calibration.
-    \item \textbf{Layer 3 — Practical Contribution:} Building on this framework, we enable transferable, survey-free, and privacy-preserving gravity-model calibration for data-scarce cities lacking target-city OD observations.
-\end{enumerate}
-
-\subsection{Paper Organization}
-The remainder of this paper is organized as follows: Section~\ref{sec:related_work} reviews related work on spatial interaction modeling, parameter identification, aggregate mobility representations, and survey-free prediction. Section~\ref{sec:problem_formulation} formulates gravity calibration as a probabilistic parameter-identification problem under aggregate observations. Section~\ref{sec:probabilistic_framework} presents the proposed probabilistic parameter-identification framework. Section~\ref{sec:results} empirically evaluates the three predictions across 50 US metropolitan areas. Section~\ref{sec:discussion} discusses scientific implications, scope, limitations, and future directions. Section~\ref{sec:conclusion} concludes the paper.
+The remainder of this paper is organized as follows. Section~\ref{sec:related_work} reviews related work on spatial interaction modeling, parameter identification, aggregate mobility representations, and survey-free prediction. Section~\ref{sec:probabilistic_framework} presents the proposed probabilistic parameter-identification framework, establishing its mathematical formulation across five distinct layers. Section~\ref{sec:results} empirically evaluates the three scientific expectations across 50 US metropolitan areas. Section~\ref{sec:discussion} discusses scientific implications, scope, limitations, and future directions. Section~\ref{sec:conclusion} concludes the paper.
 
 \begin{table*}[t]
 \centering
@@ -125,57 +100,35 @@ Gravity-Informed Neural Models \citep{rong2023odgn} & Partial & Limited & Yes & 
 
 \section{Related Work}\label{sec:related_work}
 
-\subsection{Spatial Interaction Modeling under Limited Observations}
-Spatial interaction modeling is essential for travel demand forecasting, accessibility assessment, and urban policy evaluation. Classical spatial interaction frameworks estimate mobility through gravity models \citep{wilson1971} or radiation formulations \citep{Simini2012universal}, while recent neural approaches leverage spatial representations learned from mobility data \citep{simini2021,transgm2026}. Despite structural differences, existing models overwhelmingly rely on observed OD flows or trajectory records to calibrate distance-deterrence parameters or train spatial interaction functions \citep{lenormand2016systematic}.
+Spatial interaction modeling has long relied on classical frameworks such as gravity formulations~\citep{wilson1971} or parameter-free radiation models~\citep{Simini2012universal} for travel demand forecasting, accessibility assessment, and urban policy evaluation. In recent years, deep learning and graph neural networks (e.g., DeepGravity~\citep{simini2021}, TransGM~\citep{transgm2026}, and GODDAG~\citep{Rong2023goddag}) have significantly expanded spatial representation capacity by learning complex interactions from high-dimensional spatial covariates. Despite these methodological advances, existing approaches overwhelmingly share a fundamental data dependency: they require observed origin--destination flow matrices or detailed individual trajectory records to calibrate distance-deterrence parameters or train spatial interaction functions~\citep{lenormand2016systematic}.
 
-\subsection{Distance-Deterrence Parameter Identification}
-Distance-deterrence functions quantify how travel impedance reduces interaction probability \citep{tanner1961,fotheringham1989spatial,sen1995gravity}. Parameter identification is therefore a prerequisite for gravity-model calibration. Existing calibration methods assume that complete OD matrices are available to fit deterrence parameters via maximum likelihood or least squares \citep{flowerdew1982method,rubioherrero2023sparse}. Methodological research has focused primarily on fitting techniques given complete OD data, leaving unaddressed whether parameters can be identified without observed OD matrices.
+Distance-deterrence functions quantify how physical spatial impedance reduces interaction probability between locations~\citep{tanner1961,fotheringham1989spatial,sen1995gravity}. Parameter identification is therefore a prerequisite for gravity-model calibration. Traditional calibration methodologies assume that complete OD matrices are accessible to fit deterrence parameters via maximum likelihood estimation or least squares regression~\citep{flowerdew1982method,rubioherrero2023sparse}. Consequently, methodological research has historically focused on fitting techniques given complete OD observations, leaving largely unexamined whether these critical friction parameters can be identified when origin--destination interactions are unobserved.
 
-\subsection{Aggregate Mobility as a Statistical Representation}
-Privacy-preserving aggregate mobility products summarize population movement into trip-length distributions while discarding location identities \citep{oliver2020mobile,buckee2020aggregated,pappalardo2023analytical}. While prior work uses aggregate summaries for descriptive visualization or epidemic tracking, aggregate travel-distance distributions preserve distributional information governing collective movement patterns. Whether this representation retains sufficient information for parameter identification remains largely unexplored.
-
-\subsection{Survey-Free Mobility Modeling}
-Recent transferable mobility models (e.g., DeepGravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, GODDAG \citep{Rong2023goddag}) reduce data requirements in target domains by learning mobility representations in source cities. However, these models assume that spatial interaction parameters or deep representations are learned from observed OD interactions before transfer. None directly identify distance-deterrence parameters from aggregate observations alone.
-
-\subsection{Research Gap: From Observation to Parameter Identification}
-While existing research focuses on predicting flows under data constraints, a fundamental scientific question remains unresolved: \emph{Can aggregate travel-distance distributions themselves provide sufficient statistical information for identifying latent distance-deterrence parameters?} This paper addresses this gap by formulating gravity calibration as a probabilistic parameter-identification problem under aggregate observations.
-
-\section{Problem Formulation}\label{sec:problem_formulation}
-
-Rather than estimating origin--destination (OD) flows directly, this study formulates gravity calibration as the problem of identifying latent distance-deterrence parameters $\theta$ from aggregate travel-distance observations. 
-
-The primary objective is to identify city-specific distance-deterrence parameters $\theta = (\alpha, \beta) \in \Theta$ from a spatial representation layer $\mathbf{b} = (b_1, \dots, b_K)^\top \in \Delta^{K-1}$ summarizing population travel-distance distributions. The secondary objective is to evaluate whether the identified parameters $\hat{\theta}$ enable survey-free gravity-model calibration to predict unobserved target-city OD matrices $\hat{\mathbf{T}}$.
+Concurrently, privacy-preserving aggregate mobility products summarize population movement into trip-length distributions while discarding location identities~\citep{oliver2020mobile,buckee2020aggregated,pappalardo2023analytical}. While prior work predominantly utilizes aggregate summaries for descriptive visualization or epidemiological tracking, aggregate travel-distance distributions preserve essential distributional information governing collective movement patterns. While transferable neural architectures attempt to reduce target-domain data requirements by learning representations in source cities, they still assume that spatial interaction parameters are derived from observed OD matrices prior to transfer. Table~\ref{tab:literature_comparison} contrasts existing paradigms against our proposed approach. A fundamental scientific question thus remains unresolved: \emph{Can aggregate travel-distance distributions themselves provide sufficient statistical information for identifying latent distance-deterrence parameters?} This study directly addresses this research gap.
 
 \section{Probabilistic Parameter-Identification Framework}\label{sec:probabilistic_framework}
 
-\subsection{Layer 1 — Physical Spatial Interaction Model}
-We consider a spatial interaction system comprising $N_{\text{zones}}$ geographic zones. The expected physical flow $T_{ij}$ from origin zone $i$ to destination zone $j$ under a singly constrained gravity specification is expressed in separable form:
+Rather than attempting to estimate origin--destination (OD) flows directly from aggregate data, we formulate gravity calibration as a probabilistic parameter-identification problem. The primary objective is to identify city-specific distance-deterrence parameters $\theta = (\alpha, \beta) \in \Theta$ from a spatial representation layer $\mathbf{b} = (b_1, \dots, b_K)^\top \in \Delta^{K-1}$ summarizing population travel-distance distributions. The secondary objective is to evaluate whether the identified parameters $\hat{\theta}$ enable survey-free gravity-model calibration to predict unobserved target-city OD matrices $\hat{\mathbf{T}}$. To achieve this, the proposed framework is structured across five distinct mathematical layers.
+
+\textbf{Layer 1 — Physical Spatial Interaction Model:} We consider a spatial interaction system comprising $N_{\text{zones}}$ geographic zones. The expected physical flow $T_{ij}$ from origin zone $i$ to destination zone $j$ under a singly constrained gravity specification is expressed in separable form:
 \begin{equation}\label{eq:gravity_separable}
 T_{ij} = O_i \frac{A_j f(d_{ij}; \theta)}{\sum_{m} A_m f(d_{im}; \theta)},
 \end{equation}
 where $O_i$ represents origin trip production, $A_j$ represents destination attraction, $d_{ij}$ is inter-zonal travel distance, and $f(d; \theta)$ is a distance-deterrence function parameterized by vector $\theta = (\alpha, \beta)$. Distance-deterrence parameters summarize the probability structure governing travel impedance and constitute the principal quantities to be identified.
 
-\subsection{Layer 2 — Observation Model}
-Let $\mathcal{P}: \mathbb{R}^{N_{\text{zones}} \times N_{\text{zones}}} \to \mathbb{R}^K$ denote a linear observation operator projecting origin--destination interactions onto a $K$-bin aggregate distance distribution:
+\textbf{Layer 2 — Observation Model:} Let $\mathcal{P}: \mathbb{R}^{N_{\text{zones}} \times N_{\text{zones}}} \to \mathbb{R}^K$ denote a linear observation operator projecting origin--destination interactions onto a $K$-bin aggregate distance distribution:
 \begin{equation}\label{eq:obs_operator}
 n_k = \mathcal{P}(\mathbf{T})_k = \sum_{i=1}^{N_{\text{zones}}} \sum_{j=1}^{N_{\text{zones}}} T_{ij} \cdot \mathbf{1}(d_{ij} \in \text{bin } k), \quad k \in \{1, \dots, K\},
 \end{equation}
 where $n_k$ is the empirical trip count in distance bin $k$, and $N = \sum_{k=1}^K n_k$ is total trip volume. The normalized observation vector $\mathbf{b} = (b_1, \dots, b_K)^\top \in \Delta^{K-1}$ with $b_k = n_k / N$ represents empirical trip-length probabilities across distance intervals $k$.
 
-\subsection{Layer 3 — Probabilistic Observation Model}
-The model-predicted probability $\pi_k(\theta)$ of a trip falling within distance bin $k$ under parameter vector $\theta$ is derived by marginalizing joint trip probabilities across zonal pairs:
+\textbf{Layer 3 — Probabilistic Observation Model:} The model-predicted probability $\pi_k(\theta)$ of a trip falling within distance bin $k$ under parameter vector $\theta$ is derived by marginalizing joint trip probabilities across zonal pairs:
 \begin{equation}\label{eq:predicted_prob_mle}
 \pi_k(\theta) = \sum_{i,j: d_{ij} \in \text{bin } k} \frac{O_i A_j f(d_{ij}; \theta)}{\sum_m A_m f(d_{im}; \theta)} = \frac{E_k \, f(d_k; \theta)}{\sum_{k'} E_{k'} \, f(d_{k'}; \theta)},
 \end{equation}
-where $E_k = \sum_{i,j: d_{ij} \in \text{bin } k} O_i A_j$ is the geometric spatial exposure of bin $k$, $d_k$ is the representative midpoint distance of bin $k$, and $f(d; \theta) = (d + \delta)^{-\alpha} \exp(-\beta d)$ denotes the Tanner deterrence function with adaptive offset $\delta = 0.5 \bar{R}_{\mathrm{zone}}$.
+where $E_k = \sum_{i,j: d_{ij} \in \text{bin } k} O_i A_j$ is the geometric spatial exposure of bin $k$, $d_k$ is the representative midpoint distance of bin $k$, and $f(d; \theta) = (d + \delta)^{-\alpha} \exp(-\beta d)$ denotes the Tanner deterrence function with adaptive offset $\delta = 0.5 \bar{R}_{\mathrm{zone}}$. Assuming $N$ total trips are sampled independently from categorical probability vector $\boldsymbol{\pi}(\theta) = (\pi_1(\theta), \dots, \pi_K(\theta))^\top$, the aggregate observation count vector $N \mathbf{b}$ follows a multinomial distribution: $N \mathbf{b} \sim \mathrm{Multinomial}(N, \boldsymbol{\pi}(\theta))$.
 
-Assuming $N$ total trips are sampled independently from categorical probability vector $\boldsymbol{\pi}(\theta) = (\pi_1(\theta), \dots, \pi_K(\theta))^\top$, the aggregate observation count vector $N \mathbf{b}$ follows a multinomial distribution:
-\begin{equation}\label{eq:multinomial_dist}
-N \mathbf{b} \sim \mathrm{Multinomial}(N, \boldsymbol{\pi}(\theta)).
-\end{equation}
-
-\subsection{Layer 4 — Likelihood & Statistical Parameter Identification}
-The log-likelihood of observing aggregate distribution $\mathbf{b}$ given parameter vector $\theta$ is:
+\textbf{Layer 4 — Likelihood \& Parameter Identification:} The log-likelihood of observing aggregate distribution $\mathbf{b}$ given parameter vector $\theta$ is:
 \begin{equation}\label{eq:multinomial_loglik}
 \log \mathcal{L}(\theta; \mathbf{b}) = C + N \sum_{k=1}^K b_k \log \pi_k(\theta) = C - N \left[ H(\mathbf{b}) + D_{\mathrm{KL}}(\mathbf{b} \parallel \boldsymbol{\pi}(\theta)) \right],
 \end{equation}
@@ -183,13 +136,9 @@ where $C$ is a constant, $H(\mathbf{b})$ is empirical entropy, and $D_{\mathrm{K
 \begin{equation}\label{eq:optimization_obj}
 \hat{\theta} = \arg\min_{\theta \in \Theta} H(\mathbf{b}, \boldsymbol{\pi}(\theta)) = \arg\min_{\theta \in \Theta} \left[ -\sum_{k=1}^K b_k \log \pi_k(\theta) \right].
 \end{equation}
-Because cross-entropy optimization relies only on relative proportions $b_k$, parameter identification is scale-invariant to total trip volume $N$.
+Because cross-entropy optimization relies only on relative proportions $b_k$, parameter identification is scale-invariant to total trip volume $N$. Origin trip production $\hat{O}_i$ and destination attraction $\hat{A}_j$ are estimated independently using open demographic features and spatial indicators $\hat{A}_j = \frac{1}{2} [\mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j)]$.
 
-\subsection{Origin Production & Destination Attraction Estimation}
-Origin trip production $\hat{O}_i$ is estimated independently of distance-deterrence identification using spatial machine learning models $g(\mathbf{x}_i)$ trained on open demographic and infrastructure features. Destination attraction $\hat{A}_j$ is specified independently using composite spatial indicators $\hat{A}_j = \frac{1}{2} [\mathrm{minmax}(P_j) + \mathrm{minmax}(\mathrm{POI}_j)]$, preserving the decoupled structure of the gravity model.
-
-\subsection{Layer 5 — Downstream Flow Prediction}
-Once latent deterrence parameters $\hat{\theta} = (\hat{\alpha}, \hat{\beta})$ are identified via Eq.~(\ref{eq:optimization_obj}), downstream spatial interaction flows $\hat{T}_{ij}$ are generated by combining the identified parameters with independent production and attraction estimates:
+\textbf{Layer 5 — Downstream Flow Prediction:} Once latent deterrence parameters $\hat{\theta} = (\hat{\alpha}, \hat{\beta})$ are identified via Eq.~(\ref{eq:optimization_obj}), downstream spatial interaction flows $\hat{T}_{ij}$ are generated by combining the identified parameters with independent production and attraction estimates:
 \begin{equation}\label{eq:predicted_flow_mle}
 \hat{T}_{ij} = \hat{O}_i \frac{\hat{A}_j f(d_{ij}; \hat{\theta})}{\sum_k \hat{A}_k f(d_{ik}; \hat{\theta})}.
 \end{equation}
@@ -217,29 +166,15 @@ Algorithm 1 summarizes the parameter identification and downstream interaction w
 \end{tabular}
 \end{table*}
 
-\subsection{Theoretical Properties}
-The framework satisfies four fundamental theoretical properties:
-\begin{enumerate}
-    \item \textbf{Property 1 (Statistical Identifiability):} Latent distance-deterrence parameters can be statistically identified under the assumed observation model provided the observation vector preserves $K-1 \ge p$ degrees of freedom.
-    \item \textbf{Property 2 (Observation Efficiency):} Complete origin--destination flow observations are unnecessary for identifying city-specific deterrence parameters.
-    \item \textbf{Property 3 (Decomposability):} Distance deterrence, origin production, and destination attraction are estimated independently.
-    \item \textbf{Property 4 (Transferability):} The identified parameters enable survey-free gravity calibration in unseen cities without local target-city OD surveys.
-\end{enumerate}
+The framework satisfies four fundamental theoretical properties: (1) \textbf{Property 1 (Statistical Identifiability):} Latent distance-deterrence parameters can be statistically identified under the assumed observation model provided the observation vector preserves $K-1 \ge p$ degrees of freedom; (2) \textbf{Property 2 (Observation Efficiency):} Complete origin--destination flow observations are unnecessary for identifying city-specific deterrence parameters; (3) \textbf{Property 3 (Decomposability):} Distance deterrence, origin production, and destination attraction are estimated independently; and (4) \textbf{Property 4 (Transferability):} The identified parameters enable survey-free gravity calibration in unseen cities without local target-city OD surveys.
 
 \section{Experimental Validation}\label{sec:results}
 
-\subsection{Experimental Protocol}
-We evaluate the proposed probabilistic parameter-identification framework across 50 US metropolitan areas using LODES commuting origin--destination matrices, OpenStreetMap land-use features, and Meta Movement Distribution Maps (MDM) telemetry. The dataset is partitioned into 25 source cities and 25 held-out target cities. Each empirical experiment directly evaluates one of the three scientific predictions derived from the central hypothesis.
+We evaluate the proposed framework across 50 US metropolitan areas using LODES commuting origin--destination matrices, OpenStreetMap land-use features, and Meta Movement Distribution Maps (MDM) telemetry. The dataset is partitioned into 25 source training cities and 25 held-out target cities. Empirical evaluation proceeds systematically from statistical identifiability to parameter consistency and downstream predictive performance.
 
-\subsection{Prediction 1 — Statistical Identifiability}\label{sec:pred1}
-\textbf{Prediction 1:} \emph{Aggregate travel-distance observations induce a statistically valid likelihood for identifying latent distance-deterrence parameters.}
+First, evaluating statistical identifiability, the probabilistic observation model (Eq.~\ref{eq:multinomial_loglik}) establishes a multinomial log-likelihood over aggregate travel-distance bins. Across synthetic distributions and real Meta MDM telemetry, cross-entropy minimization consistently identifies latent Tanner parameters $\theta = (\alpha, \beta)$ without observing origin--destination pairs, confirming statistical identifiability across all target metropolitan areas.
 
-\textbf{Evidence:} The probabilistic observation model (Eq.~\ref{eq:multinomial_loglik}) establishes a multinomial log-likelihood over aggregate travel-distance bins. As shown across synthetic and real Meta MDM telemetry, cross-entropy minimization consistently identifies latent Tanner parameters $\theta = (\alpha, \beta)$ without observing origin--destination pairs, confirming statistical identifiability across all target metropolitan areas.
-
-\subsection{Prediction 2 — Parameter Consistency}\label{sec:pred2}
-\textbf{Prediction 2:} \emph{Parameters identified from aggregate travel-distance distributions are statistically consistent with those calibrated from complete OD interactions.}
-
-\textbf{Evidence:} We compare parameters recovered from aggregate distance distributions ($\theta_{\text{hist}}$) against reference parameters calibrated on complete LODES OD matrices ($\theta_{\text{OD}}$) across 25 target cities. As shown in Table~\ref{tab:decay_recovery_merged}, recovered power-law exponent $\alpha$ exhibits strong structural consistency with reference OD parameters ($r = 0.909$, median relative error $1.7\%$, 100\% of cities within $\pm 10\%$). Exponential decay rate $\beta$ shows a tight absolute margin of error (MAE $= 0.0026$). Figure~\ref{fig:tanner_comparison} demonstrates that aggregate-identified deterrence curves closely match full OD calibration.
+Next, evaluating parameter consistency, we compare parameters recovered from aggregate distance distributions ($\theta_{\text{hist}}$) against reference parameters calibrated on complete LODES OD matrices ($\theta_{\text{OD}}$) across 25 target cities. As shown in Table~\ref{tab:decay_recovery_merged}, recovered power-law exponent $\alpha$ exhibits strong structural consistency with reference OD parameters ($r = 0.909$, median relative error $1.7\%$, 100\% of cities within $\pm 10\%$). Exponential decay rate $\beta$ shows a tight absolute margin of error (MAE $= 0.0026$). Figure~\ref{fig:tanner_comparison} demonstrates that aggregate-identified deterrence curves closely match full OD calibration. Furthermore, in a case study on privacy-preserving Meta MDM telemetry (3-bin fractions), models using Meta MDM identified parameters achieve a downstream Common Part of Commuters (CPC) of 0.7080 under oracle outflows (Table~\ref{tab:meta_prior_evaluation}), confirming that coarse aggregate representations preserve sufficient statistical information for parameter identification.
 
 \begin{table*}[t]
 \centering
@@ -281,9 +216,6 @@ Exponential rate ($\beta$) & 0.427 & 0.0026 & 0.0\% & 72.0\% & Tight absolute er
   \label{fig:tanner_comparison}
 \end{figure*}
 
-\subsubsection{Case Study: Meta Movement Distribution Maps Telemetry}
-To evaluate Prediction 2 under privacy-preserving real-world telemetry, parameters were identified using 3-bin travel-distance fractions from Meta Movement Distribution Maps (\texttt{Meta MDM (3-Bin)}). Under oracle outflow control, models using Meta MDM identified parameters achieve a mean Common Part of Commuters (CPC) of 0.7080, compared to 0.7348 for 3-bin ground-truth histograms and 0.7403 for 20-bin ground-truth histograms (Table~\ref{tab:meta_prior_evaluation}). Bin compression from 20 to 3 bins induces a minor CPC drop ($-0.0055$), confirming that coarse aggregate representations preserve sufficient statistical information for parameter identification.
-
 \begin{table*}[t]
 \centering
 \tablebodyfont\small
@@ -301,10 +233,9 @@ Reference Calibration & Complete OD matrix  & 0.7411 & Reference \\
 \end{tabular*}
 \end{table*}
 
-\subsection{Prediction 3 — Predictive Consequence}\label{sec:pred3}
-\textbf{Prediction 3:} \emph{Parameters identified from aggregate observations preserve the downstream predictive performance of gravity-model calibration.}
+Finally, evaluating downstream predictive consequence, we assess flow predictions generated using aggregate-identified parameters against baseline models across 25 held-out target cities (Table~\ref{tab:multibaseline_comparison}). Under oracle outflow control, a Two One-Sided Test (TOST) confirms that gravity models using Meta MDM identified deterrence parameters (CPC 0.7337) achieve statistical equivalence with models calibrated on complete local OD surveys (CPC 0.7382) within an equivalence margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$). Furthermore, models using aggregate-identified parameters statistically outperform parameter-free Radiation baselines ($p < 10^{-6}$). Figure~\ref{fig:scatter_flow} illustrates predicted vs. observed flow agreement.
 
-\textbf{Evidence:} We evaluate downstream flow predictions generated using aggregate-identified parameters against baseline models across 25 held-out target cities (Table~\ref{tab:multibaseline_comparison}). Under oracle outflow control, a Two One-Sided Test (TOST) confirms that gravity models using Meta MDM identified deterrence parameters (CPC 0.7337) achieve statistical equivalence with models calibrated on complete local OD surveys (CPC 0.7382) within an equivalence margin of $\Delta_{\text{eq}} = 0.01$ CPC ($p = 0.00326$). Furthermore, models using aggregate-identified parameters statistically outperform parameter-free Radiation baselines ($p < 10^{-6}$). Figure~\ref{fig:scatter_flow} illustrates predicted vs. observed flow agreement.
+To validate component necessity, game-theoretic Shapley value analysis~\citep{shapley1953value} across all $2^3 = 8$ coalitions (Table~\ref{tab:ablation}) reveals that relative to a uniform flow baseline (CPC 0.4263), the distance-deterrence component $f(d)$ accounts for a mean CPC gain of 0.2258 (\textbf{85.8\% of total predictive gain}), whereas destination attraction $A_j$ contributes 7.9\% (0.0208) and origin production $O_i$ contributes 6.4\% (0.0167) (Figure~\ref{fig:shapley_attribution}). Parameter identification remains highly stable across heterogeneous urban morphologies, from monocentric cores (e.g., Boston) to polycentric sprawling regions (e.g., Atlanta).
 
 \begin{table*}[t]
 \centering
@@ -333,9 +264,6 @@ Radiation Model & 0.4851 & 0.0516 & Param-free & No \\
 \bottomrule
 \end{tabular*}
 \end{table*}
-
-\subsection{Methodological Validation}
-To validate component necessity, we conduct game-theoretic Shapley value analysis \citep{shapley1953value} across all $2^3 = 8$ coalitions (Table~\ref{tab:ablation}). Relative to a uniform flow baseline (CPC 0.4263), distance-deterrence component $f(d)$ accounts for a mean CPC gain of 0.2258 (\textbf{85.8\% of total predictive gain}), whereas destination attraction $A_j$ contributes 7.9\% (0.0208) and origin production $O_i$ contributes 6.4\% (0.0167) (Figure~\ref{fig:shapley_attribution}).
 
 \begin{table*}[t]
 \centering
@@ -377,61 +305,21 @@ Origin Production $O_i$ & -3.6\% & 0.0167 & 6.4\% \\
   \label{fig:scatter_flow}
 \end{figure*}
 
-\subsection{Robustness Analysis}
-Parameter identification remains stable across heterogeneous urban morphology types, ranging from dense monocentric cores (e.g., Boston) to polycentric sprawling regions (e.g., Atlanta), demonstrating robust inference regardless of spatial layout.
-
-\subsection{Scientific Findings}
-In summary, empirical evaluation yields three key scientific findings:
-\begin{enumerate}
-    \item \textbf{Finding 1 (Statistical Identifiability):} Aggregate travel-distance distributions preserve sufficient statistical information to identify latent distance-deterrence parameters without observing OD interactions.
-    \item \textbf{Finding 2 (Parameter Consistency):} Parameters identified from aggregate observations are statistically consistent with those calibrated from complete OD interactions.
-    \item \textbf{Finding 3 (Predictive Consequence):} The identified parameters preserve the predictive consequences of gravity-model calibration, enabling competitive survey-free OD estimation.
-\end{enumerate}
-
 \section{Discussion}\label{sec:discussion}
 
-\subsection{Scientific Implications: Statistical Information in Aggregate Observations}\label{sec:paradigm_shift}
 The principal scientific finding of this study is that aggregate travel-distance distributions preserve sufficient statistical information to identify latent distance-deterrence parameters despite discarding origin--destination identities. Rather than demonstrating that aggregate data reconstruct point-to-point flows directly, this work shows that aggregate observations remain statistically informative for parameter identification. This suggests a conceptual shift: survey-free mobility modeling should be viewed as a parameter-identification problem under limited observations rather than solely as a flow reconstruction task.
 
-\subsection{Methodological Implications}
-Methodologically, the proposed framework separates parameter identification from downstream flow generation. Aggregate observations function as statistical evidence for parameter inference rather than incomplete flow measurements. The clear decomposition into distance deterrence, origin production, and destination attraction enhances model interpretability and cross-city transferability.
+Methodologically and practically, the proposed framework separates parameter identification from downstream flow generation. Aggregate observations function as statistical evidence for parameter inference rather than incomplete flow measurements. The clear decomposition into distance deterrence, origin production, and destination attraction enhances model interpretability and cross-city transferability. Practically, the framework enables survey-free gravity-model calibration for data-scarce urban regions lacking observed OD matrices, where privacy preservation emerges as a direct architectural consequence of operating solely on aggregate distance summaries.
 
-\subsection{Practical Implications}
-Practically, the framework enables survey-free gravity-model calibration for data-scarce urban regions lacking observed OD matrices. Privacy preservation is a direct architectural consequence of operating solely on aggregate distance summaries rather than an added post-processing constraint.
+We delineate the scope and limitations of this investigation. Scientifically, the study focuses on identifying distance-deterrence parameters within gravity-model formulations; individual psychological travel choices remain outside the probabilistic framework. Methodologically, the formulation is established under singly constrained gravity assumptions. Experimentally, validation is conducted across 50 metropolitan areas within one national context, and the observation model considers one-dimensional aggregate travel-distance distributions.
 
-\subsection{Scope and Limitations}
-We delineate the scope of this investigation:
-\begin{enumerate}
-    \item \textbf{Scientific Scope:} The study focuses on identifying distance-deterrence parameters within gravity-model formulations. Individual psychological travel choices remain outside the current probabilistic framework.
-    \item \textbf{Methodological Scope:} The formulation is established under singly constrained gravity assumptions. Extension to alternative spatial interaction models remains future work.
-    \item \textbf{Experimental Scope:} Validation is conducted across 50 metropolitan areas within one national context; broader cross-national evaluation is warranted.
-    \item \textbf{Observation Scope:} The framework considers one-dimensional aggregate travel-distance distributions; multi-dimensional aggregate representations may yield additional information.
-\end{enumerate}
-
-\subsection{Future Directions}
-Promising future research directions include:
-\begin{itemize}
-    \item Formulating higher-dimensional aggregate mobility representations.
-    \item Exploring alternative distance-deterrence functional forms.
-    \item Developing general probabilistic observation models for non-gravity interaction systems.
-    \item Integrating probabilistic parameter identification with physics-informed neural architectures.
-    \item Expanding empirical validation across heterogeneous international mobility systems.
-\end{itemize}
-
-\subsection{Final Vision}
-The broader implication extends beyond gravity-model calibration: statistical parameter identification depends more fundamentally on the information preserved by an observation than on the physical completeness of the observation itself. Future progress in survey-free spatial interaction modeling may stem less from attempting to reconstruct complete origin--destination matrices and more from discovering which aggregate observations retain sufficient statistical information for identifying latent distance-deterrence parameters.
+Looking forward, promising research directions include formulating higher-dimensional aggregate mobility representations, exploring alternative distance-deterrence functional forms, and developing general probabilistic observation models for non-gravity interaction systems. The broader scientific implication extends beyond gravity calibration: statistical parameter identification depends more fundamentally on the information preserved by an observation than on the physical completeness of the observation itself. Future progress in spatial interaction modeling may stem less from attempting to reconstruct complete origin--destination matrices and more from discovering which aggregate observations retain sufficient statistical information for identifying latent distance-deterrence parameters.
 
 \section{Conclusion}\label{sec:conclusion}
 
-Gravity-model calibration traditionally depends on complete observed origin--destination matrices, creating severe data bottlenecks in data-scarce regions. This study investigates whether aggregate travel-distance observations alone preserve sufficient statistical information for identifying latent distance-deterrence parameters without observing origin--destination interactions.
+Gravity-model calibration traditionally depends on complete observed origin--destination matrices, creating severe data bottlenecks in data-scarce regions. Empirical evaluation across 50 US metropolitan areas confirms our primary scientific discovery: aggregate travel-distance distributions preserve sufficient statistical information to identify city-specific distance-deterrence parameters without observing origin--destination interactions. Downstream spatial interaction flows generated using identified parameters achieve statistical equivalence with local OD-calibrated models within a 0.01 CPC margin, with distance friction accounting for 85.8\% of total predictive gain.
 
-Empirical evaluation across 50 US metropolitan areas confirms the primary scientific discovery: aggregate travel-distance distributions preserve sufficient statistical information to identify city-specific distance-deterrence parameters. Parameters identified from aggregate travel-distance distributions are statistically consistent with those calibrated from complete OD interactions and preserve the predictive consequences of gravity-model calibration.
-
-Building on this discovery, the proposed probabilistic calibration framework identifies latent distance-deterrence parameters directly from aggregate travel-distance observations and integrates them with independently estimated production and attraction components for survey-free gravity calibration. Downstream spatial interaction flows generated using identified parameters achieve statistical equivalence with local OD-calibrated models within a 0.01 CPC margin, with distance friction accounting for 85.8\% of total predictive gain.
-
-Conceptually, these results reframe survey-free spatial interaction modeling. Rather than treating aggregate mobility products as incomplete substitutes for OD matrices, they should be regarded as statistical observation layers whose information content determines parameter identifiability.
-
-Although limited to gravity formulations and aggregate travel-distance distributions, this study points toward an observation-centered perspective for spatial interaction science: future progress may depend less on reconstructing complete origin--destination matrices and more on identifying aggregate observations that preserve essential statistical information governing distance-dependent spatial interactions.
+Conceptually, these results reframe survey-free spatial interaction modeling. Rather than treating aggregate mobility products as incomplete substitutes for OD matrices, they should be regarded as statistical observation layers whose information content determines parameter identifiability. This study points toward an observation-centered perspective for spatial interaction science: future progress may depend less on reconstructing complete origin--destination matrices and more on identifying aggregate observations that preserve essential statistical information governing distance-dependent spatial interactions.
 
 \clearpage
 \begin{appendices}
@@ -469,7 +357,7 @@ SHAP feature rankings for origin-production estimation.
 Performance stability across varying spatial feature dimensionalities.
 
 \subsection{Observation Exposure Correction}
-Mathematical demonstration of geometric spatial exposure correction $E(b)$ in preventing spatial layout bias.
+Mathematical demonstration of geometric spatial exposure correction $E_k$ in preventing spatial layout bias.
 
 \subsection{Adaptive Self-loop Parameter}
 Validation of adaptive zonal offset $\delta = 0.5 \bar{R}_{\mathrm{zone}}$.
