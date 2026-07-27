@@ -23,7 +23,7 @@
 \author*[1]{\fnm{Thinh} \sur{Nguyen}}\email{nqt900@gmail.com}
 \affil*[1]{\orgname{Aarista Technologies}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 
-\abstract{Accurate origin--destination (OD) flow estimation is fundamental to transportation planning, accessibility analysis, infrastructure assessment, and urban decision-making. Gravity-model calibration traditionally requires identifying city-specific distance-deterrence parameters from complete observed OD matrices. Although privacy-preserving aggregate mobility data are increasingly available, it remains unknown whether aggregate travel-distance distributions preserve sufficient statistical information for parameter identification without observing OD interactions. This study investigates whether latent distance-deterrence parameters can be identified directly from aggregate travel-distance distributions. Aggregate travel-distance distributions are extracted from Meta Movement Distribution Maps and formulated within a multinomial likelihood framework to infer latent distance-deterrence parameters. The inferred parameters closely match locally calibrated references and produce statistically comparable OD prediction performance across multiple metropolitan areas without requiring target-city OD observations. The findings demonstrate that aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters. Building on this finding, the proposed probabilistic calibration framework enables transferable and privacy-preserving gravity-model calibration for data-scarce cities using only aggregate mobility observations.}
+\abstract{Accurate origin--destination (OD) flow estimation is fundamental to transportation planning, accessibility analysis, infrastructure assessment, and urban decision-making. Gravity-model calibration traditionally requires identifying city-specific distance-deterrence parameters from complete observed OD matrices. Although privacy-preserving aggregate mobility data are increasingly available, it remains unknown whether aggregate travel-distance distributions preserve sufficient statistical information for parameter identification without observing OD interactions. This study investigates whether latent distance-deterrence parameters can be identified directly from aggregate travel-distance distributions. Aggregate travel-distance distributions are extracted from Meta Movement Distribution Maps and formulated within a multinomial likelihood framework to infer latent distance-deterrence parameters. The inferred parameters closely match locally calibrated references and produce statistically comparable OD prediction performance across multiple metropolitan areas without requiring target-city OD observations. The findings provide statistical evidence that aggregate travel-distance distributions preserve sufficient statistical information to identify latent city-specific distance-deterrence parameters. Building on this finding, the proposed probabilistic calibration framework enables transferable and privacy-preserving gravity-model calibration for data-scarce cities using only aggregate mobility observations.}
 
 \keywords{Spatial interaction, distance deterrence, gravity models, aggregate mobility data, parameter identification, zero-shot calibration, privacy-preserving mobility}
 
@@ -58,6 +58,7 @@ DeepGravity \citep{simini2021} & No & Limited & Yes & Low & No \\
 Graph-based OD (MPGCN) \citep{hu2020mpgcn} & No & Limited & Yes & Low & No \\
 Graph Transfer Learning (GODDAG) \citep{Rong2023goddag} & Partial & Yes & Yes & Low & No \\
 Gravity-Informed Neural Models \citep{rong2023odgn} & Partial & Limited & Yes & Medium & Partial \\
+Physics-Informed Neural Models \citep{transgm2026, neurogravity2026} & Yes & Yes & Yes & Medium & Yes \\
 \textbf{Proposed Identification Framework} & Yes & Yes & No & High & Yes \\
 \bottomrule
 \end{tabular*}
@@ -100,7 +101,7 @@ Gravity-Informed Neural Models \citep{rong2023odgn} & Partial & Limited & Yes & 
 
 \section{Related Work}\label{sec:related_work}
 
-Spatial interaction modeling has long relied on classical frameworks such as gravity formulations~\citep{wilson1971} or parameter-free radiation models~\citep{Simini2012universal} for travel demand forecasting, accessibility assessment, and urban policy evaluation. In recent years, deep learning and graph neural networks (e.g., DeepGravity~\citep{simini2021}, TransGM~\citep{transgm2026}, and GODDAG~\citep{Rong2023goddag}) have significantly expanded spatial representation capacity by learning complex interactions from high-dimensional spatial covariates. Despite these methodological advances, existing approaches overwhelmingly share a fundamental data dependency: they require observed origin--destination flow matrices or detailed individual trajectory records to calibrate distance-deterrence parameters or train spatial interaction functions~\citep{lenormand2016systematic}.
+Spatial interaction modeling has long relied on classical frameworks such as gravity formulations~\citep{wilson1971} or parameter-free radiation models~\citep{Simini2012universal} for travel demand forecasting, accessibility assessment, and urban policy evaluation. In recent years, deep learning and graph neural networks (e.g., DeepGravity~\citep{simini2021}, neuroGravity~\citep{neurogravity2026}, TransGM~\citep{transgm2026}, and GODDAG~\citep{Rong2023goddag}) have significantly expanded spatial representation capacity by learning complex interactions from high-dimensional spatial covariates. Despite these methodological advances, existing approaches overwhelmingly share a fundamental data dependency: they require observed origin--destination flow matrices or detailed individual trajectory records to calibrate distance-deterrence parameters or train spatial interaction functions~\citep{lenormand2016systematic}.
 
 Distance-deterrence functions quantify how physical spatial impedance reduces interaction probability between locations~\citep{tanner1961,fotheringham1989spatial,sen1995gravity}. Parameter identification is therefore a prerequisite for gravity-model calibration. Traditional calibration methodologies assume that complete OD matrices are accessible to fit deterrence parameters via maximum likelihood estimation or least squares regression~\citep{flowerdew1982method,rubioherrero2023sparse}. Consequently, methodological research has historically focused on fitting techniques given complete OD observations, leaving largely unexamined whether these critical friction parameters can be identified when origin--destination interactions are unobserved.
 
@@ -166,7 +167,7 @@ Algorithm 1 summarizes the parameter identification and downstream interaction w
 \end{tabular}
 \end{table*}
 
-The framework satisfies four fundamental theoretical properties: (1) \textbf{Property 1 (Statistical Identifiability):} Latent distance-deterrence parameters can be statistically identified under the assumed observation model provided the observation vector preserves $K-1 \ge p$ degrees of freedom; (2) \textbf{Property 2 (Observation Efficiency):} Complete origin--destination flow observations are unnecessary for identifying city-specific deterrence parameters; (3) \textbf{Property 3 (Decomposability):} Distance deterrence, origin production, and destination attraction are estimated independently; and (4) \textbf{Property 4 (Transferability):} The identified parameters enable survey-free gravity calibration in unseen cities without local target-city OD surveys.
+The framework satisfies four fundamental properties: (1) \textbf{Property 1 (Empirical Identifiability):} Latent distance-deterrence parameters can be empirically identified under the assumed observation model provided the observation vector preserves $K-1 \ge p$ degrees of freedom; (2) \textbf{Property 2 (Observation Efficiency):} Complete origin--destination flow observations are unnecessary for identifying city-specific deterrence parameters; (3) \textbf{Property 3 (Decomposability):} Distance deterrence, origin production, and destination attraction are estimated independently; and (4) \textbf{Property 4 (Transferability):} The identified parameters enable survey-free gravity calibration in unseen cities without local target-city OD surveys.
 
 \section{Experimental Validation}\label{sec:results}
 
@@ -412,8 +413,8 @@ Formal proof that cross-entropy minimization is equivalent to maximum likelihood
 \subsection{Observation Exposure Correction}
 Mathematical derivation of geometric exposure normalization $E_k$.
 
-\subsection{Statistical Identifiability Discussion}
-Fisher Information non-singularity conditions for Tanner deterrence identification.
+\subsection{Empirical Identifiability Evidence}
+Empirical and statistical evidence supporting Tanner deterrence identification.
 
 \subsection{Computational Complexity}
 Theoretical computational bounds for parameter identification algorithms.
