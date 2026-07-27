@@ -53,7 +53,7 @@ module D
 | **D1**   | Human mobility data have undergone a fundamental transition from survey-based observations to continuously collected digital traces. | Barbosa et al. (2018) ; González et al. (2008) ; Song et al. (2010)                     | Barbosa et al. (2018) provide the most comprehensive review of this transition from household surveys toward CDRs, GPS, smart cards, LBS and social media. González et al. (2008) and Song et al. (2010) are foundational empirical studies directly enabled by digital mobility traces.                                  | None (Established knowledge).                                                                 |
 | **D2**   | Aggregate mobility datasets have become increasingly abundant and widely available.                                                  | Meta Data for Good; Google Community Mobility; Apple Mobility Trends; SafeGraph; Cuebiq; WorldPop; Open mobility datasets  | Numerous public and commercial platforms now release aggregated mobility indicators instead of individual trajectories.                       | None (Established knowledge).                                                                 |
 | **D3**   | Privacy concerns increasingly limit access to individual trajectories and complete OD matrices.                                      | GDPR; privacy-preserving mobility data literature; aggregate mobility initiatives                                          | Regulations and ethical requirements encourage releasing aggregated statistics rather than identifiable trajectories or detailed OD matrices. | Handbook emphasizes this as a fundamental scientific driver rather than merely a legal issue. |
-| **D4**   | Aggregate observations are significantly more scalable and less costly than conventional travel surveys.                             | Barbosa et al. (2018) ; Wang et al. (2019)                                                                                 | Digital mobility platforms provide frequent updates over large spatial scales at far lower cost than household travel surveys.                | None (Established knowledge).                                                                 |
+| **D4**   | Aggregate observations are significantly more scalable and less costly than conventional travel surveys.                             | Barbosa et al. (2018)                                                                                                      | Digital mobility platforms provide frequent updates over large spatial scales at far lower cost than household travel surveys.                | None (Established knowledge).                                                                 |
 | **D5**   | Modern mobility science increasingly observes populations through aggregated statistics rather than complete individual movements.   | Aggregate mobility literature; Meta; Google; Apple; open mobility datasets                                                 | Most contemporary mobility products release aggregate indicators, travel-distance summaries, visitation statistics, or mobility indices.      | Handbook unifies these datasets under the concept of **Aggregate Mobility Observations**.     |
 | **D6**   | The central scientific challenge is no longer data scarcity, but behavioural observability under aggregate observations.             | Synthesized from recent mobility literature                                                                                | Data abundance does not imply direct access to behavioural parameters because aggregation removes structural detail.                          | **Novel synthesis of the Handbook.**                                                          |
 
@@ -149,8 +149,7 @@ References
 | Ref ID | Reference                                                               | Year | Module | Vai trò                            |
 | ------ | ----------------------------------------------------------------------- | ---- | ------ | ---------------------------------- |
 | R7     | Barbosa et al. *Human Mobility: Models and Applications*                | 2018 | A–F    | Review lớn nhất về Human Mobility  |
-| R8     | Wang et al. *Urban Human Mobility: Data-Driven Modeling and Prediction* | 2019 | D, E   | Review về dữ liệu mobility         |
-| R9     | González et al. *Understanding Individual Human Mobility Patterns*      | 2008 | D      | Individual mobility                |
+| R9     | González et al. *Understanding Individual Human Mobility Patterns*      | 2008 | D, E   | Individual mobility (CDR)          |
 | R10    | Song et al. *Limits of Predictability in Human Mobility*                | 2010 | D      | Human mobility predictability      |
 
 ---
@@ -163,6 +162,8 @@ References
 | R12    | Stouffer. *Intervening Opportunities*                                 | 1940    | B      | Alternative behavioural mechanism |
 | R13    | Huff. *Defining and Estimating a Trading Area*                        | 1963    | B      | Huff Model                        |
 | R14    | Ortúzar & Willumsen. *Modelling Transport*                            | Various | C      | Behaviour calibration             |
+| R28    | Balcan et al. *Multiscale Mobility Networks and Infectious Diseases*  | 2009    | B      | Epidemic spatial model with distance-decay |
+| R29    | Lenormand et al. *Systematic Comparison of Trip Distribution Laws*    | 2016    | C, F   | Systematic comparison of gravity calibration methods |
 
 ---
 
@@ -170,11 +171,12 @@ References
 
 | Ref ID | Reference                                               | Year | Module | Vai trò                   |
 | ------ | ------------------------------------------------------- | ---- | ------ | ------------------------- |
-| R15    | Ben-Akiva & Lerman. *Discrete Choice Analysis*          | 1985 | C, H   | MLE                       |
-| R16    | Bishop. *Pattern Recognition and Machine Learning*      | 2006 | H      | Statistical inference     |
-| R17    | Murphy. *Machine Learning: A Probabilistic Perspective* | 2012 | H      | Bayesian & likelihood     |
-| R18    | Casella & Berger. *Statistical Inference*               | 2002 | H      | Classical inference       |
-| R19    | Cover & Thomas. *Elements of Information Theory*        | 1991 | H, J   | Future Information Theory |
+| R15    | Ben-Akiva & Lerman. *Discrete Choice Analysis*          | 1985 | C, H   | MLE (discrete choice)             |
+| R16    | Bishop. *Pattern Recognition and Machine Learning*      | 2006 | H      | Statistical inference             |
+| R17    | Murphy. *Machine Learning: A Probabilistic Perspective* | 2012 | H      | Bayesian & likelihood             |
+| R18    | Casella & Berger. *Statistical Inference*               | 2002 | E, H   | Classical inference; sufficiency  |
+| R19    | Cover & Thomas. *Elements of Information Theory*        | 1991 | H, J   | Future Information Theory         |
+| R30    | Flowerdew & Aitkin. *A Method of Fitting the Gravity Model Based on the Poisson Distribution* | 1982 | C | Primary reference for Poisson MLE gravity calibration |
 
 ---
 
@@ -194,9 +196,10 @@ References
 
 | Ref ID | Reference    | Year | Module  | Vai trò                     |
 | ------ | ------------ | ---- | ------- | --------------------------- |
-| R25    | Deep Gravity | 2021 | A, B, C | Gravity + Deep Learning     |
-| R26    | Imagery2Flow | 2025 | A, C    | AI mobility reconstruction  |
-| R27    | neuroGravity | 2026 | A, B, C | Physics-informed DL         |
+| R25    | Deep Gravity | 2021 | C, F   | OD prediction requiring mobility supervision |
+| R26    | Imagery2Flow | 2025 | A, F   | AI mobility reconstruction; OD supervision   |
+| R27    | neuroGravity | 2026 | A, B   | Physics-informed DL; preserves gravity decomposition |
+| R31    | TransGM      | 2026 | A, B   | Physics-informed DL; transferable gravity model      |
 
 ---
 
@@ -230,14 +233,14 @@ Các reference này **chưa dùng nhiều**, nhưng sẽ rất quan trọng.
 
 | Module | Main References         |
 | ------ | ----------------------- |
-| **A**  | R1–R7, R25–R27          |
-| **B**  | R2–R7, R11–R13, R25–R27 |
-| **C**  | R4, R14–R18, R25–R27    |
-| **D**  | R7–R10, R20–R24         |
-| **E**  | R7–R10, R19, R20–R24    |
-| **F**  | R7, R25–R27             |
-| **G**  | P1 + R2 + R25 + R27     |
-| **H**  | P2 + R15–R18            |
-| **I**  | P3                      |
-| **J**  | R19 + F1–F5             |
+| **A**  | R1–R7, R27, R31                           |
+| **B**  | R2–R7, R11–R13, R27–R28, R31              |
+| **C**  | R4, R14–R15, R18, R30, R25–R26, R29        |
+| **D**  | R7, R9–R10, R20–R24                       |
+| **E**  | R7, R9, R18, R20–R24                      |
+| **F**  | R7, R25–R26, R29                           |
+| **G**  | P1 + R2 + R27 + R31                       |
+| **H**  | P2 + R15–R19, R30                         |
+| **I**  | P3                                        |
+| **J**  | R19 + F1–F5                               |
 
