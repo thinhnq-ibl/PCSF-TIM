@@ -1,4 +1,4 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -11,10 +11,21 @@
 Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   applications. Physics Reports 734:1--74. \doi{10.1016/j.physrep.2018.01.001}
 
+\bibitem[{Bishop(2006)}]{bishop2006pattern}
+Bishop CM (2006) Pattern Recognition and Machine Learning. Springer, New York
+
 \bibitem[{Buckee et~al.(2020)Buckee, Balsari, Chan, Crosas, Dominici, Gasser,
   Grad, Grenfell, Halloran, Kraemer et~al.}]{buckee2020aggregated}
 Buckee CO, Balsari S, Chan J, et~al (2020) Aggregated mobility data could help
   fight covid-19. Science 368(6487):145--146
+
+\bibitem[{Casella and Berger(2002)}]{casella2002statistical}
+Casella G, Berger RL (2002) Statistical Inference, 2nd edn. Duxbury Press,
+  Pacific Grove, CA
+
+\bibitem[{Cover and Thomas(1991)}]{cover1991elements}
+Cover TM, Thomas JA (1991) Elements of Information Theory. John Wiley \& Sons,
+  New York, \doi{10.1002/0471200611}
 
 \bibitem[{Egu and Bonnel(2020)}]{egu2020comparable}
 Egu O, Bonnel P (2020) How comparable are origin--destination matrices
@@ -52,6 +63,11 @@ Hussain E, Bhaskar A, Chung E (2021) Transit od matrix estimation using
 Hyman GM (1969) The calibration of trip distribution models. Environment and
   Planning A 1(1):105--112. \doi{10.1068/a010105}
 
+\bibitem[{Lakens(2017)}]{lakens2017equivalence}
+Lakens D (2017) Equivalence tests: A practical primer for t tests,
+  correlations, and meta-analyses. Social Psychological and Personality Science
+  8(4):355--362. \doi{10.1177/1948550617697177}
+
 \bibitem[{Lenormand et~al.(2016)Lenormand, Bassolas, and
   Ramasco}]{lenormand2016systematic}
 Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
@@ -72,6 +88,10 @@ Merlin LA (2020) A new method using medians to calibrate single-parameter
   Blondel}]{de2013unique}
 de~Montjoye YA, Hidalgo CA, Verleysen M, et~al (2013) Unique in the crowd: The
   privacy bounds of human mobility. Scientific reports 3(1):1--5
+
+\bibitem[{Murphy(2012)}]{murphy2012machine}
+Murphy KP (2012) Machine Learning: A Probabilistic Perspective. MIT Press,
+  Cambridge, MA
 
 \bibitem[{Oliver et~al.(2020)Oliver, Lepri, Sterly, Lambiotte, Deletaille,
   De~Nadai, Letouz{\'e}, Salah, Bowman, Chen et~al.}]{oliver2020mobile}
