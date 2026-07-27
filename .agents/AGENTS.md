@@ -31,3 +31,43 @@ With:
 - Prioritize citations that strengthen the scientific narrative.
 - Avoid adding citations solely because a dataset exists.
 - Every added citation should clearly improve one of: motivation, research gap, methodological justification, or experimental reproducibility.
+
+## Rule: Evidence for Parameter Identification
+
+### Context
+The paper does **not** claim mathematical identifiability. Instead, it builds **empirical statistical evidence** that aggregate travel-length distributions (TLDs) contain sufficient information to support identification of the parameters governing collective distance-sensitive travel behaviour.
+
+### Evidence Components
+Evidence should consist of four complementary components:
+
+1. **Likelihood evidence**
+   - Well-defined optimum.
+   - Sharp and stable likelihood surface.
+
+2. **Synthetic recovery**
+   - Generate TLD from known parameters.
+   - Recover parameters accurately from the generated TLD.
+
+3. **Cross-city consistency**
+   - Independently estimate parameters for multiple cities.
+   - Results are stable and consistent across cities.
+
+4. **Downstream validation**
+   - Parameters inferred from TLD enable accurate OD reconstruction.
+   - OD reconstruction serves as validation of the inferred parameters, **not** as proof of identifiability.
+
+### Writing principle
+Always use evidence-oriented language:
+- provide statistical evidence
+- support identification
+- support the hypothesis
+- indicate
+- suggest
+- are consistent with
+
+Avoid:
+- prove
+- mathematically prove
+- uniquely determine
+- recover human mobility behaviour
+- demonstrate identifiability
