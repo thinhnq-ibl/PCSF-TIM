@@ -173,12 +173,12 @@ References
 | Ref ID | Reference                                                       | Year | BibTeX key | Hỗ trợ Module | Vai trò                                |
 | ------ | --------------------------------------------------------------- | ---- | ---------- | ------------- | -------------------------------------- |
 | R1     | Zipf, G.K. *The $P_1P_2/D$ Hypothesis: On the Intercity Movement of Persons*, Am. Sociol. Rev. 11(6) | 1946 | `zipf1946` | A             | Early sociological formalization of the gravity analogy (not its historical origin) |
-| R2     | Wilson, A.G. *A Family of Spatial Interaction Models, and Associated Developments*, Env. Plan. A | 1971 | `wilson1971` | A, B, C       | Entropy derivation, Gravity foundation |
+| R2     | Wilson, A.G. *A Family of Spatial Interaction Models, and Associated Developments*, Env. Plan. A | 1971 | `wilson1971` | A, B, C, F    | Entropy derivation, Gravity foundation |
 | R3     | Tobler, W. *A Computer Movie Simulating Urban Growth in the Detroit Region*, Econ. Geogr. | 1970 | `tobler1970computer` | B             | Source of the "First Law of Geography"; distance-decay principle |
-| R4     | Haynes & Fotheringham. *Gravity and Spatial Interaction Models*, Sage | 1984 | `haynes1984gravity` | A, B, C       | Textbook kinh điển                     |
+| R4     | Haynes & Fotheringham. *Gravity and Spatial Interaction Models*, Sage | 1984 | `haynes1984gravity` | A, B, C, F    | Textbook kinh điển                     |
 | R5     | Fotheringham & O'Kelly. *Spatial Interaction Models: Formulations and Applications*, Kluwer | 1989 | `fotheringham1989spatial` | A, B          | Spatial interaction theory             |
-| R6     | Hansen, W. *How Accessibility Shapes Land Use*, JAIP 25(2) | 1959 | `hansen1959accessibility` | B             | Accessibility & distance decay         |
-| R8     | Sen & Smith. *Gravity Models of Spatial Interaction Behavior*, Springer | 1995 | `sen1995gravity` | B, C | Statistical theory of gravity model estimation |
+| R6     | Hansen, W. *How Accessibility Shapes Land Use*, JAIP 25(2) | 1959 | `hansen1959accessibility` | B, J          | Accessibility & distance decay         |
+| R8     | Sen & Smith. *Gravity Models of Spatial Interaction Behavior*, Springer | 1995 | `sen1995gravity` | B    | Statistical theory of gravity model estimation |
 
 ---
 
@@ -186,12 +186,12 @@ References
 
 | Ref ID | Reference                                                               | Year | BibTeX key | Module | Vai trò                            |
 | ------ | ----------------------------------------------------------------------- | ---- | ---------- | ------ | ---------------------------------- |
-| R7     | Barbosa et al. *Human Mobility: Models and Applications*                | 2018 | `barbosa2018human` | A–F    | Review lớn nhất về Human Mobility  |
+| R7     | Barbosa et al. *Human Mobility: Models and Applications*                | 2018 | `barbosa2018human` | A–F, J | Review lớn nhất về Human Mobility  |
 | R9     | González et al. *Understanding Individual Human Mobility Patterns*      | 2008 | `gonzalez2008understanding` | D, E   | Individual mobility (CDR)          |
 | R10    | Song et al. *Limits of Predictability in Human Mobility*                | 2010 | `song2010limits` | D, E   | Human mobility predictability; entropy of mobility |
 | R32    | Pappalardo et al. *Future Directions in Human Mobility Science*         | 2023 | `pappalardo2023analytical` | E, D   | Agenda review; framing of mobility data |
-| R33    | Gallotti et al. *Distorted Insights from Human Mobility Data*           | 2024 | `gallotti2024distorted` | D, E, F, H | Representation choice changes inference |
-| R34    | Blondel et al. *A Survey of Results on Mobile Phone Datasets Analysis*  | 2015 | `blondel2015survey` | D, J   | Survey of CDR-based mobility observation |
+| R33    | Gallotti et al. *Distorted Insights from Human Mobility Data*           | 2024 | `gallotti2024distorted` | D, E, F, H, J | Representation choice changes inference |
+| R34    | Blondel et al. *A Survey of Results on Mobile Phone Datasets Analysis*  | 2015 | `blondel2015survey` | J      | Survey of CDR-based mobility observation |
 
 ---
 
@@ -206,7 +206,7 @@ References
 | R28    | Balcan et al. *Multiscale Mobility Networks and Infectious Diseases*  | 2009    | `balcan2009multiscale` | B      | Epidemic spatial model with a fitted gravity law |
 | R29    | Lenormand et al. *Systematic Comparison of Trip Distribution Laws and Models* | 2016 | `lenormand2016systematic` | C, F, J | Systematic comparison of trip distribution laws and calibration |
 | R35    | Martínez & Viegas. *A New Approach to Modelling Distance-Decay Functions* | 2013 | `martinez2013distance` | B, J   | Distance-decay functional forms for accessibility |
-| R48    | Liang et al. *Unraveling the Origin of Exponential Law in Intra-Urban Human Mobility* | 2013 | `liang2013unraveling` | B, G | Proves intra-urban trips decay exponentially due to urban population density decay |
+| R48    | Liang et al. *Unraveling the Origin of Exponential Law in Intra-Urban Human Mobility* | 2013 | `liang2013unraveling` | G    | Proves intra-urban trips decay exponentially due to urban population density decay |
 
 ---
 
@@ -227,7 +227,7 @@ References
 
 | Ref ID | Reference                                               | Year | BibTeX key | Module | Vai trò                   |
 | ------ | ------------------------------------------------------- | ---- | ---------- | ------ | ------------------------- |
-| R15    | Ben-Akiva & Lerman. *Discrete Choice Analysis*          | 1985 | `benakiva1985discrete` | C, H   | MLE (disaggregate choice; cited as statistical precedent only) |
+| R15    | Ben-Akiva & Lerman. *Discrete Choice Analysis*          | 1985 | `benakiva1985discrete` | C      | MLE (disaggregate choice; cited as statistical precedent only) |
 | R16    | Bishop. *Pattern Recognition and Machine Learning*      | 2006 | `bishop2006pattern` | H      | Statistical inference             |
 | R17    | Murphy. *Machine Learning: A Probabilistic Perspective* | 2012 | `murphy2012machine` | H      | Bayesian & likelihood             |
 | R18    | Casella & Berger. *Statistical Inference*, 2nd ed.      | 2002 | `casella2002statistical` | E, H, I, J | Classical inference; statistics as many-to-one maps; sufficiency |
@@ -246,7 +246,7 @@ References
 | R41    | Oliver et al. *Mobile Phone Data for Informing Public Health Actions* | 2020 | `oliver2020mobile` | C, D, F | Aggregate mobility products in practice |
 | R42    | de Montjoye et al. *Unique in the Crowd: The Privacy Bounds of Human Mobility* | 2013 | `de2013unique` | D      | Re-identifiability motivating aggregation |
 | R43    | Houssiau et al. *On the Difficulty of Achieving Differential Privacy in Practice* | 2022 | `houssiau2022dpaggregate` | D      | Privacy guarantees for aggregate location data |
-| R51    | Wang et al. *Urban Human Mobility: Data-Driven Modeling and Prediction* | 2019 | `wang2019urban` | D, E | Survey taxonomy classifying collective vs individual human mobility |
+| R51    | Wang et al. *Urban Human Mobility: Data-Driven Modeling and Prediction* | 2019 | `wang2019urban` | —    | Survey taxonomy classifying collective vs individual human mobility (available; not currently cited in claims) |
 
 > **Đã loại bỏ:** Google Community Mobility Reports và Apple Mobility Trends (cả hai chỉ công bố % thay đổi số lượt ghé thăm / yêu cầu chỉ đường, không phải OD hay phân bố quãng đường, và đã ngừng phát hành từ 2022); "GDPR" (văn bản luật, không phải reference khoa học — thay bằng R42/R43); "Nature Open Mobility Dataset paper 2024" (không xác định được tác giả/venue).
 
@@ -302,15 +302,15 @@ Bảng này phải khớp chính xác với cột *Representative References* tr
 | Module | Main References                                   |
 | ------ | ------------------------------------------------- |
 | **A**  | R1, R2, R4, R5, R7, R27, R31, R44                 |
-| **B**  | R2–R6, R8, R11–R13, R28, R30, R35, R48            |
-| **C**  | R2, R4, R7, R8, R14, R15, R25, R26, R29, R30, R36–R41, R45, R47 |
-| **D**  | R7, R9, R10, R20, R23, R33, R40–R43, R51           |
-| **E**  | R7, R9, R10, R18, R32, R33, R51                   |
-| **F**  | R7, R14, R20, R25, R26, R29, R30, R33, R36–R41, R45, R47 |
+| **B**  | R2–R7, R8, R11–R13, R28, R30, R35, R48            |
+| **C**  | R2, R4, R7, R14, R15, R25, R26, R29, R30, R36–R41, R45, R47 |
+| **D**  | R7, R9, R10, R20, R33, R40–R43                |
+| **E**  | R7, R9, R10, R18, R32, R33                        |
+| **F**  | R2, R4, R7, R14, R20, R25, R26, R29, R30, R33, R36–R41, R45, R47 |
 | **G**  | P1 + R36–R38, R48, R50                           |
 | **H**  | P2 + R16–R19, R30, R33                           |
 | **I**  | P3 + R18                                          |
-| **J**  | R13, R18, R19, R27, R29, R31, R34, R35, R45, R49 + FW1–FW6  |
+| **J**  | R6, R7, R13, R18, R19, R27, R29, R31, R33, R34, R35, R45, R49 + FW1–FW6  |
 
 ---
 
