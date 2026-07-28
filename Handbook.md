@@ -130,22 +130,38 @@ module J
 | **J2** | Formal characterization of information preservation, identifiability, and statistical sufficiency remains an open research problem. | Casella & Berger (2002); Cover & Thomas (1991) | These questions belong to statistical inference and information theory and are not resolved by the present empirical study. | Defines the principal theoretical agenda for future work. |
 | **J3** | The proposed framework may be extended to other explicitly parameterized distance-response models beyond Gravity. | Huff (1963); Hansen (1959); Martínez & Viegas (2013) | The methodology is developed using Gravity as the initial demonstration but is not conceptually restricted to Gravity alone. | Future methodological direction. |
 | **J4** | Alternative observation types may provide complementary information for parameter estimation. | Barbosa et al. (2018); Gallotti et al. (2024); Blondel et al. (2015) | Trajectories, OD matrices, travel-distance distributions and other aggregate summaries preserve different information. | Future observation framework. |
-| **J5** | Future work may investigate transferable parameter estimation across cities, temporal monitoring, and broader observation models. | Enaya et al. (2026, TransGM); Yang et al. (2026, neuroGravity); Lenormand et al. (2016) | Cross-city transfer of gravity-type models is an active direction that these directions naturally follow once aggregate parameter estimation becomes feasible. | Future application agenda. |
+| **J5** | Future work may investigate transferable parameter estimation across cities, temporal monitoring, and integration with modern OD reconstruction models trained on open geospatial data or learned through cross-city transfer. | Enaya et al. (2026, TransGM); Yang et al. (2026, neuroGravity); Xu et al. (2025, Imagery2Flow); Lenormand et al. (2016) | Transferable gravity models (neuroGravity, TransGM) and open-data OD predictors (Imagery2Flow, Deep Gravity) represent distinct but complementary directions; both naturally connect to the aggregate parameter estimation programme once it becomes feasible. | Future application agenda. |
 | **J6** | Aggregate parameter estimation provides a foundation for a broader scientific programme connecting mobility modelling, statistical inference, and information preservation. | Synthesized from Modules A–I | The present work establishes an empirical starting point while leaving broader theoretical development to future research. | **Long-term research vision of the Handbook.** |
-| **J7** | Reconstructed OD networks produced by transferable mobility models may serve as proxy knowledge for learning transferable urban structural characteristics in data-scarce contexts. | Yang et al. (2026, neuroGravity); Enaya et al. (2026, TransGM) | State-of-the-art transferable models have reconstructed OD networks for selected cities; these reconstructions can be treated as informative representations rather than ground truth, and their structural patterns may provide transferable knowledge where direct observations are unavailable. | **Future research vision — Knowledge Transfer direction.** |
+| **J7** | OD networks produced by modern mobility models—whether through cross-city transfer learning or open-data deep learning on satellite imagery—may serve as proxy knowledge for learning transferable urban structural characteristics in data-scarce contexts. | Yang et al. (2026, neuroGravity); Enaya et al. (2026, TransGM); Xu et al. (2025, Imagery2Flow) | Transferable models (neuroGravity, TransGM) and open-data OD predictors (Imagery2Flow) both produce reconstructed OD networks for cities; treated as informative representations rather than ground truth, their structural patterns may provide transferable knowledge where direct observations are unavailable. | **Future research vision — Knowledge Transfer direction.** |
 | **J8** | Combining proxy structural knowledge with the Behaviour Identification framework may enable inference of plausible OD flows for cities lacking publicly available mobility observations. | Built upon Modules G–I; J7 | The Behaviour Identification framework (Paper 1) identifies distance-response parameters from aggregate observations; extending this with transferable structural knowledge addresses cities such as Ho Chi Minh City where neither OD data nor detailed mobility surveys are publicly available. | **Future research vision — extends Paper 1 from parameter identification toward knowledge-assisted mobility reconstruction.** |
 
 ---
 
 ### Future Research Direction: Knowledge Transfer for Mobility Reconstruction in Data-Scarce Cities
 
-Many state-of-the-art transferable mobility models have reconstructed Origin–Destination (OD) networks for selected Vietnamese cities such as Hanoi and Da Nang, while large metropolitan areas including Ho Chi Minh City remain unavailable. Future research may investigate whether these reconstructed mobility networks can serve as **proxy knowledge** for learning transferable urban structural characteristics in the Vietnamese context.
+#### Positioning within the Landscape of OD Reconstruction
 
-Rather than treating the reconstructed OD networks as ground truth, they are regarded as informative representations produced by advanced transferable mobility models validated in the Vietnamese urban context. If structural patterns prove consistent across reconstructed cities, they may provide transferable knowledge for cities lacking publicly available mobility observations, while accounting for the inherent uncertainty in the reconstructed networks when transferring structural knowledge.
+Recent advances in human mobility modelling have produced several complementary approaches to OD network reconstruction, each with distinct input requirements and outputs:
 
-A key methodological challenge lies in distinguishing model-specific artefacts from genuinely transferable urban structural signals within the reconstructed networks.
+| Approach | Primary Input | Output | Requires OD supervision? |
+| --- | --- | --- | --- |
+| Deep Gravity (Simini et al., 2021) | Open urban features | OD flows | Yes |
+| Imagery2Flow (Xu et al., 2025) | Satellite imagery | OD flows | Yes |
+| neuroGravity (Yang et al., 2026) | Cross-city transfer learning | OD flows | Yes (source cities) |
+| TransGM (Enaya et al., 2026) | Cross-city transfer learning | OD flows | Yes (source cities) |
+| **This Handbook (Paper 1)** | **Aggregate travel-distance distribution + open urban structure** | **Behaviour parameters (θ)** | **No** |
 
-Combined with the Behaviour Identification framework developed in this Handbook, such transferable structural knowledge may enable the inference of plausible OD flows for previously unmodelled cities such as Ho Chi Minh City using only open urban data and aggregate mobility observations. This direction extends the Handbook from behavioural parameter identification toward knowledge-assisted mobility reconstruction for data-scarce urban environments.
+This table highlights a fundamental distinction: existing approaches—whether using satellite imagery, open urban features, or cross-city transfer—target **OD flow prediction** directly and still require observed OD data for supervision or training. The Handbook addresses a different problem: **behaviour parameter identification** from published aggregate observations, without any observed OD flows from the target city.
+
+#### Knowledge Transfer Vision
+
+Many state-of-the-art transferable mobility models have reconstructed Origin–Destination (OD) networks for selected Vietnamese cities such as Hanoi and Da Nang, while large metropolitan areas including Ho Chi Minh City remain unavailable. Similarly, open-data OD predictors such as Imagery2Flow can generate OD networks for cities with available satellite imagery. Future research may investigate whether these reconstructed networks—from either source—can serve as **proxy knowledge** for learning transferable urban structural characteristics in the Vietnamese context.
+
+Rather than treating the reconstructed OD networks as ground truth, they are regarded as informative representations produced by advanced mobility models. If structural patterns prove consistent across reconstructed cities, they may provide transferable knowledge for cities lacking publicly available mobility observations, while accounting for the inherent uncertainty in the reconstructed networks when transferring structural knowledge.
+
+A key methodological challenge lies in distinguishing model-specific artefacts from genuinely transferable urban structural signals within the reconstructed networks—a challenge that applies equally to transfer-learned networks (neuroGravity, TransGM) and imagery-based networks (Imagery2Flow).
+
+Combined with the Behaviour Identification framework developed in this Handbook, such transferable structural knowledge may enable the inference of plausible OD flows for previously unmodelled cities such as Ho Chi Minh City using only open urban data and aggregate mobility observations. This direction extends the Handbook from behavioural parameter identification toward knowledge-assisted mobility reconstruction for data-scarce urban environments, and represents a natural point of complementarity between the Handbook's aggregate parameter estimation programme and the broader landscape of modern OD reconstruction models.
 
 
 
@@ -289,7 +305,7 @@ Bảng này phải khớp chính xác với cột *Representative References* tr
 | **G**  | P1 + R36–R38                                     |
 | **H**  | P2 + R16–R19, R30, R33                           |
 | **I**  | P3 + R18                                          |
-| **J**  | R13, R18, R19, R27, R29, R31, R34, R35 + FW1–FW6  |
+| **J**  | R13, R18, R19, R27, R29, R31, R34, R35, R45 + FW1–FW6  |
 
 ---
 
