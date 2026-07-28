@@ -46,7 +46,7 @@ module C
 | **C5** | The most widely used estimation methods assume access to observed Origin–Destination flows for the study area. | Wilson (1971); Haynes & Fotheringham (1984); Ortúzar & Willumsen (2011); Flowerdew & Aitkin (1982) | Entropy, least-squares and Poisson-likelihood calibration are all defined on an observed OD matrix. | None (Established knowledge). |
 | **C6** | A classical minority tradition already calibrates deterrence functions from aggregate trip-length information rather than from the full OD matrix. | Tanner (1961); Hyman (1969); Merlin (2020) | Tanner and Hyman calibrate the deterrence parameter by matching the *mean* observed trip length; Merlin (2020) uses the median. These procedures still require observed trips from the target city and constrain only one moment of the distribution. | **Important scope correction.** Aggregate calibration is not itself new; what remains open is calibration from the *full* distributional shape with no observed trips from the target city. |
 | **C7** | Dependence on observed Origin–Destination flows limits the applicability of conventional parameter estimation when only published aggregate products are available. | Barbosa et al. (2018); Buckee et al. (2020); Oliver et al. (2020) | Aggregate mobility products generally do not release the OD interactions required by conventional estimation procedures. | **Motivates Module D.** |
-| **C8** | Existing research has largely focused on improving estimation and prediction accuracy under available mobility supervision rather than on whether published aggregate observations alone suffice for parameter estimation. | Lenormand et al. (2016); Simini et al. (2021, Deep Gravity); Atwal et al. (2025) | Most studies assume observed mobility flows are available for calibration or supervision. Yang et al. (2014) is the closest partial exception, studying commuting prediction without local calibration data, but does not estimate decay parameters from published aggregate distributions. | **Bridge to Modules D–F.** |
+| **C8** | Existing research has largely focused on improving estimation and prediction accuracy under available mobility supervision rather than on whether published aggregate observations alone suffice for parameter estimation. | Lenormand et al. (2016); Simini et al. (2021, Deep Gravity); Atwal et al. (2025); Xu et al. (2025, Imagery2Flow) | Most studies assume observed mobility flows are available for calibration or supervision, even when input features are derived from open data such as satellite imagery. Yang et al. (2014) is the closest partial exception, studying commuting prediction without local calibration data, but does not estimate decay parameters from published aggregate distributions. | **Bridge to Modules D–F.** |
 
 
 module D
@@ -79,7 +79,7 @@ module F
 | -------- | ---------------- | ------------------------- | ------------------------------------ | --------------------- |
 | **F1** | The most widely used parameter estimation methods assume access to observed Origin–Destination flows. | Wilson (1971); Haynes & Fotheringham (1984); Ortúzar & Willumsen (2011); Flowerdew & Aitkin (1982) | Classical estimation procedures are defined on observed OD interactions. | None (Established paradigm). |
 | **F2** | Modern mobility observations increasingly consist of aggregate summaries rather than complete Origin–Destination observations. | Barbosa et al. (2018); Meta Movement Distribution Maps (2026); Buckee et al. (2020); Oliver et al. (2020) | Contemporary mobility products increasingly publish aggregate statistics instead of detailed OD data. | None (Established trend). |
-| **F3** | Existing research has primarily focused on improving estimation or prediction under available mobility supervision rather than on estimation directly from published aggregate observations. | Lenormand et al. (2016); Simini et al. (2021, Deep Gravity); Atwal et al. (2025) | Most existing methods assume access to observed mobility flows for calibration or supervision. | **Handbook synthesis.** Identifies the shared methodological assumption across classical and modern approaches. |
+| **F3** | Existing research has primarily focused on improving estimation or prediction under available mobility supervision rather than on estimation directly from published aggregate observations. | Lenormand et al. (2016); Simini et al. (2021, Deep Gravity); Atwal et al. (2025); Xu et al. (2025, Imagery2Flow) | Most existing methods assume access to observed mobility flows for calibration or supervision, even when using open geospatial data such as satellite imagery as inputs. | **Handbook synthesis.** Identifies the shared methodological assumption across classical and modern approaches. |
 | **F4** | Aggregate mobility observations preserve different information from detailed Origin–Destination observations. | Built upon Module E; Gallotti et al. (2024). | Different observation forms preserve different subsets of information. | Logical consequence of Module E. |
 | **F5** | Existing aggregate calibration methods constrain only a single moment of the travel-distance distribution and still require observed trips from the target city. | Tanner (1961); Hyman (1969); Merlin (2020); Yang et al. (2014) | Mean- and median-matching calibration use one summary statistic of locally observed trips; Yang et al. (2014) study prediction without local calibration data but do not estimate decay parameters from published distributions. | **Precise statement of what is already solved.** Prevents over-claiming in F6. |
 | **F6** | It remains unresolved whether the *full shape* of a published aggregate travel-distance distribution, combined with urban structure derived from open data alone, provides enough information for practical empirical recovery of the parameters of an explicit distance-response model without any observed trips from the target city. | No direct reference (Research Gap); positioned against F5. | The literature addresses either OD-based calibration or single-moment aggregate calibration; the stated combination is not directly treated. | **Central research question of the Handbook and Paper 1.** |
@@ -132,6 +132,20 @@ module J
 | **J4** | Alternative observation types may provide complementary information for parameter estimation. | Barbosa et al. (2018); Gallotti et al. (2024); Blondel et al. (2015) | Trajectories, OD matrices, travel-distance distributions and other aggregate summaries preserve different information. | Future observation framework. |
 | **J5** | Future work may investigate transferable parameter estimation across cities, temporal monitoring, and broader observation models. | Enaya et al. (2026, TransGM); Yang et al. (2026, neuroGravity); Lenormand et al. (2016) | Cross-city transfer of gravity-type models is an active direction that these directions naturally follow once aggregate parameter estimation becomes feasible. | Future application agenda. |
 | **J6** | Aggregate parameter estimation provides a foundation for a broader scientific programme connecting mobility modelling, statistical inference, and information preservation. | Synthesized from Modules A–I | The present work establishes an empirical starting point while leaving broader theoretical development to future research. | **Long-term research vision of the Handbook.** |
+| **J7** | Reconstructed OD networks produced by transferable mobility models may serve as proxy knowledge for learning transferable urban structural characteristics in data-scarce contexts. | Yang et al. (2026, neuroGravity); Enaya et al. (2026, TransGM) | State-of-the-art transferable models have reconstructed OD networks for selected cities; these reconstructions can be treated as informative representations rather than ground truth, and their structural patterns may provide transferable knowledge where direct observations are unavailable. | **Future research vision — Knowledge Transfer direction.** |
+| **J8** | Combining proxy structural knowledge with the Behaviour Identification framework may enable inference of plausible OD flows for cities lacking publicly available mobility observations. | Built upon Modules G–I; J7 | The Behaviour Identification framework (Paper 1) identifies distance-response parameters from aggregate observations; extending this with transferable structural knowledge addresses cities such as Ho Chi Minh City where neither OD data nor detailed mobility surveys are publicly available. | **Future research vision — extends Paper 1 from parameter identification toward knowledge-assisted mobility reconstruction.** |
+
+---
+
+### Future Research Direction: Knowledge Transfer for Mobility Reconstruction in Data-Scarce Cities
+
+Many state-of-the-art transferable mobility models have reconstructed Origin–Destination (OD) networks for selected Vietnamese cities such as Hanoi and Da Nang, while large metropolitan areas including Ho Chi Minh City remain unavailable. Future research may investigate whether these reconstructed mobility networks can serve as **proxy knowledge** for learning transferable urban structural characteristics in the Vietnamese context.
+
+Rather than treating the reconstructed OD networks as ground truth, they are regarded as informative representations produced by advanced transferable mobility models validated in the Vietnamese urban context. If structural patterns prove consistent across reconstructed cities, they may provide transferable knowledge for cities lacking publicly available mobility observations, while accounting for the inherent uncertainty in the reconstructed networks when transferring structural knowledge.
+
+A key methodological challenge lies in distinguishing model-specific artefacts from genuinely transferable urban structural signals within the reconstructed networks.
+
+Combined with the Behaviour Identification framework developed in this Handbook, such transferable structural knowledge may enable the inference of plausible OD flows for previously unmodelled cities such as Ho Chi Minh City using only open urban data and aggregate mobility observations. This direction extends the Handbook from behavioural parameter identification toward knowledge-assisted mobility reconstruction for data-scarce urban environments.
 
 
 
@@ -229,8 +243,7 @@ References
 | R27    | Yang et al. *Transferable Human Mobility Network Reconstruction with neuroGravity* | 2026 | `neurogravity2026` | A, J   | Physics-informed DL; preserves gravity decomposition |
 | R31    | Enaya et al. *TransGM: Transferable Gravity Models for Cross-City Policy Transfer* | 2026 | `transgm2026` | A, J   | Transferable gravity model      |
 | R44    | Zhu & Ma. *Gravity-Informed Deep Flow Inference* | 2026 | `zhu2026gravitypanel` | A | Gravity-informed neural inference |
-
-> **Đã loại bỏ:** "Imagery2Flow (2025)" — không xác minh được tác giả/venue/DOI, không tồn tại trong `references.bib`. Vai trò của nó trong C8/F3 được thay bằng R26.
+| R45    | Xu et al. *Predicting Human Mobility Flows in Cities Using Deep Learning on Satellite Imagery* | 2025 | `xu2025imagery2flow` | C, F   | OD prediction from satellite imagery; still requires OD supervision — doi:10.1038/s41467-025-65373-z |
 
 ---
 
@@ -257,6 +270,7 @@ Các reference này **chưa dùng nhiều**, nhưng sẽ rất quan trọng. ID 
 | FW3    | Information Bottleneck | J      |
 | FW4    | Identifiability Theory | J      |
 | FW5    | Information Geometry   | J      |
+| FW6    | Knowledge Transfer for OD Reconstruction in Data-Scarce Cities | J (J7–J8) |
 
 ---
 
@@ -268,14 +282,14 @@ Bảng này phải khớp chính xác với cột *Representative References* tr
 | ------ | ------------------------------------------------- |
 | **A**  | R1, R2, R4, R5, R7, R27, R31, R44                 |
 | **B**  | R2–R6, R8, R11–R13, R28, R30, R35                |
-| **C**  | R2, R4, R7, R8, R14, R15, R25, R26, R29, R30, R36–R41 |
+| **C**  | R2, R4, R7, R8, R14, R15, R25, R26, R29, R30, R36–R41, R45 |
 | **D**  | R7, R9, R10, R20, R23, R33, R40–R43                |
 | **E**  | R7, R9, R10, R18, R32, R33                        |
-| **F**  | R7, R14, R20, R25, R26, R29, R30, R33, R36–R41    |
+| **F**  | R7, R14, R20, R25, R26, R29, R30, R33, R36–R41, R45 |
 | **G**  | P1 + R36–R38                                     |
 | **H**  | P2 + R16–R19, R30, R33                           |
 | **I**  | P3 + R18                                          |
-| **J**  | R13, R18, R19, R27, R29, R31, R34, R35 + FW1–FW5  |
+| **J**  | R13, R18, R19, R27, R29, R31, R34, R35 + FW1–FW6  |
 
 ---
 
