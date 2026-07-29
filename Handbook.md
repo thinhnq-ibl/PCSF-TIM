@@ -24,7 +24,7 @@
 
 | Module | Scientific Question | Scientific Answer | Leads to... |
 | :--- | :--- | :--- | :--- |
-| **A. Gravity as the Scientific Foundation** | **Why is Gravity an appropriate scientific framework for human mobility?** | Human mobility can be represented as spatial interactions between origins and destinations, with movement constrained by travel impedance. Gravity provides a principled mathematical description of this process. | If Gravity is the framework, **what governs travel impedance?** |
+| **A. Gravity as the Canonical Decomposition** | **Why is Gravity the canonical framework for aggregate mobility?** | Gravity should be understood not primarily as a predictive model, but as the canonical decomposition of aggregate human mobility into urban structure and travel behaviour. | If Gravity provides the decomposition, **what governs the behavioural component $f(d)$?** |
 | **B. Distance-Decay as the Behavioural Mechanism** | **Why is distance-decay the central behavioural mechanism in Gravity models?** | Distance-decay determines how interaction probability decreases with distance and therefore governs collective distance sensitivity. The parameters of the distance-decay function become the primary quantities of scientific interest. | If θ is the key behavioural quantity, **can it be identified from available data?** |
 | **C. Information Transformation through Mobility Aggregation** | **What information remains after mobility observations are aggregated?** | Aggregate datasets (e.g., Trip-Length Distributions) preserve overall travel-distance statistics but no longer explicitly record Origin–Destination interactions. Whether these aggregate observations contain sufficient information to identify the distance-decay parameters remains an open scientific question. | If this is unknown, **how can we determine it scientifically?** |
 | **D. Inference Principle: A Probabilistic Framework** | **How can the parameters of the distance-decay function be statistically identified from observed Trip-Length Distributions?** | Treat parameter identification as a probabilistic inverse problem. Construct an observation model linking the latent distance-decay parameters to the observed Trip-Length Distribution, then estimate θ using statistical inference. | This framework is then implemented and validated in the proposed method. |
@@ -56,36 +56,37 @@ flowchart TD
 
 ---
 
-# Module A — Gravity as the Scientific Foundation
+# Module A — Gravity as the Canonical Decomposition of Aggregate Mobility
 
 | **Component**              | **Content** |
 | -------------------------- | --- |
-| **Module Title**           | **Gravity as the Scientific Foundation of Human Mobility Modelling** |
-| **Scientific Question**    | **Why should human mobility be studied within the Gravity framework?** |
-| **Why is this module indispensable?** | Without Gravity, distance-decay has no scientific context. |
-| **Mission**                | Thiết lập Gravity là ngôn ngữ khoa học chuẩn để mô tả dòng di chuyển tổng hợp, đồng thời chứng minh rằng decomposition của Gravity thành urban structure và behavioural response là nền tảng cho việc nhận diện và chuyển giao hành vi. |
-| **Central Claim**          | **Gravity remains the canonical scientific framework for aggregate spatial interaction because it explicitly separates urban structure from behavioural distance sensitivity, thereby facilitating the explicit identification and transfer of distance sensitivity across urban contexts.** |
+| **Module Title**           | **Gravity as the Canonical Decomposition of Aggregate Mobility** |
+| **Scientific Question**    | **Why should human mobility be represented within the Gravity framework?** |
+| **Why is this module indispensable?** | Without Gravity's explicit decomposition, travel behaviour cannot be isolated from urban spatial structure. |
+| **Mission**                | Establish Gravity not as a specific predictive algorithm, but as the canonical scientific decomposition of aggregate mobility into urban structure ($O_i, A_j$) and behavioural distance response ($f(d_{ij}; \theta)$). |
+| **Central Claim**          | **Gravity should be understood not primarily as a predictive model, but as the canonical decomposition of aggregate human mobility into urban structure and travel behaviour.** |
+
+### Theoretical Explanation
+
+Aggregate mobility seeks to explain the volume of spatial trips between origins and destinations. Regardless of the underlying modelling technique, this problem fundamentally requires separating three distinct components:
+1. The capacity of origins to generate trips ($O_i$),
+2. The attractiveness of destinations ($A_j$),
+3. The behavioural effect of spatial separation ($f(d_{ij}; \theta)$).
+
+The gravity formulation expresses this decomposition explicitly as:
+$$T_{ij} = O_i A_j f(d_{ij}; \theta)$$
+
+where $O_i$ and $A_j$ represent urban spatial structure, while $f(d_{ij}; \theta)$ represents collective travel behaviour. The enduring importance of the gravity formulation therefore lies less in its specific functional form than in its ability to separate structural factors from behavioural mechanisms in a transparent and interpretable manner.
 
 ### Supporting Claims
 
 | **Supporting Claim** | **Purpose** | **Representative Evidence (SOTA)** | **Expected Conclusion** |
 | --- | --- | --- | --- |
-| **Claim A1. Gravity has evolved from an empirical analogy into the canonical mathematical representation of spatial interaction.** | Chứng minh Gravity không chỉ là mô hình lịch sử mà đã trở thành nền tảng lý thuyết của spatial interaction. | • Zipf (1946): Gravity analogy.<br>• Wilson (1971): Entropy-maximizing derivation.<br>• Flowerdew & Aitkin (1982): Statistical estimation (Poisson framework).<br>• Haynes & Fotheringham (1984): Classical spatial interaction modelling.<br>• Barbosa et al. (2018): Physics Reports review. | Gravity cung cấp cơ sở lý thuyết và toán học chuẩn mực để mô hình hóa tương tác không gian vĩ mô. |
-| **Claim A2. Modern mobility models extend rather than replace the Gravity paradigm.** | Trả lời phản biện rằng Deep Learning đã thay thế Gravity. | • Deep Gravity (Simini et al., 2021).<br>• neuroGravity (Yang et al., 2026).<br>• TransGM (Enaya et al., 2026).<br>• Universal Geography Neural Network (Guo et al., 2025).<br>• Imagery2Flow (Xu et al., 2025). | AI và Deep Learning chủ yếu tăng cường khả năng biểu diễn hoặc học các thành phần của Gravity chứ không thay thế cấu trúc khoa học của nó. |
-| **Claim A3. Gravity explicitly separates urban structure from spatial interaction behaviour.** | Thiết lập decomposition sẽ được dùng xuyên suốt Handbook và bài báo. | • Wilson (1971).<br>• Lenormand et al. (2016).<br>• Comparative studies of gravity models. | Gravity phân tách rõ **Urban Structure** ($O_i$, $D_j$) khỏi **Behaviour** ($f(d_{ij};\theta)$). |
-| **Claim A4. The distance-decay function is the unique component that explicitly represents spatial impedance.** | Cô lập đúng đối tượng nghiên cứu của bài báo. | • Tanner (1961).<br>• Liang et al. (2013).<br>• Lenormand et al. (2016). | Trong toàn bộ mô hình Gravity, chỉ **distance-decay function** trực tiếp mô tả ảnh hưởng của khoảng cách lên xác suất tương tác. |
-| **Claim A5. Explicit identification of distance sensitivity facilitates its transferability across urban contexts.** | Bổ sung cầu nối logic từ Module A sang Module E — giải quyết câu hỏi tại sao identification là prerequisite. | • Theoretical reasoning grounded in A3 & A4.<br>• TransGM (Enaya et al., 2026).<br>• Similarity-based City Transfer (Wang et al., 2025). | Việc nhận diện $\theta$ một cách tường minh tạo cơ sở lý thuyết cho việc chuyển giao độ nhạy cảm khoảng cách sang các ngữ cảnh đô thị khác mà không cần dữ liệu OD địa phương. |
+| **Claim A1. The canonical contribution of the gravity formulation is the explicit separation between urban structure and travel behaviour.** | Thiết lập phép phân rã $T_{ij} = \text{Structure} \times \text{Behaviour}$ làm cốt lõi lý thuyết. | • Zipf (1946): Empirical origin.<br>• Wilson (1971): Entropy-maximizing derivation.<br>• Lenormand et al. (2016): Systematic comparison confirming component independence. | Gravity cung cấp phép phân rã chuẩn mực để tách rời đặc thù đô thị khỏi phản ứng hành vi. |
+| **Claim A2. Modern mobility models extend the representation of individual components rather than replacing the canonical decomposition itself.** | Trả lời phản biện về AI/Deep Learning bằng cách chứng minh AI chỉ mở rộng các thành phần của Gravity. | • Deep Gravity (Simini et al., 2021): Extends interaction learning.<br>• Imagery2Flow (Xu et al., 2025): Extends urban structure learning.<br>• neuroGravity (Yang et al., 2026): Extends spatial representation.<br>• TransGM (Enaya et al., 2026): Extends cross-city parameter transfer. | AI và Deep Learning nâng cao khả năng biểu diễn của từng thành phần chứ không thay thế phép phân rã Gravity ($T_{ij} = \text{Structure} \times \text{Behaviour}$). |
+| **Claim A3. Viewing gravity as a canonical decomposition provides a common scientific language for organizing subsequent developments in mobility modelling.** | Định hình toàn bộ sơ đồ logic của Handbook (từ phân rã $T_{ij} \to f(d) \to$ suy luận $\theta$). | • Theoretical synthesis of spatial interaction literature.<br>• Barbosa et al. (2018): Physics Reports review. | Phép phân rã Gravity là ngôn ngữ khoa học chung để tổ chức toàn bộ tiến trình nghiên cứu trong Handbook. |
 
-### Core Mathematical Representation
-
-| **Purpose** | **Content** |
-| --- | --- |
-| **Scientific Formulation**    | $T_{ij}=O_iD_jf(d_{ij};\theta)$ |
-| **Urban Structure**           | $O_i$: Origin emission (trip production).<br>$D_j$: Destination attraction (trip attraction). |
-| **Behavioural Component**     | $f(d_{ij};\theta)$: Distance-decay function describing collective distance sensitivity. |
-| **Scientific Interpretation** | Aggregate mobility can be viewed as the interaction between urban opportunities ($O_i,D_j$) and behavioural responses to travel distance ($f(d_{ij};\theta)$). Behaviour is only transferable once $\theta$ has been independently identified. |
-
-### Deep Dive: Theoretical Evolution of Gravity (Claim A1 & A2)
+### Deep Dive: Theoretical Evolution & AI Extensions (Claim A1 & A2)
 
 > The Gravity model originated as an empirical analogy adapting Newton's law of gravitation to spatial-sociological interactions \citep{zipf1946}. It was subsequently established on a rigorous theoretical foundation within spatial interaction modelling through the entropy-maximizing principle \citep{wilson1971}. This theoretical grounding was further solidified as Gravity was integrated into formal statistical inference frameworks, defining spatial flows $T_{ij}$ as probabilistic random variables \citep{flowerdew1982method, haynes1984gravity}. Comprehensive modern surveys \citep{barbosa2018human} confirm that Gravity remains the canonical paradigm for collective mobility.
 
@@ -93,32 +94,21 @@ flowchart TD
 
 > This hybrid paradigm demonstrates that Gravity provides the indispensable structural inductive bias required for deep learning models to achieve both superior predictive realism and robust cross-context generalization. Ultimately, this confirms that physics-based spatial interaction models retain their foundational scientific value: far from being superseded, physical principles remain the indispensable cornerstone for building explainable, robust, and transferable mobility models.
 
-### Deep Dive: Structural-Behavioural Factorization (Claim A3)
+### Deep Dive: Structural-Behavioural Factorization (Claim A1 & A3)
 
-> At its theoretical core, the Gravity framework achieves a fundamental mathematical factorization: it explicitly decouples urban spatial structure from spatial interaction behaviour \citep{wilson1971, lenormand2016systematic}. In the canonical formulation $T_{ij} = O_i D_j f(d_{ij};\theta)$, demographic and economic opportunity distributions ($O_i, D_j$) and spatial impedance decay ($f(d_{ij};\theta)$) constitute two interacting yet mathematically independent components \citep{lenormand2016systematic}. The origin emission $O_i$ and destination attraction $D_j$ encode the spatial distribution of opportunities governed by land-use geometry and built-environment configurations, whereas the distance-decay function $f(d_{ij};\theta)$ isolates the collective human behavioural response to spatial impedance. This explicit factorization is scientifically indispensable because it disentangles structural opportunity density from intrinsic travel preferences; observed differences in travel lengths across cities may reflect variations in spatial opportunity layout rather than shifts in underlying behavioural sensitivity. By isolating $\theta$ from local structural constraints, the Gravity decomposition provides the prerequisite framework for identifying transferable behavioural parameters across heterogeneous urban systems.
-
-### Deep Dive: Unique Functional Role of Distance-Decay (Claim A4)
-
-> Within the functional architecture of Gravity models, the distance-decay function $f(d_{ij};\theta)$ serves as the unique component explicitly encoding spatial impedance—capturing how spatial separation diminishes interaction probability independently of origin emission capacity $O_i$ or destination attraction scale $D_j$ \citep{tanner1961, lenormand2016systematic}. While $O_i$ and $D_j$ quantify the spatial distribution of urban opportunities, $f(d_{ij};\theta)$ is the sole structural component designed to represent the travel friction imposed by distance. Consequently, because $f(d_{ij};\theta)$ exclusively isolates collective distance sensitivity from urban spatial opportunities, its governing parameter vector $\theta$ constitutes the primary behavioural object of scientific interest for identification.
-
-### Deep Dive: Identification as a Prerequisite for Behavioural Transferability (Claim A5)
-
-> Formally identifying the distance-decay parameter vector $\theta$ is a theoretical prerequisite for transferable mobility modelling and scalable cross-city flow prediction \citep{transgm2026}. If behavioural distance sensitivity remains entangled with local urban features or embedded implicitly within black-box neural weights, deploying the model to a new urban context necessitates complete local recalibration using supervised Origin–Destination flow matrices. This requirement severely limits model scalability, particularly in data-scarce urban environments or forward-looking policy scenarios where local OD flows are unavailable. Conversely, when $\theta$ is explicitly identified independently of origin-destination structural density ($O_i, D_j$), the inferred behavioural parameter can be directly transferred across heterogeneous urban systems—requiring only open spatial structure data (e.g., POI distributions, land-use geometry) at the target city to reconstruct mobility flows \citep{wang2025similarity}.
-
-> [!NOTE]
-> **Ý nghĩa cốt lõi của Claim A5:** Nhận diện tường minh $\theta$ là cầu nối duy nhất giúp mô hình di chuyển có thể mở rộng quy mô (scalable) sang các đô thị thiếu dữ liệu OD matrix. Khi $\theta$ được tách rời khỏi cấu trúc đô thị địa phương, việc chuyển giao mô hình di chuyển sang một đô thị mới chỉ đòi hỏi dữ liệu không gian mở (POIs, land-use) tại đô thị đích.
+> At its theoretical core, the Gravity framework achieves a fundamental mathematical factorization: it explicitly decouples urban spatial structure from spatial interaction behaviour \citep{wilson1971, lenormand2016systematic}. In the canonical formulation $T_{ij} = O_i A_j f(d_{ij};\theta)$, demographic and economic opportunity distributions ($O_i, A_j$) and spatial impedance decay ($f(d_{ij};\theta)$) constitute two interacting yet mathematically independent components \citep{lenormand2016systematic}. The origin emission $O_i$ and destination attraction $A_j$ encode the spatial distribution of opportunities governed by land-use geometry and built-environment configurations, whereas the distance-decay function $f(d_{ij};\theta)$ isolates the collective human behavioural response to spatial impedance. This explicit factorization is scientifically indispensable because it disentangles structural opportunity density from intrinsic travel preferences; observed differences in travel lengths across cities may reflect variations in spatial opportunity layout rather than shifts in underlying behavioural sensitivity. By isolating $\theta$ from local structural constraints, the Gravity decomposition provides the prerequisite framework for identifying transferable behavioural parameters across heterogeneous urban systems.
 
 ### Scientific Consequence
 
 | **Component** | **Content** |
 | --- | --- |
-| **Scientific Conclusion** | Gravity remains the dominant scientific framework for modelling aggregate spatial interactions. It naturally decomposes mobility into **urban structure** and **distance-dependent behavioural response**, identifying the distance-decay function as the primary object of analysis. **Therefore, behavioural identification becomes a scientifically meaningful objective.** |
+| **Scientific Conclusion** | **The lasting influence of the gravity formulation arises from its role as a canonical decomposition of aggregate mobility rather than from any particular choice of distance-decay function, calibration method, or learning algorithm.** |
 
 ### Transition to Module B
 
 | **Component** | **Content** |
 | --- | --- |
-| **Transition Question**     | **If Gravity is the framework, what governs travel impedance?** |
+| **Transition Question**     | **If Gravity provides the canonical decomposition, what governs the behavioural component $f(d)$?** |
 | **Motivation for Module B** | Understanding the scientific meaning of the distance-decay function is essential before asking whether its parameters can be identified from aggregate observations. |
 
 ---
