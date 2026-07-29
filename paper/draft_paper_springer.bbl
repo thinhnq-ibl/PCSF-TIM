@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -11,10 +11,21 @@
 Barbosa H, Barthelemy M, Ghoshal G, et~al (2018) Human mobility: Models and
   applications. Physics Reports 734:1--74. \doi{10.1016/j.physrep.2018.01.001}
 
+\bibitem[{Bishop(2006)}]{bishop2006pattern}
+Bishop CM (2006) Pattern Recognition and Machine Learning. Springer, New York
+
 \bibitem[{Buckee et~al.(2020)Buckee, Balsari, Chan, Crosas, Dominici, Gasser,
   Grad, Grenfell, Halloran, Kraemer et~al.}]{buckee2020aggregated}
 Buckee CO, Balsari S, Chan J, et~al (2020) Aggregated mobility data could help
   fight covid-19. Science 368(6487):145--146
+
+\bibitem[{Casella and Berger(2002)}]{casella2002statistical}
+Casella G, Berger RL (2002) Statistical Inference, 2nd edn. Duxbury Press,
+  Pacific Grove, CA
+
+\bibitem[{Cover and Thomas(1991)}]{cover1991elements}
+Cover TM, Thomas JA (1991) Elements of Information Theory. John Wiley \& Sons,
+  New York, \doi{10.1002/0471200611}
 
 \bibitem[{Egu and Bonnel(2020)}]{egu2020comparable}
 Egu O, Bonnel P (2020) How comparable are origin--destination matrices
@@ -42,23 +53,31 @@ Fotheringham AS, O'Kelly ME (1989) Spatial interaction models: formulations and
 Gonz{\'a}lez MC, Hidalgo CA, Barab{\'a}si AL (2008) Understanding individual
   human mobility patterns. Nature 453(7196):779--782. \doi{10.1038/nature06958}
 
-\bibitem[{Hu et~al.(2020)Hu, Yang, Li, Liang, Qu, and Yang}]{hu2020mpgcn}
-Hu J, Yang G, Li K, et~al (2020) Predicting origin-destination flow via
-  multi-perspective graph convolutional network. In: IEEE 36th International
-  Conference on Data Engineering (ICDE), pp 1818--1821,
-  \doi{10.1109/ICDE48307.2020.00178}
-
 \bibitem[{Hussain et~al.(2021)Hussain, Bhaskar, and Chung}]{hussain2021transit}
 Hussain E, Bhaskar A, Chung E (2021) Transit od matrix estimation using
   smartcard data: Recent developments and future research challenges.
   Transportation Research Part C: Emerging Technologies 125:103044.
   \doi{10.1016/j.trc.2021.103044}
 
+\bibitem[{Hyman(1969)}]{hyman1969calibration}
+Hyman GM (1969) The calibration of trip distribution models. Environment and
+  Planning A 1(1):105--112. \doi{10.1068/a010105}
+
+\bibitem[{Lakens(2017)}]{lakens2017equivalence}
+Lakens D (2017) Equivalence tests: A practical primer for t tests,
+  correlations, and meta-analyses. Social Psychological and Personality Science
+  8(4):355--362. \doi{10.1177/1948550617697177}
+
 \bibitem[{Lenormand et~al.(2016)Lenormand, Bassolas, and
   Ramasco}]{lenormand2016systematic}
 Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
   distribution laws and models. Journal of Transport Geography 51:158--169.
   \doi{10.1016/j.jtrangeo.2016.02.003}
+
+\bibitem[{Merlin(2020)}]{merlin2020medians}
+Merlin LA (2020) A new method using medians to calibrate single-parameter
+  spatial interaction models. Journal of Transport and Land Use 13(1):49--70.
+  \doi{10.5198/jtlu.2020.1614}
 
 \bibitem[{{Meta}(2026)}]{MetaMovementDistributionMaps}
 {Meta} (2026) Movement distribution maps.
@@ -69,6 +88,10 @@ Lenormand M, Bassolas A, Ramasco J (2016) Systematic comparison of trip
   Blondel}]{de2013unique}
 de~Montjoye YA, Hidalgo CA, Verleysen M, et~al (2013) Unique in the crowd: The
   privacy bounds of human mobility. Scientific reports 3(1):1--5
+
+\bibitem[{Murphy(2012)}]{murphy2012machine}
+Murphy KP (2012) Machine Learning: A Probabilistic Perspective. MIT Press,
+  Cambridge, MA
 
 \bibitem[{Oliver et~al.(2020)Oliver, Lepri, Sterly, Lambiotte, Deletaille,
   De~Nadai, Letouz{\'e}, Salah, Bowman, Chen et~al.}]{oliver2020mobile}
@@ -81,24 +104,6 @@ Oliver N, Lepri B, Sterly H, et~al (2020) Mobile phone data for informing
 Pappalardo L, Manley E, Sekara V, et~al (2023) Future directions in human
   mobility science. Nature Computational Science 3:588--600.
   \doi{10.1038/s43588-023-00469-4}
-
-\bibitem[{Rong et~al.(2023{\natexlab{a}})Rong, Feng, Ding
-  et~al.}]{Rong2023goddag}
-Rong C, Feng J, Ding J, et~al (2023{\natexlab{a}}) {GODDAG}: Generating
-  origin-destination flow for new cities via domain adversarial training. IEEE
-  Transactions on Knowledge and Data Engineering 35(10):10048--10057.
-  \doi{10.1109/TKDE.2022.3218526}
-
-\bibitem[{Rong et~al.(2023{\natexlab{b}})Rong, Wang, and Li}]{rong2023odgn}
-Rong C, Wang H, Li Y (2023{\natexlab{b}}) Origin-destination network generation
-  via gravity-guided gan. \urlprefix\url{https://arxiv.org/abs/2306.03390},
-  arXiv preprint; no DOI assigned,
-  {\href{https://arxiv.org/abs/2306.03390}{{arXiv:2306.03390}}}
-
-\bibitem[{Rubio-Herrero and Mu{\~n}uzuri(2023)}]{rubioherrero2023sparse}
-Rubio-Herrero J, Mu{\~n}uzuri J (2023) Sparse regression for data-driven
-  deterrence functions in gravity models. Annals of Operations Research
-  323(1--2):153--174. \doi{10.1007/s10479-022-04803-y}
 
 \bibitem[{Sen and Smith(1995)}]{sen1995gravity}
 Sen A, Smith TE (1995) Gravity models of spatial interaction behavior. Springer
@@ -136,5 +141,11 @@ Wilson A (1971) A family of spatial interaction models, and associated
 Yang J, Huang S, Huang Z, et~al (2026) Transferable human mobility network
   reconstruction with neurogravity. Nature Computational Science 6:630--641.
   \doi{10.1038/s43588-026-01003-y}
+
+\bibitem[{Yang et~al.(2014)Yang, Herrera, Eagle, and
+  Gonz{\'a}lez}]{yang2014limits}
+Yang Y, Herrera C, Eagle N, et~al (2014) Limits of predictability in commuting
+  flows in the absence of data for calibration. Scientific Reports 4:5662.
+  \doi{10.1038/srep05662}
 
 \end{thebibliography}
