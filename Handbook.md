@@ -24,8 +24,8 @@
 
 | Module | Scientific Question | Scientific Answer | Leads to... |
 | :--- | :--- | :--- | :--- |
-| **A. Gravity as the Canonical Decomposition** | **Why is Gravity the canonical framework for aggregate mobility?** | Gravity should be understood not primarily as a predictive model, but as the canonical decomposition of aggregate human mobility into urban structure and travel behaviour. | If Gravity provides the decomposition, **what governs the behavioural component $f(d)$?** |
-| **B. Distance-Decay as the Behavioural Mechanism** | **Why is distance-decay the central behavioural mechanism in Gravity models?** | Distance-decay determines how interaction probability decreases with distance and therefore governs collective distance sensitivity. The parameters of the distance-decay function become the primary quantities of scientific interest. | If θ is the key behavioural quantity, **can it be identified from available data?** |
+| **A. Gravity as the Canonical Decomposition** | **Why is Gravity the canonical framework for decomposing aggregate human mobility?** | Gravity should be understood not primarily as a predictive model, but as the canonical decomposition of aggregate human mobility into urban structure and travel behaviour. | If Gravity provides the canonical decomposition, **what is the scientific meaning of the behavioural component $f(d;\theta)$ and what do its parameters represent?** |
+| **B. Distance-Decay as the Behavioural Mechanism** | **What does the distance-decay function represent, and why is it the central behavioural quantity in Gravity models?** | Distance-decay determines how interaction probability decreases with distance and therefore governs collective distance sensitivity. The parameters of the distance-decay function become the primary quantities of scientific interest. | If θ is the key behavioural quantity, **can it be identified from available data?** |
 | **C. Information Transformation through Mobility Aggregation** | **What information remains after mobility observations are aggregated?** | Aggregate datasets (e.g., Trip-Length Distributions) preserve overall travel-distance statistics but no longer explicitly record Origin–Destination interactions. Whether these aggregate observations contain sufficient information to identify the distance-decay parameters remains an open scientific question. | If this is unknown, **how can we determine it scientifically?** |
 | **D. Inference Principle: A Probabilistic Framework** | **How can the parameters of the distance-decay function be statistically identified from observed Trip-Length Distributions?** | Treat parameter identification as a probabilistic inverse problem. Construct an observation model linking the latent distance-decay parameters to the observed Trip-Length Distribution, then estimate θ using statistical inference. | This framework is then implemented and validated in the proposed method. |
 | **E. Mathematical Framework: Gravity-based Statistical Identification** | **How is the probabilistic identification framework implemented for distance-decay parameter estimation?** | Specify the probabilistic model (Gravity + Observation Model + Likelihood) that links the latent parameters to the observed distribution. | **Does empirical evidence support the hypothesis?** |
@@ -61,22 +61,22 @@ flowchart TD
 | **Component**              | **Content** |
 | -------------------------- | --- |
 | **Module Title**           | **Gravity as the Canonical Decomposition of Aggregate Mobility** |
-| **Scientific Question**    | **Why should human mobility be represented within the Gravity framework?** |
+| **Scientific Question**    | **Why is Gravity the canonical framework for decomposing aggregate human mobility?** |
 | **Why is this module indispensable?** | Without Gravity's explicit decomposition, travel behaviour cannot be isolated from urban spatial structure. |
-| **Mission**                | Establish Gravity not as a specific predictive algorithm, but as the canonical scientific decomposition of aggregate mobility into urban structure ($O_i, A_j$) and behavioural distance response ($f(d_{ij}; \theta)$). |
+| **Mission**                | Establish Gravity not as a specific predictive algorithm, but as the canonical scientific decomposition of aggregate mobility into urban structure ($O_i, D_j$) and behavioural distance response ($f(d_{ij}; \theta)$). |
 | **Central Claim**          | **Gravity should be understood not primarily as a predictive model, but as the canonical decomposition of aggregate human mobility into urban structure and travel behaviour.** |
 
 ### Theoretical Explanation
 
 Aggregate mobility seeks to explain the volume of spatial trips between origins and destinations. Regardless of the underlying modelling technique, this problem fundamentally requires separating three distinct components:
 1. The capacity of origins to generate trips ($O_i$),
-2. The attractiveness of destinations ($A_j$),
+2. The trip attraction of destinations ($D_j$),
 3. The behavioural effect of spatial separation ($f(d_{ij}; \theta)$).
 
 The gravity formulation expresses this decomposition explicitly as:
-$$T_{ij} = O_i A_j f(d_{ij}; \theta)$$
+$$T_{ij} = O_i D_j f(d_{ij}; \theta)$$
 
-where $O_i$ and $A_j$ represent urban spatial structure, while $f(d_{ij}; \theta)$ represents collective travel behaviour. The enduring importance of the gravity formulation therefore lies less in its specific functional form than in its ability to separate structural factors from behavioural mechanisms in a transparent and interpretable manner.
+where $O_i$ and $D_j$ represent urban spatial structure, while $f(d_{ij}; \theta)$ represents collective travel behaviour. The enduring importance of the gravity formulation therefore lies less in its specific functional form than in its ability to separate structural factors from behavioural mechanisms in a transparent and interpretable manner.
 
 ### Supporting Claims
 
@@ -96,7 +96,7 @@ where $O_i$ and $A_j$ represent urban spatial structure, while $f(d_{ij}; \theta
 
 ### Deep Dive: Structural-Behavioural Factorization (Claim A1 & A3)
 
-> At its theoretical core, the Gravity framework achieves a fundamental mathematical factorization: it explicitly decouples urban spatial structure from spatial interaction behaviour \citep{wilson1971, lenormand2016systematic}. In the canonical formulation $T_{ij} = O_i A_j f(d_{ij};\theta)$, demographic and economic opportunity distributions ($O_i, A_j$) and spatial impedance decay ($f(d_{ij};\theta)$) constitute two interacting yet mathematically independent components \citep{lenormand2016systematic}. The origin emission $O_i$ and destination attraction $A_j$ encode the spatial distribution of opportunities governed by land-use geometry and built-environment configurations, whereas the distance-decay function $f(d_{ij};\theta)$ isolates the collective human behavioural response to spatial impedance. This explicit factorization is scientifically indispensable because it disentangles structural opportunity density from intrinsic travel preferences; observed differences in travel lengths across cities may reflect variations in spatial opportunity layout rather than shifts in underlying behavioural sensitivity. By isolating $\theta$ from local structural constraints, the Gravity decomposition provides the prerequisite framework for identifying transferable behavioural parameters across heterogeneous urban systems.
+> At its theoretical core, the Gravity framework achieves a fundamental mathematical factorization: it explicitly decouples urban spatial structure from spatial interaction behaviour \citep{wilson1971, lenormand2016systematic}. In the canonical formulation $T_{ij} = O_i D_j f(d_{ij};\theta)$, demographic and economic opportunity distributions ($O_i, D_j$) and spatial impedance decay ($f(d_{ij};\theta)$) constitute two interacting yet mathematically independent components \citep{lenormand2016systematic}. The origin emission $O_i$ and destination attraction $D_j$ encode the spatial distribution of opportunities governed by land-use geometry and built-environment configurations, while $f(d_{ij};\theta)$ isolates spatial impedance. This explicit factorization disentangles structural opportunity density from aggregate travel patterns, providing the prerequisite framework for isolating the distance-decay parameters $\theta$ from local urban geometry.
 
 ### Scientific Consequence
 
@@ -108,7 +108,7 @@ where $O_i$ and $A_j$ represent urban spatial structure, while $f(d_{ij}; \theta
 
 | **Component** | **Content** |
 | --- | --- |
-| **Transition Question**     | **If Gravity provides the canonical decomposition, what governs the behavioural component $f(d)$?** |
+| **Transition Question**     | **If Gravity provides the canonical decomposition, what is the scientific meaning of the behavioural component $f(d;\theta)$ and what do its parameters represent?** |
 | **Motivation for Module B** | Understanding the scientific meaning of the distance-decay function is essential before asking whether its parameters can be identified from aggregate observations. |
 
 ---
@@ -118,7 +118,7 @@ where $O_i$ and $A_j$ represent urban spatial structure, while $f(d_{ij}; \theta
 | **Component**              | **Content** |
 | -------------------------- | --- |
 | **Module Title**           | **The Scientific Meaning of the Distance-Decay Function** |
-| **Scientific Question**    | **What does the distance-decay function represent, and why is it the central object of behavioural analysis in Gravity models?** |
+| **Scientific Question**    | **What does the distance-decay function represent, and why is it the central behavioural quantity in Gravity models?** |
 | **Why is this module indispensable?** | Without understanding distance-decay, there is no identifiable behavioural object. |
 | **Mission**                | Thiết lập ý nghĩa khoa học của distance-decay function, làm rõ vai trò của các tham số trong việc mô tả collective distance sensitivity và chuẩn bị nền tảng để nghiên cứu khả năng suy luận các tham số này từ Trip-Length Distributions. |
 | **Central Claim**          | **The distance-decay function is the behavioural component of Gravity models, encoding collective distance sensitivity under a given urban environment.** |
@@ -149,9 +149,9 @@ where $O_i$ and $A_j$ represent urban spatial structure, while $f(d_{ij}; \theta
 
 > In spatial interaction modeling, specifying the distance-decay function $f(d)$ is not merely an empirical curve-fitting decision; rather, distinct functional specifications embody fundamentally different behavioral hypotheses regarding how travelers perceive and respond to spatial distance across scales \citep{wilson1971, lenormand2016systematic, liang2013unraveling}.
 >
-> 1. **Exponential Decay ($f(d) = e^{-\beta d}$):** Rather than simply describing rapid attenuation, the exponential form naturally emerges from entropy-maximizing spatial interaction under a global travel-cost constraint ($\sum_{ij} T_{ij} d_{ij} = C$) \citep{wilson1971}. It embodies the behavioral hypothesis of **constant marginal travel impedance** ($-\frac{f'(d)}{f(d)} = \beta$), wherein each additional kilometer imposes a constant proportional deterrence penalty regardless of trip scale.
+> 1. **Exponential Decay ($f(d) = e^{-\beta d}$):** Rather than simply describing rapid attenuation, the exponential form naturally emerges from entropy-maximizing spatial interaction under a global travel-cost constraint ($\sum_{ij} T_{ij} d_{ij} = C$) \citep{wilson1971}. It embodies the behavioral hypothesis of **constant marginal travel impedance** ($-\frac{f'(d)}{f(d)} = \beta$), wherein each additional kilometer imposes a constant proportional deterrence penalty regardless of trip scale. This hypothesis is consistent with transport settings where travel friction scales uniformly with distance.
 >
-> 2. **Power-Law Decay ($f(d) = d^{-\alpha}$):** The power-law formulation is commonly interpreted as representing scale-invariant responses to spatial separation, whereby relative rather than absolute changes in distance govern interaction decay \citep{gonzalez2008understanding, lenormand2016systematic}. Under this scale-invariant elasticity ($\frac{d \ln f(d)}{d \ln d} = -\alpha$), an increase from 2 km to 4 km is perceived as a far more substantial shift than an increase from 102 km to 104 km.
+> 2. **Power-Law Decay ($f(d) = d^{-\alpha}$):** The power-law formulation is commonly interpreted as representing scale-invariant responses to spatial separation, whereby relative rather than absolute changes in distance govern interaction decay \citep{gonzalez2008understanding, lenormand2016systematic}. Under this scale-invariant elasticity ($\frac{d \ln f(d)}{d \ln d} = -\alpha$), an increase from 2 km to 4 km is perceived as a far more substantial shift than an increase from 102 km to 104 km. This hypothesis aligns with contexts where travelers exhibit threshold sensitivity to relative distance changes.
 >
 > 3. **Composite / Tanner Deterrence Function ($f(d) = d^{-\alpha} e^{-\beta d}$):** Rather than being a mere mathematical hybrid, the Tanner specification unifies two distinct behavioral mechanisms: attraction toward nearby opportunities (governed by the short-range power-law term $d^{-\alpha}$) and increasing travel resistance at long distances (governed by the exponential cutoff $e^{-\beta d}$) \citep{tanner1961}.
 >
