@@ -126,31 +126,32 @@ link-citations: true
 > [!TIP]
 > **Core 6-Question Scientific Chain / Chuỗi 6 Câu hỏi Khoa học Trung tâm:**
 >
-> 1. **Q1 (Module A): Why Gravity?** — *Decouples urban structure ($O_i, A_j$) from travel behavior ($f(d;\theta)$) through explicit factorization.*<br>*Tách biệt cấu trúc đô thị ($O_i, A_j$) khỏi hành vi di chuyển ($f(d;\theta)$) thông qua sự phân rã rõ ràng.*
-> 2. **Q2 (Module B): What is behaviour?** — *Identifies distance-decay as generalized impedance friction and formulates its latent nature.*<br>*Xác định suy giảm khoảng cách là trở lực ma sát và công thức hóa bản chất biến ẩn của nó.*
+> 1. **Q1 (Module A): Why Gravity in Spatial Interaction?** — *Establishes Gravity not as the entire domain, but as the foundational mathematical factorization decomposing Spatial Interaction into urban structure ($O_i, A_j$) and travel behavior ($f(d;\theta)$).*<br>*Thiết lập mô hình Trọng lực không phải là toàn bộ lĩnh vực, mà là phép phân rã toán học nền tảng giúp tách Tương tác Không gian thành cấu trúc đô thị ($O_i, A_j$) và hành vi di chuyển ($f(d;\theta)$).*
+> 2. **Q2 (Module B): What is behaviour in Spatial Interaction?** — *Formulates the Principle of Spatial Interaction, identifies distance-decay as the mathematical representation of behavioural response to Spatial Separation, and articulates its latent nature.*<br>*Công thức hóa Nguyên lý Tương tác Không gian, xác định suy giảm khoảng cách là biểu diễn toán học của phản ứng hành vi đối với Spatial Separation, và làm rõ bản chất biến ẩn của nó.*
 > 3. **Q3 (Module C): Why can't we observe it?** — *Analyzes operational limits of conventional OD calibration under privacy-preserving data constraints.*<br>*Phân tích ranh giới áp dụng của hiệu chỉnh OD truyền thống trong các ràng buộc dữ liệu bảo vệ quyền riêng tư.*
 > 4. **Q4 (Module D): What survives spatial aggregation?** — *Formalizes the Information Hierarchy and preserved binned distance signatures.*<br>*Hình thức hóa Hệ thống Phân cấp Thông tin và các dấu hiệu khoảng cách tổng hợp được bảo toàn.*
-> 5. **Q5 (Module E): Why don't existing methods use it?** — *Pinpoints the research gap of treating TLD as an evaluation target rather than an inference space.*<br>*Chỉ ra khoảng trống nghiên cứu khi coi TLD là mục tiêu đánh giá thay vì không gian suy luận chính.*
+> 5. **Q5 (Module E): Why don't existing methods use it?** — *Pinpoints the research gap of treating TLD as an evaluation target rather than an aggregate observation space of Spatial Interaction.*<br>*Chỉ ra khoảng trống nghiên cứu khi coi TLD là mục tiêu đánh giá hạ nguồn thay vì không gian quan sát tổng hợp của Tương tác Không gian.*
 > 6. **Q6 (Module F): How can we infer it?** — *Formulates conditional MLE under open-data exposure and evaluates empirical statistical evidence.*<br>*Công thức hóa MLE điều kiện trên tiếp xúc dữ liệu mở và đánh giá các bằng chứng thống kê thực nghiệm.*
 
 | Module | Scientific Question (EN / VI) | Scientific Answer (EN / VI) | Leads to... (EN / VI) |
 | :--- | :--- | :--- | :--- |
-| **A. Gravity as Primary Factorization** / *Trọng lực như một Phân rã Nhân Chính* | **Why is Gravity the foundational scientific framework for aggregate mobility?**<br>*Tại sao Trọng lực là khung làm việc khoa học nền tảng của di chuyển tổng hợp?* | Gravity factorizes mobility into urban spatial structure ($O_i, A_j$) and traveller behaviour ($f(d;\theta)$).<br>*Trọng lực phân rã di chuyển thành cấu trúc không gian đô thị ($O_i, A_j$) và hành vi người di chuyển ($f(d;\theta)$).* | If behaviour is decoupled from structure, **what represents the behavioural mechanism and why must it be inferred?**<br>*Nếu hành vi được tách khỏi cấu trúc, điều gì đại diện cho cơ chế hành vi và tại sao nó phải được suy luận?* |
-| **B. Distance-Decay as Latent Behaviour** / *Suy giảm theo Khoảng cách là Hành vi Ẩn* | **What is the behavioural mechanism in spatial interaction models, and why must it be inferred rather than observed?**<br>*Cơ chế hành vi trong mô hình tương tác không gian là gì, và tại sao nó phải được suy luận thay vì quan sát trực tiếp?* | The distance-decay function $f(d;\theta)$ parameterizes collective distance sensitivity through the latent parameter $\theta$. While travel flows can be observed, $\theta$ cannot be measured directly by physical sensors and must be inferred statistically under spatial exposure confounding.<br>*Hàm suy giảm khoảng cách $f(d;\theta)$ tham số hóa độ nhạy khoảng cách tập thể thông qua tham số hành vi ẩn $\theta$. Mặc dù lưu lượng di chuyển có thể được quan sát, tham số $\theta$ không thể được đo trực tiếp bằng cảm biến vật lý mà phải được suy luận thống kê.* | If $\theta$ is a latent variable, **how has mobility science conventionally identified it, and what are its operational limits when flow data are unobserved?**<br>*Nếu $\theta$ là một biến ẩn, khoa học di chuyển đã định danh nó theo cách truyền thống như thế nào, và ranh giới áp dụng của nó là gì khi dữ liệu lưu lượng không quan sát được?* |
+| **A. Gravity as Primary SI Factorization** / *Trọng lực như Phân rã Nhân của Tương tác Không gian* | **Why is Gravity the foundational mathematical factorization for Spatial Interaction?**<br>*Tại sao Trọng lực là phép phân rã toán học nền tảng của Tương tác Không gian?* | Gravity factorizes Spatial Interaction into urban spatial structure ($O_i, A_j$) and traveller behavioural response ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}.<br>*Trọng lực phân rã Tương tác Không gian thành cấu trúc không gian đô thị ($O_i, A_j$) và phản ứng hành vi người di chuyển ($f(d;\theta)$).* | If behaviour is decoupled from structure, **what represents the behavioural mechanism in Spatial Interaction and why must it be inferred?**<br>*Nếu hành vi được tách khỏi cấu trúc, điều gì đại diện cho cơ chế hành vi trong Tương tác Không gian và tại sao nó phải được suy luận?* |
+| **B. Spatial Separation & Latent Deterrence** / *Sự chia cắt Không gian & Cản trở Ẩn* | **What is the behavioural mechanism in spatial interaction models, and why must it be inferred rather than observed?**<br>*Cơ chế hành vi trong mô hình tương tác không gian là gì, và tại sao nó phải được suy luận thay vì quan sát trực tiếp?* | Within Spatial Interaction theory \citep{okelly2009spatial}, the distance-decay function $f(d;\theta)$ mathematically represents behavioural response to **Spatial Separation**. While travel flows are observable, $\theta$ is a latent parameter confounded by structural exposure.<br>*Trong lý thuyết Tương tác Không gian \citep{okelly2009spatial}, hàm suy giảm khoảng cách $f(d;\theta)$ biểu diễn toán học cho phản ứng hành vi đối với **Spatial Separation**. Mặc dù lưu lượng di chuyển có thể quan sát được, $\theta$ là tham số ẩn bị nhiễu bởi tiếp xúc cấu trúc.* | If $\theta$ is a latent variable, **how has mobility science conventionally identified it, and what are its operational limits when flow data are unobserved?**<br>*Nếu $\theta$ là một biến ẩn, khoa học di chuyển đã định danh nó theo cách truyền thống như thế nào, và ranh giới áp dụng của nó là gì khi dữ liệu lưu lượng không quan sát được?* |
 | **C. Conventional Identification under Data Constraints** / *Định danh Truyền thống trong Ràng buộc Dữ liệu* | **How has mobility science conventionally identified latent parameters, and what are its applicability limits?**<br>*Khoa học di chuyển đã định danh các tham số ẩn theo cách truyền thống như thế nào, và ranh giới áp dụng của nó là gì?* | Conventional identification relied on supervised local OD matrix calibration, which is effective when local OD flows exist but limited when only aggregate observations are available (Meta MDM).<br>*Định danh truyền thống dựa vào việc hiệu chỉnh ma trận OD địa phương có giám sát, hiệu quả khi có dữ liệu OD địa phương nhưng gặp ranh giới áp dụng khi chỉ có các quan sát tổng hợp (Meta MDM).* | If conventional OD calibration is constrained by data availability, **what statistical information survives spatial aggregation?**<br>*Nếu hiệu chỉnh OD truyền thống gặp hạn chế về tính sẵn có của dữ liệu, thông tin thống kê nào còn tồn tại qua sự gom tụ không gian?* |
 | **D. Information Hierarchy of Aggregate Mobility** / *Hệ thống Phân cấp Thông tin* | **What statistical information survives spatial aggregation across mobility observation layers?**<br>*Thông tin thống kê nào còn tồn tại qua sự gom tụ không gian trên các lớp quan sát di chuyển?* | Aggregation collapses cell-to-cell OD identities while preserving aggregate travel-distance signatures (observed TLD) under differential privacy.<br>*Sự gom tụ loại bỏ danh tính OD giữa các ô nhưng lưu giữ các dấu hiệu khoảng cách di chuyển tổng hợp (observed TLD) dưới bảo mật vi sai.* | If aggregate TLD preserves statistical distance signatures, **why has existing mobility literature treated TLD strictly as a downstream evaluation benchmark rather than a primary observation space for parameter inference?**<br>*Nếu TLD tổng hợp bảo toàn các dấu hiệu thống kê khoảng cách, tại sao văn liệu di chuyển hiện tại vẫn xem TLD thuần túy là một mục tiêu đánh giá hạ nguồn thay vì một không gian quan sát chính cho bài toán suy luận tham số?* |
-| **E. Methodological Knowledge & Research Gap** / *Khoảng trống Nghiên cứu Phương pháp* | **Why have aggregate Trip-Length Distributions been used primarily as downstream evaluation benchmarks rather than as primary probabilistic observation spaces for behavioural parameter inference?**<br>*Tại sao Phân bố Độ dài Chuyến đi (TLD) tổng hợp trong các nghiên cứu hiện nay chủ yếu được sử dụng làm các chỉ số đánh giá chuẩn hạ nguồn, thay vì làm các không gian quan sát xác suất chính cho bài toán suy luận tham số hành vi?* | Landmark literature treats TLD strictly as a downstream evaluation benchmark; to the best of our knowledge, existing literature has not formulated a probabilistic framework using TLD as the primary inference space.<br>*Văn liệu cột mốc coi TLD thuần túy là chỉ số đánh giá chuẩn hạ nguồn; theo hiểu biết của chúng tôi, văn liệu hiện chưa công bố một khung xác suất dùng TLD làm không gian suy luận chính.* | **How does the proposed framework solve this gap and validate it empirically?**<br>*Khung làm việc được đề xuất giải quyết khoảng trống này như thế nào và kiểm chứng thực nghiệm ra sao?* |
+| **E. Methodological Knowledge & Research Gap** / *Khoảng trống Nghiên cứu Phương pháp* | **Why have aggregate Trip-Length Distributions been used primarily as downstream evaluation benchmarks rather than as primary probabilistic observation spaces for behavioural parameter inference?**<br>*Tại sao Phân bố Độ dài Chuyến đi (TLD) tổng hợp trong các nghiên cứu hiện nay chủ yếu được sử dụng làm các chỉ số đánh giá chuẩn hạ nguồn, thay vì làm các không gian quan sát xác suất chính cho bài toán suy luận tham số hành vi?* | Landmark literature treats TLD strictly as a downstream evaluation benchmark; to the best of our knowledge, existing literature has not formulated a probabilistic framework using TLD as the primary aggregate observation space of Spatial Interaction.<br>*Văn liệu cột mốc coi TLD thuần túy là chỉ số đánh giá chuẩn hạ nguồn; theo hiểu biết của chúng tôi, văn liệu hiện chưa công bố một khung xác suất dùng TLD làm không gian quan sát tổng hợp chính cho Tương tác Không gian.* | **How does the proposed framework solve this gap and validate it empirically?**<br>*Khung làm việc được đề xuất giải quyết khoảng trống này như thế nào và kiểm chứng thực nghiệm ra sao?* |
 | **F. Survey-Free Identification Framework (PCSF-TIM)** / *Khung Định danh Không cần Khảo sát* | **How does PCSF-TIM achieve survey-free parameter identification from aggregate TLDs and validate it empirically?**<br>*PCSF-TIM đạt được việc định danh tham số không cần khảo sát từ TLD tổng hợp như thế nào và kiểm chứng thực nghiệm ra sao?* | Maximum likelihood estimation conditional on open-data exposure $\mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$ recovers stable parameters $\hat{\theta}^*$ and enables zero-shot OD reconstruction.<br>*Ước tính khả năng tối đa điều kiện trên sự tiếp xúc dữ liệu mở $\mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$ khôi phục tham số ổn định $\hat{\theta}^*$ và cho phép tái tạo OD không cần huấn luyện lại.* | **Scientific Synthesis.**<br>*Tổng hợp Đánh giá Khoa học.* |
 
 ### Core Logic Graph V6.0 / Đồ thị Logic Trung tâm V6.0
 
 ```mermaid
 flowchart TD
-    subgraph Handbook ["HUMAN MOBILITY HANDBOOK V6.0 (6-MODULE TEXTBOOK ARCHITECTURE / KIẾN TRÚC 6 MODULE)"]
-        A["A. Why Gravity?<br>(Decouples Structure from Behaviour)<br><i>Trọng lực như Phân rã Nhân</i>"] --> B["B. What is Behaviour & Why Infer?<br>(Distance-Decay f(d; θ) as Latent Variable)<br><i>Suy giảm Khoảng cách là Hành vi Ẩn</i>"]
+    subgraph Handbook ["HUMAN MOBILITY HANDBOOK V6.0 (SPATIAL INTERACTION ARCHITECTURE)"]
+        SI["Spatial Interaction Domain<br>(Complementarity + Spatial Separation + Intervening Opportunities)<br><i>O'Kelly (2009)</i>"] --> A
+        A["A. Why Gravity?<br>(Multiplicative Mathematical Factorization)<br><i>Trọng lực như Phân rã Toán học</i>"] --> B["B. What is Behaviour & Why Infer?<br>(Distance-Decay as Response to Spatial Separation)<br><i>Suy giảm Khoảng cách là Phản ứng Hành vi Ẩn</i>"]
         B --> C["C. How Identified & Operational Limits?<br>(Conventional OD Calibration & Data Constraints)<br><i>Định danh Truyền thống & Ranh giới Dữ liệu</i>"]
         C --> D["D. What Information Survives?<br>(Information Hierarchy & Preserved TLD Signatures)<br><i>Hệ thống Phân cấp Thông tin</i>"]
-        D --> E["E. What is the Research Gap?<br>(TLD used as Evaluation Metric, not Inference Space)<br><i>Khoảng trống Nghiên cứu Phương pháp</i>"]
+        D --> E["E. What is the Research Gap?<br>(TLD as Aggregate SI Projection, not Inference Space)<br><i>Khoảng trống Nghiên cứu Phương pháp</i>"]
         E --> F["F. Our Identification Framework<br>(PCSF-TIM: Conditional Likelihood L(θ | TLD, E_k))<br><i>Khung Định danh Không cần Khảo sát</i>"]
     end
 
@@ -161,16 +162,17 @@ flowchart TD
 
 ---
 
-# Module A — Gravity as the Primary Factorization of Aggregate Mobility
-# Module A — Mô hình Trọng lực như một Phân rã Nhân của Di chuyển Tổng hợp
+# Module A — Gravity as the Primary Factorization of Spatial Interaction
+# Module A — Mô hình Trọng lực như một Phân rã Nhân của Tương tác Không gian
 
 | Component / Thành phần | EN Content | VI Content |
 | :--- | :--- | :--- |
-| **Module Title** | **Gravity as the Primary Factorization of Aggregate Mobility** | **Mô hình Trọng lực như một Phân rã Nhân của Di chuyển Tổng hợp** |
-| **Scientific Question** | **Why is Gravity the foundational scientific framework for aggregate human mobility?** | **Tại sao Trọng lực là khung làm việc khoa học nền tảng của di chuyển con người tổng hợp?** |
-| **Module Rationale** | Without Gravity's explicit decomposition, travel behaviour cannot be isolated from urban spatial structure. | Nếu không có sự phân rã rõ ràng của Trọng lực, hành vi di chuyển không thể được tách biệt khỏi cấu trúc không gian đô thị. |
-| **Mission** | Establish Gravity not as a specific predictive algorithm, but as a foundational scientific factorization of aggregate mobility into urban structure ($O_i, A_j$) and behavioural distance response ($f(d_{ij}; \theta)$). | Thiết lập mô hình Trọng lực không phải như một thuật toán dự báo cụ thể, mà là sự phân rã khoa học nền tảng của di chuyển tổng hợp thành cấu trúc đô thị ($O_i, A_j$) và phản ứng hành vi khoảng cách ($f(d_{ij}; \theta)$). |
-| **Central Claim** | **Gravity should be understood not primarily as a predictive model, but as a foundational factorization of aggregate human mobility into urban structure and travel behaviour.** | **Mô hình Trọng lực nên được hiểu không phải chủ yếu là một mô hình dự báo, mà là sự phân rã nền tảng của di chuyển con người tổng hợp thành cấu trúc đô thị và hành vi di chuyển.** |
+| **Module Title** | **Gravity as the Primary Factorization of Spatial Interaction** | **Mô hình Trọng lực như một Phân rã Nhân của Tương tác Không gian** |
+| **Scientific Question** | **Why is Gravity the foundational mathematical language for Spatial Interaction?** | **Tại sao Trọng lực là ngôn ngữ toán học nền tảng của Tương tác Không gian?** |
+| **Module Rationale** | Spatial Interaction constitutes the primary scientific domain, while Gravity provides its explicit multiplicative factorization into structure ($O_i, A_j$) and behavioural distance response ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. | Tương tác Không gian cấu thành đối tượng khoa học chính, trong đó Trọng lực cung cấp sự phân rã nhân rõ ràng thành cấu trúc ($O_i, A_j$) và phản ứng hành vi khoảng cách ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. |
+| **Mission** | Establish Gravity not as a specific predictive algorithm, but as a foundational mathematical factorization of Spatial Interaction into urban structure ($O_i, A_j$) and behavioural distance response ($f(d_{ij}; \theta)$). | Thiết lập mô hình Trọng lực không phải như một thuật toán dự báo cụ thể, mà là phép phân rã toán học nền tảng của Tương tác Không gian thành cấu trúc đô thị ($O_i, A_j$) và phản ứng hành vi khoảng cách ($f(d_{ij}; \theta)$). |
+| **Central Claim** | **Gravity should be understood as a foundational mathematical factorization of Spatial Interaction into urban structure and travel behaviour.** | **Mô hình Trọng lực nên được hiểu là sự phân rã toán học nền tảng của Tương tác Không gian thành cấu trúc đô thị và hành vi di chuyển.** |
+
 
 ### Theoretical Explanation / Giải thích Lý thuyết
 
@@ -214,41 +216,65 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 
 ### Deep Dive: Representation Extension in Contemporary AI Models (Claim A2) / Phân tích Sâu: Mở rộng Khả năng Biểu diễn trong các Mô hình AI Hiện đại (Luận điểm A2)
 
-> **EN:** A central question in contemporary mobility science is how deep learning architectures relate to physical spatial interaction models. Machine learning approaches enhance representational capacity but may encounter challenges in output interpretability and cross-city transferability due to spatial non-stationarity. Recent state-of-the-art models address these challenges by progressively stratifying their integration of physical principles:
-> - **Gravity-Inspired Architectures:** Frameworks such as Deep Gravity \citep{simini2021} leverage neural networks to learn complex representations from spatial features (POIs, land use). While retaining origin constraints, they replace explicit multiplicative deterrence with neural layers ($W_{MLP}$).
-> - **Physics-Informed Explicit Factorization:** Contemporary architectures—such as neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, and Imagery2Flow \citep{imagery2flow2026}—explicitly preserve the multiplicative decomposition $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$ directly within their neural layers.
->
-> **VI:** Một câu hỏi trung tâm trong khoa học di chuyển hiện đại là các kiến trúc học sâu có mối quan hệ như thế nào với các mô hình tương tác không gian vật lý. Các tiếp cận máy học nâng cao khả năng biểu diễn nhưng có thể gặp thách thức về khả năng giải thích và tính chuyển giao giữa các đô thị do tính không dừng không gian. Các mô hình SOTA gần đây giải quyết thách thức này bằng cách phân tầng mức độ tích hợp các nguyên lý vật lý:
-> - **Kiến trúc Truyền cảm hứng Trọng lực:** Các khung làm việc như Deep Gravity \citep{simini2021} sử dụng mạng thần kinh để học biểu diễn phức tạp từ đặc trưng không gian. Dù giữ lại ràng buộc điểm đi, chúng thay thế sự phân rã cản trở dạng nhân bằng các lớp thần kinh ($W_{MLP}$).
-> - **Phân rã Rõ ràng Dựa trên Vật lý:** Các kiến trúc hiện đại—như neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, và Imagery2Flow \citep{imagery2flow2026}—duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$ ngay trong các lớp mạng thần kinh của chúng.
-
-### Deep Dive: Gravity Factorization as an Organizing Principle (Claim A3) / Phân tích Sâu: Phân rã Trọng lực như Nguyên lý Tổ chức (Luận điểm A3)
-
-> **EN:** Viewing the Gravity model as a multiplicative factorization:
-> \[ T_{ij} = \underbrace{O_i A_j}_{\text{Urban Structure}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Behaviour}} \]
-> is not merely a mathematical representation, but an organizing principle for structuring problems in spatial interaction science \citep{barbosa2018human}. By explicitly decoupling urban structural opportunities ($O_i, A_j$) from behavioural distance response ($f(d;\theta)$), this decomposition establishes a shared conceptual coordinate system wherein mobility flow modeling, parameter calibration, information preservation, and behavioural inference are positioned within a single unified framework rather than treated as isolated research directions.
->
-> **VI:** Việc coi mô hình Trọng lực như một phân rã dạng nhân:
-> \[ T_{ij} = \underbrace{O_i A_j}_{\text{Cấu trúc Đô thị}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Hành vi}} \]
-> không chỉ là một cách biểu diễn toán học mà còn là một nguyên lý tổ chức các bài toán trong khoa học tương tác không gian \citep{barbosa2018human}. Phân rã này tách rõ cấu trúc đô thị ($O_i, A_j$) khỏi hành vi khoảng cách ($f(d;\theta)$), cho phép các vấn đề như mô hình hóa lưu lượng, hiệu chỉnh tham số, đánh giá thông tin và suy luận hành vi được đặt trong cùng một khung khái niệm thay vì được xem như những hướng nghiên cứu độc lập.
-
-### Transition to Module B / Chuyển tiếp sang Module B
+> **EN:** A central question in contemporary mobility science is how deep learning architectures relate to physical spatial interaction models. Machine learning approaches enhance re# Module B — Spatial Separation & Latent Deterrence in Spatial Interaction
+# Module B — Sự chia cắt Không gian & Cản trở Ẩn trong Tương tác Không gian
 
 | Component / Thành phần | EN Content | VI Content |
 | :--- | :--- | :--- |
-| **Transition Question** | **If behaviour is decoupled from structure, what represents the behavioural mechanism and why must it be inferred as a latent variable?** | **Nếu hành vi được tách khỏi cấu trúc, điều gì đại diện cho cơ chế hành vi và tại sao nó phải được suy luận như một biến ẩn?** |
-| **Motivation for Module B** | Physical sensors cannot measure human distance deterrence directly. Module B defines distance decay and formulates the Latent Behaviour Identification Problem. | Cảm biến vật lý không thể đo trực tiếp ma sát khoảng cách của con người. Module B định nghĩa sự suy giảm khoảng cách và thiết lập Bài toán Định danh Hành vi Ẩn. |
-
----
-
-# Module B — Distance-Decay as Latent Behaviour
-# Module B — Suy giảm theo Khoảng cách là Hành vi Ẩn
-
-| Component / Thành phần | EN Content | VI Content |
-| :--- | :--- | :--- |
-| **Module Title** | **Distance-Decay as Latent Behaviour** | **Suy giảm theo Khoảng cách là Hành vi Ẩn** |
+| **Module Title** | **Spatial Separation & Latent Deterrence in Spatial Interaction** | **Sự chia cắt Không gian & Cản trở Ẩn trong Tương tác Không gian** |
 | **Scientific Question** | **What is the behavioural mechanism in spatial interaction models, and why must it be inferred rather than observed directly?** | **Cơ chế hành vi trong mô hình tương tác không gian là gì, và tại sao nó phải được suy luận thay vì quan sát trực tiếp?** |
-| **Module Rationale** | Establishes distance-decay $f(d;\theta)$ as core friction mechanism, demonstrates $\theta$ is an unobservable latent variable, and articulates exposure confounding. | Thiết lập suy giảm khoảng cách $f(d;\theta)$ làm cơ pháp ma sát cốt lõi, chỉ ra $\theta$ là biến ẩn không thể quan sát, và làm rõ sự nhiễu do tiếp xúc không gian. |
+| **Module Rationale** | Grounded in Spatial Interaction theory \citep{okelly2009spatial}, distance-decay $f(d;\theta)$ parameterizes human response to **Spatial Separation**, demonstrates $\theta$ is an unobservable latent variable, and articulates exposure confounding. | Dựa trên lý thuyết Tương tác Không gian \citep{okelly2009spatial}, suy giảm khoảng cách $f(d;\theta)$ tham số hóa phản ứng của con người với **Spatial Separation**, chỉ ra $\theta$ là biến ẩn không thể quan sát, và làm rõ sự nhiễu do tiếp xúc không gian. |
+| **Mission** | Establish distance decay as the mathematical representation of behavioural response to Spatial Separation, show Tanner's parameters quantify distance sensitivity, formulate unobservability, establish urban exposure as structural confounder \citep{fotheringham1989spatial, okelly2009spatial}. | Thiết lập suy giảm khoảng cách là biểu diễn toán học của phản ứng hành vi đối với Spatial Separation, chỉ ra các tham số của Tanner định lượng độ nhạy khoảng cách, và thiết lập mức độ tiếp xúc đô thị là biến nhiễu cấu trúc \citep{fotheringham1989spatial, okelly2009spatial}. |
+
+### The Principle of Spatial Interaction & Structure–Behaviour Mapping / Nguyên lý Tương tác Không gian & Phân rã Cấu trúc - Hành vi
+
+> **EN:** Spatial interaction science establishes that movement flows across geographic space materialize only under the simultaneous confluence of foundational spatial forces \citep{stouffer1940intervening, wilson1971, okelly2009spatial}:
+> \[
+> \text{Spatial Flow } (T_{ij}) \iff \text{Origin Demand} + \text{Destination Attraction} + \text{Complementarity} + \text{Spatial Separation} + \text{Intervening Opportunities}
+> \]
+>
+> To convert this general principle into an analytical framework, the Handbook explicitly maps O'Kelly's classical spatial interaction triad \citep{okelly2009spatial} into its core **Structure–Behaviour Separation Principle**:
+>
+> | O'Kelly (2009) Triad | Handbook Theoretical Framing | Mathematical Representation |
+> | :--- | :--- | :--- |
+> | **Complementarity** | **Urban Structure** (Origin generation & Destination attraction capacities) | $O_i A_j$ |
+> | **Spatial Separation** | **Travel Behaviour** (Collective deterrence response to spatial friction) | $f(d_{ij}; \theta)$ |
+> | **Intervening Opportunities** | **Urban Structural Exposure & Spatial Configuration** | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
+>
+> *Note: While the triad represents the established definition of Spatial Interaction \citep{okelly2009spatial}, their reorganization into decoupled Structural Exposure $E_k$ and Latent Behaviour $\theta$ constitutes the specific theoretical framing of this Handbook.*
+>
+> **VI:** Khoa học tương tác không gian thiết lập rằng các dòng di chuyển qua không gian địa lý chỉ xuất hiện khi có sự hội tụ đồng thời của các lực không gian nền tảng \citep{stouffer1940intervening, wilson1971, okelly2009spatial}:
+> \[
+> \text{Dòng Di chuyển } (T_{ij}) \iff \text{Nhu cầu Điểm đi} + \text{Sức hút Điểm đến} + \text{Tính Bổ sung} + \text{Chia cắt Không gian} + \text{Cơ hội Trung gian}
+> \]
+>
+> Để chuyển đổi nguyên lý tổng quát này thành một khung phân tích, Handbook ánh xạ một cách rõ ràng tam giác tương tác không gian kinh điển của O'Kelly \citep{okelly2009spatial} vào **Nguyên lý Tách biệt Cấu trúc - Hành vi** cốt lõi:
+>
+> | Tam giác O'Kelly (2009) | Khung Lý thuyết Handbook | Biểu diễn Toán học |
+> | :--- | :--- | :--- |
+> | **Complementarity** (Tính Bổ sung) | **Cấu trúc Đô thị** (Năng lực phát thải điểm đi & sức hút điểm đến) | $O_i A_j$ |
+> | **Spatial Separation** (Chia cắt Không gian) | **Hành vi Di chuyển** (Phản ứng cản trở tập thể đối với ma sát không gian) | $f(d_{ij}; \theta)$ |
+> | **Intervening Opportunities** (Cơ hội Trung gian) | **Tiếp xúc Cấu trúc Đô thị & Cấu hình Không gian** | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
+>
+> *Lưu ý: Mặc dù tam giác ba thành phần đại diện cho định nghĩa đã được thiết lập của Tương tác Không gian \citep{okelly2009spatial}, việc tái tổ chức chúng thành Tiếp xúc Cấu trúc $E_k$ và Hành vi Ẩn $\theta$ tách biệt cấu thành khung lý thuyết riêng của Handbook này.*
+
+### Supporting Claims / Các Luận điểm Hỗ trợ (Module B)
+
+| Claim (EN / VI) | Purpose (EN / VI) | Representative Evidence (EN / VI) | Expected Conclusion (EN / VI) |
+| :--- | :--- | :--- | :--- |
+| **B1. Distance decay represents spatial impedance friction.**<br>*Suy giảm khoảng cách đại diện cho ma sát trở lực không gian.* | Maps spatial separation into interaction probability.<br>*Ánh xạ khoảng cách không gian thành xác suất tương tác.* | • Tobler (1970) \citep{tobler1970computer}.<br>• Wilson (1971) \citep{wilson1971}.<br>• Stouffer (1940) \citep{stouffer1940intervening}.<br>• O'Kelly (2009) \citep{okelly2009spatial}. | Distance decay isolates geographic impedance from structural opportunity density.<br>*Suy giảm khoảng cách tách biệt trở lực địa lý khỏi mật độ cơ hội cấu trúc.* |
+| **B2. Decay specifications embody distinct behavioural hypotheses.**<br>*Các dạng suy giảm thể hiện các giả thuyết hành vi riêng biệt.* | Analyzes exponential, power-law, and Tanner formulations.<br>*Phân tích các dạng hàm mũ, lũy thừa và Tanner.* | • Wilson (1971) \citep{wilson1971}.<br>• González (2008) \citep{gonzalez2008understanding}.<br>• Tanner (1961) \citep{tanner1961}.<br>• Liang (2013) \citep{liang2013unraveling}. | Functional forms embody distinct spatial perception mechanisms across scales.<br>*Dạng hàm thể hiện các cơ chế nhận thức không gian riêng biệt qua các quy mô.* |
+| **B3. Tanner deterrence function provides flexible dual representation.**<br>*Hàm cản trở Tanner cung cấp biểu diễn kép linh hoạt.* | Justifies Tanner function choice ($f(d) = d^{-\alpha} e^{-\beta d}$).<br>*Biện minh việc chọn hàm Tanner.* | • Tanner (1961) \citep{tanner1961}.<br>• Liang (2013) \citep{liang2013unraveling}.<br>• Lenormand (2016) \citep{lenormand2016systematic}. | Tanner unifies short-range attraction ($\alpha$) and long-range exponential cutoff ($\beta$).<br>*Tanner hợp nhất sức hút cự cự ngắn ($\alpha$) và kháng lực hàm mũ cự cự xa ($\beta$).* |
+| **B4. Traveller distance sensitivity is an unobservable latent variable confounded by spatial exposure.**<br>*Độ nhạy khoảng cách là biến ẩn không thể quan sát bị nhiễu bởi tiếp xúc không gian.* | Defines latent variable nature of $\theta = (\alpha, \beta)$ and exposure confounding.<br>*Định nghĩa bản chất biến ẩn của $\theta$ và nhiễu do tiếp xúc không gian.* | • Wilson (1971) \citep{wilson1971}.<br>• Huff (1963) \citep{huff1963probabilistic}.<br>• Fotheringham & O'Kelly (1989) \citep{fotheringham1989spatial}.<br>• O'Kelly (2009) \citep{okelly2009spatial}. | Parameter estimation must be framed as inverse statistical inference conditional on exposure $E_k$.<br>*Ước tính tham số phải được đặt khung là suy luận thống kê ngược điều kiện trên $E_k$.* |
+
+### Deep Dive: Spatial Impedance vs. Geographic Distance & Intervening Opportunities (Claim B1) / Phân tích Sâu: Trở lực Không gian so với Khoảng cách Địa lý (Luận điểm B1)
+
+> **EN:** In spatial interaction theory \citep{okelly2009spatial}, distance $d_{ij}$ in deterrence $f(d_{ij};\theta)$ represents generalized spatial impedance (travel time, monetary costs, physical transport constraints, cognitive friction). Stouffer's theory of intervening opportunities \citep{stouffer1940intervening} proposed an alternative perspective where travel deterrence is driven by intermediate opportunities between origin and destination. Exposure-corrected gravity unifies distance deterrence with opportunity density. Conditioning parameter estimation on structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ explicitly controls for intermediate opportunity capacity, allowing $f^*(d; \theta^*)$ to capture the residual spatial impedance friction.
+>
+> **VI:** Trong lý thuyết tương tác không gian \citep{okelly2009spatial}, khoảng cách $d_{ij}$ trong hàm cản trở $f(d_{ij};\theta)$ đại diện cho trở lực không gian tổng quát (thời gian di chuyển, chi phí, hạn chế hạ tầng, ma sát nhận thức). Lý thuyết cơ hội trung gian của Stouffer \citep{stouffer1940intervening} đề xuất một góc nhìn trong đó sự cản trở bị chi phối bởi các cơ hội trung gian giữa điểm đi và điểm đến. Trọng lực có hiệu chỉnh tiếp xúc hợp nhất suy giảm khoảng cách với mật độ cơ hội. Việc điều kiện hóa ước tính tham số trên tiếp xúc cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ kiểm soát rõ ràng mật độ cơ hội trung gian, giúp $f^*(d; \theta^*)$ phản ánh ma sát trở lực không gian thặng dư.
+
+### Deep Dive: Functional Decay Forms as Behavioural Hypotheses (Claim B2) / Phân tích Sâu: Dạng suy giảm như Giả thuyết Hành vi (Luận điểm B2)
+� sự nhiễu do tiếp xúc không gian. |
 | **Mission** | Define distance decay as spatial impedance friction, show Tanner's parameters quantify distance sensitivity, formulate unobservability, establish urban exposure as structural confounder. | Định nghĩa suy giảm khoảng cách là ma sát trở lực không gian, chỉ ra các tham số của Tanner định lượng độ nhạy khoảng cách, và thiết lập mức độ tiếp xúc đô thị là biến nhiễu cấu trúc. |
 
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module B)
@@ -608,6 +634,8 @@ flowchart LR
 
 ---
 
+---
+
 ## References Summary / Danh mục Tài liệu Tham khảo (Auto-synced from `handbook_references.bib`)
 
 > **Note:** This section is linked to [`handbook_references.bib`](file:///Users/nguyenquocthinh/Documents/PCSF-TIM/handbook_references.bib). Run `python3 code/sync_handbook_refs.py` to refresh.
@@ -634,19 +662,20 @@ flowchart LR
 | R18 | Liang, Xiao and Zhao, Jichang and Dong, Li and Xu, Ke *Unraveling the origin of exponential law in intra-urban human mobility*, Scientific Reports | 2013 | `liang2013unraveling` |
 | R19 | Merlin, Louis A. *A new method using medians to calibrate single-parameter spatial interaction models*, Journal of Transport and Land Use | 2020 | `merlin2020medians` |
 | R20 | Yang, Jinming and Huang, Shaoyu and Huang, Zongyuan and Jin, Yaohui and Yang, Xiaokang and Gonz\'alez, Marta C. and Xu, Yanyan *Transferable human mobility network reconstruction with neuroGravity*, Nature Computational Science | 2026 | `neurogravity2026` |
-| R21 | Oliver, Nuria and Lepri, Bruno and Sterly, Harald and Lambiotte, Renaud and Deletaille, S\'ebastien and De Nadai, Marco and Letouz\'e *Mobile phone data for informing public health actions across the COVID-19 pandemic life cycle*, Science advances | 2020 | `oliver2020mobile` |
-| R22 | Ort\'uzar, Juan de Dios and Willumsen, Luis G. *Modelling Transport*, John Wiley \& Sons | 2011 | `ortuzar2011modelling` |
-| R23 | Pappalardo, Luca and Manley, Ed and Sekara, Vedran and Alessandretti, Laura *Future directions in human mobility science*, Nature Computational Science | 2023 | `pappalardo2023analytical` |
-| R24 | Sen, Ashish and Smith, Tony E *Gravity models of spatial interaction behavior*, Springer | 1995 | `sen1995gravity` |
-| R25 | Shi, Hongzhi and Yao, Quanming and Guo, Qi and Li, Yaguang and Zhang, Lingyu and Ye, Jieping and Li, Yong and Liu, Yan *Predicting Origin-Destination Flow via Multi-Perspective Graph Convolutional Network*, IEEE 36th International Conference on Data Engineering (ICDE) | 2020 | `shi2020mpgcn` |
-| R26 | Simini, F. and Gonzalez, M.C. and Maritan, A. and Barabasi, A.-L. *A universal model for mobility and migration patterns*, Nature | 2012 | `simini2012universal` |
-| R27 | Simini, F. and Barlacchi, G. and Luca, M. and Pappalardo, L. *A Deep Gravity model for mobility flows generation*, Nature Communications | 2021 | `simini2021` |
-| R28 | Song, C. and Qu, Z. and Blumm, N. and Barab\'asi, A.-L. *Limits of predictability in human mobility*, Science | 2010 | `song2010limits` |
-| R29 | Stouffer, S. A. *Intervening opportunities: A theory relating mobility and distance*, American Sociological Review | 1940 | `stouffer1940intervening` |
-| R30 | Tanner, J. C. *Factors affecting the amount of travel*, Road Research Laboratory, Department of Scientific and Industrial Research | 1961 | `tanner1961` |
-| R31 | Tobler, W. R. *A computer movie simulating urban growth in the Detroit region*, Economic Geography | 1970 | `tobler1970computer` |
-| R32 | Enaya, Adham and Zhong, Chen and Batty, Michael and Morphet, Robin and Lopane, Fulvio D. *TransGM: Transferable gravity models for cross-city policy transfer*, Computers, Environment and Urban Systems | 2026 | `transgm2026` |
-| R33 | Vu, Tuong-Thuy and Vu, Nguyen-Van-Anh and Phung, Hoang-Phi and Nguyen, Lam-Dao *Enhanced urban functional land use map with free and open-source data*, International Journal of Digital Earth | 2021 | `vu2021landuse` |
-| R34 | Wang, Jinzhong and Kong, Xiangjie and Xia, Feng and Sun, Lijun *Urban Human Mobility: Data-Driven Modeling and Prediction*, ACM SIGKDD Explorations Newsletter | 2019 | `wang2019urban` |
-| R35 | Wilson, A.G. *A family of spatial interaction models, and associated developments*, Environment and Planning A | 1971 | `wilson1971` |
-| R36 | Zipf, George Kingsley *The $P_1 P_2 / D$ hypothesis: On the intercity movement of persons*, American Sociological Review | 1946 | `zipf1946` |
+| R21 | O'Kelly, Morton E. *Spatial Interaction Models*, International Encyclopedia of Human Geography | 2009 | `okelly2009spatial` |
+| R22 | Oliver, Nuria and Lepri, Bruno and Sterly, Harald and Lambiotte, Renaud and Deletaille, S\'ebastien and De Nadai, Marco and Letouz\'e *Mobile phone data for informing public health actions across the COVID-19 pandemic life cycle*, Science advances | 2020 | `oliver2020mobile` |
+| R23 | Ort\'uzar, Juan de Dios and Willumsen, Luis G. *Modelling Transport*, John Wiley \& Sons | 2011 | `ortuzar2011modelling` |
+| R24 | Pappalardo, Luca and Manley, Ed and Sekara, Vedran and Alessandretti, Laura *Future directions in human mobility science*, Nature Computational Science | 2023 | `pappalardo2023analytical` |
+| R25 | Sen, Ashish and Smith, Tony E *Gravity models of spatial interaction behavior*, Springer | 1995 | `sen1995gravity` |
+| R26 | Shi, Hongzhi and Yao, Quanming and Guo, Qi and Li, Yaguang and Zhang, Lingyu and Ye, Jieping and Li, Yong and Liu, Yan *Predicting Origin-Destination Flow via Multi-Perspective Graph Convolutional Network*, IEEE 36th International Conference on Data Engineering (ICDE) | 2020 | `shi2020mpgcn` |
+| R27 | Simini, F. and Gonzalez, M.C. and Maritan, A. and Barabasi, A.-L. *A universal model for mobility and migration patterns*, Nature | 2012 | `simini2012universal` |
+| R28 | Simini, F. and Barlacchi, G. and Luca, M. and Pappalardo, L. *A Deep Gravity model for mobility flows generation*, Nature Communications | 2021 | `simini2021` |
+| R29 | Song, C. and Qu, Z. and Blumm, N. and Barab\'asi, A.-L. *Limits of predictability in human mobility*, Science | 2010 | `song2010limits` |
+| R30 | Stouffer, S. A. *Intervening opportunities: A theory relating mobility and distance*, American Sociological Review | 1940 | `stouffer1940intervening` |
+| R31 | Tanner, J. C. *Factors affecting the amount of travel*, Road Research Laboratory, Department of Scientific and Industrial Research | 1961 | `tanner1961` |
+| R32 | Tobler, W. R. *A computer movie simulating urban growth in the Detroit region*, Economic Geography | 1970 | `tobler1970computer` |
+| R33 | Enaya, Adham and Zhong, Chen and Batty, Michael and Morphet, Robin and Lopane, Fulvio D. *TransGM: Transferable gravity models for cross-city policy transfer*, Computers, Environment and Urban Systems | 2026 | `transgm2026` |
+| R34 | Vu, Tuong-Thuy and Vu, Nguyen-Van-Anh and Phung, Hoang-Phi and Nguyen, Lam-Dao *Enhanced urban functional land use map with free and open-source data*, International Journal of Digital Earth | 2021 | `vu2021landuse` |
+| R35 | Wang, Jinzhong and Kong, Xiangjie and Xia, Feng and Sun, Lijun *Urban Human Mobility: Data-Driven Modeling and Prediction*, ACM SIGKDD Explorations Newsletter | 2019 | `wang2019urban` |
+| R36 | Wilson, A.G. *A family of spatial interaction models, and associated developments*, Environment and Planning A | 1971 | `wilson1971` |
+| R37 | Zipf, George Kingsley *The $P_1 P_2 / D$ hypothesis: On the intercity movement of persons*, American Sociological Review | 1946 | `zipf1946` |

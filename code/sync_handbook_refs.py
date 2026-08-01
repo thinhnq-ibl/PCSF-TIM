@@ -17,7 +17,7 @@ def parse_bib_file(bib_path):
     if not os.path.exists(bib_path):
         raise FileNotFoundError(f"Bib file not found: {bib_path}")
     
-    with open(bib_path, "r", encoding="utf-8") as f:
+    with open(bib_path, "r", encoding="utf-8", errors="replace") as f:
         content = f.read()
 
     entries = {}
@@ -51,8 +51,9 @@ def parse_bib_file(bib_path):
 def update_handbook_refs():
     bib_entries = parse_bib_file(BIB_PATH)
     
-    with open(HANDBOOK_PATH, "r", encoding="utf-8") as f:
+    with open(HANDBOOK_PATH, "r", encoding="utf-8", errors="replace") as f:
         hb_content = f.read()
+
 
     # Generate Markdown Summary Table
     table_lines = [
