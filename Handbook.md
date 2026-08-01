@@ -1,3 +1,10 @@
+---
+title: "Theoretical Background and Methodological Blueprint"
+subtitle: "Hướng dẫn Lý thuyết và Bản thiết kế Phương pháp luận"
+bibliography: handbook_references.bib
+link-citations: true
+---
+
 # Theoretical Background and Methodological Blueprint
 # Hướng dẫn Lý thuyết và Bản thiết kế Phương pháp luận
 
@@ -599,85 +606,47 @@ flowchart LR
 
 ---
 
-## References Summary / Danh mục Tài liệu Tham khảo Tóm tắt
-
-| Ref ID | Reference | Year | BibTeX key | Module | Vai trò Khoa học (EN / VI) |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| R1 | Zipf, G.K. *The P1 P2 / D hypothesis: On the intercity movement of persons*, Am. Sociol. Rev., 11(6): 677–686 | 1946 | `zipf1946` | A | Early sociological gravity analogy establishing inverse-distance spatial interaction core. / Công thức Trọng lực xã hội học ban đầu thiết lập lõi tương tác không gian nghịch đảo khoảng cách. |
-| R2 | Stouffer, S.A. *Intervening opportunities: A theory relating mobility and distance*, Am. Sociol. Rev., 5(6): 845–867 | 1940 | `stouffer1940intervening` | B | Intervening opportunities theory decoupling physical distance from opportunity density. / Lý thuyết cơ hội trung gian tách biệt khoảng cách vật lý khỏi mật độ cơ hội. |
-| R3 | Hansen, W.G. *How accessibility shapes land use*, J. Am. Inst. Planners, 25(2): 73–76 | 1959 | `hansen1959accessibility` | B | Structural spatial accessibility foundation integrating attraction and distance decay. / Nền tảng tiếp xúc tiếp cận cấu trúc không gian tích hợp sức hút và suy giảm khoảng cách. |
-| R4 | Tanner, J.C. *Factors affecting the amount of travel*, RRL Tech. Paper 51, London: HMSO | 1961 | `tanner1961` | A, B, F | Combined power-law and exponential deterrence function (Tanner deterrence model). / Hàm cản trở kết hợp lũy thừa và hàm mũ (Mô hình cản trở Tanner). |
-| R5 | Huff, D.L. *A probabilistic analysis of shopping center trade areas*, Land Econ., 39(1): 81–90 | 1963 | `huff1963probabilistic` | B | Probabilistic destination choice modeling incorporating structural opportunity capacity. / Mô hình hóa lựa chọn điểm đến xác suất kết hợp dung lượng cơ hội cấu trúc. |
-| R6 | Hyman, G.M. *The calibration of trip distribution models*, Env. Plan. A, 1(1): 105–112 | 1969 | `hyman1969calibration` | C | Classical mean trip-length matching calibration requiring full OD matrix access. / Phương pháp hiệu chỉnh khớp độ dài chuyến đi trung bình kinh điển yêu cầu truy cập ma trận OD. |
-| R7 | Tobler, W. *A computer movie simulating urban growth in the Detroit region*, Econ. Geogr., 46: 234–240 | 1970 | `tobler1970computer` | B | First Law of Geography establishing continuous spatial impedance friction. / Định luật thứ nhất Địa lý học thiết lập ma sát trở lực không gian liên tục. |
-| R8 | Wilson, A.G. *A family of spatial interaction models, and associated developments*, Env. Plan. A, 3(1): 1–32 | 1971 | `wilson1971` | A, B, E | Entropy maximization derivation and formal Gravity multiplicative factorization. / Tối đa hóa entropy và sự phân rã nhân mô hình Trọng lực chính thức. |
-| R9 | Flowerdew, R. & Aitkin, M. *A method of fitting the gravity model based on the Poisson distribution*, J. Reg. Sci., 22(2): 191–202 | 1982 | `flowerdew1982method` | A | Poisson maximum likelihood regression framework for spatial interaction count flows. / Khung hồi quy khả năng cực đại Poisson cho lưu lượng tương tác không gian dạng đếm. |
-| R10 | Haynes, K.E. & Fotheringham, A.S. *Gravity and Spatial Interaction Models*, SAGE Publications | 1984 | `haynes1984gravity` | A | Theoretical synthesis of gravity formulations and spatial parameter estimation. / Tổng quan lý thuyết về các công thức trọng lực và ước tính tham số không gian. |
-| R11 | Fotheringham, A.S. & O'Kelly, M.E. *Spatial Interaction Models: Formulations and Applications*, Kluwer Academic | 1989 | `fotheringham1989spatial` | B | Demonstration that spatial configuration confounds observed distance distributions. / Chứng minh rằng cấu hình không gian làm nhiễu phân bố khoảng cách quan sát được. |
-| R12 | Erlander, S. & Stewart, N.F. *The Gravity Model in Transportation Analysis: Theory and Applications*, VSP, Utrecht | 1990 | `erlander1990spatial` | C, D | Mathematical foundations and information-theoretic structure of flow interaction. / Nền tảng toán học và cấu trúc lý thuyết thông tin của tương tác lưu lượng. |
-| R13 | Sen, A. & Smith, T.E. *Gravity Models of Spatial Interaction Behavior*, Springer | 1995 | `sen1995gravity` | C | Rigorous estimation paradigms and asymptotic inference for spatial interaction models. / Khung lý thuyết hiệu chỉnh và suy luận tiệm cận cho các mô hình tương tác không gian. |
-| R14 | Casella, G. & Berger, R.L. *Statistical Inference (2nd ed.)*, Duxbury, Pacific Grove | 2002 | `casella2002statistical` | B, E | Statistical foundation for inverse estimation and latent parameter identifiability. / Cơ sở thống kê cho ước tính ngược và khả năng định danh tham số ẩn. |
-| R15 | González, M.C., Hidalgo, C.A. & Barabási, A.L. *Understanding individual human mobility patterns*, Nature, 453: 779–782 | 2008 | `gonzalez2008understanding` | B, D | Empirical discovery of individual travel regularities surviving spatial aggregation. / Phát hiện thực nghiệm về các quy luật di chuyển cá nhân tồn tại qua gom tụ không gian. |
-| R16 | Song, C., Qu, Z., Blumm, N. & Barabási, A.L. *Limits of predictability in human mobility*, Science, 327(5968): 1018–1021 | 2010 | `song2010limits` | D | Entropy bounds and information reduction limits in mobility trajectory aggregation. / Ranh giới entropy và giới hạn giảm thiểu thông tin trong gom tụ quỹ đạo di chuyển. |
-| R17 | Ortúzar, J. de D. & Willumsen, L.G. *Modelling Transport (4th ed.)*, John Wiley & Sons | 2011 | `ortuzar2011modelling` | C | Standard transport planning textbook for matrix estimation and trip distribution. / Giáo trình quy hoạch giao thông chuẩn cho ước tính ma trận và phân bổ chuyến đi. |
-| R18 | Simini, F., González, M.C., Maritan, A. & Barabási, A.L. *A universal model for mobility and migration patterns*, Nature, 484: 96–100 | 2012 | `simini2012universal` | E | Parameter-free Radiation model based on opportunity-driven travel decisions. / Mô hình Bức xạ không tham số dựa trên quyết định di chuyển theo cơ hội. |
-| R19 | de Montjoye, Y.A., Hidalgo, C.A., Verleysen, M. & Blondel, V.D. *Unique in the crowd: The privacy bounds of human mobility*, Sci. Rep., 3: 1376 | 2013 | `de2013unique` | C, D | Trajectory re-identification risk driving shift toward aggregate data release. / Rủi ro tái định danh quỹ đạo thúc đẩy sự chuyển dịch sang phát hành dữ liệu tổng hợp. |
-| R20 | Liang, X., Zhao, J., Dong, L. & Xu, K. *Unraveling the origin of exponential law in intra-urban human mobility*, Phys. A, 392(11): 2571–2578 | 2013 | `liang2013unraveling` | B | Derivation of exponential intra-urban travel decay from urban population exposure. / Suy luận quy luật suy giảm hàm mũ nội đô từ tiếp xúc dân số đô thị. |
-| R21 | Lenormand, M., Bassolas, A. & Ramasco, J.J. *Systematic comparison of trip distribution laws and models*, PLOS ONE / J. Transp. Geogr., 51: 158–169 | 2016 | `lenormand2016systematic` | A, B, C, E, F | Benchmark comparison of distance-decay specifications and CPC metrics. / So sánh đối chiếu các dạng hàm suy giảm khoảng cách và chỉ số CPC chuẩn. |
-| R22 | Barbosa, H. et al. *Human mobility: Models and applications*, Phys. Rep., 734: 1–74 | 2018 | `barbosa2018human` | A, B, D, E | Comprehensive human mobility review establishing structure-behaviour separation. / Khảo sát toàn diện về di chuyển con người thiết lập sự tách biệt cấu trúc - hành vi. |
-| R23 | Wang, F. et al. *Urban Human Mobility: Data-Driven Modeling and Prediction*, Springer | 2019 | `wang2019urban` | D, E | Survey taxonomy classifying collective vs individual human mobility paradigms. / Phân loại tổng quan các paradigm mô hình hóa di chuyển tập thể và cá nhân. |
-| R24 | Merlin, L.A., Singer, M.E. & Levine, J. *Median trip-length matching for gravity model calibration*, Transp. Res. Rec., 2674(10): 450–460 | 2020 | `merlin2020medians` | C | Median trip-length matching alternative to mean matching for robust calibration. / Phương pháp khớp trung vị độ dài chuyến đi thay thế khớp trung bình để hiệu chỉnh bền vững. |
-| R25 | Buckee, C.O. et al. *Aggregated mobility data could help fight COVID-19*, Science, 368(6487): 145–146 | 2020 | `buckee2020thinking` | C, D, F | Scientific rationale for releasing privacy-preserving aggregate travel products. / Biện minh khoa học cho việc phát hành các sản phẩm di chuyển tổng hợp bảo vệ quyền riêng tư. |
-| R26 | Oliver, N. et al. *Mobile phone data for informing public health actions across COVID-19*, Data & Policy, 2: e3 | 2020 | `oliver2020mobile` | C, D, F | Operational deployment of aggregate mobility distributions for public policy. / Triển khai thực tiễn các phân bố di chuyển tổng hợp cho chính sách công. |
-| R27 | Shi, C. et al. *Predicting origin-destination flow via multi-perspective graph convolutional network*, Proc. ICDE 2020, pp. 1213–1224 | 2020 | `shi2020mpgcn` | C, F | Dynamic graph neural network for supervised local OD flow prediction. / Mạng đồ thị thần kinh động dự báo lưu lượng OD địa phương có giám sát. |
-| R28 | Simini, F., Barlacchi, G., Luca, M. & Pappalardo, L. *A Deep Gravity model for mobility flows generation*, Nat. Commun., 12: 5647 | 2021 | `simini2021` | A, C, F | Deep Gravity neural architecture expanding spatial features while retaining OD supervision. / Kiến trúc mạng thần kinh Deep Gravity mở rộng đặc trưng không gian nhưng vẫn dựa vào ma trận OD. |
-| R29 | Vu, T.T. et al. *Enhanced urban functional land use map with free and open-source data*, Int. J. Digit. Earth, 14(11): 1744–1757 | 2021 | `vu2021landuse` | G | Deriving urban spatial opportunities and land use zones from open geospatial data. / Xác định cơ hội không gian đô thị và vùng sử dụng đất từ dữ liệu địa lý mở. |
-| R30 | Houssiau, F. et al. *On the difficulty of achieving Differential Privacy in practice*, Nat. Commun., 13: 19 | 2022 | `houssiau2022dpaggregate` | D | Practical limits of Differential Privacy in fine-grained location tracking. / Giới hạn thực tiễn của Quyền riêng tư vi phân trong theo dõi vị trí tinh vi. |
-| R31 | Pappalardo, L., Manley, E., Sekara, V. & Alessandretti, L. *Future directions in human mobility science*, Nat. Comput. Sci., 3: 588–600 | 2023 | `pappalardo2023analytical` | C, D | Strategic survey highlighting privacy-preserving aggregate mobility analytics. / Khảo sát chiến lược nhấn mạnh phân tích di chuyển tổng hợp bảo vệ quyền riêng tư. |
-| R32 | Gallotti, R. et al. *Distorted spatial interactions in aggregate mobility data*, Nat. Commun., 15: 1024 | 2024 | `gallotti2024distorted` | D | Probabilistic projection framework formalizing spatial aggregation and information loss. / Khung toán tử chiếu xác suất hình thức hóa sự gom tụ không gian và suy giảm thông tin. |
-| R33 | Xu, Y., Gao, S., Huang, Q., Göçmen, A., Zhu, Q. & Zhang, F. *Predicting human mobility flows in cities using deep learning on satellite imagery (Imagery2Flow)*, Nat. Commun., 16: 65373 | 2025/2026 | `imagery2flow2026` | A, C, F | Physics-informed satellite imagery OD predictor retaining explicit gravity factorization. / Mô hình dự báo OD từ ảnh vệ tinh giữ lại sự phân rã trọng lực nhân rõ ràng. |
-| R34 | Yang et al. *neuroGravity: Physics-informed neural gravity architecture for spatial interaction modeling*, Preprint / Manuscript | 2026 | `neurogravity2026` | A, C | SOTA neural gravity model embedding explicit multiplicative deterrence factorization. / Mô hình trọng lực thần kinh SOTA tích hợp phân rã cản trở dạng nhân rõ ràng. |
-| R35 | Enaya et al. *TransGM: Transferable gravity models for cross-city policy transfer*, Preprint / Manuscript | 2026 | `transgm2026` | A, C | Transferable physics-informed gravity architecture for zero-shot cross-city deployment. / Kiến trúc trọng lực vật lý có thể chuyển giao cho triển khai zero-shot giữa các đô thị. |
-| R36 | Meta AI for Good *Movement Distribution Maps (MDM)*, Meta Data for Good Platform | 2026 | `MetaMovementDistributionMaps` | A, C, D, F | Official privacy-preserving aggregate travel-distance product used for real empirical validation. / Tập dữ liệu di chuyển tổng hợp bảo vệ quyền riêng tư chính thức của Meta được dùng trong kiểm chứng thực nghiệm. |
-
 ---
 
-### Detailed Bibliography / Danh mục Trích dẫn Chi tiết (APA Format)
+## References Summary / Danh mục Tài liệu Tham khảo (Auto-synced from `handbook_references.bib`)
 
-- **[R1] (`zipf1946`)** Zipf, G.K. (1946). The P1 P2 / D hypothesis: On the intercity movement of persons. *Am. Sociol. Rev., 11(6): 677–686*. [Module(s): A]
-- **[R2] (`stouffer1940intervening`)** Stouffer, S.A. (1940). Intervening opportunities: A theory relating mobility and distance. *Am. Sociol. Rev., 5(6): 845–867*. [Module(s): B]
-- **[R3] (`hansen1959accessibility`)** Hansen, W.G. (1959). How accessibility shapes land use. *J. Am. Inst. Planners, 25(2): 73–76*. [Module(s): B]
-- **[R4] (`tanner1961`)** Tanner, J.C. (1961). Factors affecting the amount of travel. *RRL Tech. Paper 51, London: HMSO*. [Module(s): A, B, F]
-- **[R5] (`huff1963probabilistic`)** Huff, D.L. (1963). A probabilistic analysis of shopping center trade areas. *Land Econ., 39(1): 81–90*. [Module(s): B]
-- **[R6] (`hyman1969calibration`)** Hyman, G.M. (1969). The calibration of trip distribution models. *Env. Plan. A, 1(1): 105–112*. [Module(s): C]
-- **[R7] (`tobler1970computer`)** Tobler, W. (1970). A computer movie simulating urban growth in the Detroit region. *Econ. Geogr., 46: 234–240*. [Module(s): B]
-- **[R8] (`wilson1971`)** Wilson, A.G. (1971). A family of spatial interaction models, and associated developments. *Env. Plan. A, 3(1): 1–32*. [Module(s): A, B, E]
-- **[R9] (`flowerdew1982method`)** Flowerdew, R. & Aitkin, M. (1982). A method of fitting the gravity model based on the Poisson distribution. *J. Reg. Sci., 22(2): 191–202*. [Module(s): A]
-- **[R10] (`haynes1984gravity`)** Haynes, K.E. & Fotheringham, A.S. (1984). Gravity and Spatial Interaction Models. *SAGE Publications*. [Module(s): A]
-- **[R11] (`fotheringham1989spatial`)** Fotheringham, A.S. & O'Kelly, M.E. (1989). Spatial Interaction Models: Formulations and Applications. *Kluwer Academic*. [Module(s): B]
-- **[R12] (`erlander1990spatial`)** Erlander, S. & Stewart, N.F. (1990). The Gravity Model in Transportation Analysis: Theory and Applications. *VSP, Utrecht*. [Module(s): C, D]
-- **[R13] (`sen1995gravity`)** Sen, A. & Smith, T.E. (1995). Gravity Models of Spatial Interaction Behavior. *Springer*. [Module(s): C]
-- **[R14] (`casella2002statistical`)** Casella, G. & Berger, R.L. (2002). Statistical Inference (2nd ed.). *Duxbury, Pacific Grove*. [Module(s): B, E]
-- **[R15] (`gonzalez2008understanding`)** González, M.C., Hidalgo, C.A. & Barabási, A.L. (2008). Understanding individual human mobility patterns. *Nature, 453: 779–782*. [Module(s): B, D]
-- **[R16] (`song2010limits`)** Song, C., Qu, Z., Blumm, N. & Barabási, A.L. (2010). Limits of predictability in human mobility. *Science, 327(5968): 1018–1021*. [Module(s): D]
-- **[R17] (`ortuzar2011modelling`)** Ortúzar, J. de D. & Willumsen, L.G. (2011). Modelling Transport (4th ed.). *John Wiley & Sons*. [Module(s): C]
-- **[R18] (`simini2012universal`)** Simini, F., González, M.C., Maritan, A. & Barabási, A.L. (2012). A universal model for mobility and migration patterns. *Nature, 484: 96–100*. [Module(s): E]
-- **[R19] (`de2013unique`)** de Montjoye, Y.A., Hidalgo, C.A., Verleysen, M. & Blondel, V.D. (2013). Unique in the crowd: The privacy bounds of human mobility. *Sci. Rep., 3: 1376*. [Module(s): C, D]
-- **[R20] (`liang2013unraveling`)** Liang, X., Zhao, J., Dong, L. & Xu, K. (2013). Unraveling the origin of exponential law in intra-urban human mobility. *Phys. A, 392(11): 2571–2578*. [Module(s): B]
-- **[R21] (`lenormand2016systematic`)** Lenormand, M., Bassolas, A. & Ramasco, J.J. (2016). Systematic comparison of trip distribution laws and models. *PLOS ONE / J. Transp. Geogr., 51: 158–169*. [Module(s): A, B, C, E, F]
-- **[R22] (`barbosa2018human`)** Barbosa, H. et al. (2018). Human mobility: Models and applications. *Phys. Rep., 734: 1–74*. [Module(s): A, B, D, E]
-- **[R23] (`wang2019urban`)** Wang, F. et al. (2019). Urban Human Mobility: Data-Driven Modeling and Prediction. *Springer*. [Module(s): D, E]
-- **[R24] (`merlin2020medians`)** Merlin, L.A., Singer, M.E. & Levine, J. (2020). Median trip-length matching for gravity model calibration. *Transp. Res. Rec., 2674(10): 450–460*. [Module(s): C]
-- **[R25] (`buckee2020thinking`)** Buckee, C.O. et al. (2020). Aggregated mobility data could help fight COVID-19. *Science, 368(6487): 145–146*. [Module(s): C, D, F]
-- **[R26] (`oliver2020mobile`)** Oliver, N. et al. (2020). Mobile phone data for informing public health actions across COVID-19. *Data & Policy, 2: e3*. [Module(s): C, D, F]
-- **[R27] (`shi2020mpgcn`)** Shi, C. et al. (2020). Predicting origin-destination flow via multi-perspective graph convolutional network. *Proc. ICDE 2020, pp. 1213–1224*. [Module(s): C, F]
-- **[R28] (`simini2021`)** Simini, F., Barlacchi, G., Luca, M. & Pappalardo, L. (2021). A Deep Gravity model for mobility flows generation. *Nat. Commun., 12: 5647*. [Module(s): A, C, F]
-- **[R29] (`vu2021landuse`)** Vu, T.T. et al. (2021). Enhanced urban functional land use map with free and open-source data. *Int. J. Digit. Earth, 14(11): 1744–1757*. [Module(s): G]
-- **[R30] (`houssiau2022dpaggregate`)** Houssiau, F. et al. (2022). On the difficulty of achieving Differential Privacy in practice. *Nat. Commun., 13: 19*. [Module(s): D]
-- **[R31] (`pappalardo2023analytical`)** Pappalardo, L., Manley, E., Sekara, V. & Alessandretti, L. (2023). Future directions in human mobility science. *Nat. Comput. Sci., 3: 588–600*. [Module(s): C, D]
-- **[R32] (`gallotti2024distorted`)** Gallotti, R. et al. (2024). Distorted spatial interactions in aggregate mobility data. *Nat. Commun., 15: 1024*. [Module(s): D]
-- **[R33] (`imagery2flow2026`)** Xu, Y., Gao, S., Huang, Q., Göçmen, A., Zhu, Q. & Zhang, F. (2025/2026). Predicting human mobility flows in cities using deep learning on satellite imagery (Imagery2Flow). *Nat. Commun., 16: 65373*. [Module(s): A, C, F]
-- **[R34] (`neurogravity2026`)** Yang et al. (2026). neuroGravity: Physics-informed neural gravity architecture for spatial interaction modeling. *Preprint / Manuscript*. [Module(s): A, C]
-- **[R35] (`transgm2026`)** Enaya et al. (2026). TransGM: Transferable gravity models for cross-city policy transfer. *Preprint / Manuscript*. [Module(s): A, C]
-- **[R36] (`MetaMovementDistributionMaps`)** Meta AI for Good (2026). Movement Distribution Maps (MDM). *Meta Data for Good Platform*. [Module(s): A, C, D, F]
+> **Note:** This section is linked to [`handbook_references.bib`](file:///Users/nguyenquocthinh/Documents/PCSF-TIM/handbook_references.bib). Run `python3 code/sync_handbook_refs.py` to refresh.
 
+| Ref ID | Reference | Year | BibTeX key |
+| :--- | :--- | :--- | :--- |
+| R1 | Meta AI for Good *Movement Distribution Maps (MDM)* | 2021 | `MetaMovementDistributionMaps` |
+| R2 | Barbosa, Hugo and Barthelemy, Marc and Ghoshal, Gourab and James, Charlotte R. and Lenormand, Maxime and Louail, Thomas and others *Human mobility: Models and applications*, Physics Reports | 2018 | `barbosa2018human` |
+| R3 | Buckee, Caroline O. and Balsari, Satchit and Chan, Jennifer and Crosas, Merc\`e and Dominici, Francesca and Gasser, Urs and Grad, Yonatan H. and Grenfell, Bryan and Halloran, M. Elizabeth and Kraemer, Moritz U. G. and others *Aggregated mobility data could help fight COVID-19*, Science | 2020 | `buckee2020thinking` |
+| R4 | Casella, George and Berger, Roger L. *Statistical Inference*, Duxbury Press | 2002 | `casella2002statistical` |
+| R5 | de Montjoye, Yves-Alexandre and Hidalgo, C\'esar A and Verleysen, Michel and Blondel, Vincent D *Unique in the crowd: The privacy bounds of human mobility*, Scientific reports | 2013 | `de2013unique` |
+| R6 | Erlander, Sven and Stewart, Neil F. *The Gravity Model in Transportation Analysis: Theory and Applications*, VSP | 1990 | `erlander1990spatial` |
+| R7 | Flowerdew, Robin and Aitkin, Murray *A method of fitting the gravity model based on the Poisson distribution*, Journal of regional science | 1982 | `flowerdew1982method` |
+| R8 | Fotheringham, A. Stewart and O'Kelly, Morton E. *Spatial Interaction Models: Formulations and Applications*, Kluwer Academic Publishers | 1989 | `fotheringham1989spatial` |
+| R9 | Gallotti, Riccardo and Maniscalco, David and Barthelemy, Marc and De Domenico, Manlio *Distorted insights from human mobility data*, Communications Physics | 2024 | `gallotti2024distorted` |
+| R10 | Gonz\'alez, M. C. and Hidalgo, C. A. and Barab\'asi, A.-L. *Understanding individual human mobility patterns*, Nature | 2008 | `gonzalez2008understanding` |
+| R11 | Hansen, Walter G. *How accessibility shapes land use*, Journal of the American Institute of Planners | 1959 | `hansen1959accessibility` |
+| R12 | Haynes, Kingsley E. and Fotheringham, A. Stewart *Gravity and Spatial Interaction Models*, Sage Publications | 1984 | `haynes1984gravity` |
+| R13 | Houssiau, Florimond and others *On the difficulty of achieving Differential Privacy in practice: user-level guarantees in aggregate location data*, Nature Communications | 2022 | `houssiau2022dpaggregate` |
+| R14 | Huff, David L. *A probabilistic analysis of shopping center trade areas*, Land Economics | 1963 | `huff1963probabilistic` |
+| R15 | Hyman, G. M. *The calibration of trip distribution models*, Environment and Planning A | 1969 | `hyman1969calibration` |
+| R16 | Xu, Yichen and Gao, Song and Huang, Qunying and G"o\cc *Predicting human mobility flows in cities using deep learning on satellite imagery*, Nature Communications | 2025 | `imagery2flow2026` |
+| R17 | Lenormand, M. and Bassolas, A. and Ramasco, J.J. *Systematic comparison of trip distribution laws and models*, Journal of Transport Geography | 2016 | `lenormand2016systematic` |
+| R18 | Liang, Xiao and Zhao, Jichang and Dong, Li and Xu, Ke *Unraveling the origin of exponential law in intra-urban human mobility*, Scientific Reports | 2013 | `liang2013unraveling` |
+| R19 | Merlin, Louis A. *A new method using medians to calibrate single-parameter spatial interaction models*, Journal of Transport and Land Use | 2020 | `merlin2020medians` |
+| R20 | Yang, Jinming and Huang, Shaoyu and Huang, Zongyuan and Jin, Yaohui and Yang, Xiaokang and Gonz\'alez, Marta C. and Xu, Yanyan *Transferable human mobility network reconstruction with neuroGravity*, Nature Computational Science | 2026 | `neurogravity2026` |
+| R21 | Oliver, Nuria and Lepri, Bruno and Sterly, Harald and Lambiotte, Renaud and Deletaille, S\'ebastien and De Nadai, Marco and Letouz\'e *Mobile phone data for informing public health actions across the COVID-19 pandemic life cycle*, Science advances | 2020 | `oliver2020mobile` |
+| R22 | Ort\'uzar, Juan de Dios and Willumsen, Luis G. *Modelling Transport*, John Wiley \& Sons | 2011 | `ortuzar2011modelling` |
+| R23 | Pappalardo, Luca and Manley, Ed and Sekara, Vedran and Alessandretti, Laura *Future directions in human mobility science*, Nature Computational Science | 2023 | `pappalardo2023analytical` |
+| R24 | Sen, Ashish and Smith, Tony E *Gravity models of spatial interaction behavior*, Springer | 1995 | `sen1995gravity` |
+| R25 | Shi, Hongzhi and Yao, Quanming and Guo, Qi and Li, Yaguang and Zhang, Lingyu and Ye, Jieping and Li, Yong and Liu, Yan *Predicting Origin-Destination Flow via Multi-Perspective Graph Convolutional Network*, IEEE 36th International Conference on Data Engineering (ICDE) | 2020 | `shi2020mpgcn` |
+| R26 | Simini, F. and Gonzalez, M.C. and Maritan, A. and Barabasi, A.-L. *A universal model for mobility and migration patterns*, Nature | 2012 | `simini2012universal` |
+| R27 | Simini, F. and Barlacchi, G. and Luca, M. and Pappalardo, L. *A Deep Gravity model for mobility flows generation*, Nature Communications | 2021 | `simini2021` |
+| R28 | Song, C. and Qu, Z. and Blumm, N. and Barab\'asi, A.-L. *Limits of predictability in human mobility*, Science | 2010 | `song2010limits` |
+| R29 | Stouffer, S. A. *Intervening opportunities: A theory relating mobility and distance*, American Sociological Review | 1940 | `stouffer1940intervening` |
+| R30 | Tanner, J. C. *Factors affecting the amount of travel*, Road Research Laboratory, Department of Scientific and Industrial Research | 1961 | `tanner1961` |
+| R31 | Tobler, W. R. *A computer movie simulating urban growth in the Detroit region*, Economic Geography | 1970 | `tobler1970computer` |
+| R32 | Enaya, Adham and Zhong, Chen and Batty, Michael and Morphet, Robin and Lopane, Fulvio D. *TransGM: Transferable gravity models for cross-city policy transfer*, Computers, Environment and Urban Systems | 2026 | `transgm2026` |
+| R33 | Vu, Tuong-Thuy and Vu, Nguyen-Van-Anh and Phung, Hoang-Phi and Nguyen, Lam-Dao *Enhanced urban functional land use map with free and open-source data*, International Journal of Digital Earth | 2021 | `vu2021landuse` |
+| R34 | Wang, Jinzhong and Kong, Xiangjie and Xia, Feng and Sun, Lijun *Urban Human Mobility: Data-Driven Modeling and Prediction*, ACM SIGKDD Explorations Newsletter | 2019 | `wang2019urban` |
+| R35 | Wilson, A.G. *A family of spatial interaction models, and associated developments*, Environment and Planning A | 1971 | `wilson1971` |
+| R36 | Zipf, George Kingsley *The $P_1 P_2 / D$ hypothesis: On the intercity movement of persons*, American Sociological Review | 1946 | `zipf1946` |
