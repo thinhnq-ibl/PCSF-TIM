@@ -10,6 +10,35 @@ link-citations: true
 
 ---
 
+This handbook is organized as a single scientific argument rather than a conventional literature review.
+
+Each module answers one scientific question.
+
+The answer of each module motivates the next question, forming a continuous chain from scientific foundation to empirical validation.
+
+The purpose is not to review all human mobility models, but to establish the scientific reasoning leading to the central question:
+
+# Central Scientific Question / Câu hỏi Khoa học Trung tâm
+
+> **Can aggregate mobility observations preserve sufficient information to identify collective distance-decay behaviour?**
+> *(Liệu các quan sát di chuyển tổng hợp có bảo toàn đủ thông tin để định danh hành vi suy giảm khoảng cách tập thể hay không?)*
+
+> [!NOTE]
+> ### Rigorous Conceptual Breakdown of the Central Question / Phân tích Khái niệm Chặt chẽ của Câu hỏi Trung tâm
+>
+> 1. **Mobility (Di chuyển Quần thể):** Collective population-level movement across an urban region (e.g., 10M daily trips in HCMC, NYC total OD), NOT microscopic individual travel itineraries.
+> 2. **Observations (Quan sát vs Thực tế):** Data collected from empirical measurements (e.g., Trip-Length Distribution - TLD), which represents a transformed observation rather than unobserved ground-truth reality ($T_{ij}$).
+> 3. **Aggregate Mobility Observations (Quan sát Tổng hợp):** Mobility data spatially aggregated into binned statistics ($y_k \in \text{Bin}_k$), losing individual origin-destination link identity.
+> 4. **Preserve Information (Bảo toàn Thông tin):** The residual statistical information surviving distance-domain projection $\mathcal{P}$ under spatial binning and link aggregation.
+> 5. **Sufficient Information (Thông tin Đầy đủ / Information Sufficiency):** Whether surviving information in aggregate TLD is statistically sufficient to constrain and uniquely identify parameter vector $\theta$.
+> 6. **Identify (Định danh Tham số):** Inverse statistical inference deriving parameter vector $\hat{\theta}^* = (\alpha, \beta)$ from observed data via MLE, NOT flow prediction or matrix reconstruction.
+> 7. **Collective (Tính Tập thể):** Systemic population response to spatial separation across an urban region, NOT individual psychology or discrete choices.
+> 8. **Distance-decay (Suy giảm Khoảng cách):** The spatial friction function $f(d_{ij}; \theta)$ dictating how interaction probability declines with spatial separation.
+> 9. **Behaviour (Hành vi):** Narrowly defined in this Handbook as *the collective response to spatial separation encoded by the distance-decay function*, NOT mode choice, departure time, or route selection.
+>
+> **Core Scientific Essence / Bản chất Khoa học Cốt lõi:**
+> *When mobility data are aggregated into Trip-Length Distributions, losing detailed pairwise Origin-Destination links, does the aggregate distribution preserve sufficient statistical information to reliably infer population-level distance sensitivity parameters $\theta$?*
+> *(Khi dữ liệu di chuyển được tổng hợp thành các thống kê như Phân bố Độ dài Chuyến đi (TLD) và mất thông tin chi tiết về các cặp Origin–Destination, liệu những thống kê đó vẫn còn đủ thông tin để suy ra một cách đáng tin cậy các tham số mô tả mức độ nhạy cảm của toàn bộ dân số đối với khoảng cách?)*
 
 ## Guiding Philosophy / Triết lý Hướng dẫn
 
@@ -44,10 +73,10 @@ link-citations: true
 > The discrepancy between the identified deterrence function $f^*(d; \hat{\theta}^*)$ and the true underlying behavioural function $f_G(d; \theta)$ is conceptually governed by three distinct failure mechanisms:
 > 
 > 1. **Observation failure ($\epsilon_{\rm obs}$) — *Did we observe enough information?***
->    The discrepancy arises because the observation process preserves only an aggregated travel-distance distribution rather than complete individual travel information (including distance binning, loss of spatial origin-destination pairs, and purpose mixing). As observational fidelity increases, observation loss vanishes ($\epsilon_{\rm obs} \to 0$).
+>    The discrepancy arises because the observation process preserves only an aggregated travel-distance distribution rather than complete individual travel information (including distance binning, loss of spatial origin-destination pairs, and purpose mixing). As observational fidelity and resolution improve, observation error is substantially mitigated ($\epsilon_{\rm obs} \to 0$).
 > 
 > 2. **Structure failure ($\epsilon_{\rm struct}$) — *Did we model the city correctly?***
->    The discrepancy arises because the assumed opportunity field $E(d)$ does not accurately represent the true urban structure governing travel choices. When structural exposure is unbiasedly specified from multi-source open spatial data, structural failure vanishes ($\epsilon_{\rm struct} \to 0$).
+>    The discrepancy arises because the assumed opportunity field $E(d)$ does not accurately represent the true urban structure governing travel choices. When structural exposure is accurately specified from multi-source open spatial data, structural bias is minimized ($\epsilon_{\rm struct} \to 0$).
 > 
 > 3. **Coupled failure ($\epsilon_{\rm coupled}$) — *Are both problems occurring simultaneously?***
 >    Observation loss and structural misspecification non-linearly interact to influence behavioural identification, producing discrepancies that cannot generally be attributed to either mechanism alone.
@@ -57,9 +86,9 @@ link-citations: true
 > Observation  ──►  Observation Failure  ──►  Information Available  ──►  Structure Model  ──►  Structure Failure  ──►  Behaviour Identification  ──►  Coupled Failure
 > ```
 > 
-> **Theoretical Convergence Limit:**
+> **Observational Limit:**
 > \[
-> f^*(d; \hat{\theta}^*) \to f_G(d; \theta) \quad \text{as} \quad (\epsilon_{\rm obs} \to 0, \, \epsilon_{\rm struct} \to 0, \, \epsilon_{\rm coupled} \to 0)
+> f^*(d; \hat{\theta}^*) \to f_G(d; \theta) \quad \text{as observational information increases and structural exposure is accurately specified} \quad (\epsilon_{\rm obs} \to 0, \, \epsilon_{\rm struct} \to 0, \, \epsilon_{\rm coupled} \to 0)
 > \]
 > *Note: Model-class misspecification ($\epsilon_{\rm model}$) is explicitly decoupled from this observational boundary and treated under Model Selection (Module F2b).*
 >
@@ -127,36 +156,56 @@ link-citations: true
 >      \]
 >      Các thuật ngữ cấu trúc $(O_i, A_j)$ mô tả sự phân bố không gian của phát thải và sức hút chuyến đi, trong khi hàm cản trở $f(d_{ij};\theta)$ mô tả độ nhạy khoảng cách tập thể. Trong Handbook này, chúng tôi diễn giải dạng phân rã nhân này như một nguyên lý tách biệt khái niệm giữa cấu trúc đô thị và hành vi di chuyển. Cách diễn giải này tạo thành nguyên lý nền tảng đầu tiên của PCSF-TIM. *(Quy chuẩn ký hiệu: Năng lực phát thải điểm đi ký hiệu là $O_i$ và mật độ cơ hội/sức hút điểm đến ký hiệu là $A_j$ trong xuyên suốt Handbook này).*
 >
-> 5. **Novelty Positioning & Observation Model Formulation / Định vị Tính Mới & Khung Mô hình Quan sát:** 
->    - **EN:** Existing aggregate behavioural calibration approaches typically rely on low-dimensional summary statistics or aggregate calibration constraints. In contrast, the proposed framework performs likelihood-based behavioural inference directly on the complete observed travel-distance distribution, treating the observed histogram as the statistical observation of the inference problem rather than reducing it to a smaller set of aggregate descriptors. The multinomial likelihood is adopted as the probabilistic model of this observation process.
+> 5. **Novelty Positioning & Proposed Observation-Loss Conceptual Framing / Định vị Tính Mới & Khung Khái niệm Mất mát Quan sát Đề xuất:** 
+>    - **EN:** The core novelty of this work lies in its **observation-loss framing**: formulating behavioural parameter identification directly from aggregate travel-distance distributions under information loss (spatial binning, loss of pairwise OD links). Existing aggregate behavioural calibration approaches typically rely on low-dimensional summary statistics or aggregate calibration constraints. In contrast, our proposed conceptual framework performs likelihood-based behavioural inference directly on the complete observed travel-distance distribution, treating the observed histogram as the primary statistical observation of the inference problem rather than reducing it to a smaller set of aggregate descriptors. The multinomial likelihood is adopted as the probabilistic model of this observation process.
 >      
 >      *Conventional Aggregate Calibration:*
 >      ```text
 >      Mobility observations ──► Travel-distance distribution ──► Low-dimensional Summary Statistic (Mean/Median) ──► Calibration Target
 >      ```
->      *Proposed Framework:*
+>      *Proposed Conceptual Framework:*
 >      ```text
 >      Mobility observations ──► Complete Travel-distance distribution ──► Probabilistic Observation Model ──► Likelihood-based Inference
 >      ```
 >      Rather than calibrating behavioural parameters from low-dimensional aggregate summaries, the proposed framework performs inference directly on the complete observed travel-distance distribution.
 >
->    - **VI:** Các tiếp cận hiệu chỉnh hành vi tổng hợp hiện có thường dựa vào các thống kê tóm tắt số chiều thấp hoặc các ràng buộc hiệu chỉnh tổng hợp. Ngược lại, khung đề xuất thực hiện suy luận hành vi dựa trên likelihood trực tiếp trên phân bố khoảng cách di chuyển quan sát được hoàn chỉnh, coi biểu đồ tần suất quan sát được là quan sát thống kê của bài toán suy luận thay vì nén nó thành một tập hợp nhỏ các chỉ số mô tả tổng hợp. Phân phối multinomial likelihood được sử dụng như mô hình xác suất của quá trình quan sát này.
+>    - **VI:** Tính mới cốt lõi của công trình này nằm ở **khung lập luận mất mát quan sát (observation-loss framing)**: công thức hóa việc định danh tham số hành vi trực tiếp từ phân bố khoảng cách di chuyển tổng hợp dưới sự mất mát thông tin (rời rạc hóa khoảng cách, mất liên kết OD cặp). Các tiếp cận hiệu chỉnh hành vi tổng hợp hiện có thường dựa vào các thống kê tóm tắt số chiều thấp hoặc các ràng buộc hiệu chỉnh tổng hợp. Ngược lại, khung khái niệm được đề xuất thực hiện suy luận hành vi dựa trên likelihood trực tiếp trên phân bố khoảng cách di chuyển quan sát được hoàn chỉnh, coi biểu đồ tần suất quan sát được là quan sát thống kê chính của bài toán suy luận thay vì nén nó thành một tập hợp nhỏ các chỉ số mô tả tổng hợp. Phân phối multinomial likelihood được sử dụng như mô hình xác suất của quá trình quan sát này.
 >      
 >      *Hiệu chỉnh Tổng hợp Truyền thống:*
 >      ```text
 >      Quan sát di chuyển ──► Phân bố khoảng cách ──► Thống kê tóm tắt số chiều thấp (Mean/Median) ──► Mục tiêu hiệu chỉnh
 >      ```
->      *Khung Đề xuất:*
+>      *Khung Khái niệm Đề xuất:*
 >      ```text
 >      Quan sát di chuyển ──► Phân bố khoảng cách quan sát hoàn chỉnh ──► Mô hình quan sát xác suất ──► Suy luận dựa trên Likelihood
 >      ```
 >      Thay vì hiệu chỉnh tham số hành vi từ các thống kê tóm tắt số chiều thấp, khung đề xuất thực hiện suy luận trực tiếp trên phân bố khoảng cách di chuyển quan sát được hoàn chỉnh.
 >
+> 6. **Frequentist Epistemological Paradigm / Paradigm Triết học Thống kê Frequentist:** 
+>    - **EN:** PCSF-TIM is anchored strictly in the **Frequentist statistical paradigm** \citep{casella2002statistical}:
+>      - Parameters $\theta = (\alpha, \beta)$ are treated as **fixed, unknown physical-behavioural constants** governing collective population travel behavior.
+>      - Parameter estimation is performed via Maximum Likelihood Estimation (MLE): $\hat{\theta}^* = \arg\max_{\theta} \mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$.
+>      - Parameter uncertainty and identifiability evidence are evaluated through the Fisher Information matrix $\mathcal{I}(\theta)$, likelihood surface concavity, and empirical sampling distributions across cities, **NOT through Bayesian posterior probability distributions $P(\theta \mid D)$ or subjective prior regularizers $P(\theta)$**.
+>      - This ensures that parameter identification evidence is derived 100% from the empirical aggregate observation space under the Frequentist Likelihood Principle.
+>    - **VI:** PCSF-TIM được định vị chặt chẽ theo **paradigm thống kê Frequentist** \citep{casella2002statistical}:
+>      - Các tham số $\theta = (\alpha, \beta)$ được coi là **các hằng số hành vi - vật lý cố định, chưa biết** chi phối hành vi di chuyển của quần thể đô thị.
+>      - Việc ước tính tham số được thực hiện qua Ước tính Khả năng Tối đa (MLE): $\hat{\theta}^* = \arg\max_{\theta} \mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$.
+>      - Độ không đảm bảo tham số và bằng chứng định danh được đánh giá qua ma trận Thông tin Fisher $\mathcal{I}(\theta)$, độ lõm bề mặt likelihood, và phân bố mẫu thực nghiệm giữa các thành phố, **KHÔNG thông qua phân bố xác suất hậu đề Bayesian $P(\theta \mid D)$ hay các hàm chuẩn hóa tiên đề chủ quan $P(\theta)$**.
+>      - Điều này đảm bảo rằng bằng chứng định danh tham số đến 100% từ không gian quan sát tổng hợp thực nghiệm theo Nguyên lý Likelihood Frequentist.
+>
 > 7. **Role of Downstream Reconstruction: Corroborating Evidence vs Identification / Vai trò của Tái tạo Hạ nguồn: Bằng chứng Củng cố vs Định danh:** 
 >    - **EN:** Behavioural parameter identification is established through the probabilistic likelihood framework ($P(\mathbf{y} \mid \theta)$), likelihood surface sharpness, synthetic parameter recovery, and cross-city empirical consistency. Downstream flow reconstruction ($\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$) is reported only as an external consistency check demonstrating that the inferred behavioural parameters remain useful when embedded within a complete gravity model. Downstream performance alone cannot be interpreted as proof of behavioural parameter identification, because flow accuracy depends jointly on structural terms ($O_i, A_j$) and deterrence ($f(d;\hat{\theta}^*)$). Controlled ablation against a Null Deterrence baseline ($f(d) \equiv 1$) under fixed structural terms isolates the marginal contribution ($\Delta \text{CPC}$) attributable specifically to inferred behaviour.
->    - **VI:** Việc định danh tham số hành vi được thiết lập thông qua khung xác suất likelihood ($P(\mathbf{y} \mid \theta)$), độ nhọn bề mặt likelihood, khôi phục tham số giả lập và tính nhất quán thực nghiệm liên đô thị. Việc tái tạo lưu lượng hạ nguồn ($\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$) được báo cáo thuần túy như một bước kiểm tra tính nhất quán bên ngoài nhằm chứng minh rằng các tham số hành vi được suy luận vẫn hữu dụng khi được đưa vào một mô hình trọng lực hoàn chỉnh. Kết quả tái tạo hạ nguồn đơn lẻ không thể được diễn giải như một sự chứng minh cho việc định danh tham số hành vi, bởi vì độ chính xác lưu lượng phụ thuộc đồng thời vào các thuật ngữ cấu trúc ($O_i, A_j$) và hàm cản trở ($f(d;\hat{\theta}^*)$). Thí nghiệm loại bỏ kiểm soát (ablation) đối chiếu với baseline Không Cản trở ($f(d) \equiv 1$) dưới các thuật ngữ cấu trúc cố định giúp tách biệt đóng góp biên ($\Delta \text{CPC}$) thuộc về riêng hành vi được suy luận.
-
-
+>    - **VI:** Việc định danh tham số hành vi được thiết lập thông qua khung xác suất likelihood ($P(\mathbf{y} \mid \theta)$), độ nhọn bề mặt likelihood, khôi phục tham số giả lập và tính nhất quán thực nghiệm liên đô thị. Việc tái tạo lưu lượng hạ nguồn ($\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$) được báo cáo thuần túy như một bước kiểm tra tính nhất quán bên ngoài nhằm chứng minh rằng các tham số hành vi được suy luận vẫn hữu dụng khi được đưa vào một mô hình trọng lực hoàn chỉnh. Kết quả tái tạo lưu lượng hạ nguồn đơn lẻ không thể được diễn giải như một sự chứng minh cho việc định danh tham số hành vi, bởi vì độ chính xác lưu lượng phụ thuộc đồng thời vào các thuật ngữ cấu trúc ($O_i, A_j$) và hàm cản trở ($f(d;\hat{\theta}^*)$). Thí nghiệm loại bỏ kiểm soát (ablation) đối chiếu với baseline Không Cản trở ($f(d) \equiv 1$) dưới các thuật ngữ cấu trúc cố định giúp tách biệt đóng góp biên ($\Delta \text{CPC}$) thuộc về riêng hành vi được suy luận.
+>
+> 8. **Core Methodological Rigor Triad / Bộ Ba Chặt chẽ Phương pháp luận Cốt lõi:** 
+>    - **EN:** The theoretical architecture of PCSF-TIM is anchored by three complementary methodological pillars:
+>      1. **Statistical Backbone:** $\text{Data-Generating Process (DGP)} \longrightarrow \text{Probability Model (Multinomial)} \longrightarrow \text{Likelihood} \longrightarrow \text{MLE} \longrightarrow \text{Negative Log-Likelihood (NLL)}$.
+>      2. **Loss Function Origin:** Cross-Entropy is not an arbitrary optimization heuristic; it is the exact Negative Log-Likelihood of the Multinomial model, mathematically equivalent to minimizing KL Divergence relative entropy discrepancy.
+>      3. **Scientific Positioning:** Numerical optimization (L-BFGS-B) finds the parameter estimator $\hat{\theta}^*$, while parameter identifiability is evaluated via empirical statistical evidence (likelihood surface concavity, synthetic recovery, cross-city stability) rather than claimed as an absolute mathematical proof. Downstream flow validation corroborates predictive utility within defined observational assumptions and scope boundaries.
+>    - **VI:** Kiến trúc lý thuyết của PCSF-TIM được neo chặt bởi ba trụ cột phương pháp luận bổ sung cho nhau:
+>      1. **Cột sống Thống kê (Statistical Backbone):** $\text{Quá trình Sinh Dữ liệu (DGP)} \longrightarrow \text{Mô hình Xác suất (Multinomial)} \longrightarrow \text{Likelihood} \longrightarrow \text{MLE} \longrightarrow \text{Negative Log-Likelihood (NLL)}$.
+>      2. **Nguồn gốc Hàm Mất mát:** Cross-Entropy không phải là một thuật toán tối ưu hóa tự phát; nó chính là Negative Log-Likelihood chính xác của mô hình Multinomial, tương đương toán học với việc tối thiểu hóa độ lệch thông tin KL Divergence.
+>      3. **Định vị Khoa học:** Tối ưu hóa số (L-BFGS-B) tìm bộ ước tính tham số $\hat{\theta}^*$, trong khi tính định danh tham số được đánh giá thông qua bằng chứng thống kê thực nghiệm (độ lõm bề mặt likelihood, khôi phục giả lập, tính ổn định liên đô thị) thay vì tuyên bố chứng minh toán học tuyệt đối. Kiểm chứng lưu lượng hạ nguồn củng cố giá trị dự báo trong các giả định quan sát và ranh giới phạm vi được xác định rõ.
 
 ---
 
@@ -177,7 +226,7 @@ link-citations: true
 | **A. Gravity as Primary SI Factorization** / *Trọng lực như Phân rã Toán học Cốt lõi của Tương tác Không gian* | **Why is Gravity the foundational mathematical factorization for Spatial Interaction?**<br>*Tại sao Trọng lực là phép phân rã toán học nền tảng của Tương tác Không gian?* | Gravity factorizes Spatial Interaction into urban spatial structure ($O_i, A_j$) and traveller behavioural response ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}.<br>*Trọng lực phân rã Tương tác Không gian thành cấu trúc không gian đô thị ($O_i, A_j$) và phản ứng hành vi người di chuyển ($f(d;\theta)$).* | If behaviour is decoupled from structure, **what represents the behavioural mechanism in Spatial Interaction and why must it be inferred?**<br>*Nếu hành vi được tách khỏi cấu trúc, điều gì đại diện cho cơ chế hành vi trong Tương tác Không gian và tại sao nó phải được suy luận?* |
 | **B. Spatial Separation & Latent Behavioural Response** / *Sự chia cắt Không gian & Suy giảm Khoảng cách như Phản ứng Hành vi Ẩn* | **What is the behavioural mechanism in spatial interaction models, and why must it be inferred rather than observed?**<br>*Cơ chế hành vi trong mô hình tương tác không gian là gì, và tại sao nó phải được suy luận thay vì quan sát trực tiếp?* | Within Spatial Interaction theory \citep{okelly2009spatial}, the distance-decay function $f(d;\theta)$ mathematically represents behavioural response to **Spatial Separation**. While travel flows are observable, $\theta$ is a latent parameter confounded by structural exposure.<br>*Trong lý thuyết Tương tác Không gian \citep{okelly2009spatial}, hàm suy giảm khoảng cách $f(d;\theta)$ biểu diễn toán học cho phản ứng hành vi đối với **Spatial Separation**. Mặc dù lưu lượng di chuyển có thể quan sát được, $\theta$ là tham số ẩn bị nhiễu bởi tiếp xúc cấu trúc.* | If $\theta$ is a latent variable, **how has mobility science conventionally identified it, and what are its operational limits when flow data are unobserved?**<br>*Nếu $\theta$ là một biến ẩn, khoa học di chuyển đã định danh nó theo cách truyền thống như thế nào, và ranh giới áp dụng của nó là gì khi dữ liệu lưu lượng không quan sát được?* |
 | **C. Conventional Identification under Data Constraints** / *Định danh Truyền thống trong Ràng buộc Dữ liệu* | **How has mobility science conventionally identified latent parameters, and what are its applicability limits?**<br>*Khoa học di chuyển đã định danh các tham số ẩn theo cách truyền thống như thế nào, và ranh giới áp dụng của nó là gì?* | Conventional identification relied on supervised local OD matrix calibration, which is effective when local OD flows exist but limited when only aggregate observations are available (Meta MDM).<br>*Định danh truyền thống dựa vào việc hiệu chỉnh ma trận OD địa phương có giám sát, hiệu quả khi có dữ liệu OD địa phương nhưng gặp ranh giới áp dụng khi chỉ có các quan sát tổng hợp (Meta MDM).* | If conventional OD calibration is constrained by data availability, **what statistical information survives spatial aggregation?**<br>*Nếu hiệu chỉnh OD truyền thống gặp hạn chế về tính sẵn có của dữ liệu, thông tin thống kê nào còn tồn tại qua sự gom tụ không gian?* |
-| **D. Information Hierarchy of Aggregate Mobility** / *Hệ thống Phân cấp Thông tin* | **What statistical information survives spatial aggregation across mobility observation layers?**<br>*Thông tin thống kê nào còn tồn tại qua sự gom tụ không gian trên các lớp quan sát di chuyển?* | Aggregation collapses cell-to-cell OD identities while preserving aggregate travel-distance signatures (observed TLD) under differential privacy.<br>*Sự gom tụ loại bỏ danh tính OD giữa các ô nhưng lưu giữ các dấu hiệu khoảng cách di chuyển tổng hợp (observed TLD) dưới bảo mật vi sai.* | If aggregate TLD preserves statistical distance signatures, **why has existing mobility literature treated TLD strictly as a downstream evaluation benchmark rather than a primary observation space for parameter inference?**<br>*Nếu TLD tổng hợp bảo toàn các dấu hiệu thống kê khoảng cách, tại sao văn liệu di chuyển hiện tại vẫn xem TLD thuần túy là một mục tiêu đánh giá hạ nguồn thay vì một không gian quan sát chính cho bài toán suy luận tham số?* |
+| **D. Information Hierarchy of Aggregate Mobility** / *Hệ thống Phân cấp Thông tin* | **What statistical information survives spatial aggregation across mobility observation layers?**<br>*Thông tin thống kê nào còn tồn tại qua sự gom tụ không gian trên các lớp quan sát di chuyển?* | Aggregation collapses cell-to-cell OD identities while preserving aggregate travel-distance signatures (observed TLD) under aggregate privacy constraints.<br>*Sự gom tụ loại bỏ danh tính OD giữa các ô nhưng lưu giữ các dấu hiệu khoảng cách di chuyển tổng hợp (observed TLD) dưới các ranh giới bảo mật tổng hợp.* | If aggregate TLD preserves statistical distance signatures, **why has existing mobility literature treated TLD strictly as a downstream evaluation benchmark rather than a primary observation space for parameter inference?**<br>*Nếu TLD tổng hợp bảo toàn các dấu hiệu thống kê khoảng cách, tại sao văn liệu di chuyển hiện tại vẫn xem TLD thuần túy là một mục tiêu đánh giá hạ nguồn thay vì một không gian quan sát chính cho bài toán suy luận tham số?* |
 | **E. Methodological Knowledge & Research Gap** / *Khoảng trống Nghiên cứu Phương pháp* | **Why have aggregate Trip-Length Distributions been used primarily as downstream evaluation benchmarks rather than as primary probabilistic observation spaces for behavioural parameter inference?**<br>*Tại sao Phân bố Độ dài Chuyến đi (TLD) tổng hợp trong các nghiên cứu hiện nay chủ yếu được sử dụng làm các chỉ số đánh giá chuẩn hạ nguồn, thay vì làm các không gian quan sát xác suất chính cho bài toán suy luận tham số hành vi?* | Landmark literature treats TLD strictly as a downstream evaluation benchmark; to the best of our knowledge, existing literature has not formulated a probabilistic framework using TLD as the primary aggregate observation space of Spatial Interaction.<br>*Văn liệu cột mốc coi TLD thuần túy là chỉ số đánh giá chuẩn hạ nguồn; theo hiểu biết của chúng tôi, văn liệu hiện chưa công bố một khung xác suất dùng TLD làm không gian quan sát tổng hợp chính cho Tương tác Không gian.* | **How does the proposed framework solve this gap and validate it empirically?**<br>*Khung làm việc được đề xuất giải quyết khoảng trống này như thế nào và kiểm chứng thực nghiệm ra sao?* |
 | **F. Survey-Free Identification Framework (PCSF-TIM)** / *Khung Định danh Không cần Khảo sát* | **How does PCSF-TIM achieve survey-free parameter identification from aggregate TLDs and validate it empirically?**<br>*PCSF-TIM đạt được việc định danh tham số không cần khảo sát từ TLD tổng hợp như thế nào và kiểm chứng thực nghiệm ra sao?* | Maximum likelihood estimation conditional on open-data exposure $\mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$ recovers stable parameters $\hat{\theta}^*$ and enables zero-shot OD reconstruction.<br>*Ước tính khả năng tối đa điều kiện trên sự tiếp xúc dữ liệu mở $\mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$ khôi phục tham số ổn định $\hat{\theta}^*$ và cho phép tái tạo OD không cần huấn luyện lại.* | **Scientific Synthesis.**<br>*Tổng hợp Đánh giá Khoa học.* |
 
@@ -247,16 +296,6 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 | **A2. Modern AI models extend representation of components rather than replacing decomposition.**<br>*Các mô hình AI hiện đại mở rộng khả năng biểu diễn của các thành phần chứ không thay thế sự phân rã.* | Demonstrates AI extends individual components of Gravity.<br>*Phân tích cách AI mở rộng các thành phần riêng lẻ của mô hình Trọng lực.* | • Deep Gravity (Simini 2021) \citep{simini2021}.<br>• Imagery2Flow (Xu 2026) \citep{imagery2flow2026}.<br>• neuroGravity (Yang 2026) \citep{neurogravity2026}.<br>• TransGM (Enaya 2026) \citep{transgm2026}. | AI/Deep Learning enhance component representations, with SOTA models re-embedding explicit Gravity factorization.<br>*AI và Học sâu nâng cao năng lực biểu diễn của các thành phần, trong đó các mô hình SOTA ngày càng tích hợp lại sự phân rã Trọng lực rõ ràng.* |
 | **A3. Viewing gravity as a shared factorization provides a common scientific language.**<br>*Coi trọng lực là sự phân rã nhân cung cấp ngôn ngữ khoa học chung.* | Establishes a shared conceptual coordinate system for spatial interaction problems.<br>*Thiết lập một hệ tọa độ khái niệm chung cho các bài toán tương tác không gian.* | • Theoretical synthesis of spatial interaction literature \citep{wilson1971, erlander1990spatial, okelly2009spatial}.<br>• Barbosa et al. (2018) \citep{barbosa2018human}. | Gravity decomposition serves as the organizing principle positioning flow modeling, calibration, and inference within a single framework.<br>*Phân rã Trọng lực đóng vai trò là nguyên lý tổ chức đặt mô hình hóa lưu lượng, hiệu chỉnh và suy luận vào cùng một khung khái niệm.* |
 
-### Deep Dive: Structural–Behavioural Factorization (Claim A1) / Phân tích Sâu: Phân rã Cấu trúc - Hành vi (Luận điểm A1)
-
-> **EN:** The Gravity model originated as an empirical analogy adapting Newton's law of gravitation to spatial-sociological interactions \citep{zipf1946}. In early transport geography, \citet{hansen1959accessibility} defined accessibility as the potential of opportunities for interaction ($A_{i} = \sum_j \frac{S_j}{T_{ij}^x}$), implicitly combining destination opportunity capacity ($S_j$) and spatial impedance ($T_{ij}^{-x}$) into a single aggregate quantity ($A_j \cdot f(d_{ij})$). Building upon and refining this classical foundation, the gravity interaction framework explicitly factorizes spatial interaction into structurally decoupled components:
-> \[ T_{ij} = O_i \cdot \underbrace{A_j}_{\text{Urban Structure}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Behaviour}} \]
-> This explicit decomposition represents a key conceptual advancement: while Hansen's formulation implicitly convolved opportunity and distance friction, the factorized gravity model isolates **destination opportunities ($A_j$)** as an urban spatial structure property from **distance deterrence ($f(d_{ij};\theta)$)** as an effective collective behavioural response \citep{wilson1971, erlander1990spatial, okelly2009spatial}. It was subsequently established on a rigorous theoretical foundation through the entropy-maximizing principle \citep{wilson1971} and formal statistical inference \citep{flowerdew1982method, haynes1984gravity}. Comprehensive modern reviews \citep{barbosa2018human} confirm that Gravity provides a foundational formulation for separating spatial structure from collective travel response.
->
-> **VI:** Mô hình Trọng lực khởi nguồn như một sự tương tự thực nghiệm thích ứng định luật vạn vật hấp dẫn của Newton vào tương tác xã hội - không gian \citep{zipf1946}. Trong địa lý giao thông cổ điển, \citet{hansen1959accessibility} đã định nghĩa khả năng tiếp cận (accessibility) là tiềm năng cơ hội cho tương tác ($A_{i} = \sum_j \frac{S_j}{T_{ij}^x}$), gộp chung một cách ẩn danh mật độ cơ hội điểm đến ($S_j$) và trở lực không gian ($T_{ij}^{-x}$) thành một đại lượng đơn duy nhất ($A_j \cdot f(d_{ij})$). Kế thừa và tinh lọc nền tảng kinh điển này, khung tương tác trọng lực phân rã một cách rõ ràng tương tác không gian thành các thành phần tách biệt về mặt cấu trúc:
-> \[ T_{ij} = O_i \cdot \underbrace{A_j}_{\text{Cấu trúc Đô thị}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Hành vi}} \]
-> Phép phân rã rõ ràng này thể hiện một tiến bộ khái niệm quan trọng: trong khi công thức của Hansen tích hợp ẩn cơ hội và ma sát khoảng cách, mô hình trọng lực phân rã tách biệt **cơ hội điểm đến ($A_j$)** như một thuộc tính cấu trúc không gian đô thị khỏi **sự cản trở khoảng cách ($f(d_{ij};\theta)$)** như một phản ứng hành vi tập thể hiệu dụng \citep{wilson1971, erlander1990spatial, okelly2009spatial}. Sau đó nó được thiết lập trên một nền tảng lý thuyết thông qua nguyên lý tối đa hóa entropy \citep{wilson1971} và suy luận thống kê chính thức \citep{flowerdew1982method, haynes1984gravity}. Các khảo sát toàn diện hiện đại \citep{barbosa2018human} xác nhận Trọng lực cung cấp một công thức nền tảng để tách biệt cấu trúc không gian khỏi phản ứng di chuyển tập thể.
-
 ### Deep Dive: Architectural Separation in Contemporary AI Models (Claim A2) / Phân tích Sâu: Phân tách Kiến trúc trong các Mô hình AI Hiện đại (Luận điểm A2)
 
 > **EN:** Several recent studies have independently adopted architectures that distinguish structural context from behavioural or interaction modelling, although for different objectives. Neural architectures like Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, and UGNN \citep{guo2025universal} leverage rich geospatial representations \citep{liu2025representation} to capture spatial origin-destination contexts while modeling flow interaction. More recent physics-informed architectures (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly preserve multiplicative factorization $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$ within their predictive flow generation pipelines. While these models are developed for prediction, transfer learning, or network reconstruction rather than behavioural identification, their computational architectures illustrate the practical utility of separating structural context from distance deterrence. The present work differs in providing a probabilistic inference interpretation of this structural–behavioural separation to address parameter identification under aggregate observations.
@@ -272,14 +311,14 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 | :--- | :--- | :--- |
 | **Module Title** | **Spatial Separation & Distance-Decay as Latent Behavioural Response** | **Sự chia cắt Không gian & Suy giảm Khoảng cách như Phản ứng Hành vi Ẩn** |
 | **Scientific Question** | **What is the behavioural mechanism in spatial interaction models, and why must it be inferred rather than observed directly?** | **Cơ chế hành vi trong mô hình tương tác không gian là gì, và tại sao nó phải được suy luận thay vì quan sát trực tiếp?** |
-| **Module Rationale** | Grounded in Spatial Interaction theory \citep{okelly2009spatial}, distance-decay $f(d;\theta)$ parameterizes human response to **Spatial Separation**, demonstrates $\theta$ is an unobservable latent variable, and articulates exposure confounding. | Dựa trên lý thuyết Tương tác Không gian \citep{okelly2009spatial}, suy giảm khoảng cách $f(d;\theta)$ tham số hóa phản ứng của con người với **Spatial Separation**, chỉ ra $\theta$ là biến ẩn không thể quan sát, và làm rõ sự nhiễu do tiếp xúc không gian. |
+| **Module Rationale** | Grounded in Spatial Interaction theory \citep{okelly2009spatial}, distance-decay (d;	heta)$ parameterizes human response to **Spatial Separation**, demonstrates $	heta$ is an unobservable latent variable, and articulates exposure confounding. | Dựa trên lý thuyết Tương tác Không gian \citep{okelly2009spatial}, suy giảm khoảng cách (d;	heta)$ tham số hóa phản ứng của con người với **Spatial Separation**, chỉ ra $	heta$ là biến ẩn không thể quan sát, và làm rõ sự nhiễu do tiếp xúc không gian. |
 | **Mission** | Establish distance-decay as the mathematical representation of behavioural response to Spatial Separation, show Tanner's parameters quantify distance sensitivity, formulate unobservability, establish urban exposure as structural confounder \citep{fotheringham1989spatial, okelly2009spatial}. | Thiết lập suy giảm khoảng cách là biểu diễn toán học của phản ứng hành vi đối với Spatial Separation, chỉ ra các tham số của Tanner định lượng độ nhạy khoảng cách, và thiết lập mức độ tiếp xúc đô thị là biến nhiễu cấu trúc \citep{fotheringham1989spatial, okelly2009spatial}. |
 
 ### The Principle of Spatial Interaction & Structure–Behaviour Mapping / Nguyên lý Tương tác Không gian & Phân rã Cấu trúc - Hành vi
 
 > **EN:** Spatial interaction science establishes that movement flows across geographic space materialize only under the simultaneous confluence of foundational spatial forces \citep{stouffer1940intervening, wilson1971, okelly2009spatial}:
 > \[
-> \text{Spatial Flow } (T_{ij}) \iff \text{Origin Demand} + \text{Destination Attraction} + \text{Complementarity} + \text{Spatial Separation} + \text{Intervening Opportunities}
+> 	ext{Spatial Flow } (T_{ij}) \iff 	ext{Origin Demand} + 	ext{Destination Attraction} + 	ext{Complementarity} + 	ext{Spatial Separation} + 	ext{Intervening Opportunities}
 > \]
 >
 > ### Theoretical Reinterpretation of O'Kelly's Spatial Interaction Triad (after O'Kelly 2009)
@@ -289,46 +328,9 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 >
 > | Classical Concept (after O'Kelly 2009) | Conceptual Interpretation Adopted in This Work | Mathematical Realization in PCSF-TIM |
 > | :--- | :--- | :--- |
-> | **Complementarity** | **Urban Structure** (Origin generation & Destination attraction capacities) | $O_i A_j$ |
-> | **Spatial Separation** | **Travel Behaviour** (Collective deterrence response to spatial friction) | $f(d_{ij}; \theta)$ |
-> | **Intervening Opportunities** | **Structural Spatial Exposure** (Distance-bin opportunity capacity) | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
->
-> ---
->
-> **VI:** Khoa học tương tác không gian thiết lập rằng các dòng di chuyển qua không gian địa lý chỉ xuất hiện khi có sự hội tụ đồng thời của các lực không gian nền tảng \citep{stouffer1940intervening, wilson1971, okelly2009spatial}:
-> \[
-> \text{Dòng Di chuyển } (T_{ij}) \iff \text{Nhu cầu Điểm đi} + \text{Sức hút Điểm đến} + \text{Tính Bổ sung} + \text{Chia cắt Không gian} + \text{Cơ hội Trung gian}
-> \]
->
-> ### Diễn giải Lý thuyết về Tam giác Tương tác Không gian của O'Kelly (sau O'Kelly 2009)
->
-> > [!IMPORTANT]
-> > **Lưu ý Quan trọng:** *Sự ánh xạ dưới đây thể hiện cách diễn giải khái niệm (conceptual interpretation) được lựa chọn trong công trình này để phát triển khung đề xuất. Đây không phải là công thức toán học gốc của O'Kelly.*
->
-> | Khái niệm Kinh điển (sau O'Kelly 2009) | Cách Diễn giải Khái niệm được Chọn trong Công trình này | Thực hiện Toán học trong PCSF-TIM |
-> | :--- | :--- | :--- |
-> | **Complementarity** (Tính Bổ sung) | **Cấu trúc Đô thị** (Năng lực phát thải điểm đi & sức hút điểm đến) | $O_i A_j$ |
-> | **Spatial Separation** (Chia cắt Không gian) | **Hành vi Di chuyển** (Phản ứng cản trở tập thể đối với ma sát không gian) | $f(d_{ij}; \theta)$ |
-> | **Intervening Opportunities** (Cơ hội Trung gian) | **Tiếp xúc Cấu trúc Không gian** (Năng lực cơ hội theo bin khoảng cách) | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
-
-### Supporting Claims / Các Luận điểm Hỗ trợ (Module B)
-
-| Claim (EN / VI) | Purpose (EN / VI) | Representative Evidence (EN / VI) | Expected Conclusion (EN / VI) |
-| :--- | :--- | :--- | :--- |
-| **B1. Distance decay represents spatial impedance friction.**<br>*Suy giảm khoảng cách đại diện cho ma sát trở lực không gian.* | Maps spatial separation into interaction probability.<br>*Ánh xạ khoảng cách không gian thành xác suất tương tác.* | • Tobler (1970) \citep{tobler1970computer}.<br>• Wilson (1971) \citep{wilson1971}.<br>• Stouffer (1940) \citep{stouffer1940intervening}.<br>• O'Kelly (2009) \citep{okelly2009spatial}. | Distance decay isolates geographic impedance from structural opportunity density.<br>*Suy giảm khoảng cách tách biệt trở lực địa lý khỏi mật độ cơ hội cấu trúc.* |
-| **B2. Decay specifications embody distinct behavioural hypotheses.**<br>*Các dạng suy giảm thể hiện các giả thuyết hành vi riêng biệt.* | Analyzes exponential, power-law, and Tanner formulations.<br>*Phân tích các dạng hàm mũ, lũy thừa và Tanner.* | • Wilson (1971) \citep{wilson1971}.<br>• González (2008) \citep{gonzalez2008understanding}.<br>• Tanner (1961) \citep{tanner1961}.<br>• Liang (2013) \citep{liang2013unraveling}. | Functional forms embody distinct spatial perception mechanisms across scales.<br>*Dạng hàm thể hiện các cơ chế nhận thức không gian riêng biệt qua các quy mô.* |
-| **B3. Tanner deterrence function provides flexible dual representation.**<br>*Hàm cản trở Tanner cung cấp biểu diễn kép linh hoạt.* | Justifies Tanner function choice ($f(d) = d^{-\alpha} e^{-\beta d}$).<br>*Biện minh việc chọn hàm Tanner.* | • Tanner (1961) \citep{tanner1961}.<br>• Liang (2013) \citep{liang2013unraveling}.<br>• Lenormand (2016) \citep{lenormand2016systematic}. | Tanner unifies short-range attraction ($\alpha$) and long-range exponential cutoff ($\beta$).<br>*Tanner hợp nhất sức hút cự cự ngắn ($\alpha$) và kháng lực hàm mũ cự cự xa ($\beta$).* |
-| **B4. Traveller distance sensitivity is an unobservable latent variable confounded by spatial exposure.**<br>*Độ nhạy khoảng cách là biến ẩn không thể quan sát bị nhiễu bởi tiếp xúc không gian.* | Defines latent variable nature of $\theta = (\alpha, \beta)$ and exposure confounding.<br>*Định nghĩa bản chất biến ẩn của $\theta$ và nhiễu do tiếp xúc không gian.* | • Wilson (1971) \citep{wilson1971}.<br>• Huff (1963) \citep{huff1963probabilistic}.<br>• Fotheringham & O'Kelly (1989) \citep{fotheringham1989spatial}.<br>• O'Kelly (2009) \citep{okelly2009spatial}. | Parameter estimation must be framed as inverse statistical inference conditional on exposure $E_k$.<br>*Ước tính tham số phải được đặt khung là suy luận thống kê ngược điều kiện trên $E_k$.* |
-
-### Deep Dive: Spatial Impedance vs. Geographic Distance & Intervening Opportunities (Claim B1) / Phân tích Sâu: Trở lực Không gian so với Khoảng cách Địa lý (Luận điểm B1)
-
-> **EN:** In spatial interaction theory \citep{okelly2009spatial}, distance $d_{ij}$ in deterrence $f(d_{ij};\theta)$ represents generalized spatial impedance (travel time, monetary costs, physical transport constraints, cognitive friction). Stouffer's theory of intervening opportunities \citep{stouffer1940intervening} proposed an alternative perspective where travel deterrence is driven by intermediate opportunities between origin and destination. Exposure-corrected gravity unifies distance deterrence with opportunity density. Recent empirical evidence by Verma & Ukkusuri \citep{verma2025travel} highlights the structural determinants of travel time and distance decay in spatial interaction. Conditioning parameter estimation on structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ explicitly controls for intermediate opportunity capacity, allowing $f^*(d; \theta^*)$ to capture the residual spatial impedance friction.
->
-> **VI:** Trong lý thuyết tương tác không gian \citep{okelly2009spatial}, khoảng cách $d_{ij}$ trong hàm cản trở $f(d_{ij};\theta)$ đại diện cho trở lực không gian tổng quát (thời gian di chuyển, chi phí, hạn chế hạ tầng, ma sát nhận thức). Lý thuyết cơ hội trung gian của Stouffer \citep{stouffer1940intervening} đề xuất một góc nhìn trong đó sự cản trở bị chi phối bởi các cơ hội trung gian giữa điểm đi và điểm đến. Trọng lực có hiệu chỉnh tiếp xúc hợp nhất suy giảm khoảng cách với mật độ cơ hội. Bằng chứng thực nghiệm gần đây từ Verma & Ukkusuri \citep{verma2025travel} nhấn mạnh các yếu tố cấu trúc quyết định sự suy giảm thời gian và khoảng cách di chuyển trong tương tác không gian. Việc điều kiện hóa ước tính tham số trên tiếp xúc cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ kiểm soát rõ ràng mật độ cơ hội trung gian, giúp $f^*(d; \theta^*)$ phản ánh ma sát trở lực không gian thặng dư.
-
-### Deep Dive: Functional Decay Forms as Behavioural Hypotheses (Claim B2) / Phân tích Sâu: Dạng suy giảm như Giả thuyết Hành vi (Luận điểm B2)
-� sự nhiễu do tiếp xúc không gian. |
-| **Mission** | Define distance decay as spatial impedance friction, show Tanner's parameters quantify distance sensitivity, formulate unobservability, establish urban exposure as structural confounder. | Định nghĩa suy giảm khoảng cách là ma sát trở lực không gian, chỉ ra các tham số của Tanner định lượng độ nhạy khoảng cách, và thiết lập mức độ tiếp xúc đô thị là biến nhiễu cấu trúc. |
+> | **Complementarity** | **Urban Structure** (Origin generation & Destination attraction capacities) |  A_j$ |
+> | **Spatial Separation** | **Travel Behaviour** (Collective deterrence response to spatial friction) | (d_{ij}; 	heta)$ |
+> | **Intervening Opportunities** | **Structural Spatial Exposure** (Distance-bin opportunity capacity) | (d) = \sum_{(i,j) \in 	ext{Bin}_k} O_i A_j$ |
 
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module B)
 
@@ -336,8 +338,8 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 | :--- | :--- | :--- | :--- |
 | **B1. Distance decay represents spatial impedance friction.**<br>*Suy giảm khoảng cách đại diện cho ma sát trở lực không gian.* | Maps spatial separation into interaction probability.<br>*Ánh xạ khoảng cách không gian thành xác suất tương tác.* | • Tobler (1970) \citep{tobler1970computer}.<br>• Wilson (1971) \citep{wilson1971}.<br>• Stouffer (1940) \citep{stouffer1940intervening}.<br>• Hansen (1959) \citep{hansen1959accessibility}. | Distance decay isolates geographic impedance from structural opportunity density.<br>*Suy giảm khoảng cách tách biệt trở lực địa lý khỏi mật độ cơ hội cấu trúc.* |
 | **B2. Decay specifications embody distinct behavioural hypotheses.**<br>*Các dạng suy giảm thể hiện các giả thuyết hành vi riêng biệt.* | Analyzes exponential, power-law, and Tanner formulations.<br>*Phân tích các dạng hàm mũ, lũy thừa và Tanner.* | • Wilson (1971) \citep{wilson1971}.<br>• González (2008) \citep{gonzalez2008understanding}.<br>• Tanner (1961) \citep{tanner1961}.<br>• Liang (2013) \citep{liang2013unraveling}. | Functional forms embody distinct spatial perception mechanisms across scales.<br>*Dạng hàm thể hiện các cơ chế nhận thức không gian riêng biệt qua các quy mô.* |
-| **B3. Tanner deterrence function provides flexible dual representation.**<br>*Hàm cản trở Tanner cung cấp biểu diễn kép linh hoạt.* | Justifies Tanner function choice ($f(d) = d^{-\alpha} e^{-\beta d}$).<br>*Biện minh việc chọn hàm Tanner.* | • Tanner (1961) \citep{tanner1961}.<br>• Liang (2013) \citep{liang2013unraveling}.<br>• Lenormand (2016) \citep{lenormand2016systematic}. | Tanner unifies short-range attraction ($\alpha$) and long-range exponential cutoff ($\beta$).<br>*Tanner hợp nhất sức hút cự cự ngắn ($\alpha$) và kháng lực hàm mũ cự cự xa ($\beta$).* |
-| **B4. Traveller distance sensitivity is an unobservable latent variable confounded by spatial exposure.**<br>*Độ nhạy khoảng cách là biến ẩn không thể quan sát bị nhiễu bởi tiếp xúc không gian.* | Defines latent variable nature of $\theta = (\alpha, \beta)$ and exposure confounding.<br>*Định nghĩa bản chất biến ẩn của $\theta$ và nhiễu do tiếp xúc không gian.* | • Wilson (1971) \citep{wilson1971}.<br>• Huff (1963) \citep{huff1963probabilistic}.<br>• Fotheringham & O'Kelly (1989) \citep{fotheringham1989spatial}.<br>• Casella & Berger (2002) \citep{casella2002statistical}. | Parameter estimation must be framed as inverse statistical inference conditional on exposure $E_k$.<br>*Ước tính tham số phải được đặt khung là suy luận thống kê ngược điều kiện trên $E_k$.* |
+| **B3. Tanner deterrence function provides flexible dual representation.**<br>*Hàm cản trở Tanner cung cấp biểu diễn kép linh hoạt.* | Justifies Tanner function choice ((d) = d^{-lpha} e^{-eta d}$).<br>*Biện minh việc chọn hàm Tanner.* | • Tanner (1961) \citep{tanner1961}.<br>• Liang (2013) \citep{liang2013unraveling}.<br>• Lenormand (2016) \citep{lenormand2016systematic}. | Tanner unifies short-range attraction ($lpha$) and long-range exponential cutoff ($eta$).<br>*Tanner hợp nhất sức hút cự cự ngắn ($lpha$) và kháng lực hàm mũ cự cự xa ($eta$).* |
+| **B4. Traveller distance sensitivity is an unobservable latent variable confounded by spatial exposure.**<br>*Độ nhạy khoảng cách là biến ẩn không thể quan sát bị nhiễu bởi tiếp xúc không gian.* | Defines latent variable nature of $	heta = (lpha, eta)$ and exposure confounding.<br>*Định nghĩa bản chất biến ẩn của $	heta$ và nhiễu do tiếp xúc không gian.* | • Wilson (1971) \citep{wilson1971}.<br>• Huff (1963) \citep{huff1963probabilistic}.<br>• Fotheringham & O'Kelly (1989) \citep{fotheringham1989spatial}.<br>• Casella & Berger (2002) \citep{casella2002statistical}. | Parameter estimation must be framed as inverse statistical inference conditional on exposure $.<br>*Ước tính tham số phải được đặt khung là suy luận thống kê ngược điều kiện trên $.* |
 
 ### Deep Dive: Spatial Impedance vs. Geographic Distance & Intervening Opportunities (Claim B1) / Phân tích Sâu: Trở lực Không gian so với Khoảng cách Địa lý (Luận điểm B1)
 
@@ -397,8 +399,6 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 
 | Component / Thành phần | EN Content | VI Content |
 | :--- | :--- | :--- |
-| Component / Thành phần | EN Content | VI Content |
-| :--- | :--- | :--- |
 | **Module Title** | **Conventional Behaviour Identification under Data Availability Constraints** | **Định danh Hành vi Truyền thống trong Ràng buộc về Tính Sẵn có của Dữ liệu** |
 | **Scientific Question** | **How has mobility science conventionally identified latent behavioural parameters, and what are its operational limits when local flow data are unobserved?** | **Khoa học di chuyển đã định danh các tham số hành vi ẩn theo cách truyền thống như thế nào, và ranh giới áp dụng của nó là gì khi dữ liệu lưu lượng địa phương không quan sát được?** |
 | **Module Rationale** | Evaluates traditional OD calibration paradigms and demonstrates why privacy constraints motivate a shift to aggregate data products. | Đánh giá phản biện các paradigm hiệu chỉnh OD truyền thống và làm rõ lý do ranh giới riêng tư thúc đẩy chuyển dịch sang dữ liệu tổng hợp. |
@@ -420,6 +420,112 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 > While widely applied for decades, \citet{flowerdew1982method} demonstrated that log-linear OLS introduces four severe statistical limitations when applied to spatial interaction flows: (1) transformation bias induced when converting predicted log-flows back to arithmetic scale ($\exp(\hat{\log T_{ij}})$), (2) the zero-flow problem where zero-count OD pairs ($\log 0$) cannot be evaluated directly without ad-hoc offsets, (3) heteroscedasticity arising from non-constant error variance across flow scales, and (4) the inappropriate assumption of Gaussian normality for discrete count data.
 >
 > Recognizing that interaction flows are discrete count data, \citet{flowerdew1982method} reformulated gravity calibration as a probabilistic estimation problem by specifying $T_{ij} \sim \text{Poisson}(\lambda_{ij})$. This established the foundational principle that **likelihood should be derived from an explicit generative probability model rather than selected as an arbitrary loss function**. This Poisson likelihood framework (and its negative binomial extensions) became the standard statistical foundation for supervised OD flow calibration \citep{sen1995gravity, erlander1990spatial, ortuzar2011modelling}, alongside moment-matching heuristics \citep{hyman1969calibration, merlin2020medians}.
+>
+> > [!NOTE]
+> > **Foundational Note: Master Mental Model — From Data-Generating Process to Loss Function & Optimization / Mô hình Tư duy Trung tâm — Từ Quá trình Sinh Dữ liệu đến Hàm Mất mát & Tối ưu hóa**
+> >
+> > **EN:** A statistical estimator must begin with an assumption about the Data-Generating Process (DGP), not with an arbitrary optimization heuristic:
+> >
+> > ```text
+> >                  Real-World Phenomenon / Thế giới thực
+> >                                  │
+> >                                  ▼
+> >                    Data-Generating Process (DGP)
+> >                                  │
+> >                                  ▼
+> >                          Probability Model
+> >       ┌──────────────────────────┴──────────────────────────┐
+> >       ▼                                                     ▼
+> > OD Cell Counts T_ij                                 Distance Histogram y_k (Fixed N)
+> >  (Discrete Count Data)                             (Multinomial Bin Category Allocation)
+> >       ▼                                                     ▼
+> > Poisson Model (Flowerdew 1982)                       Multinomial Model (PCSF-TIM)
+> >       └──────────────────────────┬──────────────────────────┘
+> >                                  │
+> >                                  ▼
+> >                    Belongs to Exponential Family
+> >                                  │
+> >                                  ▼
+> >               Maximum Likelihood Estimation (MLE)
+> >                                  │
+> >                      [Log-transform & Negate]
+> >                                  │
+> >                    Negative Log-Likelihood (NLL)
+> >                                  │
+> >                                  ▼
+> >                            Loss Function
+> >                (Cross-Entropy Loss for Multinomial)
+> >                                  │
+> >                                  ▼
+> >                       Numerical Optimization
+> >                                  │
+> >       ┌──────────────────────────┴──────────────────────────┐
+> >       ▼                                                     ▼
+> > Finds Best Estimator θ*                              Does NOT prove Identifiability
+> >(Numerical Search Complete)                         (Requires Statistical Evidence)
+> > ```
+> >
+> > **Key Methodological Clarifications:**
+> > 1. **Count Data vs Continuous Data:** Gaussian distributions model continuous measurements with additive noise (height, temperature), whereas OD interaction flows $T_{ij}$ are discrete counts requiring **Poisson** distributions \citep{flowerdew1982method}. Aggregating OD counts into binned distance histograms under fixed total trip volume $N = \sum y_k$ transforms the observation into a **Multinomial** distribution.
+> > 2. **Exponential Family Causality Chain:** We do not select Multinomial because it belongs to the Exponential Family; rather, the data-generating process dictates the Multinomial model, which happens to belong to the Exponential Family \citep{casella2002statistical}, inheriting standard asymptotic properties (consistency $\hat{\theta}_N \xrightarrow{p} \theta_{true}$ as sample size $N \to \infty$).
+> > 3. **Optimization $\neq$ Identifiability:** Finding an optimal parameter vector $\hat{\theta}^* = \arg\min \text{CE}(b, p(\theta))$ via an optimizer merely completes the numerical search. It does not prove that $\hat{\theta}^*$ is mathematically unique or identifiable; identifiability requires empirical statistical evidence (sharp unimodal log-likelihood surface, synthetic recovery, cross-city stability).
+> >
+> > **VI:** Một bộ ước tính thống kê phải bắt đầu từ giả định về Quá trình Sinh Dữ liệu (DGP), chứ không phải từ một tiêu chí tối ưu hóa tự phát:
+> > 1. **Dữ liệu Đếm vs Dữ liệu Liên tục:** Phân phối Gaussian dành cho các phép đo liên tục với nhiễu cộng (chiều cao, nhiệt độ), trong khi các dòng tương tác OD $T_{ij}$ là dữ liệu đếm rời rạc đòi hỏi phân phối **Poisson** \citep{flowerdew1982method}. Việc gộp các số đếm OD thành biểu đồ khoảng cách với tổng số chuyến đi cố định $N = \sum y_k$ chuyển đổi quan sát thành phân phối **Multinomial**.
+> > 2. **Chuỗi Nhân quả Họ Mũ (Exponential Family):** Chúng ta không chọn Multinomial vì nó thuộc Họ Mũ; đúng hơn là quá trình sinh dữ liệu quy định mô hình Multinomial, và phân phối này thuộc Họ Mũ \citep{casella2002statistical}, thừa hưởng các tính chất tiệm cận chuẩn mực (tính nhất quán $\hat{\theta}_N \xrightarrow{p} \theta_{true}$ khi kích thước mẫu $N \to \infty$).
+> > 3. **Tối ưu hóa $\neq$ Tính Định danh:** Việc tìm một vectơ tham số tối ưu $\hat{\theta}^* = \arg\min \text{CE}(b, p(\theta))$ qua thuật toán tối ưu hóa chỉ hoàn thành việc tìm kiếm số. Nó không chứng minh $\hat{\theta}^*$ là duy nhất hay có thể định danh về mặt toán học; tính định danh đòi hỏi các bằng chứng thống kê thực nghiệm (bề mặt log-likelihood lõm đơn mốt sắc nét, khôi phục giả lập, tính ổn định liên đô thị).
+> >
+> > **VI:** Một bộ ước tính thống kê phải bắt đầu từ giả định về cách dữ liệu được tạo ra, chứ không phải từ một mục tiêu tối ưu hóa tự phát:
+> > 1. **Đặc tả Quá trình Sinh Dữ liệu (DGP):**
+> >    - Gaussian $\implies$ các phép đo liên tục với nhiễu cộng Gaussian.
+> >    - Poisson $\implies$ số lượng sự kiện độc lập.
+> >    - Multinomial $\implies$ tổng số đếm phân bổ giữa các danh mục rời rạc loại trừ lẫn nhau.
+> > 2. **Suy ra Hàm Khả năng (Likelihood) $P(D \mid \theta)$:** đo lường xác suất của dữ liệu quan sát được dưới tham số $\theta$.
+> > 3. **Ước tính Khả năng Tối đa (MLE):** chọn tham số tối đa hóa likelihood $\hat{\theta} = \arg\max_{\theta} P(D \mid \theta)$.
+> > 4. **Tính Đơn điệu của Logarit:** $\arg\max L(\theta) = \arg\max \log L(\theta)$.
+> > 5. **Negative Log-Likelihood (NLL):** Công ước máy học tối thiểu hóa NLL $\arg\min [-\log L(\theta)]$.
+> > 6. **Hiện thực hóa Multinomial & Cross-Entropy:** Đối với các quan sát multinomial, NLL đơn giản hóa thành $-\sum_k b_k \log p_k$, trùng khớp về mặt toán học với hàm tổn thất Cross-Entropy.
+> >
+> > **Thông điệp Cốt lõi:** *Hàm mất mát không nên được lựa chọn theo kinh nghiệm tự phát; nó phải được suy ra từ mô hình xác suất đại diện cho quá trình sinh dữ liệu. Do đó, Cross-Entropy không phải là một hàm mất mát tùy ý, mà chính là Negative Log-Likelihood của mô hình Multinomial.*
+> >
+> > **Ứng dụng vào PCSF-TIM:** *Lựa chọn hàm mất mát là hệ quả trực tiếp của mô hình quan sát. Một khi quan sát di chuyển tổng hợp được mô hình hóa như một quá trình Multinomial trên các bin khoảng cách chuyến đi, Cross-Entropy xuất hiện một cách tự nhiên từ Ước tính Khả năng Tối đa (MLE) thay vì được đưa vào như một tiêu chí tối ưu hóa thực nghiệm.*
+> >
+> > **Mathematical Derivation Flowchart / Sơ đồ Tiến trình Suy diễn Toán học:**
+> > ```text
+> >                  Real-World Phenomenon / Thế giới thực
+> >                                  │
+> >                                  ▼
+> >                    Data-Generating Process (DGP)
+> >                                  │
+> >                                  ▼
+> >                          Probability Model
+> >                  (Gaussian / Poisson / Multinomial)
+> >                                  │
+> >                                  ▼
+> >                     Likelihood P(Data | θ)
+> >                                  │
+> >                                  ▼
+> >             Maximum Likelihood Estimation (MLE: max L(θ))
+> >                                  │
+> >                       [Log-transform & Negate]
+> >                                  │
+> >                    Negative Log-Likelihood (NLL)
+> >                                  │
+> >                                  ▼
+> >                            Loss Function
+> >                                  │
+> >                 ┌────────────────┴────────────────┐
+> >                 ▼                                 ▼
+> >            Multinomial                         Gaussian
+> >                 ▼                                 ▼
+> >     Cross-Entropy Loss (NLL)             Least Squares (MSE)
+> > ```
+> >
+> > **Mathematical Precision Note on KL Divergence:**
+> > *Kullback-Leibler (KL) Divergence $D_{\mathrm{KL}}(P \parallel Q) = \sum_k p_k \log \frac{p_k}{q_k}$ measures the directed statistical difference (relative entropy / information discrepancy) between two probability distributions $P$ and $Q$, rather than a mathematical "distance" (metric). It is not a true metric distance because it is asymmetric ($D_{\mathrm{KL}}(P \parallel Q) \neq D_{\mathrm{KL}}(Q \parallel P)$) and does not satisfy the triangle inequality. Minimizing Cross-Entropy $H(P, Q) = H(P) + D_{\mathrm{KL}}(P \parallel Q)$ under fixed empirical observations $P$ is mathematically equivalent to minimizing KL divergence $D_{\mathrm{KL}}(P \parallel Q)$, which directly maximizes the Multinomial Log-Likelihood.*
+> >
+> > **Ghi chú Chính xác Toán học về KL Divergence:**
+> > *Kullback-Leibler (KL) Divergence $D_{\mathrm{KL}}(P \parallel Q) = \sum_k p_k \log \frac{p_k}{q_k}$ đo lường mức độ khác biệt thống kê có hướng (entropy tương đối / độ lệch thông tin) giữa hai phân bố xác suất $P$ và $Q$, chứ không phải là một "khoảng cách" toán học (metric distance). Nó không phải là một metric khoảng cách thực sự vì nó bất đối xứng ($D_{\mathrm{KL}}(P \parallel Q) \neq D_{\mathrm{KL}}(Q \parallel P)$) và không thỏa mãn bất đẳng thức tam giác. Việc tối thiểu hóa Cross-Entropy $H(P, Q) = H(P) + D_{\mathrm{KL}}(P \parallel Q)$ dưới phân bố thực nghiệm cố định $P$ tương đương về mặt toán học với việc tối thiểu hóa KL divergence $D_{\mathrm{KL}}(P \parallel Q)$, qua đó tối đa hóa trực tiếp Multinomial Log-Likelihood.*
 >
 > Crucially, \citet{hyman1969calibration} formalized the foundational assumption inherited by decades of subsequent literature: *to estimate distance-decay parameters, one must observe a full local origin-destination flow matrix $T_{ij}^{obs}$ for calibration*. By introducing mean-trip-length matching ($\bar{d}_{model}(\theta) = \bar{d}_{obs}$), Hyman established the **Supervised Calibration Paradigm**, framing local OD flow matrix observation as an indispensable prerequisite for parameter estimation. PCSF-TIM directly challenges this 50-year assumption by shifting from local flow calibration to aggregate parameter identification:
 >
@@ -484,6 +590,17 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 | **Module Rationale** | Formalizes the projection operator $\mathcal{P}$, classifies observation layers into an Information Hierarchy, and establishes the Identifiable vs Non-Identifiable boundary. | Hình thức hóa toán học toán tử chiếu $\mathcal{P}$, phân loại các lớp quan sát vào Hệ thống Phân cấp Thông tin, và thiết lập ranh giới thuộc tính Có thể vs Không thể Định danh. |
 | **Mission** | Define aggregation as a distance-domain projection $\mathcal{P}: \mathbb{R}^{N \times N} \to \mathbb{R}^K$, classify data layers, and delineate what information remains available for parameter identification. | Định nghĩa sự gom tụ là một toán tử chiếu miền khoảng cách $\mathcal{P}: \mathbb{R}^{N \times N} \to \mathbb{R}^K$, phân loại các lớp dữ liệu, và vạch rõ thông tin nào còn lại để phục vụ định danh tham số. |
 | **Hierarchy Progression** | $$\text{Trajectories} \longrightarrow \text{OD Matrix} \longrightarrow \text{Travel Distance Distribution (TLD)} \longrightarrow \text{Macro Indicators}$$ | $$\text{Quỹ đạo} \longrightarrow \text{Ma trận OD} \longrightarrow \text{Phân bố Khoảng cách (TLD)} \longrightarrow \text{Chỉ số Vĩ mô}$$ |
+
+> [!TIP]
+> ### Core Scientific Question of Information Reduction / Câu hỏi Khoa học Cốt lõi của sự Giảm Thông tin
+>
+> **EN:** The spatial aggregation mapping **Trajectory $\longrightarrow$ OD Matrix $\longrightarrow$ Travel-Distance Histogram (TLD)** represents a progressive information reduction process. The central scientific question of this study is: **Does the remaining statistical information in the aggregate histogram suffice to support the identification of behavioural distance-decay parameters?**
+>
+> *Theoretical Mechanism:* **Aggregate observations reduce the amount of information, but they preserve the probability distribution of travel distances. Since the distance-deterrence parameters directly shape this distribution, the remaining information may still be sufficient for statistical identification.**
+>
+> **VI:** Quá trình chiếu gom tụ **Quỹ đạo (Trajectory) $\longrightarrow$ Ma trận OD $\longrightarrow$ Biểu đồ khoảng cách (TLD)** đại diện cho một tiến trình giảm dần thông tin. Câu hỏi khoa học trung tâm của nghiên cứu này là: **Liệu phần thông tin thống kê còn lại trong biểu đồ tần suất tổng hợp có đủ để hỗ trợ việc định danh các tham số suy giảm khoảng cách hành vi hay không?**
+>
+> *Cơ chế Lý thuyết:* **Các quan sát tổng hợp tuy làm giảm lượng thông tin, nhưng chúng bảo toàn phân bố xác suất của khoảng cách di chuyển. Vì các tham số cản trở khoảng cách trực tiếp định hình phân bố này, phần thông tin còn lại vẫn có thể đủ cho việc định danh thống kê.**
 
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module D)
 
@@ -564,6 +681,35 @@ Summary Statistics (Mean distance, total volume)
 >
 > **VI:** Các quan sát di chuyển khác nhau lưu giữ các khía cạnh khác nhau của quá trình chuyển động nền tảng và do đó cung cấp thông tin khác nhau cho phân tích khoa học \citep{gallotti2024distorted}. Từ góc nhìn suy luận thống kê, thông tin được giữ lại bởi một quan sát quyết định các tham số mô hình nào vẫn có thể định danh thống kê \citep{casella2002statistical}. Mối quan hệ giữa quan sát – thông tin – khả năng định danh này làm động lực cho khung xác suất được phát triển trong công trình này. Việc giới hạn không gian quan sát ở Phân bố Độ dài Chuyến đi tổng hợp (Lớp 3) thiết lập một ranh giới toán học chính xác giữa các thuộc tính có thể định danh và không thể định danh: mặc dù các lưu lượng vi mô ô-tới-ô $T_{ij}^{obs}$ không thể khôi phục, lớp TLD tổng hợp vẫn lưu giữ thông tin thống kê đáng kể để hỗ trợ việc định danh các tham số suy giảm khoảng cách tập thể hiệu dụng $\theta = (\alpha, \beta)$ dưới tiếp xúc cấu trúc được xác định độc lập ($E_k$).
 
+> [!NOTE]
+> ### Foundational Note: Identifiability as Bridge & Observational Utility Principle / Tính Định danh như Cầu nối & Nguyên lý Hữu dụng Quan sát
+>
+> **EN:** From the perspective of Information Representation \citep{cover2006elements, gallotti2024distorted}, **identifiability serves as the foundational scientific bridge between the Information Hierarchy (Module D) and Behaviour Identification (Module F)**:
+> \[
+> \text{Information Hierarchy (Preserved Information)} \xrightarrow{\quad\text{Identifiability}\quad} \text{Behaviour Identification (Parameter Estimation)}
+> \]
+> **Observational Utility Principle:** *A mobility observation product is scientifically useful for behavioural inference if and only if it preserves sufficient statistical information to support parameter estimation of the underlying behavioural mechanism.*
+>
+> This principle elevates the research question beyond curve-fitting. Rather than asking *"Can an algorithm fit parameters to a curve?"*, the true scientific question is: **"Does a privacy-preserving aggregate observation product—such as the travel-distance distribution—retain sufficient statistical information to support parameter identification of distance-decay travel behaviour?"**
+>
+> **Dual-Outcome Scientific Value & Falsifiability:**
+> - **If YES (Hypothesis Supported):** Demonstrates a major methodological finding that highly compressed, aggregate mobility products suffice for behavioural parameter estimation without requiring invasive local flow surveys.
+> - **If NO (Hypothesis Rejected):** Delineates the fundamental information limit of aggregate mobility products and identifies what minimal complementary observation layers are required for parameter identification.
+> Both outcomes hold profound scientific value for mobility science.
+>
+> **VI:** Từ góc nhìn Biểu diễn Thông tin \citep{cover2006elements, gallotti2024distorted}, **tính định danh đóng vai trò là cầu nối khoa học nền tảng giữa Phân cấp Thông tin (Module D) và Định danh Hành vi (Module F)**:
+> \[
+> \text{Phân cấp Thông tin (Thông tin được giữ lại)} \xrightarrow{\quad\text{Tính Định danh}\quad} \text{Định danh Hành vi (Ước tính Tham số)}
+> \]
+> **Nguyên lý Hữu dụng Quan sát:** *Một sản phẩm quan sát di chuyển có giá trị khoa học cho suy luận hành vi khi và chỉ khi nó lưu giữ đầy đủ thông tin thống kê để hỗ trợ việc ước tính tham số của cơ chế hành vi nền tảng.*
+>
+> Nguyên lý này nâng tầm câu hỏi nghiên cứu vượt lên trên việc khớp đường cong đơn thuần. Thay vì hỏi *"Một thuật toán có thể khớp tham số vào đường cong hay không?"*, câu hỏi khoa học thực sự là: **"Liệu một sản phẩm quan sát tổng hợp bảo vệ quyền riêng tư—như phân bố khoảng cách di chuyển—có còn lưu giữ đầy đủ thông tin thống kê để hỗ trợ việc định danh tham số của hành vi suy giảm khoảng cách hay không?"**
+>
+> **Giá trị Khoa học Hai chiều & Tính Bác bỏ (Falsifiability):**
+> - **Nếu CÓ (Giả thuyết được hỗ trợ):** Chứng minh một phát hiện phương pháp luận quan trọng rằng các sản phẩm dữ liệu tổng hợp bị nén cao vẫn đủ cho việc ước tính tham số hành vi mà không cần các khảo sát lưu lượng địa phương xâm phạm quyền riêng tư.
+> - **Nếu KHÔNG (Giả thuyết bị bác bỏ):** Vạch ra ranh giới thông tin nền tảng của các sản phẩm dữ liệu tổng hợp và xác định các lớp quan sát bổ sung tối thiểu cần thiết để định danh tham số.
+> Cả hai kết quả đều mang giá trị khoa học sâu sắc cho khoa học di chuyển.
+
 ### Identifiable vs Non-Identifiable Properties / Thuộc tính Có thể và Không thể Định danh từ TLD
 
 | Identifiable Properties ($P(d_k) \mid E_k$) / Thuộc tính Có thể Định danh | Non-Identifiable Properties ($P(d_k)$) / Thuộc tính Không thể Định danh |
@@ -571,6 +717,31 @@ Summary Statistics (Mean distance, total volume)
 | **EN:** Collective distance-decay shape parameters $\theta = (\alpha, \beta)$ under exposure correction.<br>**VI:** Các tham số hình dạng suy giảm khoảng cách tập thể $\theta = (\alpha, \beta)$ khi có hiệu chỉnh tiếp xúc. | **EN:** Directional flow asymmetry ($i \to j$ vs. $j \to i$) across specific spatial pairs.<br>**VI:** Bất đối xứng lưu lượng hướng ($i \to j$ so với $j \to i$) giữa các cặp không gian cụ thể. |
 | **EN:** Effective collective distance sensitivity across short-range vs long-range distance regimes.<br>**VI:** Độ nhạy khoảng cách tập thể hiệu dụng trên các miền khoảng cách ngắn và xa. | **EN:** Specific cell-to-cell micro-flows $T_{ij}^{obs}$ for individual origin-destination pairs $(i,j)$.<br>**VI:** Các lưu lượng vi mô chi tiết giữa các ô $T_{ij}^{obs}$ cho từng cặp điểm đi - điểm đến $(i,j)$. |
 | **EN:** Global distance deterrence profile conditioned on urban spatial opportunity density $E_k$.<br>**VI:** Hồ sơ cản trở khoảng cách toàn cục điều kiện trên mật độ cơ hội không gian đô thị $E_k$. | **EN:** Disaggregated trip purpose (e.g., commuting vs leisure) without segmented layers.<br>**VI:** Mục đích chuyến đi chi tiết (ví dụ: đi làm vs giải trí) nếu không có các lớp phân đoạn. |
+
+> [!NOTE]
+> ### Foundational Note: Numerical Optimization vs Statistical Identifiability / Tối ưu hóa Số vs Tính Định danh Thống kê
+>
+> **EN:** A fundamental distinction must be maintained between numerical optimization and statistical identifiability:
+> 1. **Numerical Optimization (*How to compute the solution?*):**
+>    - Evaluates objective functions $\hat{\theta} = \arg\max_{\theta} \mathcal{L}(\theta)$ or $\arg\min_{\theta} \text{CE}(\theta)$.
+>    - Concerned strictly with gradients, surface concavity/convexity, local optima, and algorithmic convergence (e.g., L-BFGS-B, Adam).
+>    - *Algorithmic convergence merely completes the numerical search; it does not guarantee that the returned solution is unique, theoretically correct, or statistically identifiable.*
+> 2. **Statistical Identifiability (*Does the observation uniquely specify parameters?*):**
+>    - Analyzes the observation mapping $\theta \longrightarrow P(d \mid \theta)$.
+>    - If $P(d \mid \theta_1) = P(d \mid \theta_2)$ for $\theta_1 \neq \theta_2$, distinct parameter states produce identical observation distributions. In this case, $\theta$ is non-identifiable from the observation space, regardless of optimizer performance.
+>
+> **Key Takeaway:** *Optimization asks "Can the algorithm find a parameter vector that minimizes loss?", whereas Identifiability asks "Does the observation space preserve sufficient statistical information to support parameter recovery?" In PCSF-TIM, parameter identification is supported through likelihood evidence (sharp unimodal log-likelihood surface), synthetic recovery, and cross-city consistency, rather than inferred from optimization convergence alone.*
+>
+> **VI:** Cần duy trì sự phân biệt nền tảng giữa tối ưu hóa số và tính định danh thống kê:
+> 1. **Tối ưu hóa Số (*Làm thế nào để tìm nghiệm số?*):**
+>    - Đánh giá các hàm mục tiêu $\hat{\theta} = \arg\max_{\theta} \mathcal{L}(\theta)$ hoặc $\arg\min_{\theta} \text{CE}(\theta)$.
+>    - Chỉ quan tâm đến gradient, độ lõm/lồi của bề mặt, cực trị địa phương, và sự hội tụ của thuật toán (như L-BFGS-B, Adam).
+>    - *Sự hội tụ của thuật toán chỉ hoàn thành việc tìm kiếm số; nó không bảo đảm rằng nghiệm thu được là duy nhất, đúng đắn về mặt lý thuyết hay có thể định danh thống kê.*
+> 2. **Tính Định danh Thống kê (*Liệu quan sát có xác định duy nhất tham số không?*):**
+>    - Phân tích ánh xạ quan sát $\theta \longrightarrow P(d \mid \theta)$.
+>    - Nếu $P(d \mid \theta_1) = P(d \mid \theta_2)$ đối với $\theta_1 \neq \theta_2$, các trạng thái tham số khác nhau tạo ra cùng một phân bố quan sát. Khi đó, $\theta$ không thể định danh từ không gian quan sát, bất kể thuật toán tối ưu hóa hoạt động tốt ra sao.
+>
+> **Thông điệp Cốt lõi:** *Tối ưu hóa đặt câu hỏi "Thuật toán có thể tìm được vectơ tham số tối thiểu hóa tổn thất hay không?", trong khi Tính định danh đặt câu hỏi "Không gian quan sát có lưu giữ đầy đủ thông tin thống kê để hỗ trợ việc khôi phục tham số hay không?" Trong PCSF-TIM, việc định danh tham số được hỗ trợ thông qua bằng chứng likelihood (bề mặt log-likelihood đơn mốt sắc nét), khôi phục giả lập và tính nhất quán liên đô thị, thay vì chỉ suy ra từ sự hội tụ của thuật toán tối ưu hóa.*
 
 ### Transition to Module E / Chuyển tiếp sang Module E
 
@@ -659,20 +830,68 @@ flowchart LR
 | **Falsifiability Framework** | **Branch 1 (Hypothesis Supported):** Synthetic recovery error $< 5\%$; unimodal strictly concave log-likelihood surface; cross-city parameter stability ($\text{CV} < 15\%$); null-exposure ablation induces severe parameter shift ($> 30\%$); downstream flow reconstruction outperforms control baselines.<br>**Branch 2 (Hypothesis Rejected):** Surface is flat/multimodal; synthetic recovery error $\ge 5\%$; parameter estimates fluctuate erratically ($\text{CV} \ge 15\%$). | **Nhánh 1 (Giả thuyết được hỗ trợ):** Sai số khôi phục giả lập $< 5\%$; bề mặt log-khả năng đơn mốt lõm nghiêm ngặt; tính ổn định tham số liên đô thị ($\text{CV} < 15\%$); loại bỏ tiếp xúc gây sai lệch lớn ($> 30\%$); tái tạo lưu lượng hạ nguồn vượt trội so với kiểm soát.<br>**Nhánh 2 (Giả thuyết bị bác bỏ):** Bề mặt bằng phẳng/đa mốt; sai số khôi phục $\ge 5\%$; ước tính tham số biến động thất thường ($\text{CV} \ge 15\%$). |
 
 > [!IMPORTANT]
-> ### Methodological & Empirical Scope of This Study / Phạm vi Phương pháp luận & Thực nghiệm của Nghiên cứu
+> ### Methodological Scope & Master Inferential Pipeline / Phạm vi Phương pháp luận & Chuỗi Suy luận Tổng thể
 >
-> **EN:** This study addresses a single methodological problem: **identifying the parameters of collective travel distance-decay functions $\theta = (\alpha,\beta)$ from aggregate travel-distance observations, conditional on independently specified structural exposure derived from open data.**
+> **EN:** This study addresses a single scientific problem: **identifying the parameters of collective travel distance-decay functions $\theta = (\alpha,\beta)$ from aggregate travel-distance observations, conditional on independently specified structural exposure derived from open data.**
+>
+> **Master Scientific Pipeline:**
+> ```text
+> Aggregate Observations (TLD y)
+>         │
+>         ▼
+> Probability Model (Multinomial DGP)
+>         │
+>         ▼
+> Likelihood Function P(y | θ, E_k)
+>         │
+>         ▼
+> Optimization (Computational Tool: obtain estimator θ*)
+>         │
+>         ▼
+> Empirical Evidence Supporting Parameter Identification
+> (Unimodal Likelihood Surface + Synthetic Recovery + Cross-City Consistency)
+>         │
+>         ▼
+> Predictive Validation (Downstream Zero-Shot Flow Reconstruction)
+> ```
+> In this pipeline, **identifiability is the primary scientific objective**, **optimization is strictly the computational tool**, and **experiments provide empirical evidence consistent with parameter identification** rather than formal mathematical proof.
+>
 > - **Input Space:** Observed aggregate travel-distance distribution (binned TLD histogram $y = (y_1, \dots, y_K)$).
 > - **Structural Prior:** Independently specified structural spatial exposure vector $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$.
 > - **Output:** Inferred behavioural distance-decay parameters $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$.
-> - **Downstream Application:** Zero-shot OD flow reconstruction is reported only as an external consistency check of the inferred parameters rather than as a primary modeling objective.
+> - **Scientific Role of Experiments:** Likelihood surface sharpness, synthetic recovery ($<2\%$), and cross-city consistency ($\text{CV}<10\%$) accumulate statistical evidence supporting parameter identification; zero-shot OD flow reconstruction serves as downstream predictive validation.
 > - **Empirical Scope:** The empirical evaluation is conducted across 50 U.S. metropolitan areas using Meta Movement Distribution Maps \citep{MetaMovementDistributionMaps}, defining the scope of evidence presented in this study rather than implying universal applicability.
 >
-> **VI:** Nghiên cứu này tập trung giải quyết duy nhất một bài toán phương pháp luận: **định danh các tham số của hàm suy giảm khoảng cách hành vi tập thể $\theta = (\alpha,\beta)$ từ các quan sát phân bố khoảng cách di chuyển tổng hợp, điều kiện trên tiếp xúc cấu trúc được xác định độc lập từ dữ liệu mở.**
+> ---
+>
+> **VI:** Nghiên cứu này tập trung giải quyết duy nhất một bài toán khoa học: **định danh các tham số của hàm suy giảm khoảng cách hành vi tập thể $\theta = (\alpha,\beta)$ từ các quan sát phân bố khoảng cách di chuyển tổng hợp, điều kiện trên tiếp xúc cấu trúc được xác định độc lập từ dữ liệu mở.**
+>
+> **Chuỗi Suy luận Khoa học Tổng thể:**
+> ```text
+> Quan sát Tổng hợp (TLD y)
+>         │
+>         ▼
+> Mô hình Xác suất (Quá trình sinh Multinomial)
+>         │
+>         ▼
+> Hàm Khả năng Likelihood P(y | θ, E_k)
+>         │
+>         ▼
+> Tối ưu hóa (Công cụ Tính toán: tìm bộ ước tính θ*)
+>         │
+>         ▼
+> Bằng chứng Thực nghiệm Hỗ trợ Định danh Tham số
+> (Bề mặt Likelihood đơn mốt + Khôi phục Giả lập + Nhất quán Liên đô thị)
+>         │
+>         ▼
+> Kiểm chứng Dự báo (Tái tạo Lưu lượng OD Hạ nguồn)
+> ```
+> Trong chuỗi logic này, **tính định danh là mục tiêu khoa học chính**, **tối ưu hóa thuần túy là công cụ tính toán**, và **các thực nghiệm cung cấp bằng chứng thực nghiệm nhất quán với giả thuyết định danh tham số** chứ không phải chứng minh toán học tuyệt đối.
+>
 > - **Không gian Đầu vào:** Phân bố khoảng cách di chuyển tổng hợp quan sát được (biểu đồ tần suất TLD rời rạc $y = (y_1, \dots, y_K)$).
 > - **Tiền đề Cấu trúc:** Vectơ tiếp xúc không gian cấu trúc được xác định độc lập $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$.
 > - **Đầu ra:** Các tham số suy giảm khoảng cách hành vi được suy luận $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$.
-> - **Ứng dụng Hạ nguồn:** Tái tạo lưu lượng OD không cần huấn luyện lại chỉ được báo cáo như một bước kiểm tra tính nhất quán bên ngoài của các tham số được suy luận chứ không phải là mục tiêu mô hình hóa chính.
+> - **Vai trò Khoa học của Thực nghiệm:** Độ nhọn bề mặt likelihood, khôi phục giả lập ($<2\%$), và tính nhất quán liên đô thị ($\text{CV}<10\%$) tích lũy bằng chứng thống kê hỗ trợ việc định danh tham số; tái tạo lưu lượng OD không cần huấn luyện lại đóng vai trò là bước kiểm chứng dự báo hạ nguồn.
 > - **Phạm vi Thực nghiệm:** Đánh giá thực nghiệm được thực hiện trên 50 vùng đô thị tại Hoa Kỳ sử dụng Meta Movement Distribution Maps \citep{MetaMovementDistributionMaps}, xác định phạm vi bằng chứng được trình bày trong nghiên cứu này chứ không ngụ ý khả năng áp dụng vạn năng.
 
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module F)
@@ -696,6 +915,42 @@ flowchart LR
 > **EN:** To evaluate numerical stability and parameter recoverability under controlled conditions, synthetic TLDs are generated from known benchmark parameter vectors $\theta_{true} = (\alpha_{true}, \beta_{true})$. Executing conditional MLE on synthetic observations recovers parameter estimates $\hat{\theta}^*$ with relative error $< 2\%$ across standard sample sizes, providing statistical evidence that the objective surface $\mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$ possesses a well-defined, strictly concave global maximum over the parameter domain.
 >
 > **VI:** Để đánh giá tính ổn định số và khả năng khôi phục tham số trong điều kiện kiểm soát, các phân bố TLD giả lập được khởi tạo từ các vectơ tham số chuẩn đã biết $\theta_{true} = (\alpha_{true}, \beta_{true})$. Thực thi MLE điều kiện trên các quan sát giả lập khôi phục được các ước tính tham số $\hat{\theta}^*$ với sai số tương đối $< 2\%$ trên các quy mô mẫu tiêu chuẩn, cung cấp bằng chứng thống kê cho thấy bề mặt mục tiêu $\mathcal{L}(\theta \mid \mathbf{y}_{TLD}, E_k)$ sở hữu một cực đại toàn cục lõm nghiêm ngặt, rõ ràng trên miền tham số.
+
+> [!NOTE]
+> ### Computational Note: L-BFGS-B Optimization & Hessian Landscape Scope / Ghi chú Tính toán: Tối ưu hóa L-BFGS-B & Phạm vi Bề mặt Hessian
+>
+> **EN:** In the computational implementation of PCSF-TIM, parameter estimation uses bound-constrained quasi-Newton optimization (L-BFGS-B) to maximize the multinomial log-likelihood:
+> \[
+> \hat{\theta}^* = \arg\max_{\theta \in \Theta} \sum_{k=1}^K y_k \log P(k \mid E_k, \theta)
+> \]
+> **Empirical Observation & Scope Boundary:** *The present work employs L-BFGS-B to optimize the multinomial log-likelihood. We empirically observe stable convergence across all evaluated cities (50 U.S. metropolitan areas). A formal analytical analysis of global concavity, Hessian matrix structure ($\mathbf{H} = \nabla^2 \mathcal{L}(\theta)$), and strict mathematical uniqueness of the global optimum remains future theoretical work.*
+>
+> **VI:** Trong việc triển khai tính toán của PCSF-TIM, ước tính tham số sử dụng phương pháp tối ưu hóa quasi-Newton có ràng buộc biên (L-BFGS-B) để tối đa hóa multinomial log-likelihood:
+> \[
+> \hat{\theta}^* = \arg\max_{\theta \in \Theta} \sum_{k=1}^K y_k \log P(k \mid E_k, \theta)
+> \]
+> **Quan sát Thực nghiệm & Ranh giới Phạm vi:** *Nghiên cứu này sử dụng L-BFGS-B để tối ưu hóa multinomial log-likelihood. Chúng tôi quan sát thấy sự hội tụ ổn định về mặt thực nghiệm trên tất cả các thành phố được đánh giá (50 vùng đô thị Hoa Kỳ). Phân tích giải tích chính thức về độ lõm toàn cục, cấu trúc ma trận Hessian ($\mathbf{H} = \nabla^2 \mathcal{L}(\theta)$), và tính duy nhất toán học nghiêm ngặt của cực trị toàn cục vẫn là tác vụ lý thuyết trong tương lai.*
+
+> [!NOTE]
+> ### Foundational Note: Pure Likelihood Estimation Rationale / Lý do Ước tính Khả năng Likelihood Thuần túy
+>
+> **EN:** In PCSF-TIM, parameter identification is performed strictly through the multinomial likelihood without introducing prior distributions over the deterrence parameters $\theta = (\alpha, \beta)$:
+> \[
+> \hat{\theta}^* = \arg\max_{\theta} \sum_{k=1}^K y_k \log P(k \mid E_k, \theta)
+> \]
+> **Methodological Rationale:** *Our objective is to evaluate the statistical information contained in aggregate travel-distance distributions themselves. Therefore, parameter identification is performed solely through the multinomial likelihood without introducing prior distributions over the deterrence parameters. This allows the empirical evidence to come entirely from the observed aggregate data rather than from subjective prior regularization.*
+>
+> **VI:** Trong PCSF-TIM, việc định danh tham số được thực hiện thuần túy thông qua khả năng multinomial likelihood mà không đưa vào các phân bố tiên đề (priors) trên các tham số cản trở $\theta = (\alpha, \beta)$:
+> \[
+> \hat{\theta}^* = \arg\max_{\theta} \sum_{k=1}^K y_k \log P(k \mid E_k, \theta)
+> \]
+> **Lý do Phương pháp luận:** *Mục tiêu của chúng tôi là đánh giá lượng thông tin thống kê được chứa đựng trong chính các phân bố khoảng cách di chuyển tổng hợp. Do đó, việc định danh tham số được thực hiện thuần túy thông qua khả năng multinomial likelihood mà không đưa vào các phân bố tiên đề trên các tham số cản trở. Điều này cho phép bằng chứng thực nghiệm đến hoàn toàn từ dữ liệu tổng hợp quan sát được thay vì từ sự chuẩn hóa tiên đề chủ quan.*
+>
+> **Mathematical Scope Disclaimer on Classical Asymptotic Properties:**
+> *The proposed estimator is a maximum likelihood estimator under a multinomial observation model. Classical asymptotic properties of MLE—such as consistency, asymptotic normality, and asymptotic efficiency—are well established under standard regularity conditions \citep{casella2002statistical}. However, establishing whether these regularity conditions hold mathematically for the proposed observation model is beyond the scope of the present empirical study.*
+>
+> **Tuyên bố Phạm vi Toán học về các Tính chất Tiệm cận Cổ điển:**
+> *Bộ ước tính được đề xuất là một bộ ước tính khả năng tối đa (MLE) dưới mô hình quan sát multinomial. Các tính chất tiệm cận cổ điển của MLE—như tính nhất quán (consistency), tính chuẩn tiệm cận (asymptotic normality), và tính hiệu quả tiệm cận (asymptotic efficiency)—đã được thiết lập chặt chẽ dưới các điều kiện quy định chuẩn (standard regularity conditions) \citep{casella2002statistical}. Tuy nhiên, việc chứng minh liệu các điều kiện này có thỏa mãn về mặt toán học đối với mô hình quan sát được đề xuất hay không nằm ngoài phạm vi của nghiên cứu thực nghiệm hiện tại.*
 
 ### Deep Dive: Model Selection & Observational Compatibility (Claim F2b) / Phân tích Sâu: Lựa chọn Mô hình & Tính Tương thích Quan sát (Luận điểm F2b)
 
@@ -786,6 +1041,21 @@ flowchart LR
 | **Exposure Noise Sensitivity** | Random noise drift $< 3\%$; systematic bias drift $> 14\%$. | Độ lệch do nhiễu ngẫu nhiên $< 3\%$; độ lệch do sai lệch hệ thống $> 14\%$. | Validates $E_k$ Significance |
 | **Null Exposure Ablation ($E_k \equiv 1$)** | Parameter bias $> 30\%$; flow CPC drops by $> 0.25$. | Phân cực tham số $> 30\%$; CPC lưu lượng giảm mạnh $> 0.25$. | Confirms Exposure Necessity |
 | **Downstream Flow Reconstruction** | Inferred $\hat{\theta}^*$ achieves CPC $> 0.70$, significantly outperforming baselines. | $\hat{\theta}^*$ suy luận đạt CPC $> 0.70$, vượt trội rõ rệt so với các baseline. | Hypothesis Supported |
+
+> [!NOTE]
+> ### Foundational Note: Information-Theoretic Precision Limits & Fisher Information as Future Directions / Hướng Mở Lý thuyết Thông tin & Thông tin Fisher
+>
+> **EN:** In this study, parameter identification is supported empirically through likelihood evidence (sharp concave log-likelihood surface), synthetic recovery, cross-city parameter stability, and downstream predictive validation.
+>
+> **Theoretical Extension:** *A natural theoretical extension of this work is to quantify the information content of aggregate travel-length distributions using Fisher Information $\mathcal{I}(\theta) = -\mathbb{E}\left[\frac{\partial^2 \log P(\mathbf{y} \mid \theta)}{\partial \theta^2}\right]$ and investigate the fundamental precision bounds (Cramér-Rao lower bounds) of behavioural parameter estimation under aggregate observation loss.*
+>
+> Presenting Fisher Information as an open theoretical extension aligns strictly with the scope of this Handbook: providing empirical statistical evidence supporting parameter identification from aggregate data, without over-promising or asserting complete information-theoretic proofs beyond the present empirical scope.
+>
+> **VI:** Trong nghiên cứu này, việc định danh tham số được hỗ trợ thực nghiệm thông qua bằng chứng likelihood (bề mặt log-likelihood lõm đơn mốt sắc nét), khôi phục giả lập, tính ổn định tham số liên đô thị và kiểm chứng dự báo hạ nguồn.
+>
+> **Hướng Mở Lý thuyết:** *Một mở rộng lý thuyết tự nhiên của nghiên cứu này là định lượng nội dung thông tin của các phân bố độ dài chuyến đi tổng hợp bằng cách sử dụng Thông tin Fisher $\mathcal{I}(\theta) = -\mathbb{E}\left[\frac{\partial^2 \log P(\mathbf{y} \mid \theta)}{\partial \theta^2}\right]$ và điều tra các ranh giới độ chính xác nền tảng (chặn dưới Cramér-Rao) của việc ước tính tham số hành vi dưới sự mất mát quan sát tổng hợp.*
+>
+> Việc trình bày Thông tin Fisher như một hướng mở lý thuyết hoàn toàn nhất quán với phạm vi của Handbook này: cung cấp bằng chứng thống kê thực nghiệm hỗ trợ việc định danh tham số từ dữ liệu tổng hợp, mà không hứa hẹn nhiều hơn hoặc đưa ra các tuyên bố chứng minh lý thuyết thông tin hoàn chỉnh vượt quá phạm vi thực nghiệm hiện tại.
 
 ---
 
