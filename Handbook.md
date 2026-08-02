@@ -265,28 +265,38 @@ flowchart TD
 | Component / Thành phần | EN Content | VI Content |
 | :--- | :--- | :--- |
 | **Module Title** | **Gravity as the Primary Mathematical Factorization of Spatial Interaction** | **Mô hình Trọng lực như một Phân rã Toán học Cốt lõi của Tương tác Không gian** |
-| **Scientific Question** | **Why is Gravity selected as the foundational mathematical representation for behavioural parameter identification?** | **Tại sao Trọng lực được lựa chọn làm biểu diễn toán học nền tảng cho bài toán định danh tham số hành vi?** |
-| **Module Rationale** | Gravity is adopted not because it is the top predictive model, but because it provides the cleanest, most transparent mathematical representation for decomposing **Urban Structure** ($O_i, A_j$) from **Travel Behaviour** ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. | Trọng lực không được lựa chọn vì nó là mô hình dự báo tốt nhất, mà vì nó cung cấp biểu diễn toán học rõ ràng và minh bạch nhất để phân rã **Cấu trúc Đô thị** ($O_i, A_j$) khỏi **Hành vi Di chuyển** ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. |
-| **Mission** | Convince the reader that Gravity is selected not for black-box predictive benchmarks, but as the primary factorized representation isolating urban spatial structure ($O_i, A_j$) from latent behavioural distance decay ($f(d_{ij};\theta)$), establishing the indispensable structural foundation for parameter identification. | Thuyết phục người đọc rằng Gravity không được lựa chọn vì là mô hình dự báo tốt nhất trên benchmark, mà vì nó là biểu diễn phân rã rõ ràng và minh bạch nhất để tách Cấu trúc Đô thị khỏi Hành vi. Chính sự phân rã này khiến nó trở thành nền tảng bắt buộc cho bài toán định danh tham số hành vi. |
-| **Central Claim** | **Gravity should be understood as a foundational mathematical representation isolating urban structure from travel behaviour.** | **Mô hình Trọng lực nên được hiểu là biểu diễn toán học nền tảng giúp tách biệt cấu trúc đô thị khỏi hành vi di chuyển.** |
+| **Scientific Question** | **Why is the Gravity model the appropriate scientific foundation for studying and identifying collective mobility behaviour?** | **Tại sao mô hình Trọng lực là nền tảng khoa học phù hợp để nghiên cứu và định danh hành vi di chuyển tập thể?** |
+| **Module Rationale** | Gravity is adopted not because it always predicts best, but because it provides the clearest scientific representation of the structure–behaviour decomposition required for behavioural identification \citep{wilson1971, erlander1990spatial, okelly2009spatial}. | Trọng lực không được lựa chọn vì nó luôn dự báo tốt nhất, mà vì nó cung cấp biểu diễn khoa học rõ ràng nhất về sự phân rã cấu trúc - hành vi bắt buộc cho việc định danh hành vi \citep{wilson1971, erlander1990spatial, okelly2009spatial}. |
+| **Mission** | Convince the reader that the Gravity model is the most appropriate scientific representation for studying aggregate human mobility because it explicitly decomposes mobility flows into urban structure and collective behavioural response. This decomposition provides an interpretable and statistically identifiable foundation for behavioural inference, making Gravity the natural starting point for the remainder of the handbook. | Thuyết phục người đọc rằng mô hình Trọng lực là biểu diễn khoa học phù hợp nhất để nghiên cứu di chuyển con người tổng hợp vì nó phân rã một cách rõ ràng lưu lượng di chuyển thành cấu trúc đô thị và phản ứng hành vi tập thể. Sự phân rã này cung cấp một nền tảng có thể giải thích được và có thể định danh thống kê cho suy luận hành vi, biến Trọng lực thành điểm khởi đầu tự nhiên cho toàn bộ Handbook. |
+| **Central Claim** | **Gravity provides the appropriate scientific language and structural representation isolating urban structure from travel behaviour for parameter identification.** | **Mô hình Trọng lực cung cấp ngôn ngữ khoa học và biểu diễn cấu trúc phù hợp giúp tách biệt cấu trúc đô thị khỏi hành vi di chuyển cho việc định danh tham số.** |
 
 
 ### Theoretical Explanation: Representation vs. Predictive Performance / Giải thích Lý thuyết: Biểu diễn vs. Hiệu suất Dự báo
 
 > [!NOTE]
-> **Foundational Representation Principle / Nguyên lý Biểu diễn Nền tảng:**
+> **Foundational Representation Principle & Core Takeaways / Nguyên lý Biểu diễn Nền tảng & 4 Điểm Nhấn Cốt lõi:**
 >
 > **EN:** The Gravity interaction model is adopted in this Handbook **not because it claims to be the highest-performing predictive benchmark model**, but because it provides the **clearest, most transparent mathematical representation for decomposing Urban Spatial Structure ($O_i, A_j$) from Collective Travel Behaviour ($f(d_{ij};\theta)$)** \citep{wilson1971, erlander1990spatial, okelly2009spatial}:
 > \[
 > T_{ij} = \underbrace{O_i A_j}_{\text{Urban Structure}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Behaviour}}
 > \]
-> While black-box deep learning architectures or non-parametric machine learning models can achieve marginal predictive gains on specific flow benchmarks, they convolve spatial context with interaction mechanisms into uninterpretable weights. In contrast, the multiplicative gravity factorization provides an essential scientific property: it explicitly isolates the behavioural distance-decay function $f(d_{ij};\theta)$, enabling conditional inverse parameter identification from aggregate mobility observations under independent structural exposure.
+>
+> **Four Foundational Takeaways of Module A:**
+> 1. **Component Separation:** Aggregate mobility is generated by two fundamentally different components: urban spatial structure (trip generation $O_i$ and attraction $A_j$) and collective behavioural response to spatial separation ($f(d;\theta)$).
+> 2. **Explicit Factorization:** The Gravity model is the first and most widely adopted framework that explicitly separates these two components into interpretable mathematical terms.
+> 3. **Statistical Identifiability:** Because behaviour is represented explicitly through the parametric distance-decay function $f(d;\theta)$, behavioural parameters become statistically identifiable from mobility observations.
+> 4. **Scientific Foundation:** Therefore, if the scientific objective is to **identify collective mobility behaviour rather than merely predict flows**, the Gravity model provides the appropriate scientific language on which the rest of the handbook is built.
 >
 > **VI:** Mô hình tương tác Trọng lực được lựa chọn trong Handbook này **không phải vì nó tuyên bố là mô hình dự báo đạt hiệu suất cao nhất trên các benchmark**, mà vì nó cung cấp **biểu diễn toán học rõ ràng và minh bạch nhất để phân rã Cấu trúc Không gian Đô thị ($O_i, A_j$) khỏi Hành vi Di chuyển Tập thể ($f(d_{ij};\theta)$)** \citep{wilson1971, erlander1990spatial, okelly2009spatial}:
 > \[
 > T_{ij} = \underbrace{O_i A_j}_{\text{Cấu trúc Đô thị}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Hành vi}}
 > \]
-> Trong khi các kiến trúc học sâu hộp đen hay mô hình học máy phi tham số có thể đạt được điểm số dự báo cao hơn trên các benchmark lưu lượng cụ thể, chúng tích tụ bối cảnh không gian và cơ chế tương tác thành các trọng số không thể giải thích. Ngược lại, phép phân rã nhân trọng lực mang một thuộc tính khoa học bắt buộc: nó tách biệt rõ ràng hàm suy giảm khoảng cách hành vi $f(d_{ij};\theta)$, cho phép thực hiện suy luận thống kê ngược để định danh tham số từ các quan sát di chuyển tổng hợp dưới sự tiếp xúc cấu trúc độc lập.
+>
+> **Bốn Điểm Nhấn Cốt lõi của Module A:**
+> 1. **Phân rã Thành phần:** Di chuyển tổng hợp được tạo ra bởi hai thành phần khác nhau về bản chất: cấu trúc không gian đô thị (phát thải $O_i$ và sức hút $A_j$) và phản ứng hành vi tập thể đối với sự chia cắt không gian ($f(d;\theta)$).
+> 2. **Phân rã Nhân Rõ ràng:** Mô hình Trọng lực là khung làm việc đầu tiên và được áp dụng rộng rãi nhất phân rã hai thành phần này thành các thuật ngữ toán học có thể giải thích được.
+> 3. **Tính Định danh Thống kê:** Vì hành vi được biểu diễn rõ ràng qua hàm suy giảm khoảng cách tham số $f(d;\theta)$, các tham số hành vi trở nên có thể định danh thống kê từ các quan sát di chuyển.
+> 4. **Nền tảng Khoa học:** Do đó, nếu mục tiêu khoa học là **định danh hành vi di chuyển tập thể thay vì thuần túy dự báo lưu lượng**, mô hình Trọng lực cung cấp ngôn ngữ khoa học phù hợp nhất làm nền tảng cho toàn bộ Handbook.
 
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module A)
 
@@ -302,10 +312,15 @@ flowchart TD
 >
 > **VI:** Một số nghiên cứu gần đây đã độc lập áp dụng các kiến trúc phân biệt bối cảnh cấu trúc khỏi mô hình hóa tương tác hoặc hành vi, mặc dù phục vụ các mục tiêu khác nhau. Các kiến trúc thần kinh như Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, và UGNN \citep{guo2025universal} tận dụng biểu diễn không gian địa lý phong phú \citep{liu2025representation} để bắt các bối cảnh không gian điểm đi - điểm đến trong khi mô hình hóa tương tác lưu lượng. Các kiến trúc dựa trên vật lý gần đây hơn (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$ trong các chuỗi sinh lưu lượng dự báo của chúng. Mặc dù các mô hình này được phát triển cho các tác vụ dự báo, học chuyển giao hoặc tái tạo mạng lưới chứ không phải cho việc định danh hành vi, kiến trúc tính toán của chúng minh họa giá trị thực tiễn của việc tách biệt bối cảnh cấu trúc khỏi sự cản trở khoảng cách. Công trình này khác biệt ở chỗ cung cấp một cách diễn giải suy luận xác suất cho sự tách biệt cấu trúc - hành vi này nhằm giải quyết bài toán định danh tham số dưới quan sát tổng hợp.
 
+
+While the Gravity model consists of multiple components, not all components play the same scientific role. The following module focuses on the distance-decay function because it is the only component that explicitly represents collective behavioural response.
+
 ---
 
 # Module B — Spatial Separation & Distance-Decay as Latent Behavioural Response
 # Module B — Sự chia cắt Không gian & Suy giảm Khoảng cách như Phản ứng Hành vi Ẩn
+
+In this handbook, "behaviour" refers specifically to the collective sensitivity of mobility flows to spatial separation, rather than the full spectrum of individual travel decision-making.
 
 | Component / Thành phần | EN Content | VI Content |
 | :--- | :--- | :--- |
