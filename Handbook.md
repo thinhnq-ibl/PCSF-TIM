@@ -34,46 +34,55 @@ link-citations: true
 ---
 
 > [!IMPORTANT]
-> **Theoretical Convergence Principle & Observational Error Decomposition: $f^*(d; \hat{\theta}^*) \to f_G(d_{ij}; \theta)$**
-> **Nguyên lý Hội tụ Lý thuyết & Phân rã Sai số Quan sát:**
+> **Theoretical Convergence Principle & Three Conceptually Distinct Failure Modes**
+> **Nguyên lý Hội tụ Lý thuyết & Ba Dạng Thất bại Khái niệm:**
 >
 > **EN:** 
-> ### Effective–Microscopic Convergence Framework
+> ### Effective–Microscopic Convergence & Failure Mode Taxonomy
 > In PCSF-TIM, parameter inference from aggregate Trip-Length Distributions (TLD) does not aim to directly recover microscopic individual deterrence preferences, but rather to identify an **effective collective deterrence descriptor** $f^*(d; \hat{\theta}^*)$ conditioned on current spatial and observational structures.
 > 
-> The divergence between the effective macro deterrence $f^*(d; \hat{\theta}^*)$ and the underlying microscopic deterrence $f_G(d; \theta)$ is governed by a tripartite observational error decomposition:
-> \[
-> f^*(d; \hat{\theta}^*) - f_G(d; \theta) = \epsilon_{\rm disc} + \epsilon_{\rm struct} + \epsilon_{\rm mix}
-> \]
+> The discrepancy between the identified deterrence function $f^*(d; \hat{\theta}^*)$ and the true underlying behavioural function $f_G(d; \theta)$ is conceptually governed by three distinct failure mechanisms:
 > 
-> 1. **Distance Discretization Error ($\epsilon_{\rm disc}$):** Arises from replacing continuous travel distances $d_{ij}$ with discrete bin intervals $[d_k, d_{k+1})$ and midpoints $d_k$. As bin resolution becomes infinitely fine ($\Delta b \to 0$), intra-bin variance vanishes ($\epsilon_{\rm disc} \to 0$).
-> 2. **Structural Specification Error ($\epsilon_{\rm struct}$):** Arises from incomplete or biased specification of spatial exposure $E(d)$. Because observed TLD reflects $P(d) \propto E(d) f_G(d)$, spatial omitted variable bias is absorbed into parameter estimates. When exposure is unbiasedly specified from open spatial data, structural bias vanishes ($\epsilon_{\rm struct} \to 0$).
-> 3. **Behavioral Mixture Error ($\epsilon_{\rm mix}$):** Arises when aggregate TLD convolves heterogeneous trip purposes ($P(d) = \sum_m \pi_m P_m(d)$ with mixing weights $\pi_m \ge 0, \sum_m \pi_m = 1$ and purpose-conditional distributions $P_m(d) = P(d \mid m)$). Fitting a single parametric decay function yields an effective parameter $\hat{\theta}^*$ describing the joint population mixture rather than any single subgroup constant (*"When multiple behavioural mechanisms are aggregated into a single TLD, the inferred parameter $\hat{\theta}^*$ should be interpreted as an Effective Collective Behaviour Descriptor, rather than the microscopic parameter of any individual trip-purpose class"*). When observations are fully segmented by trip intent, mixture error vanishes ($\epsilon_{\rm mix} \to 0$).
+> 1. **Observation failure ($\epsilon_{\rm obs}$) — *Did we observe enough information?***
+>    The discrepancy arises because the observation process preserves only an aggregated travel-distance distribution rather than complete individual travel information (including distance binning, loss of spatial origin-destination pairs, and purpose mixing). As observational fidelity increases, observation loss vanishes ($\epsilon_{\rm obs} \to 0$).
+> 
+> 2. **Structure failure ($\epsilon_{\rm struct}$) — *Did we model the city correctly?***
+>    The discrepancy arises because the assumed opportunity field $E(d)$ does not accurately represent the true urban structure governing travel choices. When structural exposure is unbiasedly specified from multi-source open spatial data, structural failure vanishes ($\epsilon_{\rm struct} \to 0$).
+> 
+> 3. **Coupled failure ($\epsilon_{\rm coupled}$) — *Are both problems occurring simultaneously?***
+>    Observation loss and structural misspecification non-linearly interact to influence behavioural identification, producing discrepancies that cannot generally be attributed to either mechanism alone.
+> 
+> ### Conceptual Pipeline Alignment:
+> ```text
+> Observation  ──►  Observation Failure  ──►  Information Available  ──►  Structure Model  ──►  Structure Failure  ──►  Behaviour Identification  ──►  Coupled Failure
+> ```
 > 
 > **Theoretical Convergence Limit:**
 > \[
-> f^*(d; \hat{\theta}^*) \to f_G(d; \theta) \quad \text{iff} \quad (\Delta b \to 0, \, \epsilon_{\rm struct} \to 0, \, \epsilon_{\rm mix} \to 0)
+> f^*(d; \hat{\theta}^*) \to f_G(d; \theta) \quad \text{as} \quad (\epsilon_{\rm obs} \to 0, \, \epsilon_{\rm struct} \to 0, \, \epsilon_{\rm coupled} \to 0)
 > \]
 > *Note: Model-class misspecification ($\epsilon_{\rm model}$) is explicitly decoupled from this observational boundary and treated under Model Selection (Module F2b).*
 >
 > ---
 >
 > **VI:** 
-> ### Khung Hội tụ Hiệu dụng – Vi mô
+> ### Khung Hội tụ Hiệu dụng – Vi mô & Phân loại Ba Dạng Thất bại
 > Trong PCSF-TIM, suy luận tham số từ Phân bố Độ dài Chuyến đi tổng hợp (TLD) không nhằm phục hồi trực tiếp hàm cản trở vi mô cấp độ cá nhân, mà nhằm xác định một **mô tả cản trở hành vi tập thể hiệu dụng** $f^*(d; \hat{\theta}^*)$ điều kiện trên cấu trúc không gian và quan sát hiện hành.
 > 
-> Sự sai lệch giữa hàm cản trở hiệu dụng vĩ mô $f^*(d; \hat{\theta}^*)$ và hàm cản trở vi mô nền tảng $f_G(d; \theta)$ được chi phối bởi phân rã 3 nguồn sai số quan sát:
-> \[
-> f^*(d; \hat{\theta}^*) - f_G(d; \theta) = \epsilon_{\rm disc} + \epsilon_{\rm struct} + \epsilon_{\rm mix}
-> \]
+> Sự sai lệch giữa hàm cản trở được định danh $f^*(d; \hat{\theta}^*)$ và hàm hành vi nền tảng thực sự $f_G(d; \theta)$ về mặt khái niệm được chi phối bởi ba cơ chế thất bại tách biệt:
 > 
-> 1. **Sai số Rời rạc hóa Khoảng cách ($\epsilon_{\rm disc}$):** Phát sinh khi thay thế khoảng cách liên tục $d_{ij}$ bằng các bin rời rạc $[d_k, d_{k+1})$ và điểm giữa $d_k$. Khi độ phân giải bin mịn tuyệt đối ($\Delta b \to 0$), sai số nội bin triệt tiêu ($\epsilon_{\rm disc} \to 0$).
-> 2. **Sai số Đặc tả Cấu trúc Không gian ($\epsilon_{\rm struct}$):** Phát sinh khi tiếp xúc không gian $E(d)$ bị đặc tả thiếu sót hoặc chệch. Vì TLD phản ánh $P(d) \propto E(d) f_G(d)$, sai lệch cấu trúc bị bẫy vào tham số suy luận. Khi tiếp xúc được xác định không chệch từ dữ liệu không gian mở, sai số cấu trúc triệt tiêu ($\epsilon_{\rm struct} \to 0$).
-> 3. **Sai số Hỗn hợp Hành vi ($\epsilon_{\rm mix}$):** Phát sinh khi TLD gộp chung nhiều mục đích di chuyển khác nhau theo mô hình hỗn hợp ($P(d) = \sum_m \pi_m P_m(d)$ với trọng số hỗn hợp $\pi_m \ge 0, \sum_m \pi_m = 1$ và phân bố điều kiện nhóm $P_m(d) = P(d \mid m)$). Việc khớp một hàm đơn duy nhất tạo ra tham số hiệu dụng $\hat{\theta}^*$ mô tả toàn bộ phân bố hỗn hợp chứ không đại diện cho bất kỳ nhóm hành vi riêng lẻ nào (*"Khi nhiều cơ chế hành vi được tổng hợp vào một TLD duy nhất, tham số được suy luận $\hat{\theta}^*$ phải được diễn giải là một Mô tả Hành vi Tập thể Hiệu dụng, thay vì tham số vi mô của bất kỳ nhóm mục đích chuyến đi riêng lẻ nào"*). Khi dữ liệu được phân đoạn hoàn toàn theo mục đích chuyến đi, sai số hỗn hợp triệt tiêu ($\epsilon_{\rm mix} \to 0$).
+> 1. **Thất bại Quan sát ($\epsilon_{\rm obs}$) — *Liệu ta có quan sát đủ thông tin?***
+>    Phát sinh vì quá trình quan sát chỉ bảo toàn phân bố khoảng cách di chuyển tổng hợp thay vì thông tin di chuyển cá nhân hoàn chỉnh (bao gồm rời rạc hóa bin khoảng cách, mất cặp điểm đi - điểm đến, và hỗn hợp mục đích chuyến đi). Khi độ trung thực quan sát tăng lên, thất bại quan sát triệt tiêu ($\epsilon_{\rm obs} \to 0$).
+> 
+> 2. **Thất bại Cấu trúc ($\epsilon_{\rm struct}$) — *Liệu ta có mô hình hóa đô thị đúng cách?***
+>    Phát sinh vì trường cơ hội giả định $E(d)$ không phản ánh chính xác cấu trúc đô thị thực sự chi phối các lựa chọn di chuyển. Khi tiếp xúc cấu trúc được xác định không chệch từ dữ liệu không gian mở đa nguồn, thất bại cấu trúc triệt tiêu ($\epsilon_{\rm struct} \to 0$).
+> 
+> 3. **Thất bại Sóng đôi ($\epsilon_{\rm coupled}$) — *Liệu cả hai vấn đề có đồng thời xảy ra?***
+>    Phát sinh khi sự mất mát quan sát và sự đặc tả sai cấu trúc tương tác phi tuyến cùng nhau tác động lên quá trình định danh hành vi, tạo ra các sai lệch không thể tách biệt cho riêng cơ chế nào.
 > 
 > **Giới hạn Hội tụ Lý thuyết:**
 > \[
-> f^*(d; \hat{\theta}^*) \to f_G(d; \theta) \quad \text{khi và chỉ khi} \quad (\Delta b \to 0, \, \epsilon_{\rm struct} \to 0, \, \epsilon_{\rm mix} \to 0)
+> f^*(d; \hat{\theta}^*) \to f_G(d; \theta) \quad \text{khi} \quad (\epsilon_{\rm obs} \to 0, \, \epsilon_{\rm struct} \to 0, \, \epsilon_{\rm coupled} \to 0)
 > \]
 > *Lưu ý: Sai số đặc tả họ mô hình ($\epsilon_{\rm model}$) được tách biệt khỏi ranh giới quan sát này và được phân tích tại chương Lựa chọn Mô hình (Module F2b).*
 
@@ -90,9 +99,9 @@ link-citations: true
 > [!NOTE]
 > **Key Strategic Positioning for Manuscript Drafting / Định vị Chiến lược cho Bản thảo Bài báo:**
 > 
-> 0. **Core Scientific Framework (The 60-Year Perspective) / Frame Khoa học Cốt lõi (Góc nhìn 60 năm):** 
->    - **EN:** In Gravity $T_{ij} = O_i A_j f(d_{ij};\theta)$, origin demand $O_i$, destination attraction $A_j$, and distance geometry $d_{ij}$ are known or estimable from open spatial data. The **only unobservable quantity is the effective behavioural parameter $\theta$**. Spanning roughly 60 years of spatial interaction science—from foundational formulations \citep{tanner1961, wilson1971} to modern analytics—the core scientific mission of aggregate mobility modelling remains **Effective Collective Behaviour Identification** ($\hat{\theta}^*$), rather than raw flow curve-fitting. Downstream flow reconstruction serves as empirical validation of the inferred parameters, not as an independent proof of identifiability.
->    - **VI:** Trong mô hình Trọng lực $T_{ij} = O_i A_j f(d_{ij};\theta)$, nhu cầu điểm đi $O_i$, sức hút điểm đến $A_j$, và hình học khoảng cách $d_{ij}$ đã biết hoặc có thể ước tính từ dữ liệu không gian mở. **Đại lượng duy nhất không thể quan sát trực tiếp là tham số hành vi hiệu dụng $\theta$**. Trải qua khoảng 60 năm khoa học tương tác không gian—từ các công thức nền tảng \citep{tanner1961, wilson1971} đến phân tích hiện đại—sứ mệnh khoa học cốt lõi của mô hình hóa di chuyển tổng hợp vẫn là **Định danh Hành vi Tập thể Hiệu dụng** ($\hat{\theta}^*$), chứ không phải khớp đường cong lưu lượng thô. Việc tái tạo lưu lượng hạ nguồn đóng vai trò là sự kiểm chứng thực nghiệm cho các tham số được suy luận, chứ không phải là sự chứng minh độc lập cho khả năng định danh.
+> 0. **Core Scientific Framework & Observation Setting Shift / Frame Khoa học Cốt lõi & Sự Chuyển dịch Bối cảnh Quan sát:** 
+>    - **EN:** Spanning several decades of spatial interaction science, foundational researchers such as Tanner \citep{tanner1961} and Wilson \citep{wilson1971} developed spatial interaction models under an **observation setting** in which complete local OD flow matrices were generally available (or surveyed) for model calibration. Today, many urban mobility contexts reflect a shifting **observation setting**, where aggregate mobility products (e.g., travel-distance distributions) are increasingly accessible, whereas complete local OD matrices are often restricted due to privacy considerations. This observational shift introduces an important methodological challenge: estimating behavioural distance-decay parameters ($\hat{\theta}^*$) under limited flow observations, where aggregate distributions serve as the primary inference space and downstream flow reconstruction provides empirical validation.
+>    - **VI:** Trải qua vài thập kỷ nghiên cứu tương tác không gian, các nhà nghiên cứu nền tảng như Tanner \citep{tanner1961} và Wilson \citep{wilson1971} đã phát triển các mô hình tương tác không gian trong một **bối cảnh quan sát (observation setting)** mà ở đó các ma trận lưu lượng OD địa phương hoàn chỉnh thường có sẵn (hoặc được khảo sát trực tiếp) để hiệu chỉnh mô hình. Ngày nay, nhiều bối cảnh di chuyển đô thị thể hiện một **bối cảnh quan sát** có nhiều thay đổi, nơi các sản phẩm di chuyển tổng hợp (như phân bố khoảng cách di chuyển - TLD) ngày càng trở nên phổ biến, trong khi ma trận OD chi tiết thường bị hạn chế do yêu cầu bảo mật. Sự chuyển dịch bối cảnh quan sát này đặt ra một thách thức phương pháp luận quan trọng: ước tính các tham số suy giảm khoảng cách hành vi ($\hat{\theta}^*$) trong điều kiện quan sát di chuyển hạn chế, trong đó các phân bố tổng hợp đóng vai trò là không gian suy luận chính và việc tái tạo lưu lượng hạ nguồn cung cấp sự kiểm chứng thực nghiệm.
 >
 > 1. **Model–Observation Compatibility Principle / Nguyên lý Tương thích Mô hình - Quan sát:** 
 >    - **EN:** When the observation space is restricted to aggregate TLD $\mathbf{y} = (y_1, \dots, y_K)$, inference relies on explaining the full distribution shape. The parametric decay model must match the observation space shape requirements (e.g., Tanner provides dual parameters: $\alpha$ for short-to-intermediate shape and $\beta$ for long-range decay).
@@ -102,14 +111,9 @@ link-citations: true
 >    - **EN:** Standardized on **observed Trip-Length Distribution (observed TLD)** to anchor the observation space to empirical binned histograms $y = (y_1, \dots, y_K)$. Aggregate mobility products—including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior.
 >    - **VI:** Chuẩn hóa thuật ngữ **Phân bố Độ dài Chuyến đi quan sát được (observed TLD)** để gắn không gian quan sát với các biểu đồ tần suất khoảng cách thực nghiệm $y = (y_1, \dots, y_K)$. Các sản phẩm dữ liệu di chuyển tổng hợp—bao gồm Bản đồ Phân bố Di chuyển của Meta (Meta MDM) \citep{MetaMovementDistributionMaps}—ngày càng trở nên phổ biến trên nhiều nền tảng và khu vực, cung cấp các tóm tắt bảo vệ quyền riêng tư về hành vi di chuyển của quần thể.
 >
-> 3. **Enduring Value of Physics-Based Models & Evolutionary Spectrum / Giá trị Đời đời của Mô hình Vật lý & Phổ Tiến hóa:** 
->    - **EN:** Contemporary deep learning frameworks extend rather than replace Gravity. Earlier architectures like Deep Gravity \citep{simini2021} are **gravity-inspired**, retaining origin constraints and spatial features but replacing explicit multiplicative factorization with dense neural networks. Modern physics-informed architectures (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly preserve the multiplicative factorization $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. This evolution confirms that SOTA mobility science is progressing toward explicit physical factorization—the exact scientific foundation underlying PCSF-TIM.
-
-> **EN:** *Gravity should be interpreted as a scientific language describing spatial interaction rather than merely a predictive model.* Modern deep learning architectures—including Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, and UGNN \citep{guo2025universal}—demonstrate that contemporary AI frameworks inherit and build upon the fundamental Gravity factorization structure rather than discarding it.
->
-> **VI:** *Mô hình Trọng lực cần được diễn giải như một ngôn ngữ khoa học mô tả tương tác không gian thay vì chỉ đơn thuần là một mô hình dự báo.* Các kiến trúc học sâu hiện đại—bao gồm Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, và UGNN \citep{guo2025universal}—chứng minh rằng ngay cả các mô hình AI tiên tiến nhất vẫn kế thừa và phát triển trên cấu trúc phân rã Trọng lực nền tảng thay vì loại bỏ nó.
-
->    - **VI:** Các khung học sâu hiện đại mở rộng thay vì thay thế mô hình Trọng lực. Các kiến trúc sớm hơn như Deep Gravity \citep{simini2021} mang tính **truyền cảm hứng từ trọng lực**, giữ lại các ràng buộc điểm đi và đặc trưng không gian nhưng thay thế sự phân rã nhân rõ ràng bằng mạng thần kinh dày đặc. Các kiến trúc học sâu dựa trên vật lý hiện đại (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. Sự tiến hóa này xác nhận rằng khoa học di chuyển tiên tiến (SOTA) đang tiến tới sự phân rã vật lý rõ ràng—đúng là nền tảng khoa học cốt lõi của PCSF-TIM.
+> 3. **Architectural Separation in Contemporary AI Models & Methodological Distinction / Phân tách Kiến trúc trong các Mô hình AI Hiện đại & Sự Khác biệt Phương pháp:** 
+>    - **EN:** Several recent mobility models (e.g., Deep Gravity \citep{simini2021}, UGNN \citep{guo2025universal}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly distinguish structural information from behavioural or interaction components within their computational architectures. Although these models are primarily developed for prediction, transfer, or network reconstruction rather than behavioural identification, they illustrate the practical value of separating structural context from behavioural modelling. The present work differs in providing a probabilistic inference framework for behavioural parameter identification rather than a predictive architecture.
+>    - **VI:** Một số mô hình di chuyển gần đây (như Deep Gravity \citep{simini2021}, UGNN \citep{guo2025universal}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) phân biệt một cách rõ ràng giữa thông tin cấu trúc và các thành phần tương tác hoặc hành vi trong kiến trúc tính toán của chúng. Mặc dù các mô hình này chủ yếu được phát triển cho các tác vụ dự báo, chuyển giao hoặc tái tạo mạng lưới chứ không phải cho việc định danh hành vi, chúng minh họa giá trị thực tiễn của việc tách biệt bối cảnh cấu trúc khỏi mô hình hóa hành vi. Công trình này khác biệt ở chỗ cung cấp một khung suy luận xác suất cho việc định danh tham số hành vi thay vì một kiến trúc dự báo.
 >
 > 4. **The Structure–Behaviour Separation Principle / Nguyên lý Tách biệt Cấu trúc - Hành vi:** 
 >    - **EN:** The gravity interaction model factorizes spatial interaction into two mathematically separable components:
@@ -123,13 +127,34 @@ link-citations: true
 >      \]
 >      Các thuật ngữ cấu trúc $(O_i, A_j)$ mô tả sự phân bố không gian của phát thải và sức hút chuyến đi, trong khi hàm cản trở $f(d_{ij};\theta)$ mô tả độ nhạy khoảng cách tập thể. Trong Handbook này, chúng tôi diễn giải dạng phân rã nhân này như một nguyên lý tách biệt khái niệm giữa cấu trúc đô thị và hành vi di chuyển. Cách diễn giải này tạo thành nguyên lý nền tảng đầu tiên của PCSF-TIM. *(Quy chuẩn ký hiệu: Năng lực phát thải điểm đi ký hiệu là $O_i$ và mật độ cơ hội/sức hút điểm đến ký hiệu là $A_j$ trong xuyên suốt Handbook này).*
 >
-> 5. **Novelty Positioning / Định vị Tính Mới (Lenormand 2016 vs. PCSF-TIM):** 
->    - **EN:** Landmark mobility studies use TLD as a downstream evaluative benchmark metric (CPC / Sørensen index) for models calibrated on OD matrices. In contrast, **PCSF-TIM shifts TLD from an evaluation target to the primary probabilistic observation space**, enabling direct parameter identification without requiring local OD flow supervision.
->    - **VI:** Các nghiên cứu di chuyển cột mốc sử dụng TLD làm chỉ số đánh giá chuẩn hạ nguồn (CPC / chỉ số Sørensen) cho các mô hình được hiệu chỉnh trên ma trận OD. Ngược lại, **PCSF-TIM chuyển TLD từ một mục tiêu đánh giá thành không gian quan sát xác suất chính**, cho phép định danh tham số trực tiếp mà không cần sự giám sát của lưu lượng OD địa phương.
+> 5. **Novelty Positioning & Observation Model Formulation / Định vị Tính Mới & Khung Mô hình Quan sát:** 
+>    - **EN:** Existing aggregate behavioural calibration approaches typically rely on low-dimensional summary statistics or aggregate calibration constraints. In contrast, the proposed framework performs likelihood-based behavioural inference directly on the complete observed travel-distance distribution, treating the observed histogram as the statistical observation of the inference problem rather than reducing it to a smaller set of aggregate descriptors. The multinomial likelihood is adopted as the probabilistic model of this observation process.
+>      
+>      *Conventional Aggregate Calibration:*
+>      ```text
+>      Mobility observations ──► Travel-distance distribution ──► Low-dimensional Summary Statistic (Mean/Median) ──► Calibration Target
+>      ```
+>      *Proposed Framework:*
+>      ```text
+>      Mobility observations ──► Complete Travel-distance distribution ──► Probabilistic Observation Model ──► Likelihood-based Inference
+>      ```
+>      Rather than calibrating behavioural parameters from low-dimensional aggregate summaries, the proposed framework performs inference directly on the complete observed travel-distance distribution.
 >
-> 7. **Definition & Role of Downstream Flow Reconstruction / Định nghĩa & Vai trò của Tái tạo Lưu lượng Hạ nguồn:** 
->    - **EN:** *Downstream flow reconstruction* refers to the generation of an origin–destination (OD) flow matrix $\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$ using the effective behaviour descriptor inferred from aggregate mobility observations. In PCSF-TIM, the inferred parameter $\hat{\theta}^*$ is not the ultimate end-goal itself, but a latent behavioural representation in the inference pipeline: $\text{Aggregate Observation (TLD)} \to \text{Behaviour Inference } (\hat{\theta}^*) \to \text{Downstream Flow Reconstruction } (\hat{T}_{ij}) \to \text{Transport Planning}$. Flow reconstruction serves as the primary empirical validation of inferred parameters.
->    - **VI:** *Tái tạo lưu lượng hạ nguồn (Downstream flow reconstruction)* chỉ quá trình khởi tạo ma trận lưu lượng điểm đi - điểm đến (OD) $\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$ sử dụng mô tả hành vi hiệu dụng được suy luận từ quan sát di chuyển tổng hợp. Trong PCSF-TIM, tham số suy luận $\hat{\theta}^*$ không phải là mục tiêu cuối cùng, mà đóng vai trò là một đại diện hành vi ẩn trong chuỗi xử lý: $\text{Quan sát Tổng hợp (TLD)} \to \text{Suy luận Hành vi } (\hat{\theta}^*) \to \text{Tái tạo Lưu lượng Hạ nguồn } (\hat{T}_{ij}) \to \text{Quy hoạch Giao thông}$. Việc tái tạo lưu lượng đóng vai trò là sự kiểm chứng thực nghiệm chính cho các tham số được suy luận.
+>    - **VI:** Các tiếp cận hiệu chỉnh hành vi tổng hợp hiện có thường dựa vào các thống kê tóm tắt số chiều thấp hoặc các ràng buộc hiệu chỉnh tổng hợp. Ngược lại, khung đề xuất thực hiện suy luận hành vi dựa trên likelihood trực tiếp trên phân bố khoảng cách di chuyển quan sát được hoàn chỉnh, coi biểu đồ tần suất quan sát được là quan sát thống kê của bài toán suy luận thay vì nén nó thành một tập hợp nhỏ các chỉ số mô tả tổng hợp. Phân phối multinomial likelihood được sử dụng như mô hình xác suất của quá trình quan sát này.
+>      
+>      *Hiệu chỉnh Tổng hợp Truyền thống:*
+>      ```text
+>      Quan sát di chuyển ──► Phân bố khoảng cách ──► Thống kê tóm tắt số chiều thấp (Mean/Median) ──► Mục tiêu hiệu chỉnh
+>      ```
+>      *Khung Đề xuất:*
+>      ```text
+>      Quan sát di chuyển ──► Phân bố khoảng cách quan sát hoàn chỉnh ──► Mô hình quan sát xác suất ──► Suy luận dựa trên Likelihood
+>      ```
+>      Thay vì hiệu chỉnh tham số hành vi từ các thống kê tóm tắt số chiều thấp, khung đề xuất thực hiện suy luận trực tiếp trên phân bố khoảng cách di chuyển quan sát được hoàn chỉnh.
+>
+> 7. **Role of Downstream Reconstruction: Corroborating Evidence vs Identification / Vai trò của Tái tạo Hạ nguồn: Bằng chứng Củng cố vs Định danh:** 
+>    - **EN:** Behavioural parameter identification is established through the probabilistic likelihood framework ($P(\mathbf{y} \mid \theta)$), likelihood surface sharpness, synthetic parameter recovery, and cross-city empirical consistency. Downstream flow reconstruction ($\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$) is reported only as an external consistency check demonstrating that the inferred behavioural parameters remain useful when embedded within a complete gravity model. Downstream performance alone cannot be interpreted as proof of behavioural parameter identification, because flow accuracy depends jointly on structural terms ($O_i, A_j$) and deterrence ($f(d;\hat{\theta}^*)$). Controlled ablation against a Null Deterrence baseline ($f(d) \equiv 1$) under fixed structural terms isolates the marginal contribution ($\Delta \text{CPC}$) attributable specifically to inferred behaviour.
+>    - **VI:** Việc định danh tham số hành vi được thiết lập thông qua khung xác suất likelihood ($P(\mathbf{y} \mid \theta)$), độ nhọn bề mặt likelihood, khôi phục tham số giả lập và tính nhất quán thực nghiệm liên đô thị. Việc tái tạo lưu lượng hạ nguồn ($\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$) được báo cáo thuần túy như một bước kiểm tra tính nhất quán bên ngoài nhằm chứng minh rằng các tham số hành vi được suy luận vẫn hữu dụng khi được đưa vào một mô hình trọng lực hoàn chỉnh. Kết quả tái tạo hạ nguồn đơn lẻ không thể được diễn giải như một sự chứng minh cho việc định danh tham số hành vi, bởi vì độ chính xác lưu lượng phụ thuộc đồng thời vào các thuật ngữ cấu trúc ($O_i, A_j$) và hàm cản trở ($f(d;\hat{\theta}^*)$). Thí nghiệm loại bỏ kiểm soát (ablation) đối chiếu với baseline Không Cản trở ($f(d) \equiv 1$) dưới các thuật ngữ cấu trúc cố định giúp tách biệt đóng góp biên ($\Delta \text{CPC}$) thuộc về riêng hành vi được suy luận.
 
 
 
@@ -232,16 +257,11 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 > \[ T_{ij} = O_i \cdot \underbrace{A_j}_{\text{Cấu trúc Đô thị}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Hành vi}} \]
 > Phép phân rã rõ ràng này thể hiện một tiến bộ khái niệm quan trọng: trong khi công thức của Hansen tích hợp ẩn cơ hội và ma sát khoảng cách, mô hình trọng lực phân rã tách biệt **cơ hội điểm đến ($A_j$)** như một thuộc tính cấu trúc không gian đô thị khỏi **sự cản trở khoảng cách ($f(d_{ij};\theta)$)** như một phản ứng hành vi tập thể hiệu dụng \citep{wilson1971, erlander1990spatial, okelly2009spatial}. Sau đó nó được thiết lập trên một nền tảng lý thuyết thông qua nguyên lý tối đa hóa entropy \citep{wilson1971} và suy luận thống kê chính thức \citep{flowerdew1982method, haynes1984gravity}. Các khảo sát toàn diện hiện đại \citep{barbosa2018human} xác nhận Trọng lực cung cấp một công thức nền tảng để tách biệt cấu trúc không gian khỏi phản ứng di chuyển tập thể.
 
-### Deep Dive: Representation Extension in Contemporary AI Models (Claim A2) / Phân tích Sâu: Mở rộng Khả năng Biểu diễn trong các Mô hình AI Hiện đại (Luận điểm A2)
+### Deep Dive: Architectural Separation in Contemporary AI Models (Claim A2) / Phân tích Sâu: Phân tách Kiến trúc trong các Mô hình AI Hiện đại (Luận điểm A2)
 
-> **EN:** A central question in contemporary mobility science is how deep learning architectures relate to physical spatial interaction models. Machine learning approaches enhance representation capabilities rather than replacing the underlying decomposition. Earlier neural architectures like Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, and UGNN \citep{guo2025universal} are gravity-inspired, leveraging geospatial representation learning \citep{liu2025representation}, retaining origin constraints and spatial features but replacing explicit multiplicative factorization with dense neural networks. Modern physics-informed architectures (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly preserve the multiplicative factorization $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. This evolution confirms that SOTA mobility science is progressing toward explicit physical factorization—the exact scientific foundation underlying PCSF-TIM.
-
-> **EN:** *Gravity should be interpreted as a scientific language describing spatial interaction rather than merely a predictive model.* Modern deep learning architectures—including Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, and UGNN \citep{guo2025universal}—demonstrate that contemporary AI frameworks inherit and build upon the fundamental Gravity factorization structure rather than discarding it.
+> **EN:** Several recent studies have independently adopted architectures that distinguish structural context from behavioural or interaction modelling, although for different objectives. Neural architectures like Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, and UGNN \citep{guo2025universal} leverage rich geospatial representations \citep{liu2025representation} to capture spatial origin-destination contexts while modeling flow interaction. More recent physics-informed architectures (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly preserve multiplicative factorization $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$ within their predictive flow generation pipelines. While these models are developed for prediction, transfer learning, or network reconstruction rather than behavioural identification, their computational architectures illustrate the practical utility of separating structural context from distance deterrence. The present work differs in providing a probabilistic inference interpretation of this structural–behavioural separation to address parameter identification under aggregate observations.
 >
-> **VI:** *Mô hình Trọng lực cần được diễn giải như một ngôn ngữ khoa học mô tả tương tác không gian thay vì chỉ đơn thuần là một mô hình dự báo.* Các kiến trúc học sâu hiện đại—bao gồm Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, và UGNN \citep{guo2025universal}—chứng minh rằng ngay cả các mô hình AI tiên tiến nhất vẫn kế thừa và phát triển trên cấu trúc phân rã Trọng lực nền tảng thay vì loại bỏ nó.
-
->
-> **VI:** Một câu hỏi trung tâm trong khoa học di chuyển hiện đại là các kiến trúc học sâu liên quan như thế nào đến các mô hình tương tác không gian vật lý. Các tiếp cận máy học nâng cao khả năng biểu diễn thành phần hơn là thay thế sự phân rã nền tảng. Các kiến trúc thần kinh sớm hơn như Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, và UGNN \citep{guo2025universal} mang tính truyền cảm hứng từ trọng lực, tận dụng học biểu diễn không gian địa lý \citep{liu2025representation}, giữ lại các ràng buộc điểm đi và đặc trưng không gian nhưng thay thế sự phân rã nhân rõ ràng bằng mạng thần kinh dày đặc. Các kiến trúc học sâu dựa trên vật lý hiện đại (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. Sự tiến hóa này xác nhận rằng khoa học di chuyển tiên tiến (SOTA) đang tiến tới sự phân rã vật lý rõ ràng—đúng là nền tảng khoa học cốt lõi của PCSF-TIM.
+> **VI:** Một số nghiên cứu gần đây đã độc lập áp dụng các kiến trúc phân biệt bối cảnh cấu trúc khỏi mô hình hóa tương tác hoặc hành vi, mặc dù phục vụ các mục tiêu khác nhau. Các kiến trúc thần kinh như Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, và UGNN \citep{guo2025universal} tận dụng biểu diễn không gian địa lý phong phú \citep{liu2025representation} để bắt các bối cảnh không gian điểm đi - điểm đến trong khi mô hình hóa tương tác lưu lượng. Các kiến trúc dựa trên vật lý gần đây hơn (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$ trong các chuỗi sinh lưu lượng dự báo của chúng. Mặc dù các mô hình này được phát triển cho các tác vụ dự báo, học chuyển giao hoặc tái tạo mạng lưới chứ không phải cho việc định danh hành vi, kiến trúc tính toán của chúng minh họa giá trị thực tiễn của việc tách biệt bối cảnh cấu trúc khỏi sự cản trở khoảng cách. Công trình này khác biệt ở chỗ cung cấp một cách diễn giải suy luận xác suất cho sự tách biệt cấu trúc - hành vi này nhằm giải quyết bài toán định danh tham số dưới quan sát tổng hợp.
 
 ---
 
@@ -262,30 +282,34 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 > \text{Spatial Flow } (T_{ij}) \iff \text{Origin Demand} + \text{Destination Attraction} + \text{Complementarity} + \text{Spatial Separation} + \text{Intervening Opportunities}
 > \]
 >
-> To convert this general principle into an analytical framework, the Handbook explicitly maps O'Kelly's classical spatial interaction triad \citep{okelly2009spatial} into its core **Structure–Behaviour Separation Principle**:
+> ### Theoretical Reinterpretation of O'Kelly's Spatial Interaction Triad (after O'Kelly 2009)
 >
-> | O'Kelly (2009) Triad | Handbook Theoretical Framing | Mathematical Representation |
+> > [!IMPORTANT]
+> > **Disclaimer:** *The following mapping represents the conceptual interpretation adopted in this paper for developing the proposed framework. It should not be interpreted as O'Kelly's original mathematical formulation.*
+>
+> | Classical Concept (after O'Kelly 2009) | Conceptual Interpretation Adopted in This Work | Mathematical Realization in PCSF-TIM |
 > | :--- | :--- | :--- |
 > | **Complementarity** | **Urban Structure** (Origin generation & Destination attraction capacities) | $O_i A_j$ |
 > | **Spatial Separation** | **Travel Behaviour** (Collective deterrence response to spatial friction) | $f(d_{ij}; \theta)$ |
-> | **Intervening Opportunities** | **Urban Structural Exposure & Spatial Configuration** | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
+> | **Intervening Opportunities** | **Structural Spatial Exposure** (Distance-bin opportunity capacity) | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
 >
-> *Note: While the triad represents the established definition of Spatial Interaction \citep{okelly2009spatial}, their reorganization into decoupled Structural Exposure $E_k$ and Latent Behaviour $\theta$ constitutes the specific theoretical framing of this Handbook.*
+> ---
 >
 > **VI:** Khoa học tương tác không gian thiết lập rằng các dòng di chuyển qua không gian địa lý chỉ xuất hiện khi có sự hội tụ đồng thời của các lực không gian nền tảng \citep{stouffer1940intervening, wilson1971, okelly2009spatial}:
 > \[
 > \text{Dòng Di chuyển } (T_{ij}) \iff \text{Nhu cầu Điểm đi} + \text{Sức hút Điểm đến} + \text{Tính Bổ sung} + \text{Chia cắt Không gian} + \text{Cơ hội Trung gian}
 > \]
 >
-> Để chuyển đổi nguyên lý tổng quát này thành một khung phân tích, Handbook ánh xạ một cách rõ ràng tam giác tương tác không gian kinh điển của O'Kelly \citep{okelly2009spatial} vào **Nguyên lý Tách biệt Cấu trúc - Hành vi** cốt lõi:
+> ### Diễn giải Lý thuyết về Tam giác Tương tác Không gian của O'Kelly (sau O'Kelly 2009)
 >
-> | Tam giác O'Kelly (2009) | Khung Lý thuyết Handbook | Biểu diễn Toán học |
+> > [!IMPORTANT]
+> > **Lưu ý Quan trọng:** *Sự ánh xạ dưới đây thể hiện cách diễn giải khái niệm (conceptual interpretation) được lựa chọn trong công trình này để phát triển khung đề xuất. Đây không phải là công thức toán học gốc của O'Kelly.*
+>
+> | Khái niệm Kinh điển (sau O'Kelly 2009) | Cách Diễn giải Khái niệm được Chọn trong Công trình này | Thực hiện Toán học trong PCSF-TIM |
 > | :--- | :--- | :--- |
 > | **Complementarity** (Tính Bổ sung) | **Cấu trúc Đô thị** (Năng lực phát thải điểm đi & sức hút điểm đến) | $O_i A_j$ |
 > | **Spatial Separation** (Chia cắt Không gian) | **Hành vi Di chuyển** (Phản ứng cản trở tập thể đối với ma sát không gian) | $f(d_{ij}; \theta)$ |
-> | **Intervening Opportunities** (Cơ hội Trung gian) | **Tiếp xúc Cấu trúc Đô thị & Cấu hình Không gian** | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
->
-> *Lưu ý: Mặc dù tam giác ba thành phần đại diện cho định nghĩa đã được thiết lập của Tương tác Không gian \citep{okelly2009spatial}, việc tái tổ chức chúng thành Tiếp xúc Cấu trúc $E_k$ và Hành vi Ẩn $\theta$ tách biệt cấu thành khung lý thuyết riêng của Handbook này.*
+> | **Intervening Opportunities** (Cơ hội Trung gian) | **Tiếp xúc Cấu trúc Không gian** (Năng lực cơ hội theo bin khoảng cách) | $E(d) = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ |
 
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module B)
 
@@ -530,15 +554,15 @@ Distance Histogram (Observed Trip-Length Distribution - TLD)
 Summary Statistics (Mean distance, total volume)
 ```
 
-> **EN:** The Information Hierarchy explicitly quantifies **information loss** across observational levels. Each step down the hierarchy discards specific spatial and individual granularity while preserving essential aggregate invariants. The research gap lies in identifying what behavioural parameters remain statistically identifiable from aggregate TLD after spatial flow information has been compressed.
+> **EN:** The Information Hierarchy explicitly quantifies **information loss** across observational levels. Modern mobility data increasingly provide aggregate travel-distance distributions rather than complete local OD matrices. However, existing behavioural calibration methods typically require supervised local OD observations or reduce aggregate observations to low-dimensional summary statistics. Consequently, **the central methodological gap is the absence of a probabilistic framework that directly infers behavioural distance-decay parameters from the complete observed travel-distance distribution, without requiring supervised local OD flows and without reducing aggregate observations to low-dimensional summary statistics.**
 >
-> **VI:** Hệ thống Phân cấp Thông tin định lượng một cách rõ ràng **sự mất mát thông tin** qua các cấp độ quan sát. Mỗi bước đi xuống trong phân cấp sẽ loại bỏ độ mịn không gian và cá nhân cụ thể nhưng bảo toàn các đại lượng bất biến tổng hợp cốt lõi. Khoảng trống nghiên cứu nằm ở việc xác định các tham số hành vi nào vẫn có thể định danh thống kê từ TLD tổng hợp sau khi thông tin lưu lượng không gian đã bị nén.
+> **VI:** Hệ thống Phân cấp Thông tin định lượng một cách rõ ràng **sự mất mát thông tin** qua các cấp độ quan sát. Dữ liệu di chuyển hiện đại ngày càng cung cấp các phân bố khoảng cách di chuyển tổng hợp thay vì ma trận OD chi tiết tại địa phương. Tuy nhiên, các phương pháp hiệu chỉnh hành vi hiện có thường đòi hỏi quan sát OD địa phương có giám sát hoặc nén các quan sát tổng hợp thành các thống kê tóm tắt số chiều thấp. Do đó, **khoảng trống phương pháp luận trung tâm là sự thiếu vắng một khung xác suất trực tiếp suy luận các tham số suy giảm khoảng cách hành vi từ phân bố khoảng cách di chuyển quan sát được hoàn chỉnh, mà không đòi hỏi các luồng OD địa phương có giám sát và không nén các quan sát tổng hợp thành các thống kê tóm tắt số chiều thấp.**
 
 ### Deep Dive: Observational Representation & Inferential Boundaries (Claim D3) / Phân tích Sâu: Biểu diễn Quan sát & Ranh giới Suy luận (Luận điểm D3)
 
-> **EN:** The choice of observational representation fundamentally dictates answerable scientific questions and allowable inference procedures \citep{gallotti2024distorted}. Restricting the observation space to aggregate Trip-Length Distributions (Layer 3) establishes a precise mathematical boundary regarding identifiable versus non-identifiable systemic properties. As detailed in the table below, while cell-to-cell micro-flows $T_{ij}^{obs}$ and directional pair asymmetries cannot be recovered, aggregate TLD layers retain substantial statistical information that supports the identification of effective collective distance-decay parameters $\theta = (\alpha, \beta)$ under the proposed structural exposure assumptions ($E_k$).
+> **EN:** Different mobility observations preserve different aspects of the underlying movement process and consequently provide different information for scientific analysis \citep{gallotti2024distorted}. From the perspective of statistical inference, the information retained by an observation determines which model parameters remain statistically identifiable \citep{casella2002statistical}. This observation–information–identifiability relationship motivates the probabilistic framework developed in this work. Restricting the observation space to aggregate Trip-Length Distributions (Layer 3) establishes a precise mathematical boundary regarding identifiable versus non-identifiable systemic properties: while cell-to-cell micro-flows $T_{ij}^{obs}$ cannot be recovered, aggregate TLD layers retain substantial statistical information supporting the identification of effective collective distance-decay parameters $\theta = (\alpha, \beta)$ under independently specified structural exposure ($E_k$).
 >
-> **VI:** Việc lựa chọn biểu diễn quan sát quyết định một cách căn bản các câu hỏi khoa học có thể trả lời và các quy trình suy luận được phép \citep{gallotti2024distorted}. Việc giới hạn không gian quan sát ở Phân bố Độ dài Chuyến đi tổng hợp (Lớp 3) thiết lập một ranh giới toán học chính xác giữa các thuộc tính có thể định danh và không thể định danh. Như được trình bày chi tiết trong bảng dưới đây, mặc dù các lưu lượng vi mô giữa các ô $T_{ij}^{obs}$ và bất đối xứng cặp hướng không thể khôi phục, lớp TLD tổng hợp vẫn lưu giữ thông tin thống kê đáng kể để hỗ trợ việc định danh các tham số suy giảm khoảng cách tập thể hiệu dụng $\theta = (\alpha, \beta)$ dưới các giả định tiếp xúc cấu trúc được đề xuất ($E_k$).
+> **VI:** Các quan sát di chuyển khác nhau lưu giữ các khía cạnh khác nhau của quá trình chuyển động nền tảng và do đó cung cấp thông tin khác nhau cho phân tích khoa học \citep{gallotti2024distorted}. Từ góc nhìn suy luận thống kê, thông tin được giữ lại bởi một quan sát quyết định các tham số mô hình nào vẫn có thể định danh thống kê \citep{casella2002statistical}. Mối quan hệ giữa quan sát – thông tin – khả năng định danh này làm động lực cho khung xác suất được phát triển trong công trình này. Việc giới hạn không gian quan sát ở Phân bố Độ dài Chuyến đi tổng hợp (Lớp 3) thiết lập một ranh giới toán học chính xác giữa các thuộc tính có thể định danh và không thể định danh: mặc dù các lưu lượng vi mô ô-tới-ô $T_{ij}^{obs}$ không thể khôi phục, lớp TLD tổng hợp vẫn lưu giữ thông tin thống kê đáng kể để hỗ trợ việc định danh các tham số suy giảm khoảng cách tập thể hiệu dụng $\theta = (\alpha, \beta)$ dưới tiếp xúc cấu trúc được xác định độc lập ($E_k$).
 
 ### Identifiable vs Non-Identifiable Properties / Thuộc tính Có thể và Không thể Định danh từ TLD
 
@@ -634,6 +658,23 @@ flowchart LR
 | **Module Rationale** | Formulates conditional maximum likelihood estimation and evaluates statistical evidence across synthetic and real-world datasets. | Công thức hóa ước tính khả năng tối đa điều kiện và đánh giá bằng chứng thống kê trên dữ liệu giả lập và thực tế. |
 | **Falsifiability Framework** | **Branch 1 (Hypothesis Supported):** Synthetic recovery error $< 5\%$; unimodal strictly concave log-likelihood surface; cross-city parameter stability ($\text{CV} < 15\%$); null-exposure ablation induces severe parameter shift ($> 30\%$); downstream flow reconstruction outperforms control baselines.<br>**Branch 2 (Hypothesis Rejected):** Surface is flat/multimodal; synthetic recovery error $\ge 5\%$; parameter estimates fluctuate erratically ($\text{CV} \ge 15\%$). | **Nhánh 1 (Giả thuyết được hỗ trợ):** Sai số khôi phục giả lập $< 5\%$; bề mặt log-khả năng đơn mốt lõm nghiêm ngặt; tính ổn định tham số liên đô thị ($\text{CV} < 15\%$); loại bỏ tiếp xúc gây sai lệch lớn ($> 30\%$); tái tạo lưu lượng hạ nguồn vượt trội so với kiểm soát.<br>**Nhánh 2 (Giả thuyết bị bác bỏ):** Bề mặt bằng phẳng/đa mốt; sai số khôi phục $\ge 5\%$; ước tính tham số biến động thất thường ($\text{CV} \ge 15\%$). |
 
+> [!IMPORTANT]
+> ### Methodological & Empirical Scope of This Study / Phạm vi Phương pháp luận & Thực nghiệm của Nghiên cứu
+>
+> **EN:** This study addresses a single methodological problem: **identifying the parameters of collective travel distance-decay functions $\theta = (\alpha,\beta)$ from aggregate travel-distance observations, conditional on independently specified structural exposure derived from open data.**
+> - **Input Space:** Observed aggregate travel-distance distribution (binned TLD histogram $y = (y_1, \dots, y_K)$).
+> - **Structural Prior:** Independently specified structural spatial exposure vector $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$.
+> - **Output:** Inferred behavioural distance-decay parameters $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$.
+> - **Downstream Application:** Zero-shot OD flow reconstruction is reported only as an external consistency check of the inferred parameters rather than as a primary modeling objective.
+> - **Empirical Scope:** The empirical evaluation is conducted across 50 U.S. metropolitan areas using Meta Movement Distribution Maps \citep{MetaMovementDistributionMaps}, defining the scope of evidence presented in this study rather than implying universal applicability.
+>
+> **VI:** Nghiên cứu này tập trung giải quyết duy nhất một bài toán phương pháp luận: **định danh các tham số của hàm suy giảm khoảng cách hành vi tập thể $\theta = (\alpha,\beta)$ từ các quan sát phân bố khoảng cách di chuyển tổng hợp, điều kiện trên tiếp xúc cấu trúc được xác định độc lập từ dữ liệu mở.**
+> - **Không gian Đầu vào:** Phân bố khoảng cách di chuyển tổng hợp quan sát được (biểu đồ tần suất TLD rời rạc $y = (y_1, \dots, y_K)$).
+> - **Tiền đề Cấu trúc:** Vectơ tiếp xúc không gian cấu trúc được xác định độc lập $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$.
+> - **Đầu ra:** Các tham số suy giảm khoảng cách hành vi được suy luận $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$.
+> - **Ứng dụng Hạ nguồn:** Tái tạo lưu lượng OD không cần huấn luyện lại chỉ được báo cáo như một bước kiểm tra tính nhất quán bên ngoài của các tham số được suy luận chứ không phải là mục tiêu mô hình hóa chính.
+> - **Phạm vi Thực nghiệm:** Đánh giá thực nghiệm được thực hiện trên 50 vùng đô thị tại Hoa Kỳ sử dụng Meta Movement Distribution Maps \citep{MetaMovementDistributionMaps}, xác định phạm vi bằng chứng được trình bày trong nghiên cứu này chứ không ngụ ý khả năng áp dụng vạn năng.
+
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module F)
 
 | Claim (EN / VI) | Purpose (EN / VI) | Representative Evidence (EN / VI) | Expected Conclusion (EN / VI) |
@@ -646,9 +687,9 @@ flowchart LR
 
 ### Deep Dive: Open-Data Exposure Estimation & Perturbation Sensitivity (Claim F1) / Phân tích Sâu: Ước tính Tiếp xúc Dữ liệu Mở & Độ nhạy Nhiễu (Luận điểm F1)
 
-> **EN:** A central methodological premise of PCSF-TIM is that structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ can be independently specified from open spatial data (census population, POI density, land use, road networks). This premise relies on the **Weak Relative Profile Requirement**: because conditional likelihood operates on normalized probabilities $P(k \mid E_k, \theta) = \frac{E_k f(d_k; \theta)}{\sum_{m=1}^K E_m f(d_m; \theta)}$, the exposure vector $\mathbf{E} = (E_1, \dots, E_K)^T$ only needs to capture the relative profile across distance bins rather than absolute trip magnitudes. Empirical sensitivity analysis demonstrates that uncorrelated random exposure noise ($\pm 10\text{--}30\%$) induces minimal parameter drift ($\hat{\theta}^*$ deviation $< 3\%$), whereas null-exposure ablation ($E_k \equiv 1$) causes severe parameter distortion ($> 30\%$), indicating that exposure correction is essential for isolating travel behavior.
+> **EN:** A central methodological premise of PCSF-TIM is that structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ can be independently specified from open spatial data (census population, POI density, land use, road networks). Because the conditional likelihood operates on normalized distance-bin probabilities $P(k \mid E_k, \theta) = \frac{E_k f(d_k; \theta)}{\sum_{m=1}^K E_m f(d_m; \theta)}$, parameter inference is invariant to constant multiplicative scaling of the exposure vector and depends strictly on its relative profile across distance bins. We refer to this structural property as the **Weak Relative Profile Property** (derived formally in Section F1). Empirical sensitivity analysis confirms that uncorrelated exposure noise ($\pm 10\text{--}30\%$) induces minimal parameter drift ($\hat{\theta}^*$ deviation $< 3\%$), whereas null-exposure ablation ($E_k \equiv 1$) causes severe parameter distortion ($> 30\%$), demonstrating that structural exposure correction is essential for isolating travel behavior.
 >
-> **VI:** Một tiền đề phương pháp luận trung tâm của PCSF-TIM là tiếp xúc không gian cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ có thể được xác định độc lập từ các tập dữ liệu không gian mở (dân số, mật độ POI, sử dụng đất, mạng lưới đường). Tiền đề này dựa trên **Yêu cầu Hồ sơ Tương đối Yếu**: vì khả năng điều kiện hoạt động trên xác suất chuẩn hóa $P(k \mid E_k, \theta) = \frac{E_k f(d_k; \theta)}{\sum_{m=1}^K E_m f(d_m; \theta)}$, vectơ tiếp xúc $\mathbf{E} = (E_1, \dots, E_K)^T$ chỉ cần phản ánh hồ sơ tương đối giữa các khoảng khoảng cách chứ không cần quy mô chuyến đi tuyệt đối. Phân tích độ nhạy thực nghiệm cho thấy nhiễu ngẫu nhiên không tương quan ($\pm 10\text{--}30\%$) chỉ tạo ra độ lệch tham số tối thiểu ($\hat{\theta}^*$ lệch $< 3\%$), trong khi việc loại bỏ tiếp xúc ($E_k \equiv 1$) gây ra sai lệch tham số nghiêm trọng ($> 30\%$), cho thấy việc hiệu chỉnh tiếp xúc là bắt buộc để tách biệt hành vi di chuyển.
+> **VI:** Một tiền đề phương pháp luận trung tâm của PCSF-TIM là tiếp xúc không gian cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ có thể được xác định độc lập từ các tập dữ liệu không gian mở (dân số, mật độ POI, sử dụng đất, mạng lưới đường). Vì khả năng điều kiện hoạt động trên xác suất chuẩn hóa theo bin khoảng cách $P(k \mid E_k, \theta) = \frac{E_k f(d_k; \theta)}{\sum_{m=1}^K E_m f(d_m; \theta)}$, suy luận tham số bất biến đối với phép nhân với hằng số tỉ lệ của vectơ tiếp xúc và phụ thuộc chặt chẽ vào hồ sơ tương đối của nó giữa các bin khoảng cách. Chúng tôi gọi thuộc tính cấu trúc này là **Thuộc tính Hồ sơ Tương đối Yếu (Weak Relative Profile Property)** (được chứng minh chính thức trong Phần F1). Phân tích độ nhạy thực nghiệm xác nhận rằng nhiễu tiếp xúc không tương quan ($\pm 10\text{--}30\%$) chỉ tạo ra độ lệch tham số tối thiểu ($\hat{\theta}^*$ lệch $< 3\%$), trong khi việc loại bỏ tiếp xúc ($E_k \equiv 1$) gây ra sai lệch tham số nghiêm trọng ($> 30\%$), cho thấy việc hiệu chỉnh tiếp xúc cấu trúc là bắt buộc để tách biệt hành vi di chuyển.
 
 ### Deep Dive: Synthetic Parameter Recovery & Numerical Stability (Claim F2) / Phân tích Sâu: Khôi phục Tham số Giả lập & Tính Ổn định Số (Luận điểm F2)
 
@@ -682,15 +723,15 @@ flowchart LR
 
 ### Deep Dive: Downstream Zero-Shot Flow Reconstruction & Baseline Controls (Claim F4) / Phân tích Sâu: Tái tạo Lưu lượng Hạ nguồn Không cần Huấn luyện lại & Các Baseline Kiểm soát (Luận điểm F4)
 
-> **EN:** *Downstream flow reconstruction* refers to the generation of an origin–destination (OD) flow matrix $\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$ using the effective behaviour descriptor inferred from aggregate mobility observations. In PCSF-TIM, the inferred effective behavioural parameter is not the final objective itself, but a latent behavioural representation that enables subsequent reconstruction of urban mobility flows through a gravity-based spatial interaction model: $\text{Aggregate Observation (TLD)} \to \text{Behaviour Inference } (\hat{\theta}^*) \to \text{Downstream Flow Reconstruction } (\hat{T}_{ij})$. Evaluated against ground-truth flow benchmarks, reconstructed flows achieve high predictive agreement (Common Part of Commuters $\text{CPC} > 0.70$). Comparative ablation controls confirm that accuracy gains stem jointly from structural exposure specification and inferred parameters:
-> - **Null Deterrence Control ($f(d) \equiv 1$):** Exposure without distance decay yields low flow agreement ($\text{CPC} \approx 0.35\text{--}0.45$).
-> - **Fixed Literature Parameter Control ($\theta_{fixed}$):** Applying literature parameters \citep{lenormand2016systematic} yields moderate flow agreement ($\text{CPC} \approx 0.50\text{--}0.58$).
-> - **PCSF-TIM Inferred Parameters ($\hat{\theta}^*$):** Achieving $\text{CPC} > 0.70$ provides proxy evidence corroborating the validity of the inferred behavioral parameters.
+> **EN:** Behavioural parameter identification is established through the probabilistic likelihood framework ($P(\mathbf{y} \mid \theta)$), likelihood surface sharpness, synthetic parameter recovery, and cross-city empirical consistency. Downstream flow reconstruction ($\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$) is reported only as an external consistency check demonstrating that the inferred behavioural parameters remain useful when embedded within a complete gravity model. Downstream performance alone cannot be interpreted as proof of behavioural parameter identification, because flow reconstruction accuracy is jointly determined by structural terms ($O_i, A_j$) and deterrence ($f(d;\hat{\theta}^*)$). Evaluated against ground-truth flow benchmarks, reconstructed flows achieve high predictive agreement ($\text{CPC} > 0.70$). Controlled ablation controls under fixed structural terms isolate the marginal contribution ($\Delta \text{CPC}$) attributable specifically to the inferred behavioural deterrence function:
+> - **Null Deterrence Control ($f(d) \equiv 1$):** Exposure without distance decay yields baseline flow agreement ($\text{CPC} \approx 0.35\text{--}0.45$).
+> - **Fixed Literature Parameter Control ($\theta_{fixed}$):** Applying literature parameters \citep{lenormand2016systematic} yields moderate agreement ($\text{CPC} \approx 0.50\text{--}0.58$).
+> - **PCSF-TIM Inferred Parameters ($\hat{\theta}^*$):** Achieving $\text{CPC} > 0.70$ provides a marginal gain ($\Delta \text{CPC} \approx +0.30$) over Null Deterrence under identical structural terms, corroborating the behavioral utility of the inferred parameters.
 >
-> **VI:** *Tái tạo lưu lượng hạ nguồn (Downstream flow reconstruction)* chỉ quá trình khởi tạo ma trận lưu lượng điểm đi - điểm đến (OD) $\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$ sử dụng mô tả hành vi hiệu dụng được suy luận từ quan sát di chuyển tổng hợp. Trong PCSF-TIM, tham số hành vi hiệu dụng suy luận không phải là mục tiêu cuối cùng, mà là một biểu diễn hành vi ẩn cho phép tái tạo ma trận lưu lượng di chuyển đô thị qua mô hình tương tác không gian Trọng lực: $\text{Quan sát Tổng hợp (TLD)} \to \text{Suy luận Hành vi } (\hat{\theta}^*) \to \text{Tái tạo Lưu lượng Hạ nguồn } (\hat{T}_{ij})$. Đánh giá so với chuẩn lưu lượng thực tế, lưu lượng tái tạo đạt độ tương thích cao (Common Part of Commuters $\text{CPC} > 0.70$). Các kiểm soát ablation đối chiếu xác nhận hiệu quả đạt được xuất phát từ sự phối hợp giữa xác định tiếp xúc cấu trúc và tham số suy luận:
-> - **Kiểm soát Không Cản trở ($f(d) \equiv 1$):** Tiếp xúc đơn thuần không có suy giảm khoảng cách đạt độ tương thích lưu lượng thấp ($\text{CPC} \approx 0.35\text{--}0.45$).
+> **VI:** Việc định danh tham số hành vi được thiết lập thông qua khung xác suất likelihood ($P(\mathbf{y} \mid \theta)$), độ nhọn bề mặt likelihood, khôi phục tham số giả lập và tính nhất quán thực nghiệm liên đô thị. Việc tái tạo lưu lượng hạ nguồn ($\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$) được báo cáo thuần túy như một bước kiểm tra tính nhất quán bên ngoài nhằm chứng minh rằng các tham số hành vi được suy luận vẫn hữu dụng khi được đưa vào một mô hình trọng lực hoàn chỉnh. Kết quả tái tạo hạ nguồn đơn lẻ không thể được diễn giải như một sự chứng minh cho việc định danh tham số hành vi, bởi vì độ chính xác lưu lượng tái tạo được quyết định đồng thời bởi các thuật ngữ cấu trúc ($O_i, A_j$) và hàm cản trở ($f(d;\hat{\theta}^*)$). Đánh giá so với chuẩn lưu lượng thực tế, lưu lượng tái tạo đạt độ tương thích cao ($\text{CPC} > 0.70$). Các thí nghiệm kiểm soát loại bỏ dưới các thuật ngữ cấu trúc cố định giúp tách biệt đóng góp biên ($\Delta \text{CPC}$) thuộc về riêng hàm cản trở hành vi được suy luận:
+> - **Kiểm soát Không Cản trở ($f(d) \equiv 1$):** Tiếp xúc đơn thuần không có suy giảm khoảng cách đạt độ tương thích lưu lượng cơ sở ($\text{CPC} \approx 0.35\text{--}0.45$).
 > - **Kiểm soát Tham số Cố định Văn liệu ($\theta_{fixed}$):** Áp dụng tham số từ văn liệu \citep{lenormand2016systematic} đạt độ tương thích trung bình ($\text{CPC} \approx 0.50\text{--}0.58$).
-> - **Tham số Suy luận PCSF-TIM ($\hat{\theta}^*$):** Đạt $\text{CPC} > 0.70$ cung cấp bằng chứng củng cố hỗ trợ tính hợp lệ của các tham số hành vi được suy luận.
+> - **Tham số Suy luận PCSF-TIM ($\hat{\theta}^*$):** Đạt $\text{CPC} > 0.70$ tạo ra mức tăng biên ($\Delta \text{CPC} \approx +0.30$) so với Không Cản trở dưới cùng thuật ngữ cấu trúc, củng cố độ hữu dụng hành vi của các tham số được suy luận.
 
 ---
 
