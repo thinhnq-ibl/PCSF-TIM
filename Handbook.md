@@ -18,6 +18,13 @@ The answer of each module motivates the next question, forming a continuous chai
 
 The purpose is not to review all human mobility models, but to establish the scientific reasoning leading to the central question:
 
+# Central Scientific Problem
+
+Mobility aggregation inevitably removes detailed Origin–Destination interactions.
+
+The fundamental scientific question is whether the remaining aggregate observations still contain enough behavioural information for empirical parameter identification.
+
+
 # Central Scientific Question / Câu hỏi Khoa học Trung tâm
 
 > **Can aggregate mobility observations preserve sufficient information to identify collective distance-decay behaviour?**
@@ -39,6 +46,8 @@ The purpose is not to review all human mobility models, but to establish the sci
 > **Core Scientific Essence / Bản chất Khoa học Cốt lõi:**
 > *When mobility data are aggregated into Trip-Length Distributions, losing detailed pairwise Origin-Destination links, does the aggregate distribution preserve sufficient statistical information to reliably infer population-level distance sensitivity parameters $\theta$?*
 > *(Khi dữ liệu di chuyển được tổng hợp thành các thống kê như Phân bố Độ dài Chuyến đi (TLD) và mất thông tin chi tiết về các cặp Origin–Destination, liệu những thống kê đó vẫn còn đủ thông tin để suy ra một cách đáng tin cậy các tham số mô tả mức độ nhạy cảm của toàn bộ dân số đối với khoảng cách?)*
+
+Throughout this handbook, claims regarding "information sufficiency" refer to empirical evidence obtained through statistical inference and validation. They should not be interpreted as formal proofs of identifiability, sufficient statistics, or information-theoretic optimality, which remain important directions for future theoretical research.
 
 ## Guiding Philosophy / Triết lý Hướng dẫn
 
@@ -256,37 +265,28 @@ flowchart TD
 | Component / Thành phần | EN Content | VI Content |
 | :--- | :--- | :--- |
 | **Module Title** | **Gravity as the Primary Mathematical Factorization of Spatial Interaction** | **Mô hình Trọng lực như một Phân rã Toán học Cốt lõi của Tương tác Không gian** |
-| **Scientific Question** | **Why is Gravity the foundational mathematical language for Spatial Interaction?** | **Tại sao Trọng lực là ngôn ngữ toán học nền tảng của Tương tác Không gian?** |
-| **Module Rationale** | Spatial Interaction constitutes the primary scientific domain, while Gravity provides its explicit multiplicative factorization into structure ($O_i, A_j$) and behavioural distance response ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. | Tương tác Không gian cấu thành đối tượng khoa học chính, trong đó Trọng lực cung cấp sự phân rã nhân rõ ràng thành cấu trúc ($O_i, A_j$) và phản ứng hành vi khoảng cách ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. |
-| **Mission** | Establish Gravity not as a specific predictive algorithm, but as a foundational mathematical factorization of Spatial Interaction into urban structure ($O_i, A_j$) and behavioural distance response ($f(d_{ij}; \theta)$). | Thiết lập mô hình Trọng lực không phải như một thuật toán dự báo cụ thể, mà là phép phân rã toán học nền tảng của Tương tác Không gian thành cấu trúc đô thị ($O_i, A_j$) và phản ứng hành vi khoảng cách ($f(d_{ij}; \theta)$). |
-| **Central Claim** | **Gravity should be understood as a foundational mathematical factorization of Spatial Interaction into urban structure and travel behaviour.** | **Mô hình Trọng lực nên được hiểu là sự phân rã toán học nền tảng của Tương tác Không gian thành cấu trúc đô thị và hành vi di chuyển.** |
+| **Scientific Question** | **Why is Gravity selected as the foundational mathematical representation for behavioural parameter identification?** | **Tại sao Trọng lực được lựa chọn làm biểu diễn toán học nền tảng cho bài toán định danh tham số hành vi?** |
+| **Module Rationale** | Gravity is adopted not because it is the top predictive model, but because it provides the cleanest, most transparent mathematical representation for decomposing **Urban Structure** ($O_i, A_j$) from **Travel Behaviour** ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. | Trọng lực không được lựa chọn vì nó là mô hình dự báo tốt nhất, mà vì nó cung cấp biểu diễn toán học rõ ràng và minh bạch nhất để phân rã **Cấu trúc Đô thị** ($O_i, A_j$) khỏi **Hành vi Di chuyển** ($f(d;\theta)$) \citep{wilson1971, erlander1990spatial, okelly2009spatial}. |
+| **Mission** | Convince the reader that Gravity is selected not for black-box predictive benchmarks, but as the primary factorized representation isolating urban spatial structure ($O_i, A_j$) from latent behavioural distance decay ($f(d_{ij};\theta)$), establishing the indispensable structural foundation for parameter identification. | Thuyết phục người đọc rằng Gravity không được lựa chọn vì là mô hình dự báo tốt nhất trên benchmark, mà vì nó là biểu diễn phân rã rõ ràng và minh bạch nhất để tách Cấu trúc Đô thị khỏi Hành vi. Chính sự phân rã này khiến nó trở thành nền tảng bắt buộc cho bài toán định danh tham số hành vi. |
+| **Central Claim** | **Gravity should be understood as a foundational mathematical representation isolating urban structure from travel behaviour.** | **Mô hình Trọng lực nên được hiểu là biểu diễn toán học nền tảng giúp tách biệt cấu trúc đô thị khỏi hành vi di chuyển.** |
 
 
-### Theoretical Explanation / Giải thích Lý thuyết
+### Theoretical Explanation: Representation vs. Predictive Performance / Giải thích Lý thuyết: Biểu diễn vs. Hiệu suất Dự báo
 
-**EN:** Aggregate mobility seeks to explain the volume of spatial trips between origins and destinations. Regardless of the underlying modelling technique, this problem fundamentally requires separating three distinct components:
-1. The capacity of origins to generate trips ($O_i$),
-2. The trip attraction of destinations ($A_j$),
-3. The behavioural effect of spatial separation ($f(d_{ij}; \theta)$).
-
-The gravity formulation expresses this decomposition explicitly as:
-\[
-T_{ij} = \underbrace{O_i A_j}_{\text{Urban Structure}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Behaviour}}
-\]
-
-where $O_i$ and $A_j$ represent urban spatial structure, while $f(d_{ij}; \theta)$ represents collective travel behaviour. The enduring importance of the gravity formulation therefore lies less in its specific functional form than in its ability to separate structural factors from behavioural mechanisms in a transparent and interpretable manner.
-
-**VI:** Di chuyển tổng hợp nhằm mục đích giải thích lưu lượng chuyến đi không gian giữa điểm đi và điểm đến. Bất kể kỹ thuật mô hình hóa nền tảng là gì, bài toán này về bản chất đòi hỏi phải tách biệt ba thành phần riêng biệt:
-1. Năng lực phát thải chuyến đi của điểm đi ($O_i$),
-2. Sức hút chuyến đi của điểm đến ($A_j$),
-3. Tác động hành vi của khoảng cách chia cắt không gian ($f(d_{ij}; \theta)$).
-
-Công thức trọng lực thể hiện sự phân rã này một cách rõ ràng dưới dạng:
-\[
-T_{ij} = \underbrace{O_i A_j}_{\text{Cấu trúc Đô thị}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Hành vi}}
-\]
-
-trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị, còn $f(d_{ij}; \theta)$ đại diện cho hành vi di chuyển tập thể. Tầm quan trọng lâu bền của công thức trọng lực do đó nằm ở khả năng tách biệt các yếu tố cấu trúc khỏi các cơ chế hành vi một cách minh bạch và có thể giải thích được, hơn là nằm ở dạng hàm cụ thể của nó.
+> [!NOTE]
+> **Foundational Representation Principle / Nguyên lý Biểu diễn Nền tảng:**
+>
+> **EN:** The Gravity interaction model is adopted in this Handbook **not because it claims to be the highest-performing predictive benchmark model**, but because it provides the **clearest, most transparent mathematical representation for decomposing Urban Spatial Structure ($O_i, A_j$) from Collective Travel Behaviour ($f(d_{ij};\theta)$)** \citep{wilson1971, erlander1990spatial, okelly2009spatial}:
+> \[
+> T_{ij} = \underbrace{O_i A_j}_{\text{Urban Structure}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Behaviour}}
+> \]
+> While black-box deep learning architectures or non-parametric machine learning models can achieve marginal predictive gains on specific flow benchmarks, they convolve spatial context with interaction mechanisms into uninterpretable weights. In contrast, the multiplicative gravity factorization provides an essential scientific property: it explicitly isolates the behavioural distance-decay function $f(d_{ij};\theta)$, enabling conditional inverse parameter identification from aggregate mobility observations under independent structural exposure.
+>
+> **VI:** Mô hình tương tác Trọng lực được lựa chọn trong Handbook này **không phải vì nó tuyên bố là mô hình dự báo đạt hiệu suất cao nhất trên các benchmark**, mà vì nó cung cấp **biểu diễn toán học rõ ràng và minh bạch nhất để phân rã Cấu trúc Không gian Đô thị ($O_i, A_j$) khỏi Hành vi Di chuyển Tập thể ($f(d_{ij};\theta)$)** \citep{wilson1971, erlander1990spatial, okelly2009spatial}:
+> \[
+> T_{ij} = \underbrace{O_i A_j}_{\text{Cấu trúc Đô thị}} \cdot \underbrace{f(d_{ij};\theta)}_{\text{Hành vi}}
+> \]
+> Trong khi các kiến trúc học sâu hộp đen hay mô hình học máy phi tham số có thể đạt được điểm số dự báo cao hơn trên các benchmark lưu lượng cụ thể, chúng tích tụ bối cảnh không gian và cơ chế tương tác thành các trọng số không thể giải thích. Ngược lại, phép phân rã nhân trọng lực mang một thuộc tính khoa học bắt buộc: nó tách biệt rõ ràng hàm suy giảm khoảng cách hành vi $f(d_{ij};\theta)$, cho phép thực hiện suy luận thống kê ngược để định danh tham số từ các quan sát di chuyển tổng hợp dưới sự tiếp xúc cấu trúc độc lập.
 
 ### Supporting Claims / Các Luận điểm Hỗ trợ (Module A)
 
