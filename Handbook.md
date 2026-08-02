@@ -10,6 +10,15 @@ link-citations: true
 
 ---
 
+
+## Guiding Philosophy / Triết lý Hướng dẫn
+
+> **EN:** *Human mobility research is ultimately concerned with understanding how observable urban structure gives rise to collective movement patterns, what information is preserved under different observation levels, and how this information can be used to reconstruct mobility in data-scarce environments.*
+>
+> **VI:** *Nghiên cứu di chuyển con người rốt cuộc hướng tới việc hiểu cách cấu trúc đô thị có thể quan sát được tạo ra các mẫu hình di chuyển tập thể, thông tin nào được bảo toàn dưới các cấp độ quan sát khác nhau, và cách thông tin này có thể được sử dụng để tái tạo sự di chuyển trong môi trường khan hiếm dữ liệu.*
+
+---
+
 ## Central Thesis & Research Hypothesis / Luận điểm & Giả thuyết Khoa học Trung tâm
 
 > **EN:** **This Handbook formulates and evaluates the central hypothesis that aggregate mobility observations retain sufficient statistical information to support the identification of effective collective distance sensitivity governing spatial interaction, provided that urban structural exposure is independently specified.**
@@ -95,6 +104,11 @@ link-citations: true
 >
 > 3. **Enduring Value of Physics-Based Models & Evolutionary Spectrum / Giá trị Đời đời của Mô hình Vật lý & Phổ Tiến hóa:** 
 >    - **EN:** Contemporary deep learning frameworks extend rather than replace Gravity. Earlier architectures like Deep Gravity \citep{simini2021} are **gravity-inspired**, retaining origin constraints and spatial features but replacing explicit multiplicative factorization with dense neural networks. Modern physics-informed architectures (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly preserve the multiplicative factorization $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. This evolution confirms that SOTA mobility science is progressing toward explicit physical factorization—the exact scientific foundation underlying PCSF-TIM.
+
+> **EN:** *Gravity should be interpreted as a scientific language describing spatial interaction rather than merely a predictive model.* Modern deep learning architectures—including Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, and UGNN \citep{guo2025universal}—demonstrate that contemporary AI frameworks inherit and build upon the fundamental Gravity factorization structure rather than discarding it.
+>
+> **VI:** *Mô hình Trọng lực cần được diễn giải như một ngôn ngữ khoa học mô tả tương tác không gian thay vì chỉ đơn thuần là một mô hình dự báo.* Các kiến trúc học sâu hiện đại—bao gồm Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, và UGNN \citep{guo2025universal}—chứng minh rằng ngay cả các mô hình AI tiên tiến nhất vẫn kế thừa và phát triển trên cấu trúc phân rã Trọng lực nền tảng thay vì loại bỏ nó.
+
 >    - **VI:** Các khung học sâu hiện đại mở rộng thay vì thay thế mô hình Trọng lực. Các kiến trúc sớm hơn như Deep Gravity \citep{simini2021} mang tính **truyền cảm hứng từ trọng lực**, giữ lại các ràng buộc điểm đi và đặc trưng không gian nhưng thay thế sự phân rã nhân rõ ràng bằng mạng thần kinh dày đặc. Các kiến trúc học sâu dựa trên vật lý hiện đại (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. Sự tiến hóa này xác nhận rằng khoa học di chuyển tiên tiến (SOTA) đang tiến tới sự phân rã vật lý rõ ràng—đúng là nền tảng khoa học cốt lõi của PCSF-TIM.
 >
 > 4. **The Structure–Behaviour Separation Principle / Nguyên lý Tách biệt Cấu trúc - Hành vi:** 
@@ -220,9 +234,14 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 
 ### Deep Dive: Representation Extension in Contemporary AI Models (Claim A2) / Phân tích Sâu: Mở rộng Khả năng Biểu diễn trong các Mô hình AI Hiện đại (Luận điểm A2)
 
-> **EN:** A central question in contemporary mobility science is how deep learning architectures relate to physical spatial interaction models. Machine learning approaches enhance representation capabilities rather than replacing the underlying decomposition. Earlier neural architectures like Deep Gravity \citep{simini2021} are gravity-inspired, retaining origin constraints and spatial features but replacing explicit multiplicative factorization with dense neural networks. Modern physics-informed architectures (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly preserve the multiplicative factorization $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. This evolution confirms that SOTA mobility science is progressing toward explicit physical factorization—the exact scientific foundation underlying PCSF-TIM.
+> **EN:** A central question in contemporary mobility science is how deep learning architectures relate to physical spatial interaction models. Machine learning approaches enhance representation capabilities rather than replacing the underlying decomposition. Earlier neural architectures like Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, and UGNN \citep{guo2025universal} are gravity-inspired, leveraging geospatial representation learning \citep{liu2025representation}, retaining origin constraints and spatial features but replacing explicit multiplicative factorization with dense neural networks. Modern physics-informed architectures (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) explicitly preserve the multiplicative factorization $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. This evolution confirms that SOTA mobility science is progressing toward explicit physical factorization—the exact scientific foundation underlying PCSF-TIM.
+
+> **EN:** *Gravity should be interpreted as a scientific language describing spatial interaction rather than merely a predictive model.* Modern deep learning architectures—including Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, and UGNN \citep{guo2025universal}—demonstrate that contemporary AI frameworks inherit and build upon the fundamental Gravity factorization structure rather than discarding it.
 >
-> **VI:** Một câu hỏi trung tâm trong khoa học di chuyển hiện đại là các kiến trúc học sâu liên quan như thế nào đến các mô hình tương tác không gian vật lý. Các tiếp cận máy học nâng cao khả năng biểu diễn thành phần hơn là thay thế sự phân rã nền tảng. Các kiến trúc thần kinh sớm hơn như Deep Gravity \citep{simini2021} mang tính truyền cảm hứng từ trọng lực, giữ lại các ràng buộc điểm đi và đặc trưng không gian nhưng thay thế sự phân rã nhân rõ ràng bằng mạng thần kinh dày đặc. Các kiến trúc học sâu dựa trên vật lý hiện đại (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. Sự tiến hóa này xác nhận rằng khoa học di chuyển tiên tiến (SOTA) đang tiến tới sự phân rã vật lý rõ ràng—đúng là nền tảng khoa học cốt lõi của PCSF-TIM.
+> **VI:** *Mô hình Trọng lực cần được diễn giải như một ngôn ngữ khoa học mô tả tương tác không gian thay vì chỉ đơn thuần là một mô hình dự báo.* Các kiến trúc học sâu hiện đại—bao gồm Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, và UGNN \citep{guo2025universal}—chứng minh rằng ngay cả các mô hình AI tiên tiến nhất vẫn kế thừa và phát triển trên cấu trúc phân rã Trọng lực nền tảng thay vì loại bỏ nó.
+
+>
+> **VI:** Một câu hỏi trung tâm trong khoa học di chuyển hiện đại là các kiến trúc học sâu liên quan như thế nào đến các mô hình tương tác không gian vật lý. Các tiếp cận máy học nâng cao khả năng biểu diễn thành phần hơn là thay thế sự phân rã nền tảng. Các kiến trúc thần kinh sớm hơn như Deep Gravity \citep{simini2021}, MPGCN \citep{shi2020mpgcn}, và UGNN \citep{guo2025universal} mang tính truyền cảm hứng từ trọng lực, tận dụng học biểu diễn không gian địa lý \citep{liu2025representation}, giữ lại các ràng buộc điểm đi và đặc trưng không gian nhưng thay thế sự phân rã nhân rõ ràng bằng mạng thần kinh dày đặc. Các kiến trúc học sâu dựa trên vật lý hiện đại (neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, Imagery2Flow \citep{imagery2flow2026}) duy trì một cách rõ ràng sự phân rã nhân $T_{ij} = \text{NN}_O(\mathbf{x}_i) \cdot \text{NN}_A(\mathbf{x}_j) \cdot f(d_{ij};\theta)$. Sự tiến hóa này xác nhận rằng khoa học di chuyển tiên tiến (SOTA) đang tiến tới sự phân rã vật lý rõ ràng—đúng là nền tảng khoa học cốt lõi của PCSF-TIM.
 
 ---
 
@@ -279,9 +298,9 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 
 ### Deep Dive: Spatial Impedance vs. Geographic Distance & Intervening Opportunities (Claim B1) / Phân tích Sâu: Trở lực Không gian so với Khoảng cách Địa lý (Luận điểm B1)
 
-> **EN:** In spatial interaction theory \citep{okelly2009spatial}, distance $d_{ij}$ in deterrence $f(d_{ij};\theta)$ represents generalized spatial impedance (travel time, monetary costs, physical transport constraints, cognitive friction). Stouffer's theory of intervening opportunities \citep{stouffer1940intervening} proposed an alternative perspective where travel deterrence is driven by intermediate opportunities between origin and destination. Exposure-corrected gravity unifies distance deterrence with opportunity density. Conditioning parameter estimation on structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ explicitly controls for intermediate opportunity capacity, allowing $f^*(d; \theta^*)$ to capture the residual spatial impedance friction.
+> **EN:** In spatial interaction theory \citep{okelly2009spatial}, distance $d_{ij}$ in deterrence $f(d_{ij};\theta)$ represents generalized spatial impedance (travel time, monetary costs, physical transport constraints, cognitive friction). Stouffer's theory of intervening opportunities \citep{stouffer1940intervening} proposed an alternative perspective where travel deterrence is driven by intermediate opportunities between origin and destination. Exposure-corrected gravity unifies distance deterrence with opportunity density. Recent empirical evidence by Verma & Ukkusuri \citep{verma2025travel} highlights the structural determinants of travel time and distance decay in spatial interaction. Conditioning parameter estimation on structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ explicitly controls for intermediate opportunity capacity, allowing $f^*(d; \theta^*)$ to capture the residual spatial impedance friction.
 >
-> **VI:** Trong lý thuyết tương tác không gian \citep{okelly2009spatial}, khoảng cách $d_{ij}$ trong hàm cản trở $f(d_{ij};\theta)$ đại diện cho trở lực không gian tổng quát (thời gian di chuyển, chi phí, hạn chế hạ tầng, ma sát nhận thức). Lý thuyết cơ hội trung gian của Stouffer \citep{stouffer1940intervening} đề xuất một góc nhìn trong đó sự cản trở bị chi phối bởi các cơ hội trung gian giữa điểm đi và điểm đến. Trọng lực có hiệu chỉnh tiếp xúc hợp nhất suy giảm khoảng cách với mật độ cơ hội. Việc điều kiện hóa ước tính tham số trên tiếp xúc cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ kiểm soát rõ ràng mật độ cơ hội trung gian, giúp $f^*(d; \theta^*)$ phản ánh ma sát trở lực không gian thặng dư.
+> **VI:** Trong lý thuyết tương tác không gian \citep{okelly2009spatial}, khoảng cách $d_{ij}$ trong hàm cản trở $f(d_{ij};\theta)$ đại diện cho trở lực không gian tổng quát (thời gian di chuyển, chi phí, hạn chế hạ tầng, ma sát nhận thức). Lý thuyết cơ hội trung gian của Stouffer \citep{stouffer1940intervening} đề xuất một góc nhìn trong đó sự cản trở bị chi phối bởi các cơ hội trung gian giữa điểm đi và điểm đến. Trọng lực có hiệu chỉnh tiếp xúc hợp nhất suy giảm khoảng cách với mật độ cơ hội. Bằng chứng thực nghiệm gần đây từ Verma & Ukkusuri \citep{verma2025travel} nhấn mạnh các yếu tố cấu trúc quyết định sự suy giảm thời gian và khoảng cách di chuyển trong tương tác không gian. Việc điều kiện hóa ước tính tham số trên tiếp xúc cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ kiểm soát rõ ràng mật độ cơ hội trung gian, giúp $f^*(d; \theta^*)$ phản ánh ma sát trở lực không gian thặng dư.
 
 ### Deep Dive: Functional Decay Forms as Behavioural Hypotheses (Claim B2) / Phân tích Sâu: Dạng suy giảm như Giả thuyết Hành vi (Luận điểm B2)
 � sự nhiễu do tiếp xúc không gian. |
@@ -298,9 +317,9 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 
 ### Deep Dive: Spatial Impedance vs. Geographic Distance & Intervening Opportunities (Claim B1) / Phân tích Sâu: Trở lực Không gian so với Khoảng cách Địa lý (Luận điểm B1)
 
-> **EN:** In spatial interaction theory, distance $d_{ij}$ in deterrence $f(d_{ij};\theta)$ represents generalized spatial impedance (travel time, monetary costs, physical transport constraints, cognitive friction). Stouffer's theory of intervening opportunities \citep{stouffer1940intervening} proposed an alternative perspective where travel deterrence is driven by intermediate opportunities between origin and destination. Exposure-corrected gravity unifies distance deterrence with opportunity density. Conditioning parameter estimation on structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ explicitly controls for intermediate opportunity capacity, allowing $f^*(d; \theta^*)$ to capture the residual spatial impedance friction.
+> **EN:** In spatial interaction theory, distance $d_{ij}$ in deterrence $f(d_{ij};\theta)$ represents generalized spatial impedance (travel time, monetary costs, physical transport constraints, cognitive friction). Stouffer's theory of intervening opportunities \citep{stouffer1940intervening} proposed an alternative perspective where travel deterrence is driven by intermediate opportunities between origin and destination. Exposure-corrected gravity unifies distance deterrence with opportunity density. Recent empirical evidence by Verma & Ukkusuri \citep{verma2025travel} highlights the structural determinants of travel time and distance decay in spatial interaction. Conditioning parameter estimation on structural spatial exposure $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ explicitly controls for intermediate opportunity capacity, allowing $f^*(d; \theta^*)$ to capture the residual spatial impedance friction.
 >
-> **VI:** Trong lý thuyết tương tác không gian, khoảng cách $d_{ij}$ trong hàm cản trở $f(d_{ij};\theta)$ đại diện cho trở lực không gian tổng quát (thời gian di chuyển, chi phí, hạn chế hạ tầng, ma sát nhận thức). Lý thuyết cơ hội trung gian của Stouffer \citep{stouffer1940intervening} đề xuất một góc nhìn trong đó sự cản trở bị chi phối bởi các cơ hội trung gian giữa điểm đi và điểm đến. Trọng lực có hiệu chỉnh tiếp xúc hợp nhất suy giảm khoảng cách với mật độ cơ hội. Việc điều kiện hóa ước tính tham số trên tiếp xúc cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ kiểm soát rõ ràng mật độ cơ hội trung gian, giúp $f^*(d; \theta^*)$ phản ánh ma sát trở lực không gian thặng dư.
+> **VI:** Trong lý thuyết tương tác không gian, khoảng cách $d_{ij}$ trong hàm cản trở $f(d_{ij};\theta)$ đại diện cho trở lực không gian tổng quát (thời gian di chuyển, chi phí, hạn chế hạ tầng, ma sát nhận thức). Lý thuyết cơ hội trung gian của Stouffer \citep{stouffer1940intervening} đề xuất một góc nhìn trong đó sự cản trở bị chi phối bởi các cơ hội trung gian giữa điểm đi và điểm đến. Trọng lực có hiệu chỉnh tiếp xúc hợp nhất suy giảm khoảng cách với mật độ cơ hội. Bằng chứng thực nghiệm gần đây từ Verma & Ukkusuri \citep{verma2025travel} nhấn mạnh các yếu tố cấu trúc quyết định sự suy giảm thời gian và khoảng cách di chuyển trong tương tác không gian. Việc điều kiện hóa ước tính tham số trên tiếp xúc cấu trúc $E_k = \sum_{(i,j) \in \text{Bin}_k} O_i A_j$ kiểm soát rõ ràng mật độ cơ hội trung gian, giúp $f^*(d; \theta^*)$ phản ánh ma sát trở lực không gian thặng dư.
 
 ### Deep Dive: Functional Decay Forms as Behavioural Hypotheses (Claim B2) / Phân tích Sâu: Dạng suy giảm như Giả thuyết Hành vi (Luận điểm B2)
 
@@ -311,6 +330,14 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 > **VI:** Việc xác định dạng hàm suy giảm khoảng cách $f(d)$ phản ánh các giả thuyết hành vi riêng biệt về cách quần thể di chuyển phản ứng với sự chia cắt không gian qua các quy mô khoảng cách \citep{wilson1971, lenormand2016systematic, liang2013unraveling}:
 > 1. **Suy giảm theo Hàm Mũ ($f(d) = e^{-\beta d}$):** Nảy sinh tự nhiên từ việc tối đa hóa entropy trong tương tác không gian dưới ràng buộc chi phí \citep{wilson1971}, thể hiện trở lực di chuyển biên không đổi.
 > 2. **Suy giảm theo Hàm Lũy thừa ($f(d) = d^{-\alpha}$):** Đại diện cho các mẫu hình bất biến theo quy mô, phù hợp với độ nhạy ngưỡng đối với những thay đổi khoảng cách tương đối \citep{gonzalez2008understanding}.
+
+
+
+### Deep Dive: Modern Interpretations of Distance / Phân tích Sâu: Diễn giải Hiện đại về Khoảng cách
+
+> **EN:** In modern spatial interaction science, distance in the deterrence function $f(d_{ij}; \theta)$ is no longer restricted to simple Euclidean distance. Modern representations incorporate generalized spatial impedance, travel time, monetary cost, transport network accessibility, latent spatial cost, and learned distance representations \citep{verma2025travel, liu2025representation}. While spatial representations have become increasingly rich and multi-dimensional, the fundamental mechanism of distance decay remains invariant: spatial interaction intensity declines continuously with generalized spatial impedance.
+>
+> **VI:** Trong khoa học tương tác không gian hiện đại, khoảng cách trong hàm cản trở $f(d_{ij}; \theta)$ không còn bị giới hạn ở khoảng cách Euclid đơn thuần. Các biểu diễn hiện đại tích hợp trở lực không gian tổng quát, thời gian di chuyển, chi phí tiền tệ, khả năng tiếp cận mạng lưới giao thông, chi phí không gian ẩn, và các biểu diễn khoảng cách được học \citep{verma2025travel, liu2025representation}. Mặc dù các biểu diễn không gian ngày càng trở nên phong phú và đa chiều, cơ chế suy giảm khoảng cách nền tảng vẫn giữ nguyên tính bất biến: cường độ tương tác không gian suy giảm liên tục theo trở lực không gian tổng quát.
 
 ### Deep Dive: Tanner Deterrence Specification & Dual Representation (Claim B3) / Phân tích Sâu: Công thức Cản trở Tanner & Biểu diễn Kép (Luận điểm B3)
 
@@ -389,9 +416,9 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 
 ### Deep Dive: Supervision Dependencies in Contemporary Deep Learning Baselines (Claim C2) / Phân tích Sâu: Sự Phụ thuộc Giám sát trong các Baseline Học sâu Hiện đại (Luận điểm C2)
 
-> **EN:** Contemporary deep learning frameworks (Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}) extend feature representation through neural networks, yet remain reliant on supervised local OD matrix optimization $\min \mathcal{L}(T_{ij}^{obs}, \hat{T}_{ij})$. In regions lacking comprehensive local flow surveys or where privacy policies restrict flow matrix sharing, both neural and classical calibration paradigms encounter operational limitations.
+> **EN:** Contemporary deep learning frameworks (Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, UGNN \citep{guo2025universal}) extend feature representation through neural networks, yet remain reliant on supervised local OD matrix optimization $\min \mathcal{L}(T_{ij}^{obs}, \hat{T}_{ij})$. In regions lacking comprehensive local flow surveys or where privacy policies restrict flow matrix sharing, both neural and classical calibration paradigms encounter operational limitations, severely constraining predictive reliability as established by Yang et al. \citep{yang2014limits}.
 >
-> **VI:** Các khung học sâu hiện đại (Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}) mở rộng biểu diễn đặc trưng qua mạng thần kinh, nhưng vẫn phụ thuộc vào tối ưu hóa hàm tổn thất ma trận OD địa phương có giám sát $\min \mathcal{L}(T_{ij}^{obs}, \hat{T}_{ij})$. Tại các khu vực thiếu khảo sát lưu lượng toàn diện hoặc nơi chính sách quyền riêng tư hạn chế chia sẻ ma trận lưu lượng, cả paradigm hiệu chỉnh thần kinh lẫn cổ điển đều gặp những hạn chế thực thi.
+> **VI:** Các khung học sâu hiện đại (Deep Gravity \citep{simini2021}, neuroGravity \citep{neurogravity2026}, TransGM \citep{transgm2026}, UGNN \citep{guo2025universal}) mở rộng biểu diễn đặc trưng qua mạng thần kinh, nhưng vẫn phụ thuộc vào tối ưu hóa hàm tổn thất ma trận OD địa phương có giám sát $\min \mathcal{L}(T_{ij}^{obs}, \hat{T}_{ij})$. Tại các khu vực thiếu khảo sát lưu lượng toàn diện hoặc nơi chính sách quyền riêng tư hạn chế chia sẻ ma trận lưu lượng, cả paradigm hiệu chỉnh thần kinh lẫn cổ điển đều gặp những hạn chế thực thi, làm suy giảm nghiêm trọng độ tin cậy dự báo như đã được khẳng định bởi Yang et al. \citep{yang2014limits}.
 
 ### Comparative Analysis Table / Bảng So sánh Đối chiếu các Mô hình SOTA
 
@@ -458,6 +485,21 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 >
 > Như \citet{gonzalez2008understanding} đã chứng minh, phân bố dịch chuyển tổng hợp $P(\Delta r)$ thể hiện các quy luật thống kê mạnh mẽ nảy sinh từ hàng triệu chuyến di chuyển cá nhân. Mặc dù sự gom tụ không gian loại bỏ danh tính ô-tới-ô $(i,j)$, nó lưu giữ các dấu hiệu khoảng cách di chuyển tổng hợp $P(d_k)$ dưới các ranh giới bảo mật vi sai \citep{barbosa2018human, gallotti2024distorted}.
 
+
+
+### Data vs Information Preservation Taxonomy / Phân loại Bảo toàn Dữ liệu & Thông tin
+
+| Data Product Layer / Lớp Sản phẩm Dữ liệu | Preserved Information Content / Nội dung Thông tin Bảo toàn | Behavioral Granularity / Độ Mịn Hành vi |
+| :--- | :--- | :--- |
+| **Trajectory (GPS / CDR)** | Full spatio-temporal individual trajectories & movement sequences | Microscopic individual behavior |
+| **OD Matrix ($T_{ij}$)** | Pairwise spatial interaction flows between origin-destination pairs | Spatial interaction matrix |
+| **Trip-Length Distribution (TLD)** | Aggregate distance-decay profile & collective travel-distance summary | Collective distance sensitivity |
+| **Aggregate Summary Statistics** | Mean travel distance, total trips, or regional totals | Lowest information layer |
+
+> **EN:** The modern mobility data ecosystem is increasingly **aggregate-first** \citep{buckee2020thinking, oliver2020mobile}. Privacy restrictions and data platforms increasingly release aggregate mobility summaries, satellite-derived indicators, or LBS summaries rather than raw trajectories \citep{houssiau2022dpaggregate, imagery2flow2026, guo2025universal, gallotti2024distorted, liu2025representation}.
+>
+> **VI:** Hệ sinh thái dữ liệu di chuyển hiện đại ngày càng hướng tới định hướng **tổng hợp là trên hết (aggregate-first)** \citep{buckee2020thinking, oliver2020mobile}. Các hạn chế về quyền riêng tư và nền tảng dữ liệu ngày càng ưu tiên phát hành các tóm tắt di chuyển tổng hợp, chỉ số từ ảnh vệ tinh, hoặc tóm tắt LBS thay vì các quỹ đạo thô \citep{houssiau2022dpaggregate, imagery2flow2026, guo2025universal, gallotti2024distorted, liu2025representation}.
+
 ### Deep Dive: Information Preservation Hierarchy & Taxonomy (Claim D2) / Phân tích Sâu: Hệ thống Phân cấp & Phân loại Bảo toàn Thông tin (Luận điểm D2)
 
 > **EN:** Human mobility observations form a structured hierarchy characterized by progressive information reduction \citep{song2010limits, erlander1990spatial}. Under Information Theory \citep{cover2006elements}, spatial aggregation operates as a Markov processing chain mapping high-dimensional trajectory space to cell-to-cell interaction matrices and subsequently onto distance-domain distributions ($X \to Y \to Z$). By the Data Processing Inequality \citep{cover2006elements}, mutual information satisfies $I(X; Z) \le I(X; Y)$. While fine-grained spatial identities $(i,j)$ are discarded ($H(Y \mid Z) > 0$), aggregate TLD layers retain sufficient statistical information regarding collective distance deterrence parameters $\theta = (\alpha, \beta)$ when structural exposure $E_k$ is specified independently \citep{casella2002statistical, cover2006elements}. This progression is systematized in the Information Preservation Taxonomy table below.
@@ -472,6 +514,25 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 | **Layer 2: OD Interaction Matrix** | Preserves network topology $T_{ij}$; requires full local flow surveys \citep{erlander1990spatial}. | Bảo toàn cấu trúc mạng tương tác $T_{ij}$; đòi hỏi khảo sát lưu lượng địa phương đầy đủ \citep{erlander1990spatial}. |
 | **Layer 3: Trip-Length Distribution (TLD)** | Discards spatial destination identities $(i,j)$, but retains aggregate travel-distance signatures $P(d_k)$ under differential privacy. | Loại bỏ danh tính điểm đến không gian $(i,j)$, nhưng lưu giữ các dấu hiệu khoảng cách di chuyển tổng hợp $P(d_k)$ dưới bảo mật vi sai. |
 | **Layer 4: Macro Mobility Indicators** | Collapses distribution into scalar moments (mean/median); insufficient for multi-parameter identification. | Nén phân bố thành các mô-men vô hướng (trung bình/trung vị); không đủ để định danh đa tham số. |
+
+
+
+```text
+Trajectory (Individual spatio-temporal points)
+    ↓  [Discarded: Individual identity, exact timestamps, micro-routes]
+    ↓  [Preserved: Pairwise OD flow counts]
+OD Matrix (Pairwise spatial interaction counts)
+    ↓  [Discarded: Specific OD pair origins & destinations]
+    ↓  [Preserved: Aggregate distance-binned travel counts]
+Distance Histogram (Observed Trip-Length Distribution - TLD)
+    ↓  [Discarded: Full distribution shape and variance]
+    ↓  [Preserved: Mean travel distance & scalar totals]
+Summary Statistics (Mean distance, total volume)
+```
+
+> **EN:** The Information Hierarchy explicitly quantifies **information loss** across observational levels. Each step down the hierarchy discards specific spatial and individual granularity while preserving essential aggregate invariants. The research gap lies in identifying what behavioural parameters remain statistically identifiable from aggregate TLD after spatial flow information has been compressed.
+>
+> **VI:** Hệ thống Phân cấp Thông tin định lượng một cách rõ ràng **sự mất mát thông tin** qua các cấp độ quan sát. Mỗi bước đi xuống trong phân cấp sẽ loại bỏ độ mịn không gian và cá nhân cụ thể nhưng bảo toàn các đại lượng bất biến tổng hợp cốt lõi. Khoảng trống nghiên cứu nằm ở việc xác định các tham số hành vi nào vẫn có thể định danh thống kê từ TLD tổng hợp sau khi thông tin lưu lượng không gian đã bị nén.
 
 ### Deep Dive: Observational Representation & Inferential Boundaries (Claim D3) / Phân tích Sâu: Biểu diễn Quan sát & Ranh giới Suy luận (Luận điểm D3)
 
@@ -519,6 +580,12 @@ trong đó $O_i$ và $A_j$ đại diện cho cấu trúc không gian đô thị,
 > **EN:** Landmark studies in spatial interaction modeling \citep{lenormand2016systematic, simini2012universal} established Trip-Length Distributions as essential benchmark targets. In these frameworks, models are calibrated using supervised local OD matrices $T_{ij}^{obs}$, and the resulting predicted flows are aggregated into distance histograms to compute quantitative goodness-of-fit metrics, such as the Common Part of Commuters (CPC / Sørensen index). However, treating TLD primarily as an output evaluation metric assumes that local OD flow matrices are available during calibration—a condition that may not hold when flow surveys are absent or restricted.
 >
 > **VI:** Các nghiên cứu cột mốc trong mô hình hóa tương tác không gian \citep{lenormand2016systematic, simini2012universal} đã thiết lập Phân bố Độ dài Chuyến đi như những mục tiêu đánh giá chuẩn thiết yếu. Trong các khung làm việc này, mô hình được hiệu chỉnh bằng ma trận OD địa phương có giám sát $T_{ij}^{obs}$, và các lưu lượng dự báo được gom tụ thành biểu đồ tần suất khoảng cách để tính toán các chỉ số độ phù hợp định lượng (như CPC / chỉ số Sørensen). Tuy nhiên, việc coi TLD chủ yếu là chỉ số đánh giá đầu ra giả định rằng ma trận lưu lượng OD địa phương luôn sẵn có trong quá trình hiệu chỉnh—điều kiện không phải lúc nào cũng thỏa mãn khi thiếu khảo sát lưu lượng.
+
+
+
+> **EN:** *Existing studies predominantly improve mobility generation models or transferable prediction frameworks. In contrast, little attention has been paid to understanding what behavioural information remains statistically identifiable after mobility observations have been compressed into aggregate travel-distance distributions.*
+>
+> **VI:** *Các nghiên cứu hiện tại chủ yếu tập trung cải tiến các mô hình sinh di chuyển hoặc khung dự báo có thể chuyển giao. Ngược lại, chưa có nhiều sự chú ý dành cho việc hiểu thông tin hành vi nào vẫn có thể định danh thống kê sau khi các quan sát di chuyển đã bị nén vào các phân bố khoảng cách di chuyển tổng hợp.*
 
 ### Deep Dive: Primary Inference-Space Paradigm & Forward Model Formulation (Claim E2) / Phân tích Sâu: Paradigm Không gian Suy luận Chính & Công thức Toán tử Tiến (Luận điểm E2)
 
@@ -607,6 +674,12 @@ flowchart LR
 >
 > **VI:** Áp dụng MLE điều kiện trên các sản phẩm dữ liệu tổng hợp thực nghiệm—cụ thể là Meta Movement Distribution Maps \citep{MetaMovementDistributionMaps}—trên nhiều vùng đô thị cho thấy các ước tính tham số nhất quán ($\text{CV} < 10\%$). Các tham số suy luận $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$ thể hiện sự biến thiên hệ thống phản ánh hạ tầng giao thông vùng và mật độ không gian đô thị, hỗ trợ giả thuyết rằng các lớp TLD tổng hợp giữ lại thông tin thống kê ổn định trên các bối cảnh đô thị đa dạng.
 
+
+
+> **EN:** *While contemporary AI baselines focus on predicting OD flow networks directly under supervised learning, PCSF-TIM focuses on identifying latent behavioural parameters ($\hat{\theta}^*$) from aggregate observations, enabling survey-free downstream flow reconstruction under severe data constraints.* Specifically, Deep Gravity \citep{simini2021} still requires local training flow matrices; UGNN \citep{guo2025universal} generates flows for unseen target cities without target history but requires massive multi-city OD training data; neuroGravity \citep{neurogravity2026} relies on partial OD network observations or source pre-training; and TransGM \citep{transgm2026} requires target-city flow samples for adaptive fine-tuning.
+>
+> **VI:** *Trong khi các baseline AI hiện đại tập trung dự báo trực tiếp mạng lưới lưu lượng OD bằng học có giám sát, PCSF-TIM tập trung vào việc định danh các tham số hành vi ẩn ($\hat{\theta}^*$) từ quan sát tổng hợp, cho phép tái tạo lưu lượng hạ nguồn không cần khảo sát trong điều kiện dữ liệu hạn chế.* Cụ thể, Deep Gravity \citep{simini2021} vẫn cần ma trận lưu lượng huấn luyện địa phương; UGNN \citep{guo2025universal} sinh lưu lượng cho đô thị mới không cần lịch sử mục tiêu nhưng cần huấn luyện trên ma trận OD lớn từ nhiều đô thị; neuroGravity \citep{neurogravity2026} dựa vào quan sát mạng lưới OD một phần hoặc tiền huấn luyện nguồn; và TransGM \citep{transgm2026} cần các mẫu lưu lượng đô thị mục tiêu để tinh chỉnh thích ứng.
+
 ### Deep Dive: Downstream Zero-Shot Flow Reconstruction & Baseline Controls (Claim F4) / Phân tích Sâu: Tái tạo Lưu lượng Hạ nguồn Không cần Huấn luyện lại & Các Baseline Kiểm soát (Luận điểm F4)
 
 > **EN:** *Downstream flow reconstruction* refers to the generation of an origin–destination (OD) flow matrix $\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\theta}^*)$ using the effective behaviour descriptor inferred from aggregate mobility observations. In PCSF-TIM, the inferred effective behavioural parameter is not the final objective itself, but a latent behavioural representation that enables subsequent reconstruction of urban mobility flows through a gravity-based spatial interaction model: $\text{Aggregate Observation (TLD)} \to \text{Behaviour Inference } (\hat{\theta}^*) \to \text{Downstream Flow Reconstruction } (\hat{T}_{ij})$. Evaluated against ground-truth flow benchmarks, reconstructed flows achieve high predictive agreement (Common Part of Commuters $\text{CPC} > 0.70$). Comparative ablation controls confirm that accuracy gains stem jointly from structural exposure specification and inferred parameters:
@@ -620,6 +693,18 @@ flowchart LR
 > - **Tham số Suy luận PCSF-TIM ($\hat{\theta}^*$):** Đạt $\text{CPC} > 0.70$ cung cấp bằng chứng củng cố hỗ trợ tính hợp lệ của các tham số hành vi được suy luận.
 
 ---
+
+
+
+### Deep Dive: Recent Developments in Transferability / Phân tích Sâu: Các Phát triển Gần đây về Khả năng Chuyển giao
+
+> **EN:** Recent transferability studies in mobility science fall into two main paradigms: (1) **representation transfer** (e.g., UGNN \citep{guo2025universal}, Imagery2Flow \citep{imagery2flow2026}) which learns transferable geographic embeddings across cities, and (2) **similarity-weighted transfer** (e.g., TransGM \citep{transgm2026}, neuroGravity \citep{neurogravity2026}) which fine-tunes source gravity parameters using structural similarity measures like spatial KL divergence.
+>
+> *Most recent transfer studies focus on transferring representations or predictive models, whereas this handbook focuses on transferring structural components while independently identifying behavioural parameters in the target city.*
+>
+> **VI:** Các nghiên cứu về khả năng chuyển giao gần đây trong khoa học di chuyển chia thành hai paradigm chính: (1) **chuyển giao biểu diễn** (ví dụ: UGNN \citep{guo2025universal}, Imagery2Flow \citep{imagery2flow2026}) học các nhúng địa lý có thể chuyển giao qua các đô thị, và (2) **chuyển giao theo độ tương đồng** (ví dụ: TransGM \citep{transgm2026}, neuroGravity \citep{neurogravity2026}) tinh chỉnh các tham số trọng lực nguồn bằng thước đo tương đồng cấu trúc như phân kỳ KL không gian.
+>
+> *Hầu hết các nghiên cứu chuyển giao gần đây tập trung vào chuyển giao biểu diễn hoặc mô hình dự báo, trong khi cuốn handbook này tập trung vào việc chuyển giao các thành phần cấu trúc đồng thời định danh độc lập các tham số hành vi tại đô thị mục tiêu.*
 
 ### Evidence for Parameter Identification Framework / Khung Bằng chứng Thống kê cho Định danh Tham số
 
