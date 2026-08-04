@@ -541,10 +541,49 @@ Proposed PCSF-TIM Framework:
 ```
 * **ML Analogy:** Ground-truth OD matrices function exactly like **test labels in Machine Learning**: they do NOT participate in inference/training, but serve strictly to compute test accuracy/goodness-of-fit metrics.
 
-## 3. The 5-Stage Causal Chain of Urban Mobility Science
-```text
-Urban Environment ──► Urban Structure (S_i) ──► Collective Behaviour (θ) ──► Human Mobility (T_ij) ──► Transportation System
-```
+## 3. The Master 6-Column Causal Derivation & Literature Matrix
+
+| Stage | Scientific Question | Scientific Claim | Assumption | Inference Principle | Representative References |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **1. Urban Structure Representation** | What defines the spatial opportunities for mobility? | Urban mobility is fundamentally constrained by urban structure (population, attractions, spatial configuration). | **A1. Structure–Behaviour Separability** | Urban structure provides the structural inputs of the mobility system. | Wilson (1970); Barbosa et al. (2018 review); Deep Gravity (Simini et al., 2021); Spatial Representation Learning (2025–2026) |
+| **2. Aggregate Travel-Distance Distribution** | How are aggregate mobility observations generated? | Travel-distance distributions emerge from the interaction between urban structure and behavioural distance-decay. | **A2. Gravity Forward Assumption** | Forward gravity transforms $(\text{Structure}, \text{Behaviour}) \to \text{Distance Distribution}$. | Zipf (1946); Wilson (1970); Liang et al. (2013); Lenormand et al. (2016) |
+| **3. Behaviour Identification** | Can behavioural parameters be inferred from aggregate observations? | Aggregate travel-distance distributions preserve sufficient information to identify distance-decay parameters. | **A3. Information Sufficiency**<br>**A4. Identifiability** | Statistical inference (Likelihood / MLE) estimates $\theta$ from observed TLD. | Your methodological contribution (Paper 2 / PCSF-TIM); Likelihood theory; Gallotti et al. (2024) |
+| **4. OD Reconstruction** | How can complete mobility demand be reconstructed? | Given urban structure and behavioural parameters, the gravity model generates the OD matrix. | **A5. Generative Gravity Assumption** | Gravity acts as a generative model mapping $(\text{Structure}, \theta) \to \text{OD}$. | Gravity Model; Deep Gravity (2021); UGNN (2025); neuroGravity (2026) |
+| **5. Planning Application** | Why reconstruct OD? | OD demand is the operational representation required by planning models. | **A6. Planning Sufficiency** | Planning analyses consume OD demand rather than individual trajectories. | Ortúzar & Willumsen (2011); Barbosa et al. (2018); UGNN (2025); Imagery2Flow (2025) |
+
+## 4. The Master 7-Column Literature & Conceptual Mapping Matrix
+
+| Stage | Topic | Foundation | Classical | Modern | Review / Survey | Role in Framework |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **1. Urban Structure Representation** | Urban structure | Wilson (1970) | Gravity Model | Deep Gravity (2021), Imagery2Flow (2025), UGNN (2025), neuroGravity (2026), Representation Learning (2025) | Barbosa et al. (2018) | Structural context & opportunities ($O_i, A_j, d_{ij}$) |
+| **2. Distance-decay Mechanism** | Distance effect | Zipf (1946), Wilson (1970) | Gravity, Tanner, Exponential | Liang et al. (2013), Lenormand et al. (2016) | Barbosa et al. (2018) | Behavioural mechanism $f(d;\theta)$ |
+| **3. Aggregate Mobility Observation** | Aggregate observations | Census tradition | OD matrix, Distance histogram | Gallotti et al. (2024), LBS review (2025) | Wang et al. (2019), Barbosa et al. (2018) | Observable evidence $\mathbf{y}_{TLD}$ |
+| **4. Behaviour Identification** | Statistical inference | Fisher (MLE) | Likelihood inference | **Primary Dissertation Novelty (Paper 2 / PCSF-TIM)** | — | Inverse inference $\mathbf{y} \to \theta$ |
+| **5. OD Reconstruction** | Spatial interaction | Gravity | Radiation (Simini 2012), IO | Deep Gravity (2021), UGNN (2025), neuroGravity (2026) | Lenormand et al. (2016) | Survey-free OD generation ($\hat{T}_{ij}$) |
+| **6. Transport Planning** | Transport planning | Four-step model | OD-based planning | UGNN, Imagery2Flow | Barbosa et al. (2018) | Decision-support application (Level 3 Validation) |
+
+## 5. The Interdisciplinary Scientific Schools Mapping Matrix
+
+| Stage | Interdisciplinary Scientific School of Thought | Scientific Focus & Role |
+| :--- | :--- | :--- |
+| **1. Urban Structure Representation** | **Urban Geography / GIS / GeoAI** | Extraction of spatial opportunities, land-use attraction ($O_i, A_j$), and network accessibility ($d_{ij}$). |
+| **2. Distance-decay Mechanism** | **Spatial Interaction Theory** | Conceptualization of friction of distance and collective travel deterrence behavior $f(d;\theta)$. |
+| **3. Aggregate Mobility Observation** | **Mobility Data Science** | Processing privacy-preserving distance histograms ($\mathbf{y}_{TLD}$) and aggregate spatiotemporal evidence. |
+| **4. Behaviour Identification** | **Statistical Inference / Inverse Problems** | Formulation of conditional multinomial likelihoods and numerical MLE estimation for latent parameters $\theta$. |
+| **5. OD Reconstruction** | **Transportation Science** | Forward generative matrix synthesis producing survey-free origin-destination flow matrices $\hat{T}_{ij}$. |
+| **6. Transport Planning Application** | **Transportation Planning** | Downstream traffic/transit assignment, smartcard boarding validation, and decision support for urban transit networks. |
+
+## 6. The Core Theoretical Foundations Mapping Matrix
+
+| Stage | Core Theory (Lý thuyết Cốt lõi) | Mathematical & Physical Principles |
+| :--- | :--- | :--- |
+| **1. Urban Structure Representation** | **Tobler's First Law of Geography & Spatial Heterogeneity** | Spatial autocorrelation, spatial decay of influence, land-use opportunity distributions. |
+| **2. Distance-decay Mechanism** | **Entropy Maximization & Gravity Theory** | Wilson's (1970) entropy-maximizing state derivation under total distance constraints. |
+| **3. Aggregate Mobility Observation** | **Information Theory** | Shannon entropy, information loss under projection $\mathcal{P}$, residual statistic sufficiency. |
+| **4. Behaviour Identification** | **Maximum Likelihood Estimation & Inverse Problems** | Fisherian likelihood theory, concavity of conditional multinomial distributions. |
+| **5. OD Reconstruction** | **Generative Spatial Interaction Models** | Forward matrix synthesis via multiplicative structural-behavioural factorization ($S_{ij} \times f(d;\theta)$). |
+| **6. Transport Planning Application** | **Demand Forecasting Theory** | Four-step transportation model, Wardropian user equilibrium, network transit assignment. |
+
 * **Behaviour ($\theta$)** serves as the **pivotal scientific bridge** connecting Urban Design ($\mathbf{S}_i$) to the Transportation System (Traffic, Public Transit).
 
 ---
@@ -571,6 +610,79 @@ Urban Environment ──► Urban Structure (S_i) ──► Collective Behaviour
 ### 4. Urban Complexity & Spatial Heterogeneity Limits
 * **Batty (2013) & Barthelemy (2016, 2018)**: Complex systems view of urban scaling, spatial networks, and population mobility distributions.
 * **Yang et al. (2014)**: Limits of classical gravity assumptions under extreme spatial heterogeneity and polycentric urban structures.
+
+### 5. Formal Theoretical Assumptions (A1–A7 Defense Taxonomy)
+Each formal assumption protects exactly one explicit arrow in the causal derivation chain ($\text{Structure} \to \text{Observation} \to \text{Inference} \to \text{Reconstruction} \to \text{Planning}$):
+
+| ID | Derivation Step | Formal Assumption | Role & Defense |
+| :--- | :--- | :--- | :--- |
+| **A1** ⭐⭐⭐ | Structure + Behaviour $\to$ Flow | **Structure–Behaviour Separability:** Mobility can be factorized into urban spatial structure and a distance-decay behavioural mechanism ($T_{ij} = S_{ij} \times f(d;\theta)$). | Foundation of the entire framework. Without A1, structure and behavior cannot be decoupled. |
+| **A2** | Structure + Behaviour $\to$ TLD | **Gravity Forward Assumption:** Aggregate mobility is generated by a gravity-type spatial interaction model. | Defines the forward generative model producing empirical observations. |
+| **A3** ⭐⭐⭐ | TLD $\to$ Inferred Behaviour $\theta$ | **Information Sufficiency:** Aggregate travel-distance distributions preserve sufficient statistical information about the distance-decay parameters. | Enables inverse inference from aggregate distance histograms to $\theta$. |
+| **A4** | TLD $\to$ Inferred Behaviour $\theta$ | **Parameter Identifiability:** Different behavioural parameters induce distinguishable travel-distance distributions (at least locally). | Ensures $\theta$ is uniquely or locally identifiable on the likelihood surface. |
+| **A5** ⭐⭐⭐ | Inferred $\theta$ + Structure $\to$ OD Matrix | **Generative Gravity Assumption:** Given urban structure and identified behaviour, the OD matrix is uniquely generated by the gravity model. | Enables OD matrix reconstruction without requiring full OD survey observations. |
+| **A6** | OD Matrix $\to$ Transport Planning | **Planning Sufficiency:** The reconstructed OD matrix is a sufficient operational input for downstream transit planning models. | Defines application bounds without requiring direct modeling of all planning nuances. |
+| **A7** | Full Inference Engine | **Likelihood Correctness:** The statistical likelihood correctly represents the empirical observation process of the aggregate distance distribution. | Guarantees the statistical validity of MLE/inference. |
+
+> **The 3 Indispensable Pillars:**
+> 1. **A1 (Separability):** If false, structural context and human behavior cannot be decoupled.
+> 2. **A3 (Information Sufficiency):** If false, aggregate evidence cannot support behavioral inference.
+> 3. **A5 (Generative Gravity):** If false, survey-free OD flow matrices cannot be reconstructed after identifying $\theta$.
+
+---
+
+### 6. Master 30-Paper Project Literature Allocation Matrix
+This matrix maps the 30 active PDF literature assets in the project into the 5 stages of the dissertation derivation framework:
+
+#### Stage 1: Urban Structure Representation (Biểu diễn Cấu trúc Đô thị)
+| Short Reference | System PDF Filename | Theoretical Contribution & Role |
+| :--- | :--- | :--- |
+| **Alis et al. (2021)** | *Scientific Reports 11, 22707* | **Multidimensional Attractiveness Proof:** Demonstrates that population alone is an inadequate proxy for destination attractiveness ($A_j$); multidimensional urban amenities improve flow prediction by 10.3%. |
+| **Vu et al. (2021)** | `Enhanced urban functional land use map with free and open-source data.pdf` | **Local Empirical Proof:** Land-use extraction from Sentinel-2 & OSM in Ho Chi Minh City. |
+| **Liu et al. (2025)** | `Representation learning for geospatial data.pdf` | **GeoAI Foundation:** Representation learning for encoding urban spatial context. |
+| **Hansen (1959)** | `hansen1959.pdf` | **Classical Foundation:** Accessibility defined as potential spatial interaction based on opportunity distribution. |
+| **Haynes & Fotheringham (1984)** | `gravity-and-spatial-interaction-models-oqez7udowi.pdf` | **Structural Factorization:** Mathematical isolation of origin ($O_i$) and destination ($D_j$) attractions. |
+
+#### Stage 2: Aggregate Travel-Distance Distribution (Phân phối Khoảng cách Gộp - TLD)
+| Short Reference | System PDF Filename | Theoretical Contribution & Role |
+| :--- | :--- | :--- |
+| **González et al. (2008)** | `Understanding-individual-human-mobility-patterns.pdf` | **Individual Trajectories:** Individual mobility follows truncated power-law bounded by radius of gyration ($r_g$). |
+| **Song et al. (2010)** | `Limits-of-Predictability-in-Human-Mobility.pdf` | **Entropy Limits:** 93% upper bound on individual mobility predictability. |
+| **Liang et al. (2013)** | `unraveling.pdf` | **Exponential TLD Emergence:** Analytical derivation of exponential travel-distance distributions from urban structure. |
+| **de Montjoye et al. (2013)** | `srep01376.pdf` | **Trajectory Re-identification:** 4 spatiotemporal points re-identify 95% of individuals (privacy justification for aggregation). |
+| **Houssiau et al. (2022)** | `houssiau2022.pdf` | **Aggregate Privacy Risk:** Re-identification risk analysis on aggregate mobility data. |
+| **Gallotti et al. (2024)** | `Detors.pdf` | **Privacy Filtering Distortion:** Big Tech differential privacy filtering severely distorts observed TLDs. |
+
+#### Stage 3: Behaviour Identification (Định danh Tham số Hành vi - Core Novelty)
+| Short Reference | System PDF Filename | Theoretical Contribution & Role |
+| :--- | :--- | :--- |
+| **Merlin (2020)** | `amyf,+Merlin_1614.pdf` | **Single-Parameter Precedent:** Calibration of gravity deterrence using median travel duration matching. |
+| **Yang et al. (2014)** | `yang2014.pdf` | **Analytical Scaling Limits:** Parameter scaling in Extended Radiation Models without empirical OD matrices. |
+| **Rubio-Herrero & Muñuzuri (2023)** | `Sparse-regression-for-data-driven-deterrence-functions-in-gravity-models.pdf` | **Sparse Deterrence Functions:** Data-driven deterrence approximation via sparse regression. |
+| **Enaya et al. (2026)** | `TransferGM-2026.pdf` | **Structural Transferability:** TransGM behavioral parameter transfer across cities based on land-use similarity. |
+| **Wilson (1971)** | `wilson1971.pdf` | **Classical Entropy Calibration:** Deterrence parameter calibration via macro average trip cost constraints. |
+| **Flowerdew & Aitkin (1982)** | `flowerdew1982.pdf` | **Poisson MLE Estimation:** Generalized linear models (GLMs) for spatial interaction parameter estimation. |
+| **O'Kelly (2009)** | `OKELLYSIIEHG.pdf` | **Spatial Deterrence Sensitivity:** Empirical evaluation of distance-decay stability and sensitivity. |
+
+#### Stage 4: OD Reconstruction (Tái tạo Ma trận OD - Forward Generation)
+| Short Reference | System PDF Filename | Theoretical Contribution & Role |
+| :--- | :--- | :--- |
+| **Simini et al. (2021)** | `deep-gravity.pdf` / `s41467-021-26752-4.pdf` | **Deep Gravity:** Deep neural spatial interaction model combining gravity factorization with neural features. |
+| **Yang et al. (2026)** | `2604.23678v1.pdf` | **neuroGravity:** GNN + meta-Gravity for zero-shot transferrable mobility flow generation. |
+| **Guo et al. (2025)** | `Computer aided Civil Eng - 2025 - Guo...pdf` | **UGNN:** Urban Semantic GNN predicting spatial interaction flows. |
+| **Xu et al. (2025)** | `Predict-statellite-image.pdf` | **Imagery2Flow:** Unsupervised urban mobility flow prediction directly from satellite imagery. |
+| **Shi et al. (2020)** | `shi2020.pdf` | **MPGCN:** Multi-view graph convolutional networks for dynamic OD flow prediction. |
+| **Simini et al. (2012)** | `simini2012a.pdf` | **Original Radiation Model:** Parameter-free macro mobility generation based on job opportunities. |
+| **Lenormand et al. (2016)** | `1-s2.0-S0966692315002422-main.pdf` | **Cross-Country Benchmark:** Large-scale evaluation of Gravity vs Radiation models across 8 countries (CPC/CPL). |
+| **DUT Mobility Review (2018)** | `urban mobility repdict.pdf` | **Deep Graph Mobility Review:** Comprehensive review of deep graph learning for mobility flow prediction. |
+
+#### Stage 5: Planning Application (Ứng dụng Quy hoạch & Decision Support)
+| Short Reference | System PDF Filename | Theoretical Contribution & Role |
+| :--- | :--- | :--- |
+| **Barbosa et al. (2018)** | `barbosa2018.pdf` | **Human Mobility Encyclopedia:** Comprehensive review of human mobility science, models, and downstream applications. |
+| **Oliver et al. (2020)** | `oliver2020.pdf` | **Epidemiological Planning:** Aggregate mobile data for evaluating non-pharmaceutical interventions in pandemic response. |
+| **Buckee et al. (2020)** | `buckee2020.pdf` | **Ethics & Crisis Planning:** Privacy ethics and operational efficacy of aggregate mobile data in public health crisis. |
+| **Pappalardo et al. (2023)** | `Future-directions-in-human-mobility-science.pdf` | **Future Horizon:** Strategic roadmap for explainable AI (XAI) and sustainable multi-modal transport planning. |
 
 ---
 
