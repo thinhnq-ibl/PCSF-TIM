@@ -615,16 +615,45 @@ Urban Environment ──► Urban Structure (S_i) ──► Collective Behaviour
 
 ---
 
-# MODULE 7: Open Problems & Observational Boundaries
+# MODULE 7: Open Problems and Future Directions
 
-*(Tracking unresolved questions and boundaries to address during PhD execution)*
+*(Structured along the 4-stage scientific progression: Data Quality ──► Urban Complexity ──► Statistical Inference ──► Scientific Generality)*
 
-* **OP1 (Structural Transferability Limits):** How far across cultural/morphological domains can US-trained GNN structure representations ($\mathbf{S}_i$) be transferred without severe domain shift?
-* **OP2 (Behavioural Temporal Stability):** Is the City Behavioural Index $\theta$ temporally stable across weekdays vs weekends, or pre- vs post-pandemic periods?
-* **OP3 (Spatial Resolution Sensitivity):** How does bin width choice ($\Delta d = 500\text{m}$ vs $1\text{km}$) in aggregate TLDs affect Fisher Information and Cramér-Rao precision bounds?
-* **OP4 (Modality Confounding):** How can mode-specific travel (motorcycle vs transit) be disentangled when aggregate TLDs reflect all-mode travel?
-* **OP5 (Spatial Heterogeneity & Polycentricity Limits):** How does severe spatial heterogeneity (Yang et al. 2014) in polycentric megacities affect parameter identifiability under structural exposure $E_k$?
-* **OP6 (Multi-Parameter Decay Identifiability):** For dual-parameter deterrence functions like Tanner ($d^\alpha e^{-\beta d}$), how can parameter collinearity between $\alpha$ and $\beta$ be prevented during conditional MLE?
+### 1. Structural Exposure Estimation (Measurement Problem)
+The proposed framework assumes that the structural exposure term ($E_k$) can be estimated reliably from publicly available geographic information. Experimental evidence indicates that ignoring exposure ($E_k \equiv 1$) produces parameter biases exceeding 30%, demonstrating that exposure is an indispensable component for separating urban structure from travel behaviour.
+
+A remaining challenge is therefore the accurate extraction of exposure from heterogeneous open spatial datasets (road networks, land use, accessibility, built environment, and remote sensing products). Errors in exposure estimation propagate directly into behavioural parameter recovery.
+
+* **Future Direction:** Develop more robust exposure estimators that integrate multiple spatial data sources while remaining transferable across cities.
+
+---
+
+### 2. Structural Heterogeneity and Polycentric Cities (Urban Complexity Problem)
+The current framework assumes that behavioural parameters remain globally identifiable after accounting for structural exposure.
+
+However, highly polycentric metropolitan regions exhibit strong spatial heterogeneity, multiple employment centres, and locally varying accessibility patterns. These factors may reduce the separability between structural effects and behavioural responses, thereby weakening parameter identifiability.
+
+* **Future Direction:** Investigate multi-scale and hierarchical gravity formulations capable of explicitly modelling heterogeneous urban structures while preserving behavioural interpretability.
+
+---
+
+### 3. Behavioural Model Identifiability (Statistical Inference Problem)
+The Tanner deterrence function:
+\[ f(d) = d^{-\alpha} e^{-\beta d} \]
+introduces two behavioural parameters describing short-distance attraction ($\alpha$) and long-distance decay ($\beta$).
+
+Although preliminary experiments indicate stable optimisation, the statistical identifiability of these two parameters under different distance distributions remains an open question. Correlation between $\alpha$ and $\beta$ may emerge for certain cities or limited observation ranges, potentially increasing estimation uncertainty.
+
+* **Future Direction:** Future work should investigate profile likelihood analysis, Fisher information, and Bayesian uncertainty estimation to better quantify parameter identifiability and confidence intervals.
+
+---
+
+### 4. Universality of Behavioural Recovery (Scientific Validation Problem)
+The proposed framework is motivated by the hypothesis that aggregate travel-distance distributions preserve sufficient information to recover collective distance sensitivity.
+
+While the framework performs consistently across multiple metropolitan areas, its applicability to cities with substantially different urban morphologies, socioeconomic conditions, and transportation systems remains to be systematically evaluated.
+
+* **Future Direction:** Future work should investigate the universality of behavioural recovery across diverse geographic contexts and identify the structural conditions under which aggregate distance distributions remain sufficient statistics for behavioural inference.
 
 ---
 
