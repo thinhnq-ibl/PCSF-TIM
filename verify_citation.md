@@ -935,4 +935,51 @@
 | **Evidence Level**            | Empirical validation on migration data in the Philippines using census and OpenStreetMap amenities.                                                                                                                                                                                                                                                |
 | **Key Takeaway (1 sentence)** | **Population is only one proxy of destination attractiveness; urban opportunities are better represented by a multidimensional combination of urban features.**                                                                                                                                                                                    |
 
+| Field                       | Content                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Reference**               | **Rong, C., Feng, J., & Ding, J. (2023).** *GODDAG: Generating Origin-Destination Flow for New Cities Via Domain Adversarial Training.* **IEEE Transactions on Knowledge and Data Engineering (TKDE)**, 35(10), 10048–10057.                                                                                                                                                                              |
+| **Venue**                   | **IEEE TKDE (Q1)** – Top-tier journal in Data Mining, Knowledge Engineering, Machine Learning and Urban Computing.                                                                                                                                                                                                                                                                                        |
+| **Research Question**       | **How can OD flows be generated for a target city where no OD observations are available?**                                                                                                                                                                                                                                                                                                               |
+| **Problem**                 | Existing Gravity models are too simplistic to capture complex mobility patterns, while machine learning and deep learning models require abundant OD data for training. Consequently, they cannot be directly applied to **new or data-scarce cities** where OD observations are unavailable.                                                                                                             |
+| **Core Idea**               | Learn transferable mobility knowledge from a **source city** with OD data and generate OD flows in a **target city** using **Graph Neural Networks (GNNs)** combined with **Domain Adversarial Training**.                                                                                                                                                                                                |
+| **Method**                  | Construct origin and destination embeddings from regional attributes (demographics, POIs, etc.) using GATs, learn spatial interaction features with GINs, combine them with distance features, and perform transfer learning through adversarial domain adaptation (MMD + domain classifier).                                                                                                             |
+| **Inputs**                  | Regional attributes (population, demographics, POIs), spatial interaction features (distance), geo-adjacency graph, and OD data from the **source city**. The target city requires only urban features and graph structure.                                                                                                                                                                               |
+| **Output**                  | Complete Origin–Destination (OD) flow matrix for the target city.                                                                                                                                                                                                                                                                                                                                         |
+| **Main Findings**           | GODDAG consistently outperforms Gravity, Random Forest, GBRT, GAT and GMEL across U.S. and Chinese datasets, achieving approximately **14.5% RMSE improvement** and **5.62% CPC improvement** over competing transfer-learning baselines.                                                                                                                                                                 |
+| **Scientific Contribution** | Demonstrates that **OD generation can be formulated as a transferable representation learning problem**, where knowledge learned from one city can generalize to another through domain adaptation.                                                                                                                                                                                                       |
+| **Limitation**              | Requires a **source city with observed OD data** for transfer learning. It does **not infer behavioural parameters**, does **not separate structural and behavioural components**, and does **not explain the underlying mobility mechanism beyond learned representations**.                                                                                                                             |
+| **Relevance to Handbook**   | Strong support for **Stage 1 (Structural Component Representation)** and **Stage 4 (Mobility Synthesis)**. The paper learns origin and destination representations from urban features to generate OD, but treats mobility as a supervised learning problem rather than decomposing it into **Urban Structure + Behaviour**.                                                                              |
+| **Relation to This Thesis** | Similarity: both aim to reconstruct OD without direct OD observations in the target city. Difference: GODDAG transfers **representation** from another city, whereas this thesis aims to infer **structural components** ((O_i, A_j)) from urban structure and **behavioural parameters** ((\theta)) from aggregate travel-distance distributions, then synthesize OD through a generative Gravity model. |
+| **Key Takeaway**            | **Urban features contain transferable structural information sufficient to generate OD flows across cities, but the behavioural mechanism governing mobility remains implicit within the learned neural representation.**                                                                                                                                                                                 |
+
+---
+
+## Vai trò trong Knowledge Graph của Handbook
+
+```text
+Observed Urban Features
+        │
+        ▼
+Graph Representation Learning
+        │
+        ▼
+Origin Embedding      Destination Embedding
+        │                     │
+        └──────────┬───────────┘
+                   ▼
+            Transfer Learning
+                   ▼
+             OD Flow Generation
+```
+
+### Mapping vào Handbook
+
+| Handbook Component                  | GODDAG                                                                                                                                 |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Origin Potential ($O_i$)**        | Học embedding cho vùng gốc (origin embedding), nhưng không tách thành $O_i$ rõ ràng.                                                   |
+| **Destination Opportunity ($A_j$)** | Học embedding riêng cho vùng đích (destination embedding).                                                                             |
+| **Behaviour ($\theta$)**            | **Không được mô hình hóa hoặc nhận diện tường minh.**                                                                                  |
+| **Gravity Mechanism**               | Không sử dụng như mô hình sinh (generative model); chỉ sử dụng quy luật khoảng cách như một đặc trưng hỗ trợ (distance augmentation).  |
+| **Transferability**                 | **Đóng góp chính** của bài báo: chuyển tri thức OD giữa các thành phố bằng domain adversarial training.                                |
+
 
