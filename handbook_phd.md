@@ -541,15 +541,52 @@ Proposed PCSF-TIM Framework:
 ```
 * **ML Analogy:** Ground-truth OD matrices function exactly like **test labels in Machine Learning**: they do NOT participate in inference/training, but serve strictly to compute test accuracy/goodness-of-fit metrics.
 
-## 3. The Master 6-Column Causal Derivation & Literature Matrix
+## 3. The Symmetric Dual-Engine & Mobility Synthesis Architecture (Framework V2)
 
-| Stage | Scientific Question | Scientific Claim | Assumption | Inference Principle | Representative References |
+The dissertation is structured around an elegant **Symmetric Dual-Engine Architecture** that infers the three basic components of spatial interaction ($O_i$, $A_j$, $\theta$) before synthesizing survey-free mobility:
+
+```text
+                 Observed Urban Features                   Aggregate Distance Distribution y_TLD
+                            │                                                │
+                            │ ML / GeoAI                                     │ Conditional MLE
+                            ▼                                                ▼
+             Engine A: Structural Component Inference         Engine B: Behavioural Inference
+              (Infers Structural Components)                 (Infers Latent Behaviour Parameter)
+              ┌─────────────┴─────────────┐                                  │
+              ▼                           ▼                                  │
+       Origin Potential          Destination Opportunity                     │
+            (O_i)                       (A_j)                                │
+              └─────────────┬─────────────┘                                  │
+                            │                                                │
+                            └──────────────────────────┬─────────────────────┘
+                                                       │
+                                                       ▼
+                                        Engine C: Mobility Synthesis
+                                           (Gravity Generative Engine)
+                                                       │
+                                                       ▼
+                                        Reconstructed OD Matrix (T_ij)
+                                                       │
+                                                       ▼
+                                       Policy & Planning Applications
+```
+
+### The 3 Symmetric Engines of the Thesis
+| Component / Engine | Operational Input | Target Output | Scientific Method | Theoretical Role |
+| :--- | :--- | :--- | :--- | :--- |
+| **Engine A: Structural Component Inference** | Observable Urban Features (OSM, POIs, Satellite) | Structural Components $(O_i, A_j)$ | Machine Learning / GeoAI | Learns trip generation potential $O_i$ & attraction opportunity $A_j$ |
+| **Engine B: Behavioural Inference** | Aggregate Travel-Distance Evidence ($\mathbf{y}_{TLD}$) | Latent Behaviour Parameter $\theta$ | Conditional Maximum Likelihood (MLE) | Recovers collective distance-decay parameter $\theta$ |
+| **Engine C: Mobility Synthesis** | Inferred Structure $(O_i, A_j)$ + Inferred Behaviour $\theta$ | Full OD Flow Matrix ($T_{ij}$) | Forward Generative Gravity Model | Synthesizes survey-free OD matrix without fitting parameters |
+
+### Updated Scientific Inference Framework (V2 Matrix)
+
+| Stage | Scientific Question | Scientific Claim | Assumption | Inference Principle | Representative Literature |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **1. Urban Structure Representation** | What defines the spatial opportunities for mobility? | Urban mobility is fundamentally constrained by urban structure (population, attractions, spatial configuration). | **A1. Structure–Behaviour Separability** | Urban structure provides the structural inputs of the mobility system. | Wilson (1970); Barbosa et al. (2018 review); Deep Gravity (Simini et al., 2021); Spatial Representation Learning (2025–2026) |
-| **2. Aggregate Travel-Distance Distribution** | How are aggregate mobility observations generated? | Travel-distance distributions emerge from the interaction between urban structure and behavioural distance-decay. | **A2. Gravity Forward Assumption** | Forward gravity transforms $(\text{Structure}, \text{Behaviour}) \to \text{Distance Distribution}$. | Zipf (1946); Wilson (1970); Liang et al. (2013); Lenormand et al. (2016) |
-| **3. Behaviour Identification** | Can behavioural parameters be inferred from aggregate observations? | Aggregate travel-distance distributions preserve sufficient information to identify distance-decay parameters. | **A3. Information Sufficiency**<br>**A4. Identifiability** | Statistical inference (Likelihood / MLE) estimates $\theta$ from observed TLD. | Your methodological contribution (Paper 2 / PCSF-TIM); Likelihood theory; Gallotti et al. (2024) |
-| **4. OD Reconstruction** | How can complete mobility demand be reconstructed? | Given urban structure and behavioural parameters, the gravity model generates the OD matrix. | **A5. Generative Gravity Assumption** | Gravity acts as a generative model mapping $(\text{Structure}, \theta) \to \text{OD}$. | Gravity Model; Deep Gravity (2021); UGNN (2025); neuroGravity (2026) |
-| **5. Planning Application** | Why reconstruct OD? | OD demand is the operational representation required by planning models. | **A6. Planning Sufficiency** | Planning analyses consume OD demand rather than individual trajectories. | Ortúzar & Willumsen (2011); Barbosa et al. (2018); UGNN (2025); Imagery2Flow (2025) |
+| **1. Structural Component Inference** | How can structural components be inferred from open urban data? | Urban structure consists of **Origin Potential ($O_i$)** and **Destination Opportunity ($A_j$)**, both inferable from features. | **A1. Structure–Behaviour Separation** | Observable urban features $\to$ Structural representation $\to (O_i, A_j)$ | Wilson (1970); Generalized Radiation; Deep Gravity; UGNN; neuroGravity |
+| **2. Forward Mobility Generation** | How are aggregate mobility observations generated? | Aggregate travel-distance distributions arise from interaction between structure and behaviour. | **A2. Gravity Forward Assumption** | $(O_i, A_j, \theta) \to \text{Gravity} \to \text{Travel Distance Distribution}$ | Gravity; Tanner; Barbosa Review |
+| **3. Behavioural Inference** | Can behavioural parameters be recovered from aggregate evidence? | Aggregate travel-distance distributions preserve sufficient information to identify distance-decay. | **A3. Information Sufficiency**<br>**A4. Identifiability** | Likelihood / MLE : $\mathbf{y}_{TLD} \to \theta$ | **Core Contribution of the Thesis (Paper 2 / PCSF-TIM)** |
+| **4. Mobility Synthesis** | Can inferred structure and behaviour jointly reproduce mobility? | Combining inferred structural components and inferred behaviour reconstructs complete OD matrix. | **A5. Generative Gravity** | $(O_i, A_j, \hat{\theta}) \to \text{Gravity} \to \text{OD}$ | Gravity; Deep Gravity; neuroGravity |
+| **5. Planning Application** | Why reconstruct OD? | OD demand is the operational representation required by planning models. | **A6. Planning Sufficiency** | $\text{OD} \to \text{Planning Models} \to \text{Decision Support}$ | Barbosa Review; UGNN |
 
 ## 4. The Master 7-Column Literature & Conceptual Mapping Matrix
 
@@ -614,9 +651,23 @@ Proposed PCSF-TIM Framework:
 ### 5. Formal Theoretical Assumptions (A1–A7 Defense Taxonomy)
 Each formal assumption protects exactly one explicit arrow in the causal derivation chain ($\text{Structure} \to \text{Observation} \to \text{Inference} \to \text{Reconstruction} \to \text{Planning}$):
 
+#### Updated Assumption A1 (Structure–Behaviour Separability)
+> **"Human mobility can be decomposed into:**
+> * **Urban Structure, represented by the trip-generation potential of origins ($O_i$) and the trip-attraction opportunity of destinations ($A_j$);**
+> * **Behaviour, represented by the distance-decay mechanism governing travellers' responses to spatial separation."**
+
+#### Formal Scientific Claim of Stage 1
+> **"Urban structure is a latent structural representation consisting of two complementary components: origin potential ($O_i$) and destination opportunity ($A_j$). Observable urban features serve as representations of these latent structural components rather than direct inputs to mobility models."**
+
+#### The Internal Architecture of Urban Structure
+| Component | Scientific Meaning | Gravity Variable | Typical Representation | Representative Literature |
+| :--- | :--- | :--- | :--- | :--- |
+| **Origin Potential** | Capacity of a region to generate trips | $O_i$ | Population, residential density, demographics, housing | Wilson (1970); Classic Gravity literature |
+| **Destination Opportunity** | Capacity of a region to attract trips | $A_j$ | Employment, amenities, POIs, schools, healthcare, services, accessibility | Alis et al. (2021); Deep Gravity; UGNN; neuroGravity |
+
 | ID | Derivation Step | Formal Assumption | Role & Defense |
 | :--- | :--- | :--- | :--- |
-| **A1** ⭐⭐⭐ | Structure + Behaviour $\to$ Flow | **Structure–Behaviour Separability:** Mobility can be factorized into urban spatial structure and a distance-decay behavioural mechanism ($T_{ij} = S_{ij} \times f(d;\theta)$). | Foundation of the entire framework. Without A1, structure and behavior cannot be decoupled. |
+| **A1** ⭐⭐⭐ | Structure + Behaviour $\to$ Flow | **Structure–Behaviour Separability:** Mobility can be factorized into Urban Structure ($O_i, A_j$) and a distance-decay behavioural mechanism ($T_{ij} = O_i A_j f(d;\theta)$). | Foundation of the entire framework. Without A1, structure and behavior cannot be decoupled. |
 | **A2** | Structure + Behaviour $\to$ TLD | **Gravity Forward Assumption:** Aggregate mobility is generated by a gravity-type spatial interaction model. | Defines the forward generative model producing empirical observations. |
 | **A3** ⭐⭐⭐ | TLD $\to$ Inferred Behaviour $\theta$ | **Information Sufficiency:** Aggregate travel-distance distributions preserve sufficient statistical information about the distance-decay parameters. | Enables inverse inference from aggregate distance histograms to $\theta$. |
 | **A4** | TLD $\to$ Inferred Behaviour $\theta$ | **Parameter Identifiability:** Different behavioural parameters induce distinguishable travel-distance distributions (at least locally). | Ensures $\theta$ is uniquely or locally identifiable on the likelihood surface. |
