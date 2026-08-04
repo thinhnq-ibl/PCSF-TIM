@@ -20,15 +20,15 @@ The purpose is not to review all human mobility models, but to establish the sci
 
 # Central Scientific Question / Câu hỏi Khoa học Trung tâm
 
-Mobility aggregation inevitably removes detailed Origin–Destination interactions. **The central unanswered scientific question is not how to predict mobility from aggregate data, but what behavioural information remains statistically identifiable after mobility observations have been aggregated.**
+Mobility aggregation inevitably removes detailed Origin–Destination interactions. **The central unanswered scientific question is not how to predict mobility from aggregate data, but whether the behavioural mechanism governing spatial interaction can be identified from aggregate mobility observations.**
 
-> **Can aggregate mobility observations preserve sufficient information to identify collective distance-decay behaviour when urban spatial structure is independently specified?**
-> *(Liệu các quan sát di chuyển tổng hợp có bảo toàn đủ thông tin để định danh hành vi suy giảm khoảng cách tập thể khi cấu trúc không gian đô thị được xác định độc lập hay không?)*
+> **Can the behavioural mechanism governing spatial interaction be identified from aggregate mobility observations?**
+> *(Liệu cơ chế hành vi chi phối tương tác không gian có thể được định danh từ các quan sát di chuyển tổng hợp hay không?)*
 
 > [!NOTE]
 > ### Rigorous Conceptual Breakdown of the Central Question / Phân tích Khái niệm Chặt chẽ của Câu hỏi Trung tâm
 >
-> 1. **Mobility (Di chuyển Quần thể):** Collective population-level movement across an urban region (e.g., 10M daily trips in HCMC, NYC total OD), NOT microscopic individual travel itineraries.
+> 1. **Phenomenon vs. Scientific Object (Hiện tượng vs Đối tượng Khoa học):** **Human Mobility** is the observed empirical phenomenon (collective population-level movement across an urban region, e.g., 10M daily trips), whereas **Spatial Interaction** is the formal scientific object and mathematical model representing flow densities across spatial separation.
 > 2. **Observations (Quan sát vs Thực tế):** Data collected from empirical measurements (e.g., Trip-Length Distribution - TLD), which represents a transformed observation rather than the unobserved latent true flow matrix ($T_{ij}$).
 > 3. **Aggregate Mobility Observations (Quan sát Tổng hợp):** Aggregate mobility observations (hereafter abbreviated as aggregate observations) comprise observation layers such as Trip-Length Distributions (TLD) and other spatially aggregated mobility summaries.
 > 4. **Preserve Information (Bảo toàn Thông tin):** The residual statistical information surviving distance-domain projection $\mathcal{P}$ under spatial binning and link aggregation.
@@ -36,7 +36,7 @@ Mobility aggregation inevitably removes detailed Origin–Destination interactio
 > 6. **Identify (Định danh Tham số):** Inverse statistical inference deriving parameter vector $\hat{\theta}^* = (\alpha, \beta)$ from observed data via MLE, NOT flow prediction or matrix reconstruction.
 > 7. **Collective (Tính Tập thể):** Systemic population response to spatial separation across an urban region, NOT individual psychology or discrete choices.
 > 8. **Distance-decay (Suy giảm Khoảng cách):** The spatial friction function $f(d_{ij}; \theta)$ dictating how interaction probability declines with spatial separation.
-> 9. **Behaviour (Hành vi):** Narrowly defined in this Handbook as *the collective response to spatial separation encoded by the distance-decay function*, NOT mode choice, departure time, or route selection.
+> 9. **Behavioural Mechanism Governing Spatial Interaction (Cơ chế Hành vi Chi phối Tương tác Không gian):** In this dissertation/handbook, the behavioural mechanism governing spatial interaction refers to the component of a spatial interaction model that determines how travel propensity varies with spatial separation, after controlling for urban structural factors. Within the gravity framework, this mechanism is represented by the distance-decay function $f(d;\theta)$. It excludes mode choice, departure time, or route selection.
 >
 > **Core Scientific Essence / Bản chất Khoa học Cốt lõi:**
 > *When mobility data are aggregated into Trip-Length Distributions, losing detailed pairwise Origin-Destination links, does the aggregate distribution preserve sufficient statistical information to reliably infer population-level distance sensitivity parameters $\theta$?*
@@ -56,23 +56,23 @@ Throughout this Handbook:
 
 ## Guiding Philosophy / Triết lý Hướng dẫn
 
-> **EN:** *Human mobility research is ultimately concerned with understanding how observable urban structure gives rise to collective movement patterns, what information is preserved under different observation levels, and how this information can be used to reconstruct mobility in data-scarce environments.*
+> **EN:** *Within spatial interaction theory, human mobility emerges from the interaction between urban spatial structure and a behavioural mechanism governing how spatial separation influences interactions. In gravity models, this behavioural mechanism is represented by the distance-decay function, but the concept itself is more general than any particular mathematical formulation.*
 >
-> **VI:** *Nghiên cứu di chuyển con người rốt cuộc hướng tới việc hiểu cách cấu trúc đô thị có thể quan sát được tạo ra các mẫu hình di chuyển tập thể, thông tin nào được bảo toàn dưới các cấp độ quan sát khác nhau, và cách thông tin này có thể được sử dụng để tái tạo sự di chuyển trong môi trường khan hiếm dữ liệu.*
+> **VI:** *Trong lý thuyết tương tác không gian, sự di chuyển của con người nảy sinh từ sự tương tác giữa cấu trúc không gian đô thị và một cơ chế hành vi chi phối cách thức khoảng cách không gian ảnh hưởng đến các tương tác. Trong các mô hình trọng lực, cơ chế hành vi này được biểu diễn bởi hàm suy giảm khoảng cách, nhưng bản thân khái niệm này mang tính tổng quát hơn bất kỳ công thức toán học cụ thể nào.*
 
 ---
 
 ## Central Thesis & Research Hypothesis / Luận điểm & Giả thuyết Khoa học Trung tâm
 
-> **EN:** **This Handbook formulates and evaluates the central hypothesis that aggregate mobility observations retain sufficient statistical information to support the identification of effective collective distance sensitivity governing spatial interaction.**
+> **EN:** **This Handbook formulates and evaluates the central hypothesis that aggregate mobility observations preserve sufficient statistical information to identify the behavioural mechanism governing spatial interaction, provided that urban structural factors are independently specified.**
 > 
-> **VI:** **Handbook này xây dựng và đánh giá giả thuyết trung tâm rằng các quan sát di chuyển tổng hợp lưu giữ đầy đủ thông tin thống kê để hỗ trợ việc định danh độ nhạy khoảng cách tập thể hiệu dụng chi phối tương tác không gian.**
+> **VI:** **Handbook này xây dựng và đánh giá giả thuyết trung tâm rằng các quan sát di chuyển tổng hợp bảo toàn đủ thông tin thống kê để định danh cơ chế hành vi chi phối tương tác không gian, với điều kiện các yếu tố cấu trúc đô thị được xác định độc lập.**
 >
 > ---
 >
-> **EN:** *This Handbook develops the scientific argument that effective collective distance-decay parameters $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$ can be statistically identified from aggregate observations (such as Trip-Length Distributions) when urban spatial structure is independently specified from open spatial data.*
+> **EN:** *This Handbook develops the scientific argument that the behavioural mechanism governing spatial interaction, represented by effective distance-decay parameters $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$, can be statistically identified from aggregate observations (such as Trip-Length Distributions) when urban spatial structure is independently specified from open spatial data.*
 >
-> **VI:** *Cuốn Handbook này phát triển lập luận khoa học rằng các tham số suy giảm theo khoảng cách tập thể hiệu dụng $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$ có thể được định danh thống kê từ các quan sát tổng hợp (như Phân bố Độ dài Chuyến đi - TLD) khi cấu trúc không gian đô thị được xác định độc lập từ dữ liệu không gian mở.*
+> **VI:** *Cuốn Handbook này phát triển lập luận khoa học rằng cơ chế hành vi chi phối tương tác không gian, được biểu diễn bởi các tham số suy giảm khoảng cách tập thể hiệu dụng $\hat{\theta}^* = (\hat{\alpha}^*, \hat{\beta}^*)$, có thể được định danh thống kê từ các quan sát tổng hợp (như Phân bố Độ dài Chuyến đi - TLD) khi cấu trúc không gian đô thị được xác định độc lập từ dữ liệu không gian mở.*
 
 > [!NOTE]
 > **Boundary of the Hypothesis / Scope Ranh giới Giả thuyết:**
@@ -227,6 +227,10 @@ Throughout this Handbook:
 >      1. **Cột sống Thống kê (Statistical Backbone):** $\text{Quá trình Sinh Dữ liệu (DGP)} \longrightarrow \text{Mô hình Xác suất (Multinomial)} \longrightarrow \text{Likelihood} \longrightarrow \text{MLE} \longrightarrow \text{Negative Log-Likelihood (NLL)}$.
 >      2. **Nguồn gốc Hàm Mất mát:** Cross-Entropy không phải là một thuật toán tối ưu hóa tự phát; nó chính là Negative Log-Likelihood chính xác của mô hình Multinomial, tương đương toán học với việc tối thiểu hóa độ lệch thông tin KL Divergence.
 >      3. **Định vị Khoa học:** Tối ưu hóa số (L-BFGS-B) tìm bộ ước tính tham số $\hat{\theta}^*$, trong khi tính định danh tham số được đánh giá thông qua bằng chứng thống kê thực nghiệm (độ lõm bề mặt likelihood, khôi phục giả lập, tính ổn định liên đô thị) thay vì tuyên bố chứng minh toán học tuyệt đối. Kiểm chứng lưu lượng hạ nguồn củng cố giá trị dự báo trong các giả định quan sát và ranh giới phạm vi được xác định rõ.
+>
+> 9. **The Evaluation–Inference Separation Principle / Nguyên lý Tách biệt Đánh giá - Suy luận:** 
+>    - **EN:** Ground-truth OD matrices are used exclusively for scientific evaluation and benchmarking, not for behavioural inference. Behavioural parameters $\hat{\theta}^*$ are inferred solely from aggregate mobility observations (observed TLD) conditional on spatial exposure $E_k$. Ground-truth OD matrices serve only as a downstream test benchmark to assess the validity of the inferred behaviour through reconstruction accuracy, mathematically analogous to ground-truth test labels in machine learning evaluation. During real-world deployment, zero OD surveys are required.
+>    - **VI:** Các ma trận OD thực tế (Ground-truth OD) được sử dụng **độc quyền cho mục đích đánh giá khoa học và tạo benchmark**, không tham gia vào suy luận hành vi. Các tham số hành vi $\hat{\theta}^*$ được suy luận **hoàn toàn từ quan sát di chuyển tổng hợp (observed TLD)** điều kiện hóa trên tiếp xúc không gian $E_k$. Ma trận OD thực tế chỉ đóng vai trò là nhãn kiểm chứng hạ nguồn để đánh giá độ chính xác của hành vi được suy luận, tương tự toán học với nhãn kiểm thử (test labels) trong đánh giá Học máy. Trong triển khai thực tế, quy trình hoàn toàn không cần khảo sát OD địa phương.
 
 ---
 
