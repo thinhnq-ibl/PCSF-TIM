@@ -1,143 +1,194 @@
 ---
-title: "Master PhD Monograph Architecture & Scientific Blueprint"
-subtitle: "Bản Thiết kế Luận án Tiến sĩ theo Kiến trúc Monograph 6 Chương"
+title: "PhD Operating System & Master Research Notebook (handbook_phd.md)"
+subtitle: "Hệ Điều Hành Luận án Tiến sĩ & Sổ tay Nghiên cứu Khoa học Phân tích"
 author: "PhD Candidate"
 date: "2026"
-anchor-reference: "Handbook.md (Anchor for Chapter 3: Behaviour Identification)"
+anchor-reference: "Handbook.md (Anchor for Paper 2 / Stage 1 Knowledge Base)"
+system-protocol: "One Conversation → One Refinement"
 ---
 
-# Master PhD Monograph Architecture & Scientific Blueprint
-# Bản Thiết kế Luận án Tiến sĩ theo Kiến trúc Monograph 6 Chương
-
----
-
-## 📌 Relationship to `Handbook.md` (The Anchor)
-
-* **[`handbook_phd.md`](file:///D:/research/PCSF-TIM/handbook_phd.md)**: Định hình toàn bộ **Kiến trúc Luận án Tiến sĩ 2 Tầng (Two-Tier Monograph Architecture)** gồm 6 Chương xoay quanh 1 Câu hỏi Trung tâm.
-* **[`Handbook.md`](file:///D:/research/PCSF-TIM/Handbook.md)**: Giữ nguyên 100% vai trò **Neo giữ Lý thuyết (Theoretical Anchor)** chuyên sâu cho **Chapter 3 (Collective Behaviour Identification)**.
+# PhD Operating System & Master Research Notebook
+# Hệ Điều Hành Luận án Tiến sĩ & Sổ tay Nghiên cứu Khoa học
 
 ---
 
-# I. The Grand Scientific Question of the Thesis
+## 📌 Three Evolutionary Stages of the PhD Journey
 
-Toàn bộ Luận án Tiến sĩ xoay quanh **MỘT CÂU HỎI KHOA HỌC TRUNG TÂM DUY NHẤT**:
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 1 (Completed): Handbook.md                                                       │
+│ • Focus: "What is Human Mobility?" (Knowledge Acquisition & Literature Synthesis).      │
+│ • Role: Immutable Anchor for Paper 2 (PCSF-TIM / Behaviour Identification).             │
+└──────────────────────────────────────────┬─────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 2 (Active - Operating System): handbook_phd.md                                   │
+│ • Focus: "What is my specific scientific contribution to Human Mobility?"              │
+│ • Role: Living PhD Notebook & Decision Operating System (8 Modules).                   │
+└──────────────────────────────────────────┬─────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ STAGE 3 (Future Output): PhD Dissertation & Monograph                                  │
+│ • Focus: 6-Chapter PhD Monograph Defense & Publications.                               │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
+---
+
+# MODULE 1: Research Vision (The Manifesto)
+
+> **"Human mobility should not only be predicted through black-box computational models, but fundamentally understood through the explicit theoretical separation of urban spatial structure and collective travel behaviour."**
+
+### Core Position Statement
+This dissertation rejects the paradigm of treating spatial interaction as an uninterpretable end-to-end mapping ($\text{Spatial Data} \to \text{OD}$). Instead, it establishes that population movement is the confluence of two independent physical-statistical processes: **Urban Spatial Structure** (observable opportunity distributions) and **Collective Travel Behaviour** (population distance sensitivity). 
+
+By explicitly decoupling these components, we unlock survey-free, zero-shot origin-destination estimation for data-scarce cities worldwide.
+
+---
+
+# MODULE 2: Scientific Questions Chain
+
+The entire PhD dissertation addresses **One Grand Scientific Question**, broken down into **Six Sequential Scientific Sub-Questions** corresponding to the 6 chapters of the PhD monograph:
+
+### Grand Scientific Question
 > **How can human mobility be understood by explicitly separating urban structure from collective travel behaviour?**
->
-> *(Làm thế nào để hiểu về di chuyển của con người bằng cách tách biệt một cách rõ ràng giữa cấu trúc đô thị và hành vi di chuyển tập thể?)*
+
+### Sequential Sub-Questions (Chapter Mapping)
+* **Q1 (Chapter 1 - Theory):** *What determines human mobility?*
+* **Q2 (Chapter 2 - Urban Structure):** *How should urban structure be represented from open spatial data?*
+* **Q3 (Chapter 3 - Behaviour Identification - SCIENTIFIC CORE):** *How can collective travel behaviour be identified from aggregate mobility observations under spatial information loss?*
+* **Q4 (Chapter 4 - Transferability):** *How can urban structural knowledge be transferred across cities without local OD surveys?*
+* **Q5 (Chapter 5 - Survey-Free OD - ENGINEERING DEMO):** *How can complete OD flow matrices be generated by combining transferred urban structure and locally identified behaviour?*
+* **Q6 (Chapter 6 - Applications & Validation):** *How can the integrated framework support transportation planning and enable indirect model validation?*
 
 ---
 
-# II. Two-Tier Thesis Structure (Cấu trúc Luận án 2 Tầng Cân bằng)
+# MODULE 3: Scientific Philosophy & Causal Chain
+
+## 1. The Structure–Behaviour Decoupling Axiom
+$$\text{Human Mobility} = \text{Urban Structure Representation } (\mathbf{S}_i) \times \text{Collective Behaviour Index } (\theta)$$
+
+* **Urban Structure ($\mathbf{S}_i$):** Objective, spatial distribution of human activities, land use, POIs, and transport networks. Learned via Deep Learning / GNNs.
+* **Collective Behaviour ($\theta$):** Intrinsic population distance sensitivity and spatial friction response. Identified via Probabilistic Likelihood Inference (MLE).
+* **Decoupling Value:** Solves the cross-city transferability dilemma: $\mathbf{S}_i$ is transferable across space, whereas $\theta$ is an intrinsic local city property identified from privacy-preserving aggregate TLDs.
+
+## 2. The 5-Stage Causal Chain of Urban Mobility Science
+```text
+Urban Environment ──► Urban Structure (S_i) ──► Collective Behaviour (θ) ──► Human Mobility (T_ij) ──► Transportation System
+```
+* **Behaviour ($\theta$)** serves as the **pivotal scientific bridge** connecting Urban Design ($\mathbf{S}_i$) to the Transportation System (Traffic, Public Transit).
+
+---
+
+# MODULE 4: Supporting Theoretical Foundations
+
+*(This section contains the active theoretical pillars supporting THIS thesis, distinct from a generic literature review)*
+
+### 1. Spatial Interaction & Factorization Theory
+* **Wilson (1967, 1970)**: Entropy-maximizing foundations for spatial interaction decomposition $T_{ij} = O_i A_j f(d_{ij};\theta)$.
+* **Erlander & Stewart (1990) / O'Kelly (2009)**: Mathematical separation of origin/destination attraction constraints from deterrence.
+
+### 2. Random Utility & Discrete Choice Behaviour
+* **Ben-Akiva & Lerman (1985)**: Random Utility Maximization (RUM) grounding destination choice choices.
+* **Fotheringham & O'Kelly (1989)**: Spatial deterrence as spatial friction and opportunity availability.
+
+### 3. Urban Complexity & Morphogenesis
+* **Batty (2013) & Barthelemy (2016, 2018)**: Complex systems view of urban scaling, spatial networks, and population mobility distributions.
+
+### 4. Frequentist Likelihood & Information Bounds
+* **Flowerdew & Aitkin (1982)**: Poisson probabilistic specification for spatial interaction counts.
+* **Casella & Berger (2002) / Cover & Thomas (2006)**: Asymptotic properties of MLE and Information Loss under distance domain projection $\mathcal{P}$.
+
+---
+
+# MODULE 5: Master Research Framework & Publication Roadmap
 
 ```text
 ===================================================================================================
- TIER A: SCIENTIFIC CONTRIBUTION (Human Mobility Science)
+ TIER A: SCIENTIFIC CONTRIBUTION (Human Mobility Science) ──► Primary Novelty
  "How to infer OD without surveys?"
 ───────────────────────────────────────────────────────────────────────────────────────────────────
- • Core: Urban Structure (S_i) + Collective Behaviour (θ) ──► Survey-Free Zero-Shot OD Matrix (T_ij)
- • Target Audience: Human Mobility / Urban AI / Spatial Physics Committees
+ • Structure (S_i) + Behaviour (θ) ──► PCSF-TIM Framework ──► Survey-Free Zero-Shot OD Matrix (T_ij)
 ===================================================================================================
                                                 │
                                                 ▼ (Generated OD Matrix T_ij)
 ===================================================================================================
- TIER B: ENGINEERING CONTRIBUTION & POLICY IMPACT (Transportation Engineering)
+ TIER B: ENGINEERING CONTRIBUTION & POLICY IMPACT (Transportation Engineering) ──► Demonstration
  "What to do with the generated OD?"
 ───────────────────────────────────────────────────────────────────────────────────────────────────
- • Core: Generated OD ──► Transit Assignment ──► Indirect Boarding Validation & Bus/Metro Planning
- • Target Audience: Transportation Planning / Civil Engineering Committees & City Planning Authorities
+ • Generated OD ──► Transit Assignment ──► Indirect Boarding Validation & Bus/Metro Planning
 ===================================================================================================
 ```
 
+### 3-Paper Publication Roadmap
+1. **Paper 1 (Structure Learning):** *Transferable Urban Structure Learning from Multi-City Open Data* (CEUS / IEEE TKDE / KDD).
+2. **Paper 2 (Behaviour Identification - ANCHORED BY `Handbook.md`):** *Behaviour Identification from Aggregate Mobility Observations under Information Loss* (TR-B / PRE / Nature Comms).
+3. **Paper 3 (Integrated Thesis):** *A Hybrid Survey-Free OD Estimation Framework for Data-Scarce Metropolitan Regions* (TR-C / TR-A / IEEE T-ITS).
+
 ---
 
-# III. The 6-Chapter Monograph Architecture
+# MODULE 6: Scientific Evidence Matrix
 
-Sáu chương của luận án là 6 bước tiến trình không thể tách rời:
+*(Mapping core scientific claims to authoritative supporting literature and empirical evidence)*
+
+| Scientific Claim | Theoretical / Literature Basis | Empirical Evidence |
+| :--- | :--- | :--- |
+| **C1. Structure and Behaviour are mathematically separable.** | Zipf (1946), Wilson (1971), Erlander & Stewart (1990) | Gravity multiplicative decomposition $T_{ij} = O_i A_j f(d;\theta)$ |
+| **C2. Deep Learning models encode structural context.** | Simini (2021), Yang (2026), Enaya (2026) | SOTA neural gravity models re-embed multiplicative structural factorization |
+| **C3. Local OD calibration encounters privacy limits.** | de Montjoye (2013), Meta MDM (2021) | 95% individual re-identification from 4 spatiotemporal points |
+| **C4. Aggregate TLDs retain distance-decay signatures.** | Cover & Thomas (2006), Casella & Berger (2002) | Distance-domain projection $\mathcal{P}$ preserves macro decay profiles |
+| **C5. Structural exposure correction is mandatory.** | Hansen (1959), Fotheringham (1989) | Ablation $E_k \equiv 1$ causes $>30\%$ parameter shift in synthetic experiments |
+| **C6. Indirect Boarding Validation validates zero-shot OD.** | Ortúzar & Willumsen (2011) | Transit assignment predicted boardings vs observed Smartcard boardings |
+
+---
+
+# MODULE 7: Open Problems & Observational Boundaries
+
+*(Tracking unresolved questions and boundaries to address during PhD execution)*
+
+* **OP1 (Structural Transferability Limits):** How far across cultural/morphological domains can US-trained GNN structure representations ($\mathbf{S}_i$) be transferred without severe domain shift?
+* **OP2 (Behavioural Temporal Stability):** Is the City Behavioural Index $\theta$ temporally stable across weekdays vs weekends, or pre- vs post-pandemic periods?
+* **OP3 (Spatial Resolution Sensitivity):** How does bin width choice ($\Delta d = 500\text{m}$ vs $1\text{km}$) in aggregate TLDs affect Fisher Information and Cramér-Rao precision bounds?
+* **OP4 (Modality Confounding):** How can mode-specific travel (motorcycle vs transit) be disentangled when aggregate TLDs reflect all-mode travel?
+
+---
+
+# MODULE 8: Future Research Vault & Horizon Scanner
+
+*(Idea Vault: Capturing new ideas without polluting the core theoretical framework)*
+
+* **FR1 (Indirect Transit Assignment Validation):** Using HCMC bus boarding smartcard data to run transit assignment on $\hat{T}_{ij}$ for indirect ground-truth validation.
+* **FR2 (Urban Foundation Models):** Exploring Geo-LLMs or Urban Foundation Models (2025–2026) for zero-shot urban structure embedding in Paper 1.
+* **FR3 (Metro Line 2 Planning Impact):** Applying the integrated framework to evaluate feeder bus route restructuring for HCMC Metro Line 2.
+* **FR4 (Multi-Modal Behavioural Breakdown):** Extending single-index $\theta$ to multi-modal decay profiles when mode-split TLDs become available.
+
+---
+
+# IX. Operating System Rules & Idea Evaluation Algorithm
+
+Every new idea, data source, or literature suggestion MUST pass through this 3-Step Algorithm before inclusion:
 
 ```text
-                               Grand Scientific Question:
- "How can human mobility be understood by explicitly separating urban structure from collective travel behaviour?"
-                                            │
-       ┌────────────────────────────────────┼────────────────────────────────────┐
-       ▼                                    ▼                                    ▼
-Chapter 1: Why separate?              Chapter 2: How represent?            Chapter 3: How identify?
-What determines mobility?              How represent structure?             How identify behaviour?
-(Human Mobility Theory)               (Urban Structure Representation)     (Behaviour Identification)
-                                                                            [SCIENTIFIC CORE]
-       │                                    │                                    │
-       ├────────────────────────────────────┼────────────────────────────────────┘
-       ▼                                    ▼                                    ▼
-Chapter 4: How transfer?              Chapter 5: How generate OD?          Chapter 6: How support planning?
-How transfer knowledge?               Can OD be generated survey-free?     How run transit assignment & policy?
-(Transferable Urban Knowledge)        (Survey-Free OD Generation)          (Transportation Applications)
-                                      [ENGINEERING DEMO]                   [INDIRECT VALIDATION & POLICY]
+                          New Idea / Idea Suggestion
+                                      │
+                                      ▼
+             [Step 1: Which Scientific Question does it answer?]
+                 │                                        │
+             (Answers Q1-Q6)                         (No direct Q)
+                 │                                        │
+                 ▼                                        ▼
+    [Step 2: Assign Module]                     [Do NOT put in Core]
+     • Q1-Q5 ──► Core Modules 1-5                 • App-only ──► Module 8 (Vault)
+     • App   ──► Module 5/8 (App/Vault)           • Speculation ──► Module 7 (Open Prob)
+                 │
+                 ▼
+    [Step 3: Vision Alignment Check]
+     • Preserves Structure-Behaviour Decoupling? ──► Append to Module
+     • Alters Core Vision?                      ──► Trigger Formal OS Revision
 ```
 
----
-
-# IV. Detailed Chapter Breakdown & Scientific Questions
-
-### Chapter 1. Human Mobility Theory
-* **Scientific Question:** *What determines human mobility?*
-* **Scope & Content:** Nền tảng lý thuyết Tương tác Không gian (Wilson 1967, Gravity, Radiation), Nguyên lý Tách biệt Cấu trúc vs Hành vi, và ranh giới tri thức hiện tại.
-* **Role:** **Theoretical Foundation.**
-
-### Chapter 2. Urban Structure Representation
-* **Scientific Question:** *How should urban structure be represented?*
-* **Scope & Content:** Phân rã các lớp cấu trúc đô thị (Population, Employment, POIs, Road Network, Land Use, Accessibility) và sử dụng Deep Learning/GNNs để học vectơ biểu diễn ẩn $\mathbf{S}_i$ (latent urban representation).
-* **Role:** **Urban AI & Representation Learning.**
-
-### Chapter 3. Collective Behaviour Identification
-* **Scientific Question:** *How can collective travel behaviour be identified?*
-* **Scope & Content:** Ước tính chỉ số hành vi suy giảm khoảng cách $\theta = (\alpha, \beta)$ từ các quan sát di chuyển nén (observed TLD) qua hàm khả năng xác suất (Conditional MLE) và đánh giá tính định danh (Identifiability). *(Được neo giữ bởi `Handbook.md`)*.
-* **Role:** **THE SOUL OF THE THESIS (Primary Scientific Contribution).**
-
-### Chapter 4. Transferable Urban Knowledge
-* **Scientific Question:** *How can urban knowledge be transferred across cities?*
-* **Scope & Content:** Học biểu diễn Cấu trúc $\mathbf{S}_i$ từ 50 thành phố US, xây dựng lý thuyết chuyển giao tri thức không gian vượt đô thị (Transferability & Domain Adaptation) mà không bị phụ thuộc vào dữ liệu OD địa phương.
-* **Role:** **AI Transferability & Cross-City Generalization.**
-
-### Chapter 5. Survey-Free OD Generation
-* **Scientific Question:** *How can OD be generated without surveys?*
-* **Scope & Content:** Hợp nhất Cấu trúc học được ($\mathbf{S}_i$, Ch 2/4) + Hành vi định danh được ($\theta$, Ch 3) vào mô hình Trọng lực suy luận để tái tạo ma trận lưu lượng OD $T_{ij}$ không cần khảo sát địa phương.
-* **Role:** **ENGINEERING DEMONSTRATION & PROOF-OF-CONCEPT.**
-
-### Chapter 6. Transportation Applications & Indirect Validation
-* **Scientific Question:** *How can the framework support transportation planning and enable indirect model validation?*
-* **Scope & Content:** 
-  1. **Transit Assignment:** Chạy mô hình gán lưu lượng giao thông (Transit Assignment) từ ma trận OD $\hat{T}_{ij}$ sinh ra.
-  2. **Indirect Boarding Validation:** So sánh Lượt khách dự báo tại trạm (*Predicted Boarding*) với Lượt khách thực tế (*Observed Smartcard Boarding*) để kiểm chứng gián tiếp độ chính xác của ma trận OD khi không có Ground-truth OD survey.
-  3. **Planning Scenario Analysis:** Đánh giá kịch bản cắt/điều chỉnh tuyến bus (Route 08 removal) và tác động của Metro Số 2 lên mạng lưới bus gom (Feeder Bus Networks).
-* **Role:** **INDIRECT VALIDATION, PRACTICAL UTILITY & POLICY IMPACT.**
-
----
-
-# V. Precise Role of Bus Data: Application & Indirect Validation
-
-```text
-   INCORRECT (Training Trap):    Bus Data ──► Learn emission O_i / Gravity flows  (FLAWED)
-
-   CORRECT (Gold-Standard):      Generated OD ──► Transit Assignment ──► Bus Planning
-                                                         │
-                                                         ▼
-                                           Indirect Boarding Validation
-                                          (Predicted vs Observed Boardings)
-```
-
-> **Nguyên tắc:** Dữ liệu xe buýt được chuyển từ **Training Data** sang **Application & Indirect Validation Data**. Đây là cách duy nhất để chứng minh độ chính xác của ma trận OD tại đô thị thiếu dữ liệu (TPHCM) mà không cần OD survey tốn kém.
-
----
-
-# VI. The Literature Bible (10 Classical & SOTA Categories)
-
-1. **Wilson (1967, 1970)** — Entropy & Spatial Interaction (*Chapter 1*)
-2. **Ben-Akiva & Lerman (1985)** — Discrete Choice Analysis & Random Utility (*Chapter 1 & 3*)
-3. **Ortúzar & Willumsen (2011)** — Modelling Transport (*Transportation & Transit Assignment Bible*)
-4. **Michael Batty (2013)** — The New Science of Cities (*Urban Science*)
-5. **Marc Barthelemy (2016, 2018)** — Cities & Complex Systems / Physics Reports 2018 (*Mobility Bible*)
-6. **David Levinson** — Accessibility & Transport Geography (*Chapter 2 & 6*)
-7. **Chodrow (2017)** — Spatial Information & Transferability (*Chapter 4*)
-8. **Geo Representation Learning Literature** — Spatial embeddings (*Chapter 2*)
-9. **Barbosa et al. (2018)** — Human Mobility Review (*Chapter 1*)
-10. **GeoAI & Urban Foundation Models (2024–2026)** — SOTA Urban AI (*Chapter 2 & 4*)
+### Golden Protocol: "One Conversation → One Refinement"
+1. **Exploration:** Brainstorm and evaluate new ideas during conversation.
+2. **Consolidation:** Immediately refine `handbook_phd.md` after each conversation to lock in progress.
