@@ -559,7 +559,7 @@ Crucially, \citet{hyman1969calibration} formalized the foundational assumption i
 
 ### Deep Dive: Privacy Preservation & Aggregate Data Shift (Claim C3) / Phân tích Sâu: Bảo vệ Quyền riêng tư & Chuyển dịch Dữ liệu Tổng hợp (Luận điểm C3)
 
-> **EN:** **Empirically,** individual mobility trajectories exhibit extreme spatio-temporal uniqueness: just four location-time points are sufficient to uniquely re-identify approximately 95% of individuals \citep{de2013unique}. In response, aggregate mobility products—including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior \citep{buckee2020thinking, oliver2020mobile, pappalardo2023analytical}.
+> **EN:** **Empirically,** individual mobility trajectories exhibit extreme spatio-temporal uniqueness: just four location-time points are sufficient to uniquely re-identify approximately 95% of individuals \citep{de2013unique}. Furthermore, as \citet{gallotti2024distorted} demonstrated, privacy-preserving matrix pruning severely distorts microscopic origin-destination flow matrices. In response, aggregate mobility products—including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior \citep{buckee2020thinking, oliver2020mobile, pappalardo2023analytical}.
 >
 > **Conceptually,** this aggregate data shift replaces fine-grained origin-destination pairs with distance-binned summaries, preventing direct application of supervised OD calibration methods.
 >
@@ -778,7 +778,7 @@ Why has existing literature not treated TLD as a primary inference space?
 
 > **EN:** **Empirically,** landmark studies in spatial interaction modeling \citep{lenormand2016systematic, simini2012universal} established Trip-Length Distributions as essential benchmark targets.
 >
-> **Conceptually,** in these conventional frameworks, models are calibrated using supervised local OD matrices $T_{ij}^{\text{obs}}$, and the resulting predicted flows are aggregated into distance histograms to compute quantitative goodness-of-fit metrics (such as CPC / Sørensen index). More fundamentally, treating TLD primarily as an output evaluation metric assumes that local OD flow matrices are available during calibration—a condition that fails under privacy bounds.
+> **Conceptually,** in these conventional frameworks, models are calibrated using supervised local OD matrices $T_{ij}^{\text{obs}}$, and the resulting predicted flows are aggregated into distance histograms to compute quantitative goodness-of-fit metrics (such as CPC / Sørensen index). Crucially, \citet{merlin2020medians} explicitly warned against unconditioned TLD curve-fitting, noting that directly fitting deterrence curves to observed TLDs lacks a sound mathematical basis because it ignores origin-destination spatial structure. More fundamentally, treating TLD primarily as an output evaluation metric assumes that local OD flow matrices are available during calibration—a condition that fails under privacy bounds.
 >
 > **In this handbook,** we articulate that the central unanswered scientific question is not how to predict mobility from aggregate data, but what behavioural information remains statistically identifiable after mobility observations have been aggregated.
 >

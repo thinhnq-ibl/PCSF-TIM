@@ -39,12 +39,12 @@ system-protocol: "One Conversation → One Refinement"
 
 # MODULE 1: Research Vision (The Manifesto)
 
-> **"Human mobility should not only be predicted through black-box computational models, but fundamentally understood through the explicit theoretical separation of urban spatial structure and collective travel behaviour."**
+> **"Human mobility should not only be predicted through black-box computational models, but fundamentally understood through the explicit theoretical separation of urban spatial structure and collective travel behaviour under aggregate observation loss."**
 
 ### Core Position Statement
 This dissertation rejects the paradigm of treating spatial interaction as an uninterpretable end-to-end mapping ($\text{Spatial Data} \to \text{OD}$). Instead, it establishes that population movement is the confluence of two independent physical-statistical processes: **Urban Spatial Structure** (observable opportunity distributions) and **Collective Travel Behaviour** (population distance sensitivity). 
 
-By explicitly decoupling these components, we unlock survey-free, zero-shot origin-destination estimation for data-scarce cities worldwide.
+Rather than asking solely "How can we predict flow?", the proposal investigates a deeper information-theoretic question: **What statistical information survives spatial aggregation, and does aggregate mobility preserve sufficient information for behavioural parameter identification?**
 
 ---
 
@@ -70,8 +70,9 @@ The entire PhD dissertation addresses **One Grand Scientific Question**, broken 
 ## 1. The Structure–Behaviour Decoupling Axiom
 $$\text{Human Mobility} = \text{Urban Structure Representation } (\mathbf{S}_i) \times \text{Collective Behaviour Index } (\theta)$$
 
+* **Statistical Formulation:** Given known/observed Urban Structure $\mathbf{S}$, the residual parameter space $P(\text{TLD} \mid \theta, \mathbf{S})$ collapses to a low-dimensional unknown parameter vector $\theta = (\alpha, \beta)$, providing the mathematical intuition for parameter identification under aggregate loss.
 * **Urban Structure ($\mathbf{S}_i$):** Objective, spatial distribution of human activities, land use, POIs, and transport networks. Learned via Deep Learning / GNNs.
-* **Collective Behaviour ($\theta$):** Intrinsic population distance sensitivity and spatial friction response. Identified via Probabilistic Likelihood Inference (MLE).
+* **Collective Behaviour ($\theta$):** Intrinsic population distance sensitivity and spatial friction response. Hypothesized to be identifiable via Probabilistic Likelihood Inference (MLE).
 * **Decoupling Value:** Solves the cross-city transferability dilemma: $\mathbf{S}_i$ is transferable across space, whereas $\theta$ is an intrinsic local city property identified from privacy-preserving aggregate TLDs.
 
 ## 2. The 5-Stage Causal Chain of Urban Mobility Science
@@ -89,17 +90,21 @@ Urban Environment ──► Urban Structure (S_i) ──► Collective Behaviour
 ### 1. Spatial Interaction & Factorization Theory
 * **Wilson (1967, 1970)**: Entropy-maximizing foundations for spatial interaction decomposition $T_{ij} = O_i A_j f(d_{ij};\theta)$.
 * **Erlander & Stewart (1990) / O'Kelly (2009)**: Mathematical separation of origin/destination attraction constraints from deterrence.
+* **Merlin (2020)**: Inspiring methodological precedent demonstrating that median travel duration matching calibrates single-parameter gravity models under fixed structure, while explicitly warning against unconditioned TLD curve-fitting (which ignores spatial structure).
 
 ### 2. Random Utility & Discrete Choice Behaviour
-* **Ben-Akiva & Lerman (1985)**: Random Utility Maximization (RUM) grounding destination choice choices.
+* **Ben-Akiva & Lerman (1985)**: Random Utility Maximization (RUM) grounding destination choice.
 * **Fotheringham & O'Kelly (1989)**: Spatial deterrence as spatial friction and opportunity availability.
 
-### 3. Urban Complexity & Morphogenesis
-* **Batty (2013) & Barthelemy (2016, 2018)**: Complex systems view of urban scaling, spatial networks, and population mobility distributions.
+### 3. Privacy Pruning & Information Theory Bounds
+* **de Montjoye (2013)**: Trajectory re-identification bounds (95% re-identification from 4 spatiotemporal points).
+* **Gallotti et al. (2024)**: Demonstrated that privacy-preserving matrix pruning severely distorts micro origin-destination flows.
+* **Cover & Thomas (2006) / Casella & Berger (2002)**: Information-theoretic bounds and Multinomial Probabilistic Likelihood derivation for binned spatial data:
+  \[ P(k \mid E_k, \theta) = \frac{E_k \, f(d_k; \theta)}{\sum_{m=1}^K E_m \, f(d_m; \theta)} \]
 
-### 4. Frequentist Likelihood & Information Bounds
-* **Flowerdew & Aitkin (1982)**: Poisson probabilistic specification for spatial interaction counts.
-* **Casella & Berger (2002) / Cover & Thomas (2006)**: Asymptotic properties of MLE and Information Loss under distance domain projection $\mathcal{P}$.
+### 4. Urban Complexity & Spatial Heterogeneity Limits
+* **Batty (2013) & Barthelemy (2016, 2018)**: Complex systems view of urban scaling, spatial networks, and population mobility distributions.
+* **Yang et al. (2014)**: Limits of classical gravity assumptions under extreme spatial heterogeneity and polycentric urban structures.
 
 ---
 
@@ -137,9 +142,9 @@ Urban Environment ──► Urban Structure (S_i) ──► Collective Behaviour
 | :--- | :--- | :--- |
 | **C1. Structure and Behaviour are mathematically separable.** | Zipf (1946), Wilson (1971), Erlander & Stewart (1990) | Gravity multiplicative decomposition $T_{ij} = O_i A_j f(d;\theta)$ |
 | **C2. Deep Learning models encode structural context.** | Simini (2021), Yang (2026), Enaya (2026) | SOTA neural gravity models re-embed multiplicative structural factorization |
-| **C3. Local OD calibration encounters privacy limits.** | de Montjoye (2013), Meta MDM (2021) | 95% individual re-identification from 4 spatiotemporal points |
-| **C4. Aggregate TLDs retain distance-decay signatures.** | Cover & Thomas (2006), Casella & Berger (2002) | Distance-domain projection $\mathcal{P}$ preserves macro decay profiles |
-| **C5. Structural exposure correction is mandatory.** | Hansen (1959), Fotheringham (1989) | Ablation $E_k \equiv 1$ causes $>30\%$ parameter shift in synthetic experiments |
+| **C3. Local OD calibration encounters privacy limits.** | de Montjoye (2013), Gallotti et al. (2024), Meta MDM (2021) | 95% trajectory re-identification & privacy matrix pruning distortion |
+| **C4. Aggregate TLDs retain distance-decay signatures.** | Merlin (2020), Flowerdew (1982), Casella & Berger (2002) | Conditional Multinomial Likelihood concavity on binned histograms $\mathbf{y}_{TLD}$ |
+| **C5. Structural exposure correction is mandatory.** | Hansen (1959), Fotheringham (1989), Merlin (2020) | Ablation $E_k \equiv 1$ causes $>30\%$ parameter shift in synthetic experiments |
 | **C6. Indirect Boarding Validation validates zero-shot OD.** | Ortúzar & Willumsen (2011) | Transit assignment predicted boardings vs observed Smartcard boardings |
 
 ---
@@ -152,6 +157,8 @@ Urban Environment ──► Urban Structure (S_i) ──► Collective Behaviour
 * **OP2 (Behavioural Temporal Stability):** Is the City Behavioural Index $\theta$ temporally stable across weekdays vs weekends, or pre- vs post-pandemic periods?
 * **OP3 (Spatial Resolution Sensitivity):** How does bin width choice ($\Delta d = 500\text{m}$ vs $1\text{km}$) in aggregate TLDs affect Fisher Information and Cramér-Rao precision bounds?
 * **OP4 (Modality Confounding):** How can mode-specific travel (motorcycle vs transit) be disentangled when aggregate TLDs reflect all-mode travel?
+* **OP5 (Spatial Heterogeneity & Polycentricity Limits):** How does severe spatial heterogeneity (Yang et al. 2014) in polycentric megacities affect parameter identifiability under structural exposure $E_k$?
+* **OP6 (Multi-Parameter Decay Identifiability):** For dual-parameter deterrence functions like Tanner ($d^\alpha e^{-\beta d}$), how can parameter collinearity between $\alpha$ and $\beta$ be prevented during conditional MLE?
 
 ---
 
