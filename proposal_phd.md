@@ -1,4 +1,4 @@
-# PhD Dissertation Proposal (V2.0 — Post Quick Tests Validation)
+# PhD Dissertation Proposal (V2.1 — Post Quick Tests 1–19 Validation)
 
 ## Title
 
@@ -24,13 +24,15 @@ However, **current studies primarily model mobility as a prediction problem rath
 
 ### Research Vision
 
-> **Rather than treating urban mobility as a black-box prediction problem, this dissertation establishes a mechanism-based framework that decomposes mobility into interpretable structural and behavioural components, enabling quantitative explanation, diagnosis, policy evaluation, and transferable understanding of urban mobility systems.**
+> **Rather than treating urban mobility as a black-box prediction problem, this dissertation establishes a mechanism-based framework founded on the independent representation of Urban Structure and the independent identification of Behaviour, enabling quantitative explanation, diagnosis, policy evaluation, and transferable understanding of urban mobility systems.**
 
 ---
 
 # 2. Research Gap
 
 Existing studies learn mobility directly from observations. As a consequence, **urban structure and travel behaviour remain entangled**, preventing independent understanding, quantification, and transfer of their roles.
+
+These limitations are not merely methodological but conceptual. Existing models jointly optimize urban structure and travel behaviour as a single predictive function, preventing either component from being independently interpreted, transferred, or statistically identified. Consequently, the literature motivates a scientific decomposition of Human Mobility into two complementary mechanisms—Urban Structure and Behaviour—rather than a new predictive architecture. This Structure–Behaviour Separation Principle therefore emerges as a necessary consequence of the limitations of the existing Observation-First paradigm, rather than an arbitrary modelling choice.
 
 Neither the traditional gravity paradigm nor modern deep learning models (e.g., DeepGravity) provide a unified framework that independently models components according to their fundamentally distinct functional roles:
 
@@ -46,6 +48,8 @@ Neither the traditional gravity paradigm nor modern deep learning models (e.g., 
 Human mobility is represented as a production-constrained spatial interaction process where **Behaviour acts on Structure**:
 
 $$T_{ij} = O_i \frac{A_j f(d_{ij}; \boldsymbol{\theta})}{\sum_{m} A_m f(d_{im}; \boldsymbol{\theta})}$$
+
+This decomposition immediately suggests a new scientific proposition. If Urban Structure can be represented and transferred independently, and Behaviour can be statistically identified from aggregate observations, then their probabilistic interaction provides sufficient information to reconstruct OD flows. The reconstructed OD matrix is therefore not the objective of the framework, but empirical evidence that these independently recovered mechanisms adequately explain observed mobility.
 
 Urban Structure and Behaviour play complementary rather than equivalent roles in spatial interaction:
 
@@ -107,24 +111,26 @@ describes how travellers trade off spatial opportunities against travel distance
 # 6. Master Research Framework
 
 ```text
-                       HUMAN MOBILITY
-                              │
-                              ▼
-           Structure–Behaviour Separation Principle
-                              │
-        ┌───────────────┴───────────────┐
-        ▼                               ▼
- Urban Structure                  Behaviour
-(Mobility Potential)      (Distance Sensitivity)
-        │                               │
- Represented from             Identified from
- Urban Features               Aggregate Mobility
-        │                               │
-        └───────────────┬───────────────┘
-                        ▼
-              Gravity-based Interaction
-                        ▼
-               Observed Mobility (OD)
+Urban Features
+      │
+Represent Structure
+      │
+      ▼
+
+Aggregate Mobility
+      │
+Identify Behaviour
+      │
+      ▼
+
+Probabilistic Integration
+      │
+(Gravity as Scientific Language)
+      │
+      ▼
+
+OD Reconstruction
+(Validation)
 ```
 
 ---
@@ -156,7 +162,7 @@ Supports **Hypothesis 1**: Behaviour can be independently identified from aggreg
 
 ### Scientific Objective
 
-Learn and represent the **Urban Mobility Potential Field** ($\mathbf{O}, \mathbf{A}$) from multi-source open urban spatial features, demonstrating that non-spatial tabular models ceiling at $R^2 \approx 0.48$ (QT14) and establishing the necessity of Spatial Graph Neural Networks.
+Urban Structure is directly observable through publicly available urban features. Because observable spatial characteristics can be systematically represented using spatial representation learning, the resulting Mobility Potential Field becomes transferable across cities. This observable → representable → transferable property forms the scientific basis for estimating Urban Structure in previously unseen urban environments.
 
 ### Main Contributions
 
@@ -170,7 +176,11 @@ Supports **Hypothesis 2**: The Mobility Potential Field of Urban Structure can b
 
 ---
 
-# 9. Expected Scientific Contributions
+# 9. Probabilistic Integration Protocol & Scientific Contributions
+
+### Integration Protocol
+
+The principal methodological contribution of this dissertation is not a new Gravity model. Instead, it is a probabilistic integration protocol that combines two independently inferred scientific components: Urban Structure represented from observable urban features and Behaviour identified from aggregate mobility observations. Gravity serves as the common scientific language through which these independently recovered mechanisms interact to generate observable mobility flows.
 
 ### Contribution 1 (Theory of Behaviour Identification)
 Develop a probabilistic inference theory and statistical proof showing that collective travel behaviour can be identified from aggregate mobility statistics.
@@ -178,8 +188,8 @@ Develop a probabilistic inference theory and statistical proof showing that coll
 ### Contribution 2 (Scientific Representation of Urban Structure)
 Develop a spatial representation framework that models Urban Structure as a Mobility Potential Field ($O_i, A_j$) using GeoAI and open urban data.
 
-### Contribution 3 (Mechanism-based Framework for Human Mobility)
-Establish a mechanism-based scientific framework that explains collective human movement flows through the interaction of independently recovered Structure and Behaviour.
+### Contribution 3 (Mechanism-based Probabilistic Integration Framework)
+Establish a mechanism-based probabilistic integration framework that combines independently inferred Structure and Behaviour within a unified probabilistic spatial interaction model. The methodological novelty lies in integrating independently inferred Structure and Behaviour within a unified probabilistic spatial interaction framework.
 
 ---
 
@@ -205,4 +215,4 @@ Scientific Understanding ──► Quantitative Diagnosis ──► Policy Inter
 | **Contribution** | Better AI model | **New Mechanism-based Scientific Framework** |
 
 ---
-*Status: Updated V2.0 — Post Quick Tests 1–19 Validation Reference Standard for PhD Proposal & Dissertation.*
+*Status: Updated V2.1 — Post Quick Tests 1–19 Validation Reference Standard for PhD Proposal & Dissertation.*
