@@ -35,14 +35,14 @@ system-protocol: "One Conversation → One Refinement"
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-# MODULE 0: The Universal 9-Step Inevitable Scientific Argument Chain
-# Chuỗi Lập luận Khoa học Tất yếu & Kiến trúc Phương pháp Độc lập
+# MODULE 0: The 9-Step Scientific Argument Chain
+# Chuỗi Lập luận Khoa học & Kiến trúc Phương pháp Độc lập
 
 > **Grand Core Theme of the Dissertation:**
 > **"Probabilistic Behavioural Identification under Information Compression"**
 
 ### The Immutable Scientific Principles vs Flexible Implementation Layer
-A hallmark of top-tier academic architecture is that **the core scientific principles exist completely independent of specific implementation methods**. Not a single step in the 9-step logical chain depends strictly on Gravity, TLD, or MLE. These specific choices belong strictly to the **Implementation / Instantiation Layer**:
+A key property of this theoretical architecture is that **the core scientific principles are independent of specific implementation methods**. Not a single step in the 9-step logical chain depends strictly on Gravity, TLD, or MLE. These specific choices belong strictly to the **Implementation / Instantiation Layer**:
 
 | Theoretical Abstraction Layer (Immutable Core) | Primary Dissertation Instantiation (Paper 2 / PCSF-TIM) | Future Alternative Instantiations |
 | :--- | :--- | :--- |
@@ -56,7 +56,7 @@ A hallmark of top-tier academic architecture is that **the core scientific princ
 | **8. Empirical Evaluation** | Likelihood Surface Concavity & Synthetic Recovery | Fisher Information Bounds / Hessian Spectrum |
 | **9. Downstream Validation** | Transit Assignment & Indirect Smartcard Boarding | Traffic Count Assignment & Synthetic OD CPC |
 
-Instead of a passive literature review, the theoretical foundation of this dissertation is structured as an **inevitable 9-step logical progression**. Every step answers exactly one scientific sub-question, leading the reader inescapably to one single conclusion: *When Urban Structure is specified and observations are aggregated due to privacy bounds, behavioural parameter identification is an indispensable scientific inquiry.*
+Instead of a passive literature review, the theoretical foundation of this dissertation is structured as a **9-step logical progression**. Each step answers one scientific sub-question, leading to the conclusion that *when Urban Structure is specified and observations are aggregated due to privacy bounds, behavioural parameter identification is a relevant scientific inquiry.*
 
 ```text
 1. Phenomenon & Object:     Empirical Phenomenon: Human Mobility ──► Formal Scientific Object: Spatial Interaction
@@ -86,8 +86,8 @@ Instead of a passive literature review, the theoretical foundation of this disse
 9. Validation:              Indirect Boarding & Downstream Flow Benchmarking (How do we validate inferred θ?)
 ```
 
-> **The Inevitable Scientific Conclusion:**
-> *"If Urban Spatial Structure is specified ($S_{ij}$) and fine-grained mobility data is restricted to Aggregate Mobility Observations ($\mathbf{y}_{TLD}$), the natural, unavoidable scientific question is whether the behavioural mechanism governing spatial interaction remains statistically identifiable."*
+> **Scientific Conclusion:**
+> *"If Urban Spatial Structure is specified ($S_{ij}$) and fine-grained mobility data is restricted to Aggregate Mobility Observations ($\mathbf{y}_{TLD}$), a natural scientific question is whether the behavioural mechanism governing spatial interaction remains statistically identifiable."*
 
 ---
 
@@ -156,7 +156,7 @@ Gravity is not an arbitrary, outdated model chosen by default; it represents a c
 where $O_i, A_j$ represent **Urban Structure**, and $f(d_{ij}; \theta)$ represents the **Behavioural Mechanism Governing Spatial Interaction**.
 
 #### The Asymmetric Representation Progress Paradox
-The core scientific gap driving this dissertation is not merely that travel behaviour is hard to measure, but that **the two components of Spatial Interaction Representation are advancing at fundamentally asymmetric speeds**:
+The core scientific gap driving this dissertation is not merely that travel behaviour is hard to measure, but that **the two components of Spatial Interaction Representation are advancing at asymmetric rates**:
 
 ```text
                                Spatial Interaction
@@ -180,7 +180,7 @@ The core scientific gap driving this dissertation is not merely that travel beha
                  └──────────────────────┬──────────────────────┘
                                         │
                                         ▼
-                            GOLDEN RESEARCH OPPORTUNITY
+                            RESEARCH OPPORTUNITY
 ```
 
 #### Towards a Balanced Representation of Spatial Interaction
@@ -205,7 +205,7 @@ Why can we not observe the Behavioural Mechanism $\theta$ directly?
 * **Urban Structure ($\mathbf{S}_i$)** is observable from physical spatial data (GIS, POIs, road networks, satellite imagery).
 * **The Behavioural Mechanism ($\theta = (\alpha, \beta)$)** is an unobservable **Latent Descriptor** representing collective distance sensitivity across a population.
 
-Because $\theta$ cannot be measured directly by physical sensors without violating privacy or incurring astronomical survey costs, it **MUST BE INFERRED** via statistical inverse problem formulation.
+Because $\theta$ cannot be measured directly by physical sensors due to privacy constraints and high survey costs, it must be inferred via statistical inverse problem formulation.
 
 #### The 3-Tier Generative Physical-Statistical Chain
 A crucial ontological distinction in this dissertation is that **Behaviour does not generate empirical data directly; Behaviour creates Spatial Interaction, which in turn generates Mobility Observations**:
@@ -223,7 +223,7 @@ Mobility Observations y_TLD  (Empirical Binned Distance Histogram)
 This 3-tier chain distinguishes the **physical generative process** ($\theta + S_{ij} \to T_{ij}$) from the **empirical observation process** ($T_{ij} \xrightarrow{\mathcal{P}} \mathbf{y}_{TLD}$). It clarifies why scientific inference operates as an inverse problem from observed $\mathbf{y}_{TLD}$ back to latent $\theta$, conditioned on $S_{ij}$.
 
 #### Paper 2 / Chapter 3 Redefined
-Paper 2 is NOT merely an empirical curve-fitting exercise to estimate scalar $\beta$. It is **the critical scientific step required to complete the scientific representation of spatial interaction**, transforming an unbalanced structural model into a complete, interpretable, mechanism-based spatial interaction framework.
+Paper 2 is not merely an empirical curve-fitting exercise to estimate scalar $\beta$. It is **a scientific step toward completing the scientific representation of spatial interaction**, transforming an unbalanced structural model into a complete, interpretable, mechanism-based spatial interaction framework.
 
 ---
 
@@ -267,8 +267,8 @@ Different forms of mobility evidence preserve different levels of **Behavioural 
 
 > **"Different forms of mobility evidence preserve different levels of behavioural information. This information hierarchy determines both the scale at which mobility can be analysed and the extent to which latent behavioural mechanisms can be inferred."**
 
-#### The Inevitable Inescapable Bridge to Step 5
-Having established that mobility evidence forms an information hierarchy, the natural, inevitable scientific question that transitions us to Step 5 is:
+#### Transition to Step 5
+Having established that mobility evidence forms an information hierarchy, the scientific question that motivates Step 5 is:
 
 > **"If different forms of mobility evidence preserve different amounts of behavioural information, then what behavioural information survives after spatial aggregation?"**
 
@@ -282,7 +282,7 @@ Having established that mobility evidence forms an information hierarchy, the na
 #### 1. Information Compression
 Every spatial aggregation process is a projection of information compression:
 \[ \text{Trajectories} \longrightarrow \text{OD Matrix} \longrightarrow \text{Trip-Length Distribution (TLD)} \longrightarrow \text{Summary Indicators} \]
-At each projection step, specific dimensions of information are discarded. This compression is physically and privacy-wise inevitable.
+At each projection step, specific dimensions of information are discarded. This compression is a consequence of physical aggregation and privacy constraints.
 
 #### 2. Information is Not Lost Uniformly (Selective Information Preservation)
 Aggregation is not merely destructive information loss; it is **Selective Information Preservation**:
@@ -302,7 +302,7 @@ TLD serves as an empirical **case study**, demonstrating how highly aggregated o
 > **"If behavioural mechanisms remain identifiable after substantial information compression, the implications extend beyond a single data product. It would suggest that aggregate mobility observations can serve not only descriptive purposes but also as statistically informative evidence for scientific inference."**
 
 > **Master Concluding Maxim of Step 5:**
-> **"The central question is therefore not whether information is lost during aggregation—this is inevitable—but whether the behavioural information that survives is sufficient for scientific inference."**
+> **"The central question is therefore not whether information is lost during aggregation—this is by design—but whether the behavioural information that survives is sufficient for scientific inference."**
 
 ---
 
@@ -312,7 +312,7 @@ TLD serves as an empirical **case study**, demonstrating how highly aggregated o
 > **"Can the behavioural mechanism governing spatial interaction be identified from aggregate mobility observations?"**
 
 #### 1. The 3 Criteria of a High-Impact Scientific Question
-Step 6 satisfies the three golden criteria of a top-tier PhD scientific question:
+Step 6 satisfies three criteria of a well-posed scientific question:
 1. **Plausibility:** There is theoretical ground to suspect that structural conditioning ($S_{ij}$) isolates the residual parameter space of $\theta$.
 2. **Unanswered Gap:** Nobody has established the exact bounds of statistical sufficiency under spatial aggregation.
 3. **High Impact:** If true, it redefines aggregate data from descriptive summaries into statistical evidence for inference!
@@ -330,7 +330,7 @@ This dissertation elevates the problem from a narrow transport domain task to a 
 > **"This dissertation investigates the statistical sufficiency of aggregate mobility observations for behavioural identification. Trip-length distributions serve as the primary case study through which this broader scientific question is examined."**
 
 #### 3. Real-world Timeliness & Practical Urgency
-Due to privacy regulations (GDPR, Differential Privacy) and data collection costs, fine-grained trajectory and OD data are increasingly suppressed. Aggregate mobility products are becoming the dominant accessible data format. Thus, establishing information sufficiency bounds is an urgent practical necessity for data-scarce urban regions globally.
+Due to privacy regulations (GDPR, Differential Privacy) and data collection costs, fine-grained trajectory and OD data are increasingly suppressed. Aggregate mobility products are becoming the dominant accessible data format. Thus, establishing information sufficiency bounds is a practical requirement for data-scarce urban regions.
 
 #### 4. The Transformation of Aggregate Data
 If statistical identifiability holds under aggregation:
@@ -338,7 +338,7 @@ If statistical identifiability holds under aggregation:
 * Aggregate mobility data becomes **statistically informative evidence for behavioural inference**.
 
 #### 5. Master Concluding Statements for Step 6
-> **"The central scientific question is therefore not whether aggregation reduces information—this is inevitable—but whether the information that survives remains sufficient for identifying the behavioural mechanism governing spatial interaction."**
+> **"The central scientific question is therefore not whether aggregation reduces information—this is by design—but whether the information that survives remains sufficient for identifying the behavioural mechanism governing spatial interaction."**
 
 > **"Answering this question would redefine the role of aggregate mobility data, transforming them from descriptive statistics into scientifically informative observations for behavioural inference."**
 
@@ -383,7 +383,7 @@ Scientific Hypothesis ──► Probability Model ──► Likelihood ──►
 2. **Probability Model:** Multinomial bin distribution $P(k \mid E_k, \theta) = \frac{E_k f(d_k; \theta)}{\sum E_m f(d_m; \theta)}$.
 3. **Likelihood Function:** Log-Likelihood $\log \mathcal{L}(\theta \mid \mathbf{y}, E_k) = \sum y_k \log P(k \mid E_k, \theta)$.
 4. **MLE Estimator:** Numerical optimization $\hat{\theta}^* = \arg\max_\theta \log \mathcal{L}(\theta \mid \mathbf{y}, E_k)$ (solved via L-BFGS-B).
-5. **Inferred Parameter $\hat{\beta}^*$ / $\hat{\theta}^*$:** Inferred collective distance sensitivity parameter vector representing the city's behavioral index!
+5. **Inferred Parameter $\hat{\beta}^*$ / $\hat{\theta}^*$:** Inferred collective distance sensitivity parameter vector representing the city's behavioural index.
 
 #### Methodological Execution: Conditional Maximum Likelihood Estimation (MLE)
 By establishing the probability distribution $P(k \mid E_k, \theta)$ as the scientific bridge, PCSF-TIM formulates a **Conditional Multinomial Likelihood**:
@@ -416,7 +416,7 @@ Step 8 translates the theoretical question into a rigorous empirical test:
 * **IF NOT**, the likelihood surface will remain flat, ill-conditioned, or unidentifiable, failing parameter recovery tests.
 
 #### The 4 Complementary Components of Empirical Evidence
-To build unshakeable empirical evidence without claiming unproven mathematical proof, evaluation is structured into four complementary components:
+To build rigorous empirical evidence without claiming unproven mathematical proof, evaluation is structured into four complementary components:
 
 1. **Likelihood Evidence:** Sharpness, concavity, and global uniqueness of the log-likelihood surface over real-world data.
 2. **Synthetic Parameter Recovery:** Generating synthetic TLD from known ground-truth $\theta^*$, then verifying that MLE accurately recovers $\hat{\theta}^* = \theta^*$.
@@ -446,7 +446,7 @@ To build unshakeable empirical evidence without claiming unproven mathematical p
 ```
 
 1. **Level 1 — Statistical Validation (Identifiability Proof - Paper 2):**
-   * *Objective:* Test mathematical recovery of latent parameters where ground truth $\theta^*$ is perfectly known.
+   * *Objective:* Test parameter recovery where ground truth $\theta^*$ is known by construction.
    * *Pipeline:* Known $\theta^* \to \text{Generate OD} \to \text{Aggregate TLD} \to \text{Infer } \hat{\theta}^* \to \text{Verify } \hat{\theta}^* = \theta^*$.
 
 2. **Level 2 — Benchmark Validation (Method Comparison - Paper 2):**
@@ -464,14 +464,14 @@ To build unshakeable empirical evidence without claiming unproven mathematical p
 
 ---
 
-# MODULE 1: Research Vision (The Manifesto)
+# MODULE 1: Research Vision
 
-> **"Human mobility should not only be predicted through black-box computational models, but fundamentally understood through the explicit theoretical separation of urban spatial structure and collective travel behaviour under aggregate observation loss."**
+> **"Human mobility should not only be predicted through opaque end-to-end models, but also understood through the explicit theoretical separation of urban spatial structure and collective travel behaviour under aggregate observation loss."**
 
 ### Core Position Statement
 Within spatial interaction theory, human mobility emerges from the interaction between urban spatial structure and a behavioural mechanism governing how spatial separation influences interactions. In gravity models, this behavioural mechanism is represented by the distance-decay function, but the concept itself is more general than any particular mathematical formulation.
 
-This dissertation rejects the paradigm of treating spatial interaction as an uninterpretable end-to-end mapping ($\text{Spatial Data} \to \text{OD}$). Instead, it investigates a deeper information-theoretic question: **What statistical information survives spatial aggregation, and does aggregate mobility preserve sufficient information to identify the behavioural mechanism governing spatial interaction?**
+This dissertation departs from the approach of treating spatial interaction as an undifferentiated end-to-end mapping ($\text{Spatial Data} \to \text{OD}$). Instead, it investigates a deeper information-theoretic question: **What statistical information survives spatial aggregation, and does aggregate mobility preserve sufficient information to identify the behavioural mechanism governing spatial interaction?**
 
 ---
 
@@ -640,7 +640,7 @@ The dissertation is structured around an elegant **Symmetric Dual-Engine Archite
 
 ### 3. Privacy Pruning & Information Theory Bounds
 * **de Montjoye (2013)**: Trajectory re-identification bounds (95% re-identification from 4 spatiotemporal points).
-* **Gallotti et al. (2024)**: Demonstrated that privacy-preserving matrix pruning severely distorts micro origin-destination flows.
+* **Gallotti et al. (2024)**: Demonstrated that privacy-preserving matrix pruning distorts micro origin-destination flows.
 * **Cover & Thomas (2006) / Casella & Berger (2002)**: Information-theoretic bounds and Multinomial Probabilistic Likelihood derivation for binned spatial data:
   \[ P(k \mid E_k, \theta) = \frac{E_k \, f(d_k; \theta)}{\sum_{m=1}^K E_m \, f(d_m; \theta)} \]
 
@@ -675,7 +675,7 @@ Each formal assumption protects exactly one explicit arrow in the causal derivat
 | **A6** | OD Matrix $\to$ Transport Planning | **Planning Sufficiency:** The reconstructed OD matrix is a sufficient operational input for downstream transit planning models. | Defines application bounds without requiring direct modeling of all planning nuances. |
 | **A7** | Full Inference Engine | **Likelihood Correctness:** The statistical likelihood correctly represents the empirical observation process of the aggregate distance distribution. | Guarantees the statistical validity of MLE/inference. |
 
-> **The 3 Indispensable Pillars:**
+> **The 3 Core Pillars:**
 > 1. **A1 (Separability):** If false, structural context and human behavior cannot be decoupled.
 > 2. **A3 (Information Sufficiency):** If false, aggregate evidence cannot support behavioral inference.
 > 3. **A5 (Generative Gravity):** If false, survey-free OD flow matrices cannot be reconstructed after identifying $\theta$.
@@ -702,7 +702,7 @@ This matrix maps the 30 active PDF literature assets in the project into the 5 s
 | **Liang et al. (2013)** | `unraveling.pdf` | **Exponential TLD Emergence:** Analytical derivation of exponential travel-distance distributions from urban structure. |
 | **de Montjoye et al. (2013)** | `srep01376.pdf` | **Trajectory Re-identification:** 4 spatiotemporal points re-identify 95% of individuals (privacy justification for aggregation). |
 | **Houssiau et al. (2022)** | `houssiau2022.pdf` | **Aggregate Privacy Risk:** Re-identification risk analysis on aggregate mobility data. |
-| **Gallotti et al. (2024)** | `Detors.pdf` | **Privacy Filtering Distortion:** Big Tech differential privacy filtering severely distorts observed TLDs. |
+| **Gallotti et al. (2024)** | `Detors.pdf` | **Privacy Filtering Distortion:** Differential privacy filtering distorts observed TLDs. |
 
 #### Stage 3: Behaviour Identification (Định danh Tham số Hành vi - Core Novelty)
 | Short Reference | System PDF Filename | Theoretical Contribution & Role |
@@ -783,7 +783,7 @@ This matrix maps the 30 active PDF literature assets in the project into the 5 s
 *(Structured along the 4-stage scientific progression: Data Quality ──► Urban Complexity ──► Statistical Inference ──► Scientific Generality)*
 
 ### 1. Structural Exposure Estimation (Measurement Problem)
-The proposed framework assumes that the structural exposure term ($E_k$) can be estimated reliably from publicly available geographic information. Experimental evidence indicates that ignoring exposure ($E_k \equiv 1$) produces parameter biases exceeding 30%, demonstrating that exposure is an indispensable component for separating urban structure from travel behaviour.
+The proposed framework assumes that the structural exposure term ($E_k$) can be estimated reliably from publicly available geographic information. Experimental evidence indicates that ignoring exposure ($E_k \equiv 1$) produces parameter biases exceeding 30%, demonstrating that exposure is a necessary component for separating urban structure from travel behaviour.
 
 A remaining challenge is therefore the accurate extraction of exposure from heterogeneous open spatial datasets (road networks, land use, accessibility, built environment, and remote sensing products). Errors in exposure estimation propagate directly into behavioural parameter recovery.
 
@@ -854,6 +854,6 @@ Every new idea, data source, or literature suggestion MUST pass through this 3-S
      • Alters Core Vision?                      ──► Trigger Formal OS Revision
 ```
 
-### Golden Protocol: "One Conversation → One Refinement"
+### Protocol: "One Conversation → One Refinement"
 1. **Exploration:** Brainstorm and evaluate new ideas during conversation.
 2. **Consolidation:** Immediately refine `handbook_phd.md` after each conversation to lock in progress.
