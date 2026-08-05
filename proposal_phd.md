@@ -8,12 +8,14 @@
 
 # 1. Motivation
 
-* Mobility information is fundamental for transportation planning.
-* Many rapidly urbanizing cities lack updated OD matrices.
-* Household travel surveys are expensive and infrequent.
-* Publicly available aggregate data are increasingly accessible.
+* Mobility information is a critical dynamic layer shaping economic activity, transportation planning, public health, and urban intelligence.
+* Modern cities have become increasingly observable through multi-source open spatial data (OSM, POIs, Sentinel/Landsat) and geospatial representation learning.
+* Aggregate mobility products—including Meta's Movement Distribution Maps (MDM)—are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior.
+* However, a severe "data paradox" persists: while spatial data is abundant, high-resolution origin-destination (OD) mobility matrices remain unavailable or heavily restricted due to systemic privacy bounds.
+* Many rapidly urbanizing cities lack updated OD matrices, as traditional household travel surveys are prohibitively expensive and infrequent.
 
-This motivates the reconstruction of OD matrices from aggregate observations.
+This motivates the generative reconstruction of fine-grained OD matrices from publicly available aggregate mobility observations and open urban structure representations.
+
 
 ---
 
