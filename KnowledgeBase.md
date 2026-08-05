@@ -1,8 +1,9 @@
 # Research Knowledge Base (RKB) Architecture
 ## Background Operating System for PhD Program
 
-> **Status:** Architecture Blueprint V1.0  
+> **Status:** Architecture Blueprint V2.0 (Post QT1-QT19 Validation)  
 > **Role:** Master Background Operating System supporting Proposal (~20 pages), Paper 1, Paper 2, and PhD Dissertation (~150-300 pages).  
+> **Core Mission Statement:** *"To establish Human Mobility as a mechanism-based science by identifying Behaviour from aggregate mobility observations and representing Urban Structure from observable urban features, enabling quantitative explanation, diagnosis, and evaluation of urban mobility systems."*  
 > **Core Principle:** Structure–Behaviour Separation ($T_{ij} = O_i A_j f(d_{ij}; \theta)$).
 
 ---
@@ -15,7 +16,7 @@
            ┌───────────────────────────┼───────────────────────────┐
            ▼                           ▼                           ▼
       PhD Proposal                  Paper 1                     Paper 2
-   (proposal_phd.md)       (Behaviour Identification) (Mobility Potential Field)
+   (proposal_phd.md)       (Behaviour Identification) (Urban Structure Representation)
        ~20 pages                 (TLD $\to \boldsymbol{\theta}$)     ($\boldsymbol{\Phi} = (\mathbf{O}, \mathbf{A})$)
            │                           │                           │
            └───────────────────────────┼───────────────────────────┘
@@ -27,58 +28,52 @@
 ```
 
 * **Proposal (`proposal_phd.md`):** High-level scientific synthesis (~20 pages) referencing RKB modules for detailed theoretical proofs and evidence maps.
-* **Paper 1:** Methodological & empirical proof that the Behaviour of Spatial Interaction (collective distance sensitivity governing opportunity utilization) can be statistically identified from aggregate travel-distance distributions (TLD), with parameter vector $\boldsymbol{\theta}$ acting as its mathematical proxy.
+* **Paper 1:** Methodological & empirical proof that the Behaviour of Spatial Interaction (collective distance sensitivity $\beta$) can be statistically identified from aggregate travel-distance distributions (TLD), with parameter vector $\boldsymbol{\theta}$ acting as its mathematical proxy.
 * **Paper 2:** Methodological & empirical proof that the Urban Mobility Potential Field ($\mathbf{O}, \mathbf{A}$) can be learned and represented from open spatial features, using cross-city spatial transferability as an evaluation diagnostic benchmark.
-* **Research Knowledge Base (`KnowledgeBase.md` & `Handbook.md`):** The comprehensive background operating system organized into 8 modular layers.
-
-
----
-
-## 2. Standardized Layer Template
-
-To function as a **Background Operating System**, every layer in the RKB strictly follows a 5-component modular architecture:
-
-1. **Scientific Question:** What core scientific question does this layer answer?
-2. **Core Claims:** Explicit scientific assertions established in the literature.
-3. **Evidence Map:** Categorized literature support, key empirical findings, and foundational papers.
-4. **Critical Comparison:** Methodological paradigms, underlying assumptions, and structural boundaries.
-5. **Implications for Thesis:** Direct logical bridge leading to thesis hypotheses, Paper 1, or Paper 2.
+* **Research Knowledge Base (`KnowledgeBase.md` & `handbook_phd.md`):** The comprehensive background operating system organized into 8 realigned scientific modules.
 
 ---
 
-## 3. The 8-Layer Knowledge Architecture
+## 2. Executive Scientific Matrix (8 Realigned Modules)
 
-### Executive Scientific Matrix (8-Module Architecture)
-
-| Module | Scientific Question | Scientific Outcome & Mission |
-| :---: | :--- | :--- |
-| **Module 1** | What is the fundamental scientific problem of understanding human mobility? | Define Human Mobility as a scientific phenomenon to be decomposed and explained (Prediction $\neq$ Understanding). |
-| **Module 2** | Why is Gravity the appropriate scientific language for describing spatial interaction? | Establish Gravity as a scientific decomposition into Production, Attraction, and Distance Deterrence (not a prediction model). |
-| **Module 3** | Can Human Mobility be decomposed into Structure and Behaviour? | Establish Structure–Behaviour Separation: Structure creates opportunities; Behaviour determines opportunity utilization. |
-| **Module 4** | What is Behaviour in Spatial Interaction? | Define Behaviour as collective distance sensitivity governing opportunity utilization (Paper 1 Identifiability). |
-| **Module 5** | What constitutes Urban Structure in Spatial Interaction? | Represent Urban Structure as the Urban Mobility Potential Field (Production Potential $O_i$ & Attraction Potential $A_j$). |
-| **Module 6** | How much behavioural and structural information is preserved by different mobility observations? | Formulate the Information Hierarchy proving aggregate TLDs preserve distance sensitivity signatures (Paper 1 Feasibility). |
-| **Module 7** | How can scientific quantities be learned from observations? | Develop Scientific Representation Learning (Paper 2 learns spatial potentials; flow is validation, not end goal). |
-| **Module 8** | What scientific understanding becomes possible once Structure and Behaviour are independently identified? | Enable Mechanistic Understanding for diagnosis, policy evaluation, counterfactual analysis, and knowledge transfer. |
+| Module | Scientific Question | Scientific Mission | Connection to Thesis & Papers |
+| :--- | :--- | :--- | :--- |
+| **Module 1. Human Mobility as a Scientific Problem** | **What does it mean to understand human mobility?** | Shift from *mobility prediction* to *mobility understanding*. Define mobility as a scientific phenomenon to be explained rather than merely predicted. | Central Problem Statement |
+| **Module 2. Gravity as the Scientific Language** | **Why is Gravity the appropriate scientific language?** | Interpret Gravity as a **scientific language** describing Spatial Interaction (Production, Attraction, and Distance Deterrence). | Theoretical Foundation |
+| **Module 3. Structure–Behaviour Separation Principle** | **Can Human Mobility be decomposed into Structure and Behaviour?** | Formulate and empirically support (QT16 ANOVA) the principle that mobility consists of two complementary mechanisms: Structure creates opportunity, Behaviour regulates opportunity usage. | Central Theoretical Principle |
+| **Module 4. Behaviour of Spatial Interaction** | **What is Behaviour and can it be identified?** | Define Behaviour as **collective distance sensitivity** ($\beta$) and prove empirical parameter recovery from TLD. | **PAPER 1** (Behaviour Identification) |
+| **Module 5. Urban Structure Representation** | **What is Urban Structure and how should it be represented?** | Define Urban Structure as **Mobility Potential Field**, consisting of **Production Potential ($O_i$)** and **Attraction Potential ($A_j$)**, represented from Urban Features. | **PAPER 2** (Structure Representation) |
+| **Module 6. Information Hierarchy of Mobility Observations** | **Which observations preserve which scientific information?** | Construct information hierarchy: Trajectory $\to$ OD $\to$ TLD $\to$ Statistics, explaining why TLD preserves sufficient information to identify Behaviour. | Data & Information Justification |
+| **Module 7. Scientific Identification & Representation** | **How can scientific components be independently recovered from observations?** | Present symmetric approaches: **Behaviour Identification** (Paper 1) and **Structure Representation** (Paper 2). Distinguish *scientific representation* from *black-box embedding*. | Unifies Paper 1 & Paper 2 |
+| **Module 8. Mechanism-based Urban Mobility Science** | **What becomes possible once Structure and Behaviour are independently quantified?** | Shift from prediction to **Diagnosis – Explanation – Policy Evaluation – Counterfactual Analysis – Transferable Knowledge**. OD Reconstruction serves as validation evidence. | Ultimate Scientific Contribution |
 
 ---
 
-### Knowledge Tree Navigation
+## 3. Knowledge Tree Navigation
 
 ```text
-MODULE 1: Human Mobility as a Scientific Problem (Phenomenon to Explain)
-        │
-        ▼
-MODULE 2: Gravity as the Scientific Language (Multiplicative Factorization)
-        │
-        ▼
-MODULE 3: Structure–Behaviour Separation Principle (Opportunities vs Utilization)
-        │
- ┌──────┴──────┐
- ▼             ▼
-MODULE 4: Behaviour Identification     MODULE 5: Urban Structure Representation
-(Collective Distance Sensitivity)       (Mobility Potential Field)
-        │             │
+Human Mobility (Module 1)
+      │
+      ▼
+Gravity as Scientific Language (Module 2)
+      │
+      ▼
+Structure–Behaviour Separation Principle (Module 3)
+      │
+ ┌────┴────┐
+ ▼         ▼
+Behaviour   Urban Structure
+(Module 4)  (Module 5)
+(Paper 1)   (Paper 2)
+      │         │
+      └────┬────┘
+           ▼
+Information Hierarchy (Module 6)
+           ▼
+Scientific Identification & Scientific Representation (Module 7)
+           ▼
+Mechanism-based Urban Mobility Science (Module 8)
+```       │
         └──────┬──────┘
                ▼
 MODULE 6: Information Hierarchy (TLD Information Preservation)
