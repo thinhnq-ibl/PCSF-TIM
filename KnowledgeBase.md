@@ -15,8 +15,8 @@
            ┌───────────────────────────┼───────────────────────────┐
            ▼                           ▼                           ▼
       PhD Proposal                  Paper 1                     Paper 2
-   (proposal_phd.md)        (Behaviour Inference)         (Structure Transfer)
-       ~20 pages                    (TLD $\to \theta$)              ($(O_i, A_j)$)
+   (proposal_phd.md)       (Behaviour Identification) (Mobility Potential Field)
+       ~20 pages                 (TLD $\to \boldsymbol{\theta}$)     ($\boldsymbol{\Phi} = (\mathbf{O}, \mathbf{A})$)
            │                           │                           │
            └───────────────────────────┼───────────────────────────┘
                                        │
@@ -27,9 +27,10 @@
 ```
 
 * **Proposal (`proposal_phd.md`):** High-level scientific synthesis (~20 pages) referencing RKB modules for detailed theoretical proofs and evidence maps.
-* **Paper 1:** Methodological & empirical proof that Spatial Interaction Behaviour ($\theta$) can be statistically inferred from aggregate travel-distance distributions (TLD).
-* **Paper 2:** Methodological & empirical proof that Urban Structure ($(O_i, A_j)$) can be transferred across cities using open spatial features.
+* **Paper 1:** Methodological & empirical proof that the Behaviour of Spatial Interaction (collective distance sensitivity governing opportunity utilization) can be statistically identified from aggregate travel-distance distributions (TLD), with parameter vector $\boldsymbol{\theta}$ acting as its mathematical proxy.
+* **Paper 2:** Methodological & empirical proof that the Urban Mobility Potential Field ($\mathbf{O}, \mathbf{A}$) can be learned and represented from open spatial features, using cross-city spatial transferability as an evaluation diagnostic benchmark.
 * **Research Knowledge Base (`KnowledgeBase.md` & `Handbook.md`):** The comprehensive background operating system organized into 8 modular layers.
+
 
 ---
 

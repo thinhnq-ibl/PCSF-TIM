@@ -104,16 +104,14 @@ In spatial interaction theory, spatial interaction is the scientific representat
 This distinction is fundamental because scientific inference is performed on spatial interaction rather than on the phenomenon itself.
 
 #### Two fundamental components of spatial interaction
-Spatial interaction is assumed to emerge from the combination of two conceptually distinct components:
-1. **Urban Structure** – the spatial distribution of opportunities and constraints, including origins, destinations, land use, population, transport infrastructure, and accessibility.
-2. **Behavioural Mechanism Governing Spatial Interaction** – the mechanism describing how populations respond to spatial separation and opportunities when generating interactions.
+Spatial interaction emerges from the combination of two components with fundamentally distinct functional roles:
+1. **Urban Structure (Mobility Potential Field $\boldsymbol{\Phi} = (\mathbf{O}, \mathbf{A})$)** – the spatial distribution of **Production Potential ($O_i$)** (latent origin trip-emission capacity) and **Attraction Potential ($A_j$)** (latent destination opportunity density), defining *where spatial opportunities exist*.
+2. **Behaviour of Spatial Interaction** – defined as the **collective distance sensitivity governing the utilization of spatial opportunities**. Distance decay parameter vector $\boldsymbol{\theta}$ (e.g., Tanner deterrence $\alpha, \beta$) serves as the **mathematical proxy/representation** of this Behaviour.
 
-Together, these two components determine the observed spatial interaction pattern:
-\[ \text{Spatial Interaction} = \text{Urban Structure} + \text{Behavioural Mechanism} \]
+Together, these two components determine the observed spatial interaction pattern when **Behaviour acts on Structure**:
+\[ T_{ij} = O_i \frac{A_j f(d_{ij}; \boldsymbol{\theta})}{\sum_{m} A_m f(d_{im}; \boldsymbol{\theta})} \]
 
-Within the gravity framework, these two components are commonly represented as:
-\[ T_{ij} = O_i A_j f(d_{ij}; \theta) \]
-where $O_i$ and $A_j$ characterize urban structure, while $f(d_{ij}; \theta)$ represents the behavioural mechanism governing spatial interaction.
+Urban Structure and Behaviour play complementary rather than equivalent roles in spatial interaction. Urban Structure defines the distribution of mobility opportunities through origin production and destination attraction potentials, whereas Behaviour determines how travellers utilize those opportunities by trading off travel opportunities against distance cost. Consequently, observed mobility emerges from the interaction between an opportunity field and a collective distance-sensitivity mechanism.
 
 ---
 
@@ -756,9 +754,9 @@ This matrix maps the 30 active PDF literature assets in the project into the 5 s
 ===================================================================================================
 ```
 
-### 3-Paper Publication Roadmap
-1. **Paper 1 (Structure Learning):** *Transferable Urban Structure Learning from Multi-City Open Data* (CEUS / IEEE TKDE / KDD).
-2. **Paper 2 (Behaviour Identification - ANCHORED BY `Handbook.md`):** *Behaviour Identification from Aggregate Mobility Observations under Information Loss* (TR-B / PRE / Nature Comms).
+### Publication Roadmap
+1. **Paper 1 (Behaviour Identification):** *Identification of the Behaviour of Spatial Interaction from Aggregate Travel-Distance Distributions* (TR-B / PRE / Nature Comms).
+2. **Paper 2 (Mobility Potential Representation):** *Representation of Urban Mobility Potential Field for Zero-Shot OD Matrix Reconstruction* (CEUS / IEEE TKDE / KDD).
 3. **Paper 3 (Integrated Thesis):** *A Hybrid Survey-Free OD Estimation Framework for Data-Scarce Metropolitan Regions* (TR-C / TR-A / IEEE T-ITS).
 
 ---

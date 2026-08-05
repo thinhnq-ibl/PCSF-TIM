@@ -184,7 +184,7 @@ def predict_gravity_od(df: pd.DataFrame, beta: float, custom_O: np.ndarray = Non
         idx_to_pos = {int(nid): pos for pos, nid in enumerate(node_ids)}
         d_idx = df["d_idx"].values
         d_pos = np.array([idx_to_pos.get(int(idx), 0) for idx in d_idx])
-        A = custom_A[d_pos].clip(lower=1e-4)
+        A = np.maximum(custom_A[d_pos], 1e-4)
     else:
         A = df["A_j_clamped"].values
 
