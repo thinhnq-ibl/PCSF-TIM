@@ -1,5 +1,5 @@
 """
-Master Execution Script for Feasibility Test Suite (Quick Tests 1 - 9)
+Master Execution Script for Feasibility Test Suite (Quick Tests 1 - 11)
 """
 import os
 import sys
@@ -20,10 +20,12 @@ from quick_test_6 import run_test_6
 from quick_test_7 import run_test_7
 from quick_test_8 import run_test_8
 from quick_test_9 import run_test_9
+from quick_test_10 import run_test_10
+from quick_test_11 import run_test_11
 
 def main():
     print("#" * 70)
-    print("STARTING FEASIBILITY TEST SUITE FOR 50 CITIES DATASET")
+    print("STARTING FULL EXTENDED FEASIBILITY TEST SUITE (TESTS 1 - 11)")
     print("#" * 70)
 
     start_time = time.time()
@@ -74,6 +76,24 @@ def main():
     cpc_mat, scenario, diag_adv = run_test_9()
     summary["Quick_Test_9"] = {"Scenario": scenario, "Diagonal_Advantage_Delta_CPC": float(diag_adv), "runtime_s": round(time.time() - t0, 2)}
 
+    # Test 10
+    t0 = time.time()
+    summary_10 = run_test_10()
+    summary["Quick_Test_10"] = {
+        "JSD_Improvement_pct": float(summary_10.loc[summary_10['Metric']=='JSD (TLD Divergence)', 'Pct_Improvement'].values[0]),
+        "AvgDist_Error_Improvement_pct": float(summary_10.loc[summary_10['Metric']=='Delta Avg Distance (km)', 'Pct_Improvement'].values[0]),
+        "runtime_s": round(time.time() - t0, 2)
+    }
+
+    # Test 11
+    t0 = time.time()
+    _, top_sens, top_insens = run_test_11()
+    summary["Quick_Test_11"] = {
+        "Most_Sensitive_City": top_sens.iloc[0]["city"],
+        "Least_Sensitive_City": top_insens.iloc[0]["city"],
+        "runtime_s": round(time.time() - t0, 2)
+    }
+
     total_time = round(time.time() - start_time, 2)
     summary["Total_Execution_Time_s"] = total_time
 
@@ -85,7 +105,7 @@ def main():
         json.dump(summary, f, indent=4)
 
     print("\n" + "#" * 70)
-    print("ALL 9 QUICK TESTS COMPLETED SUCCESSFULLY!")
+    print("ALL 11 QUICK TESTS COMPLETED SUCCESSFULLY!")
     print(f"Total Execution Time: {total_time} seconds")
     print(f"Summary JSON saved to {results_dir / 'summary_results.json'}")
     print("#" * 70)
