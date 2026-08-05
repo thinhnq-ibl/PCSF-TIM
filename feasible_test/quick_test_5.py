@@ -1,0 +1,94 @@
+"""
+Quick Test 5 — Paper 2 Feasibility: Can Random Forest predict Attraction A_j from Urban Features?
+"""
+import os
+import sys
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import KFold
+from sklearn.metrics import r2_score, mean_absolute_error
+
+FEASIBLE_DIR = Path(__file__).parent
+sys.path.insert(0, str(FEASIBLE_DIR))
+
+from utils_test import ALL_50_CITIES
+from quick_test_4 import build_node_dataset
+
+def run_test_5():
+    print("=" * 60)
+    print("Running Quick Test 5: Predicting Destination Attraction A_j with Random Forest")
+    print("=" * 60)
+
+    X, _, y_A, city_indices = build_node_dataset(ALL_50_CITIES)
+    print(f"Total dataset size: {len(y_A)} zones across 50 cities")
+
+    rf = RandomForestRegressor(n_estimators=100, max_depth=15, random_state=42, n_jobs=-1)
+
+    # 5-Fold Cross-Validation
+    kf = KFold(n_splits=5, shuffle=True, random_state=42)
+    y_pred_cv = np.zeros_like(y_A)
+
+    for fold, (train_idx, val_idx) in enumerate(kf.split(X), 1):
+        rf.fit(X[train_idx], y_A[train_idx])
+        y_pred_cv[val_idx] = rf.predict(X[val_idx])
+
+    r2_cv = r2_score(y_A, y_pred_cv)
+    mae_cv = mean_absolute_error(y_A, y_pred_cv)
+
+    # In-sample fit
+    rf.fit(X, y_A)
+    y_pred_in = rf.predict(X)
+    r2_in = r2_score(y_A, y_pred_in)
+
+    print("\n" + "-" * 40)
+    print("Quick Test 5 A_j Prediction Performance:")
+    print(f"  5-Fold CV R^2 Score : {r2_cv:.4f}")
+    print(f"  5-Fold CV MAE       : {mae_cv:.4f}")
+    print(f"  In-Sample R^2 Score : {r2_in:.4f}")
+    print("-" * 40)
+
+    if r2_cv > 0.85:
+        print("  => DECISION: R^2 > 0.85 -> Attraction A_j is highly predictable! NN is just optimization.")
+    elif r2_cv > 0.60:
+        print("  => DECISION: R^2 > 0.60 -> Good predictability; non-linear NN features will add value.")
+    else:
+        print("  => DECISION: R^2 < 0.40 -> A_j is hard to predict; Paper 2 requires rethinking.")
+
+    # Save results
+    results_dir = FEASIBLE_DIR / "results"
+    results_dir.mkdir(parents=True, exist_ok=True)
+    res_df = pd.DataFrame({"city": city_indices, "y_true_A": y_A, "y_pred_A": y_pred_cv})
+    res_df.to_csv(results_dir / "qt5_predict_Aj_results.csv", index=False)
+
+    # Plot
+    figures_dir = FEASIBLE_DIR / "figures"
+    figures_dir.mkdir(parents=True, exist_ok=True)
+
+    plt.figure(figsize=(7, 6))
+    plt.scatter(y_A, y_pred_cv, alpha=0.3, color="#ff7f0e", s=15)
+    lim_min = min(y_A.min(), y_pred_cv.min())
+    lim_max = max(y_A.max(), y_pred_cv.max())
+    plt.plot([lim_min, lim_max], [lim_min, lim_max], "r--", linewidth=2, label="Identity Line ($y=x$)")
+
+    plt.xlabel(r"Observed Attraction $\log(A_j + 1)$", fontsize=12)
+    plt.ylabel(r"RF Predicted $\log(\hat{A}_j + 1)$ (5-Fold CV)", fontsize=12)
+    plt.title(f"Quick Test 5: Paper 2 Feasibility — $A_j$ Prediction\n5-Fold CV $R^2 = {r2_cv:.4f}$", fontsize=13, fontweight="bold")
+    plt.grid(True, linestyle=":", alpha=0.6)
+    plt.legend(fontsize=11)
+
+    plt.text(0.05, 0.85, f"CV R² = {r2_cv:.4f}\nCV MAE = {mae_cv:.4f}\nN = {len(y_A)} zones",
+             transform=plt.gca().transAxes, fontsize=11,
+             bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="gray", alpha=0.9))
+
+    plt.tight_layout()
+    plt.savefig(figures_dir / "qt5_predict_Aj.png", dpi=300)
+    plt.close()
+
+    print(f"Saved plot to {figures_dir / 'qt5_predict_Aj.png'}")
+    return r2_cv
+
+if __name__ == "__main__":
+    run_test_5()

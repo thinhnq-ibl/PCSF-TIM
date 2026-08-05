@@ -1,0 +1,94 @@
+"""
+Master Execution Script for Feasibility Test Suite (Quick Tests 1 - 9)
+"""
+import os
+import sys
+import time
+import json
+import pandas as pd
+from pathlib import Path
+
+FEASIBLE_DIR = Path(__file__).parent
+sys.path.insert(0, str(FEASIBLE_DIR))
+
+from quick_test_1 import run_test_1
+from quick_test_2 import run_test_2
+from quick_test_3 import run_test_3
+from quick_test_4 import run_test_4
+from quick_test_5 import run_test_5
+from quick_test_6 import run_test_6
+from quick_test_7 import run_test_7
+from quick_test_8 import run_test_8
+from quick_test_9 import run_test_9
+
+def main():
+    print("#" * 70)
+    print("STARTING FEASIBILITY TEST SUITE FOR 50 CITIES DATASET")
+    print("#" * 70)
+
+    start_time = time.time()
+    summary = {}
+
+    # Test 1
+    t0 = time.time()
+    _, r2_qt1 = run_test_1()
+    summary["Quick_Test_1"] = {"R2_beta_OD_vs_TLD": float(r2_qt1), "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 2
+    t0 = time.time()
+    _, cv_qt2 = run_test_2()
+    summary["Quick_Test_2"] = {"CV_beta": float(cv_qt2), "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 3
+    t0 = time.time()
+    _, avg_own_3, avg_wrong_3 = run_test_3()
+    summary["Quick_Test_3"] = {"CPC_own": float(avg_own_3), "CPC_wrong": float(avg_wrong_3), "CPC_drop": float(avg_own_3 - avg_wrong_3), "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 4
+    t0 = time.time()
+    r2_qt4 = run_test_4()
+    summary["Quick_Test_4"] = {"R2_5fold_CV_Oi": float(r2_qt4), "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 5
+    t0 = time.time()
+    r2_qt5 = run_test_5()
+    summary["Quick_Test_5"] = {"R2_5fold_CV_Aj": float(r2_qt5), "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 6
+    t0 = time.time()
+    imp_df = run_test_6()
+    summary["Quick_Test_6"] = {"Top_Feature_Oi": imp_df.iloc[0]["feature"], "Top_Feature_Aj": imp_df.sort_values(by="importance_Aj", ascending=False).iloc[0]["feature"], "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 7
+    t0 = time.time()
+    _, r2_O_7, r2_A_7 = run_test_7()
+    summary["Quick_Test_7"] = {"ZeroShot_Test_R2_Oi": float(r2_O_7), "ZeroShot_Test_R2_Aj": float(r2_A_7), "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 8
+    t0 = time.time()
+    _, cpc_qt8 = run_test_8()
+    summary["Quick_Test_8"] = {"Dissertation_Mean_CPC": float(cpc_qt8), "runtime_s": round(time.time() - t0, 2)}
+
+    # Test 9
+    t0 = time.time()
+    cpc_mat, scenario, diag_adv = run_test_9()
+    summary["Quick_Test_9"] = {"Scenario": scenario, "Diagonal_Advantage_Delta_CPC": float(diag_adv), "runtime_s": round(time.time() - t0, 2)}
+
+    total_time = round(time.time() - start_time, 2)
+    summary["Total_Execution_Time_s"] = total_time
+
+    # Save summary json
+    results_dir = FEASIBLE_DIR / "results"
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    with open(results_dir / "summary_results.json", "w") as f:
+        json.dump(summary, f, indent=4)
+
+    print("\n" + "#" * 70)
+    print("ALL 9 QUICK TESTS COMPLETED SUCCESSFULLY!")
+    print(f"Total Execution Time: {total_time} seconds")
+    print(f"Summary JSON saved to {results_dir / 'summary_results.json'}")
+    print("#" * 70)
+
+if __name__ == "__main__":
+    main()
