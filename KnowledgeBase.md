@@ -95,19 +95,17 @@ Layer H: Scientific Synthesis & Research Gaps (Knowledge → Gap Transition)
 
 #### 1. Scientific Master Matrix for Layer A
 
-| Section | Scientific Question | Core Claim | Purpose in Proposal | Connection to Later Layers |
+| Section | Scientific Question | Core Claim | Main Supporting References (APA) | Role of Literature |
 | :--- | :--- | :--- | :--- | :--- |
-| **A. Defining Urban Human Mobility as the Scientific Object** | What is the scientific object of this research? | Urban Human Mobility is the scientific object of this research. | Establish the research object, scope and scientific significance. | Foundation for the entire proposal. |
-| **A1. What is Urban Human Mobility?** | What exactly is Urban Human Mobility? | Urban Human Mobility is the collective spatial movement of people within an urban system arising from daily activities. It is a phenomenon rather than a dataset. | Define the research object and distinguish the phenomenon from its observations. | Leads to Information Hierarchy (Layer C). |
-| **A2. Scope of the Scientific Object** | Why focus on urban mobility instead of all human mobility? | This research focuses on intra-urban collective mobility because urban environments provide rich observable structure and abundant publicly available data. | Clearly delimit the research scope. | Motivates the exclusive focus on cities throughout the proposal. |
-| **A3. Urban Mobility as a Scientific Object** | Why can Urban Human Mobility be studied scientifically? | Urban Human Mobility satisfies the essential characteristics of a scientific object. | Justify the scientific legitimacy of the research topic. | Bridges toward modelling and theory. |
-| **A3.1 Observable** | Can it be observed? | Mobility can be observed through trajectories, OD matrices, surveys, GPS, LBS, travel-distance distributions and other mobility datasets. | Demonstrate that mobility leaves measurable evidence. | Leads naturally to Data Revolution (Layer B). |
-| **A3.2 Measurable** | Can it be quantified? | Mobility can be quantified through flows, trip lengths, travel times, accessibility and other aggregate indicators. | Introduce measurable quantities for scientific analysis. | Supports later estimation problems. |
-| **A3.3 Regular** | Does mobility exhibit regular patterns? | Although individual trips are heterogeneous, aggregate urban mobility exhibits stable statistical regularities such as gravity laws and distance decay. | Justify scientific modelling. | Leads directly to Gravity (Layer D) and Behaviour (Layer E). |
-| **A3.4 Explainable** | Can these regularities be explained? | Collective mobility emerges from the interaction between Urban Structure and Human Travel Behaviour. | Introduce the conceptual framework behind the proposal. | Direct foundation for Structure–Behaviour Separation Principle. |
-| **A3.5 Predictable** | Can mobility be predicted? | The existence of stable regularities makes prediction and reconstruction scientifically meaningful. | Justify the need for mobility models. | Leads toward OD reconstruction (Paper 2). |
-| **A4. Scientific Definition** | How will this proposal define Urban Human Mobility? | Urban Human Mobility is the collective spatial interaction of people within an urban system, emerging from the interaction between Urban Structure and Human Travel Behaviour, and manifested through observable mobility patterns. | Provide the official definition used consistently throughout the proposal. | Serves as the ontology for all subsequent chapters. |
-| **A5. Transition to Layer B** | If mobility is a scientific object, why is it still difficult to study? | Although mobility is observable, measurements are incomplete, heterogeneous and often aggregated, creating a gap between the phenomenon and available observations. | Introduce the central challenge of the proposal. | Leads directly to **Layer B – The Urban Mobility Data Revolution**. |
+| **A. Defining Urban Human Mobility as the Scientific Object** | What is the scientific object of this research? | Urban Human Mobility is a legitimate scientific object for quantitative investigation. | Barbosa, H., et al. (2018). *Human mobility: Models and applications*. **Physics Reports, 734, 1–74**. | Foundational review of Human Mobility Science. |
+| **A1. Urban Human Mobility in the Open Data Era** | Why has Urban Human Mobility become a timely scientific problem? | Modern cities have become increasingly observable through publicly available spatial data. | Guo, Y., et al. (2025). *A universal geography neural network for mobility flow prediction in planning*. **CACE**; Liu et al. (2025). *Representation Learning for Geospatial Data*. | Demonstrates the growth of open urban data and geospatial representations. |
+| **A2. Urban Mobility as Urban Intelligence** | Why is mobility fundamental to modern cities? | Urban mobility has become a fundamental information layer supporting transportation, planning and urban intelligence. | Barbosa et al. (2018); Big Mobile Data Review; Guo et al. (2025). | Role of mobility in modern urban applications. |
+| **A3. Urban Mobility is Observable** | Can Urban Human Mobility be observed? | Urban mobility leaves observable traces through multiple complementary observation layers. | Barbosa et al. (2018); Zheng, Y. (2015). *Trajectory Data Mining*; Big Mobile Data Review. | Synthesizes observation sources: surveys, GPS, CDR, LBS, OD, trajectories. |
+| **A4. Urban Mobility is Measurable** | Can Urban Human Mobility be quantitatively measured? | Urban mobility can be quantified using flows, trip distances, travel times, accessibility and other statistical indicators. | Barbosa et al. (2018). | Standard quantitative indicators in Human Mobility Science. |
+| **A5. Urban Mobility Exhibits Regularities** | Does Urban Mobility exhibit scientific regularities? | Collective urban mobility exhibits robust statistical regularities despite heterogeneous individual behaviour. | Barbosa et al. (2018); Simini, F., et al. (2012). *A universal model for mobility and migration patterns*. **Nature**; Liang, X., et al. (2013). *Scientific Reports*. | Foundation for Gravity, Radiation, and distance-decay laws. |
+| **A6. Urban Mobility is Explainable** | Can Urban Mobility be scientifically explained? | Collective mobility arises from systematic interactions rather than random movements. | Barbosa et al. (2018); Wilson, A. G. (1971). *A family of spatial interaction models*; Simini et al. (2012). | Basis for transition to the Gravity Principle (Layer D). |
+| **A7. Urban Mobility is Predictable** | Can Urban Mobility be predicted or reconstructed? | The existence of stable regularities makes statistical modelling and reconstruction scientifically meaningful. | Barbosa et al. (2018); Simini et al. (2021). *DeepGravity* (**Nature Comm**); Guo et al. (2025). | Links to modern predictive models and generative reconstruction. |
+| **A8. Transition to Layer B** | If Urban Mobility is observable, why is it still difficult to understand? | The challenge is no longer the absence of data, but the diversity, incompleteness and accessibility of mobility observations. | Big Mobile Data Review; Open Mobility Dataset papers; Barbosa et al. (2018). | Direct bridge to Layer B (Urban Mobility Data Revolution). |
 
 ---
 
@@ -118,18 +116,18 @@ What is the scientific object of this research, why does intra-urban collective 
 
 ##### 2. Core Claims
 * **Claim A.1 (Phenomenon vs Dataset):** Urban Human Mobility is an underlying spatio-temporal phenomenon (the collective spatial movement of people within an urban system arising from daily activities), not any single dataset or measurement layer.
-* **Claim A.2 (Five Characteristics of the Scientific Object):** Intra-urban collective mobility is a legitimate scientific object because it is:
-  1. **Observable:** Leaves physical traces across surveys, GPS, LBS, and aggregate travel-distance distributions.
+* **Claim A.2 (Essential Characteristics of the Scientific Object):** Intra-urban collective mobility is a legitimate scientific object because it is:
+  1. **Observable:** Leaves physical traces across surveys, GPS, CDR, LBS, and aggregate travel-distance distributions.
   2. **Measurable:** Quantifiable via spatial flows ($T_{ij}$), trip lengths, travel times, and accessibility indices.
   3. **Regular:** Displays robust statistical regularities (distance-decay laws, spatial scaling).
-  4. **Explainable:** Emerges from the interaction between Urban Structure ($(O_i, A_j)$) and Travel Behaviour ($f(d;\theta)$).
+  4. **Explainable:** Emerges from systematic interaction between Urban Structure ($(O_i, A_j)$) and Travel Behaviour ($f(d;\theta)$).
   5. **Predictable:** Stable regularities allow generative reconstruction in unobserved cities.
 * **Claim A.3 (Ontological Definition):** *Urban Human Mobility is defined as the collective spatial interaction of people within an urban system, emerging from the interaction between Urban Structure and Human Travel Behaviour, and manifested through observable mobility patterns.*
 
 ##### 3. Evidence Map
-* **Foundational Surveys:** Barbosa et al. (2018) *Human mobility: Models and applications* (Physics Reports); Zheng (2015) *Trajectory data mining*.
-* **Complexity & Urban Regularities:** Batty (2013) *The New Science of Cities*; Bettencourt (2013) *Origins of scaling in cities*.
-* **Epidemiology & Societal Need:** Buckee et al. (2020) (Science); Oliver et al. (2020) (Nature Communications).
+* **Foundational Surveys:** Barbosa et al. (2018) *Human mobility: Models and applications* (Physics Reports); Zheng (2015) *Trajectory Data Mining*.
+* **Open Urban Data & Deep Mobility:** Guo et al. (2025) *A universal geography neural network for mobility flow prediction* (CACE); Liu et al. (2025) *Representation Learning for Geospatial Data*; Simini et al. (2021) *DeepGravity* (Nature Communications).
+* **Statistical Regularities & Gravity Foundations:** Wilson (1971) *Spatial interaction models*; Simini et al. (2012) *Nature*; Liang et al. (2013) *Scientific Reports*.
 
 ##### 4. Critical Comparison
 * **Phenomenon vs. Data Layer:** Traditional research often conflates mobility itself with an observed OD matrix. RKB explicitly decouples the underlying spatial phenomenon from the observational layer (which may be incomplete, distorted, or aggregated).
@@ -139,18 +137,19 @@ Establishes the ontological baseline for the entire dissertation: because mobili
 
 ---
 
-### Layer B — The Urban Mobility Data Revolution (Observation Space)
+### Layer B — The Evolution of Urban Mobility Observations (Observation Space)
 
 #### 1. Scientific Master Matrix for Layer B
 
-| Section | Scientific Question | Core Claim | Purpose in Proposal | Connection to Later Layers |
+| Section | Scientific Question | Core Claim | Main Supporting References (APA) | Role in the RKB |
 | :--- | :--- | :--- | :--- | :--- |
-| **B. The Urban Mobility Data Revolution** | How has Urban Mobility become observable? | Mobility observations have evolved dramatically during the last decades. | Introduce the evolution of mobility observation. | Foundation of Information Hierarchy. |
-| **B1. Survey Era** | How was mobility traditionally measured? | Household Travel Surveys (HTS) established the first systematic observation of urban mobility but are expensive and infrequently updated. | Historical baseline. | Motivation for alternative data. |
-| **B2. Digital Mobility Era** | What changed with digital technologies? | GPS, mobile phones, smart cards and LBS dramatically increased the quantity and temporal resolution of mobility observations. | Explain the data revolution. | Richer observations. |
-| **B3. Open Urban Data Era** | What information is publicly available today? | OpenStreetMap, GTFS, POIs, satellite imagery, census and remote sensing provide abundant descriptions of urban structure. | Introduce publicly available data. | Foundation for Paper 2. |
-| **B4. Data Abundance Paradox** | Does abundant data imply complete mobility knowledge? | Despite abundant urban data, complete OD matrices remain unavailable for most cities. | Introduce the central paradox. | Motivation of proposal. |
-| **B5. Transition** | What information is actually preserved by different observations? | Different datasets preserve different levels of mobility information. | Transition. | Layer C: Information Hierarchy. |
+| **B. The Evolution of Urban Mobility Observations** | How has Urban Human Mobility become observable? | Advances in sensing technologies and digital infrastructures have fundamentally transformed the observation of urban mobility. | Barbosa, H., et al. (2018). *Human mobility: Models and applications*. **Physics Reports, 734**, 1–74; Big Mobile Data Review. | Introduce the evolution of mobility observations. |
+| **B1. The Survey Era** | How was urban mobility traditionally observed? | Household Travel Surveys established the first systematic observations of urban mobility but remain expensive, sparse, and infrequently updated. | Barbosa et al. (2018); Zheng, Y. (2015). *Trajectory Data Mining*. | Historical baseline of mobility observation. |
+| **B2. The Digital Mobility Era** | How did digital technologies transform mobility observation? | GPS, mobile phones, smart cards and LBS dramatically improved the spatial and temporal resolution of mobility observations. | Barbosa et al. (2018); Zheng (2015); Big Mobile Data Review. | Demonstrate the digital transformation of mobility observations. |
+| **B3. The Open Urban Data Era** | What urban information is publicly available today? | Public datasets such as OpenStreetMap, GTFS, POIs, census, building footprints and satellite imagery provide rich descriptions of urban structure. | Guo, Y., et al. (2025). *A universal geography neural network for mobility flow prediction in planning*; Liu et al. (2025). *Representation Learning for Geospatial Data*; Open Datasets papers. | Introduce the modern open-data ecosystem. |
+| **B4. Modern Urban Mobility Observations** | How is Urban Human Mobility observed today? | Modern urban mobility is observed through multiple complementary observation layers rather than a single data source, including aggregate products such as Meta Movement Distribution Maps (MDM). | Barbosa et al. (2018); Zheng (2015); Meta AI for Good (2026) *Movement Distribution Maps (MDM)*; Big Mobile Data Review. | Summarize the diversity of observation layers. |
+| **B5. Observation Diversity** | Do different observations provide the same knowledge about mobility? | Different observation layers differ in spatial resolution, temporal resolution, accessibility, privacy, and semantic richness. | Barbosa et al. (2018); Big Mobile Data Review; Zheng (2015). | Compare the characteristics of different observation layers. |
+| **B6. Observation Principle (Transition to Layer C)** | What determines the scientific value of a mobility observation? | The scientific value of a mobility observation depends not only on how it is collected, but also on the information it preserves about the underlying mobility phenomenon. | Barbosa et al. (2018). *(The explicit "information preservation" interpretation is introduced by this thesis and becomes the basis for Layer C.)* | Transition from **Observation** to **Information Hierarchy** (Layer C). |
 
 ---
 
@@ -167,7 +166,7 @@ How has the evolution of mobility data sources transformed the observational fid
 ##### 3. Evidence Map
 * **Privacy & Trajectory Limits:** de Montjoye et al. (2013) *Unique in the Crowd: The privacy bounds of human mobility* (Scientific Reports); Houssiau et al. (2022) *On the Difficulty of Achieving Differential Privacy in Practice*.
 * **Aggregate Releases:** Meta AI for Good (2026) *Movement Distribution Maps (MDM)*; Pappalardo et al. (2023) *Analytical framework for aggregate mobility data*.
-* **Geospatial & POI Data:** Vu et al. (2021) *Enhanced Urban Functional Land Use Map with Open Data*.
+* **Geospatial & POI Data:** Vu et al. (2021) *Enhanced Urban Functional Land Use Map with Open Data*; Guo et al. (2025) *Computer-Aided Civil and Infrastructure Engineering*.
 
 ##### 4. Critical Comparison
 * **Disaggregate Trajectories (High detail, high privacy risk) vs. Aggregate Mobility Releases (Spatially noded/binned, low privacy risk, high accessibility).**
@@ -181,14 +180,15 @@ Justifies positioning Aggregate Mobility Products (specifically Trip-Length Dist
 
 #### 1. Scientific Master Matrix for Layer C
 
-| Section | Scientific Question | Core Claim | Purpose in Proposal | Connection to Later Layers |
+| Section | Scientific Question | Core Claim | Main Supporting References (APA) | Role in the RKB |
 | :--- | :--- | :--- | :--- | :--- |
-| **C. Information Hierarchy of Urban Mobility Observations** | How much information is preserved by different observations? | Different observations preserve different amounts of mobility information. | Establish the theoretical foundation. | Foundation for Paper 1. |
-| **C1. Observation vs Information** | Is more data equivalent to more information? | Data quantity and information content are fundamentally different concepts. | Introduce information perspective. | Hierarchy construction. |
-| **C2. Mobility Observation Hierarchy** | How can mobility observations be organized? | Mobility observations can be ordered according to information preservation. | Introduce the hierarchy. | Information loss analysis. |
-| **C3. Information Loss** | What information is lost during aggregation? | Every aggregation operation removes certain dimensions of mobility information. | Explain irreversible aggregation. | Behaviour inference. |
-| **C4. Information Sufficiency** | Which observations remain sufficient for scientific inference? | Some aggregate observations still preserve sufficient statistical information for identifying behavioural mechanisms. | Scientific justification for Paper 1. | Behaviour Identification. |
-| **C5. Transition** | What behavioural information is preserved? | Distance distributions preserve statistical information about travel behaviour. | Transition. | Layer D / Paper 1. |
+| **C. Information Hierarchy of Urban Mobility Observations** | How should different mobility observations be organized? | Different mobility observations should be organized according to the information they preserve rather than their data source. | Cover, T. M., & Thomas, J. A. (2006). *Elements of Information Theory*; Barbosa, H., et al. (2018). *Human mobility: Models and applications*. | Introduce the information-centric perspective. |
+| **C1. Observation versus Information** | Is more data equivalent to more information? | The quantity of data and the amount of scientific information are fundamentally different concepts. | Cover & Thomas (2006); Barbosa et al. (2018). | Distinguish observations from information. |
+| **C2. Information Hierarchy** | How can mobility observations be systematically organized? | Mobility observations form a hierarchy according to the mobility information they preserve. | Cover & Thomas (2006); Song, C., Qu, Z., Blumm, N., & Barabási, A.-L. (2010). *Limits of Predictability in Human Mobility*. **Science**; Barbosa et al. (2018). | Introduce the hierarchy used throughout the thesis. |
+| **C3. Information Reduction through Aggregation** | What information is lost during aggregation? | Every aggregation operation removes specific dimensions of mobility information while preserving others. | Cover & Thomas (2006); Gallotti, R., et al. (2024). *Distorted Mobility Data*; Barbosa et al. (2018). | Explain information reduction. |
+| **C4. Information Sufficiency** | Does information loss imply scientific uselessness? | Information loss does not necessarily eliminate the information required to answer a specific scientific question. | Cover & Thomas (2006). *(The application to mobility observations is the interpretation proposed in this thesis.)* | Introduce the Information Sufficiency Principle. |
+| **C5. Behavioural Information in Aggregate Observations** | What behavioural information is preserved by aggregate observations? | Aggregate travel-distance distributions preserve statistical signatures of collective travel behaviour despite losing pairwise OD information. | Liang, X., et al. (2013). *Scientific Reports*; Barbosa et al. (2018); Gallotti et al. (2024). | Scientific motivation for Paper 1. |
+| **C6. Information Sufficiency Principle (Transition to Layer D)** | What determines whether an observation is scientifically useful? | The scientific usefulness of a mobility observation depends on whether it preserves the information required to answer a particular scientific question, rather than on the total amount of information it contains. | *(This principle is proposed by this thesis, supported conceptually by Information Theory rather than directly stated in the literature.)* | Transition from **Information** to **Scientific Mechanisms** (Layer D). |
 
 ---
 
@@ -216,18 +216,19 @@ Provides the theoretical foundation for **Paper 1**: supporting the hypothesis t
 
 ---
 
-### Layer D — Gravity as Scientific Language (Spatial Interaction Theory)
+### Layer D — The Gravity Principle of Urban Spatial Interaction
 
 #### 1. Scientific Master Matrix for Layer D
 
-| Section | Scientific Question | Core Claim | Purpose in Proposal | Connection to Later Layers |
+| Section | Scientific Question | Core Claim | Main Supporting References (APA) | Role in the RKB |
 | :--- | :--- | :--- | :--- | :--- |
-| **D. Gravity as the Scientific Language** | How should collective mobility be represented? | Gravity provides a general scientific language for describing spatial interaction. | Introduce the conceptual framework. | Foundation of the proposal. |
-| **D1. Spatial Interaction** | What is the essence of urban mobility? | Urban mobility is fundamentally a spatial interaction process between origins and destinations. | Define the phenomenon mathematically. | Gravity principle. |
-| **D2. Gravity Principle** | Why has gravity remained central for decades? | Mobility emerges from the interaction between opportunity and travel impedance. | Introduce gravity as a principle rather than a model. | Unified interpretation. |
-| **D3. Gravity Models** | How has the gravity principle been implemented? | Different gravity models represent different mathematical realizations of the same underlying principle. | Literature organization. | Behaviour models. |
-| **D4. Behaviour and Structure** | What are the components of gravity? | Gravity separates naturally into Urban Structure and Human Travel Behaviour. | Introduce the proposal's conceptual separation. | Paper 1 & Paper 2. |
-| **D5. Transition** | Which component remains poorly understood? | Behaviour remains the least directly observable component. | Transition to Layer E. | Layer E / Paper 1. |
+| **D. The Gravity Principle of Urban Spatial Interaction** | What scientific principle governs collective Urban Human Mobility? | Collective urban mobility can be understood as a process of spatial interaction governed by attraction and travel impedance. | Wilson, A. G. (1971). *A family of spatial interaction models*; Barbosa, H., et al. (2018). *Human mobility: Models and applications*. | Introduce Gravity as the fundamental scientific principle. |
+| **D1. Urban Mobility as Spatial Interaction** | What is the essence of Urban Human Mobility? | Urban mobility fundamentally consists of spatial interactions among locations rather than isolated individual movements. | Wilson (1971); Barbosa et al. (2018); Erlander, S., & Stewart, N. F. (1990). *The Gravity Model in Transportation Analysis*. | Define mobility as a spatial interaction phenomenon. |
+| **D2. The Gravity Principle** | Why has Gravity remained the dominant paradigm? | Spatial interactions emerge from the balance between opportunities and travel impedance. | Wilson (1971); Tanner, J. C. (1961). *Factors affecting the amount of travel*; Barbosa et al. (2018). | Introduce the conceptual principle behind Gravity. |
+| **D3. Alternative Theoretical Formulations** | Are different mobility models fundamentally different? | Entropy Maximization, Classical Gravity, Radiation and Intervening Opportunities are different theoretical realizations of the same spatial interaction problem, each emphasizing different assumptions. | Wilson (1971); Simini, F., et al. (2012). *A universal model for mobility and migration patterns*. **Nature**; Stouffer, S. A. (1940). *Intervening Opportunities*. | Compare competing theoretical paradigms without favoring one. |
+| **D4. Structure and Behaviour in Gravity** | What components determine spatial interaction? | Gravity models naturally decompose mobility into Urban Structure (opportunities) and Human Travel Behaviour (travel impedance). | Wilson (1971); Tanner (1961); Barbosa et al. (2018). *(The explicit Structure–Behaviour interpretation is proposed by this thesis.)* | Establish the conceptual decomposition underlying the thesis. |
+| **D5. Scientific Interpretation of Gravity** | Is Gravity merely a predictive model? | Gravity should be interpreted as a scientific framework for explaining spatial interactions rather than merely a predictive equation. | Wilson (1971); Barbosa et al. (2018). | Shift from model-centric to principle-centric thinking. |
+| **D6. Transition to Layer E** | Which component remains the least observable? | While Urban Structure is increasingly observable, Human Travel Behaviour remains a latent mechanism that must be inferred statistically. | Barbosa et al. (2018); Tanner (1961). | Transition to Behaviour (Layer E). |
 
 ---
 
@@ -254,18 +255,19 @@ Establishes the mathematical formulation $T_{ij} = O_i A_j f(d_{ij}; \theta)$ as
 
 ---
 
-### Layer E — Human Travel Behaviour as the Hidden Mechanism
+### Layer E — Human Travel Behaviour in Urban Spatial Interaction
 
 #### 1. Scientific Master Matrix for Layer E
 
-| Section | Scientific Question | Core Claim | Purpose in Proposal | Connection to Later Layers |
+| Section | Core Claim | Strong Supporting References (APA) | Actual Reference Contribution | Attribution Boundary (What NOT to Attribute) |
 | :--- | :--- | :--- | :--- | :--- |
-| **E. Human Travel Behaviour as the Hidden Mechanism** | What behavioural mechanism governs mobility? | Travel behaviour determines how people respond to spatial separation. | Introduce behaviour as the hidden component. | Paper 1. |
-| **E1. What is Human Travel Behaviour?** | What does behaviour mean in collective mobility? | Behaviour is the collective response of travellers to travel impedance under a given urban environment. | Define behaviour scientifically. | Behaviour modelling. |
-| **E2. Behaviour vs Urban Structure** | How is behaviour different from structure? | Structure provides opportunities; behaviour determines choices. | Formalize the separation principle. | Proposal foundation. |
-| **E3. Distance Sensitivity** | How is behaviour expressed? | Behaviour manifests primarily through distance sensitivity. | Connect behaviour to observable quantities. | Distance-decay. |
-| **E4. Distance-decay as Behaviour Representation** | How is behaviour mathematically represented? | Distance-decay functions are behavioural representations rather than merely mathematical fitting functions. | Reinterpret distance-decay. | Behaviour identification. |
-| **E5. The Behaviour Identification Problem** | Can behaviour be identified from aggregate observations? | Behaviour cannot be directly observed and must be statistically inferred. | Introduce Paper 1. | Paper 1. |
+| **E. Human Travel Behaviour in Urban Spatial Interaction** | Collective spatial interactions are governed by human responses to travel impedance. | Barbosa, H., et al. (2018). *Human mobility: Models and applications*. **Physics Reports, 734**, 1–74. | Establishes Human Mobility Science context; surveys population mobility models; affirms Gravity and distance deterrence as central components in mobility modeling. | Does not propose Structure–Behaviour Separation; does not investigate behavioural identifiability. |
+| **E1. Human Travel Behaviour** | Human Travel Behaviour is the collective response to spatial impedance. | Tanner, J. C. (1961). *Factors affecting the amount of travel*; Barbosa et al. (2018). | Tanner establishes foundational concepts for travel impedance and distance-frequency relationships. Barbosa contextualizes it in modern Human Mobility Science. | Tanner does not define "behaviour" as an independent scientific object. |
+| **E2. Behaviour versus Urban Structure** | Behaviour and Urban Structure are complementary components of spatial interaction. | Wilson, A. G. (1971). *A family of spatial interaction models*; Erlander, S., & Stewart, N. F. (1990). *The Gravity Model in Transportation Analysis*. | Wilson and Erlander demonstrate that spatial interaction depends simultaneously on opportunities and impedance. Forms the foundation for the thesis's interpretation into Structure and Behaviour. | Neither paper explicitly states the "Structure–Behaviour Separation Principle". This is the original thesis interpretation. |
+| **E3. Spatial Impedance and Distance Sensitivity** | Behaviour is primarily expressed through sensitivity to travel distance. | Tanner (1961); Liang, X., et al. (2013). *Unraveling the origin of exponential law in intra-urban human mobility*. **Scientific Reports**. | Tanner formulates deterrence functions; Liang explains why distance decay emerges in intra-urban mobility and links it to collective movement patterns. | Liang does not study parameter identification from aggregate TLD. |
+| **E4. Distance-decay as Behavioural Representation** | Distance-decay functions are mathematical representations of collective travel behaviour. | Tanner (1961); Martínez, L. M., & Viegas, J. M. (2013). *Calibration of gravity models*; Liang et al. (2013). | Tanner introduces the Tanner function; Martínez & Viegas review and compare deterrence functions; Liang provides empirical urban distance-decay evidence. | No paper explicitly calls distance-decay a "representation of behaviour". This is an explicit interpretation of this thesis. |
+| **E5. Behaviour as a Latent Scientific Quantity** | Human Travel Behaviour cannot be directly observed and must be statistically inferred. | Casella, G., & Berger, R. L. (2002). *Statistical Inference*; Barbosa et al. (2018). | Casella & Berger provide foundations for latent parameters, likelihood, and statistical inference; Barbosa shows behaviour is typically inferred via models rather than directly observed. | Casella does not discuss Human Mobility; Barbosa does not demonstrate inference from aggregate observations. |
+| **E6. Transition to Layer F** | Human Travel Behaviour alone cannot generate mobility; it interacts with Urban Structure. | Wilson (1971); Erlander & Stewart (1990). | Spatial interaction always requires attraction and impedance. Opens the path for Layer F (Urban Structure). | Should not attribute to Wilson that he proposed separating Structure and Behaviour into independent research objects. |
 
 ---
 
@@ -292,18 +294,19 @@ Forms the core literature, likelihood derivation, and empirical validation suite
 
 ---
 
-### Layer F — Urban Structure (Observable Mechanism & Feature Potentials)
+### Layer F — Urban Structure in Urban Spatial Interaction
 
 #### 1. Scientific Master Matrix for Layer F
 
-| Section | Scientific Question | Core Claim | Purpose in Proposal | Connection to Later Layers |
-| :--- | :--- | :--- | :--- | :--- |
-| **F. Urban Structure as the Observable Mechanism** | What observable mechanism supports mobility? | Urban spatial structure provides the spatial opportunity field $(O_i, A_j)$ supporting collective trips. | Introduce urban structure as the observable component. | Paper 2. |
-| **F1. Spatial Opportunities** | What is urban structure? | Urban structure consists of spatial distributions of population, land use, POIs, and road networks. | Define urban structure mathematically. | Feature representation. |
-| **F2. Feature Representation** | How can urban structure be quantified? | Open spatial data can be represented as structural potential fields $(O_i, A_j)$ via spatial GNNs or feature aggregation. | Structural estimation without flows. | Paper 2 methodology. |
-| **F3. Transferability of Structure** | Can urban structure be transferred? | Structural opportunity mappings are transferable across cities with similar spatial typologies. | Justify structural transfer. | Cross-city generalization. |
-| **F4. Open Data Feasibility** | Is open data sufficient? | Multi-source open data (OSM, WorldPop, POI registers) provide adequate proxy signals for structural potentials. | Data feasibility. | Survey-free estimation. |
-| **F5. Transition** | How do existing models treat urban structure? | Existing paradigms conflate structure with behavior into end-to-end black boxes. | Transition to Layer G. | Layer G. |
+| Section | Scientific Question | Core Claim | Main Supporting References (APA) | Contribution of References | Thesis Interpretation |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **F. Urban Structure in Urban Spatial Interaction** | What structural components determine spatial interactions? | Urban Structure provides the spatial opportunities and constraints within which Human Travel Behaviour generates mobility flows. | Wilson, A. G. (1971). *A family of spatial interaction models*; Barbosa, H., et al. (2018). *Human mobility: Models and applications*. **Physics Reports, 734**, 1–74. | Spatial interaction depends on origins, destinations and spatial opportunities. | Urban Structure is treated as an independent scientific object. |
+| **F1. Urban Structure as Spatial Opportunity** | What constitutes Urban Structure? | Urban Structure consists of the spatial distribution of population, activities, infrastructure and opportunities. | Wilson (1971); Barbosa et al. (2018); Batty, M. (2013). *The New Science of Cities*. | Spatial interaction requires opportunities distributed in space. | Structure is defined independently of mobility observations. |
+| **F2. Observable Urban Structure** | Can Urban Structure be directly observed? | Unlike behaviour, Urban Structure is increasingly observable through open urban datasets. | Guo, Y., et al. (2025). *A universal geography neural network for mobility flow prediction in planning*. **CACE**; Liu et al. (2025). *Representation Learning for Geospatial Data*; Open mobility/open datasets papers. | OpenStreetMap, POIs, census, buildings, satellite imagery, GTFS provide structural observations. | Structure becomes the observable component of the thesis. |
+| **F3. Urban Structure Representation** | How should Urban Structure be represented? | Modern AI represents Urban Structure through learned geospatial representations rather than handcrafted variables. | Guo et al. (2025); Liu et al. (2025); Simini et al. (2021). *DeepGravity* (**Nature Comm**); Enaya et al. (2026). *TransGM*. | Reviews representation learning and feature learning for cities. | Representation learning is interpreted as learning structural information. |
+| **F4. Transferability of Urban Structure** | Can Urban Structure be transferred across cities? | Many structural characteristics are transferable across cities because they describe physical urban organization rather than city-specific behaviour. | Enaya et al. (2026). *TransGM*; Guo et al. (2025); Simini et al. (2021). *DeepGravity*; Liu et al. (2025). *NeuroGravity*. | Existing work explores transferable embeddings and representations. | The thesis transfers only Urban Structure—not behaviour. |
+| **F5. Urban Structure as the Observable Counterpart of Behaviour** | How are Structure and Behaviour related? | Urban Mobility emerges from the interaction between observable Urban Structure and latent Human Travel Behaviour. | Wilson (1971); Barbosa et al. (2018). | Spatial interaction depends on both opportunity and impedance. | Formalizes the Structure–Behaviour Separation Principle. |
+| **F6. Transition to Layer G** | How are these two components currently modelled? | Existing models usually learn Structure and Behaviour jointly without explicitly separating them. | Simini et al. (2021); Liu et al. (2025); Enaya et al. (2026); Guo et al. (2025). | Modern AI models jointly optimize all components. | Leads naturally to the review of the conventional modelling paradigm (Layer G). |
 
 ---
 
@@ -330,18 +333,19 @@ Establishes the structural representation paradigm for **Paper 2**, enabling ind
 
 ---
 
-### Layer G — The Conventional Paradigm & Transferability
+### Layer G — The Conventional Paradigm of Urban Mobility Modelling
 
 #### 1. Scientific Master Matrix for Layer G
 
-| Section | Scientific Question | Core Claim | Purpose in Proposal | Connection to Later Layers |
-| :--- | :--- | :--- | :--- | :--- |
-| **G. The Conventional Paradigm & Transferability** | How has the community traditionally modelled urban mobility? | Existing approaches share a common paradigm requiring direct target mobility observations or black-box neural transfer. | Review conventional paradigms & transfer learning. | Layer H. |
-| **G1. Model Calibration** | How are mobility models calibrated? | Behavioural parameters are estimated using observed target OD matrices or individual trajectories. | Review conventional workflow. | Hidden assumptions. |
-| **G2. Data Dependency** | What data do current models require? | Most models assume access to detailed mobility observations, creating a severe data scarcity barrier. | Reveal data scarcity problem. | Motivation for new paradigm. |
-| **G3. Modern Deep Learning & Transfer** | Has AI changed the paradigm? | Deep learning (e.g., GODDAG, TransGM, DeepGravity) improves prediction but transfers end-to-end black-box representations. | Show limitations of neural transfer. | Transfer learning limits. |
-| **G4. Fundamental Limitation** | What is the common limitation? | Existing methods conflate urban structure and travel behavior rather than decoupling transferable knowledge. | Identify core paradigm limit. | Layer H. |
-| **G5. Transition** | Where do these limitations lead? | The conventional paradigm leaves fundamental scientific questions unresolved. | Transition to Layer H. | Layer H. |
+| Section | Scientific Question | Core Claim | Main Supporting References (APA) | Contribution of References | Thesis Interpretation |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **G. The Conventional Paradigm of Urban Mobility Modelling** | How is Urban Mobility traditionally modelled? | Existing methods generally learn Urban Mobility directly from observed mobility data. | Barbosa, H., et al. (2018). *Human mobility: Models and applications*. **Physics Reports, 734**, 1–74; DeepGravity (2021); NeuroGravity (2025); Universal Geography (2025). | Survey existing modelling paradigms. | Introduce the Observation-First paradigm. |
+| **G1. Classical Spatial Interaction Models** | How were mobility models traditionally developed? | Classical models estimate behavioural parameters using observed OD matrices or travel surveys. | Wilson, A. G. (1971); Erlander, S., & Stewart, N. F. (1990); Tanner, J. C. (1961). | Calibration based on observed mobility. | Foundation of conventional modelling. |
+| **G2. Machine Learning-based Mobility Models** | How has machine learning changed mobility modelling? | Machine learning improves predictive performance while preserving the same dependence on observed mobility labels. | Simini, F., et al. (2021). *DeepGravity* (**Nature Comm**); Liu et al. (2025). *NeuroGravity*; Guo, Y., et al. (2025). *Universal Geography Neural Network*. | Review AI-based mobility prediction. | AI changes the model, not the paradigm. |
+| **G3. Transfer Learning for Mobility** | How is knowledge transferred across cities? | Existing transfer-learning methods mainly transfer model parameters or learned embeddings. | Enaya et al. (2026). *TransGM*; Liu et al. (2025). *NeuroGravity*; Guo et al. (2025). | Review transfer-learning approaches. | Transfer is generally model-centric. |
+| **G4. Common Assumptions of Existing Models** | What assumptions are shared by existing methods? | Most existing methods assume that detailed mobility observations are available for training or calibration. | Barbosa et al. (2018); Simini et al. (2021); Enaya et al. (2026); Liu et al. (2025). | Reveal the hidden common assumption. | Define the Observation-First Paradigm. |
+| **G5. Observation-First Paradigm** | What paradigm underlies existing research? | Urban Mobility is typically treated as an observable target from which models are learned. | Synthesized from Wilson (1971), Barbosa et al. (2018), Simini et al. (2021), and Enaya et al. (2026). | Literature demonstrates this pattern across classical and AI methods. | The thesis formalizes this shared paradigm. |
+| **G6. Transition to Layer H** | What happens when mobility observations are unavailable? | Existing paradigms become difficult to apply in cities lacking detailed mobility observations. | Barbosa et al. (2018); Open Dataset papers; Guo et al. (2025). | Motivate the unresolved scientific problem. | Transition to Research Gaps (Layer H). |
 
 ---
 
@@ -380,14 +384,15 @@ To synthesize the scientific knowledge established in the previous layers (A–G
 
 #### 1. Scientific Master Matrix for Layer H
 
-| Section | Scientific Question | Outcome | Purpose | Leads to |
-| :--- | :--- | :--- | :--- | :--- |
-| **H. Scientific Synthesis and Research Gaps** | How does established scientific knowledge synthesize into core research gaps? | Knowledge $\to$ Gap Transition | Synthesize the entire literature foundation. | Research Proposal. |
-| **H1. Scientific Consensus** | What has been established? | Scientific Consensus | Consolidate established facts across Layers A–G. | Identify boundaries of knowledge. |
-| **H2. Scientific Uncertainties** | What remains uncertain? | Scientific Uncertainties | Highlight unresolved assumptions in current paradigms. | Reveal critical scientific limitations. |
-| **H3. Research Gaps** | What are the unresolved research gaps? | Research Gaps | Formulate precise scientific gaps (Behavior & Structure). | Motivate scientific needs. |
-| **H4. Scientific Significance** | Why do these gaps matter? | Scientific Significance | Establish why closing these gaps is scientifically essential. | Value to urban mobility science. |
-| **H5. Transition** | Where do these gaps lead? | Proposal | Transition from Knowledge Base to Research Proposal. | Research Proposal. |
+| Section | Scientific Question | Core Claim | Main Supporting References (APA) | Contribution of References | Thesis Interpretation |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **H. Scientific Synthesis and Research Gaps** | What remains scientifically unresolved? | Despite major advances in mobility modelling, two fundamental scientific questions remain unresolved. | Synthesized from Layers A–G. | Literature collectively reveals unresolved problems. | The thesis synthesizes these into a unified research agenda. |
+| **H1. Scientific Consensus** | What has the community established? | Urban mobility is a measurable spatial interaction governed by systematic behavioural and structural mechanisms. | Barbosa et al. (2018); Wilson (1971); Tanner (1961); Guo et al. (2025). | Summarize established scientific knowledge. | No new interpretation beyond synthesis. |
+| **H2. Scientific Uncertainties** | What remains uncertain? | Human Travel Behaviour remains latent, Urban Structure is increasingly observable, and their interaction is still difficult to disentangle. | Barbosa et al. (2018); Simini et al. (2021). *DeepGravity*; Guo et al. (2025). *Universal Geography*; Enaya et al. (2026). *TransGM*. | Literature reveals persistent challenges. | Synthesis across previous layers. |
+| **H3. Research Gap I – Behaviour Identification** | Can Human Travel Behaviour be identified without detailed mobility observations? | Existing studies estimate behaviour from observed OD flows, while the identifiability of behaviour from aggregate mobility observations remains largely unexplored. | Barbosa et al. (2018); Liang et al. (2013); Casella & Berger (2002). | Literature motivates but does not solve the problem. | Motivation for Paper 1. |
+| **H4. Research Gap II – Transferable Urban Structure** | Can Urban Structure be represented and transferred independently of behaviour? | Existing transfer-learning methods transfer models or embeddings, whereas transferable structural knowledge remains insufficiently understood. | Guo et al. (2025). *Universal Geography*; Enaya et al. (2026). *TransGM*; Liu et al. (2025). *NeuroGravity*. | Literature explores transfer learning but not explicit structural transfer. | Motivation for Paper 2. |
+| **H5. Unified Scientific Perspective** | How are the two gaps related? | Behaviour Identification and Transferable Urban Structure are complementary problems arising from the same scientific decomposition of Urban Mobility. | Synthesized from Layers D–G. | Literature provides ingredients separately. | The thesis unifies them through the Structure–Behaviour Separation Principle. |
+| **H6. Transition to the Research Proposal** | What scientific questions should be addressed next? | These research gaps motivate the research questions, objectives and methodology presented in the proposal. | Synthesized from the entire RKB. | Transition only. | Bridge from Knowledge Base to Proposal. |
 
 ---
 
