@@ -72,8 +72,8 @@ def run_test_17():
         ])
 
         # Predicted log O_i and log A_j -> transform to original scale
-        hat_O = np.expm1(rf_O.predict(X_city)).clip(lower=0.0)
-        hat_A = np.expm1(rf_A.predict(X_city)).clip(lower=0.0)
+        hat_O = np.maximum(np.expm1(rf_O.predict(X_city)), 0.0)
+        hat_A = np.maximum(np.expm1(rf_A.predict(X_city)), 0.0)
 
         # Reconstruct OD with predicted O_i, A_j and fitted beta
         T_hat = predict_gravity_od(df, beta, custom_O=hat_O, custom_A=hat_A, node_ids=nodes["idx"].values)

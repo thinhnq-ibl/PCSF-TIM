@@ -40,6 +40,9 @@ system-protocol: "One Conversation → One Refinement"
 
 > **Grand Core Theme of the Dissertation:**
 > **"Probabilistic Behavioural Identification under Information Compression"**
+> 
+> **Research Vision:**
+> *"Rather than treating urban mobility as a black-box phenomenon, this dissertation decomposes mobility into interpretable structural and behavioural components, enabling quantitative diagnosis, policy evaluation, and mechanism-based interpretation of urban mobility systems."*
 
 ### The Immutable Scientific Principles vs Flexible Implementation Layer
 A key property of this theoretical architecture is that **the core scientific principles are independent of specific implementation methods**. Not a single step in the 9-step logical chain depends strictly on Gravity, TLD, or MLE. These specific choices belong strictly to the **Implementation / Instantiation Layer**:

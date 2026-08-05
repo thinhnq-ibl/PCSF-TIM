@@ -48,46 +48,46 @@ To function as a **Background Operating System**, every layer in the RKB strictl
 
 ## 3. The 8-Layer Knowledge Architecture
 
-### Executive Scientific Matrix
+### Executive Scientific Matrix (8-Module Architecture)
 
-| Layer | One Scientific Question | Scientific Outcome |
+| Module | Scientific Question | Scientific Outcome & Mission |
 | :---: | :--- | :--- |
-| **Layer A** | What is Urban Human Mobility? | Define the scientific object. |
-| **Layer B** | How can Urban Human Mobility be observed? | Define the observation space. |
-| **Layer C** | What information is preserved by each observation? | Define the information hierarchy. |
-| **Layer D** | What scientific principle governs Urban Mobility? | Establish the Gravity Principle. |
-| **Layer E** | What hidden mechanism generates collective mobility? | Human Travel Behaviour (Paper 1). |
-| **Layer F** | What observable mechanism supports mobility? | Urban Structure (Paper 2). |
-| **Layer G** | How has the community modelled Urban Mobility? | Existing paradigms and assumptions. |
-| **Layer H** | What scientific questions remain unanswered? | Research gaps (Knowledge $\to$ Gap). |
+| **Module 1** | What is the fundamental scientific problem of understanding human mobility? | Define Human Mobility as a scientific phenomenon to be decomposed and explained (Prediction $\neq$ Understanding). |
+| **Module 2** | Why is Gravity the appropriate scientific language for describing spatial interaction? | Establish Gravity as a scientific decomposition into Production, Attraction, and Distance Deterrence (not a prediction model). |
+| **Module 3** | Can Human Mobility be decomposed into Structure and Behaviour? | Establish Structure–Behaviour Separation: Structure creates opportunities; Behaviour determines opportunity utilization. |
+| **Module 4** | What is Behaviour in Spatial Interaction? | Define Behaviour as collective distance sensitivity governing opportunity utilization (Paper 1 Identifiability). |
+| **Module 5** | What constitutes Urban Structure in Spatial Interaction? | Represent Urban Structure as the Urban Mobility Potential Field (Production Potential $O_i$ & Attraction Potential $A_j$). |
+| **Module 6** | How much behavioural and structural information is preserved by different mobility observations? | Formulate the Information Hierarchy proving aggregate TLDs preserve distance sensitivity signatures (Paper 1 Feasibility). |
+| **Module 7** | How can scientific quantities be learned from observations? | Develop Scientific Representation Learning (Paper 2 learns spatial potentials; flow is validation, not end goal). |
+| **Module 8** | What scientific understanding becomes possible once Structure and Behaviour are independently identified? | Enable Mechanistic Understanding for diagnosis, policy evaluation, counterfactual analysis, and knowledge transfer. |
 
 ---
 
 ### Knowledge Tree Navigation
 
 ```text
-Layer A: Defining Urban Human Mobility (Scientific Object)
-   │
-   ▼
-Layer B: The Urban Mobility Data Revolution (Observation Space)
-   │
-   ▼
-Layer C: Information Hierarchy (Information Preservation)
-   │
-   ▼
-Layer D: Gravity as Scientific Language (Gravity Principle)
-   │
-   ▼
-Layer E: Human Travel Behaviour (Hidden Mechanism & Identification) ───► Paper 1
-   │
-   ▼
-Layer F: Urban Structure (Observable Mechanism & Feature Potentials) ───► Paper 2
-   │
-   ▼
-Layer G: The Conventional Paradigm & Transferability (Existing Models & Assumptions)
-   │
-   ▼
-Layer H: Scientific Synthesis & Research Gaps (Knowledge → Gap Transition)
+MODULE 1: Human Mobility as a Scientific Problem (Phenomenon to Explain)
+        │
+        ▼
+MODULE 2: Gravity as the Scientific Language (Multiplicative Factorization)
+        │
+        ▼
+MODULE 3: Structure–Behaviour Separation Principle (Opportunities vs Utilization)
+        │
+ ┌──────┴──────┐
+ ▼             ▼
+MODULE 4: Behaviour Identification     MODULE 5: Urban Structure Representation
+(Collective Distance Sensitivity)       (Mobility Potential Field)
+        │             │
+        └──────┬──────┘
+               ▼
+MODULE 6: Information Hierarchy (TLD Information Preservation)
+        │
+        ▼
+MODULE 7: Scientific Representation Learning (Feature → Potentials)
+        │
+        ▼
+MODULE 8: Mechanism-based Understanding (Diagnosis, Intervention, Transfer)
 ```
 
 ---

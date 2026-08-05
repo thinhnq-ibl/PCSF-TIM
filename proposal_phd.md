@@ -6,7 +6,7 @@
 
 ---
 
-# 1. Motivation
+# 1. Motivation & Vision
 
 * Mobility data are a dynamic input to economic analysis, transportation planning, and public health applications.
 * Modern cities have become increasingly observable through multi-source open spatial data (OSM, POIs, Sentinel/Landsat) and geospatial representation learning.
@@ -16,6 +16,9 @@
 
 This motivates the generative reconstruction of fine-grained OD matrices from publicly available aggregate mobility observations and open urban structure representations.
 
+### Research Vision
+
+> **Rather than treating urban mobility as a black-box phenomenon, this dissertation decomposes mobility into interpretable structural and behavioural components, enabling quantitative diagnosis, policy evaluation, and mechanism-based interpretation of urban mobility systems.**
 
 ---
 
