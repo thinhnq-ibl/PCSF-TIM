@@ -171,6 +171,53 @@ Wilson (1971).
 Haynes, K. E., & Fotheringham, A. S. (1984). Gravity and Spatial Interaction Models. Sage.
 Barbosa et al. (2018).
 Lenormand et al. (2016).
+
+Argument 2b.
+These common components are exactly two: no more, no less.
+Scientific Question
+
+Why are there exactly two common components, not three or four?
+
+Nội dung
+
+Để chứng minh rằng các mô hình Spatial Interaction luôn chia sẻ chính xác 2 thành phần khái niệm, ta có thể phân tích chi tiết các mô hình điển hình.
+
+Trong Gravity model, công thức cơ bản là: Q_ij = O_i × D_j × f(d_ij)
+
+- O_i và D_j đại diện cho "khả năng phát sinh" và "khả năng thu hút" các chuyến đi tại các vùng → đây là **Urban Structure**
+- f(d_ij) là hàm distance-decay (ví dụ: exponential, power law) mô tả mức độ mà khoảng cách cản trở tương tác → đây là **Travel Behaviour**
+
+Hai thành phần này hoàn toàn độc lập về khái niệm: O_i và D_j mô tả "đặc điểm của nơi", trong khi f(d_ij) mô tả "cách con người phản ứng".
+
+Tương tự, trong Radiation model: Q_ij = O_i × D_j / (D_j + S_ij)
+
+Trong công thức này:
+- **O_i, D_j** vẫn là **Urban Structure** (khả năng phát sinh và thu hút chuyến đi)
+- **S_ij** là "intervening opportunities" — tức là tổng các cơ hội (origin + destination) nằm trong bán kính giữa i và j
+- **Mẫu số (D_j + S_ij)** mô tả cơ chế **Travel Behaviour**: cơ chế "opportunity competition" — nếu có nhiều cơ hội gần hơn giữa i và j (S_ij lớn), khả năng người di chuyển từ i đến j sẽ giảm
+
+So với Gravity model sử dụng distance-decay function f(d_ij) để mô tả Travel Behaviour, Radiation model sử dụng một cơ chế khác: sự cạnh tranh từ các cơ hội trung gian. Nhưng bản chất vẫn giống nhau — mô tả cách con người phản ứng với sự phân bố không gian của các cơ hội, chứ không phải mô tả cấu trúc không gian.
+
+Điều quan trọng: Radiation model cho thấy **Travel Behaviour có thể có nhiều hình thức khác nhau** (distance-decay, opportunity competition, v.v.), nhưng luôn là một thành phần riêng biệt khái niệm với Urban Structure.
+
+Và trong các mô hình Deep Learning hiện đại:
+
+- Các embedding layers hay feature encoders học các biểu diễn latent của các vùng → **Urban Structure representation**
+- Các attention mechanisms, interaction layers hay neural interaction functions học cách các vùng tương tác → **Travel Behaviour representation**
+
+Phân tích của ba họ mô hình này cho thấy cùng một cấu trúc: luôn có một thành phần mô tả "nơi" (Origin-Destination potentials) và một thành phần mô tả "cách tương tác" (interaction mechanism). Không tồn tại mô hình Spatial Interaction nào thiếu một trong hai thành phần này, và cũng không tồn tại mô hình nào có một thành phần thứ ba độc lập.
+
+Nếu coi các yếu tố khác (thời gian, giá cả, mục đích chuyến đi, v.v.) là thành phần thứ ba, chúng sẽ luôn tác động **thông qua** một trong hai thành phần đã nói: ví dụ, giá cả ảnh hưởng đến Travel Behaviour (làm thay đổi f(d_ij)), còn mục đích chuyến đi ảnh hưởng đến Urban Structure (định nghĩa lại O_i và D_j cho từng loại hoạt động). Do đó, các yếu tố này không tạo nên một thành phần khái niệm độc lập mà chỉ là các modifiers của hai thành phần chính.
+
+Kết luận: Spatial Interaction luôn được hình thành từ chính xác hai thành phần khái niệm: một mô tả cấu trúc không gian (Urban Structure) và một mô tả cơ chế tương tác (Travel Behaviour).
+
+APA References
+Wilson (1971).
+Simini et al. (2012).
+Haynes & Fotheringham (1984).
+Lenormand et al. (2016).
+Barbosa et al. (2018).
+
 Argument 3.
 These recurring components can be interpreted as Urban Structure and Travel Behaviour.
 Scientific Question
