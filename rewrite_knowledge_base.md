@@ -35,7 +35,7 @@ Sau khi xác lập Spatial Interaction là đối tượng khoa học, câu hỏ
 
 Tài liệu tham khảo (APA)
 Barbosa, H., Barthelemy, M., Ghoshal, G., James, C. R., Lenormand, M., Louail, T., Menezes, R., Ramasco, J. J., Simini, F., & Tomasini, M. (2018). Human mobility: Models and applications. Physics Reports, 734, 1–74.
-Toole, J. L., Colak, S., Sturt, B., Alexander, L. P., Evsukoff, A., & González, M. C. (2015). The path most traveled: Travel demand estimation using big data resources. Transportation Research Part C, 58, 162–177.
+Toole, J. L., Colak, S., Sturt, B., Alexander, L. P., Evsukoff, A., & González, M. C. (2015). The path most traveled: Travel demand estimation using big data resources. Transportation Research Part C: Emerging Technologies, 58, 162–177.
 Pappalardo, L., Manley, E., Sekara, V., Alessandretti, L., et al. (2023). Future directions in human mobility science. Nature Computational Science, 3, 588–600.
 
 ## Module 2. Observing Spatial Interaction
@@ -63,7 +63,7 @@ Trong nhiều thập kỷ qua, sự phát triển của công nghệ đã tạo 
 APA References
 Barbosa et al. (2018).
 Lenormand, M., Bassolas, A., & Ramasco, J. J. (2016). Systematic comparison of trip distribution laws and models. Journal of Transport Geography, 51, 158–169.
-Toole, J. L., et al. (2015). The path most traveled: Travel demand estimation using big data resources. Transportation Research Part C, 58, 162–177.
+Toole, J. L., et al. (2015). The path most traveled: Travel demand estimation using big data resources. Transportation Research Part C: Emerging Technologies, 58, 162–177.
 Pappalardo, L., et al. (2023). Future directions in human mobility science. Nature Computational Science, 3, 588–600.
 Argument 3. Mobility datasets differ in the information they preserve
 Scientific Question
