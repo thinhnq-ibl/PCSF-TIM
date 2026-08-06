@@ -560,10 +560,10 @@ Key Outcome
 ├─ **Paper 1:** Recover Travel Behaviour Representation from aggregate observations (distance distributions)
 │  └─ Output: Behavioural parameters for each city
 │
-├─ **Paper 2:** Learn transferable Urban Structure Representation from open geospatial datasets
+├─ **Paper 2:** Learn transferable Urban Structure representations from multimodal open geospatial data
 │  └─ Output: Structure embedding that generalizes to unseen cities
 │
-└─ **Compositional Reconstruction:** SI = Structure × Behaviour
+└─ **Compositional Spatial Interaction Reconstruction:** SI = Structure × Behaviour
    └─ Reconstruct OD matrices in data-scarce cities by combining recovered behaviour + learned structure
 
 8.1 Why does this question arise?
@@ -628,7 +628,11 @@ Research Question 1
 
 ↓
 
-Paper 1: Recover Behaviour from Aggregate Observations
+Paper 1: Recover Travel Behaviour Representation from Aggregate Observations
+
+↓
+
+Behaviour Representation
 
 ↓
 
@@ -644,7 +648,7 @@ Research Question 2
 
 ↓
 
-Paper 2: Learn Structure from Open Geospatial Data
+Paper 2: Learn Structure from Open Geospatial Data + Open Mobility Statistics
 
 ↓
 
@@ -660,7 +664,7 @@ Recovered Behaviour (Paper 1) × Learned Structure (Paper 2)
 
 ↓
 
-**Application: Compositional Reconstruction of OD Matrices in Data-Scarce Cities**
+**Application: Compositional Spatial Interaction Reconstruction of OD Matrices in Data-Scarce Cities**
 
 Ở đây
 
@@ -694,13 +698,17 @@ Nhưng hơn nữa: Paper 1 → Paper 2 là sequential relationship.
 
 Paper 1 establish foundation cho Paper 2.
 
-**Paper 1: Recover Travel Behaviour**
+**Paper 1: Recover Travel Behaviour Representation**
 
 Paper 1
 
 ↓
 
 Nhận dạng Travel Behaviour Representation từ Aggregate Observations.
+
+↓
+
+Behaviour Representation
 
 ↓
 
@@ -720,7 +728,7 @@ Paper 2
 
 ↓
 
-Học Urban Structure Representation từ open geospatial datasets (OSM, satellite imagery, POI data, v.v.)
+Học Urban Structure representations từ multimodal open geospatial data + mobility statistics (OSM, satellite imagery, POI data, traffic counts, origin-destination patterns, v.v.)
 
 ↓
 
@@ -738,7 +746,7 @@ Representation này có khả năng **transfer** sang các thành phố chưa qu
 
 Tái tạo Spatial Interaction = Structure (Paper 2) ⊗ Behaviour (Paper 1)
 
-**Compositional Reconstruction Logic**
+**Compositional Spatial Interaction Reconstruction Logic**
 
 Điểm chính yếu: Paper 2 không chỉ về "transfer learning" mô hình. Mà trọng tâm thực sự là:
 
@@ -746,7 +754,7 @@ Tái tạo Spatial Interaction = Structure (Paper 2) ⊗ Behaviour (Paper 1)
 2. **Recover Behaviour**: Từ Paper 1, đã có behavioural parameters cho mỗi thành phố
 3. **Compose**: Kết hợp cả hai thành phần để tái tạo OD matrices
 
-Chuỗi logic này là **compositional reconstruction**: SI = Structure × Behaviour. Paper 1 và Paper 2 mỗi cái cung cấp một thành phần, từ đó tạo ra tái tạo hoàn chỉnh của Spatial Interaction.
+Chuỗi logic này là **compositional spatial interaction reconstruction**: SI = Structure × Behaviour. Paper 1 và Paper 2 mỗi cái cung cấp một thành phần, từ đó tạo ra tái tạo hoàn chỉnh của Spatial Interaction.
 
 Hai paper
 
@@ -766,7 +774,7 @@ Paper 2 có vision
 
 ↓
 
-Compositional Reconstruction cho Spatial Interaction.
+Compositional Spatial Interaction Reconstruction cho Spatial Interaction.
 
 Đây là một dissertation.
 
@@ -833,7 +841,7 @@ Parameters     Structure
 
 Đây chính là Framework của luận án.
 
-Lưu ý: Paper 1 (Recover Behaviour) tạo điều kiện cho Paper 2 (Learn Structure sạch), và cả hai outputs kết hợp lại thành Compositional Reconstruction là ứng dụng cuối cùng của luận án.
+Lưu ý: Paper 1 (Recover Behaviour) tạo điều kiện cho Paper 2 (Learn Structure sạch), và cả hai outputs kết hợp lại thành Compositional Spatial Interaction Reconstruction là ứng dụng cuối cùng của luận án.
 
 8.6 Scientific Contributions
 
@@ -876,16 +884,19 @@ Methodological
 ↓
 
 Transferable Urban Structure Representation:
-Học một biểu diễn Urban Structure từ open geospatial datasets (OSM, satellite imagery) có khả năng chuyển giao và tổng quát hóa sang các thành phố chưa quan sát.
+Học một biểu diễn Urban Structure từ open geospatial datasets + mobility statistics (OSM, satellite imagery, traffic counts, origin-destination patterns) có khả năng chuyển giao và tổng quát hóa sang các thành phố chưa quan sát.
 
 Contribution 4
 
-Methodological + Practical
+Methodological + Practical + Theoretical
 
 ↓
 
-Compositional Reconstruction of Spatial Interaction:
-Kết hợp recovered behavioural parameters (Paper 1) + learned Structure representation (Paper 2) để tái tạo OD matrices trong các thành phố thiếu dữ liệu (data-scarce cities). Đây là ứng dụng trực tiếp của Structure–Behaviour Decomposition Principle: SI  Structure × Behaviour.
+A compositional framework
+for reconstructing Spatial Interaction
+through independent learning
+of Urban Structure
+and Travel Behaviour.
 
 Contribution 5
 
@@ -900,4 +911,8 @@ Scientific Conclusion
 
 Module kết thúc bằng
 
-This dissertation operationalizes the Structure–Behaviour Decomposition Principle into a coherent research framework in which Paper 1 recovers Travel Behaviour from aggregate observations and Paper 2 learns transferable Urban Structure from open geospatial data. Together, these two papers demonstrate that Spatial Interaction can be compositionally reconstructed in data-scarce cities by combining recovered behavioural parameters with learned structure representations. Collectively, they contribute to a unified scientific understanding of human mobility that bridges theoretical geography and practical AI applications.
+This dissertation operationalizes the Structure–Behaviour Decomposition Principle into a coherent research framework in which Paper 1 recovers Travel Behaviour from aggregate observations and Paper 2 learns transferable Urban Structure representations from multimodal open geospatial data and mobility statistics. Together, these two papers demonstrate that Spatial Interaction can be compositionally reconstructed in data-scarce cities by combining recovered behavioural parameters with learned structure representations. Collectively, they contribute to a unified scientific understanding of human mobility that bridges theoretical geography and practical AI applications.
+
+**Dissertation Vision**
+
+Rather than learning mobility flows end-to-end, this dissertation proposes that Spatial Interaction can be reconstructed compositionally by independently learning Urban Structure and Travel Behaviour from complementary open data sources. This compositional view provides a unified scientific framework that connects classical spatial interaction theory with modern representation learning and GeoAI.
