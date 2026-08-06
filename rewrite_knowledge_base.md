@@ -540,13 +540,11 @@ Hai Research Questions không được đặt ra một cách độc lập mà đ
 Key Outcome
 Research Question 1
 
-How can the representation of Travel Behaviour be identified from aggregate observations of Spatial Interaction?
+ - How can the representation of Travel Behaviour be identified from aggregate observations of Spatial Interaction?
 
 Research Question 2
 
-How can Urban Structure Representation be learned to generalize and reconstruct Spatial Interaction in unseen cities?
-
-Bridge to Module 8
+ - How can Urban Structure Representation be learned to generalize and reconstruct Spatial Interaction in unseen cities?
 
 Sau khi xác định được hai Research Questions, bước cuối cùng là chuyển các câu hỏi này thành một chương trình nghiên cứu cụ thể. Điều này đòi hỏi phải xác định mối quan hệ giữa Scientific Proposition, Research Questions, hai bài báo và đóng góp tổng thể của luận án. Đó chính là nhiệm vụ của Module 8.
 
@@ -578,27 +576,11 @@ Sau khi Module 7 đã xác định hai khoảng trống khoa học và hình th�
 
 8.2 Theoretical foundation
 
-Module này mở đầu bằng việc nhắc lại
-
-Scientific Proposition.
-
 Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed.
-
-Đây là
-
-backbone.
-
-Không giải thích lại.
-
-Không review lại.
-
-Chỉ nhắc lại.
 
 8.3 Operationalizing the Scientific Proposition
 
-Đây là phần quan trọng nhất.
-
-Bạn sẽ giải thích
+giải thích
 
 Scientific Proposition
 
@@ -615,14 +597,6 @@ Structure–Behaviour Decomposition
 ↓
 
 Behaviour Representation + Urban Structure Representation
-
-Đây mới chỉ là
-
-theory.
-
-Luận án cần chuyển thành
-
-research.
 
 Tiếp theo
 
@@ -666,39 +640,15 @@ Output: Transferable Structure Representation
 
 ↓
 
-Recovered Behaviour (Paper 1) × Learned Structure (Paper 2)
+Recovered Behaviour (Paper 1) and Learned Structure (Paper 2)
 
 ↓
 
 **Application: Compositional Spatial Interaction Reconstruction of OD Matrices in Data-Scarce Cities**
 
-Ở đây
-
-không nói methodology.
-
-Không nói experiment.
-
-Chỉ nói
-
-logic.
-
-Chỉ nói
-
-cách kết hợp hai outputs để tạo ra tái tạo Spatial Interaction.
-
 8.4 Relationship between the two papers
 
-Đây là phần tôi thấy rất nhiều proposal thiếu.
-
-Bạn cần giải thích
-
-Paper 1
-
-không độc lập.
-
-Paper 2
-
-không độc lập.
+Cần giải thích Paper 1 không độc lập voi Paper 2
 
 Nhưng hơn nữa: Paper 1 → Paper 2 là sequential relationship.
 
@@ -766,13 +716,7 @@ Hai paper
 
 ↓
 
-Giải quyết
-
-hai thành phần
-
-của cùng
-
-Scientific Proposition.
+Giải quyết hai thành phần của cùng Scientific Proposition.
 
 Và hơn nữa:
 
@@ -782,23 +726,8 @@ Paper 2 có vision
 
 Compositional Spatial Interaction Reconstruction cho Spatial Interaction.
 
-Đây là một dissertation.
-
-Không phải
-
-hai paper ghép lại.
-
-Mà là
-
-một chương trình nghiên cứu
-
-có sắc thái lô-gic và compositional.
 
 8.5 Overall Dissertation Framework
-
-Đây là nơi trình bày
-
-framework cuối cùng.
 
 Spatial Interaction
         │
@@ -847,75 +776,25 @@ Parameters     Structure
 
 Đây chính là Framework của luận án.
 
-Lưu ý: Paper 1 (Recover Behaviour) tạo điều kiện cho Paper 2 (Learn Structure sạch), và cả hai outputs kết hợp lại thành Compositional Spatial Interaction Reconstruction là ứng dụng cuối cùng của luận án.
+- Paper 1 (Recover Behaviour) tạo điều kiện cho Paper 2 (Learn Structure sạch), và cả hai outputs kết hợp lại thành Compositional Spatial Interaction Reconstruction
 
 8.6 Scientific Contributions
 
-Đây là phần nên xuất hiện.
-
-Không phải contribution của từng paper.
-
-Mà là
-
-contribution
-
-của
-
-dissertation.
-
-Ví dụ
-
-Contribution 1
-
-Scientific
-
-↓
-
-Structure–Behaviour Decomposition Principle:
+- Structure–Behaviour Decomposition Principle:
 Phân tích Spatial Interaction thành hai thành phần khái niệm riêng biệt cho phép xác định rõ các thành phần nào cần được nghiên cứu và phát triển.
 
-Contribution 2
-
-Methodological
-
-↓
-
-Behaviour Identification from Aggregate Observations:
+- Behaviour Identification from Aggregate Observations:
 Phương pháp nhận dạng Travel Behaviour Representation từ các quan sát tổng hợp (distance distributions) của Spatial Interaction, mà không cần individual-level trajectories hay OD matrices.
 
-Contribution 3
-
-Methodological
-
-↓
-
-Transferable Urban Structure Representation:
+- Transferable Urban Structure Representation:
 Học Urban Structure Representation từ multimodal open geospatial and mobility datasets (OSM, satellite imagery, POI data, traffic counts, aggregate mobility statistics) có khả năng chuyển giao và tổng quát hóa sang các thành phố chưa quan sát.
 
-Contribution 4
+- A compositional framework for reconstructing Spatial Interaction through independent learning of Urban Structure and Travel Behaviour.
 
-Methodological + Practical + Theoretical
-
-↓
-
-A compositional framework
-for reconstructing Spatial Interaction
-through independent learning
-of Urban Structure
-and Travel Behaviour.
-
-Contribution 5
-
-Unified Framework
-
-↓
-
-Spatial Interaction Science:
+- Spatial Interaction Science:
 Thiết lập một khung lý thuyết thống nhất cho việc nghiên cứu Human Mobility, trong đó các phương pháp khác nhau (Gravity models, Deep Learning, GeoAI) được hiểu là những cách biểu diễn hoặc học hai thành phần cơ bản của Spatial Interaction.
 
 Scientific Conclusion
-
-Module kết thúc bằng
 
 This dissertation operationalizes the Structure–Behaviour Decomposition Principle into a coherent research framework in which Paper 1 recovers Travel Behaviour from aggregate observations and Paper 2 learns transferable Urban Structure Representation from multimodal open geospatial and mobility datasets. Together, these two papers demonstrate that Spatial Interaction can be compositionally reconstructed in data-scarce cities by combining recovered behavioural parameters with learned structure representation. Collectively, they contribute to a unified scientific understanding of human mobility that bridges theoretical geography and practical AI applications.
 
