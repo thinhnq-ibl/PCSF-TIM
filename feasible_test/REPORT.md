@@ -13,11 +13,11 @@ Executing the 19 Quick Feasibility Tests fundamentally transforms the scope and 
 
 | Nội dung | Trước Quick Tests | Sau Quick Tests | Vì sao thay đổi? |
 | :--- | :--- | :--- | :--- |
-| **Định vị luận án** | Xây dựng framework reconstruct OD | **Xây dựng framework để hiểu và định lượng cơ chế Human Mobility** | QT1–QT19 cung cấp bằng chứng thống kê thực nghiệm rằng các thành phần có thể được nhận dạng và kiểm chứng riêng. |
-| **Mục tiêu cuối** | OD Reconstruction | **Mechanism-based Urban Mobility Science** | OD reconstruction chuyển từ mục tiêu cuối cùng thành bằng chứng thực nghiệm (validation evidence). |
-| **Structure–Behaviour Separation** | Một nguyên lý giả định (Principle) | **Một nguyên lý có bằng chứng thực nghiệm ban đầu** | QT16 (ANOVA) chỉ ra Structure ($81.3\%$) và Behaviour ($5.3\%$) có đóng góp khác nhau đối với CPC. |
-| **Paper 1** | Ước lượng $\beta$ từ TLD | **Cung cấp bằng chứng thực nghiệm rằng Behaviour có thể được nhận dạng từ TLD** | QT1 ($R^2=0.9624$), QT12 ($\text{CV}=0.00\%$), QT18 ($<0.5\%$ lỗi dưới noise) đều ủng hộ mạnh mẽ giả thuyết này. |
-| **Paper 2** | Học $O_i, A_j$ | **Biểu diễn Urban Mobility Potential từ Urban Features** | Flow di chuyển không còn là target trực tiếp, mà trở thành validation cho biểu diễn cấu trúc không gian. |
+| **Định vị luận án** | Xây dựng framework reconstruct OD | **Xây dựng framework khoa học cơ chế cho Spatial Interaction** | QT1–QT19 cung cấp bằng chứng thống kê thực nghiệm rằng các thành phần có thể được nhận dạng và kiểm chứng độc lập. |
+| **Mục tiêu cuối** | OD Reconstruction | **Mechanism-based Spatial Interaction Science** | OD reconstruction chuyển từ mục tiêu cuối cùng thành bằng chứng thực nghiệm (validation evidence). |
+| **Structure–Behaviour Decomposition** | Một nguyên lý giả định (Principle) | **Một nguyên lý phân rã có bằng chứng thực nghiệm ban đầu** | QT16 (ANOVA) chỉ ra Structure ($81.3\%$) và Behaviour ($5.3\%$) có đóng góp khác nhau và tách biệt về mặt phân tích đối với CPC. |
+| **Paper 1** | Ước lượng $\beta$ từ TLD | **Cung cấp bằng chứng thực nghiệm rằng Travel Behaviour Representation có thể được nhận dạng độc lập từ TLD** | QT1 ($R^2=0.9624$), QT12 ($\text{CV}=0.00\%$), QT18 ($<0.5\%$ lỗi dưới noise) đều ủng hộ mạnh mẽ giả thuyết này. |
+| **Paper 2** | Học $O_i, A_j$ | **Học Urban Structure Representation có thể transfer được từ Urban Features** | Flow di chuyển không còn là target trực tiếp, mà trở thành validation cho biểu diễn cấu trúc không gian có khả năng tổng quát hóa. |
 
 ```
                            ┌─────────────────────────────────────────────────────────┐
@@ -39,10 +39,11 @@ Executing the 19 Quick Feasibility Tests fundamentally transforms the scope and 
 └────────────────────────────────────────┘  └────────────────────────────────────────┘  └────────────────────────────────────────┘
 ```
 
-### Central Thesis Statement of the Dissertation
+### Central Scientific Proposition of the Dissertation
 
-> **Human Mobility can be decomposed into two scientifically meaningful components: Urban Structure and Behaviour.**  
-> Each component can be studied, quantified, and validated using independent empirical evidence; when combined under a gravity formulation, they explain the essential characteristics of urban movement flows.
+> **"Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed."**
+>
+> *The reconstructed OD matrix serves as empirical evidence that independently recovered Structure and Behaviour representations adequately explain observed Spatial Interaction flows.*
 
 ---
 

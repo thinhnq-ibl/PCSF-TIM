@@ -1,56 +1,54 @@
-# Mechanism-Based Human Mobility Science — Mind Map & Architecture State (v2.0)
+# Mechanism-Based Human Mobility Science — Mind Map & Architecture State (v3.0)
 
 > **CORE DISSERTATION MISSION STATEMENT:**  
-> *"To establish Human Mobility as a mechanism-based science by identifying Behaviour from aggregate mobility observations and representing Urban Structure from observable urban features, enabling quantitative explanation, diagnosis, and evaluation of urban mobility systems."*
+> *"To advance the scientific understanding of Spatial Interaction by independently identifying the Travel Behaviour Representation from aggregate mobility observations and independently learning the Urban Structure Representation from observable urban features—enabling quantitative explanation, diagnosis, policy evaluation, and transferable knowledge of urban mobility systems."*
+
+> **SCIENTIFIC PROPOSITION (End of Module 3):**  
+> *"Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed."*
+
+> **CORE PRINCIPLE:** Structure–Behaviour **Decomposition** Principle (analytically distinguishable representations).
 
 ---
 
-## 1. The 8 Realigned Scientific Modules
+## 1. The 8 Realigned Scientific Modules & Causal Chain
 
 ```text
-Human Mobility (Module 1: What does it mean to understand human mobility?)
+Spatial Interaction as Scientific Object (Module 1)
       │
       ▼
-Gravity as Scientific Language (Module 2: Why is Gravity the appropriate scientific language?)
+Observing Spatial Interaction (Module 2)
       │
       ▼
-Structure–Behaviour Separation Principle (Module 3: Can mobility be decomposed?)
+Identifying Common Conceptual Decomposition & Scientific Proposition (Module 3)
       │
  ┌────┴────┐
  ▼         ▼
-Behaviour   Urban Structure
-(Module 4)  (Module 5)
-(Paper 1)   (Paper 2)
-      │         │
-      └────┬────┘
-           ▼
-Information Hierarchy (Module 6: Which observations preserve which information?)
-           ▼
-Scientific Identification & Scientific Representation (Module 7: Symmetric recovery)
-           ▼
-Mechanism-based Urban Mobility Science (Module 8: Diagnosis, Explanation, Policy & Transfer)
+Urban Structure Representation   Travel Behaviour Representation
+      (Module 4)                           (Module 5)
+          │                                     │
+          └──────────────────┬──────────────────┘
+                             ▼
+Learning Representations for Spatial Interaction (Module 6)
+(Learning Objective ──► Learning Strategy ──► Representation ──► Generalization)
+                             ▼
+                     Research Gaps (Module 7)
+               (Formulate RQ1 & RQ2)
+                             ▼
+                 Dissertation Framework (Module 8)
+(Decomposition Principle ──► RQ1 ──► Paper 1 ──► RQ2 ──► Paper 2 ──► Dissertation Framework)
 ```
 
 ---
 
-## 2. Module Mapping & Scientific Questions
+## 2. Module Mapping & Scientific Questions Matrix
 
-| Module | Scientific Question | Scientific Mission | Key Connection |
+| Module | Scientific Question | Mission | Key Outcome |
 | :--- | :--- | :--- | :--- |
-| **Module 1** | **What does it mean to understand human mobility?** | Chuyển từ *mobility prediction* sang *mobility understanding*. | Central Scientific Problem |
-| **Module 2** | **Why is Gravity the appropriate scientific language?** | Diễn giải Gravity như ngôn ngữ khoa học mô tả Spatial Interaction. | Theoretical Foundation |
-| **Module 3** | **Can Human Mobility be decomposed into Structure & Behaviour?** | Structure tạo cơ hội, Behaviour điều tiết việc khai thác cơ hội (QT16 ANOVA). | Core Theoretical Principle |
-| **Module 4** | **What is Behaviour and can it be identified?** | Định nghĩa Behaviour là collective distance sensitivity $\beta$; nhận dạng từ TLD. | **PAPER 1** (Behaviour Identification) |
-| **Module 5** | **What is Urban Structure and how should it be represented?** | Định nghĩa Structure là Mobility Potential Field $(O_i, A_j)$ từ Urban Features. | **PAPER 2** (Structure Representation) |
-| **Module 6** | **Which observations preserve which scientific information?** | Xây dựng hierarchy: Trajectory $\to$ OD $\to$ TLD $\to$ Indicators. | Data & Information Hierarchy |
-| **Module 7** | **How can scientific components be independently recovered?** | Tiếp cận đối xứng: Behaviour Identification vs Structure Representation. | Paper 1 + Paper 2 Integration |
-| **Module 8** | **What becomes possible once components are quantified?** | Diagnosis, Explanation, Policy Evaluation, Counterfactual Analysis, Transfer. | Ultimate Dissertation Contribution |
-
----
-
-## 3. Empirical Evidence Anchors (QT1 – QT19)
-
-- **Module 4 (Paper 1)**: QT1 ($R^2 = 0.9624$), QT2 ($CV = 28.7\%$), QT12 ($\text{CV} = 0.00\%$), QT18 ($<0.5\%$ error under noise).
-- **Module 5 (Paper 2)**: QT4/5 ($RF R^2 \approx 0.45$), QT13 ($\Delta R^2 < 0.005$), QT14 ($\text{Non-spatial ceiling } R^2 \le 0.48$).
-- **Module 3 (Separation Principle)**: QT3 (CPC insensitive to $\beta$), QT15 (linear noise degradation), QT16 (ANOVA: Structure $81.3\%$, Behaviour $5.3\%$).
-- **Module 8 (Mechanism-based Science)**: QT8 (Mean Gravity $\text{CPC} = 0.704$), QT10 (Structure = WHERE, Behaviour = HOW FAR), QT17 (Zero-shot test $\text{CPC} = 0.646$).
+| **Module 1** | **Why should Spatial Interaction be treated as the central scientific object for understanding human mobility?** | Establish Spatial Interaction as the scientific object of the dissertation. | Spatial Interaction is established as the central scientific object. |
+| **Module 2** | **How can Spatial Interaction be observed from available mobility data?** | Review how Spatial Interaction is observed through different mobility datasets. | Different mobility datasets are recognized as different observations of the same underlying phenomenon. |
+| **Module 3** | **Can a common conceptual decomposition be identified across existing spatial interaction models?** | **Identify and synthesize recurring conceptual components across existing spatial interaction models, and formalize them as an analytical decomposition.** | **Structure–Behaviour Decomposition Principle** together with the **Scientific Proposition**. |
+| **Module 4** | **How should Urban Structure be represented for spatial interaction modelling?** | Review the evolution of Urban Structure representations. | Urban Structure remains the same concept, while representation evolves from handcrafted variables to learned representations (**Paper 2**). |
+| **Module 5** | **How should Travel Behaviour be represented for spatial interaction modelling?** | Review the evolution of Travel Behaviour representations. | Behaviour representations evolve from analytical interaction functions to learned interaction mechanisms (**Paper 1**). |
+| **Module 6** | **How do learning objectives and strategies shape learned representations and their ability to generalize?** | Explain causal chain: **Learning Objective $\to$ Learning Strategy $\to$ Representation $\to$ Encoded Information $\to$ Generalization.** | Learning objectives and strategies determine encoded information and govern generalization/transferability. |
+| **Module 7** | **What scientific questions remain unresolved after introducing the Structure–Behaviour Decomposition Principle?** | Derive the research questions from the identified scientific gaps. | **Research Question 1** (Paper 1) and **Research Question 2** (Paper 2) are formulated. |
+| **Module 8** | **How does this dissertation operationalize the Structure–Behaviour Decomposition Principle into a coherent research framework?** | Operationalize the principle into research questions, papers, and the dissertation framework. | **Structure–Behaviour Decomposition Principle $\to$ RQ1 $\to$ Paper 1 $\to$ RQ2 $\to$ Paper 2 $\to$ Dissertation Framework.** |

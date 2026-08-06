@@ -18,13 +18,13 @@ system-protocol: "One Conversation → One Refinement"
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │ STAGE 1 (Completed): Handbook.md                                                       │
 │ • Focus: "What is Human Mobility?" (Knowledge Acquisition & Literature Synthesis).      │
-│ • Role: Immutable Anchor for Paper 2 (PCSF-TIM / Behaviour Identification).             │
+│ • Role: Immutable Stage 1 Knowledge Base Anchor. Do NOT modify.                        │
 └──────────────────────────────────────────┬─────────────────────────────────────────────┘
                                            │
                                            ▼
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │ STAGE 2 (Active - Operating System): handbook_phd.md                                   │
-│ • Focus: "What is my specific scientific contribution to Human Mobility?"              │
+│ • Focus: "What is my specific scientific contribution to Spatial Interaction Science?"  │
 │ • Role: Living PhD Notebook & Decision Operating System (8 Modules).                   │
 └──────────────────────────────────────────┬─────────────────────────────────────────────┘
                                            │
@@ -39,150 +39,132 @@ system-protocol: "One Conversation → One Refinement"
 
 # CORE DISSERTATION MISSION STATEMENT
 
-> **"To establish Human Mobility as a mechanism-based science by identifying Behaviour from aggregate mobility observations and representing Urban Structure from observable urban features, enabling quantitative explanation, diagnosis, and evaluation of urban mobility systems."**
+> **"To advance the scientific understanding of Spatial Interaction by independently identifying the Travel Behaviour Representation from aggregate mobility observations and independently learning the Urban Structure Representation from observable urban features—enabling quantitative explanation, diagnosis, policy evaluation, and transferable knowledge of urban mobility systems."**
 
 ---
 
-# THE 8 REALIGNED SCIENTIFIC MODULES
+# THE SCIENTIFIC PROPOSITION (End of Module 3)
 
-The 19 Quick Feasibility Tests (QT1–QT19) anchor the 8 modules of this PhD Operating System. Each module answers an explicit scientific question and directly bridges the theoretical architecture to **Paper 1** and **Paper 2**:
+> **"Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed."**
 
-| Module | Scientific Question | Scientific Mission | Connection to Dissertation & Papers | Empirical Evidence (QT1–QT19) |
-| :--- | :--- | :--- | :--- | :--- |
-| **1. Human Mobility as a Scientific Problem** | **What does it mean to understand human mobility?** | Shift from *mobility prediction* to *mobility understanding*. Define mobility as a scientific phenomenon to be explained rather than merely predicted. | Establishes the core scientific problem of the dissertation. | QT8, QT14 |
-| **2. Gravity as the Scientific Language** | **Why is Gravity the appropriate scientific language?** | Interpret Gravity as a **scientific language** describing Spatial Interaction (Production, Attraction, and Distance Deterrence). | Provides theoretical foundation for the entire framework. | QT8, QT10 |
-| **3. Structure–Behaviour Separation Principle** | **Can Human Mobility be decomposed into Structure and Behaviour?** | Formulate and empirically support the principle that mobility consists of two complementary mechanisms: Structure creates opportunity, Behaviour regulates opportunity usage. | Central Theoretical Principle of the Dissertation. | QT3, QT15, QT16 |
-| **4. Behaviour of Spatial Interaction** | **What is Behaviour and can it be identified?** | Define Behaviour as **collective distance sensitivity** ($\beta$) and provide empirical statistical evidence supporting parameter recovery from TLD. | **PAPER 1** – Behaviour Identification. | QT1, QT2, QT12, QT18 |
-| **5. Urban Structure Representation** | **What is Urban Structure and how should it be represented?** | Define Urban Structure as **Mobility Potential Field**, consisting of **Production Potential ($O_i$)** and **Attraction Potential ($A_j$)**, represented from Urban Features. | **PAPER 2** – Urban Structure Representation. | QT4, QT5, QT6, QT13, QT14 |
-| **6. Information Hierarchy of Mobility Observations** | **Which observations preserve which scientific information?** | Construct information hierarchy: Trajectory $\to$ OD $\to$ TLD $\to$ Statistics, explaining why TLD preserves sufficient information to identify Behaviour. | Data selection & justification for Paper 1. | QT1, QT10, QT18 |
-| **7. Scientific Identification & Representation** | **How can scientific components be independently recovered from observations?** | Present symmetric approaches: **Behaviour Identification** (Paper 1) and **Structure Representation** (Paper 2). Distinguish *scientific representation* from *black-box embedding*. | Unifies Paper 1 and Paper 2 into a single coherent framework. | QT12, QT14, QT17 |
-| **8. Mechanism-based Urban Mobility Science** | **What becomes possible once Structure and Behaviour are independently quantified?** | Shift from prediction to **Diagnosis – Explanation – Policy Evaluation – Counterfactual Analysis – Transferable Knowledge**. OD Reconstruction serves as validation evidence. | Ultimate Scientific Contribution of the Dissertation. | QT8, QT10, QT17, QT19 |
+*Role:* Serves as the philosophical and methodological backbone of the dissertation.
+
+---
+
+# THE 8 SCIENTIFIC MODULES — MASTER MATRIX
+
+| Module | Scientific Question | Mission | Key Outcome |
+| :--- | :--- | :--- | :--- |
+| **1. Spatial Interaction as the Scientific Object** | **Why should Spatial Interaction be treated as the central scientific object for understanding human mobility?** | Establish Spatial Interaction as the scientific object of the dissertation. | Spatial Interaction is established as the central scientific object. Human Mobility is the empirical phenomenon. |
+| **2. Observing Spatial Interaction** | **How can Spatial Interaction be observed from available mobility data?** | Review how Spatial Interaction is observed through different mobility datasets. | Different mobility datasets (trajectories, OD matrices, TLDs, aggregate statistics) are recognized as different observations of the same underlying phenomenon. |
+| **3. Identifying a Common Conceptual Decomposition in Spatial Interaction Models** | **Can a common conceptual decomposition be identified across existing spatial interaction models?** | Identify and synthesize recurring conceptual components across existing spatial interaction models, and formalize them as an analytical decomposition. | **Structure–Behaviour Decomposition Principle** together with the **Scientific Proposition**. |
+| **4. Urban Structure Representation** | **How should Urban Structure be represented for spatial interaction modelling?** | Review the evolution of Urban Structure representations from handcrafted variables to learned potential fields. | Urban Structure remains the same scientific concept, while its representation evolves from handcrafted variables to learned representations → motivates **Paper 2**. |
+| **5. Travel Behaviour Representation** | **How should Travel Behaviour be represented for spatial interaction modelling?** | Review the evolution of Travel Behaviour representations from analytical decay functions to statistically identified mechanisms. | Travel Behaviour representations evolve from simple analytical functions to empirically identified parameters → motivates **Paper 1**. |
+| **6. Learning Representations for Spatial Interaction** | **How do learning objectives and learning strategies shape learned representations and their ability to generalize across spatial contexts?** | Explain the causal chain: **Learning Objective → Learning Strategy → Representation → Encoded Information → Generalization / Transferability.** | Learning objectives and strategies determine what information is encoded in representations and therefore govern their generalization and transferability across cities. |
+| **7. Research Gaps** | **What scientific questions remain unresolved after introducing the Structure–Behaviour Decomposition Principle?** | Derive the research questions from the identified scientific gaps. | **Research Question 1** (Paper 1 — Travel Behaviour Identification) and **Research Question 2** (Paper 2 — Urban Structure Representation) are formulated. |
+| **8. Dissertation Framework** | **How does this dissertation operationalize the Structure–Behaviour Decomposition Principle into a coherent research framework?** | Operationalize the principle into research questions, papers, and the dissertation framework. | **Structure–Behaviour Decomposition Principle → RQ1 → Paper 1 → RQ2 → Paper 2 → Dissertation Framework.** |
 
 ---
 
 # LOGICAL FLOW OF THE 8 MODULES
 
 ```text
-Human Mobility (Module 1)
-      │
+Spatial Interaction as Scientific Object (Module 1)
+      │  [Why Spatial Interaction, not Human Mobility?]
       ▼
-Gravity as Scientific Language (Module 2)
-      │
+Observing Spatial Interaction (Module 2)
+      │  [Trajectories / OD / TLD / Statistics = different observations of same phenomenon]
       ▼
-Structure–Behaviour Separation Principle (Module 3)
+Identifying Common Conceptual Decomposition (Module 3)
+      │  → Structure–Behaviour Decomposition Principle
+      │  → Scientific Proposition
       │
  ┌────┴────┐
  ▼         ▼
-Behaviour   Urban Structure
-(Module 4)  (Module 5)
+Urban Structure          Travel Behaviour
+Representation           Representation
+(Module 4)               (Module 5)
+[observable → learnable] [aggregate → identifiable]
+[→ Paper 2]              [→ Paper 1]
       │         │
       └────┬────┘
            ▼
-Information Hierarchy (Module 6)
+Learning Representations for Spatial Interaction (Module 6)
+[Learning Objective → Learning Strategy → Representation → Generalization]
            ▼
-Scientific Identification & Scientific Representation (Module 7)
+Research Gaps (Module 7)
+[RQ1: Can Travel Behaviour be independently identified?]
+[RQ2: Can Urban Structure be independently represented & transferred?]
            ▼
-Mechanism-based Urban Mobility Science (Module 8)
+Dissertation Framework (Module 8)
+[Decomposition Principle → RQ1 → Paper 1 → RQ2 → Paper 2 → Framework]
 ```
 
 ---
 
-# STRATEGIC PARADIGM SHIFT (BEFORE vs. AFTER QUICK TESTS)
+# STRATEGIC PARADIGM SHIFT (BEFORE vs. AFTER)
 
-| Item | Before Quick Tests | After Quick Tests (QT1–QT19) | Why the Paradigm Shifted |
-| :--- | :--- | :--- | :--- |
-| **Dissertation Positioning** | Build an OD reconstruction framework | **Build a framework to understand & quantify the mechanisms of Human Mobility** | QT1–QT19 provide empirical statistical evidence that components can be independently identified and tested. |
-| **Ultimate Goal** | OD Reconstruction accuracy | **Mechanism-based Urban Mobility Science** | OD reconstruction becomes empirical validation evidence rather than the ultimate goal. |
-| **Structure–Behaviour Separation** | An assumed principle | **A principle supported by empirical statistical evidence** | QT16 (ANOVA) shows Structure ($81.3\%$) and Behaviour ($5.3\%$) make distinct contributions to CPC. |
-| **Paper 1** | Estimate $\beta$ from TLD | **Demonstrate that Behaviour can be identified from aggregate TLD** | QT1 ($R^2=0.9624$), QT12 ($\text{CV}=0.00\%$), QT18 ($<0.5\%$ error under noise) strongly support this hypothesis. |
-| **Paper 2** | Learn $O_i, A_j$ | **Represent Urban Mobility Potential from Urban Features** | Mobility flow is no longer the direct training target, but the validation evidence for spatial structure representations. |
-
----
-
-# MODULE 0: The 9-Step Scientific Argument Chain
-# Chuỗi Lập luận Khoa học & Kiến trúc Phương pháp Độc lập
-
-> **Grand Core Theme of the Dissertation:**
-> **"Probabilistic Behavioural Identification under Information Compression"**
-
-### The Immutable Scientific Principles vs Flexible Implementation Layer
-
-| Theoretical Abstraction Layer (Immutable Core) | Primary Dissertation Instantiation (Paper 2 / PCSF-TIM) | Future Alternative Instantiations |
+| Item | Before Quick Tests | After QT1–QT19 + Refined 8-Module Framework |
 | :--- | :--- | :--- |
-| **1. Scientific Object** | Spatial Interaction | Spatial Interaction |
-| **2. Scientific Representation** | Structure–Behaviour Factorization ($T_{ij} = S_{ij} \times f(d;\theta)$) | Utility Kernel / Neural Interaction Model |
-| **3. Latent Mechanism** | Population Distance Sensitivity $\theta = (\alpha, \beta)$ | Heterogeneous Utility Parameters $\theta(x)$ |
-| **4. Observable Evidence** | Distance-Domain Mobility Evidence | Spatiotemporal Flow Summaries |
-| **5. Information Compression** | Pairwise OD Matrix $\to$ Bin Histogram Projection $\mathcal{P}$ | Graph Aggregation / Sectoral Projections |
-| **6. Scientific Question** | *Can $\theta$ be identified under information loss?* | *Is compressed evidence statistically sufficient?* |
-| **7. Probabilistic Inference Engine** | Conditional Maximum Likelihood Estimation (MLE) | Variational Inference / Bayesian MCMC |
-| **8. Empirical Evaluation** | Likelihood Surface Concavity & Synthetic Recovery | Fisher Information Bounds / Hessian Spectrum |
-| **9. Downstream Validation** | Transit Assignment & Indirect Smartcard Boarding | Traffic Count Assignment & Synthetic OD CPC |
-
-```text
-1. Phenomenon & Object:     Empirical Phenomenon: Human Mobility ──► Formal Scientific Object: Spatial Interaction
-          │
-          ▼
-2. Representation:          Spatial Interaction Factorization: Spatial Interaction ──► Structure (S_ij) + Behavioural Mechanism f(d; θ)
-          │
-          ▼
-3. Latent Variable:         Behavioural Mechanism θ as an Unobservable Latent Descriptor (Why must it be inferred?)
-          │
-          ▼
-4. Observation:             Observation Loss: Pairwise OD → Aggregate TLD (What do sensors/privacy observe?)
-          │
-          ▼
-5. Information:             Residual Information Content under Aggregation Projection P (What information survives?)
-          │
-          ▼
-6. Identifiability:         Statistical Identifiability Bounds (Can θ be identified from surviving information?)
-          │
-          ▼
-7. Hypothesis:              Central Research Hypothesis (TLDs preserve sufficient information given S_ij)
-          │
-          ▼
-8. Inference:               Conditional Maximum Likelihood Estimation (MLE) (How do we infer θ mathematically?)
-          │
-          ▼
-9. Validation:              Indirect Boarding & Downstream Flow Benchmarking (How do we validate inferred θ?)
-```
+| **Scientific Object** | Human Mobility (phenomenon) | **Spatial Interaction (formal scientific object)** |
+| **Dissertation Goal** | Build OD reconstruction framework | **Advance Spatial Interaction Science through independent representation identification** |
+| **Core Principle** | Gravity model baseline | **Structure–Behaviour Decomposition Principle + Scientific Proposition** |
+| **Module 3 Output** | A separability claim | **Scientific Proposition (philosophically grounded analytical distinguishability)** |
+| **Paper 1** | Estimate decay $\beta$ | **Identify Travel Behaviour Representation from aggregate TLD** |
+| **Paper 2** | Learn $O_i, A_j$ | **Learn transferable Urban Structure Representation** |
+| **Module 6** | Information Hierarchy | **Learning Objective → Strategy → Representation → Generalization causal chain** |
+| **Integration** | Reconstruct OD | **Explain Spatial Interaction — OD reconstruction is validation evidence** |
 
 ---
 
-## DEEP DIVE: MODULES 1 – 8
+# DEEP DIVE: THE 8 MODULES
 
-### Module 1. Human Mobility as a Scientific Problem
-- **Scientific Question:** What does it mean to understand human mobility?
-- **Scientific Mission:** Shift from *mobility prediction* to *mobility understanding*. Human mobility is an empirical phenomenon; spatial interaction is its formal scientific representation.
-- **Core Principle:** Mobility is a phenomenon to be explained, diagnosed, and understood rather than merely predicted via black-box models.
+### Module 1. Spatial Interaction as the Scientific Object
+**Scientific Question:** Why should Spatial Interaction be treated as the central scientific object for understanding human mobility?
+- **Mission:** Establish Spatial Interaction as the formal scientific object of the dissertation.
+- **Key Distinction:** Human Mobility = empirical phenomenon. Spatial Interaction = formal scientific object (mathematical representation of collective flow intensities between origins and destinations).
+- **Empirical Anchors:** QT8 (Gravity CPC = 0.704), QT16 (ANOVA decomposition of flow variance).
 
-### Module 2. Gravity as the Scientific Language
-- **Scientific Question:** Why is Gravity the appropriate scientific language?
-- **Scientific Mission:** Diễn giải Gravity như một **ngôn ngữ khoa học** để mô tả Spatial Interaction gồm Production, Attraction và Distance Deterrence.
-- **Core Model:** $T_{ij} = O_i A_j f(d_{ij}; \boldsymbol{\theta})$. Gravity is not an outdated baseline; it is a mechanism-based scientific representation aligning with modern Scientific Machine Learning (SciML).
+### Module 2. Observing Spatial Interaction
+**Scientific Question:** How can Spatial Interaction be observed from available mobility data?
+- **Mission:** Show that Trajectories, OD Matrices, TLDs, and Aggregate Statistics are all different observation layers of the same latent Spatial Interaction phenomenon.
+- **Key Insight:** Different datasets are not different phenomena — they are different projections. This justifies using aggregate TLD (Meta MDM \citep{MetaMovementDistributionMaps}) as a valid observation source for Paper 1.
+- **Empirical Anchors:** QT1 ($R^2 = 0.9624$), QT18 (noise robustness $< 0.5\%$).
 
-### Module 3. Structure–Behaviour Separation Principle
-- **Scientific Question:** Can Human Mobility be decomposed into Structure and Behaviour?
-- **Scientific Mission:** Propose and provide empirical evidence (QT16 ANOVA: Structure $81.3\%$, Behaviour $5.3\%$, Interaction $13.5\%$) that mobility consists of two complementary mechanisms:
-  - **Urban Structure ($\mathbf{O}, \mathbf{A}$)** defines WHERE spatial opportunities exist.
-  - **Behaviour ($\boldsymbol{\theta}$)** defines HOW FAR individuals are willing to travel to utilize those opportunities.
+### Module 3. Identifying a Common Conceptual Decomposition
+**Scientific Question:** Can a common conceptual decomposition be identified across existing spatial interaction models?
+- **Mission:** Synthesize recurring components (Structure, Behaviour/decay) across Gravity, Radiation, Entropy, and Neural models into a formal analytical decomposition.
+- **Key Output:** Structure–Behaviour Decomposition Principle + Scientific Proposition.
+- **Empirical Anchors:** QT3 (CPC insensitive to $\beta$ perturbation), QT15 (linear degradation under structure noise), QT16 (ANOVA: Structure $\eta^2 = 81.3\%$, Behaviour $\eta^2 = 5.3\%$).
 
-### Module 4. Behaviour of Spatial Interaction (Paper 1)
-- **Scientific Question:** What is Behaviour and can it be identified?
-- **Scientific Mission:** Define Behaviour as **collective distance sensitivity** ($\beta$). Provide empirical statistical evidence supporting parameter recovery from aggregate Travel Length Distributions (TLDs) (QT1: $R^2 = 0.9624$, QT12: Multi-start $\text{CV} = 0.00\%$, QT18: Noise robustness $<0.5\%$).
+### Module 4. Urban Structure Representation
+**Scientific Question:** How should Urban Structure be represented for spatial interaction modelling?
+- **Mission:** Trace the evolution of Urban Structure representations: handcrafted census/POI variables → learned Mobility Potential Fields via GNNs.
+- **Key Property:** *Observable → Representable → Transferable.* Urban structure is observable; spatial learning encodes it into a transferable representation.
+- **Empirical Anchors:** QT4/5 ($R^2 \approx 0.45$), QT6 (Population 43.8%, POI 18.7%), QT13 ($\Delta R^2 < 0.005$ for extra tabular features), QT14 (ceiling $R^2 \le 0.48$ for all tabular models → GNN justified).
 
-### Module 5. Urban Structure Representation (Paper 2)
-- **Scientific Question:** What is Urban Structure and how should it be represented?
-- **Scientific Mission:** Define Urban Structure as a **Mobility Potential Field** ($\boldsymbol{\Phi} = (O_i, A_j)$). Demonstrate that tabular ML models hit a hard capacity ceiling ($R^2 \approx 0.46 - 0.48$, QT4, QT5, QT14), proving the necessity of Spatial Graph Neural Networks (GNN / DeepGravity) for structural representation.
+### Module 5. Travel Behaviour Representation
+**Scientific Question:** How should Travel Behaviour be represented for spatial interaction modelling?
+- **Mission:** Trace the evolution of Travel Behaviour representations: Power-law → Exponential → Tanner decay → Empirically identified $\hat{\boldsymbol{\theta}}$ from aggregate TLD.
+- **Key Property:** *Aggregate-observable → Statistically identifiable.* Behaviour is not directly observable; it is inferred from the empirical consequences visible in TLDs.
+- **Empirical Anchors:** QT1 ($R^2 = 0.9624$), QT2 (city-specific $\beta$, $CV = 28.7\%$), QT12 (multi-start $\text{CV} = 0.00\%$), QT18 ($<0.5\%$ error under $20\%$ noise).
 
-### Module 6. Information Hierarchy of Mobility Observations
-- **Scientific Question:** Which observations preserve which scientific information?
-- **Scientific Mission:** Establish the Information Hierarchy ($\text{Trajectory} \to \text{OD Pairs} \to \text{TLD Histogram} \to \text{Mobility Indicators}$). Prove that aggregate TLD preserves sufficient information to identify Behaviour under structural exposure $E_k$.
+### Module 6. Learning Representations for Spatial Interaction
+**Scientific Question:** How do learning objectives and learning strategies shape learned representations and their ability to generalize?
+- **Mission:** Explain the causal chain: **Learning Objective → Learning Strategy → Representation → Encoded Information → Generalization / Transferability.**
+- **Application to Paper 1:** Learning Objective = identify $\boldsymbol{\theta}$; Learning Strategy = Conditional MLE; Representation = distance-decay parameter; Generalization = city-specific identification.
+- **Application to Paper 2:** Learning Objective = represent $(O_i, A_j)$ transferably; Learning Strategy = Spatial GNN; Representation = Mobility Potential Field; Generalization = zero-shot cross-city transfer.
+- **Empirical Anchors:** QT17 (zero-shot CPC = 0.646), QT19 (performance plateaus at 15–20 training cities).
 
-### Module 7. Scientific Identification & Representation
-- **Scientific Question:** How can scientific components be independently recovered from observations?
-- **Scientific Mission:** Develop symmetric methodologies: **Behaviour Identification** (Inference via MLE from TLD, Paper 1) and **Structure Representation** (Spatial Neural Learning from Urban Features, Paper 2). Distinguish interpretable scientific representations from opaque black-box embeddings.
+### Module 7. Research Gaps
+**Scientific Question:** What scientific questions remain unresolved after introducing the Structure–Behaviour Decomposition Principle?
+- **Mission:** Formally derive RQ1 and RQ2 from the gaps left open by the Decomposition Principle.
+- **Gap for RQ1:** Although Travel Behaviour is a component of Spatial Interaction, no framework has established that it can be independently identified from aggregate observations alone.
+- **Gap for RQ2:** Although Urban Structure is observable, no framework has established a learned representation that is independently transferable to unseen cities without joint optimization with flow data.
+- **Research Questions formulated:** RQ1 (Paper 1) and RQ2 (Paper 2).
 
-### Module 8. Mechanism-based Urban Mobility Science
-- **Scientific Question:** What becomes possible once Structure and Behaviour are independently quantified?
-- **Scientific Mission:** Enable **Diagnosis, Explanation, Policy Evaluation, Counterfactual Analysis, and Transferable Knowledge** (QT17 zero-shot transfer $\text{CPC} = 0.646$). Reconstruct OD matrices as validation evidence rather than the ultimate goal.
+### Module 8. Dissertation Framework
+**Scientific Question:** How does this dissertation operationalize the Structure–Behaviour Decomposition Principle into a coherent research framework?
+- **Mission:** Operationalize the principle into research questions, papers, probabilistic integration, and dissertation framework.
+- **Derivation Chain:** Structure–Behaviour Decomposition Principle → RQ1 → Paper 1 (Behaviour Identification) → RQ2 → Paper 2 (Structure Representation) → Probabilistic Integration → Dissertation Framework.
+- **Validation Logic:** Reconstructed OD matrix is not the goal — it is the empirical evidence that independently recovered representations adequately explain Spatial Interaction.

@@ -1,10 +1,10 @@
 # Research Knowledge Base (RKB) Architecture
 ## Background Operating System for PhD Program
 
-> **Status:** Architecture Blueprint V2.0 (Post QT1-QT19 Validation)  
+> **Status:** Architecture Blueprint V3.0 (Refined 8-Module Framework)  
 > **Role:** Master Background Operating System supporting Proposal (~20 pages), Paper 1, Paper 2, and PhD Dissertation (~150-300 pages).  
-> **Core Mission Statement:** *"To establish Human Mobility as a mechanism-based science by identifying Behaviour from aggregate mobility observations and representing Urban Structure from observable urban features, enabling quantitative explanation, diagnosis, and evaluation of urban mobility systems."*  
-> **Core Principle:** Structure–Behaviour Separation ($T_{ij} = O_i A_j f(d_{ij}; \theta)$).
+> **Core Mission Statement:** *"To advance the scientific understanding of Spatial Interaction by independently identifying the Travel Behaviour Representation from aggregate mobility observations and independently learning the Urban Structure Representation from observable urban features—enabling quantitative explanation, diagnosis, policy evaluation, and transferable knowledge of urban mobility systems."*  
+> **Core Principle:** Structure–Behaviour Decomposition Principle ($T_{ij} = O_i A_j f(d_{ij}; \theta)$ with analytically distinguishable representations).
 
 ---
 
@@ -28,66 +28,66 @@
 ```
 
 * **Proposal (`proposal_phd.md`):** High-level scientific synthesis (~20 pages) referencing RKB modules for detailed theoretical proofs and evidence maps.
-* **Paper 1:** Methodological & empirical proof that the Behaviour of Spatial Interaction (collective distance sensitivity $\beta$) can be statistically identified from aggregate travel-distance distributions (TLD), with parameter vector $\boldsymbol{\theta}$ acting as its mathematical proxy.
-* **Paper 2:** Methodological & empirical proof that the Urban Mobility Potential Field ($\mathbf{O}, \mathbf{A}$) can be learned and represented from open spatial features, using cross-city spatial transferability as an evaluation diagnostic benchmark.
-* **Research Knowledge Base (`KnowledgeBase.md` & `handbook_phd.md`):** The comprehensive background operating system organized into 8 realigned scientific modules.
+* **Paper 1 (Module 5 → RQ1):** Methodological & empirical evidence that the Travel Behaviour Representation of Spatial Interaction (collective distance sensitivity $\boldsymbol{\theta}$) can be independently identified from aggregate travel-distance distributions (TLD).
+* **Paper 2 (Module 4 → RQ2):** Methodological & empirical evidence that the Urban Structure Representation ($\mathbf{O}, \mathbf{A}$) can be independently learned from open spatial features and transferred to unseen cities.
+* **Research Knowledge Base (`KnowledgeBase.md` & `handbook_phd.md`):** The comprehensive background operating system organized into 8 scientific modules anchored to the Structure–Behaviour Decomposition Principle.
 
 ---
 
-## 2. Executive Scientific Matrix (8 Realigned Modules)
+## 2. Executive Scientific Matrix (8 Refined Modules)
 
-| Module | Scientific Question | Scientific Mission | Connection to Thesis & Papers |
+> **Scientific Proposition (End of Module 3):**  
+> *"Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed."*
+
+| Module | Scientific Question | Mission | Key Outcome |
 | :--- | :--- | :--- | :--- |
-| **Module 1. Human Mobility as a Scientific Problem** | **What does it mean to understand human mobility?** | Shift from *mobility prediction* to *mobility understanding*. Define mobility as a scientific phenomenon to be explained rather than merely predicted. | Central Problem Statement |
-| **Module 2. Gravity as the Scientific Language** | **Why is Gravity the appropriate scientific language?** | Interpret Gravity as a **scientific language** describing Spatial Interaction (Production, Attraction, and Distance Deterrence). | Theoretical Foundation |
-| **Module 3. Structure–Behaviour Separation Principle** | **Can Human Mobility be decomposed into Structure and Behaviour?** | Formulate and empirically support (QT16 ANOVA) the principle that mobility consists of two complementary mechanisms: Structure creates opportunity, Behaviour regulates opportunity usage. | Central Theoretical Principle |
-| **Module 4. Behaviour of Spatial Interaction** | **What is Behaviour and can it be identified?** | Define Behaviour as **collective distance sensitivity** ($\beta$) and prove empirical parameter recovery from TLD. | **PAPER 1** (Behaviour Identification) |
-| **Module 5. Urban Structure Representation** | **What is Urban Structure and how should it be represented?** | Define Urban Structure as **Mobility Potential Field**, consisting of **Production Potential ($O_i$)** and **Attraction Potential ($A_j$)**, represented from Urban Features. | **PAPER 2** (Structure Representation) |
-| **Module 6. Information Hierarchy of Mobility Observations** | **Which observations preserve which scientific information?** | Construct information hierarchy: Trajectory $\to$ OD $\to$ TLD $\to$ Statistics, explaining why TLD preserves sufficient information to identify Behaviour. | Data & Information Justification |
-| **Module 7. Scientific Identification & Representation** | **How can scientific components be independently recovered from observations?** | Present symmetric approaches: **Behaviour Identification** (Paper 1) and **Structure Representation** (Paper 2). Distinguish *scientific representation* from *black-box embedding*. | Unifies Paper 1 & Paper 2 |
-| **Module 8. Mechanism-based Urban Mobility Science** | **What becomes possible once Structure and Behaviour are independently quantified?** | Shift from prediction to **Diagnosis – Explanation – Policy Evaluation – Counterfactual Analysis – Transferable Knowledge**. OD Reconstruction serves as validation evidence. | Ultimate Scientific Contribution |
+| **Module 1. Spatial Interaction as the Scientific Object** | **Why should Spatial Interaction be treated as the central scientific object for understanding human mobility?** | Establish Spatial Interaction as the scientific object of the dissertation. | Spatial Interaction is established as the central scientific object. |
+| **Module 2. Observing Spatial Interaction** | **How can Spatial Interaction be observed from available mobility data?** | Review how Spatial Interaction is observed through different mobility datasets. | Different mobility datasets are recognized as different observations of the same underlying phenomenon. |
+| **Module 3. Identifying a Common Conceptual Decomposition in Spatial Interaction Models** | **Can a common conceptual decomposition be identified across existing spatial interaction models?** | **Identify and synthesize recurring conceptual components across existing spatial interaction models, and formalize them as an analytical decomposition.** | **Structure–Behaviour Decomposition Principle** together with the **Scientific Proposition**. |
+| **Module 4. Urban Structure Representation** | **How should Urban Structure be represented for spatial interaction modelling?** | Review the evolution of Urban Structure representations. | Urban Structure remains the same concept, while representation evolves from handcrafted variables to learned representations (**Paper 2**). |
+| **Module 5. Travel Behaviour Representation** | **How should Travel Behaviour be represented for spatial interaction modelling?** | Review the evolution of Travel Behaviour representations. | Behaviour representations evolve from analytical interaction functions to learned interaction mechanisms (**Paper 1**). |
+| **Module 6. Learning Representations for Spatial Interaction** | **How do learning objectives and strategies shape learned representations and their ability to generalize?** | Explain causal chain: **Learning Objective $\to$ Learning Strategy $\to$ Representation $\to$ Encoded Information $\to$ Generalization.** | Learning objectives and strategies determine encoded information and govern generalization/transferability. |
+| **Module 7. Research Gaps** | **What scientific questions remain unresolved after introducing the Structure–Behaviour Decomposition Principle?** | Derive the research questions from the identified scientific gaps. | **Research Question 1** (Paper 1) and **Research Question 2** (Paper 2) are formulated. |
+| **Module 8. Dissertation Framework** | **How does this dissertation operationalize the Structure–Behaviour Decomposition Principle into a coherent research framework?** | Operationalize the principle into research questions, papers, and the dissertation framework. | **Structure–Behaviour Decomposition Principle $\to$ RQ1 $\to$ Paper 1 $\to$ RQ2 $\to$ Paper 2 $\to$ Dissertation Framework.** |
 
 ---
 
 ## 3. Knowledge Tree Navigation
 
 ```text
-Human Mobility (Module 1)
+Spatial Interaction as Scientific Object (Module 1)
       │
       ▼
-Gravity as Scientific Language (Module 2)
+Observing Spatial Interaction (Module 2)
       │
       ▼
-Structure–Behaviour Separation Principle (Module 3)
+Identifying Common Conceptual Decomposition & Scientific Proposition (Module 3)
       │
  ┌────┴────┐
  ▼         ▼
-Behaviour   Urban Structure
-(Module 4)  (Module 5)
-(Paper 1)   (Paper 2)
-      │         │
-      └────┬────┘
-           ▼
-Information Hierarchy (Module 6)
-           ▼
-Scientific Identification & Scientific Representation (Module 7)
-           ▼
-Mechanism-based Urban Mobility Science (Module 8)
-```       │
-        └──────┬──────┘
-               ▼
-MODULE 6: Information Hierarchy (TLD Information Preservation)
-        │
-        ▼
-MODULE 7: Scientific Representation Learning (Feature → Potentials)
-        │
-        ▼
-MODULE 8: Mechanism-based Understanding (Diagnosis, Intervention, Transfer)
+Urban Structure Representation   Travel Behaviour Representation
+      (Module 4)                           (Module 5)
+[observable → representable           [aggregate → statistically
+ → transferable] → Paper 2              identifiable] → Paper 1
+          │                                     │
+          └──────────────────┬──────────────────┘
+                             ▼
+Learning Representations for Spatial Interaction (Module 6)
+[Learning Objective → Strategy → Representation → Generalization]
+                             ▼
+                     Research Gaps (Module 7)
+            [Formulate RQ1 & RQ2 from identified gaps]
+                             ▼
+                 Dissertation Framework (Module 8)
+[Decomposition Principle → RQ1 → Paper 1 → RQ2 → Paper 2 → Framework]
 ```
 
 ---
 
-### Layer A — Defining Urban Human Mobility as the Scientific Object
+### Layer A — Spatial Interaction as the Scientific Object
+*(Corresponding to Module 1: Spatial Interaction as the Scientific Object)*
+
+> **Module 1 Transition Note:** Human Mobility is the empirical phenomenon; Spatial Interaction is the formal scientific object and mathematical model representing collective flow intensities across spatial separation. Layer A establishes this distinction and the scientific legitimacy of Spatial Interaction as the object of study.
 
 #### 1. Scientific Master Matrix for Layer A (Optimized)
 
@@ -263,7 +263,7 @@ Establishes the mathematical formulation $T_{ij} = O_i A_j f(d_{ij}; \theta)$ as
 | :--- | :--- | :--- | :--- | :--- |
 | **E. Human Travel Behaviour in Urban Spatial Interaction** | Collective spatial interactions are governed by population-level responses to spatial separation, expressed as travel impedance. | Barbosa, H., Barthelemy, M., Ghoshal, G., James, C. R., Lenormand, M., Louail, T., Menezes, R., Ramasco, J. J., Simini, F., & Tomasini, M. (2018). Human mobility: Models and applications. *Physics Reports*, 734, 1–74. | Establishes the modern Human Mobility Science paradigm; comprehensively surveys population-level spatial interaction models; and affirms the central role of travel impedance and distance-decay in collective flows. | Does not propose the explicit separation of Structure and Behaviour as a methodological principle; does not address the question of behavioral parameter identifiability under aggregate data constraints. |
 | **E1. Human Travel Behaviour** | Within the spatial interaction framework, Human Travel Behaviour is formally represented as the collective population-level response to spatial separation. | Tanner, J. C. (1961). Factors affecting the amount of travel. *Road Research Technical Paper*; Barbosa et al. (2018); Lenormand, M., Bassolas, A., & Ramasco, J. J. (2016). Systematic comparison of trip distribution laws and models. *Journal of Transport Geography*, 51, 158–169. | Tanner establishes foundational concepts for travel impedance and distance-frequency relationships. Barbosa (2018) and Lenormand (2016) contextualize it as a collective behavioral mechanism. | Tanner does not define collective distance sensitivity as an independent, latent behavioral object of scientific identification. |
-| **E2. Behaviour versus Urban Structure** | Human travel behavior (impedance sensitivity) and urban physical structure (distribution of masses and opportunities) are complementary, separable components of spatial interaction. | Wilson, A. G. (1971). A family of spatial interaction models, and associated developments. *Environment and Planning A*, 3(1), 1–32; Haynes, K. E., & Fotheringham, A. S. (1984). *Gravity and Spatial Interaction Models*. Sage Publications. | Wilson and Haynes demonstrate that spatial flows depend simultaneously on structural opportunities (origins/destinations) and physical impedance (distance-decay). | Neither source explicitly formulates the "Structure–Behaviour Separation Principle" as a methodological axiom for behavioral reconstruction. This framing is introduced in this thesis. |
+| **E2. Behaviour versus Urban Structure** | Human travel behavior (impedance sensitivity) and urban physical structure (distribution of masses and opportunities) are complementary, analytically distinguishable representations of spatial interaction. | Wilson, A. G. (1971). A family of spatial interaction models, and associated developments. *Environment and Planning A*, 3(1), 1–32; Haynes, K. E., & Fotheringham, A. S. (1984). *Gravity and Spatial Interaction Models*. Sage Publications. | Wilson and Haynes demonstrate that spatial flows depend simultaneously on structural opportunities (origins/destinations) and physical impedance (distance-decay). | Neither source explicitly formulates the Structure–Behaviour Decomposition Principle as an analytical decomposition enabling independent learning objectives and strategies. This framing is introduced in this thesis. |
 | **E3. Spatial Impedance and Distance Sensitivity** | Collective human travel behavior in cities is primarily expressed through systematic, non-linear sensitivity to travel distance and route displacement. | Liang, X., Zhao, J., Dong, L., & Xu, K. (2013). Unraveling the origin of exponential law in intra-urban human mobility. *Scientific Reports*, 3, 2983; Lenormand et al. (2016). | Liang et al. explain why exponential distance decay emerges in intra-urban mobility. Lenormand (2016) provides empirical evidence of distance sensitivity across multiple national scales. | Liang et al. do not investigate the statistical possibility of identifying this distance sensitivity parameter from aggregate TLDs. |
 | **E4. Distance-decay as Behavioural Representation** | Distance-decay functions (e.g., exponential, power-law, or Tanner formulations) are mathematical representations of collective travel behavior rather than mere empirical curve-fitting equations. | Rubio-Herrero, J., & Muñuzuri, J. (2023). Sparse regression for data-driven deterrence functions in gravity models. *Annals of Operations Research*; Wilson, A. G. (1971). | Wilson shows how entropy maximization under system travel cost constraints yields specific decay functions. Rubio-Herrero (2023) frames the deterrence function as an expression of traveler preferences under system constraints. | No prior study explicitly interprets distance-decay as a mathematical representation of collective behavior; this framing is introduced in this thesis. |
 | **E5. Behaviour as a Latent Scientific Quantity** | Collective travel behavior is a latent scientific quantity that cannot be observed directly and must be statistically inferred from observable mobility evidence. | Merlin, L. A. (2020). A new method using medians to calibrate single-parameter spatial interaction models. *Journal of Transport and Land Use*, 13(1), 49–70; Flowerdew, R., & Aitkin, M. (1982). A method of fitting the gravity model based on the poisson distribution. *Journal of Regional Science*, 22(2), 191–202; Rubio-Herrero & Muñuzuri (2023). | Flowerdew & Aitkin outline maximum likelihood estimation of impedance parameters. Rubio-Herrero shows that the deterrence function is unobservable and must be estimated. Merlin demonstrates it can be inferred from a single median statistic. | These papers do not establish a generalized "Information Preservation Taxonomy" or investigate the theoretical boundaries of parameter recovery from aggregate TLDs under privacy constraints. |
@@ -306,7 +306,7 @@ Forms the core literature, likelihood derivation, and empirical validation suite
 | **F2. Observable Urban Structure** | Can Urban Structure be directly observed and mapped? | Unlike latent travel behavior, Urban Structure is directly observable, measurable, and representable through open-source geospatial platforms. | Guo, Y., et al. (2025). A universal geography neural network for mobility flow prediction in planning scenarios. *CACE*, 40, 5769–5789; Liu, Y., et al. (2024). Towards semantic enrichment for spatial interactions. *Annals of GIS*; Herfort, B., et al. (2023). A spatio-temporal analysis investigating completeness and inequalities of global urban building data in OpenStreetMap. *Nature Communications*, 14, 3985; Vu, T. T., et al. (2021). Enhanced urban functional land use map with free and open-source data. *International Journal of Digital Earth*, 14(12). | Demonstrates that OpenStreetMap (OSM) road networks, Point-of-Interest (POI) distributions, and high-resolution Sentinel-2/Landsat satellite imagery provide empirical structural inputs. | Urban Structure serves as the observable, structurally grounded counterpart of the spatial interaction equation. |
 | **F3. Urban Structure Representation** | How should Urban Structure be represented in spatial models? | Modern spatial artificial intelligence represents Urban Structure through self-supervised, high-dimensional geospatial representations rather than handcrafted spatial variables. | Guo et al. (2025); Liu et al. (2024); Simini, F., et al. (2021). A Deep Gravity model for mobility flows generation. *Nature Communications*, 12(1), 6576; Xu, Y., et al. (2025). Predicting human mobility flows in cities using deep learning on satellite imagery. *Nature Communications*. | Introduces deep fully connected neural networks, graph attention networks (GAT), and self-supervised contrastive learning (SimCLR) to extract deep semantic embeddings from satellite images and multi-source geocontext. | Spatial representation learning (GeoAI) is interpreted as a tool for extracting the structural features of geographical units. |
 | **F4. Transferability of Urban Structure** | Can Urban Structure representations be transferred across geographical contexts? | Physical urban structural configurations and functional arrangements show cross-city transferability to the extent that they reflect general urban form, land-use patterns, and morphological characteristics. | Enaya, A., et al. (2026). TransGM: Transferable gravity models for cross-city policy transfer. *Computers, Environment and Urban Systems*, 128, 102455; Yang, J., et al. (2026). Transferable Human Mobility Network Reconstruction with neuroGravity. *Preprint/SJTU*; Guo et al. (2025); Simini et al. (2021). | Employs spatial Kullback-Leibler (KL) divergence, domain-adversarial neural networks, and pre-trained GNN encoders to transfer learned structural contexts across "unseen" target urban domains. | This thesis proposes that Urban Structure embeddings are transferable across cities, while the latent collective travel behavior ($\theta$) requires city-specific parameter identification. |
-| **F5. Urban Structure as the Observable Counterpart of Behaviour** | How do Structure and Behaviour mathematically relate to generate collective mobility? | Urban Human Mobility patterns emerge from the non-linear interaction between the observable physical Urban Structure and the latent Human Travel Behaviour (distance-decay sensitivity). | Wilson (1971); Barbosa et al. (2018). | Mathematically operationalizes spatial flows as a function of origin-destination opportunities constrained by distance impedance. | Formalizes the Structure–Behaviour Separation Principle as the foundational axiom for aggregate behavioral identification. |
+| **F5. Urban Structure as the Observable Counterpart of Behaviour** | How do Structure and Behaviour mathematically relate to generate collective mobility? | Urban Human Mobility patterns emerge from the non-linear interaction between the observable physical Urban Structure and the latent Human Travel Behaviour (distance-decay sensitivity). | Wilson (1971); Barbosa et al. (2018). | Mathematically operationalizes spatial flows as a function of origin-destination opportunities constrained by distance impedance. | Operationalizes the Structure–Behaviour Decomposition Principle: Urban Structure Representation is observable and learnable; Travel Behaviour Representation is latent and must be statistically identified from aggregate observations. |
 | **F6. Transition to Layer G** | How are these structural and behavioral components modeled in current AI approaches? | Current machine learning models optimize flow prediction by jointly learning Structure and Behaviour in an end-to-end architecture, without explicit separation between the two components. | Simini et al. (2021); Liu et al. (2024); Enaya et al. (2026); Guo et al. (2025). | Shows that end-to-end deep learning pipelines (GNNs, FCNNs) merge distance decay and geographical context into dense neural layers, without preserving interpretable structural separation. | Leads directly to the systematic review of the Conventional Joint Modelling Paradigm (Layer G), where behavior cannot be isolated or identified. |
 
 
@@ -394,7 +394,7 @@ To synthesize the scientific knowledge established in the previous layers (A–G
 | **H2. Scientific Uncertainties** | What core tensions remain unresolved in current spatial models? | Collective travel behavior remains a latent parameter that current deep learning models do not disentangle from the underlying urban morphology. | Barbosa et al. (2018); Simini, F., et al. (2021). A Deep Gravity model for mobility flows generation. *Nature Communications*; Guo et al. (2025); Enaya, A., et al. (2026). TransGM. *CEUS*. | Shows that current predictive networks (Deep Gravity, UGNN) jointly optimize structural and behavioral features in an end-to-end architecture, without explicit separation. | Identifies the joint optimization of physical urban form and traveler preferences as a source of transferability limitations. |
 | **H3. Research Gap I – Behaviour Identification** | Can latent collective travel behavior ($\theta$) be identified in the absence of fine-grained flow observations? | Existing estimation paradigms require complete, high-cost OD matrices to calibrate behavioral parameters, while the scientific possibility of recovering $\theta$ from compressed, privacy-preserving aggregate statistics remains unformalized. | Merlin, L. A. (2020). A new method using medians to calibrate single-parameter spatial interaction models. *JTLU*; Liang, X., et al. (2013). Unraveling the origin of exponential law. *Scientific Reports*; Yang, Y., et al. (2014). Limits of predictability in commuting flows. *Scientific Reports*; Gallotti, R., et al. (2024). Distorted insights from human mobility data. *Nature Communications*. | Merlin (2020) demonstrates the sufficiency of a single median travel time for calibration. Yang (2014) highlights calibration failure under data scarcity. Gallotti (2024) reveals biases introduced by aggregate privacy-preserving filters. | Identifies Gap I: Prior work either curve-fits TLDs without structural constraints or relies on full ODs. This thesis formalizes behavioral identification directly from aggregate TLDs under known structures. |
 | **H4. Research Gap II – Transferable Urban Structure** | Can physical urban structure representations be transferred across geographical domains independently of behavioral bias? | Current transfer-learning models transfer entire neural networks (model-centric) or multi-modal spatial embeddings (embedding-centric), and their accuracy degrades when target cities exhibit different behavioral profiles or spatial segregation patterns. | Yang, J., et al. (2026). Transferable Human Mobility Network Reconstruction with neuroGravity. *Preprint/SJTU*; Enaya et al. (2026); Guo et al. (2025); Xu, Y., et al. (2025). Predicting human mobility flows using satellite imagery. *Nature Communications*. | Yang (2026) demonstrates that spatial income segregation bounds model transferability. Enaya (2026) uses KL divergence to adapt models based on spatial patterns but still relies on target-domain flow signals. | Identifies Gap II: Existing transfer learning adapts model weights rather than transferring the decoupled physical structural representation. This thesis proposes transferring only the represented Urban Structure. |
-| **H5. Unified Scientific Perspective** | How are the two gaps theoretically connected? | Behavioral Identification (Gap I) and Transferable Urban Structure (Gap II) are complementary problems unified under the Structure–Behaviour Separation Principle of spatial interaction. | Synthesized from Wilson (1971), Haynes & Fotheringham (1984), Simini et al. (2021), and Enaya et al. (2026). | Prior literature provides separate components of spatial friction and opportunities but treats them as joint statistical targets. | Proposes a unified conceptual framework: if urban structure can be represented and transferred independently (Gap II), it can serve as a constraint for behavioral parameter identification from aggregate statistics (Gap I). |
+| **H5. Unified Scientific Perspective** | How are the two gaps theoretically connected? | Behavioral Identification (Gap I) and Transferable Urban Structure (Gap II) are complementary problems unified under the Structure–Behaviour Decomposition Principle: treating both representations as analytically distinguishable enables independent learning objectives and strategies to be developed for each. | Synthesized from Wilson (1971), Haynes & Fotheringham (1984), Simini et al. (2021), and Enaya et al. (2026). | Prior literature provides separate components of spatial friction and opportunities but treats them as joint statistical targets. | Proposes a unified conceptual framework grounded in the Scientific Proposition: if Urban Structure Representation can be learned and transferred independently (Gap II), it can serve as a structural condition for Travel Behaviour identification from aggregate TLDs (Gap I). |
 | **H6. Transition to the Research Proposal** | What formal scientific framework must be developed next? | These gaps motivate the development of the Probabilistic Constrained Spatial Flow - Travel Impedance Model (PCSF-TIM) framework to provide empirical statistical evidence for behavioral identifiability and evaluate downstream planning applications. | Synthesized from the entire Research Knowledge Base (RKB). | Literature identifies limitations of supervised prediction in data-constrained settings, motivating the development of a mathematically bounded, generative reconstruction framework. | Direct transition from the systematic literature review to the formal mathematical and experimental proposal. |
 
 
@@ -430,22 +430,22 @@ Provides the complete, self-contained literature synthesis (Knowledge $\to$ Gap)
 
 ---
 
-## 4. Mapping RKB Layers to Thesis Deliverables
+## 4. Mapping RKB Layers to 8-Module Framework & Thesis Deliverables
 
 ```text
-┌─────────────────────────────────────────┬───────────────────────────┬───────────────────────────┐
-│ Research Knowledge Base (RKB) Layer     │ PhD Proposal Section      │ Target Publication        │
-├─────────────────────────────────────────┼───────────────────────────┼───────────────────────────┤
-│ Layer A (Defining Scientific Object)    │ 1. Motivation             │ Both Papers (Intro)       │
-│ Layer B (Data Revolution)               │ 1. Motivation             │ Paper 1 & Paper 2         │
-│ Layer C (Information Hierarchy)         │ 3. Scientific Principle   │ Paper 1 (Foundations)     │
-│ Layer D (Gravity as Scientific Lang)    │ 3. Scientific Principle   │ Both Papers (Methodology) │
-│ Layer E (Human Travel Behaviour)        │ 7. Paper 1 Scope          │ Paper 1 (Main Target)     │
-│ Layer F (Urban Structure Potentials)    │ 8. Paper 2 Scope          │ Paper 2 (Main Target)     │
-│ Layer G (Conventional Paradigm & AI)    │ 2. Literature Review      │ Both Papers (Related Work)│
-│ Layer H (Scientific Synthesis & Gaps)   │ 2. Gap & Contributions    │ PhD Dissertation Synthesis│
-└─────────────────────────────────────────┴───────────────────────────┴───────────────────────────┘
+┌─────────────────────────────────────────┬──────────────────────────────────┬───────────────────────────┬───────────────────────────┐
+│ Research Knowledge Base (RKB) Layer     │ 8-Module Framework               │ Proposal Section          │ Target Publication        │
+├─────────────────────────────────────────┼──────────────────────────────────┼───────────────────────────┼───────────────────────────┤
+│ Layer A (Spatial Interaction as Object) │ Module 1                         │ 1. Motivation & Vision    │ Both Papers (Intro)       │
+│ Layer B (Observing Spatial Interaction) │ Module 2                         │ 1. Motivation             │ Paper 1 & Paper 2         │
+│ Layer C (Information Hierarchy)         │ Module 6 (Learning Strategy)     │ 3. Decomposition Principle│ Paper 1 (Foundations)     │
+│ Layer D (Gravity — Scientific Language) │ Module 3 (Decomposition + Prop.) │ 3. Decomposition Principle│ Both Papers (Methodology) │
+│ Layer E (Travel Behaviour Repr.)        │ Module 5 → RQ1 → Paper 1        │ 7. Paper 1 Scope          │ Paper 1 (Main Target)     │
+│ Layer F (Urban Structure Repr.)         │ Module 4 → RQ2 → Paper 2        │ 8. Paper 2 Scope          │ Paper 2 (Main Target)     │
+│ Layer G (Conventional Paradigm & AI)    │ Module 7 (Research Gaps)         │ 2. Research Gap           │ Both Papers (Related Work)│
+│ Layer H (Scientific Synthesis & Gaps)   │ Module 7 + Module 8              │ 2. Gap & Contributions    │ PhD Dissertation Synthesis│
+└─────────────────────────────────────────┴──────────────────────────────────┴───────────────────────────┴───────────────────────────┘
 ```
 
 ---
-*Status: Frozen Operating Blueprint V1.0 — System Master Standard for Research Program.*
+*Status: Architecture Blueprint V3.0 (Refined 8-Module Framework) — System Master Standard for Research Program. References updated: Batty (2013), Rubio-Herrero & Muñuzuri (2023), Herfort et al. (2023), Alis et al. (2021), Martínez & Viegas (2013).*
