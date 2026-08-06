@@ -5,6 +5,7 @@ Trong nhiều thập kỷ qua, Human Mobility đã được công nhận là m�
 
 Tài liệu tham khảo (APA)
 Barbosa, H., Barthelemy, M., Ghoshal, G., James, C. R., Lenormand, M., Louail, T., Menezes, R., Ramasco, J. J., Simini, F., & Tomasini, M. (2018). Human mobility: Models and applications. Physics Reports, 734, 1–74.
+O'Kelly, M. E. (2009). Spatial interaction. In R. Kitchin & N. Thrift (Eds.), International Encyclopedia of Human Geography. Elsevier.
 Wang, J., Kong, X., Xia, F., & Sun, L. (2019). Urban human mobility: Data-driven modeling and prediction. ACM SIGKDD Explorations, 21(1), 1–19.
 Pappalardo, L., Manley, E., Sekara, V., Alessandretti, L., et al. (2023). Future directions in human mobility science. Nature Computational Science, 3, 588–600.
 Argument 2. Hiểu một hiện tượng khoa học đòi hỏi phải xác định rõ đối tượng khoa học
@@ -15,6 +16,7 @@ Tài liệu tham khảo (APA)
 Barbosa, H., Barthelemy, M., Ghoshal, G., James, C. R., Lenormand, M., Louail, T., Menezes, R., Ramasco, J. J., Simini, F., & Tomasini, M. (2018). Human mobility: Models and applications. Physics Reports, 734, 1–74.
 Batty, M. (2013). The New Science of Cities. MIT Press.
 Haynes, K. E., & Fotheringham, A. S. (1984). Gravity and Spatial Interaction Models. Sage.
+O'Kelly, M. E. (2009). Spatial interaction. In R. Kitchin & N. Thrift (Eds.), International Encyclopedia of Human Geography. Elsevier.
 
 Lưu ý: Đoạn này là lập luận của luận án dựa trên nền tảng của các tài liệu trên. Các tài liệu không phát biểu trực tiếp rằng "mọi ngành khoa học phải xác định scientific object", vì vậy khi viết cần diễn đạt đây là lập luận được rút ra từ quá trình tổng hợp tài liệu.
 
@@ -60,6 +62,7 @@ Trong nhiều thập kỷ qua, sự phát triển của công nghệ đã tạo 
 
 APA References
 Barbosa et al. (2018).
+Lenormand, M., Bassolas, A., & Ramasco, J. J. (2016). Systematic comparison of trip distribution laws and models. Journal of Transport Geography, 51, 158–169.
 Toole, J. L., et al. (2015). The path most traveled: Travel demand estimation using big data resources. Transportation Research Part C, 58, 162–177.
 Pappalardo, L., et al. (2023). Future directions in human mobility science. Nature Computational Science, 3, 588–600.
 Argument 3. Mobility datasets differ in the information they preserve
@@ -290,12 +293,14 @@ Trong các mô hình Spatial Interaction cổ điển, Urban Structure thường
 APA References
 Wilson, A. G. (1971). A family of spatial interaction models, and associated developments. Environment and Planning A, 3(1), 1–32.
 Haynes, K. E., & Fotheringham, A. S. (1984). Gravity and Spatial Interaction Models. Sage.
+Erlander, S., & Stewart, N. F. (1990). The Gravity Model in Transportation Analysis: Theory and Extensions (Ch. 3: Basic definitions and gravity structure; Ch. 4: Derivations of doubly constrained gravity model). VSP, Utrecht.
 O'Kelly, M. E. (2009). Spatial interaction. In R. Kitchin & N. Thrift (Eds.), International Encyclopedia of Human Geography. Elsevier.
 4.3. Representation evolved from engineered features to learned representations
 
 Sự phát triển của dữ liệu lớn và học máy đã làm thay đổi đáng kể cách biểu diễn Urban Structure. Thay vì chỉ sử dụng các biến được xác định trước, nhiều nghiên cứu bắt đầu khai thác các đặc trưng được thiết kế từ dữ liệu như khả năng tiếp cận (accessibility), mật độ Point-of-Interest (POI), cấu trúc mạng lưới giao thông hay các chỉ số trung tâm của mạng. Gần đây hơn, các mô hình học sâu chuyển sang học trực tiếp các latent representations từ nhiều nguồn dữ liệu khác nhau như OpenStreetMap, ảnh vệ tinh, dữ liệu POI và đồ thị không gian. Các biểu diễn học được này có khả năng mã hóa đồng thời nhiều khía cạnh của Urban Structure mà không cần xác định trước các biến đặc trưng, mở ra khả năng xây dựng các biểu diễn linh hoạt và có khả năng chuyển giao cao hơn.
 
 APA References
+Erlander, S., & Stewart, N. F. (1990). The Gravity Model in Transportation Analysis: Theory and Extensions (Ch. 2: Distribution problem & accessibility; Ch. 6: Practical implementation and parameter estimation). VSP, Utrecht.
 Guo, Y., et al. (2025). A universal geography neural network for mobility flow prediction in planning scenarios. Computer-Aided Civil and Infrastructure Engineering.
 Shi, X., et al. (2021). Deep Gravity: A deep learning framework for mobility flows generation. Nature Communications.
 Mai, G., et al. (2022). Representation learning for geospatial data. ACM Computing Surveys.
@@ -495,6 +500,7 @@ Các nghiên cứu hiện nay đã phát triển nhiều phương pháp biểu d
 APA References
 Barbosa et al. (2018).
 Lenormand et al. (2016).
+O'Kelly, M. E. (2009). Spatial interaction. In R. Kitchin & N. Thrift (Eds.), International Encyclopedia of Human Geography. Elsevier.
 Toole et al. (2015).
 7.3 Research Gap 2: Learning transferable Urban Structure representations
 Scientific Question
@@ -916,3 +922,10 @@ This dissertation operationalizes the Structure–Behaviour Decomposition Princi
 **Dissertation Vision**
 
 Rather than learning mobility flows end-to-end, this dissertation proposes that Spatial Interaction can be reconstructed compositionally by independently learning Urban Structure and Travel Behaviour from complementary open data sources. This compositional view provides a unified scientific framework that connects classical spatial interaction theory with modern representation learning and GeoAI.
+
+**Scientific Foundation (APA References)**
+
+Wilson, A. G. (1971). A family of spatial interaction models, and associated developments. Environment and Planning A, 3(1), 1–32.
+O'Kelly, M. E. (2009). Spatial interaction. In R. Kitchin & N. Thrift (Eds.), International Encyclopedia of Human Geography. Elsevier.
+Barbosa, H., Barthelemy, M., Ghoshal, G., James, C. R., Lenormand, M., Louail, T., Menezes, R., Ramasco, J. J., Simini, F., & Tomasini, M. (2018). Human mobility: Models and applications. Physics Reports, 734, 1–74.
+Lenormand, M., Bassolas, A., & Ramasco, J. J. (2016). Systematic comparison of trip distribution laws and models. Journal of Transport Geography, 51, 158–169.
