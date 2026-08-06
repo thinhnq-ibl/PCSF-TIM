@@ -599,56 +599,13 @@ Trên nền tảng đó, **Paper 2** tập trung vào việc học **Transferabl
 Do đó, **Paper 2 không chỉ kế thừa kết quả của Paper 1 mà còn phụ thuộc vào nền tảng khoa học do Paper 1 thiết lập**. Hai bài báo tạo thành một chuỗi nghiên cứu liên tục: **Paper 1** cung cấp **Recovered Behavioural Parameters**, **Paper 2** cung cấp **Transferable Urban Structure Representation**, và hai đầu ra này được kết hợp trong một **khung tái tạo Spatial Interaction theo hướng hợp thành (Compositional Spatial Interaction Reconstruction)**. Theo cách diễn giải này, việc tái tạo ma trận OD không phải là mục tiêu của riêng Paper 2 mà là kết quả của sự kết hợp giữa hai thành phần khái niệm mà mỗi bài báo đóng góp. Vì vậy, giá trị của luận án không nằm ở từng bài báo riêng lẻ mà ở việc xây dựng một framework thống nhất, trong đó **Travel Behaviour** và **Urban Structure** được học độc lập nhưng được kết hợp để giải thích và tái tạo **Spatial Interaction** trong các thành phố thiếu dữ liệu.
 
 
-8.5 Overall Dissertation Framework
+8.5. Overall Dissertation Framework
 
-Spatial Interaction
-        │
-        ▼
-Observation (Multiple datasets)
-        │
-        ▼
-Structure–Behaviour Decomposition Principle
-        │
-        ▼
-Scientific Proposition
-        │
-   ┌────┴────┐
-   ▼         ▼
-Travel          Urban
-Behaviour       Structure
-Representation  Representation
-   │                │
-   ▼                ▼
-Research        Research
-Question 1      Question 2
-   │                │
-   ▼                ▼
-Paper 1          Paper 2
-(Recover)        (Learn)
-   │                │
-   ▼                ▼
-Behavioural    Transferable
-Parameters     Structure
-   │                │
-   └────────┬───────┘
-            ▼
-    Compositional Integration
-    (Behaviour × Structure)
-            │
-            ▼
-    OD Reconstruction
-    in Data-Scarce Cities
-            │
-            ▼
-    Scientific Contributions
-    + Practical Applications
-            │
-            ▼
-        Dissertation
+![Figure 8.1: Operationalization Flow of the Dissertation Framework](./Figure_8_1_Landscape_Framework.png)
 
-Đây chính là Framework của luận án.
+*Figure 8.1 minh họa toàn bộ luồng vận hành của khung nghiên cứu trong luận án: Từ nguyên lý phân rã lý thuyết (Structure–Behaviour Decomposition Principle) dẫn đến việc thiết lập hai câu hỏi nghiên cứu (RQ1, RQ2) và hai bài báo tương ứng (Paper 1, Paper 2). Hai bài báo cung cấp hai đầu ra độc lập (Recovered Behavioural Parameters và Transferable Urban Structure Representation), sau đó được kết hợp theo nguyên lý hợp thành (Compositional Spatial Interaction Reconstruction) để tái tạo ma trận OD tại các đô thị thiếu dữ liệu.*
 
-- Paper 1 (Recover Behaviour) tạo điều kiện cho Paper 2 (Learn Structure sạch), và cả hai outputs kết hợp lại thành Compositional Spatial Interaction Reconstruction
+
 
 8.6 Scientific Contributions
 
