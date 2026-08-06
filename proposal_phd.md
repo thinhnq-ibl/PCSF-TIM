@@ -30,7 +30,7 @@ However, **current studies primarily model mobility as a prediction problem rath
 
 # 2. Research Gap
 
-Existing studies learn mobility directly from observations. As a consequence, **Urban Structure Representations and Travel Behaviour Representations remain entangled** within a single predictive function, preventing independent understanding, quantification, and transfer of their roles.
+Existing studies learn mobility directly from observations. As a consequence, **Urban Structure Representation and Travel Behaviour Representation remain entangled** within a single predictive function, preventing independent understanding, quantification, and transfer of their roles.
 
 These limitations are not merely methodological but conceptual. Existing models jointly optimize Urban Structure and Travel Behaviour as a single predictive function, preventing either representation from being independently interpreted, transferred, or statistically identified. Consequently, the literature motivates a scientific decomposition of Spatial Interaction into two analytically distinguishable representations—Urban Structure and Travel Behaviour—rather than a new predictive architecture. The **Structure–Behaviour Decomposition Principle** therefore emerges as a necessary conceptual consequence of the limitations of the existing Observation-First paradigm, rather than an arbitrary modelling choice.
 
