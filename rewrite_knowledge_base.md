@@ -578,153 +578,25 @@ Sau khi Module 7 đã xác định hai khoảng trống khoa học và hình th�
 
 Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed.
 
-8.3 Operationalizing the Scientific Proposition
+8.3. Operationalizing the Scientific Proposition
 
-giải thích
+Scientific Proposition của luận án khẳng định rằng mặc dù **Spatial Interaction** được hình thành từ sự tương tác giữa **Urban Structure Representation** và **Travel Behaviour Representation**, việc xem hai biểu diễn này là các thành phần có thể tách biệt về mặt phân tích cho phép xây dựng các câu hỏi khoa học, mục tiêu học và chiến lược học khác nhau. Tuy nhiên, đây mới chỉ là một nguyên lý ở cấp độ khái niệm. Để nguyên lý này trở thành một chương trình nghiên cứu cụ thể, luận án cần hiện thực hóa (operationalize) từng thành phần thành các câu hỏi nghiên cứu và các công trình khoa học tương ứng.
 
-Scientific Proposition
+Trên cơ sở đó, **Travel Behaviour Representation** được chuyển hóa thành **Research Question 1**, tập trung vào việc liệu hành vi di chuyển tập thể có thể được nhận dạng từ các quan sát tổng hợp của Spatial Interaction hay không. Câu hỏi này được giải quyết trong **Paper 1**, nơi các biểu diễn hành vi được phục hồi từ phân bố khoảng cách chuyến đi mà không cần sử dụng quỹ đạo cá nhân hoặc ma trận OD đầy đủ. Kết quả của Paper 1 là các **tham số hành vi** đặc trưng cho mức độ phản ứng của người dân đối với khoảng cách hoặc các cơ chế tương tác trong từng thành phố.
 
-↓
+Song song với đó, **Urban Structure Representation** được chuyển hóa thành **Research Question 2**, tập trung vào việc học các biểu diễn cấu trúc đô thị có khả năng tổng quát hóa và chuyển giao giữa các thành phố. Câu hỏi này được giải quyết trong **Paper 2**, thông qua việc học biểu diễn từ **multimodal open geospatial and mobility datasets** như OpenStreetMap, ảnh vệ tinh, Point-of-Interest (POI), dữ liệu giao thông và các thống kê mobility tổng hợp. Mục tiêu là xây dựng một **Transferable Urban Structure Representation** có thể áp dụng cho các thành phố chưa từng được quan sát trong quá trình huấn luyện.
 
-Operationalization
+Mặc dù tập trung vào hai thành phần khác nhau của Spatial Interaction, hai bài báo không phải là hai nghiên cứu độc lập mà cùng hiện thực hóa một Scientific Proposition thống nhất. **Paper 1** cung cấp biểu diễn của **Travel Behaviour**, trong khi **Paper 2** cung cấp biểu diễn của **Urban Structure**. Khi kết hợp hai đầu ra này, luận án đề xuất một **khung tái tạo Spatial Interaction theo hướng hợp thành (Compositional Spatial Interaction Reconstruction)**, trong đó ma trận OD của các thành phố thiếu dữ liệu được tái tạo bằng cách kết hợp **hành vi đã được phục hồi** với **cấu trúc đô thị đã được học**. Nhờ đó, Scientific Proposition được chuyển hóa từ một nguyên lý lý thuyết thành một framework nghiên cứu hoàn chỉnh, liên kết chặt chẽ giữa nền tảng lý thuyết, các câu hỏi nghiên cứu, hai bài báo và mục tiêu khoa học tổng thể của luận án.
 
-Spatial Interaction
+8.4. Mối quan hệ giữa hai bài báo
 
-↓
+Mặc dù mỗi bài báo của luận án giải quyết một câu hỏi nghiên cứu riêng, chúng không phải là hai nghiên cứu độc lập mà được thiết kế theo một **mối quan hệ tuần tự (sequential relationship)** nhằm hiện thực hóa **Structure–Behaviour Decomposition Principle**. Trong mối quan hệ này, **Paper 1** đóng vai trò thiết lập nền tảng khoa học (scientific foundation) cho **Paper 2**, còn **Paper 2** mở rộng kết quả của Paper 1 để hoàn thành mục tiêu tái tạo Spatial Interaction.
 
-Structure–Behaviour Decomposition
+Cụ thể, **Paper 1** tập trung vào việc nhận dạng **Travel Behaviour Representation** từ các quan sát tổng hợp của Spatial Interaction. Bằng cách phục hồi các tham số hành vi đặc trưng cho từng thành phố, nghiên cứu này tách riêng ảnh hưởng của hành vi khỏi các quan sát mobility. Kết quả không chỉ trả lời **Research Question 1** mà còn cung cấp một biểu diễn hành vi độc lập, tạo cơ sở để nghiên cứu Urban Structure mà không còn bị nhiễu bởi sự khác biệt về hành vi giữa các thành phố.
 
-↓
+Trên nền tảng đó, **Paper 2** tập trung vào việc học **Transferable Urban Structure Representation** từ các **multimodal open geospatial and mobility datasets**. Khi thành phần hành vi đã được nhận dạng riêng trong Paper 1, Paper 2 có thể tập trung học những đặc trưng thực sự thuộc về cấu trúc đô thị và phát triển các biểu diễn có khả năng tổng quát hóa sang các thành phố chưa từng được quan sát. Cách tiếp cận này giúp giảm sự pha trộn giữa thông tin về cấu trúc và hành vi trong quá trình học biểu diễn, qua đó tăng khả năng chuyển giao của Urban Structure Representation.
 
-Behaviour Representation + Urban Structure Representation
-
-Tiếp theo
-
-Behaviour Representation
-
-↓
-
-Research Question 1
-
-↓
-
-Paper 1: Recover Travel Behaviour Representation from Aggregate Observations
-
-↓
-
-Behaviour Representation
-
-↓
-
-Output: Recovered Behavioural Parameters
-
-và
-
-Urban Structure Representation
-
-↓
-
-Research Question 2
-
-↓
-
-Paper 2: Learn Structure from Multimodal Open Geospatial and Mobility Datasets
-
-↓
-
-Output: Transferable Structure Representation
-
-↓
-
-**Compositional Integration**
-
-↓
-
-Recovered Behaviour (Paper 1) and Learned Structure (Paper 2)
-
-↓
-
-**Application: Compositional Spatial Interaction Reconstruction of OD Matrices in Data-Scarce Cities**
-
-8.4 Relationship between the two papers
-
-Cần giải thích Paper 1 không độc lập voi Paper 2
-
-Nhưng hơn nữa: Paper 1 → Paper 2 là sequential relationship.
-
-Paper 1 establish foundation cho Paper 2.
-
-**Paper 1: Recover Travel Behaviour Representation**
-
-Paper 1
-
-↓
-
-Nhận dạng Travel Behaviour Representation từ Aggregate Observations.
-
-↓
-
-Behaviour Representation
-
-↓
-
-Output: **Recovered behavioural parameters** (distance-decay, opportunity decay, hay bất kỳ hình thức Travel Behaviour nào)
-
-↓
-
-Các parameters này "cô lập" Behaviour ở mỗi thành phố.
-
-↓
-
-Tạo điều kiện học Urban Structure "sạch" (không bị confound bởi Behaviour differences).
-
-**Paper 2: Learn Structure + Compose with Behaviour**
-
-Paper 2
-
-↓
-
-Học Urban Structure Representation từ multimodal open geospatial and mobility datasets (OSM, satellite imagery, POI data, traffic counts, aggregate mobility statistics, v.v.)
-
-↓
-
-Representation này có khả năng **transfer** sang các thành phố chưa quan sát.
-
-↓
-
-**Kết hợp** learned Structure representation + recovered behavioural parameters từ Paper 1
-
-↓
-
-**Output: OD Reconstruction** trong data-scarce cities
-
-↓
-
-Tái tạo Spatial Interaction (được diễn giải về mặt khái niệm là sự kết hợp giữa Urban Structure [Paper 2] và Travel Behaviour [Paper 1])
-
-**Compositional Spatial Interaction Reconstruction Logic**
-
-Điểm chính yếu: Paper 2 không chỉ về "transfer learning" mô hình. Mà trọng tâm thực sự là:
-
-1. **Learn Structure**: Từ geospatial data mở, học một biểu diễn Urban Structure có thể tổng quát hóa
-2. **Recover Behaviour**: Từ Paper 1, đã có behavioural parameters cho mỗi thành phố
-3. **Compose**: Kết hợp cả hai thành phần để tái tạo OD matrices
-
-Chuỗi logic này là **compositional spatial interaction reconstruction**: Spatial Interaction được diễn giải về mặt khái niệm như sự kết hợp (composition) giữa Urban Structure và Travel Behaviour. Paper 1 và Paper 2 mỗi cái cung cấp một thành phần khái niệm, từ đó tạo ra tái tạo hoàn chỉnh của Spatial Interaction.
-
-Hai paper
-
-↓
-
-Giải quyết hai thành phần của cùng Scientific Proposition.
-
-Và hơn nữa:
-
-Paper 2 có vision
-
-↓
-
-Compositional Spatial Interaction Reconstruction cho Spatial Interaction.
+Do đó, **Paper 2 không chỉ kế thừa kết quả của Paper 1 mà còn phụ thuộc vào nền tảng khoa học do Paper 1 thiết lập**. Hai bài báo tạo thành một chuỗi nghiên cứu liên tục: **Paper 1** cung cấp **Recovered Behavioural Parameters**, **Paper 2** cung cấp **Transferable Urban Structure Representation**, và hai đầu ra này được kết hợp trong một **khung tái tạo Spatial Interaction theo hướng hợp thành (Compositional Spatial Interaction Reconstruction)**. Theo cách diễn giải này, việc tái tạo ma trận OD không phải là mục tiêu của riêng Paper 2 mà là kết quả của sự kết hợp giữa hai thành phần khái niệm mà mỗi bài báo đóng góp. Vì vậy, giá trị của luận án không nằm ở từng bài báo riêng lẻ mà ở việc xây dựng một framework thống nhất, trong đó **Travel Behaviour** và **Urban Structure** được học độc lập nhưng được kết hợp để giải thích và tái tạo **Spatial Interaction** trong các thành phố thiếu dữ liệu.
 
 
 8.5 Overall Dissertation Framework
