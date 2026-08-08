@@ -17,7 +17,7 @@
            ▼                           ▼                           ▼
       PhD Proposal                  Paper 1                     Paper 2
    (proposal_phd.md)       (Behaviour Identification) (Urban Structure Representation)
-       ~20 pages                 (TLD $\to \boldsymbol{\theta}$)     ($\boldsymbol{\Phi} = (\mathbf{O}, \mathbf{A})$)
+       ~20 pages                 (TLD $\to \boldsymbol{\theta}$)     ($R_S \to (\mathbf{O}, \mathbf{A})$)
            │                           │                           │
            └───────────────────────────┼───────────────────────────┘
                                        │

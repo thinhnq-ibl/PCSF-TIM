@@ -54,11 +54,18 @@ This decomposition immediately suggests a research programme. If Urban Structure
 
 Urban Structure and Travel Behaviour play complementary rather than equivalent roles:
 
-### Urban Structure Representation (Mobility Potential Field)
+### Urban Structure and Its Representation
 
-$$\boldsymbol{\Phi} = (\mathbf{O}, \mathbf{A})$$
+Urban Structure refers to the spatial organization of opportunities and constraints that shapes the potential landscape of spatial interaction. In this research, Urban Structure is not directly equated with any single observable dataset or model variable. Instead, it is represented through observable and inferred structural information, which is operationalized in the spatial interaction model through structural representations such as origin-side production $O_i$ and destination-side attraction $A_j$:
 
-represents the spatial distribution of **Production Potential ($O_i$)** (latent origin trip-emission capacity) and **Attraction Potential ($A_j$)** (latent destination opportunity density). Urban Structure is directly observable through publicly available urban features (POIs, road networks, land use, population). Because observable spatial characteristics can be systematically encoded using spatial representation learning, the resulting Mobility Potential Field becomes **transferable** across cities. This *observable → representable → transferable* property forms the scientific basis of Paper 2.
+$$\text{Urban Structure} \longrightarrow R_S \longrightarrow (O_i, A_j)$$
+
+where:
+* **Urban Structure**: Scientific object (the spatial organization of opportunities and constraints).
+* **$R_S$**: Urban Structure representation (e.g., Mobility Potential Field learned from multi-source spatial data).
+* **$O_i, A_j$**: Operational structural quantities used by the spatial interaction model (origin-side production and destination-side attraction).
+
+Because observable spatial characteristics can be systematically encoded using spatial representation learning, the resulting Urban Structure representation ($R_S$) becomes **transferable** across cities. This *observable → representable → transferable* property forms the scientific basis of Paper 2.
 
 ### Travel Behaviour Representation
 
