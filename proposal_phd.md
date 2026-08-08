@@ -86,7 +86,7 @@ $$f(d; \alpha, \beta) = d^{-\alpha} e^{-\beta d}$$
 
 where $(\alpha, \beta)$ parameterize the behavioural representation rather than being identified directly with Behaviour itself.
 
-Because aggregate travel-distance distributions (TLD) preserve statistical signatures of travel friction, the behavioural representation parameters ($\boldsymbol{\theta}$) are **statistically identifiable** given an independently specified Urban Structure. This *aggregate-observable → statistically identifiable* property forms the scientific basis of Paper 1.
+Because aggregate travel-distance distributions (TLD) preserve statistical signatures of travel friction, aggregate mobility observations provide empirical statistical evidence supporting the identification of behavioural representation parameters ($\boldsymbol{\theta}$) given a specified Urban Structure. This *aggregate-observable → statistical-evidence-supported identification* property forms the scientific basis of Paper 1.
 
 ### Distinction Between Scientific Representation and AI-Learned Embeddings
 
