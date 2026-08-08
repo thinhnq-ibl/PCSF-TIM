@@ -88,12 +88,62 @@ where $(\alpha, \beta)$ parameterize the behavioural representation rather than 
 
 Because aggregate travel-distance distributions (TLD) preserve statistical signatures of travel friction, the behavioural representation parameters ($\boldsymbol{\theta}$) are **statistically identifiable** given an independently specified Urban Structure. This *aggregate-observable → statistically identifiable* property forms the scientific basis of Paper 1.
 
+### Distinction Between Scientific Representation and AI-Learned Embeddings
+
+A critical epistemological contribution of this framework is distinguishing explicitly between three levels:
+
+$$\text{Scientific Object} \longrightarrow \text{Scientific Representation } (R_S, R_B) \longrightarrow \text{AI-Learned Latent Representation } (Z_{\text{task}})$$
+
+Specifically, for Urban Structure:
+
+$$\text{Urban Structure} \longrightarrow R_S \longrightarrow \text{AI / GNN Model} \longrightarrow Z_{\text{task}}$$
+
+* **Scientific Object (Urban Structure / Behaviour)**: Real-world physical spatial organization of opportunities and collective travel response.
+* **Scientific Representation ($R_S, R_B$)**: Explicitly specified, interpretable structural quantities $(O_i, A_j)$ and deterrence function $f(d; \boldsymbol{\theta})$ operationalized in the Spatial Interaction model.
+* **AI-Learned Latent Representation ($Z_{\text{task}}$)**: High-dimensional latent embeddings (e.g., GNN or DeepGravity hidden states) optimized for a specific downstream prediction task.
+
+Crucially, **$Z_{\text{task}} \neq R_S$ or $R_B$ by default**. Standard black-box AI models (e.g., DeepGravity) learn task-driven embeddings ($Z_{\text{task}}$) that entangle Urban Structure and Travel Behaviour into a single latent vector. In contrast, Paper 2 does not merely aim to generate a "better neural embedding," but to learn an **explicit, interpretable structural representation ($R_S$)** whose cross-city transferability can be systematically evaluated.
+
+### Epistemological Clarification on Model Residuals and Information Sufficiency
+
+A fundamental methodological pitfall in mobility modelling is conflating unexplained model error (residuals) directly with human behaviour. In this research, model residuals are treated strictly as **unexplained variation**, not automatically as Travel Behaviour:
+
+$$\text{OD} = f(R_S) + \underbrace{\epsilon}_{\text{unexplained variation}}$$
+
+Crucially, unexplained variation ($\epsilon$) could stem from either an incomplete structural representation (e.g., missing spatial features in $R_S$) or distance-decay travel friction ($R_B$). Therefore, model error alone does not "prove" Behaviour; it merely **motivates the hypothesis** that a behavioural representation is required:
+
+$$\text{Hypothesized Component of Residual: } \epsilon \approx R_B(d; \boldsymbol{\theta})$$
+
+The core scientific test is evaluating whether integrating the explicit behavioural representation ($R_B$) with the structural representation ($R_S$) provides a superior explanation of spatial interaction:
+
+$$R_S + R_B \longrightarrow \text{Superior Mechanism-based Explanation of Mobility}$$
+
+Furthermore, testing structural sufficiency does not claim to disprove all possible physical structural configurations; it evaluates **only the sufficiency of the adopted representation** ($R_S$).
+
+### Validation Philosophy: Three-Tier Empirical Evidence
+
+In alignment with the epistemological separation of Structure and Behaviour, validation in this framework does not rely solely on downstream OD matrix reconstruction. Instead, validation is structured across three complementary evidence tiers:
+
+$$\begin{aligned}
+\text{Urban Structure} &\longrightarrow R_S \longrightarrow \text{(Representation \& Transfer Validation — Paper 2)} \\
+\text{City-specific Behaviour} &\longrightarrow R_B \longrightarrow \text{(Inference \& Parameter Validation — Paper 1)} \\
+R_S + R_B &\longrightarrow \text{OD} \longrightarrow \text{(Integration Validation — Dissertation Framework)}
+\end{aligned}$$
+
+1. **Behavioural Representation Validation (Paper 1)**: Evaluated *prior* to flow reconstruction through likelihood surface stability, synthetic parameter recovery from generated TLDs, and cross-city parameter consistency.
+2. **Structural Representation Validation (Paper 2)**: Evaluated *prior* to flow reconstruction through spatial encoding capacity ceilings ($R^2 > 0.48$) and cross-city zero-shot transferability metrics ($\text{CPC}$, $\text{KL-divergence}$).
+3. **Integration & Downstream Validation (Dissertation Framework)**: OD matrix reconstruction serves as downstream validation of the **joint integration** of $R_S$ and $R_B$, demonstrating joint explanatory and predictive capability rather than acting as singular proof of individual component correctness.
+
 ### Epistemological & Transferability Shift
 
 | Dimension | Conventional Conflated Framing | Refined Decoupled Framing |
 | :--- | :--- | :--- |
 | **Urban Structure** | $\text{Urban Structure} = (O_i, A_j)$ | $\text{Urban Structure} \longrightarrow R_S \longrightarrow (O_i, A_j)$ |
 | **Structural Quantities** | $(O_i, A_j)$ directly equals Structure | $(O_i, A_j)$ are operational structural quantities of $R_S$ |
+| **AI Learning Target** | AI learns Urban Structure directly | AI learns task-specific latent representations ($Z_{\text{task}}$) from structural inputs |
+| **Latent Embedding Role** | Latent embedding ($Z_{\text{task}}$) = Structure | $Z_{\text{task}} \neq R_S$ by default ($Z_{\text{task}}$ entangles Structure & Behaviour) |
+| **Scientific vs AI Repr.** | Scientific representation = neural embedding | Scientific representation ($R_S$) $\neq$ Black-box neural embedding ($Z_{\text{task}}$) |
+| **Paper 2 Objective** | Paper 2 = better neural embedding | Paper 2 = Explicit structural representation ($R_S$) + evaluate transferability |
 | **Object Transferred** | Urban Structure is transferred | Urban Structure representation ($R_S$) is transferred |
 | **Transfer Type** | Structural transfer | Transfer of structural representation ($R_S$) |
 | **Travel Behaviour** | $\text{Behaviour} = f(d; \boldsymbol{\theta})$ | $\text{City-specific Behaviour} \longrightarrow R_B(d; \boldsymbol{\theta}) \longrightarrow \boldsymbol{\theta}$ |
@@ -103,16 +153,64 @@ Because aggregate travel-distance distributions (TLD) preserve statistical signa
 | **Inference Path** | $\text{TLD} \longrightarrow \text{Behaviour}$ | $\text{TLD} \longrightarrow \text{infer } R_B (\boldsymbol{\theta}) \longrightarrow \text{interpret as Behaviour}$ |
 | **Target Integration** | Transfer structure + behaviour | Transfer $R_S$, retain/infer local $R_B$ |
 | **Claim Nature** | Absolute independence claim | Distinct scientific components + testable empirical claims |
+| **Model Residual** | Residual = Behaviour | Residual = **unexplained variation** (not automatically Behaviour) |
+| **Model Error Role** | Error proves Behaviour | Error only **motivates the Behaviour hypothesis** |
+| **Unexplained Variance Source** | Missing info is definitely Behaviour | Could be missing Structure representation ($R_S$) OR Behaviour ($R_B$) |
+| **Behaviour Definition** | Behaviour is the entire residual | Behaviour is a **hypothesized component** of remaining variation |
+| **Sufficiency Tests** | Representation sufficiency disproved | Evaluates **sufficiency of the adopted representation** only |
+| **Hypothesis Verification** | Fit model directly to residual | Test: $R_S + R_B \longrightarrow \text{Superior explanation of mobility}$ |
+| **OD Role** | OD reconstruction validates scientific objects | OD reconstruction validates **their joint integration** |
+| **Good Flow Fit** | Good OD fit $\to$ components are correct | Good OD fit $\to$ **joint explanatory/predictive value** |
+| **Evidence Scope** | OD reconstruction is the sole evidence | Multi-tiered evidence (Component + Transfer + Integration) |
+| **Behaviour Validation** | Behaviour validated solely by OD fit | $R_B$ validated first via likelihood & synthetic TLD recovery |
+| **Structure Validation** | Structure validated solely by OD fit | $R_S$ validated first via representation capacity & transfer tests |
+| **Paper Distinction** | Papers differ by dataset/algorithm | Papers execute **two distinct scientific tasks & inference pathways** |
+| **Behaviour Task** | Behaviour is learned | Behaviour representation ($R_B$) is **statistically inferred** (via MLE) |
+| **Structure Task** | Structure is identified | Structure representation ($R_S$) is **constructed/learned** (via GeoAI) |
+| **Parameter $\boldsymbol{\theta}$ Nature** | $\boldsymbol{\theta}$ = latent feature | $\boldsymbol{\theta}$ = inferred behavioural representation parameter |
+| **Representation $R_S$ Nature** | $R_S$ = latent feature | $R_S$ = structural representation |
+| **AI Role** | AI = scientific method itself | AI = **possible implementation method** |
+| **Local Behaviour Data** | Behaviour = local data | Behaviour is scientific object; local data is used to infer $R_B$ |
+| **Local Parameter $\boldsymbol{\theta}_c$** | Local Behaviour = $\boldsymbol{\theta}_c$ | $\boldsymbol{\theta}_c$ = representation of city-specific Behaviour |
+| **Behaviour Transferability** | Behaviour is untransferable | **Does not assume global transferability** by default |
+| **Local Inference Rationale** | Proof of non-transferability | Local inference = **modelling principle / strategic choice** |
+| **Zero-shot Target OD** | Zero-shot OD prediction | **Structural zero-shot transfer + local Behaviour inference** |
+| **Cross-city Strategy** | Transfer structure, no behaviour | **Transfer $R_S$, locally infer $R_B$** |
+| **Transfer Goal** | Source $\to$ Target model | Source $\to$ **structural knowledge/representation transfer** |
+| **Transfer Scope** | Transfer model = transfer everything | Does not assume transferring everything by default |
+| **Cross-city Behaviour** | Behaviour transferred from source to target | **Target Behaviour inferred locally** ($R_{B, \text{target}}$) |
+| **Target Data Needs** | Target needs no information | Target needs open spatial features ($X_{S, \text{target}}$) & local TLD ($D_{\text{target}}$) |
+| **Representation Transfer** | $R_{S, \text{source}} = R_{S, \text{target}}$ | Source representation knowledge transferred & **instantiated** on target |
+| **Target Case Study Role** | Target city = research object | Target city (e.g., HCMC) = **target demonstration/validation case** |
+| **Zero-Shot Transfer** | Zero-shot OD prediction | **Zero-shot structural transfer ($R_{S, \text{target}}$)** |
 
-### Unified Theoretical Architecture
+### Distinct Scientific Tasks and Inference Pathways (Paper 1 vs. Paper 2)
 
-The complete, refined framework operates through two distinct scientific streams integrated probabilistically:
+Paper 1 and Paper 2 do not merely differ in datasets or algorithms; they execute fundamentally different **scientific tasks** via distinct inference pathways:
 
-$$\text{Urban Structure} \longrightarrow \text{Structural Representation } R_S \longrightarrow \text{Cross-City Transfer}$$
+1. **Pathway 1: Statistical Inference Pathway (Paper 1 — Behavioural Stream)**:
+   $$\text{Aggregate Mobility Observations (TLD)} \xrightarrow{\text{statistical inference (MLE)}} R_B(\boldsymbol{\theta})$$
+   * **Task:** Parametric statistical inference of collective distance sensitivity ($\boldsymbol{\theta}$) from aggregate travel-distance distributions under information sufficiency. AI/optimization functions as a numerical implementation tool rather than the scientific method itself.
 
-$$\text{City-specific Behaviour} \longrightarrow \text{Behavioural Representation } R_B \longrightarrow \text{Local Inference}$$
+2. **Pathway 2: Representation Learning Pathway (Paper 2 — Structural Stream)**:
+   $$\text{Open Spatial Information (OSM, POI, Satellite)} \xrightarrow{\text{representation learning (GeoAI/GNN)}} R_S(O_i, A_j)$$
+   * **Task:** Spatial representation learning and domain adaptation to construct transferable structural representations ($R_S$) from multi-source geographic contexts.
 
-$$\underbrace{R_S}_{\text{Transferred Structural Representation}} + \underbrace{R_B}_{\text{Locally Inferred Behavioural Representation}} \longrightarrow \text{Spatial Interaction Process} \longrightarrow T_{ij} \text{ (OD Matrix Reconstruction)}$$
+### Strategic Transfer & Local Inference Protocol
+
+The framework adopts a deliberate modeling strategy for cross-city application: **transfer structural representations ($R_S$), while locally inferring behavioural representations ($R_B$)**:
+
+$$\text{Structural Transfer \& Instantiation: } X_{S, \text{source}} \longrightarrow R_{S, \text{transfer}} \xrightarrow{X_{S, \text{target}}} R_{S, \text{target}}$$
+
+$$\text{Local Behaviour Inference: } D_{\text{target}} \text{ (aggregate TLD)} \xrightarrow{\text{local inference}} R_{B, \text{target}}(\boldsymbol{\theta}_{\text{target}})$$
+
+$$\text{Unified Integration: } R_{S, \text{target}} + R_{B, \text{target}} \longrightarrow \text{Gravity Protocol} \longrightarrow \text{OD}_{\text{target}}$$
+
+Crucially:
+* **Object Transferred**: The source spatial representation knowledge ($R_{S, \text{transfer}}$) is transferred and instantiated on the target city using open spatial features ($X_{S, \text{target}}$).
+* **Target Information Requirements**: The target domain still requires open spatial features ($X_{S, \text{target}}$) to instantiate structural representation $R_{S, \text{target}}$, and low-cost aggregate mobility summaries ($D_{\text{target}}$) to infer local behaviour $R_{B, \text{target}}$.
+* **Local Inference Rationale**: Locally inferring $R_{B, \text{target}}$ is a **modelling principle and strategic design choice** of the framework to respect city-specific friction profiles and prevent cross-domain behavioural bias, rather than an absolute theoretical claim that travel behaviour is inherently untransferable under all circumstances. We do not assume global transferability of behaviour by default; instead, local inference from low-cost aggregate TLDs provides a robust, city-specific calibration mechanism.
+* **Demonstration Case**: Specific target cities (e.g., Ho Chi Minh City) function as **demonstration and empirical validation cases** to evaluate cross-city transferability and matrix reconstruction, rather than the primary scientific object of the dissertation.
 
 ---
 
