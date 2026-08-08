@@ -52,7 +52,7 @@ $$T_{ij} = O_i \frac{A_j f(d_{ij}; \boldsymbol{\theta})}{\sum_{m} A_m f(d_{im}; 
 
 This decomposition immediately suggests a research programme. If Urban Structure can be represented and transferred across cities, and a representation of city-specific Travel Behaviour can be statistically inferred from aggregate observations through distinct inference pathways, then their probabilistic interaction provides empirical evidence to reconstruct OD flows. The reconstructed OD matrix is therefore not the objective of the framework, but **empirical evidence** evaluating whether integrating these two distinct scientific components adequately explains observed Spatial Interaction.
 
-Urban Structure and Travel Behaviour play complementary rather than equivalent roles. This research conceptualizes Urban Structure and city-specific Travel Behaviour as two distinct scientific components, each represented and inferred through different sources of information, and possessing fundamentally different transferability properties:
+Urban Structure and Travel Behaviour play complementary rather than equivalent roles. This research conceptualizes Urban Structure and city-specific Travel Behaviour as two distinct scientific components, each represented and inferred through different sources of information, and investigated through different transferability and inference strategies:
 
 ### Urban Structure and Its Representation
 
@@ -65,7 +65,7 @@ where:
 * **$R_S$**: Urban Structure representation (e.g., Mobility Potential Field learned from multi-source spatial data).
 * **$O_i, A_j$**: Operational structural quantities used by the spatial interaction model (origin-side production and destination-side attraction).
 
-Because observable spatial characteristics can be systematically encoded using spatial representation learning, the resulting Urban Structure representation ($R_S$) becomes **transferable** across cities. This *observable → representable → transferable* property forms the scientific basis of Paper 2.
+Because observable spatial characteristics can be systematically encoded using spatial representation learning, the resulting Urban Structure representation ($R_S$) provides a basis for testing cross-city structural transferability. Paper 2 therefore evaluates, rather than assumes, whether $R_S$ learned from source cities can generalize to unseen urban environments. This *observable → representable → testable-transferability* logic forms the scientific basis of Paper 2.
 
 ### City-Specific Travel Behaviour and Its Representation
 
@@ -125,14 +125,14 @@ Furthermore, testing structural sufficiency does not claim to disprove all possi
 In alignment with the epistemological separation of Structure and Behaviour, validation in this framework does not rely solely on downstream OD matrix reconstruction. Instead, validation is structured across three complementary evidence tiers:
 
 $$\begin{aligned}
-\text{Urban Structure} &\longrightarrow R_S \longrightarrow \text{(Representation \& Transfer Validation — Paper 2)} \\
-\text{City-specific Behaviour} &\longrightarrow R_B \longrightarrow \text{(Inference \& Parameter Validation — Paper 1)} \\
-R_S + R_B &\longrightarrow \text{OD} \longrightarrow \text{(Integration Validation — Dissertation Framework)}
+\text{Urban Structure} &\longrightarrow R_S \longrightarrow \text{(Structural Representation \& Transfer Evidence — Paper 2)} \\
+\text{City-specific Behaviour} &\longrightarrow R_B \longrightarrow \text{(Behavioural Representation Identification Evidence — Paper 1)} \\
+R_S + R_B &\longrightarrow \text{OD} \longrightarrow \text{(Downstream Joint Integration Evidence — Dissertation Framework)}
 \end{aligned}$$
 
-1. **Behavioural Representation Validation (Paper 1)**: Evaluated *prior* to flow reconstruction through likelihood surface stability, synthetic parameter recovery from generated TLDs, and cross-city parameter consistency.
-2. **Structural Representation Validation (Paper 2)**: Evaluated *prior* to flow reconstruction through spatial encoding capacity ceilings ($R^2 > 0.48$) and cross-city zero-shot transferability metrics ($\text{CPC}$, $\text{KL-divergence}$).
-3. **Integration & Downstream Validation (Dissertation Framework)**: OD matrix reconstruction serves as downstream validation of the **joint integration** of $R_S$ and $R_B$, demonstrating joint explanatory and predictive capability rather than acting as singular proof of individual component correctness.
+1. **Behavioural Representation Identification Evidence (Paper 1)**: Evaluated *prior* to flow reconstruction through likelihood surface stability, synthetic parameter recovery from generated TLDs under the assumed generative model, and cross-city parameter consistency.
+2. **Structural Representation and Transfer Evidence (Paper 2)**: Evaluated *prior* to flow reconstruction through spatial encoding capacity limitations ($R^2 > 0.48$) and cross-city zero-shot transferability metrics ($\text{CPC}$, $\text{KL-divergence}$).
+3. **Downstream Joint Integration Evidence (Dissertation Framework)**: OD matrix reconstruction serves as downstream evidence of the **joint integration** of $R_S$ and $R_B$, demonstrating joint explanatory and predictive capability rather than acting as singular proof of individual component correctness.
 
 ### Epistemological & Transferability Shift
 
@@ -189,8 +189,8 @@ R_S + R_B &\longrightarrow \text{OD} \longrightarrow \text{(Integration Validati
 Paper 1 and Paper 2 do not merely differ in datasets or algorithms; they execute fundamentally different **scientific tasks** via distinct inference pathways:
 
 1. **Pathway 1: Statistical Inference Pathway (Paper 1 — Behavioural Stream)**:
-   $$\text{Aggregate Mobility Observations (TLD)} \xrightarrow{\text{statistical inference (MLE)}} R_B(\boldsymbol{\theta})$$
-   * **Task:** Parametric statistical inference of collective distance sensitivity ($\boldsymbol{\theta}$) from aggregate travel-distance distributions under information sufficiency. AI/optimization functions as a numerical implementation tool rather than the scientific method itself.
+   $$D_{\text{TLD}} \mid R_S \xrightarrow{\text{statistical inference (MLE)}} \hat{R}_B(\hat{\boldsymbol{\theta}})$$
+   * **Task:** Parametric statistical inference of collective distance sensitivity ($\boldsymbol{\theta}$) from aggregate travel-distance distributions given an independently specified structural representation ($R_S$). AI/optimization functions as a numerical implementation tool rather than the scientific method itself.
 
 2. **Pathway 2: Representation Learning Pathway (Paper 2 — Structural Stream)**:
    $$\text{Open Spatial Information (OSM, POI, Satellite)} \xrightarrow{\text{representation learning (GeoAI/GNN)}} R_S(O_i, A_j)$$
@@ -202,7 +202,7 @@ The framework adopts a deliberate modeling strategy for cross-city application: 
 
 $$\text{Structural Transfer \& Instantiation: } X_{S, \text{source}} \longrightarrow R_{S, \text{transfer}} \xrightarrow{X_{S, \text{target}}} R_{S, \text{target}}$$
 
-$$\text{Local Behaviour Inference: } D_{\text{target}} \text{ (aggregate TLD)} \xrightarrow{\text{local inference}} R_{B, \text{target}}(\boldsymbol{\theta}_{\text{target}})$$
+$$\text{Local Behaviour Inference: } D_{\text{target}} \mid R_{S, \text{target}} \xrightarrow{\text{local inference}} R_{B, \text{target}}(\boldsymbol{\theta}_{\text{target}})$$
 
 $$\text{Unified Integration: } R_{S, \text{target}} + R_{B, \text{target}} \longrightarrow \text{Gravity Protocol} \longrightarrow \text{OD}_{\text{target}}$$
 
@@ -222,10 +222,10 @@ Crucially:
 ### Hypotheses
 
 * **Hypothesis 1 (H1 — Paper 1 — Module 5):**
-  *A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations.*
+  *A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations given an independently specified structural representation.*
 
 * **Hypothesis 2 (H2 — Paper 2 — Module 4):**
-  *Urban Structure can be represented from observable urban features using spatial representation learning and transferred across cities.*
+  *An Urban Structure Representation learned from observable urban features can provide transferable structural information across heterogeneous urban environments under appropriate cross-city conditions.*
 
 ---
 
@@ -235,7 +235,7 @@ The following research questions are derived from the scientific gaps identified
 
 ### RQ1 (Paper 1 — Travel Behaviour Representation)
 
-*Can a representation of city-specific Travel Behaviour be statistically inferred from aggregate travel-distance observations, and does the inferred representation support the reconstruction of OD flows?*
+*Can a representation of city-specific Travel Behaviour be statistically inferred from aggregate travel-distance observations when the relevant Urban Structure is represented independently, and does the inferred representation support spatial interaction reconstruction?*
 
 ---
 
@@ -319,7 +319,7 @@ Provide empirical statistical evidence supporting parameter identification of th
 
 ### Scientific Evidence Provided
 
-Supports **Hypothesis 1**: A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations ($R^2 = 0.9624$ vs. OD-fitted parameters across 50 US cities).
+Supports **Hypothesis 1**: A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations given an independently specified structural representation ($R^2 = 0.9624$ vs. OD-fitted parameters across 50 US cities).
 
 ---
 
@@ -331,22 +331,22 @@ Supports **Hypothesis 1**: A representation of city-specific Travel Behaviour ca
 
 ### Scientific Objective
 
-Learn and represent the **Urban Structure Representation** ($\mathbf{O}, \mathbf{A}$) as a Mobility Potential Field from multi-source open urban features, following the *observable → representable → transferable* property.
+Learn and evaluate an **Urban Structure Representation ($R_S$)** from multi-source open urban features, following the *observable → representable → testable-transferability* logic, and determine whether the resulting representation can be operationalized into relevant structural quantities such as $O_i$ and $A_j$ for spatial interaction modelling.
 
 ### Learning Objective & Strategy
 
-* **Learning Objective:** Represent $(O_i, A_j)$ from observable urban features such that the representation is transferable to unseen cities.
-* **Learning Strategy:** Spatial representation learning (Spatial GNNs / DeepGravity), justified by the hard capacity ceiling of tabular models ($R^2 \le 0.48$, QT14).
+* **Learning Objective:** Learn $R_S$ from observable urban features and evaluate whether it can be instantiated to produce useful structural quantities ($O_i, A_j$) in unseen cities.
+* **Learning Strategy:** Spatial representation learning (Spatial GNNs / DeepGravity), motivated by the observed capacity limitations of non-spatial tabular models ($R^2 \le 0.48$, QT14).
 
 ### Main Contributions
 
 * Formalize the Urban Mobility Potential Field consisting of Production Potential ($O_i$) and Attraction Potential ($A_j$).
-* Demonstrate that non-spatial tabular models hit a hard capacity ceiling (QT14: $R^2 \le 0.48$), mandating spatial graph neural network representations.
+* Demonstrate that tested non-spatial tabular models show capacity limitations ($R^2 \le 0.48$, QT14), motivating the investigation of spatial graph neural network representations.
 * Establish cross-city zero-shot transferability evaluation benchmarks (QT17: Test $\text{CPC} = 0.646$).
 
 ### Scientific Evidence Provided
 
-Supports **Hypothesis 2**: Urban Structure can be represented from observable urban features and generalized across heterogeneous urban environments.
+Supports **Hypothesis 2**: An Urban Structure Representation learned from observable urban features can provide transferable structural information across heterogeneous urban environments under appropriate cross-city conditions.
 
 ---
 
