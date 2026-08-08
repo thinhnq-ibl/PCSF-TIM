@@ -29,7 +29,7 @@
 
 * **Proposal (`proposal_phd.md`):** High-level scientific synthesis (~20 pages) referencing RKB modules for detailed theoretical proofs and evidence maps.
 * **Paper 1 (Module 5 → RQ1):** Methodological & empirical evidence that the Travel Behaviour Representation of Spatial Interaction (collective distance sensitivity $\boldsymbol{\theta}$) can be independently identified from aggregate travel-distance distributions (TLD).
-* **Paper 2 (Module 4 → RQ2):** Methodological & empirical evidence that the Urban Structure Representation ($\mathbf{O}, \mathbf{A}$) can be independently learned from open spatial features and transferred to unseen cities.
+* **Paper 2 (Module 4 → RQ2):** Methodological & empirical evidence that Urban Structure can be represented as $R_S \to (\mathbf{O}, \mathbf{A})$ from open spatial features and transferred to unseen cities.
 * **Research Knowledge Base (`KnowledgeBase.md` & `handbook_phd.md`):** The comprehensive background operating system organized into 8 scientific modules anchored to the Structure–Behaviour Decomposition Principle.
 
 ---
@@ -50,6 +50,81 @@
 | **Module 7. Research Gaps** | **What scientific questions remain unresolved after introducing the Structure–Behaviour Decomposition Principle?** | Formally derive research questions from the open scientific gaps following the Decomposition Principle. | Formulate **Research Question 1** (Paper 1 — Travel Behaviour Identification) and **Research Question 2** (Paper 2 — Urban Structure Representation). |
 | **Module 8. Dissertation Framework** | **How does this dissertation operationalize the Structure–Behaviour Decomposition Principle into a coherent research framework?** | Operationalize the principle into research questions, papers, probabilistic integration, and dissertation framework. | Establish derivation chain: **Structure–Behaviour Decomposition Principle $\to$ RQ1 $\to$ Paper 1 $\to$ RQ2 $\to$ Paper 2 $\to$ Downstream Validation $\to$ Dissertation Framework.** |
 
+
+---
+
+## 2.1. Master Ontology Invariants & Hard Rules
+
+### 1. AI Latent Representation Rule
+A task-specific AI latent representation $Z_{\text{task}}$ is a learned model representation, not a scientific object. It must not be identified with Urban Structure Representation $R_S$ merely because it is learned from geographic data or improves mobility-flow prediction. Such identification requires an explicit structural interpretation and independent validation.
+
+* **Forbidden Phrasing:**
+  * ❌ *"The GNN learns Urban Structure."*
+  * ❌ *"The AI model identifies Urban Structure directly."*
+  * ❌ *"Latent vector $Z$ is Urban Structure."*
+
+* **Required Phrasing:**
+  * ✅ *"The GNN learns a task-specific latent representation ($Z_{\text{task}}$) from observable urban features."*
+  * ✅ *"We investigate whether this representation can support a scientifically meaningful Urban Structure Representation $R_S$."*
+
+### 2. Human Mobility & Spatial Interaction Ontology Rule
+Do NOT define the conceptual ontology of Human Mobility using a direct multiplication product sign (e.g. ❌ $\text{Human Mobility} = \text{Urban Structure Representation} \times \text{Collective Behaviour}$). The gravity equation $T_{ij} = O_i A_j f(d_{ij}; \boldsymbol{\theta})$ serves strictly as the mathematical integration framework for flow reconstruction, not as the definition of the scientific object itself.
+
+* **Forbidden Phrasing:**
+  * ❌ *"Human Mobility = Urban Structure Representation × Collective Behaviour"*
+  * ❌ *"Human Mobility is the product of Structure and Behaviour"*
+
+* **Required Phrasing:**
+  * ✅ *"Urban Structure + Travel Behaviour $\longrightarrow$ Spatial Interaction"* (Conceptual Ontology)
+  * ✅ *"$R_S + R_B \longrightarrow \text{Spatial Interaction Process} \longrightarrow T_{ij}$"* (Operational Integration)
+  * ✅ *"$T_{ij} = O_i A_j f(d_{ij}; \boldsymbol{\theta})$"* (Mathematical Integration Model)
+
+### 3. Analytical vs. Causal Phrasing Rule
+This thesis proposes an **analytical/compositional framework** ($R_S + R_B \longrightarrow T_{ij}$), NOT a causal inference model. Avoid using causal phrasing that suggests a unidirectional causal relationship (e.g. ❌ $\text{Structure} \longrightarrow \text{Behaviour} \longrightarrow \text{OD}$) or absolute statistical independence (❌ $\text{Structure} \perp \text{Behaviour}$).
+
+* **Forbidden Phrasing:**
+  * ❌ *"Structure causes Travel Behaviour"* ($\text{Structure} \longrightarrow \text{Behaviour} \longrightarrow \text{OD}$)
+  * ❌ *"Behaviour determines Urban Structure"* ($\text{Behaviour} \longrightarrow \text{Structure} \longrightarrow \text{OD}$)
+  * ❌ *"Structure and Behaviour are statistically independent"* ($\text{Structure} \perp \text{Behaviour}$)
+
+* **Required Phrasing:**
+  * ✅ *"Urban Structure + Travel Behaviour $\longrightarrow$ Spatial Interaction"* (Conceptual Ontology)
+  * ✅ *"$R_S + R_B \longrightarrow \text{Spatial Interaction Process} \longrightarrow T_{ij}$"* (Core Operational Integration)
+  * ✅ *"$T_{ij} = O_i A_j f(d_{ij}; \boldsymbol{\theta})$"* (Mathematical Gravity Integration)
+
+### 4. Structural Representation vs. Operational Quantities Rule
+Do NOT conflate Urban Structure Representation $R_S$ solely with the two operational scalar quantities $(O_i, A_j)$. $R_S$ is a multi-dimensional structural opportunity field, while $(O_i, A_j)$ are operational quantities projected from $R_S$ for spatial interaction model execution: $\text{Urban Structure } \mathcal{S} \longrightarrow R_S \longrightarrow (O_i, A_j, \dots)$.
+
+* **Forbidden Phrasing:**
+  * ❌ *"Urban Structure Representation is $(O_i, A_j)$"*
+  * ❌ *"R_S equals origin production and destination attraction"*
+
+* **Required Phrasing:**
+  * ✅ *"Urban Structure Representation $R_S$ is operationalized through structural quantities $(O_i, A_j)$ in spatial interaction models."*
+  * ✅ *"$R_S \longrightarrow (O_i, A_j, \dots)$"*
+
+### 5. Avoid "Intrinsic / Inherent Property" Phrasing for Travel Behaviour
+Do NOT describe local travel behaviour or parameter $\boldsymbol{\theta}$ as an "intrinsic local city property" or "inherently untransferable". Local parameter inference of $\boldsymbol{\theta}$ is a conservative **modelling principle and strategic design choice** to account for city-specific distance-sensitivity profiles, NOT a metaphysical claim of intrinsic essentialism.
+
+* **Forbidden Phrasing:**
+  * ❌ *"$\boldsymbol{\theta}$ is an intrinsic local city property"*
+  * ❌ *"Travel behaviour is inherently untransferable"*
+  * ❌ *"Local behaviour is an intrinsic invariant"*
+
+* **Required Phrasing:**
+  * ✅ *"City-specific Travel Behaviour is represented operationally via $R_B(d; \boldsymbol{\theta})$, where $\boldsymbol{\theta}$ is locally inferred."*
+  * ✅ *"Local inference of $R_B$ is a modelling principle to respect city-specific friction profiles and prevent cross-domain behavioural bias."*
+
+### 6. Structural Transferability as a Testable Empirical Hypothesis Rule
+Do NOT state that "Urban Structure is transferable" as an a priori assumption. The transferability of structural representation $R_S$ is a **testable empirical hypothesis** evaluated in Paper 2, not a predefined fact.
+
+* **Forbidden Phrasing:**
+  * ❌ *"Urban Structure is transferable."*
+  * ❌ *"Structural representation $R_S$ is inherently transferable."*
+
+* **Required Phrasing:**
+  * ✅ *"Paper 2 tests the hypothesis that structural representations ($R_S$) learned from open spatial features can be transferred across heterogeneous urban domains."*
+  * ✅ *"Structure transferability is an empirical hypothesis to be evaluated, while target-city Behaviour is locally inferred."*
 
 ---
 
@@ -118,7 +193,7 @@ What is the scientific object of this research, why does intra-urban collective 
   1. **Observable:** Leaves physical traces across surveys, GPS, CDR, LBS, and aggregate travel-distance distributions.
   2. **Measurable:** Quantifiable via spatial flows ($T_{ij}$), trip lengths, travel times, and accessibility indices.
   3. **Regular:** Displays robust statistical regularities (distance-decay laws, spatial scaling).
-  4. **Explainable:** Emerges from systematic interaction between Urban Structure ($(O_i, A_j)$) and Travel Behaviour ($f(d;\theta)$).
+  4. **Explainable:** Emerges from systematic interaction between Urban Structure representation ($R_S \to (O_i, A_j)$) and Travel Behaviour representation ($R_B \to f(d;\boldsymbol{\theta})$).
   5. **Predictable:** Stable regularities allow generative reconstruction in unobserved cities.
 * **Claim A.3 (Operational Definition):** *Urban Human Mobility is defined as the collective spatial interaction of people within an urban system, emerging from the interaction between Urban Structure and Human Travel Behaviour, and manifested through observable mobility patterns.*
 
@@ -144,7 +219,7 @@ Establishes the conceptual baseline: because mobility is a regular, explainable 
 | **B. The Evolution of Urban Mobility Observations** | How has Urban Human Mobility become observable? | Advances in mobile sensing, computing infrastructure, and digital trace collection have substantially increased the observational coverage and granularity of urban mobility data. | Barbosa, H., et al. (2018). Human mobility: Models and applications. *Physics Reports*, 734, 1–74; Wang, J., Kong, X., Xia, F., & Sun, L. (2019). Urban Human Mobility: Data-Driven Modeling and Prediction. *SIGKDD Explorations*, 21(1), 1–19. | Establishes the historical and technological baseline of the transition from physical questionnaires to passive digital footprinting. |
 | **B1. The Survey Era** | How was urban mobility traditionally observed? | Traditional Household Travel Surveys (HTSs) and census programs (e.g., CTPP, LODES) provided the first systematic, origin-constrained interaction networks but are constrained by high financial costs, spatial sparsity, and low update frequencies. | Barbosa et al. (2018); Wang et al. (2019); Yang, Y., Herrera, C., Eagle, N., & González, M. C. (2014). Limits of predictability in commuting flows in the absence of data for calibration. *Scientific Reports*, 4, 5662. | Establishes the historical baseline, highlighting the data-scarcity bottleneck in developing regions (such as the Global South) where census surveys are rarely updated. |
 | **B2. The Digital Mobility Era** | How did digital technologies transform mobility observation? | The integration of Call Detail Records (CDRs), high-resolution GPS trajectories, and Automated Fare Collection (AFC) smart cards substantially increased the spatial-temporal granularity and coverage of collective mobility observations. | González, M. C., Hidalgo, C. A., & Barabási, A. L. (2008). Understanding individual human mobility patterns. *Nature*, 453, 779–782; Pappalardo, L., Manley, E., Sekara, V., & Alessandretti, L. (2023). Future directions in human mobility science. *Nature Computational Science*, 3, 588–600; Toole, J. L., et al. (2015). The path most traveled: Travel demand estimation using big data resources. *Transportation Research Part C*, 58, 162–177. | Outlines the passive collection mechanisms of major mobile traces (Voronoi-based CDR vs. precise GPS coordinate logging and public transit smart-card taps). |
-| **B3. The Open Urban Data Era** | What urban information is publicly available today? | Publicly accessible spatial platforms (OpenStreetMap, POI APIs, satellite imagery, and building outlines) provide a globally available, low-cost digital representation of the urban physical structure. | Guo, Y., et al. (2025). A universal geography neural network for mobility flow prediction in planning scenarios. *CACE*, 38(14); Liu, Y., et al. (2024). Towards semantic enrichment for spatial interactions. *Annals of GIS*; Vu, T. T., Vu, N. V. A., Phung, H. P., & Nguyen, L. D. (2021). Enhanced urban functional land use map with free and open-source data. *International Journal of Digital Earth*. | Demonstrates that multi-modal urban characteristics (POIs, road networks, land-use zoning) can be mapped from open-source data to construct proxies for Urban Structure ($S_{ij}$). |
+| **B3. The Open Urban Data Era** | What urban information is publicly available today? | Publicly accessible spatial platforms (OpenStreetMap, POI APIs, satellite imagery, and building outlines) provide a globally available, low-cost digital representation of the urban physical structure. | Guo, Y., et al. (2025). A universal geography neural network for mobility flow prediction in planning scenarios. *CACE*, 38(14); Liu, Y., et al. (2024). Towards semantic enrichment for spatial interactions. *Annals of GIS*; Vu, T. T., Vu, N. V. A., Phung, H. P., & Nguyen, L. D. (2021). Enhanced urban functional land use map with free and open-source data. *International Journal of Digital Earth*. | Demonstrates that multi-modal urban characteristics (POIs, road networks, land-use zoning) can be mapped from open-source data to construct structural representations ($R_S \to (O_i, A_j)$) of Urban Structure. |
 | **B4. Modern Urban Mobility Observations** | How is Urban Human Mobility observed today? | Modern mobility observation relies on a fragmented, multi-source ecosystem of aggregated digital data products (e.g., Google, Meta Data for Good, Cuebiq, SafeGraph) managed through proprietary pipelines rather than unified raw datasets. | Gallotti, R., Maniscalco, D., Barthelemy, M., & De Domenico, M. (2024). Distorted insights from human mobility data. *Nature Communications*; Oliver, N., et al. (2020). Mobile phone data for informing public health actions across the COVID-19 pandemic life cycle. *Science Advances*, 6; Buckee, C. O., et al. (2020). Aggregated mobility data could help fight COVID-19. *Science*, 368. | Documents the real-world operational reliance on corporate "Data for Good" products and systematically compares their structural differences across multiple platforms. |
 | **B5. Observation Diversity and Biases** | Do different observations provide the same knowledge about mobility? | Different observation layers do not describe the same physical reality; they exhibit systemic demographic skewness, spatial resolution biases, and proprietary processing distortions that alter the observed travel-distance distributions. | Gallotti et al. (2024); Pappalardo et al. (2023) [Box 1 on "Issues with mobility data"]. | Demonstrates that empirical mobility data sources require systematic bias auditing before use as reference benchmarks. Documents the underrepresentation of low-income groups and spatial distortions introduced by proprietary aggregation algorithms. |
 | **B6. Observation Principle (Transition to Layer C)** | What determines the scientific value of a mobility observation? | The scientific utility of a mobility observation is determined by the specific entropy and behavioral information it preserves after passing through privacy-preserving aggregation and compression filters. | de Montjoye, Y. A., Hidalgo, C. A., Verleysen, M., & Blondel, V. D. (2013). Unique in the crowd: The privacy bounds of human mobility. *Scientific Reports*, 3, 1376; Houssiau, F., Rocher, L., & de Montjoye, Y. A. (2022). Tapas: A framework for membership inference attacks on aggregated mobility data. *Nature Communications*. | Forms the theoretical justification for the "Information Preservation Taxonomy" (Layer C) by showing that individual uniqueness motivates aggregation, shifting the observation focus from raw trajectories to aggregate statistics. |
@@ -302,10 +377,10 @@ Forms the core literature, likelihood derivation, and empirical validation suite
 
 | Section | Scientific Question | Core Claim | Main Supporting References (APA) | Contribution of References | Thesis Interpretation |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **F. Urban Structure in Urban Spatial Interaction** | What structural components determine spatial interactions? | Urban Structure provides the physical spatial opportunities and morphological constraints within which latent Human Travel Behaviour dynamically generates collective mobility flows. | Wilson, A. G. (1971). A family of spatial interaction models, and associated developments. *Environment and Planning A*, 3(1), 1–32; Barbosa, H., et al. (2018). Human mobility: Models and applications. *Physics Reports*, 734, 1–74. | Demonstrates that population-level spatial interaction flows depend systematically on origin propulsiveness, destination attractiveness, and spatial opportunities. | Urban Structure ($S_{ij}$) is treated as an independent, logically separable scientific object of the spatial interaction representation. |
+| **F. Urban Structure in Urban Spatial Interaction** | What structural components determine spatial interactions? | Urban Structure provides the physical spatial opportunities and morphological constraints within which latent Human Travel Behaviour dynamically generates collective mobility flows. | Wilson, A. G. (1971). A family of spatial interaction models, and associated developments. *Environment and Planning A*, 3(1), 1–32; Barbosa, H., et al. (2018). Human mobility: Models and applications. *Physics Reports*, 734, 1–74. | Demonstrates that population-level spatial interaction flows depend systematically on origin propulsiveness, destination attractiveness, and spatial opportunities. | Urban Structure ($\mathcal{S}$) is treated as a distinct scientific object, represented operationally via $R_S \to (O_i, A_j)$. |
 | **F1. Urban Structure as Spatial Opportunity** | What constitutes Urban Structure? | Urban Structure consists of the spatial distribution of population masses, functional land-use activities, transportation infrastructures, and localized opportunities. | Wilson (1971); Barbosa et al. (2018); Batty, M. (2013). *The New Science of Cities*. MIT Press. | Establishes that collective spatial interaction requires a geographical distribution of discrete opportunities, resources, and destination facilities. | Urban Structure is formally defined by the spatial configuration of the built environment, independent of active mobility observations. |
 | **F2. Observable Urban Structure** | Can Urban Structure be directly observed and mapped? | Unlike latent travel behavior, Urban Structure is directly observable, measurable, and representable through open-source geospatial platforms. | Guo, Y., et al. (2025). A universal geography neural network for mobility flow prediction in planning scenarios. *CACE*, 40, 5769–5789; Liu, Y., et al. (2024). Towards semantic enrichment for spatial interactions. *Annals of GIS*; Herfort, B., et al. (2023). A spatio-temporal analysis investigating completeness and inequalities of global urban building data in OpenStreetMap. *Nature Communications*, 14, 3985; Vu, T. T., et al. (2021). Enhanced urban functional land use map with free and open-source data. *International Journal of Digital Earth*, 14(12). | Demonstrates that OpenStreetMap (OSM) road networks, Point-of-Interest (POI) distributions, and high-resolution Sentinel-2/Landsat satellite imagery provide empirical structural inputs. | Urban Structure serves as the observable, structurally grounded counterpart of the spatial interaction equation. |
-| **F3. Urban Structure Representation** | How should Urban Structure be represented in spatial models? | Modern spatial artificial intelligence represents Urban Structure through self-supervised, high-dimensional geospatial representations rather than handcrafted spatial variables. | Guo et al. (2025); Liu et al. (2024); Simini, F., et al. (2021). A Deep Gravity model for mobility flows generation. *Nature Communications*, 12(1), 6576; Xu, Y., et al. (2025). Predicting human mobility flows in cities using deep learning on satellite imagery. *Nature Communications*. | Introduces deep fully connected neural networks, graph attention networks (GAT), and self-supervised contrastive learning (SimCLR) to extract deep semantic embeddings from satellite images and multi-source geocontext. | Spatial representation learning (GeoAI) is interpreted as a tool for extracting the structural features of geographical units. |
+| **F3. Urban Structure Representation** | How should Urban Structure be represented in spatial models? | Modern spatial artificial intelligence represents Urban Structure through self-supervised, high-dimensional geospatial representations rather than handcrafted spatial variables. | Guo et al. (2025); Liu et al. (2024); Simini, F., et al. (2021). A Deep Gravity model for mobility flows generation. *Nature Communications*, 12(1), 6576; Xu, Y., et al. (2025). Predicting human mobility flows in cities using deep learning on satellite imagery. *Nature Communications*. | Introduces deep fully connected neural networks, graph attention networks (GAT), and self-supervised contrastive learning (SimCLR) to extract deep semantic embeddings from satellite images and multi-source geocontext. | Spatial representation learning (GeoAI) is interpreted as a tool for extracting structural features of geographical units ($Z_{\text{task}}$). A learned latent representation ($Z_{\text{task}}$) may be interpreted as supporting a scientific structural representation ($Z_{\text{task}} \approx R_S$) only when that interpretation is explicitly justified and validated. |
 | **F4. Transferability of Urban Structure** | Can Urban Structure representations be transferred across geographical contexts? | Physical urban structural configurations and functional arrangements show cross-city transferability to the extent that they reflect general urban form, land-use patterns, and morphological characteristics. | Enaya, A., et al. (2026). TransGM: Transferable gravity models for cross-city policy transfer. *Computers, Environment and Urban Systems*, 128, 102455; Yang, J., et al. (2026). Transferable Human Mobility Network Reconstruction with neuroGravity. *Preprint/SJTU*; Guo et al. (2025); Simini et al. (2021). | Employs spatial Kullback-Leibler (KL) divergence, domain-adversarial neural networks, and pre-trained GNN encoders to transfer learned structural contexts across "unseen" target urban domains. | This thesis proposes that Urban Structure embeddings are transferable across cities, while the latent collective travel behavior ($\theta$) requires city-specific parameter identification. |
 | **F5. Urban Structure as the Observable Counterpart of Behaviour** | How do Structure and Behaviour mathematically relate to generate collective mobility? | Urban Human Mobility patterns emerge from the non-linear interaction between the observable physical Urban Structure and the latent Human Travel Behaviour (distance-decay sensitivity). | Wilson (1971); Barbosa et al. (2018). | Mathematically operationalizes spatial flows as a function of origin-destination opportunities constrained by distance impedance. | Operationalizes the Structure–Behaviour Decomposition Principle: Urban Structure Representation is observable and learnable; Travel Behaviour Representation is latent and must be statistically identified from aggregate observations. |
 | **F6. Transition to Layer G** | How are these structural and behavioral components modeled in current AI approaches? | Current machine learning models optimize flow prediction by jointly learning Structure and Behaviour in an end-to-end architecture, without explicit separation between the two components. | Simini et al. (2021); Liu et al. (2024); Enaya et al. (2026); Guo et al. (2025). | Shows that end-to-end deep learning pipelines (GNNs, FCNNs) merge distance decay and geographical context into dense neural layers, without preserving interpretable structural separation. | Leads directly to the systematic review of the Conventional Joint Modelling Paradigm (Layer G), where behavior cannot be isolated or identified. |
@@ -320,7 +395,7 @@ How can urban spatial structure—specifically origin trip production $O_i$ and 
 
 ##### 2. Core Claims
 * **Claim F.1:** Urban structure encompasses the spatial distribution of opportunities, land-use intensity, population density, POI distribution, and road network centrality.
-* **Claim F.2:** High-dimensional spatial features can be compressed into latent structural representations $(O_i, A_j)$ using spatial graph neural networks (GNNs) or spatial representation learning.
+* **Claim F.2:** High-dimensional spatial features can be encoded into structural representations $R_S$, which are operationalized as structural quantities $(O_i, A_j)$ for spatial interaction models.
 * **Claim F.3:** Multi-source open datasets (OpenStreetMap, WorldPop, POI registers) provide sufficient proxy signals for estimating structural opportunity potentials.
 
 ##### 3. Evidence Map
@@ -360,19 +435,19 @@ Under what structural and spatial conditions can urban mobility models or repres
 
 ##### 2. Core Claims
 * **Claim G.1:** Cross-city mobility synthesis requires transferring structural or behavioural knowledge from data-rich source cities to data-scarce target cities.
-* **Claim G.2:** Existing transfer methods (e.g., DeepGravity, GODDAG, TransGM) transfer end-to-end neural representations, conflating urban structure and mobility behaviour without explicit separation.
+* **Claim G.2:** Existing transfer methods (e.g., DeepGravity, GODDAG, TransGM, Imagery2Flow) transfer end-to-end task-specific neural representations ($Z_{\text{task}}$), conflating Urban Structure ($R_S$) and Travel Behaviour ($R_B$) without explicit scientific separation. Crucially, $Z_{\text{task}} \neq R_S$ by default.
 * **Claim G.3:** Separating structure from behaviour enables zero-shot structural transfer while identifying city-specific behaviour independently from local aggregate TLD.
 
 ##### 3. Evidence Map
 * **Domain Adaptation & GNN Transfer:** Rong, Feng, & Ding (2023) *GODDAG: Generating Origin-Destination Flow for New Cities Via Domain Adversarial Training* (IEEE TKDE).
-* **Transferable Gravity & Neural Baselines:** Enaya et al. (2026) *TransGM: Transferable gravity models*; Simini et al. (2021) *DeepGravity*; Liu et al. (2025) *NeuroGravity*.
+* **Transferable Gravity & Neural Baselines:** Enaya et al. (2026) *TransGM: Transferable gravity models*; Simini et al. (2021) *DeepGravity*; Liu et al. (2025) *NeuroGravity*; Xu et al. (2025) *Imagery2Flow*.
 * **Predictability Limits in Zero-Data Settings:** Yang et al. (2014) *Limits of Predictability in Commuting Flows in the Absence of Data for Calibration* (Scientific Reports).
 
 ##### 4. Critical Comparison
 * **Sub-categories of Transferability:**
   * **G1 — Transfer Behaviour:** Assuming distance-decay parameters $\theta$ are universal across cities (invalidated by urban scale differences).
-  * **G2 — Transfer Structure:** Transferring structural opportunity mappings $(O_i, A_j)$ from urban features across similar urban typologies (Thesis Approach).
-  * **G3 — End-to-End Neural Transfer:** Transferring joint neural embeddings via GNN/Domain Adversarial Training (GODDAG / TransGM).
+  * **G2 — Transfer Structure:** Transferring structural representations ($R_S$) from urban features across similar urban typologies (Thesis Approach).
+  * **G3 — End-to-End Neural Transfer ($Z_{\text{task}}$):** Transferring joint neural embeddings ($Z_{\text{task}}$) via GNNs/Domain Adversarial Training (GODDAG / TransGM) or visual encoders (Imagery2Flow: $v_i \to r_i \to \text{GAT} \to \text{OD}$), which conflate structural features and travel friction into task-driven embeddings ($Z_{\text{task}} \neq R_S$).
 
 ##### 5. Implications for Thesis
 Defines the methodological benchmark and state-of-the-art contrast for **Paper 2**.
