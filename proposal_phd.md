@@ -10,7 +10,7 @@
 ---
 
 > **Single Master Opening Statement:**
-> **"This research aims to establish a mechanism-based scientific framework for Human Mobility by independently identifying the Behaviour of Spatial Interaction from aggregate mobility observations and representing Urban Structure from observable urban features. The reconstructed OD matrix serves as empirical evidence that these independently recovered components adequately explain the fundamental mechanisms governing urban mobility."**
+> **"This research aims to establish a mechanism-based scientific framework for Human Mobility by inferring a representation of city-specific Travel Behaviour from aggregate mobility observations and representing Urban Structure from observable urban features to evaluate cross-city transferability. The reconstructed OD matrix serves as empirical evidence that integrating these two distinct scientific components adequately explains observed Spatial Interaction flows."**
 
 ---
 
@@ -24,7 +24,7 @@ However, **current studies primarily model mobility as a prediction problem rath
 
 ### Research Vision
 
-> **Rather than treating urban mobility as a black-box prediction problem, this dissertation adopts Spatial Interaction as its formal scientific object and establishes a mechanism-based framework founded on the independent representation of Urban Structure and the independent identification of Travel Behaviour. This approach enables quantitative explanation, diagnosis, policy evaluation, and transferable understanding of urban mobility systems.**
+> **Rather than treating urban mobility as a black-box prediction problem, this dissertation adopts Spatial Interaction as its formal scientific object and establishes a mechanism-based framework founded on the distinct representation of Urban Structure and the inference of city-specific Travel Behaviour. This approach enables quantitative explanation, diagnosis, policy evaluation, and transferable understanding of urban mobility systems.**
 
 ---
 
@@ -50,9 +50,9 @@ $$T_{ij} = O_i \frac{A_j f(d_{ij}; \boldsymbol{\theta})}{\sum_{m} A_m f(d_{im}; 
 > **Scientific Proposition (End of Module 3):**
 > *Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed.*
 
-This decomposition immediately suggests a research programme. If Urban Structure Representation can be independently learned and transferred, and Travel Behaviour Representation can be statistically identified from aggregate observations, then their probabilistic interaction provides sufficient information to reconstruct OD flows. The reconstructed OD matrix is therefore not the objective of the framework, but **empirical evidence** that these independently recovered representations adequately explain observed Spatial Interaction.
+This decomposition immediately suggests a research programme. If Urban Structure can be represented and transferred across cities, and a representation of city-specific Travel Behaviour can be statistically inferred from aggregate observations through distinct inference pathways, then their probabilistic interaction provides empirical evidence to reconstruct OD flows. The reconstructed OD matrix is therefore not the objective of the framework, but **empirical evidence** evaluating whether integrating these two distinct scientific components adequately explains observed Spatial Interaction.
 
-Urban Structure and Travel Behaviour play complementary rather than equivalent roles:
+Urban Structure and Travel Behaviour play complementary rather than equivalent roles. This research conceptualizes Urban Structure and city-specific Travel Behaviour as two distinct scientific components, each represented and inferred through different sources of information, and possessing fundamentally different transferability properties:
 
 ### Urban Structure and Its Representation
 
@@ -67,28 +67,67 @@ where:
 
 Because observable spatial characteristics can be systematically encoded using spatial representation learning, the resulting Urban Structure representation ($R_S$) becomes **transferable** across cities. This *observable → representable → transferable* property forms the scientific basis of Paper 2.
 
-### Travel Behaviour Representation
+### City-Specific Travel Behaviour and Its Representation
 
-Defined as the **collective distance sensitivity governing the utilization of spatial opportunities**:
+City-specific Behaviour is conceptualized as the collective behavioural component governing how travellers respond to spatial separation and the spatial opportunities defined by Urban Structure. Behaviour is not directly observed. Instead, it is represented operationally in the spatial interaction model through a distance-deterrence function:
 
-$$f(d; \boldsymbol{\theta})$$
+$$R_B(d; \boldsymbol{\theta}) = f(d; \boldsymbol{\theta})$$
 
-Travel Behaviour representation evolves from simple analytical decay functions (power-law, exponential) towards statistically identified parameters $\boldsymbol{\theta}$ (e.g., Tanner deterrence $\alpha, \beta$) learned from aggregate mobility evidence. The distance decay parameter vector $\boldsymbol{\theta}$ serves as the **mathematical proxy** of this representation. This *aggregate-observable → statistically identifiable* property forms the scientific basis of Paper 1.
+$$\text{City-specific Behaviour} \longrightarrow R_B(d; \boldsymbol{\theta}) = f(d; \boldsymbol{\theta}) \longrightarrow \boldsymbol{\theta} = (\alpha, \beta)$$
+
+where:
+* **City-specific Behaviour**: Scientific object (the collective behavioural component governing how travellers respond to spatial separation and spatial opportunities).
+* **$R_B(d; \boldsymbol{\theta}) = f(d; \boldsymbol{\theta})$**: Travel Behaviour representation (e.g., Tanner deterrence function operationalized in the spatial interaction model).
+* **$\boldsymbol{\theta} = (\alpha, \beta)$**: Behavioural representation parameters (mathematical proxies estimated from aggregate mobility evidence).
+
+For example, under the Tanner specification:
+
+$$f(d; \alpha, \beta) = d^{-\alpha} e^{-\beta d}$$
+
+where $(\alpha, \beta)$ parameterize the behavioural representation rather than being identified directly with Behaviour itself.
+
+Because aggregate travel-distance distributions (TLD) preserve statistical signatures of travel friction, the behavioural representation parameters ($\boldsymbol{\theta}$) are **statistically identifiable** given an independently specified Urban Structure. This *aggregate-observable → statistically identifiable* property forms the scientific basis of Paper 1.
+
+### Epistemological & Transferability Shift
+
+| Dimension | Conventional Conflated Framing | Refined Decoupled Framing |
+| :--- | :--- | :--- |
+| **Urban Structure** | $\text{Urban Structure} = (O_i, A_j)$ | $\text{Urban Structure} \longrightarrow R_S \longrightarrow (O_i, A_j)$ |
+| **Structural Quantities** | $(O_i, A_j)$ directly equals Structure | $(O_i, A_j)$ are operational structural quantities of $R_S$ |
+| **Object Transferred** | Urban Structure is transferred | Urban Structure representation ($R_S$) is transferred |
+| **Transfer Type** | Structural transfer | Transfer of structural representation ($R_S$) |
+| **Travel Behaviour** | $\text{Behaviour} = f(d; \boldsymbol{\theta})$ | $\text{City-specific Behaviour} \longrightarrow R_B(d; \boldsymbol{\theta}) \longrightarrow \boldsymbol{\theta}$ |
+| **Deterrence Function** | Distance decay function *is* Behaviour | Distance decay function *is a representation* ($R_B$) of Behaviour |
+| **Behaviour Processing** | Behaviour is independently identified | Behaviour representation ($R_B$) is locally inferred |
+| **Parameters ($\boldsymbol{\theta}$)** | $\boldsymbol{\theta}$ *is* Behaviour | $\boldsymbol{\theta}$ parameterizes the representation $R_B$ |
+| **Inference Path** | $\text{TLD} \longrightarrow \text{Behaviour}$ | $\text{TLD} \longrightarrow \text{infer } R_B (\boldsymbol{\theta}) \longrightarrow \text{interpret as Behaviour}$ |
+| **Target Integration** | Transfer structure + behaviour | Transfer $R_S$, retain/infer local $R_B$ |
+| **Claim Nature** | Absolute independence claim | Distinct scientific components + testable empirical claims |
+
+### Unified Theoretical Architecture
+
+The complete, refined framework operates through two distinct scientific streams integrated probabilistically:
+
+$$\text{Urban Structure} \longrightarrow \text{Structural Representation } R_S \longrightarrow \text{Cross-City Transfer}$$
+
+$$\text{City-specific Behaviour} \longrightarrow \text{Behavioural Representation } R_B \longrightarrow \text{Local Inference}$$
+
+$$\underbrace{R_S}_{\text{Transferred Structural Representation}} + \underbrace{R_B}_{\text{Locally Inferred Behavioural Representation}} \longrightarrow \text{Spatial Interaction Process} \longrightarrow T_{ij} \text{ (OD Matrix Reconstruction)}$$
 
 ---
 
 # 4. Central Scientific Proposition & Hypotheses
 
 > **Central Scientific Proposition:**
-> *Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed. The reconstructed OD matrix serves as empirical evidence that independently recovered Structure and Behaviour adequately explain observed Spatial Interaction.*
+> *Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed. The reconstructed OD matrix serves as empirical evidence that integrating these two distinct scientific components adequately explains observed Spatial Interaction.*
 
 ### Hypotheses
 
 * **Hypothesis 1 (H1 — Paper 1 — Module 5):**
-  *The Travel Behaviour Representation of Spatial Interaction can be independently identified from aggregate travel-distance observations.*
+  *A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations.*
 
 * **Hypothesis 2 (H2 — Paper 2 — Module 4):**
-  *The Urban Structure Representation of Spatial Interaction can be independently learned from observable urban features and transferred to unseen cities.*
+  *Urban Structure can be represented from observable urban features using spatial representation learning and transferred across cities.*
 
 ---
 
@@ -98,19 +137,19 @@ The following research questions are derived from the scientific gaps identified
 
 ### RQ1 (Paper 1 — Travel Behaviour Representation)
 
-*Can the Travel Behaviour Representation of Spatial Interaction be independently identified from aggregate travel-distance observations, and does the identified representation support the reconstruction of OD flows?*
+*Can a representation of city-specific Travel Behaviour be statistically inferred from aggregate travel-distance observations, and does the inferred representation support the reconstruction of OD flows?*
 
 ---
 
 ### RQ2 (Paper 2 — Urban Structure Representation)
 
-*Can the Urban Structure Representation of Spatial Interaction be independently learned from observable urban features using spatial representation learning, and does the learned representation generalize across heterogeneous urban environments?*
+*Can Urban Structure be represented from observable urban features using spatial representation learning, and does the learned representation generalize across heterogeneous urban environments?*
 
 ---
 
 ### RQ3 (Integration — Module 8: Dissertation Framework)
 
-*Can Spatial Interaction be explained through the probabilistic integration of independently identified Travel Behaviour Representation and independently learned Urban Structure Representation?*
+*Can Spatial Interaction be explained through the probabilistic integration of the inferred Travel Behaviour representation and the learned Urban Structure representation?*
 
 *(Note: The objective of RQ3 is **explanation** of the mechanisms governing Spatial Interaction, not merely OD prediction. OD matrix reconstruction is the empirical validation evidence).*
 
@@ -182,7 +221,7 @@ Provide empirical statistical evidence supporting parameter identification of th
 
 ### Scientific Evidence Provided
 
-Supports **Hypothesis 1**: Travel Behaviour Representation can be independently identified from aggregate travel-distance observations ($R^2 = 0.9624$ vs. OD-fitted parameters across 50 US cities).
+Supports **Hypothesis 1**: A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations ($R^2 = 0.9624$ vs. OD-fitted parameters across 50 US cities).
 
 ---
 
@@ -209,7 +248,7 @@ Learn and represent the **Urban Structure Representation** ($\mathbf{O}, \mathbf
 
 ### Scientific Evidence Provided
 
-Supports **Hypothesis 2**: Urban Structure Representation can be independently learned from observable urban features and generalized across heterogeneous urban environments.
+Supports **Hypothesis 2**: Urban Structure can be represented from observable urban features and generalized across heterogeneous urban environments.
 
 ---
 
@@ -217,16 +256,16 @@ Supports **Hypothesis 2**: Urban Structure Representation can be independently l
 
 ### Integration Protocol
 
-The principal methodological contribution of this dissertation is not a new Gravity model. Instead, it is a **Probabilistic Integration Protocol** that combines two independently learned representations: Urban Structure Representation learned from observable urban features, and Travel Behaviour Representation identified from aggregate mobility observations. Gravity serves as the common **scientific language** (Module 2) through which these independently recovered representations interact to generate observable Spatial Interaction flows.
+The principal methodological contribution of this dissertation is not a new Gravity model. Instead, it is a **Probabilistic Integration Protocol** that combines two distinct scientific representations: Urban Structure Representation learned from observable urban features, and Travel Behaviour Representation inferred from aggregate mobility observations. Gravity serves as the common **scientific language** (Module 2) through which these two distinct components interact to generate observable Spatial Interaction flows.
 
 ### Contribution 1 — Theory of Travel Behaviour Identification
-Advance Travel Behaviour Representation from analytical decay functions to a statistically identified probabilistic inference framework showing that collective travel behaviour can be independently identified from aggregate mobility statistics.
+Advance Travel Behaviour Representation from analytical decay functions to a statistically identified probabilistic inference framework showing that a representation of city-specific travel behaviour can be inferred from aggregate mobility statistics.
 
 ### Contribution 2 — Scientific Representation of Urban Structure
 Advance Urban Structure Representation from handcrafted variables to a learned Mobility Potential Field ($O_i, A_j$) using spatial GeoAI and open urban data, with cross-city transferability as an evaluation diagnostic.
 
 ### Contribution 3 — Mechanism-based Probabilistic Integration Framework
-Establish a mechanism-based probabilistic integration framework that combines independently recovered Structure and Behaviour representations within a unified Spatial Interaction model. The methodological novelty lies in **treating the two representations as analytically distinguishable** with independent learning objectives, learning strategies, and empirical evaluation pipelines, rather than jointly optimizing them in a single black-box function.
+Establish a mechanism-based probabilistic integration framework that combines representations of the two distinct scientific components within a unified Spatial Interaction model. The methodological novelty lies in **treating the two representations as analytically distinguishable** with distinct learning objectives, learning strategies, and empirical evaluation pipelines, rather than jointly optimizing them in a single black-box function.
 
 ---
 
