@@ -43,7 +43,7 @@ Neither the traditional gravity paradigm nor modern deep learning models (e.g., 
 
 # 3. Structure–Behaviour Decomposition Principle
 
-Spatial Interaction is represented as a production-constrained process where **Travel Behaviour acts on Urban Structure**:
+Spatial Interaction is represented as a production-constrained process in which the Urban Structure Representation and Travel Behaviour Representation jointly determine the distribution of interactions across spatial separation:
 
 $$T_{ij} = O_i \frac{A_j f(d_{ij}; \boldsymbol{\theta})}{\sum_{m} A_m f(d_{im}; \boldsymbol{\theta})}$$
 
@@ -90,19 +90,19 @@ Because aggregate travel-distance distributions (TLD) preserve statistical signa
 
 ### Distinction Between Scientific Representation and AI-Learned Embeddings
 
-A critical epistemological contribution of this framework is distinguishing explicitly between three levels:
+A critical epistemological contribution of this framework is explicitly distinguishing between the scientific ontology level and its computational implementation level:
 
-$$\text{Scientific Object} \longrightarrow \text{Scientific Representation } (R_S, R_B) \longrightarrow \text{AI-Learned Latent Representation } (Z_{\text{task}})$$
+1. **Scientific Ontology Level**:
+   $$\text{Scientific Object (Urban Structure } \mathcal{S}) \longrightarrow \text{Scientific Structural Representation } (R_S)$$
 
-Specifically, for Urban Structure:
-
-$$\text{Urban Structure} \longrightarrow R_S \longrightarrow \text{AI / GNN Model} \longrightarrow Z_{\text{task}}$$
+2. **Computational Implementation Level (Paper 2 Pipeline)**:
+   $$X_S \text{ (Open Spatial Features)} \xrightarrow{\text{GeoAI/GNN}} Z_{\text{task}} \xrightarrow{\text{structural interpretation \& validation}} R_S^* \longrightarrow (O_i, A_j)$$
 
 * **Scientific Object (Urban Structure / Behaviour)**: Real-world physical spatial organization of opportunities and collective travel response.
-* **Scientific Representation ($R_S, R_B$)**: Explicitly specified, interpretable structural quantities $(O_i, A_j)$ and deterrence function $f(d; \boldsymbol{\theta})$ operationalized in the Spatial Interaction model.
+* **Scientific Representation ($R_S, R_B$)**: Explicitly specified representations of Urban Structure and Travel Behaviour, with $R_S$ operationalized through structural quantities such as $(O_i, A_j)$, and $R_B$ operationalized through the deterrence function $f(d; \boldsymbol{\theta})$.
 * **AI-Learned Latent Representation ($Z_{\text{task}}$)**: High-dimensional latent embeddings (e.g., GNN or DeepGravity hidden states) optimized for a specific downstream prediction task.
 
-Crucially, **$Z_{\text{task}} \neq R_S$ or $R_B$ by default**. Standard black-box AI models (e.g., DeepGravity, Imagery2Flow) learn task-driven embeddings ($Z_{\text{task}}$) that entangle Urban Structure and Travel Behaviour into a single latent vector. However, a learned latent representation ($Z_{\text{task}}$) may be interpreted as supporting a scientific representation ($Z_{\text{task}} \approx R_S$) only when that interpretation is explicitly justified and validated—namely, when it is learned strictly from structural inputs ($X_S$) without target mobility contamination, demonstrates structural interpretability, preserves necessary opportunity information, and generalizes across structural domains. In contrast, Paper 2 does not merely aim to generate a "better neural embedding," but to learn an **explicit, interpretable structural representation ($R_S$)** whose cross-city transferability can be systematically evaluated.
+Crucially, **$Z_{\text{task}} \neq R_S$ or $R_B$ by default**. Many end-to-end mobility prediction models learn task-driven latent representations ($Z_{\text{task}}$) in which structural and behavioural information may be jointly encoded and are not explicitly separated. However, a learned latent representation ($Z_{\text{task}}$) may be interpreted as supporting a scientific representation ($Z_{\text{task}} \approx R_S$) only when that interpretation is explicitly justified and validated—namely, when it is learned strictly from structural inputs ($X_S$) without target mobility contamination, demonstrates structural interpretability, preserves necessary opportunity information, and generalizes across structural domains. In contrast, Paper 2 does not merely aim to generate a "better neural embedding," but to learn an **explicit, interpretable structural representation ($R_S$)** whose cross-city transferability can be systematically evaluated.
 
 ### Epistemological Clarification on Model Residuals and Information Sufficiency
 
@@ -141,7 +141,7 @@ R_S + R_B &\longrightarrow \text{OD} \longrightarrow \text{(Downstream Joint Int
 | **Urban Structure** | $\text{Urban Structure} = (O_i, A_j)$ | $\text{Urban Structure} \longrightarrow R_S \longrightarrow (O_i, A_j)$ |
 | **Structural Quantities** | $(O_i, A_j)$ directly equals Structure | $(O_i, A_j)$ are operational structural quantities of $R_S$ |
 | **AI Learning Target** | AI learns Urban Structure directly | AI learns task-specific latent representations ($Z_{\text{task}}$) from structural inputs |
-| **Latent Embedding Role** | Latent embedding ($Z_{\text{task}}$) = Structure | $Z_{\text{task}} \neq R_S$ by default ($Z_{\text{task}}$ entangles Structure & Behaviour) |
+| **Latent Embedding Role** | Latent embedding ($Z_{\text{task}}$) = Structure | $Z_{\text{task}} \neq R_S$ by default ($Z_{\text{task}}$ does not explicitly separate structural and behavioural information) |
 | **Scientific vs AI Repr.** | Scientific representation = neural embedding | Scientific representation ($R_S$) $\neq$ Black-box neural embedding ($Z_{\text{task}}$) |
 | **Paper 2 Objective** | Paper 2 = better neural embedding | Paper 2 = Explicit structural representation ($R_S$) + evaluate transferability |
 | **Object Transferred** | Urban Structure is transferred | Urban Structure representation ($R_S$) is transferred |
@@ -193,8 +193,8 @@ Paper 1 and Paper 2 do not merely differ in datasets or algorithms; they execute
    * **Task:** Parametric statistical inference of collective distance sensitivity ($\boldsymbol{\theta}$) from aggregate travel-distance distributions given an independently specified structural representation ($R_S$). AI/optimization functions as a numerical implementation tool rather than the scientific method itself.
 
 2. **Pathway 2: Representation Learning Pathway (Paper 2 — Structural Stream)**:
-   $$\text{Open Spatial Information (OSM, POI, Satellite)} \xrightarrow{\text{representation learning (GeoAI/GNN)}} R_S(O_i, A_j)$$
-   * **Task:** Spatial representation learning and domain adaptation to construct transferable structural representations ($R_S$) from multi-source geographic contexts.
+   $$X_S \text{ (Open Spatial Features)} \xrightarrow{\text{representation learning (GeoAI/GNN)}} R_S \xrightarrow{\text{operationalization}} (O_i, A_j)$$
+   * **Task:** Spatial representation learning and domain adaptation to construct transferable structural representations ($R_S$) from multi-source geographic contexts and operationalize them into structural quantities ($O_i, A_j$).
 
 ### Strategic Transfer & Local Inference Protocol
 
@@ -274,8 +274,8 @@ Urban Structure Representation     Travel Behaviour Representation
            │                                 │
  Observable Urban Features        Aggregate Mobility Observations
            │                                 │
-  Learning Objective:                Learning Objective:
-  Transferable Potential Field       Statistical Identification
+   Learning Objective:                Learning Objective:
+   Mobility Potential Field           Statistical Identification
   (Module 6 — Learning Strategy)     (Module 6 — Learning Strategy)
            │                                 │
            └─────────────┬───────────────────┘
@@ -335,7 +335,7 @@ Learn and evaluate an **Urban Structure Representation ($R_S$)** from multi-sour
 
 ### Learning Objective & Strategy
 
-* **Learning Objective:** Learn $R_S$ from observable urban features and evaluate whether it can be instantiated to produce useful structural quantities ($O_i, A_j$) in unseen cities.
+* **Learning Objective:** Learn a Mobility Potential Field representation and evaluate its cross-city transferability.
 * **Learning Strategy:** Spatial representation learning (Spatial GNNs / DeepGravity), motivated by the observed capacity limitations of non-spatial tabular models ($R^2 \le 0.48$, QT14).
 
 ### Main Contributions
@@ -346,7 +346,7 @@ Learn and evaluate an **Urban Structure Representation ($R_S$)** from multi-sour
 
 ### Scientific Evidence Provided
 
-Supports **Hypothesis 2**: An Urban Structure Representation learned from observable urban features can provide transferable structural information across heterogeneous urban environments under appropriate cross-city conditions.
+Provides evidence toward **Hypothesis 2** by evaluating cross-city transferability under the specified experimental conditions.
 
 ---
 
@@ -354,7 +354,7 @@ Supports **Hypothesis 2**: An Urban Structure Representation learned from observ
 
 ### Integration Protocol
 
-The principal methodological contribution of this dissertation is not a new Gravity model. Instead, it is a **Probabilistic Integration Protocol** that combines two distinct scientific representations: Urban Structure Representation learned from observable urban features, and Travel Behaviour Representation inferred from aggregate mobility observations. Gravity serves as the common **scientific language** (Module 2) through which these two distinct components interact to generate observable Spatial Interaction flows.
+The principal methodological contribution of this dissertation is not a new Gravity model. Instead, it is a **Probabilistic Integration Protocol** that combines two distinct scientific representations: Urban Structure Representation learned from observable urban features, and Travel Behaviour Representation inferred from aggregate mobility observations. Gravity serves as the common **scientific language** (Module 3) through which these two distinct components interact to generate observable Spatial Interaction flows.
 
 ### Contribution 1 — Theory of Travel Behaviour Identification
 Advance Travel Behaviour Representation from analytical decay functions to a statistically identified probabilistic inference framework showing that a representation of city-specific travel behaviour can be inferred from aggregate mobility statistics.
