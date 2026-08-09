@@ -55,7 +55,11 @@ Evidence for parameter identification under Hypothesis 1 must be presented as a 
 4. **Observation noise robustness**
    - Assess parameter estimation stability under observation noise perturbation (QT18: $<0.5\%$ error under $20\%$ noise).
 
-5. **Downstream reconstruction adequacy**
+5. **Open-data resolution aggregation robustness**
+   - Evaluate parameter estimation stability when aggregating from a primary 20-bin TLD down to a coarse 3-bin TLD simulating Meta MDM.
+   - Tests whether the identified behavioural signal remains robust under coarse open-data resolutions ($\hat{\boldsymbol{\theta}}_{20} \approx \hat{\boldsymbol{\theta}}_3$).
+
+6. **Downstream reconstruction adequacy**
    - Inferred parameters support downstream OD matrix reconstruction (TOST equivalence under oracle outflows).
    - Serves as downstream consequence validation, **not** as direct proof of parameter identifiability.
 
@@ -132,10 +136,11 @@ Do NOT conflate Urban Structure Representation $R_S$ solely with the two operati
 - **Avoid (Forbidden):**
   - ❌ *"Urban Structure Representation is $(O_i, A_j)$"*
   - ❌ *"R_S equals origin production and destination attraction"*
+  - ❌ *"Urban Structure Representation is the Mobility Potential Field $(O_i, A_j)$"*
 
 - **Use (Required):**
-  - ✅ *"Urban Structure Representation $R_S$ is operationalized through structural quantities $(O_i, A_j)$ in spatial interaction models."*
-  - ✅ *"$R_S \longrightarrow (O_i, A_j, \dots)$"*
+  - ✅ *"Urban Structure Representation $R_S$ is operationalized through structural quantities (such as Mobility Potential Field $(O_i, A_j)$) in spatial interaction models."*
+  - ✅ *"$R_S \longrightarrow \text{Mobility Potential Field } (O_i, A_j, \dots)$"*
 
 ## Rule: Avoid "Intrinsic / Inherent Property" Phrasing for Travel Behaviour
 
@@ -191,10 +196,12 @@ Do NOT describe the 85.8% Shapley attribution result as "Behaviour accounts for 
   - ❌ *"Distance-decay behaviour accounts for 85.8% of total mobility."*
   - ❌ *"Travel Behaviour is responsible for 85.8% of mobility flow."*
   - ❌ *"Behaviour ontologically dominates Urban Structure by 85.8%."*
+  - ❌ *"Finding 2 (Behavioral Dominance)"*
 
 - **Required Phrasing:**
   - ✅ *"Within the evaluated spatial-interaction decomposition, distance deterrence accounts for 85.8% of the total CPC gain over the uniform-flow baseline."*
-  - ✅ *"Shapley value attribution demonstrates that distance deterrence is the dominant predictive component among the three evaluated components in the tested spatial-interaction decomposition."*
+  - ✅ *"Finding 2: Predictive Contribution of Distance Deterrence."*
+  - ✅ *"Shapley value attribution demonstrates that distance deterrence is the largest incremental predictive component among the three evaluated components in the tested spatial-interaction decomposition."*
 
 ## Rule: Oracle Equivalence vs. Survey-Free Deployment Scope
 
@@ -255,8 +262,10 @@ Do NOT claim that "Two-Way ANOVA proves / establishes the Structure–Behaviour 
   - ❌ *"ANOVA proves the Structure–Behaviour Separation Principle."*
   - ❌ *"Urban Structure is intrinsically 81.3% more important than Travel Behaviour."*
   - ❌ *"Behaviour is only 5.3% important in human mobility."*
+  - ❌ *"The Structure–Behaviour Decomposition Principle is a necessary conceptual consequence of literature."*
 
 - **Required Phrasing:**
+  - ✅ *"The Structure–Behaviour Decomposition Principle is proposed as an analytical synthesis of recurring structural-opportunity and behavioural-impedance components in spatial-interaction theory."*
   - ✅ *"Develop and empirically support the Structure–Behaviour Separation Principle as an analytical framework for decomposing spatial interaction into structural and behavioural representations."*
   - ✅ *"QT16 ANOVA provides empirical support for this decomposition by showing distinguishable variance contributions from structural ($\eta^2 = 81.27\%$) and behavioural ($\eta^2 = 5.28\%$) factors under the evaluated cross-city reconstruction experiment."*
 
@@ -285,9 +294,11 @@ Do NOT claim that "Paper 2 must succeed before Paper 1 can be valid" or that "Pa
   - ❌ *"Paper 2's transferability establishes the prerequisite condition for Paper 1."*
   - ❌ *"If Paper 2 transfers structure, then Paper 1 can identify behaviour."*
   - ❌ *"Paper 1 relies on Paper 2 to validate its structural inputs."*
+  - ❌ *"Derivation chain: Principle $\to$ RQ1 $\to$ Paper 1 $\to$ RQ2 $\to$ Paper 2"*
 
 - **Required Phrasing:**
   - ✅ *"Behavioural Identification (Gap I) and Urban Structure Transferability (Gap II) are complementary scientific problems unified by the Structure–Behaviour Separation Principle."*
+  - ✅ *"Derivation structure: Principle $\to$ two complementary parallel pathways (Gap I $\to$ RQ1 $\to$ Paper 1; Gap II $\to$ RQ2 $\to$ Paper 2) $\to$ Joint Integration (RQ3) $\to$ Validation $\to$ Synthesis."*
   - ✅ *"The two papers jointly test whether Spatial Interaction can be decomposed into a transferable Urban Structure Representation ($R_S$) and a locally identifiable Travel Behaviour Representation ($R_B$). Each component is evaluated through its own inference pathway before their joint integration is assessed."*
 
 ## Rule: Zero-Target-OD vs. Target-Data-Free Positioning

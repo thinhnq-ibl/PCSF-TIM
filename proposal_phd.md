@@ -32,7 +32,7 @@ However, **current studies primarily model mobility as a prediction problem rath
 
 Existing studies learn mobility directly from observations. As a consequence, **Urban Structure Representation and Travel Behaviour Representation remain entangled** within a single predictive function, preventing independent understanding, quantification, and transfer of their roles.
 
-These limitations are not merely methodological but conceptual. Existing models jointly optimize Urban Structure and Travel Behaviour as a single predictive function, preventing either representation from being independently interpreted, transferred, or statistically identified. Consequently, the literature motivates a scientific decomposition of Spatial Interaction into two analytically distinguishable representations—Urban Structure and Travel Behaviour—rather than a new predictive architecture. The **Structure–Behaviour Decomposition Principle** therefore emerges as a necessary conceptual consequence of the limitations of the existing Observation-First paradigm, rather than an arbitrary modelling choice.
+These limitations are not merely methodological but conceptual. Existing models jointly optimize Urban Structure and Travel Behaviour as a single predictive function, preventing either representation from being independently interpreted, transferred, or statistically identified. Consequently, the literature motivates a scientific decomposition of Spatial Interaction into two analytically distinguishable representations—Urban Structure and Travel Behaviour—rather than a new predictive architecture. The **Structure–Behaviour Decomposition Principle** is proposed as an analytical synthesis of recurring structural-opportunity and behavioural-impedance components in spatial-interaction theory, providing a framework for formulating distinct scientific questions, learning objectives, and empirical evaluation pathways for Urban Structure and Travel Behaviour.
 
 Neither the traditional gravity paradigm nor modern deep learning models (e.g., DeepGravity) provide a unified framework that independently models the two representations according to their fundamentally distinct functional roles:
 
@@ -298,8 +298,8 @@ Urban Structure Representation     Travel Behaviour Representation
               (Validation Evidence)
 ```
 
-**Derivation chain (Module 8):**
-Structure–Behaviour Decomposition Principle → RQ1 → Paper 1 → RQ2 → Paper 2 → Dissertation Framework
+**Derivation Structure (Module 8):**
+Structure–Behaviour Decomposition Principle → two complementary parallel pathways (Gap I → RQ1 → Paper 1; Gap II → RQ2 → Paper 2) → Joint Integration (RQ3) → Downstream OD Reconstruction Validation → Dissertation Synthesis
 
 ---
 
@@ -321,13 +321,13 @@ Provide empirical statistical evidence supporting parameter identification of th
 ### Main Contributions
 
 * Operationally define Travel Behaviour Representation as collective distance sensitivity $\boldsymbol{\theta}$.
-* Develop a binned probabilistic observation model formalizing aggregate information loss.
+* Develop a binned probabilistic observation model formalizing aggregate information loss across a primary 20-bin experimental setting and a 3-bin open-data resolution aggregation setting simulating Meta MDM.
 * Demonstrate a well-defined likelihood surface supporting parameter identification (QT12: Multi-start $\text{CV} = 0.00\%$).
 * Demonstrate parameter recovery robustness under observational noise (QT18: $<0.5\%$ error under $20\%$ noise).
 
 ### Scientific Evidence Provided
 
-Provides a multi-tiered evidence bundle supporting **Hypothesis 1**: (1) synthetic recovery and likelihood-surface stability (QT12: Multi-start $\text{CV} = 0.00\%$) provide direct evidence for parameter identification under the assumed model; (2) cross-city agreement with OD-based reference estimates ($R^2 = 0.9624$ across 50 US cities) provides external reference consistency evidence; (3) noise sensitivity analysis (QT18: $<0.5\%$ error under $20\%$ noise) confirms estimator robustness; and (4) downstream TOST equivalence evaluates model reconstruction consequences under specified outflow conditions.
+Provides a multi-tiered evidence bundle supporting **Hypothesis 1**: (1) synthetic recovery and likelihood-surface stability (QT12: Multi-start $\text{CV} = 0.00\%$) in the primary 20-bin experimental setting provide direct evidence for parameter identification under the assumed model; (2) cross-city agreement with OD-based reference estimates ($R^2 = 0.9624$ across 50 US cities) provides external reference consistency evidence; (3) noise sensitivity analysis (QT18: $<0.5\%$ error under $20\%$ noise) and 20-to-3-bin aggregation experiments confirm estimator robustness under coarse open-data resolutions (Meta MDM); and (4) downstream TOST equivalence evaluates model reconstruction consequences under specified outflow conditions.
 
 ---
 
@@ -343,12 +343,12 @@ Paper 2 tests whether an Urban Structure Representation ($R_S$), learned from ob
 
 ### Learning Objective & Strategy
 
-* **Learning Objective:** Learn a Mobility Potential Field representation and evaluate its cross-city transferability.
+* **Learning Objective:** Learn an explicit Urban Structure Representation ($R_S$), operationalize it into an Operational Mobility Potential Field consisting of production and attraction potentials ($O_i, A_j$), and evaluate the cross-city transferability of the resulting structural representation.
 * **Learning Strategy:** Graph-based spatial representation learning (Spatial GNNs) is investigated as a candidate mechanism for constructing an explicit Urban Structure Representation ($R_S$), motivated by the observed performance limitations of non-spatial tabular baselines ($R^2 \le 0.48$, QT14). End-to-end neural models such as DeepGravity are evaluated separately as comparative transfer baselines rather than being identified directly with $R_S$.
 
 ### Main Contributions
 
-* Formalize the Urban Mobility Potential Field consisting of Production Potential ($O_i$) and Attraction Potential ($A_j$).
+* Operationalize the Urban Structure Representation ($R_S$) as an Operational Mobility Potential Field consisting of Production Potential ($O_i$) and Attraction Potential ($A_j$).
 * Demonstrate that evaluated non-spatial tabular baselines show limited predictive performance ($R^2 \le 0.48$, QT14) for operational structural quantities, motivating the investigation of spatial representation learning.
 * Evaluate cross-city zero-target-OD transfer performance and compare against non-transfer baselines across target cities (QT17: Test $\text{CPC} = 0.646$).
 
@@ -368,7 +368,7 @@ The principal methodological contribution of this dissertation is not a new Grav
 Advance Travel Behaviour Representation from analytical decay functions to a statistically identified probabilistic inference framework showing that a representation of city-specific travel behaviour can be inferred from aggregate mobility statistics.
 
 ### Contribution 2 — Scientific Representation of Urban Structure
-Advance Urban Structure Representation from handcrafted variables to a learned Mobility Potential Field ($O_i, A_j$) using spatial GeoAI and open urban data, with cross-city transferability as an evaluation diagnostic.
+Advance Urban Structure Representation from handcrafted variables to a learned spatial representation ($R_S$) operationalized into an Operational Mobility Potential Field ($O_i, A_j$) using spatial GeoAI and open urban data, with cross-city transferability as an evaluation diagnostic.
 
 ### Contribution 3 — Mechanism-Oriented Probabilistic Integration Framework
 Develop a mechanism-oriented probabilistic integration framework that combines representations of the two distinct scientific components within a unified Spatial Interaction model. The methodological novelty lies in **treating the two representations as analytically distinguishable** with distinct learning objectives, learning strategies, and empirical evaluation pipelines, rather than jointly optimizing them in a single black-box function. Its empirical role is to evaluate whether their joint integration provides adequate explanatory and predictive performance under the specified model, rather than establishing causal mechanisms.
