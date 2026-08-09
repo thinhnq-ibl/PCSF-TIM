@@ -18,7 +18,7 @@
 
 Urban mobility is one of the most important collective phenomena in modern cities. Mobility data serve as a dynamic input to economic analysis, transportation planning, and public health policies.
 
-Modern cities have become increasingly observable through multi-source open spatial data (OSM, POIs, Sentinel/Landsat) and geospatial representation learning. Furthermore, aggregate mobility products—including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—are becoming increasingly available across platforms and regions, providing privacy-preserving summaries of population travel behavior.
+Modern cities have become increasingly observable through multi-source open spatial data (OSM, POIs, Sentinel/Landsat) and geospatial representation learning. Furthermore, aggregate mobility products—including Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—are becoming increasingly available across platforms and regions, providing aggregated summaries of population travel behavior that reduce the disclosure granularity of individual travel patterns.
 
 However, **current studies primarily model mobility as a prediction problem rather than a scientific phenomenon**. In doing so, they treat the phenomenon directly as an observable, bypassing the need to identify the latent mechanisms that generate it. Consequently, although OD matrices can be predicted via black-box machine learning models, **the underlying mechanisms governing Spatial Interaction remain poorly understood**.
 
@@ -208,7 +208,15 @@ $$\text{Unified Integration: } R_{S, \text{target}} + R_{B, \text{target}} \long
 
 Crucially:
 * **Object Transferred**: The source spatial representation knowledge ($R_{S, \text{transfer}}$) is transferred and instantiated on the target city using open spatial features ($X_{S, \text{target}}$).
-* **Target Information Requirements**: The target domain still requires open spatial features ($X_{S, \text{target}}$) to instantiate structural representation $R_{S, \text{target}}$, and low-cost aggregate mobility summaries ($D_{\text{target}}$) to infer local behaviour $R_{B, \text{target}}$.
+* **Target Information Requirements (Zero-Target-OD Scope)**: The framework is **zero-target-OD rather than target-data-free**: target-city reconstruction uses open structural features ($X_{S, \text{target}}$) and an aggregate travel-distance distribution ($D_{\text{target}}$) to infer the local Behaviour Representation ($R_{B, \text{target}}$), while explicitly avoiding disaggregated target-city OD observations ($T_{ij, \text{target}}^{\text{obs}}$).
+
+| Target Domain Information Component | Required? | Specific Role in Operational Pipeline |
+| :--- | :---: | :--- |
+| **Open Spatial Features ($X_{S, \text{target}}$)** | **YES** | Instantiates structural representation $R_{S, \text{target}} \to (O_i, A_j)$ |
+| **Aggregate TLD ($D_{\text{target}}$)** | **YES** | Infers local distance deterrence $\hat{\boldsymbol{\theta}}_{\text{target}} \to R_{B, \text{target}}$ |
+| **Target OD Matrix ($T_{ij, \text{target}}^{\text{obs}}$)** | **NO** | **Explicitly avoided (Zero-Target-OD)** |
+| **Individual Trajectories** | **NO** | **Explicitly avoided** |
+| **Full Household Travel Survey** | **NO** | **Explicitly avoided** |
 * **Local Inference Rationale**: Locally inferring $R_{B, \text{target}}$ is a **modelling principle and strategic design choice** of the framework to respect city-specific friction profiles and prevent cross-domain behavioural bias: *Structure transferability is an empirical hypothesis to be tested, while target-city Behaviour is locally inferred unless its transferability is separately demonstrated*. Local inference from low-cost aggregate TLDs provides a robust, city-specific calibration mechanism without making a dogmatic claim of intrinsic untransferability.
 * **Demonstration Case**: Specific target cities (e.g., Ho Chi Minh City) function as **demonstration and empirical validation cases** to evaluate cross-city transferability and matrix reconstruction, rather than the primary scientific object of the dissertation.
 
@@ -222,7 +230,7 @@ Crucially:
 ### Hypotheses
 
 * **Hypothesis 1 (H1 — Paper 1 — Module 5):**
-  *A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations given an independently specified structural representation.*
+  *Aggregate travel-distance distributions contain sufficient statistical information to identify city-specific distance-deterrence parameters under the specified spatial-interaction model given an independently specified structural representation.*
 
 * **Hypothesis 2 (H2 — Paper 2 — Module 4):**
   *An Urban Structure Representation learned from observable urban features can provide transferable structural information across heterogeneous urban environments under appropriate cross-city conditions.*
@@ -319,7 +327,7 @@ Provide empirical statistical evidence supporting parameter identification of th
 
 ### Scientific Evidence Provided
 
-Supports **Hypothesis 1**: A representation of city-specific Travel Behaviour can be statistically inferred from aggregate travel-distance observations given an independently specified structural representation ($R^2 = 0.9624$ vs. OD-fitted parameters across 50 US cities).
+Supports **Hypothesis 1**: Aggregate travel-distance distributions contain sufficient statistical information to identify city-specific distance-deterrence parameters under the specified spatial-interaction model ($R^2 = 0.9624$ vs. OD-fitted parameters across 50 US cities).
 
 ---
 
@@ -331,7 +339,7 @@ Supports **Hypothesis 1**: A representation of city-specific Travel Behaviour ca
 
 ### Scientific Objective
 
-Learn and evaluate an **Urban Structure Representation ($R_S$)** from multi-source open urban features, following the *observable → representable → testable-transferability* logic, and determine whether the resulting representation can be operationalized into relevant structural quantities such as $O_i$ and $A_j$ for spatial interaction modelling.
+Paper 2 tests whether an Urban Structure Representation ($R_S$), learned from observable open spatial features, can transfer across cities and under what source–target conditions such transfer remains valid without relying on target-city OD labels, determining whether the resulting representation can be operationalized into relevant structural quantities such as $O_i$ and $A_j$ for spatial interaction modelling.
 
 ### Learning Objective & Strategy
 
