@@ -37,24 +37,27 @@ With:
 ### Context
 The paper does **not** claim mathematical identifiability. Instead, it builds **empirical statistical evidence** that aggregate travel-length distributions (TLDs) contain sufficient information to support identification of the parameters governing collective distance-sensitive travel behaviour.
 
-### Evidence Components
-Evidence should consist of four complementary components:
+### Multi-Tiered Evidence Bundle Architecture
+Evidence for parameter identification under Hypothesis 1 must be presented as a multi-tiered evidence bundle:
 
-1. **Likelihood evidence**
-   - Well-defined optimum.
-   - Sharp and stable likelihood surface.
+1. **Likelihood surface & optimization stability**
+   - Well-defined optimum and sharp likelihood surface (QT12: Multi-start $\text{CV} = 0.00\%$).
+   - Direct evidence for estimator stability.
 
-2. **Synthetic recovery**
-   - Generate TLD from known parameters.
-   - Recover parameters accurately from the generated TLD.
+2. **Synthetic parameter recovery**
+   - Generate TLD from known parameters and recover parameters accurately from synthetic TLD.
+   - Primary direct evidence for parameter identifiability under the assumed generative model.
 
-3. **Cross-city consistency**
-   - Independently estimate parameters for multiple cities.
-   - Results are stable and consistent across cities.
+3. **Cross-city empirical reference consistency**
+   - Independently estimate parameters for multiple cities (50 US metropolitan areas) and compare against OD-calibrated reference parameters ($R^2 = 0.9624$).
+   - Measures external empirical reference agreement/consistency, NOT sole proof of formal statistical sufficiency by itself.
 
-4. **Downstream validation**
-   - Parameters inferred from TLD enable accurate OD reconstruction.
-   - OD reconstruction serves as validation of the inferred parameters, **not** as proof of identifiability.
+4. **Observation noise robustness**
+   - Assess parameter estimation stability under observation noise perturbation (QT18: $<0.5\%$ error under $20\%$ noise).
+
+5. **Downstream reconstruction adequacy**
+   - Inferred parameters support downstream OD matrix reconstruction (TOST equivalence under oracle outflows).
+   - Serves as downstream consequence validation, **not** as direct proof of parameter identifiability.
 
 ### Writing principle
 Always use evidence-oriented language:
@@ -112,11 +115,13 @@ This thesis proposes an **analytical/compositional framework** ($R_S + R_B \long
   - ❌ *"Structure causes Travel Behaviour"* ($\text{Structure} \longrightarrow \text{Behaviour} \longrightarrow \text{OD}$)
   - ❌ *"Behaviour determines Urban Structure"* ($\text{Behaviour} \longrightarrow \text{Structure} \longrightarrow \text{OD}$)
   - ❌ *"Structure and Behaviour are statistically independent"* ($\text{Structure} \perp \text{Behaviour}$)
+  - ❌ *"Causal chain: Learning Objective $\to$ Strategy $\to$ Representation $\to$ Generalization"*
 
 - **Required Phrasing:**
   - ✅ *"Urban Structure + Travel Behaviour $\longrightarrow$ Spatial Interaction"* (Conceptual Ontology)
   - ✅ *"$R_S + R_B \longrightarrow \text{Spatial Interaction Process} \longrightarrow T_{ij}$"* (Core Operational Integration)
   - ✅ *"$T_{ij} = O_i A_j f(d_{ij}; \boldsymbol{\theta})$"* (Mathematical Gravity Integration)
+  - ✅ *"Methodological chain: Learning Objective $\to$ Learning Strategy $\to$ Representation $\to$ Encoded Information $\to$ Generalization"*
 
 ## Rule: Structural Representation vs. Operational Quantities Rule
 
@@ -215,11 +220,13 @@ Do NOT claim that "DeepGravity requires target-city OD data for inference" or th
   - ❌ *"DeepGravity requires historical target OD matrices for inference."*
   - ❌ *"Deep-learning approaches cannot perform zero-shot flow prediction."*
   - ❌ *"DeepGravity conflates Urban Structure and Travel Behaviour."*
+  - ❌ *"DeepGravity is the proposed scientific representation $R_S$."*
 
 - **Required Phrasing:**
   - ✅ *"DeepGravity is trained on observed mobility flows from source regions but generates flows for target regions without target-city OD observations, serving as a strong zero-shot neural baseline."*
   - ✅ *"Existing transfer models generally learn predictive representations that jointly encode structural and behavioural information, without explicitly defining these components as separate scientific representations."*
   - ✅ *"DeepGravity achieves higher predictive accuracy ($\text{CPC} = 0.7529$), whereas the proposed framework prioritizes explicit behavioural identification, structural decomposition ($R_S \neq R_B$), and lower-dimensional structural inputs (6 features vs. 27 features)."*
+  - ✅ *"DeepGravity and other end-to-end mobility prediction models serve as comparative neural transfer baselines unless their learned representations are explicitly interpreted and independently validated as a scientific structural representation ($R_S^*$). A task-specific neural embedding ($Z_{\text{task}}$) is not $R_S$ by default."*
 
 ## Rule: Empirical Motivation vs. Architectural Necessity (Tabular Ceiling R^2 <= 0.48)
 
@@ -231,10 +238,12 @@ Do NOT claim that "tabular models hit a hard theoretical capacity ceiling ($R^2 
   - ❌ *"Tabular models hit a hard capacity ceiling, mandating a GNN."*
   - ❌ *"GNN is mathematically necessary for learning Urban Structure."*
   - ❌ *"Urban Structure Representation is identical to a GNN embedding."*
+  - ❌ *"R^2 <= 0.48 proves the information capacity ceiling of Urban Structure Representation."*
 
 - **Required Phrasing:**
   - ✅ *"The limited performance of the evaluated non-spatial tabular baselines ($R^2 \approx 0.48$) motivates the investigation of spatial representation learning for Urban Structure."*
   - ✅ *"A graph-based architecture is adopted as a candidate mechanism for learning a transferable $R_S$, rather than being treated as a theoretical necessity or uniquely valid architecture."*
+  - ✅ *"Operational prediction performance ($R^2 \le 0.48$) reflects baseline model limitations for the selected quantities $(O_i, A_j)$, not direct proof of $R_S$ scientific validity."*
 
 ## Rule: ANOVA Variance Decomposition & Separation Principle Scope
 
@@ -310,6 +319,23 @@ Do NOT claim that "no previous method calibrates gravity models from aggregate d
 - **Required Phrasing:**
   - ✅ *"Gap 1 (Behaviour Identification): Existing studies demonstrate calibration from OD data and, in some cases, from compressed summary statistics (such as mean or median travel time), but it remains insufficiently established whether a full aggregate travel-distance distribution can be formulated as a probabilistic observation model supporting city-specific parameter identification and agreement with OD-based reference estimates."*
   - ✅ *"The novelty of Paper 1 lies not in the general idea that gravity parameters can be calibrated without complete OD matrices, as prior work has demonstrated calibration from compressed summary statistics. Rather, the novelty lies in treating the full aggregate travel-distance distribution as a probabilistic observation layer, formulating an explicit multinomial observation likelihood, and empirically demonstrating city-specific parameter identification with strong agreement to OD-based reference estimates."*
+
+## Rule: Epistemic Boundary of Model Integration (Joint OD Fit != Causal/Mechanistic Proof)
+
+### Context
+Do NOT claim that "fitting an integrated gravity model ($\hat{T}_{ij} \approx T_{ij}^{\text{obs}}$) proves the true underlying causal mechanisms of human mobility" or that RQ3 establishes "causal explanation". The framework is an **analytical/compositional framework**. OD matrix reconstruction evaluates the **explanatory and predictive adequacy of the proposed mechanism-oriented decomposition under the specified model**, NOT causal truth in reality.
+
+### Phrasing Matrix
+- **Forbidden Phrasing:**
+  - ❌ *"OD reconstruction proves the underlying causal mechanism of human mobility."*
+  - ❌ *"RQ3 provides a causal explanation of why Spatial Interaction occurs."*
+  - ❌ *"Establishes the true physical mechanism governing urban travel."*
+
+- **Required Phrasing:**
+  - ✅ *"Can the probabilistic integration of the inferred Travel Behaviour representation and the learned Urban Structure representation provide an adequate mechanism-based account of observed Spatial Interaction under the specified model?"*
+  - ✅ *"Develop a mechanism-oriented probabilistic integration framework... Its empirical role is to evaluate whether their joint integration provides adequate explanatory and predictive performance under the specified model, rather than establishing causal mechanisms."*
+  - ✅ *"The dissertation evaluates the adequacy of a proposed mechanism-oriented decomposition under a specified model, not causal truth."*
+
 
 
 

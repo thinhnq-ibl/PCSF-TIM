@@ -131,7 +131,7 @@ R_S + R_B &\longrightarrow \text{OD} \longrightarrow \text{(Downstream Joint Int
 \end{aligned}$$
 
 1. **Behavioural Representation Identification Evidence (Paper 1)**: Evaluated *prior* to flow reconstruction through likelihood surface stability, synthetic parameter recovery from generated TLDs under the assumed generative model, and cross-city parameter consistency.
-2. **Structural Representation and Transfer Evidence (Paper 2)**: Evaluated *prior* to flow reconstruction through spatial encoding capacity limitations ($R^2 > 0.48$) and cross-city zero-shot transferability metrics ($\text{CPC}$, $\text{KL-divergence}$).
+2. **Structural Representation and Transfer Evidence (Paper 2)**: Evaluated *prior* to flow reconstruction through baseline performance limitations of non-spatial models ($R^2 \le 0.48$) and cross-city zero-shot transferability metrics ($\text{CPC}$, $\text{KL-divergence}$).
 3. **Downstream Joint Integration Evidence (Dissertation Framework)**: OD matrix reconstruction serves as downstream evidence of the **joint integration** of $R_S$ and $R_B$, demonstrating joint explanatory and predictive capability rather than acting as singular proof of individual component correctness.
 
 ### Epistemological & Transferability Shift
@@ -255,9 +255,9 @@ The following research questions are derived from the scientific gaps identified
 
 ### RQ3 (Integration — Module 8: Dissertation Framework)
 
-*Can Spatial Interaction be explained through the probabilistic integration of the inferred Travel Behaviour representation and the learned Urban Structure representation?*
+*Can the probabilistic integration of the inferred Travel Behaviour representation and the learned Urban Structure representation provide an adequate mechanism-based account of observed Spatial Interaction under the specified model?*
 
-*(Note: The objective of RQ3 is **explanation** of the mechanisms governing Spatial Interaction, not merely OD prediction. OD matrix reconstruction is the empirical validation evidence).*
+*(Note: The objective of RQ3 is to evaluate whether joint integration provides an adequate mechanism-based account of Spatial Interaction under the specified model, rather than establishing causal mechanisms. OD matrix reconstruction serves as empirical evidence for this joint integration).*
 
 ---
 
@@ -327,7 +327,7 @@ Provide empirical statistical evidence supporting parameter identification of th
 
 ### Scientific Evidence Provided
 
-Supports **Hypothesis 1**: Aggregate travel-distance distributions contain sufficient statistical information to identify city-specific distance-deterrence parameters under the specified spatial-interaction model ($R^2 = 0.9624$ vs. OD-fitted parameters across 50 US cities).
+Provides a multi-tiered evidence bundle supporting **Hypothesis 1**: (1) synthetic recovery and likelihood-surface stability (QT12: Multi-start $\text{CV} = 0.00\%$) provide direct evidence for parameter identification under the assumed model; (2) cross-city agreement with OD-based reference estimates ($R^2 = 0.9624$ across 50 US cities) provides external reference consistency evidence; (3) noise sensitivity analysis (QT18: $<0.5\%$ error under $20\%$ noise) confirms estimator robustness; and (4) downstream TOST equivalence evaluates model reconstruction consequences under specified outflow conditions.
 
 ---
 
@@ -344,17 +344,17 @@ Paper 2 tests whether an Urban Structure Representation ($R_S$), learned from ob
 ### Learning Objective & Strategy
 
 * **Learning Objective:** Learn a Mobility Potential Field representation and evaluate its cross-city transferability.
-* **Learning Strategy:** Spatial representation learning (Spatial GNNs / DeepGravity), motivated by the observed capacity limitations of non-spatial tabular models ($R^2 \le 0.48$, QT14).
+* **Learning Strategy:** Graph-based spatial representation learning (Spatial GNNs) is investigated as a candidate mechanism for constructing an explicit Urban Structure Representation ($R_S$), motivated by the observed performance limitations of non-spatial tabular baselines ($R^2 \le 0.48$, QT14). End-to-end neural models such as DeepGravity are evaluated separately as comparative transfer baselines rather than being identified directly with $R_S$.
 
 ### Main Contributions
 
 * Formalize the Urban Mobility Potential Field consisting of Production Potential ($O_i$) and Attraction Potential ($A_j$).
-* Demonstrate that tested non-spatial tabular models show capacity limitations ($R^2 \le 0.48$, QT14), motivating the investigation of spatial graph neural network representations.
-* Establish cross-city zero-shot transferability evaluation benchmarks (QT17: Test $\text{CPC} = 0.646$).
+* Demonstrate that evaluated non-spatial tabular baselines show limited predictive performance ($R^2 \le 0.48$, QT14) for operational structural quantities, motivating the investigation of spatial representation learning.
+* Evaluate cross-city zero-target-OD transfer performance and compare against non-transfer baselines across target cities (QT17: Test $\text{CPC} = 0.646$).
 
 ### Scientific Evidence Provided
 
-Provides evidence toward **Hypothesis 2** by evaluating cross-city transferability under the specified experimental conditions.
+Provides empirical evidence toward **Hypothesis 2** by evaluating cross-city structural transfer performance under zero-target-OD conditions, comparing transfer outcomes against non-transfer baselines, and analyzing transfer performance as a function of source–target structural similarity.
 
 ---
 
@@ -370,8 +370,8 @@ Advance Travel Behaviour Representation from analytical decay functions to a sta
 ### Contribution 2 — Scientific Representation of Urban Structure
 Advance Urban Structure Representation from handcrafted variables to a learned Mobility Potential Field ($O_i, A_j$) using spatial GeoAI and open urban data, with cross-city transferability as an evaluation diagnostic.
 
-### Contribution 3 — Mechanism-based Probabilistic Integration Framework
-Establish a mechanism-based probabilistic integration framework that combines representations of the two distinct scientific components within a unified Spatial Interaction model. The methodological novelty lies in **treating the two representations as analytically distinguishable** with distinct learning objectives, learning strategies, and empirical evaluation pipelines, rather than jointly optimizing them in a single black-box function.
+### Contribution 3 — Mechanism-Oriented Probabilistic Integration Framework
+Develop a mechanism-oriented probabilistic integration framework that combines representations of the two distinct scientific components within a unified Spatial Interaction model. The methodological novelty lies in **treating the two representations as analytically distinguishable** with distinct learning objectives, learning strategies, and empirical evaluation pipelines, rather than jointly optimizing them in a single black-box function. Its empirical role is to evaluate whether their joint integration provides adequate explanatory and predictive performance under the specified model, rather than establishing causal mechanisms.
 
 ---
 
