@@ -37,7 +37,9 @@ def run_stress_tests():
     df_county_od = load_county_matched_od()
     df_county_meta, dates = load_county_matched_meta()
     
-    meta_full_county = df_county_meta.groupby(["county_fips", "gadm_county"])[["q1_meta_0_10", "q2_meta_10_100"]].mean().reset_index()
+    meta_full_county = df_county_meta.groupby(["county_fips", "gadm_county"])[["p0", "q1_meta_0_10", "q2_meta_10_100"]].mean().reset_index()
+    meta_full_county["p2_10_100"] = meta_full_county["q2_meta_10_100"] * (1.0 - meta_full_county["p0"])
+    
     matched = df_county_od.merge(meta_full_county, on=["county_fips", "gadm_county"])
     n_counties = len(matched)
     
@@ -131,10 +133,7 @@ def run_stress_tests():
     # -------------------------------------------------------------
     # Test 3: Raw p_10_100 vs Conditional q_10_100
     # -------------------------------------------------------------
-    raw_meta = df_county_meta.groupby("county_fips")[["p2_10_100", "q2_meta_10_100"]].mean().reset_index()
-    matched_raw = matched.merge(raw_meta[["county_fips", "p2_10_100"]], on="county_fips")
-    
-    rho_raw_p2, _ = spearmanr(matched_raw["p2_10_100"], matched_raw["q2_od_10_100"])
+    rho_raw_p2, _ = spearmanr(matched["p2_10_100"], matched["q2_od_10_100"])
     rho_cond_q2, _ = spearmanr(matched["q2_meta_10_100"], matched["q2_od_10_100"])
     
     print("\n3. RAW Meta Fraction p2 vs CONDITIONAL Meta Fraction q2:")
