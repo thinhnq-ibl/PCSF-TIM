@@ -315,7 +315,7 @@ Provide empirical statistical evidence supporting parameter identification of th
 
 ### Learning Objective & Strategy
 
-* **Learning Objective:** Identify $\boldsymbol{\theta}$ from aggregate TLD without requiring pairwise OD labels.
+* **Learning Objective:** Identify $\boldsymbol{\theta}$ from aggregate TLD without using pairwise origin–destination identities in the inference procedure.
 * **Learning Strategy:** Conditional Maximum Likelihood Estimation (MLE) under a binned Multinomial observation model.
 
 ### Main Contributions

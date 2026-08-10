@@ -172,19 +172,23 @@ Do NOT state that "Urban Structure is transferable" as an a priori assumption or
   - ✅ *"Paper 2 tests whether an Urban Structure Representation ($R_S$), learned from observable open spatial features, can transfer across cities and under what source–target conditions such transfer remains valid without relying on target-city OD labels."*
   - ✅ *"Structure transferability is an empirical hypothesis. Existing literature demonstrates cross-city generalization of several neural mobility models and representations, but does not establish that a scientifically defined Urban Structure Representation ($R_S$) is universally transferable. Paper 2 therefore tests the transferability of $R_S$ under explicit source–target conditions."*
 
-## Rule: Identification Sufficiency vs Formal Statistical Sufficiency
+## Rule: Information Hierarchy & Identification Sufficiency
 
 ### Context
-Do NOT describe TLD as a "formal sufficient statistic" (in the Fisher–Neyman factorization sense) for full OD data or as a universal theorem for behaviour. Always scope "sufficient statistical information" by adding **under the specified spatial-interaction model and observation process**.
+Mobility observations form **a hierarchy of increasingly aggregated observation representations, each preserving different subsets of spatial and statistical information**. Aggregation reduces observation resolution and removes pairwise origin-destination identities, but information reduction does NOT automatically imply inferential insufficiency ($\text{Aggregation} \to \text{Information reduction} \nRightarrow \text{Identification failure}$). An aggregate observation is sufficient for parameter identification when, under a specified probabilistic spatial-interaction model, it contains enough task-relevant statistical information to identify the target parameter $\boldsymbol{\theta}$.
 
 ### Phrasing Matrix
 - **Forbidden Phrasing:**
-  - ❌ *"TLD is a sufficient statistic for travel behaviour."*
-  - ❌ *"TLD is universally sufficient for parameter identification."*
+  - ❌ *"Strict mathematical hierarchy of decreasing information content."*
+  - ❌ *"TLD is a formal sufficient statistic for travel behaviour."*
+  - ❌ *"3-bin contains almost all information of 20-bin."*
+  - ❌ *"Identify $\boldsymbol{\theta}$ without requiring pairwise OD labels / without requiring OD data."*
 
 - **Required Phrasing:**
-  - ✅ *"Aggregate travel-distance distributions contain sufficient statistical information to identify city-specific distance-deterrence parameters under the specified spatial-interaction model."*
-  - ✅ *"Identification Sufficiency: An aggregate mobility observation is considered sufficient for parameter identification when, under a specified probabilistic spatial-interaction model, it contains enough statistical information to identify the target parameter."*
+  - ✅ *"Mobility observations can be organized as a hierarchy of increasingly aggregated observation representations—from individual trajectories to OD matrices, aggregate TLDs, and scalar summaries—with each transformation discarding some dimensions of the original observation while potentially preserving task-relevant statistical information."*
+  - ✅ *"Identification Sufficiency: An aggregate mobility observation representation is considered sufficient for parameter identification when, under a specified probabilistic spatial-interaction model and observation process, it contains enough task-relevant statistical information to identify the target parameter $\boldsymbol{\theta}$ with empirically validated consistency against an appropriate reference estimator."*
+  - ✅ *"Evaluating coarse resolution aggregation ($\hat{\boldsymbol{\theta}}_{20} \approx \hat{\boldsymbol{\theta}}_3$) tests whether the coarser observation retains sufficient task-relevant information for the behavioural identification task."*
+  - ✅ *"Identify $\boldsymbol{\theta}$ from aggregate TLD without using pairwise origin–destination identities in the inference procedure."*
 
 ## Rule: Scoping Shapley Value Attribution Claims (85.8% Predictive Gain)
 
@@ -295,11 +299,12 @@ Do NOT claim that "Paper 2 must succeed before Paper 1 can be valid" or that "Pa
   - ❌ *"If Paper 2 transfers structure, then Paper 1 can identify behaviour."*
   - ❌ *"Paper 1 relies on Paper 2 to validate its structural inputs."*
   - ❌ *"Derivation chain: Principle $\to$ RQ1 $\to$ Paper 1 $\to$ RQ2 $\to$ Paper 2"*
+  - ❌ *"Sequential dependency: Paper 1 establishes the scientific foundation for Paper 2."*
 
 - **Required Phrasing:**
   - ✅ *"Behavioural Identification (Gap I) and Urban Structure Transferability (Gap II) are complementary scientific problems unified by the Structure–Behaviour Separation Principle."*
-  - ✅ *"Derivation structure: Principle $\to$ two complementary parallel pathways (Gap I $\to$ RQ1 $\to$ Paper 1; Gap II $\to$ RQ2 $\to$ Paper 2) $\to$ Joint Integration (RQ3) $\to$ Validation $\to$ Synthesis."*
-  - ✅ *"The two papers jointly test whether Spatial Interaction can be decomposed into a transferable Urban Structure Representation ($R_S$) and a locally identifiable Travel Behaviour Representation ($R_B$). Each component is evaluated through its own inference pathway before their joint integration is assessed."*
+  - ✅ *"Derivation structure: Principle $\to$ two complementary parallel pathways (Gap I $\to$ RQ1 $\to$ Paper 1; Gap II $\to$ RQ2 $\to$ Paper 2) $\to$ Joint Integration (RQ3) $\to$ Downstream OD Reconstruction Validation $\to$ Dissertation Synthesis."*
+  - ✅ *"The two papers address independent scientific tasks, complementary within a common framework. Paper 1 identifies $R_B$ and Paper 2 learns $R_S$ through distinct inference pathways before their joint integration (RQ3) is evaluated."*
 
 ## Rule: Zero-Target-OD vs. Target-Data-Free Positioning
 

@@ -35,7 +35,7 @@ Learning Representations for Spatial Interaction (Module 6)
                (Formulate RQ1 & RQ2)
                              ▼
                  Dissertation Framework (Module 8)
-(Decomposition Principle ──► RQ1 ──► Paper 1 ──► RQ2 ──► Paper 2 ──► Dissertation Framework)
+(Principle ──► two parallel pathways [Gap I ──► RQ1 ──► Paper 1; Gap II ──► RQ2 ──► Paper 2] ──► Joint Integration / RQ3 ──► Downstream Validation ──► Dissertation Synthesis)
 ```
 
 ---
@@ -51,5 +51,5 @@ Learning Representations for Spatial Interaction (Module 6)
 | **Module 5** | **How should Travel Behaviour be represented for spatial interaction modelling?** | Trace the evolution of Travel Behaviour representations from analytical decay functions to statistically identified parameter vectors $\hat{\boldsymbol{\theta}}$ from aggregate TLDs. | Travel Behaviour representation evolves from analytical decay functions to statistically identified parameter vectors (**Paper 1**). |
 | **Module 6** | **How do learning objectives and strategies shape learned representations and their ability to generalize?** | Explain causal chain: **Learning Objective $\to$ Learning Strategy $\to$ Representation $\to$ Encoded Information $\to$ Generalization.** | Establish the scientific mechanism linking learning objectives with representation transferability across spatial contexts. |
 | **Module 7** | **What scientific questions remain unresolved after introducing the Structure–Behaviour Decomposition Principle?** | Formally derive research questions from the open scientific gaps following the Decomposition Principle. | Formulate **Research Question 1** (Paper 1 — Travel Behaviour Identification) and **Research Question 2** (Paper 2 — Urban Structure Representation). |
-| **Module 8** | **How does this dissertation operationalize the Structure–Behaviour Decomposition Principle into a coherent research framework?** | Operationalize the principle into research questions, papers, probabilistic integration, and dissertation framework. | Establish derivation chain: **Structure–Behaviour Decomposition Principle $\to$ RQ1 $\to$ Paper 1 $\to$ RQ2 $\to$ Paper 2 $\to$ Downstream Validation $\to$ Dissertation Framework.** |
+| **Module 8** | **How does this dissertation operationalize the Structure–Behaviour Decomposition Principle into a coherent research framework?** | Operationalize the principle into research questions, papers, probabilistic integration, and dissertation framework. | Establish derivation structure: **Structure–Behaviour Decomposition Principle $\to$ two complementary parallel pathways (Gap I $\to$ RQ1 $\to$ Paper 1; Gap II $\to$ RQ2 $\to$ Paper 2) $\to$ Joint Integration (RQ3) $\to$ Downstream OD Reconstruction Validation $\to$ Dissertation Synthesis.** |
 
