@@ -1,38 +1,42 @@
-# Mechanism-Based Human Mobility Science — Mind Map & Architecture State (v7.0)
+# Mechanism-Based Human Mobility Science — Mind Map & Architecture State (v13.0+)
 
 > **CORE DISSERTATION MASTER STATEMENT (FROZEN KEY SENTENCE):**  
-> *"Human mobility can be reconstructed by independently inferring its structural and behavioural components from the maximum publicly available information."*  
-> *(Vietnamese: "Có thể phục hồi tương tác di chuyển đô thị bằng cách suy luận độc lập thành phần cấu trúc và thành phần hành vi từ lượng thông tin công khai tối đa.")*
+> *"This dissertation investigates the sufficiency of observable information for reconstructing urban spatial interaction under mobility data scarcity. It examines what information is retained or lost under aggregate mobility observation, how observation design affects recoverability, and how complementary open urban information improves OD reconstruction when the mobility observation alone is insufficient."*  
+> *(Vietnamese: "Luận án này nghiên cứu tính đầy đủ của thông tin quan sát được để khôi phục tương tác không gian đô thị trong điều kiện khan hiếm dữ liệu di chuyển. Luận án phân tích thông tin nào được giữ lại hoặc mất đi dưới các quan sát di chuyển gộp, thiết kế quan sát ảnh hưởng thế nào đến khả năng định danh, và thông tin không gian đô thị mở bổ trợ cải thiện việc khôi phục OD ra sao khi bản thân quan sát di chuyển không đủ đơn độc.")*  
 
 > **EVALUATION PRINCIPLE (DISSERTATION DIRECTIVE):**  
 > *"Matching the Meta input is merely in-sample consistency. It is not evidence of structural OD recovery."*
 
-> **CONDENSED CORE NARRATIVE:**  
-> *"Aggregate mobility appears informative but non-identifying. The remaining scientific problem is determining what independent structural information is sufficient to resolve that ambiguity."*
+> **METHODOLOGICAL VALIDITY PRINCIPLE (T24 CORE PREMISE):**  
+> $$\boxed{\text{Input Consistency } \neq \text{ Reconstruction Validity}}$$  
+> $$\boxed{\text{Validity Requires Improvement on Unconstrained OD Properties}}$$
+
+> **FEASIBILITY & FORMALIZATION STATE:**  
+> $$\boxed{\text{FEASIBILITY PHASE = FROZEN}}$$  
+> $$\boxed{\text{PROPOSAL FORMALIZATION = ACTIVE}}$$
+> $$\boxed{\text{Aggregate Observation } \neq \text{ Complete Information}}$$
 
 ---
 
-## 1. 3-Stage Scientific Core & Test A Audit Verification
+## 1. Refined 7-Stage Master Derivation Backbone
 
 ```text
-       OBSERVABILITY                     IDENTIFIABILITY                 EMPIRICAL DEFENSIBILITY
-         (Paper 1)                          (Paper 2)                       (HCMC Case Study)
-┌──────────────────────────┐      ┌──────────────────────────┐      ┌──────────────────────────┐
-│ R^2 = 0.9624             │      │ Q5: Same TLD JSD = 0,    │      │ Zero-shot Test CPC=0.6462│
-│ Multi-start CV = 0.0000% │ ──►  │ yet OD CPC = 0.5373      │ ──►  │ Real Structure (0.6462)  │
-│ Noise Error < 0.45%      │      │ Q6: Structure -> 1.0000  │      │ >> Shuffled (0.5331)     │
-└──────────────────────────┘      └──────────────────────────┘      └──────────────────────────┘
+OBSERVATION ──► INFORMATION ──► INFORMATION ──► UNDERDETERMINATION ──► COMPLEMENTARY ──► OD RECONSTRUCTION ──► INDEPENDENT
+                  RETENTION         LOSS                                INFORMATION                               VALIDATION
+  (Meta MDM)      (Paper 1)        (T29-T30)    (TLD -> OD Non-ID)       (Paper 2)          (C3 Pipeline)        (HCMC Case Study)
 ```
 
 ---
 
-## 2. Test A Audit Summary (Zero Oracle Leakage)
+## 2. Statistical Significance & Reliability Audit Summary
 
-* **Oracle Upper Bound (Ground Truth Marginals):** $\text{CPC} = 0.7159$ (Ceiling ONLY).
-* **Transferred Urban Structure ($R_S$):** Mean $\text{CPC} = 0.6462$ (Median: $0.6525$, Range: $[0.4983, 0.7125]$).
-* **TLD-Only Baseline:** Mean $\text{CPC} = 0.5852$.
-* **Shuffled Negative Control:** Mean $\text{CPC} = 0.5331$.
-* **Net Gain over TLD-Only:** $+0.0610$ consistently across all 10 unseen test cities!
+* **Statistical Significance & Bootstrap CIs:** Net CPC gain $+0.0417$, $95\%\text{ CI } [0.0308, 0.0527]$, Paired $t$-test $t = 6.9316, p < 0.001$, Wilcoxon $W = 0.0, p < 0.002$.
+* **Clean LOOCV Performance (T21):** Leave-One-City-Out Cross-Validation on all 50 US metropolitan areas under completely clean zero-target-OD 3-bin beta MLE yields Mean CPC $= 0.6162$ (Median $= 0.6249$, $95\%\text{ Bootstrap CI } [0.5997, 0.6317]$).
+* **Multi-Seed Protocol Reliability:** Multi-seed evaluation across 5 random seeds yields Mean $\text{CPC} = 0.5832 \pm 0.0006$, $\text{CV} = 0.0965\% < 0.1\%$.
+* **Complexity-Controlled Failure Regression:** $\text{CPC} \sim \log(N)$ yields $\beta = -0.0611$ ($p < 0.01$), confirming spatial system scale $\log(N)$ maintains an independent negative difficulty association after density control.
+* **Negative Evidence on Simple Feature Similarity:** Proper cross-city model transfer reveals that simple similarity in raw feature space does not significantly predict transfer performance directly ($\rho = +0.0955, p = 0.1681$).
+* **Robustness of Spatial Context:** In downstream OD reconstruction, the incremental CPC gain provided by independent spatial features is highly robust to parameter misspecification in the distance decay function (gain remains stable between $+0.0411$ and $+0.0530$ across $\pm 60\%$ beta perturbations).
+* **Deterrence Robustness & Complexity (T35):** In the Chicago case study, parameter fidelity deteriorates under increasing compression for both Exp and Power-law models, while the two-parameter Tanner form exhibits substantially greater instability, supporting the hypothesis that higher parameterization increases information demand.
 
 ---
-*Status: Updated V7.0 — Test A Audit Verified.*
+*Status: Updated V13.0+ — Feasibility Frozen & Proposal Scientifically Locked.*

@@ -1,158 +1,144 @@
 # PhD Dissertation Proposal: Learning Human Mobility from Aggregate Observations
 
 ## Title
-**Learning Human Mobility from Aggregate Observations: Identification of Spatial Interaction Behaviour and Transferable Urban Structure for OD Matrix Reconstruction**
+**Learning Human Mobility from Aggregate Observations: Sufficiency of Observable Information and Complementary Urban Context for Origin-Destination Matrix Reconstruction**
 
 ### Subtitle
-*Towards Mechanism-based Human Mobility Science through Observability, Identifiability, and Empirical Defensibility*
+*Towards Mechanism-Based Human Mobility Science through Observability, Identifiability, and Empirical Defensibility*
 
 ---
 
-> **Master Opening Statement (Frozen Key Sentence):**  
-> **"Human mobility can be reconstructed by independently inferring its structural and behavioural components from the maximum publicly available information."**  
-> *(Phiên bản tiếng Việt: "Có thể phục hồi tương tác di chuyển đô thị bằng cách suy luận độc lập thành phần cấu trúc và thành phần hành vi từ lượng thông tin công khai tối đa.")*
+## 7-Stage Scientific Backbone (Zero-Target-OD Baseline)
 
-> **Evaluation Principle (Dissertation Evaluation Directive):**  
-> **"Matching the Meta input is merely in-sample consistency. It is not evidence of structural OD recovery."**  
-> *(Phiên bản tiếng Việt: "Trùng khớp với dữ liệu đầu vào Meta chỉ là tính nhất quán nội mẫu. Đó không phải là bằng chứng của việc phục hồi cấu trúc OD.")*
+$$\boxed{\text{Observation} \longrightarrow \text{Recoverable Information} \longrightarrow \text{Observation Sensitivity} \longrightarrow \text{Complementary Context} \longrightarrow \text{OD Reconstruction} \longrightarrow \text{Independent Validation}}$$
 
 ---
 
-# 1. Executive Summary & Scientific Core
+## Core Scientific Premises
 
-## 1.1 The 3-Stage Scientific Backbone
-This dissertation establishes a mechanism-based framework for learning human mobility under extreme data scarcity. Rather than treating mobility as a black-box machine learning prediction problem or arguing over model benchmarks, this research addresses three sequential scientific questions: **Observability $\longrightarrow$ Identifiability $\longrightarrow$ Empirical Defensibility**.
+$$\boxed{\text{Aggregate Observation } \neq \text{ Complete Information}}$$
+
+$$\boxed{\text{Input Consistency } \neq \text{ Reconstruction Validity}}$$
+
+$$\boxed{\text{Validity Requires Improvement on Unconstrained OD Properties}}$$
+
+> **Central Dissertation Master Statement (Frozen Key Sentence):**  
+> **"This dissertation investigates the sufficiency of observable information for reconstructing urban spatial interaction under mobility data scarcity. It examines what information is retained or lost under aggregate mobility observation, how observation design affects recoverability, and how complementary open urban information improves OD reconstruction when the mobility observation alone is insufficient."**
+
+---
+
+# 1. Introduction & Problem Statement
+
+Human mobility patterns shape critical urban planning decisions, transportation infrastructure investments, disaster response protocols, and public health interventions. Despite their importance, comprehensive Origin-Destination (OD) travel matrices remain severely unavailable in most cities of the Global South due to the prohibitive financial and administrative costs of disaggregated household travel surveys.
+
+In recent years, aggregate mobility products—most prominently Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—have become widely accessible across global urban regions. These products provide daily movement-range information in an aggregate map, serving as a real-world instance of highly compressed aggregate mobility observations. They reduce the granularity of disclosed movement information by removing individual-level and pairwise spatial identities, providing instead coarse, distance-binned Travel Length Distributions (TLDs). 
+
+This dissertation addresses the fundamental scientific challenge of recovering disaggregated OD mobility matrices from aggregate mobility observations under extreme data scarcity. We reframe this challenge as an information sufficiency problem: *How much spatial-interaction information can be recovered from incomplete aggregate mobility observations, and what additional observable information is required for defensible OD reconstruction?*
+
+---
+
+# 2. Literature Baseline & Identified Scientific Limits
+
+Reconstructing spatial interactions from partial data has a rich history in transportation planning. Traditional OD estimation from traffic link counts has long identified the underdetermined nature of the inverse problem, utilizing prior target surveys, Bayesian updates, and network regularization to constrain the unknowns (IIASA literature). Similarly, modern geographic flow generation (such as DeepGravity; Nature 2021) leverages deep learning and open spatial features ($X_U$) like land use, road networks, and POIs to generate commuting flows across different cities. Recent work like TransGM (2026) explores cross-city transfer but relies on limited target flow observations for adaptive calibration.
+
+In spatial interaction modeling, foundational work by Fotheringham (1981, 1986) establishes that estimated distance-decay parameters ($\hat{\boldsymbol{\theta}}$) are systematically influenced by the spatial configuration of opportunity fields, demonstrating that observed decay rates are not pure behavioral parameters. Liang et al. (2013) confirm this by demonstrating that aggregate exponential travel-length distributions can emerge naturally from exponential urban population density decay. Gallotti et al. (2024) further demonstrate that observed mobility statistics and downstream urban conclusions vary systematically across measurement pipelines.
+
+While these streams of literature are individually mature, their intersection has received limited systematic empirical attention. Specifically:
+1. **Gap 1 — Observation Sufficiency:** What OD-relevant information survives highly compressed aggregate mobility observations (such as Meta MDM)? Existing work demonstrates that highly reduced mobility summaries such as median travel time can support single-parameter calibration when the spatial system is otherwise fully specified (Merlin 2020), but does not systematically characterize how observation resolution, bin geometry, and spatial support govern recoverability from compressed aggregate mobility representations under zero-target-OD constraints.
+2. **Gap 2 — Observation Design:** How do spatial support, bin resolution, bin geometry, and model complexity affect recoverability? Existing studies evaluate data sparsity generally, but the joint effect of these observation design parameters on downstream parameter recoverability has received limited attention.
+3. **Gap 3 — Complementary Reconstruction Value:** How much marginal reconstruction improvement ($\Delta\text{CPC}$) is obtained from adding open urban spatial information under the same mobility observation constraints? Although geographic variables improve flow prediction (e.g. DeepGravity, Imagery2Flow 2025), it remains less systematically quantified how much marginal OD reconstruction improvement each additional open data source contributes on top of incomplete aggregate observations.
+
+When complete target-city OD ground truth is unavailable, reconstruction must be evaluated against independent partial observations and unconstrained OD properties rather than against the observations used to construct the model. This validation requirement is addressed as a methodological contribution (C4) in the HCMC case study.
+
+---
+
+# 3. Paper 1 Formulation — Information Retention in Aggregate Mobility Observations
+
+* **Research Gap 1 (Observation Information & Compression Sensitivity - Gaps A & B):** Calibration models traditionally assume continuous distance observations or disaggregated flows. However, there is limited systematic understanding of what spatial-interaction information is retained by binned aggregate observations themselves, and how spatial support, distance resolution, and bin geometry control that information loss under varying model complexity.
+* **Paper 1 Mission:** Parametric statistical inference of collective distance sensitivity from aggregate TLDs, utilizing $\beta$ as an interpretable measurement probe of information degradation across Exponential, Power-law, and Tanner models.
+* **Claim P1-A (Information Retention):** Three-bin aggregation preserves non-trivial distance-related ordering and trend information.
+* **Claim P1-B (Signal Retention vs. Parameter Fidelity):** Coarse aggregation can retain detectable distance-related signal while substantially degrading quantitative parameter fidelity ($R^2 = 0.9624$, Multi-start $\text{CV} = 0.00\%$ under 20-bins; $\text{Mean Error} \approx 36.94\%$ under 3-bins).
+
+---
+
+# 4. Paper 1 Methodology & Observability Analysis
+
+Paper 1 formulates parametric statistical inference of collective distance sensitivity using a **3-Tier Information Probe Architecture** to evaluate how information sufficiency degrades under compression. 
+
+Exponential deterrence is used as the primary one-parameter probe of information retention. Power-law provides a matched-complexity robustness specification, while Tanner is used as a higher-complexity stress test. Preliminary evidence from Chicago indicates that compression-induced parameter degradation is not unique to the exponential specification and becomes more severe for the two-parameter Tanner form.
+
+| Probe Tier | Deterrence Formulation | Parameters | Role in Information Sufficiency Framework |
+| :--- | :--- | :---: | :--- |
+| **Primary Probe** | $f_{\exp}(d) = \exp(-\beta d)$ | 1 | Primary one-parameter probe of information retention (simple interpretation, numerically stable for short distances $d \to 0$, isolating compression loss from preprocessing choices). |
+| **Robustness Check** | $f_{\text{power}}(d) = d^{-\alpha}$ | 1 | Matched-complexity robustness check to confirm compression findings are not specific function artifacts. |
+| **Complexity Test** | $f_{\text{Tanner}}(d) = d^{-\alpha} \exp(-\beta d)$ | 2 | Higher-complexity stress test to evaluate parameter identifiability as representation complexity increases. |
+
+The likelihood of observing aggregate binned trip counts $\boldsymbol{y} = (y_1, y_2, \dots, y_K)^T$ across distance bins $k \in \{1, \dots, K\}$ is maximized via a robust grid-start bounded optimization:
+
+$$\boldsymbol{y} \sim \text{Multinomial}(N, \boldsymbol{p}(\boldsymbol{\theta}))$$
 
 ```text
-       OBSERVABILITY                     IDENTIFIABILITY                 EMPIRICAL DEFENSIBILITY
-         (Paper 1)                          (Paper 2)                       (HCMC Case Study)
-┌──────────────────────────┐      ┌──────────────────────────┐      ┌──────────────────────────┐
-│  Is the mobility signal  │      │ Can urban structure      │      │ Is the reconstructed OD  │
-│  scientifically          │ ──►  │ reduce ambiguity         │ ──►  │ empirically defensible   │
-│  observable from Meta    │      │ sufficiently for OD      │      │ on UNCONSTRAINED         │
-│  compressed TLD?         │      │ identification?          │      │ properties?              │
-└──────────────────────────┘      └──────────────────────────┘      └──────────────────────────┘
+Aggregate TLD (Meta 3-bin) ──► Grid-Start Bounded Likelihood ──► Parameter Optimizer ──► Primary Probe (β_3bin = 0.0989)
 ```
 
-> **Condensed Thesis Core Narrative:**  
-> **"Aggregate mobility appears informative but non-identifying."**  
-> **"The remaining scientific problem is determining what independent structural information is sufficient to resolve that ambiguity."**
+By scanning the likelihood profile, we avoid local minima traps caused by the clipping penalty ceiling when outer bins have near-zero trip counts.
 
 ---
 
-## 1.2 The Four Logical Pillars
+# 5. Paper 2 Formulation — Complementary Information for OD Reconstruction
 
-1. **Slide 1 — Baseline (Locked Art):**  
-   Calibrating distance decay functions from aggregate travel-distance distributions (TLDs) is a solved baseline in spatial interaction modelling. TLD calibration alone is not the primary scientific research gap.
-
-2. **Slide 2 — Observability / Paper 1:**  
-   The primary scientific question for aggregate mobility products (such as Meta's Movement Distribution Maps \citep{MetaMovementDistributionMaps}) is **which information survives spatial aggregation and bin compression**, and under which spatial-support conditions that signal remains statistically defensible.
-
-3. **Slide 3 — Identifiability / Paper 2:**  
-   Even when aggregate observation signals are reliable, aggregate constraints are underdetermined (non-identifiable)—infinitely many distinct OD matrices produce the exact same TLD ($TLD_{\text{3bin}} \to \hat{\boldsymbol{\theta}}$ stable, but $TLD_{\text{3bin}} \not\to \text{OD}$; Q5 empirical demonstration: $\text{JSD} = 0.0000$, yet $\text{CPC} = 0.5373$). **What independent structural information is sufficient to convert an observable but non-identifying mobility signal into defensible OD allocation?** Here, the Structure–Behaviour Decomposition Principle directly serves the **identification problem** by injecting structural opportunity fields ($R_S$) to constrain the solution space.
-
-4. **Slide 4 — Empirical Defensibility / HCMC Case Study:**  
-   Reconstruction is scientifically valid only if it correctly predicts **unconstrained properties of OD allocation**—spatial allocation characteristics that were *not* directly constrained by the input data—and explains independent urban patterns in Ho Chi Minh City under missing complete ground truth.
+* **Research Gap 2 (Complementary Reconstruction Value - Gap 3):** Aggregate mobility observations are mathematically underdetermined. When the mobility observation itself is incomplete and quantitatively degraded, it remains less systematically quantified how much marginal OD reconstruction improvement is obtained by adding each open urban data source ($X_U$) under the same aggregate observation constraints.
+* **Core Sub-Question (Spatial Context Robustness):** *To what extent can independent spatial context compensate for distance-decay parameter uncertainty in downstream OD reconstruction?*
+* **Paper 2 Mission:** Spatial representation learning (Spatial GNNs) to map open spatial features $X_U$ (Population, POIs, Area, Roads, Accessibility, etc.) into operational production and attraction potentials $(O_i, A_j)$.
+* **Spatial Complementarity Mechanism (T32):** Spatial variation in population and opportunities supplies complementary allocation information that is not directly captured by aggregate distance observations. Among the tested open spatial sources, population and POI density provide most of the observed incremental CPC improvement, accounting for approximately **97.6%** of the observed CPC gain provided by the full open spatial feature set under clean 3-bin TLD-MLE conditions.
 
 ---
 
-## 1.3 Pre-HCMC Simulation Paradigm & Test A Audit
+# 6. Paper 2 Methodology & Spatial Context Integration
 
-A critical strategic insight of this dissertation is that **lack of initial target-city (HCMC) disaggregated OD data is NOT a research blocker**. Before deploying to HCMC, the framework is validated through a controlled experimental paradigm using multi-city datasets with complete OD ground truth (50 US Metropolitan Areas):
+Paper 2 employs a Graph Neural Network architecture as a candidate mechanism to map open spatial features $X_U$ into operational structural quantities $(O_i, A_j)$ in spatial interaction models:
+
+$$X_U \xrightarrow{\text{Spatial GNN}} (O_i, A_j)$$
+
+$$\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\boldsymbol{\theta}})$$
 
 ```text
-Full OD Ground Truth ──► Artificial Aggregation (Meta 3-bin) ──► Hide Target OD ──► Reconstruct ──► Reveal OD (Evaluate)
+Open Features X_U ──────► Spatial GNN ────► Potentials (O_i, A_j) ──┐
+                                                                   ├──► Reconstructed Flows T_ij
+Aggregate TLD D_agg ────► Robust MLE ─────► Deterrence Parameter θ ─┘
 ```
-
-> **Audit Test A Result (Zero Oracle Leakage):**  
-> Evaluated on 10 unseen test cities, **Transferred Urban Structure ($R_S$, $\text{CPC} = 0.6462$)** learned strictly from open spatial features (without target OD marginals) reliably outperforms both **TLD-Only Baseline ($\text{CPC} = 0.5852$)** and **Shuffled Negative Control ($\text{CPC} = 0.5331$)**, while **Oracle OD Marginals ($\text{CPC} = 0.7159$)** serve strictly as the upper-bound ceiling.
 
 ---
 
-# 2. Central Scientific Proposition & Refined Research Questions
+# 7. Operational Integration of Observable Information Sources
 
-> **Central Scientific Proposition:**  
-> *"Although Spatial Interaction emerges from the interaction between Urban Structure Representation and Travel Behaviour Representation, treating these representations as analytically distinguishable enables different scientific questions to be formulated, different learning objectives to be defined, and different learning strategies to be developed. The Structure–Behaviour Decomposition Principle serves directly to resolve the identification problem by constraining underdetermined OD solution spaces."*
+The reconstruction framework integrates two independently sourced information streams to constrain the underdetermined OD solution space:
 
-## Refined Research Questions (RQs)
+$$\text{Aggregate Mobility Observation } (\hat{\boldsymbol{\theta}}) + \text{Open Urban Spatial Context } (O_i, A_j) \longrightarrow \hat{T}_{ij}$$
 
-```text
-   RQ1: Observability ──► RQ2: Identifiability & ──► RQ3: Structural Transfer ──► RQ4: Empirical
- (Aggregate Mobility)      Unconstrained Properties     (Ambiguity Reduction)      Defensibility (HCMC)
-```
+$$\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\boldsymbol{\theta}})$$
 
-* **RQ1 (Observability — Paper 1):**  
-  *Which information survives aggregation in aggregate mobility data (such as Meta MDM), and under which spatial-support conditions is it statistically defensible?*  
-  *(Quantifies information preservation and parameter stability $\hat{\boldsymbol{\theta}}$ across 20-bin OD-derived benchmark distributions and 3-bin Meta MDM open distributions).*
+The aggregate mobility observation (TLD) provides a compressed distance-sensitivity signal from which a decay parameter $\hat{\boldsymbol{\theta}}$ is inferred via robust MLE. Open urban spatial features ($X_U$) independently supply structural opportunity context — production and attraction potentials $(O_i, A_j)$ — that constrains the spatial allocation of flows. Local parameter inference of $\boldsymbol{\theta}$ is adopted as a modeling principle to respect city-specific distance-sensitivity profiles.
 
-* **RQ2 (Identifiability & Unconstrained Properties — Paper 2):**  
-  *Can support-aware aggregate mobility constraints, combined with a transferable representation of urban spatial structure, recover unconstrained properties of OD allocation without target-city OD calibration?*  
-  *(Evaluates whether structural potential fields ($R_S$) provide sufficient information to narrow the underdetermined solution space and recover unobserved spatial allocation properties).*
-
-* **RQ3 (Structural Transferability & Ambiguity Reduction — Paper 2):**  
-  *To what extent can an Urban Structure Representation ($R_S$) learned from open spatial data reduce OD allocation ambiguity across heterogeneous urban domains?*  
-  *(Tests the zero-shot cross-city transferability hypothesis $H_2$ under source-target structural similarity conditions).*
-
-* **RQ4 (Empirical Defensibility — HCMC Case Study):**  
-  *How can reconstructed latent OD matrices for Ho Chi Minh City be empirically defended using unconstrained spatial allocation properties and independent multi-level urban constraints under missing complete ground truth?*  
-  *(Validates reconstructed flows against independent urban indicators and auxiliary mobility constraints).*
+Because the aggregate observation alone is insufficient to uniquely determine the disaggregated OD matrix, complementary open urban information is required to narrow the solution space. The two information streams are combined operationally through the gravity integration model, rather than being assumed to represent empirically independent or uniquely separable components of mobility.
 
 ---
 
-# 3. Paper Architecture & 3-Round Quick-Test Suite
+# 8. Ho Chi Minh City Case Study Strategy
+
+Ho Chi Minh City (HCMC) represents a high-priority, extreme data-scarcity urban domain in Southeast Asia. Lacking complete disaggregated OD travel matrices, HCMC serves as the ultimate real-world application testbed. The framework is zero-target-OD: target-city reconstruction uses open spatial features ($X_U$) and the aggregate travel-distance distribution ($D_{\text{target}}$) to infer a local distance-interaction parameterization ($\hat{\boldsymbol{\theta}}$), while explicitly avoiding disaggregated target-city OD observations.
 
 ```text
-                        DISSERTATION FRAMEWORK
-                                  │
-         ┌────────────────────────┴────────────────────────┐
-         ▼                                                 ▼
-      PAPER 1                                           PAPER 2
-   Observability Stream                           Identifiability Stream
- (Which info survives aggregation?)           (What structure resolves ambiguity?)
-D_TLD ──► MLE ──► R_B(θ)                           X_S ──► GeoAI/GNN ──► R_S ──► (O_i, A_j)
-         │                                                 │
-         └────────────────────────┬────────────────────────┘
-                                  ▼
-                        HO CHI MINH CITY CASE STUDY
-                        Empirical Defensibility Stream
-               (Evaluating Unconstrained OD Allocation Properties)
+HCMC Open Spatial Features (OSM, WorldPop, POI) ──► Potentials (O_i, A_j) ──┐
+                                                                            ├──► Reconstructed HCMC OD Matrix
+Meta MDM HCMC Aggregate TLD (3-bin) ──────────────► Deterrence Parameter θ ─┘
 ```
-
-## 3.1 Paper 1 Mission: Observability Stream
-* **Core Task:** Parametric statistical inference of collective distance sensitivity ($\boldsymbol{\theta} = (\alpha, \beta)$ under Tanner deterrence) from aggregate travel-distance distributions (TLDs) given an independently specified structural representation ($R_S$).
-* **Real-World Goal:** Scientifically and efficiently exploit open Meta TLD data (3-bin aggregate releases) to establish robust behavioural calibration as an input stream for Paper 2.
-* **Empirical Findings:** Multi-start MLE optimization achieves $\text{CV} = 0.0000\%$, $R^2 = 0.9624$, and noise robustness error $<0.45\%$ under $20\%$ noise perturbation.
-
-## 3.2 Paper 2 Mission: Identifiability Stream
-* **Core Task:** Spatial representation learning (Spatial GNNs) to learn an explicit Urban Structure Representation ($R_S$) from open spatial features ($X_S$: population density, land use, POI density, accessibility, road network layout) and operationalize it into production and attraction potentials $(O_i, A_j)$.
-* **Methodological Rationale for Spatial GNNs:** Non-spatial tabular models ceiling at $R^2 \approx 0.481$ (QT14). The observed tabular performance ceiling motivates explicitly spatial relational representations, such as graph-based models.
-* **Core Identifiability Premise:** Aggregate TLD constraints are underdetermined. Integrating $R_S$ with aggregate TLD constraints reduces solution space ambiguity sufficiently to enable defensible OD recovery.
-
-## 3.3 The 3-Round Feasibility Quick-Test Suite (Q1–Q10 & Audit Results)
-
-```text
-ROUND A: KILL THE IDEA CHEAPLY ──► ROUND B: MECHANISM TEST ──► ROUND C: FEASIBILITY TEST
-    (Q1, Q2, Q4, Q5)                   (Q6, Q8, Q9 + Neg Controls)          (Q7, Q10)
-```
-
-1. **Round A — Kill the Idea Cheaply (Q1, Q2, Q4, Q5):**
-   * *Q1 (Tidelity):* $R^2 = 0.9624$ between $\hat{\beta}_{\text{OD}}$ and $\hat{\beta}_{\text{TLD}}$.
-   * *Q4 (Observability vs Identifiability):* Proving $TLD_{\text{3bin}} \to \hat{\boldsymbol{\theta}}$ is stable ($\text{CV} = 0.00\%$), but $TLD_{\text{3bin}} \not\to \text{OD}$.
-   * *Q5 (Non-Identifiability Demonstration):* Empirical proof that **Same TLD $\to$ Radically Different ODs** ($\text{JSD} = 0.000000$, yet $\text{CPC} = 0.5373$).
-2. **Round B — Scientific Mechanism Test & Test A Audit (Q6, Q8, Q9 & Negative Controls):**
-   * *Q6 & Test A Audit (Zero Oracle Leakage):* Evaluating Transferred Structure ($R_S$, $\text{CPC} = 0.6462$) against TLD-Only ($\text{CPC} = 0.5852$), Shuffled Negative Control ($\text{CPC} = 0.5331$), and Oracle Upper Bound ($\text{CPC} = 0.7159$).
-   * *Q9 (Information Ablation Ladder):* Evaluating progressive recovery gains across $\text{TLD (0.6925)} \to \text{TLD}+O_i \text{ (0.7772)} \to \text{TLD}+A_j \text{ (0.8181)} \to \text{TLD}+S \text{ (1.0000)}$.
-   * *Negative Controls:* Real Structure ($\text{CPC} = 0.6462$) significantly outperforms Shuffled Negative Control ($\text{CPC} = 0.5331$).
-3. **Round C — Dissertation Feasibility Test (Q7, Q10):**
-   * *Q7 (Zero-Target-OD Test):* Leave-one-city-out cross-city reconstruction achieves mean $\text{CPC} = 0.6462$ across 10 unseen test cities.
-   * *Q10 (Pseudo-HCMC Stress Test):* Stress-testing transferability as a function of source-target structural similarity ($Transferability = f(\text{structural similarity})$).
 
 ---
 
-# 4. Ho Chi Minh City Case Study & Empirical Defensibility
+# 9. Evaluation Paradigm & Unconstrained Properties
 
-## 4.1 Evaluation of Unconstrained OD Allocation Properties
-In alignment with the Evaluation Principle (*"Matching the Meta input is merely in-sample consistency. It is not evidence of structural OD recovery"*), the HCMC Case Study evaluates OD recovery on **unconstrained properties**—spatial allocation attributes that are NOT directly forced by the aggregate input TLD:
+In strict adherence to the Evaluation Principle (*"Matching the Meta input is merely in-sample consistency. It is not evidence of structural OD recovery"*), the framework is evaluated on **unconstrained properties of OD allocation**—spatial allocation characteristics that were *not* directly constrained by the input data:
 
 ```text
                       UNCONSTRAINED OD PROPERTIES
@@ -163,51 +149,86 @@ Fine-Resolution Distance      Directional Spatial         Inter-District Corrido
 (Beyond input coarse bins)   (Origin-Destination ratio)   (Traffic flow consistency)
 ```
 
-1. **Fine-Resolution Distance Decay Shape:** Reconstructing smooth, continuous trip length distributions across fine distance intervals beyond the 3 coarse Meta input bins.
-2. **Directional Spatial Flow Asymmetry:** Recovering asymmetric commuting patterns between suburban residential areas (e.g., Binh Chanh, District 12) and central employment hubs (District 1, Thu Duc).
-3. **Inter-District Corridor Allocation:** Reconstructing major traffic flow volumes along primary arterial road corridors without direct corridor flow inputs.
-
-## 4.2 The 3-Level Indirect Validation Hierarchy
-1. **Level 1 — Internal Consistency:** Conservation of origin production and destination attraction sums ($\sum_j T_{ij} = O_i, \sum_i T_{ij} = A_j$), flow symmetry, and spatial smoothness.
-2. **Level 2 — External Plausibility:** Alignment of inferred attraction potentials ($A_j$) with known economic centers (CBD District 1, Thu Duc Financial City, Tan Binh industrial zones) and major highway capacities.
-3. **Level 3 — Partial Validation:** Auxiliary validation against available partial transit proxies (bus smart card tap-in/tap-out matrices, population census commuting counts, LBS location proxies) used strictly as boundary constraints rather than complete ground truth.
+Validation follows a **3-Level Indirect Validation Hierarchy**:
+1. **Level 1 — Model Diagnostics:** Conservation of origin production and destination attraction sums ($\sum_j T_{ij} = O_i, \sum_i T_{ij} = A_j$) and numerical consistency.
+2. **Level 2 — Independent Partial Observations:** Auxiliary validation against bus smart card tap counts, arterial corridor volumes, and district commuting censuses.
+3. **Level 3 — Falsification & Sensitivity Tests:** Shuffled opportunity fields, perturbed deterrence parameters, or incorrect spatial context must demonstrably degrade external alignment metrics.
 
 ---
 
-# 5. Summary of Scientific Contributions
+# 10. Preliminary Feasibility Evidence (v13.0 Audited Evidence Base)
 
-1. **Theoretical Contribution:** Establishes Spatial Interaction as the formal scientific object and reframes Structure–Behaviour Decomposition as a mechanism to resolve OD non-identifiability.
-2. **Methodological Contribution:** Proposes an independent inference protocol: learning structural representations ($R_S$) from open spatial features via GeoAI and inferring behavioural representations ($R_B$) from aggregate TLDs via MLE.
-3. **Empirical Contribution:** Provides systematic evidence of data observability and aggregation robustness when compressing 20-bin primary TLDs to 3-bin Meta MDM open TLDs.
-4. **Applied Contribution:** Delivers a defensible OD matrix reconstruction protocol for Ho Chi Minh City tested on unconstrained spatial allocation properties under extreme data scarcity.
-5. **Practical Contribution:** Shifts urban planning paradigm from "costly disaggregated OD survey collection" to "maximizing scientific signal extraction from publicly available open data and aggregate mobility products."
+The pre-validation suite was executed across the **50 US Metropolitan Areas Dataset** under a controlled simulation paradigm ($\text{Full OD} \to \text{Meta 3-bin} \to \text{Hide OD} \to \text{Reconstruct} \to \text{Reveal OD}$):
+
+### Master Experiment Registry & Quantitative Results
+
+| Experiment | Dataset & Cities | Training Protocol | Available Inputs | Target OD Status | Key CPC Metric |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **T20 Leakage Audit** | 40 train / 10 test cities | RF on open spatial features $X_U$ | Aggregate TLD + Open $X_U$ | Hidden | **$0.5948$** (Transferred) vs **$0.5463$** (Uniform Baseline) [**Clean Gain $+0.0485$**] |
+| **T21 50-City LOOCV** | 50 US cities (LOOCV) | 49 train / 1 test fold | Aggregate TLD + Open $X_U$ | Hidden | Mean **$0.6162$** (Median **$0.6249$**, $95\%\text{ CI } [0.5997, 0.6317]$ under clean beta) |
+| **T22 Baseline Benchmark** | 10 unseen test cities | Common baseline protocol | Open spatial features | Hidden | **$0.5948$** (vs Gravity $0.5463$, Radiation $0.5257$, Uniform $0.4482$) |
+| **Seed Reliability Audit** | 5 Random Seeds | Multi-seed RF protocol | Open spatial features $X_U$ | Hidden | **$0.5832 \pm 0.0006$** ($\text{CV} = 0.0965\% < 0.1\%$) |
+| **T26–T27 Similarity Audit** | 15 cities (105 pairs) | Pairwise RF transfer | Raw spatial feature vectors | Hidden | $\rho = +0.0955$ ($p = 0.1681$). [**Simple structural similarity does NOT significantly predict transfer**] |
+| **T28 Support Search** | Atlanta Case Study | Aggregated node clustering | $N/1 \to N/32$ | N/A | Support-robust (~3-5% error) down to $N/16$; breakdown at $N/32$ |
+| **T29 Compression Grid** | Chicago Case Study | Binned MLE inference | 20, 10, 5, 3, 2, 1 bins | N/A | 20-bin ($0.77\%$) $\to$ 3-bin ($44.42\%$) $\to$ 1-bin ($100\%$ collapse) |
+| **T30 Cut-Point Shift** | Chicago Case Study | Cut-point shift $-20\% \to +20\%$ | Shifted 3-bin cut-points | N/A | Error shifts $55.5\% \to 33.3\%$ (Jointly count & geometry dependent) |
+| **T32 Structural Ablation** | 40 train / 10 test cities | Feature subset RF models | Subsets of $X_U$ | Hidden | Pop + POI: **$0.5950$** (~97.6% of full $R_S$ gain $+0.0499$) |
+| **T33 Failure Taxonomy** | 50 US cities (LOOCV) | Multivariable OLS regression | City characteristics | Hidden | $\text{CPC} \sim \log(N)$ yields $\beta = -0.0611$ (scale increases difficulty) |
+| **T34 Structural Compensation** | 40 train / 10 test cities | Perturbed beta RF models | Perturbed beta + Open $X_U$ | Hidden | CPC Gain stable ($+0.0411$ to $+0.0530$) across $\pm 60\%$ beta perturbation |
+| **T35 Deterrence Robustness** | Chicago Case Study | Multinomial MLE (Exp, Pow, Tan) | 20, 10, 5, 3 bins | N/A | Exp ($0.77\% \to 44.4\%$), Power ($25.9\% \to 36.9\%$), Tanner ($65.3\% \to 96.2\%$ avg error) |
 
 ---
 
-# 6. Methodological Rule Compliance & Terminology Mapping
+# 11. Summary of Scientific Contributions
 
-| Scientific Dimension | Conventional Conflated Framing | Refined Decoupled Framing (This Dissertation) |
+1. **C1 — Aggregate Mobility Information Characterization:** An empirical and methodological characterization of the information retained and lost under aggregation/compression.
+2. **C2 — Observation-Sensitivity Framework:** Quantifying the joint effects of spatial support, bin count, and bin geometry on parameter recoverability.
+3. **C3 — Complementary-Information OD Reconstruction:** A zero-target-OD reconstruction methodology that integrates aggregate observations with open spatial context ($X_U$).
+4. **C4 — Empirical Defensibility Framework:** Evaluating reconstruction quality using unconstrained properties and indirect validation, with HCMC acting as the applied case study.
+
+---
+
+# 12. Risks, Boundary Conditions & Phrasing Controls
+
+To maintain scientific defensibility, all thesis claims are bounded by explicit empirical constraints:
+
+* **US Pre-Validation Boundary:** Preliminary evidence is established on US metropolitan benchmarks; real-world applicability to HCMC remains a testable empirical hypothesis ($H_4$).
+* **Scale & Dimensionality Bound (T33):** Several medium-scale systems (e.g. Arlington: $\text{CPC} \approx 0.6961$; Wichita: $\text{CPC} \approx 0.6947$) achieve higher reconstruction accuracy, whereas some large, high-dimensional metropolitan systems (e.g. New York: $\text{CPC} \approx 0.4329$; Chicago: $\text{CPC} \approx 0.5035$; Los Angeles: $\text{CPC} \approx 0.5121$) represent a substantially harder regime.
+* **Negative Evidence on Feature Similarity (T26–T27):** Proper cross-city model transfer reveals that simple structural similarity in raw feature space does not significantly predict transfer performance directly ($\rho = 0.0955, p = 0.1681$).
+* **Epistemic Boundary of Integration (RQ3):** Reconstructing flows evaluates the explanatory and predictive adequacy of the proposed operational integration framework under the specified model, not causal truth in reality.
+* **Robustness of Spatial Context to Distance Misspecification (T34):** In downstream OD reconstruction, the incremental reconstruction gain provided by independent open spatial features is highly robust to parameter misspecification in the distance decay function. In T34, when the true decay parameter $\beta^*$ is deliberately perturbed by $\pm 60\%$, the incremental CPC gain provided by independent spatial features remains stable (ranging between $+0.0411$ and $+0.0530$). This controlled sensitivity experiment indicates that independent spatial context bounds the underdetermined solution space, maintaining reconstruction robustness even under moderate-to-large misspecification of the distance component.
+* **Deterrence Function Robustness Boundary (T35):** Deterrence functions are employed as *information probes* rather than absolute ground-truth representations. In the Chicago case study, parameter fidelity deteriorates under increasing compression for both exponential and power-law specifications, while the two-parameter Tanner form exhibits substantially greater instability. This stress-test illustration supports the hypothesis that higher parameterization increases information demand, though multi-city replication would be required to claim this as a universal boundary.
+
+---
+
+# 13. Master Scoped Dissertation Claim Status Matrix (v13.0+)
+
+| Scientific Claim | Audited Evidence Status | Phrasing Constraint & Boundary |
 | :--- | :--- | :--- |
-| **Scientific Core** | Model prediction benchmarks | **Observability $\rightarrow$ Identifiability $\rightarrow$ Empirical Defensibility** |
-| **Thesis Core Narrative** | "Models reconstruct OD" | **"Aggregate mobility is informative but non-identifying; structure resolves ambiguity"** |
-| **Evaluation Principle** | Good in-sample fit = good model | **"Matching Meta input is merely in-sample consistency, not OD recovery evidence"** |
-| **Identifiability Goal** | Break non-identifiability completely | **Reduce solution space ambiguity sufficiently for defensible OD recovery** |
-| **Evaluation Target** | In-sample TLD matching | **Unconstrained properties of OD allocation** |
-| **Oracle Marginal Role** | Flagship feasibility evidence | **Upper-bound ceiling ONLY (Test A Audit: Oracle $\text{CPC}=0.7159$)** |
-| **Transferred Structure Role** | Secondary evaluation | **Primary Feasibility Evidence (Test A Audit: Transferred $\text{CPC}=0.6462$)** |
-| **Tabular $R^2 \le 0.481$** | Proves GNN is mandatory | **Motivates explicitly spatial relational representations (Graph GNNs)** |
-| **Pre-HCMC Validation** | Wait for HCMC ground truth | **Controlled simulation: Artificial Aggregation $\to$ Hide OD $\to$ Reconstruct $\to$ Reveal OD** |
-| **Quick Test Pipeline** | Exploratory trial & error | **3-Round Decision Pipeline (Q1–Q10) with Go/Revise/Stop matrix** |
-| **Urban Structure** | Urban Structure = $(O_i, A_j)$ | $\text{Urban Structure} \longrightarrow R_S \longrightarrow (O_i, A_j)$ |
-| **AI Learning Role** | GNN learns Urban Structure | GNN learns task-specific representation ($Z_{\text{task}}$) from $X_S$ |
-| **Latent Embedding** | Latent vector $Z = R_S$ | $Z_{\text{task}} \neq R_S$ by default (requires structural validation) |
-| **Travel Behaviour** | Deterrence function *is* Behaviour | Deterrence function operationalizes representation $R_B(\boldsymbol{\theta})$ |
-| **Local Inference Rationale** | Intrinsic untransferable property | **Modelling principle & strategic design choice** |
-| **Parameter Identification** | Mathematical proof of identifiability | **Multi-tiered evidence bundle** (QT12, QT18, $R^2 = 0.9624$) |
-| **Structural Transferability** | Absolute assumption of transfer | **Testable empirical hypothesis ($H_2$)** |
-| **ANOVA ($\eta^2_S = 81.3\%$)** | Absolute proof of natural law | Empirical support for decomposition's analytical usefulness |
-| **Privacy Motivation** | Aggregate TLD is DP guaranteed | Aggregation reduces granularity; depends on release mechanism |
-| **Paper Relationship** | Sequential dependency | **Decoupled complementary parallel inference pathways** |
+| **Aggregate TLD retains distance-related interaction signal** | **Strongly Pre-validated** | 3-bin preserves non-trivial distance-related ordering and trend information. |
+| **Compression reduces quantitative fidelity** | **Strongly Pre-validated** | Parameter magnitude error grows $0.77\% \to 44.42\% \to 100\%$ collapse at 1-bin. |
+| **Bin geometry materially affects retained signal** | **Strongly Pre-validated** | T30: Shift $-20\% \to +20\%$ alters parameter error ($55.5\% \to 33.3\%$). |
+| **Aggregate TLD does not identify OD uniquely** | **Demonstrated (Control)** | Empirically supported by Q5 ($\text{JSD} = 0.0000$, yet $\text{CPC} = 0.5373$). |
+| **Open urban spatial information improves recovery** | **Demonstrated Feasibility** | Clean 50-city LOOCV demonstrates end-to-end reconstruction feasibility ($\text{Mean CPC} = 0.6162, 95\%\text{ CI } [0.5997, 0.6317]$); net improvement over baseline ($\Delta\text{CPC} = +0.0485$, $95\%\text{ CI } [0.0308, 0.0527]$) is established via T20/T32. |
+| **Multi-seed protocol reliability** | **High Reliability** | Multi-seed $\text{CPC} = 0.5832 \pm 0.0006$, $\text{CV} = 0.0965\%$. |
+| **Pop + POI account for ~97.6% of spatial context gain** | **Strong Mechanism Evidence** | T32 Ablation: Pop + POI accounts for ~97.6% of observed full open spatial feature gain ($+0.0499$). |
+| **Scale log(N) increases difficulty** | **Regression Associated** | $\text{CPC} \sim \log(N)$ yields $\beta = -0.0611$ after controlling for density and sparsity. |
+| **Transferability follows simple feature similarity** | **NOT SUPPORTED** | T26–T27: $\rho = +0.0955$ ($p = 0.1681$). Raw structural similarity does not predict transfer. |
+| **Incremental value of open urban spatial information is robust to distance-parameter misspecification** | **Preliminary robustness evidence** | T34: Incremental CPC gain remains stable ($+0.0411$ to $+0.0530$) across $\pm 60\%$ beta perturbation. |
+| **Information loss and complexity bounds are robust to deterrence functional forms** | **Preliminary complexity evidence** | T35: Chicago case study shows parameter fidelity deteriorates for Exp/Power and Tanner. Higher parameterization increases information demand. |
+| **HCMC real-world applicability** | **Feasibility Justified** | US cities results provide sufficient feasibility evidence to justify testing in HCMC. |
 
 ---
-*Status: Updated V7.0 — Full Test A Audit & Refined Scientific Core Narrative.*
+
+# 14. Research Timeline & Milestones
+
+```text
+2026 Q3: Proposal Defense & Paper 1 Submission (Aggregate Mobility Observability)
+2026 Q4: Paper 2 Submission (Transferable Structural Complementarity for OD Recovery)
+2027 Q1: HCMC Data Pipeline Integration & Multi-Level Indirect Validation
+2027 Q2: Full Dissertation Writing & Pre-defense Review
+2027 Q3: Final PhD Dissertation Defense
+```
+
+---
+*Status: Updated V13.0+ — Master PhD Proposal Document (Clean Audited Evidence Base).*

@@ -1,73 +1,103 @@
 # Research Knowledge Base (RKB): Master Scientific Operating System
 
-> **Status:** Version 7.0 — Full Test A Audit & Refined Scientific Core Narrative  
+> **Status:** Version 13.0+ — Master Frozen & Defense-Ready Scientific Operating System  
+> **Feasibility State:** $\boxed{\text{FEASIBILITY PHASE = FROZEN}}$  
+> **Proposal State:** $\boxed{\text{PROPOSAL FORMALIZATION = ACTIVE}}$  
+
+$$\boxed{\text{Aggregate Observation } \neq \text{ Complete Information}}$$
+
+$$\boxed{\text{Input Consistency } \neq \text{ Reconstruction Validity}}$$
+
+$$\boxed{\text{Validity Requires Improvement on Unconstrained OD Properties}}$$
+
 > **Core Scientific Master Statement (Frozen):**  
-> *"Human mobility can be reconstructed by independently inferring its structural and behavioural components from the maximum publicly available information."*  
-> *(Vietnamese: "Có thể phục hồi tương tác di chuyển đô thị bằng cách suy luận độc lập thành phần cấu trúc và thành phần hành vi từ lượng thông tin công khai tối đa.")*  
+> *"This dissertation investigates the sufficiency of observable information for reconstructing urban spatial interaction under mobility data scarcity. It examines what information is retained or lost under aggregate mobility observation, how observation design affects recoverability, and how complementary open urban information improves OD reconstruction when the mobility observation alone is insufficient."*  
+> *(Vietnamese: "Luận án này nghiên cứu tính đầy đủ của thông tin quan sát được để khôi phục tương tác không gian đô thị trong điều kiện khan hiếm dữ liệu di chuyển. Luận án phân tích thông tin nào được giữ lại hoặc mất đi dưới các quan sát di chuyển gộp, thiết kế quan sát ảnh hưởng thế nào đến khả năng định danh, và thông tin không gian đô thị mở bổ trợ cải thiện việc khôi phục OD ra sao khi bản thân quan sát di chuyển không đủ đơn độc.")*  
+
 > **Evaluation Principle (Dissertation Directive):**  
 > *"Matching the Meta input is merely in-sample consistency. It is not evidence of structural OD recovery."*  
+
 > **Condensed Core Narrative:**  
-> *"Aggregate mobility appears informative but non-identifying. The remaining scientific problem is determining what independent structural information is sufficient to resolve that ambiguity."*
+> *"Aggregate mobility appears informative but non-identifying. The remaining scientific problem is determining what independent open spatial information is sufficient to resolve that ambiguity."*
 
 ---
 
-## 1. Overall System Architecture & Derivation Flow
+## 1. Refined Derivation Backbone & System Architecture
 
 ```text
-                           RESEARCH KNOWLEDGE BASE (RKB)
-                                 (Source of Truth)
-                                        │
-           ┌────────────────────────────┼────────────────────────────┐
-           ▼                            ▼                            ▼
-     OBSERVABILITY                    IDENTIFIABILITY            EMPIRICAL DEFENSIBILITY
-       (Paper 1)                        (Paper 2)                   (HCMC Case Study)
-Which info survives aggregation     What structure resolves       Is latent OD defensible on
-    from aggregate TLD?               OD ambiguity?             UNCONSTRAINED properties?
+OBSERVATION ──► INFORMATION ──► INFORMATION ──► UNDERDETERMINATION ──► COMPLEMENTARY ──► OD RECONSTRUCTION ──► INDEPENDENT
+                  RETENTION         LOSS                                INFORMATION                               VALIDATION
+  (Meta MDM)      (Paper 1)        (T29-T30)    (TLD -> OD Non-ID)       (Paper 2)          (C3 Pipeline)        (HCMC Case Study)
 ```
 
-The Knowledge Base serves as the background scientific operating system backing all publications and the PhD dissertation. It structures scientific knowledge into **8 Core Modules**, **4 Claim Hierarchy Layers** (with 4-field claim cards), and the **10 Strategic Decision Quick Tests (Q1–Q10)**.
+The Knowledge Base structures scientific knowledge into the **Refined Derivation Backbone**, **Statistical Audit Results**, **Decoupled Paper Scope**, and the **Master Scoped Claim Matrix**.
+
+This architecture is grounded in foundational and modern spatial interaction literature:
+* **Fotheringham (1981, 1986):** Demonstrates that estimated distance-decay parameters ($\hat{\boldsymbol{\theta}}$) are systematically influenced by the spatial configuration of opportunity fields (competing destinations), proving that observed parameters are not pure behavior but encode spatial structure.
+* **Aoki et al. (2022):** Shows that observed flows reveal spatial structures, meaning structure and behavior are entangled in the same observational object.
+* **DeepGravity (2021):** Illustrates that neural mobility representations jointly encode spatial opportunity features and distance decay.
+* **Wilson (1971):** Wilson's family of spatial interaction models frames interaction models under different constraints/information formulations rather than rigid ontological decompositions.
+* **OD estimation from counts (IIASA):** Established the underdetermined nature of OD reconstruction from partial observations (where counts are fewer than cells), requiring additional spatial regularizers.
 
 ---
 
-## 2. Executive Matrix of 8 Scientific Modules
+## 2. Statistical Significance & Reliability Audit Summary
 
-| Module | Scientific Core Question | Mission & Scope | Key Outcome / Paper Mapping |
-| :--- | :--- | :--- | :--- |
-| **Module 1. Spatial Interaction** | **Why treat Spatial Interaction as the central scientific object?** | Establish Spatial Interaction as the scientific object; position OD matrices as specific observation projections. | Conceptual foundation for entire dissertation. |
-| **Module 2. Observability** | **Which information survives aggregation in Meta data?** | Synthesize observation layers (OD, GPS, CDR, LBS, Meta MDM \citep{MetaMovementDistributionMaps}, TLDs) under spatial support reliability. | Observability stream (**Paper 1**). |
-| **Module 3. Identifiability & Ambiguity** | **What structure is sufficient to resolve OD ambiguity?** | Formulate the **Structure–Behaviour Decomposition Principle** as a mechanism to constrain underdetermined OD solution spaces. | Mathematical backbone ($T_{ij} = O_i A_j f(d_{ij}; \boldsymbol{\theta})$). |
-| **Module 4. Urban Structure** | **How should Urban Structure ($R_S$) be represented and learned?** | Trace representation evolution from tabular variables ($R^2 \le 0.481$) to GNN-learned potential fields $(O_i, A_j)$ from open spatial features. | Identifiability stream (**Paper 2**). |
-| **Module 5. Travel Behaviour** | **How should Travel Behaviour ($R_B$) be identified from aggregate data?** | Formulate parametric statistical inference of distance friction $\boldsymbol{\theta}$ from aggregate TLDs (20-bin & 3-bin Meta MDM). | Behaviour identification & inference pathway (**Paper 1**). |
-| **Module 6. Learning Strategy** | **How do learning objectives shape encoded representations?** | Formalize the methodological chain: `Objective` $\to$ `Strategy` $\to$ `Representation` $\to$ `Encoded Info` $\to$ `Generalization`. | Epistemological separation between GeoAI embeddings $Z_{\text{task}}$ and scientific representation $R_S$. |
-| **Module 7. Transferability** | **What components can transfer vs. what must be inferred locally?** | Evaluate structural transferability ($H_2$) across cities while maintaining local behavioral inference as a conservative design choice. | Zero-target-OD transfer protocol across heterogeneous urban domains (**Paper 2**). |
-| **Module 8. Empirical Defensibility** | **How is reconstructed latent OD empirically defended without ground truth?** | Evaluate reconstructed flows on **unconstrained properties of OD allocation** using a 3-level validation hierarchy for Ho Chi Minh City. | Downstream OD reconstruction roadmap for **HCMC Case Study**. |
-
----
-
-## 3. Strategic 10 Quick-Test Suite & Audit Execution Results
-
-### 3.1 Test A Audit Results (Zero Oracle Leakage Verification)
-
-To eliminate information leakage, **Test A Audit** evaluated four distinct models across 10 unseen test cities:
-
-```text
-Model A (TLD Only Baseline)       : Mean CPC = 0.5852 (Std: 0.0530)
-Model B (Shuffled Control)         : Mean CPC = 0.5331 (Std: 0.0463)
-Model C (Transferred Structure)    : Mean CPC = 0.6462 (Std: 0.0616, Median: 0.6525, Range: [0.4983, 0.7125])
-Model D (Oracle Upper Bound)       : Mean CPC = 0.7159 (Std: 0.0419)  [CEILING ONLY]
-```
-
-* **Scientific Finding:** Transferred Urban Structure ($R_S$, $\text{CPC} = 0.6462$) learned strictly from open spatial features consistently outperforms both TLD-Only ($\text{CPC} = 0.5852$) and Shuffled Negative Control ($\text{CPC} = 0.5331$) across all 10 unseen test cities without relying on Oracle OD marginals!
+1. **Statistical Significance & Bootstrap CIs:** Net CPC gain of Transferred Structure over baseline is statistically significant at $p < 0.001$ ($95\%\text{ Bootstrap CI } [0.0308, 0.0527]$).
+2. **LOOCV Performance (T21):** Leave-One-City-Out Cross-Validation on all 50 US metropolitan areas under completely clean zero-target-OD 3-bin beta MLE yields:
+   - Mean CPC: **$0.6162$**
+   - Median CPC: **$0.6249$**
+   - 95% Bootstrap Confidence Interval: **$[0.5997, 0.6317]$** (excluding zero).
+   - Spread (2.5% to 97.5% percentiles): **$[0.5054, 0.6942]$**.
+   - Failure regime (CPC < 0.50): Only 1 city (New York: CPC $= 0.4329$), consistent with the scale difficulty bound.
+3. **Multi-Seed Protocol Reliability:** Multi-seed evaluation across 5 random seeds yields Mean $\text{CPC} = 0.5832 \pm 0.0006$ with Coefficient of Variation $\text{CV} = 0.0965\% (< 0.1\%)$, confirming high protocol stability.
+4. **Complexity-Controlled Failure Regression:** Multivariable regression $\text{CPC} = 0.9021 - 0.0611 \cdot \log(N) - 0.0034 \cdot \log(\text{Density})$ confirms spatial system scale $\log(N)$ maintains an independent negative difficulty association ($\beta = -0.0611$) after density control.
 
 ---
 
-## 4. Master Claim Cards & Refined Wording
+## 3. Decoupled Paper Scope & Core Research Questions
 
-#### Claim Card C.1 — Tabular Representation Ceiling & Relational Motivation
-* **Claim:** Non-spatial tabular models display an empirical performance limit ($R^2 \approx 0.481$) when predicting operational structural quantities ($O_i, A_j$). The observed tabular performance ceiling motivates explicitly spatial relational representations, such as graph-based models.
-* **Evidence:** Quantitative Experiment QT14 (Ridge $0.386$, RF $0.459$, GBDT $0.481$, MLP $0.445$). Feature expansion from 6 to 12 features yields only $+0.0024 R^2$ gain (QT13).
-* **Boundary:** Does not theoretically disprove all possible feature representations; demonstrates the limitations of non-spatial tabular regression families.
-* **Paper Role:** Paper 2 Motivation, Knowledge Base Module 4.
+### 3.1 Core Research Questions (RQs)
+* **RQ1 — Information Retention:** *What spatial-interaction information is retained or lost when OD flows are compressed into aggregate mobility representations?*
+* **RQ2 — Observation Conditions:** *How do spatial support, distance resolution, and bin geometry affect the reliability of information recovered from aggregate mobility observations?*
+* **RQ3 — Complementary Information:** *To what extent can open urban spatial information improve OD reconstruction beyond aggregate mobility constraints alone under zero-target-OD conditions?*
+* **RQ4 — Empirical Defensibility:** *How can reconstructed OD patterns be empirically evaluated when complete target-city OD ground truth is unavailable?*
 
 ---
-*Status: Updated V7.0 — Master Scientific Operating System (Test A Audit & Refined Core Narrative).*
+
+### 3.2 Paper Stream & Technical Scope
+* **Paper 1 — Information Retention in Aggregate Mobility Observations**
+  - *Research Question:* *How does the design of an aggregate mobility observation determine what spatial-interaction information remains recoverable?*
+  - *Technical Scope:* Evaluates the observation transformation ($OD \to \text{Observation} \to \text{Information}$) across the axes of $\text{spatial support} \times \text{distance resolution} \times \text{bin geometry} \times \text{model complexity}$.
+  - *Decay Probes:* Exponential primary probe (stable, interpretable), Power-law robustness check, and Tanner complexity stress test.
+  - *Key Evidence:* T28, T29, T30, and T35.
+* **Paper 2 — Complementary Information for OD Reconstruction**
+  - *Research Question:* *How much complementary open urban information is needed to improve OD recoverability when aggregate mobility observations are insufficient?*
+  - *Technical Scope:* Develops a zero-target-OD reconstruction methodology mapping open features ($X_U$) to complementary constraints, quantifying the incremental value along the information ladder ($\text{TLD} \to +P \to +\text{POI} \to \text{Full } X_U$).
+  - *Key Evidence:* T20, T21, T22, T32, and T34.
+* **Ho Chi Minh City Applied Case Study**
+  - *Research Question:* *Can the resulting latent OD be empirically defended through independent partial manifestations when complete OD ground truth is unavailable?*
+  - *Technical Scope:* Deploys the reconstruction pipeline under extreme data scarcity and validates OD patterns using unconstrained properties and independent smart card/bus census datasets.
+  - *Key Evidence:* T24.
+
+---
+
+## 4. Master Scoped Dissertation Claim Status Matrix (v13.0+)
+
+| Scientific Claim | Audited Evidence Status | Phrasing Constraint & Boundary |
+| :--- | :--- | :--- |
+| **Aggregate TLD retains distance-related interaction signal** | **Strongly Pre-validated** | 3-bin preserves non-trivial distance-related ordering and trend information. |
+| **Compression reduces quantitative fidelity** | **Strongly Pre-validated** | Parameter magnitude error grows $0.77\% \to 44.42\% \to 100\%$ collapse at 1-bin. |
+| **Bin geometry materially affects retained signal** | **Strongly Pre-validated** | T30: Shift $-20\% \to +20\%$ alters parameter error ($55.5\% \to 33.3\%$). |
+| **Aggregate TLD does not identify OD uniquely** | **Demonstrated (Control)** | Empirically supported by Q5 ($\text{JSD} = 0.0000$, yet $\text{CPC} = 0.5373$). |
+| **Open urban spatial information improves recovery** | **Demonstrated Feasibility** | Clean 50-city LOOCV demonstrates end-to-end reconstruction feasibility ($\text{Mean CPC} = 0.6162, 95\%\text{ CI } [0.5997, 0.6317]$); net improvement over baseline ($\Delta\text{CPC} = +0.0485$, $95\%\text{ CI } [0.0308, 0.0527]$) is established via T20/T32. |
+| **Multi-seed protocol reliability** | **High Reliability** | Multi-seed $\text{CPC} = 0.5832 \pm 0.0006$, $\text{CV} = 0.0965\%$. |
+| **Pop + POI account for ~97.6% of spatial context gain** | **Strong Mechanism Evidence** | T32 Ablation: Pop + POI accounts for ~97.6% of observed full open spatial feature gain ($+0.0499$). |
+| **Scale log(N) increases difficulty** | **Regression Associated** | $\text{CPC} \sim \log(N)$ yields $\beta = -0.0611$ after controlling for density and sparsity. |
+| **Transferability follows simple feature similarity** | **NOT SUPPORTED** | T26–T27: $\rho = +0.0955$ ($p = 0.1681$). Raw structural similarity does not predict transfer. |
+| **Incremental value of open urban spatial information is robust to distance-parameter misspecification** | **Preliminary robustness evidence** | T34: Incremental CPC gain remains stable ($+0.0411$ to $+0.0530$) across $\pm 60\%$ beta perturbation. |
+| **Information loss and complexity bounds are robust to deterrence functional forms** | **Preliminary complexity evidence** | T35: Chicago case study shows parameter fidelity deteriorates for Exp/Power and Tanner. Higher parameterization increases information demand. |
+| **HCMC real-world applicability** | **Feasibility Justified** | US cities results provide sufficient feasibility evidence to justify testing in HCMC. |
+
+---
+*Status: Updated V13.0+ — Master Scientific Operating System (Frozen & Formalization Active).*

@@ -119,7 +119,7 @@ def fit_beta_od_mle(df: pd.DataFrame):
     return float(res.x)
 
 def fit_beta_tld_mle(df: pd.DataFrame, K: int = 20):
-    """Fit beta parameter purely from aggregate Travel-Length Distribution (TLD)."""
+    """Fit beta parameter purely from aggregate Travel-Length Distribution (TLD) robustly using grid-start."""
     d = df["d_clamped"].values
     A = df["A_j_clamped"].values
     o_idx = df["o_idx"].values
@@ -160,7 +160,17 @@ def fit_beta_tld_mle(df: pd.DataFrame, K: int = 20):
         p_k = (p_k / p_k_tot).clip(1e-15)
         return -float(np.sum(y_k * np.log(p_k)))
 
-    res = minimize_scalar(neg_tld_log_like, bounds=(0.0001, 3.0), method="bounded")
+    # Grid search to find a good starting neighborhood (prevents getting trapped in flat regions)
+    grid_size = 15
+    grid = np.linspace(0.001, 3.0, grid_size)
+    grid_likes = [neg_tld_log_like(b) for b in grid]
+    best_idx = np.argmin(grid_likes)
+    
+    # Define sub-bounds around the best grid point
+    low_b = grid[max(0, best_idx - 1)]
+    high_b = grid[min(grid_size - 1, best_idx + 1)]
+
+    res = minimize_scalar(neg_tld_log_like, bounds=(low_b, high_b), method="bounded")
     return float(res.x)
 
 def calculate_cpc(actual: np.ndarray, predicted: np.ndarray) -> float:
