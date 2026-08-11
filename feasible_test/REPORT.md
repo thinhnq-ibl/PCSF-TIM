@@ -30,7 +30,7 @@ ROUND A: KILL THE IDEA CHEAPLY ──► ROUND B: MECHANISM TEST ──► ROUND
 
 | Round | Quick Test | Measured Empirical Result | Scientific & Strategic Meaning | Decision |
 | :--- | :--- | :--- | :--- | :---: |
-| **Round A** | **Q1: TLD Fidelity** | $R^2 = 0.9624$ between $\hat{\beta}_{\text{OD}}$ and $\hat{\beta}_{\text{TLD}}$ | Meta MDM 3-bin TLD is a valid observation projection of OD flows. | **GO** |
+| **Round A** | **Q1: TLD Fidelity** | $R^2 = 0.9624$ between $\hat{\beta}_{\text{OD}}$ and $\hat{\beta}_{\text{TLD}}$ | A 3-bin Meta-like aggregate movement observation generated from OD remains a valid coarse observation projection for parameter recovery tests. | **GO** |
 | **Round A** | **Q2: Compression Loss** | $\hat{\boldsymbol{\theta}}_{20} \approx \hat{\boldsymbol{\theta}}_3$, noise error $<0.44\%$ under $20\%$ noise | Distance deterrence characteristics remain stable despite compression. | **GO** |
 | **Round A** | **Q3: Spatial Support** | Parameter stability preserved across fine/medium zone aggregates | Identifies spatial support boundaries for reliable signal extraction. | **GO** |
 | **Round A** | **Q4: Parameter Recovery** | Multi-start $\text{CV} = 0.0000\%$, synthetic error $= 6.84\%$ | **Observable $\neq$ Identifiable**: $TLD_{\text{3bin}} \to \hat{\boldsymbol{\theta}}$ stable, but $TLD_{\text{3bin}} \not\to \text{OD}$. | **GO** |
@@ -69,7 +69,7 @@ ROUND A: KILL THE IDEA CHEAPLY ──► ROUND B: MECHANISM TEST ──► ROUND
 
 | Empirical Finding | Decision Outcome | Status |
 | :--- | :--- | :---: |
-| 3-bin Meta TLD preserves $\hat{\boldsymbol{\theta}}$ across multiple spatial supports (QT1, QT18) | **GO Paper 1** | **VERIFIED** |
+| 3-bin Meta-like aggregate movement observation preserves $\hat{\boldsymbol{\theta}}$ across multiple spatial supports (QT1, QT18) | **GO Paper 1** | **VERIFIED** |
 | Parameter $\hat{\boldsymbol{\theta}}$ signal exists only within specific spatial scales (QT2) | **GO Paper 1** | **VERIFIED** |
 | TLD-only poor on OD ($\text{CPC} = 0.5373$), but TLD+$S_{ij}$ improves unconstrained metrics ($\text{CPC} = 1.0000$) | **GO Paper 2** | **VERIFIED** |
 | Real Structure ($\text{CPC} = 1.0000$) outperforms Negative Control ($\text{CPC} = 0.5850$) | **GO Paper 2** | **VERIFIED** |

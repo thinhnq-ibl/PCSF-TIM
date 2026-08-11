@@ -20,6 +20,9 @@ $$\boxed{\text{Validity Requires Improvement on Unconstrained OD Properties}}$$
 > **Condensed Core Narrative:**  
 > *"Aggregate mobility observations are informative but non-identifying at the OD level. The remaining scientific problem is determining how complementary open spatial information reduces this ambiguity and improves OD recoverability."*
 
+> **Terminology Rule (Frozen):**  
+> *"Meta Movement Distribution is an aggregate movement observation describing the distribution or range of daily movement relative to individuals' residential areas. It is not a directly observed trip-length distribution derived from an OD matrix. 'TLD' is reserved for distance distributions derived or simulated from OD flows, including OD-derived TLD and Meta-like aggregate movement observations generated from OD."*
+
 ---
 
 ## 1. Refined Derivation Backbone & System Architecture
@@ -27,7 +30,7 @@ $$\boxed{\text{Validity Requires Improvement on Unconstrained OD Properties}}$$
 ```text
 OBSERVATION ──► RECOVERABLE ──► OBSERVATION ──► UNDERDETERMINATION ──► COMPLEMENTARY ──► OD RECONSTRUCTION ──► INDEPENDENT
                 INFORMATION     SENSITIVITY                              CONTEXT                                VALIDATION
-  (Meta MDM)     (Paper 1)       (T29-T30)       (TLD -> OD Non-ID)      (Paper 2)          (C3 Pipeline)        (HCMC Case Study)
+  (Meta MDM Obs.) (Paper 1)      (T29-T30)       (Agg. Obs. -> OD Non-ID) (Paper 2)         (C3 Pipeline)        (HCMC Case Study)
 ```
 
 The Knowledge Base structures scientific knowledge into the **Refined Derivation Backbone**, **Statistical Audit Results**, **Paper Scope**, and the **Master Scoped Claim Matrix**.
@@ -70,7 +73,7 @@ This architecture is grounded in foundational and modern spatial interaction lit
 * **Paper 2 — Complementary Information for OD Reconstruction**
   - *Research Question:* *How much complementary open urban information is needed to improve OD recoverability when aggregate mobility observations are insufficient?*
   - *Sub-Question:* *To what extent does open urban spatial context preserve incremental reconstruction value when distance-interaction information is uncertain?*
-  - *Technical Scope:* Develops a zero-target-OD reconstruction methodology mapping open features ($X_U$) to complementary constraints, quantifying the incremental value along the information ladder ($\text{TLD} \to +P \to +\text{POI} \to \text{Full } X_U$).
+  - *Technical Scope:* Develops a zero-target-OD reconstruction methodology mapping open features ($X_U$) to complementary constraints, quantifying the incremental value along the information ladder ($\text{Aggregate Observation} \to +P \to +\text{POI} \to \text{Full } X_U$), with OD-derived TLD retained as a controlled benchmark representation rather than a synonym for Meta observation.
   - *Key Evidence:* T20, T21, T22, T32, and T34.
 * **Ho Chi Minh City Applied Case Study**
   - *Research Question:* *Can the resulting latent OD be empirically defended through independent partial manifestations when complete OD ground truth is unavailable?*
@@ -83,10 +86,10 @@ This architecture is grounded in foundational and modern spatial interaction lit
 
 | Scientific Claim | Audited Evidence Status | Phrasing Constraint & Boundary |
 | :--- | :--- | :--- |
-| **Aggregate TLD retains distance-related interaction signal** | **Strongly Pre-validated** | 3-bin preserves non-trivial distance-related ordering and trend information. |
+| **OD-derived TLD retains distance-related interaction signal** | **Strongly Pre-validated** | 3-bin preserves non-trivial distance-related ordering and trend information under controlled OD-derived aggregation. |
 | **Compression reduces quantitative fidelity** | **Strongly Pre-validated** | Parameter magnitude error grows $0.77\% \to 44.42\% \to 100\%$ collapse at 1-bin. |
 | **Bin geometry materially affects retained signal** | **Strongly Pre-validated** | T30: Shift $-20\% \to +20\%$ alters parameter error ($55.5\% \to 33.3\%$). |
-| **Aggregate TLD does not identify OD uniquely** | **Demonstrated (Control)** | Empirically supported by Q5 ($\text{JSD} = 0.0000$, yet $\text{CPC} = 0.5373$). |
+| **OD-derived TLD does not identify OD uniquely** | **Demonstrated (Control)** | Empirically supported by Q5 ($\text{JSD} = 0.0000$, yet $\text{CPC} = 0.5373$). |
 | **Open urban spatial information improves recovery** | **Demonstrated Feasibility** | Open spatial information yields positive reconstruction gains across the tested protocols; the dedicated paired reliability audit estimates a mean gain of $+0.0417$ with $95\%\text{ bootstrap CI } [0.0308, 0.0527]$. T20 clean split reports $\Delta\text{CPC} = +0.0485$. |
 | **Multi-seed protocol reliability** | **High Reliability** | Multi-seed $\text{CPC} = 0.5832 \pm 0.0006$, $\text{CV} = 0.0965\%$. |
 | **Pop + POI account for ~97.6% of spatial context gain** | **Strong Mechanism Evidence** | T32 Ablation: Pop + POI accounts for ~97.6% of observed full open spatial feature gain ($+0.0499$). |

@@ -56,7 +56,7 @@ Evidence for parameter identification under Hypothesis 1 must be presented as a 
    - Assess parameter estimation stability under observation noise perturbation (QT18: $<0.5\%$ error under $20\%$ noise).
 
 5. **Open-data resolution aggregation robustness**
-   - Evaluate parameter estimation stability when aggregating from a primary 20-bin TLD down to a coarse 3-bin TLD simulating Meta MDM.
+  - Evaluate parameter estimation stability when aggregating from a primary 20-bin OD-derived TLD down to a coarse 3-bin Meta-like aggregate movement observation simulating the Meta MDM release design.
    - Tests whether the identified behavioural signal remains robust under coarse open-data resolutions ($\hat{\boldsymbol{\theta}}_{20} \approx \hat{\boldsymbol{\theta}}_3$).
 
 6. **Downstream reconstruction adequacy**
@@ -351,17 +351,6 @@ Do NOT claim that "fitting an integrated gravity model ($\hat{T}_{ij} \approx T_
   - ✅ *"Can the probabilistic integration of the inferred Travel Behaviour representation and the learned Urban Structure representation provide an adequate mechanism-based account of observed Spatial Interaction under the specified model?"*
   - ✅ *"Develop a mechanism-oriented probabilistic integration framework... Its empirical role is to evaluate whether their joint integration provides adequate explanatory and predictive performance under the specified model, rather than establishing causal mechanisms."*
   - ✅ *"The dissertation evaluates the adequacy of a proposed mechanism-oriented decomposition under a specified model, not causal truth."*
-
-
-
-
-
-
-
-
-
-
-
 
 
 ### More
@@ -832,6 +821,4 @@ Before returning academic text, silently check:
 * Would a skeptical PhD examiner understand exactly what remains unknown?
 
 Rewrite the response if these conditions are not satisfied.
-
-Đối với **đề tài OD matrix của bạn**, tôi khuyên bổ sung thêm một rule đặc biệt cho agent: **không được chấp nhận gap ngay khi bạn đưa ra**, mà phải đóng vai reviewer và cố gắng *kill the gap* trước. Nếu gap vẫn sống sót sau khi đối chiếu literature, khi đó mới dùng nó làm narrative của proposal. Cách này sẽ khiến phần lập luận PhD chặt hơn rất nhiều.
 

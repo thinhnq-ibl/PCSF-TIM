@@ -60,14 +60,14 @@ A prominent example is:
 
 **Meta Movement Distribution Maps (MDM)**
 
-These data provide highly compressed representations of movement, including coarse distance-based movement distributions.
+These data provide highly compressed aggregate movement observations, describing daily movement range relative to residential areas rather than a directly observed OD-derived trip-length distribution.
 
 Conceptually:
 
 $$
-OD
-\longrightarrow
-Aggregate\ Mobility\ Observation
+\mathbf{T}
+\xrightarrow{\text{observation process}}
+\mathbf{y}_{\text{Meta}}
 $$
 
 But aggregation removes information.

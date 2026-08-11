@@ -31,7 +31,7 @@ $$\boxed{\text{Validity Requires Improvement on Unconstrained OD Properties}}$$
 
 Human mobility patterns shape critical urban planning decisions, transportation infrastructure investments, disaster response protocols, and public health interventions. Despite their importance, comprehensive Origin-Destination (OD) travel matrices remain severely unavailable in most cities of the Global South due to the prohibitive financial and administrative costs of disaggregated household travel surveys.
 
-In recent years, aggregate mobility products—most prominently Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—have become widely accessible across global urban regions. These products provide daily movement-range information in an aggregate map, serving as a real-world instance of highly compressed aggregate mobility observations. They reduce the granularity of disclosed movement information by removing individual-level and pairwise spatial identities, providing instead coarse, distance-binned Travel Length Distributions (TLDs). 
+In recent years, aggregate mobility products—most prominently Meta's Movement Distribution Maps (MDM) \citep{MetaMovementDistributionMaps}—have become widely accessible across global urban regions. These products provide daily movement-range information in an aggregate map, serving as a real-world instance of highly compressed aggregate mobility observations. They reduce the granularity of disclosed movement information by removing individual-level and pairwise spatial identities and providing instead coarse aggregate movement-distance observations relative to individuals' residential areas. In this dissertation, Meta MDM is therefore treated as an aggregate mobility observation design rather than as a directly observed OD-derived Trip Length Distribution (TLD).
 
 This dissertation addresses the fundamental scientific challenge of recovering disaggregated OD mobility matrices from aggregate mobility observations under extreme data scarcity. We reframe this challenge as an information sufficiency problem: *How much spatial-interaction information can be recovered from incomplete aggregate mobility observations, and what additional observable information is required for defensible OD reconstruction?*
 
@@ -55,7 +55,7 @@ When complete target-city OD ground truth is unavailable, reconstruction must be
 # 3. Paper 1 Formulation — Information Retention in Aggregate Mobility Observations
 
 * **Research Gap 1 (Observation Sufficiency & Determinants - Gaps 1 & 2):** Calibration models traditionally assume continuous distance observations or disaggregated flows. However, there is limited systematic understanding of what spatial-interaction information is retained by binned aggregate observations themselves, and how spatial support, distance resolution, and bin geometry control that information loss under varying model complexity.
-* **Paper 1 Mission:** Parametric statistical inference of collective distance sensitivity from aggregate TLDs, utilizing $\beta$ as an interpretable measurement probe of information degradation across Exponential, Power-law, and Tanner models.
+* **Paper 1 Mission:** Parametric statistical inference of collective distance sensitivity from aggregate mobility observations, using OD-derived TLDs as the controlled benchmark representation and Meta-like aggregate movement observations as the practical observation design, with $\beta$ serving as an interpretable probe of information degradation across Exponential, Power-law, and Tanner models.
 * **Claim P1-A (Information Retention):** Three-bin aggregation preserves non-trivial distance-related ordering and trend information.
 * **Claim P1-B (Signal Retention vs. Parameter Fidelity):** Coarse aggregation can retain detectable distance-related signal while substantially degrading quantitative parameter fidelity ($R^2 = 0.9624$, Multi-start $\text{CV} = 0.00\%$ under 20-bins; $\text{Mean Error} \approx 36.94\%$ under 3-bins).
 
@@ -78,7 +78,7 @@ The likelihood of observing aggregate binned trip counts $\boldsymbol{y} = (y_1,
 $$\boldsymbol{y} \sim \text{Multinomial}(N, \boldsymbol{p}(\boldsymbol{\theta}))$$
 
 ```text
-Aggregate TLD (Meta 3-bin) ──► Grid-Start Bounded Likelihood ──► Parameter Optimizer ──► Primary Probe (β_3bin = 0.0989)
+Meta-like Aggregate Movement Observation (3-bin) ──► Grid-Start Bounded Likelihood ──► Parameter Optimizer ──► Primary Probe (β_3bin = 0.0989)
 ```
 
 By scanning the likelihood profile, we avoid local minima traps caused by the clipping penalty ceiling when outer bins have near-zero trip counts.
@@ -103,9 +103,9 @@ $$X_U \xrightarrow{\text{Spatial GNN}} (O_i, A_j)$$
 $$\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\boldsymbol{\theta}})$$
 
 ```text
-Open Features X_U ──────► Spatial GNN ────► Potentials (O_i, A_j) ──┐
-                                                                   ├──► Reconstructed Flows T_ij
-Aggregate TLD D_agg ────► Robust MLE ─────► Deterrence Parameter θ ─┘
+Open Features X_U ─────────────────────► Spatial GNN ────► Potentials (O_i, A_j) ──┐
+                                                                                   ├──► Reconstructed Flows T_ij
+Aggregate Mobility Observation y_agg ──► Robust MLE ─────► Deterrence Parameter θ ─┘
 ```
 
 ---
@@ -118,7 +118,7 @@ $$\text{Aggregate Mobility Observation } (\hat{\boldsymbol{\theta}}) + \text{Ope
 
 $$\hat{T}_{ij} = O_i A_j f(d_{ij}; \hat{\boldsymbol{\theta}})$$
 
-The aggregate mobility observation (TLD) provides a compressed distance-sensitivity signal from which a decay parameter $\hat{\boldsymbol{\theta}}$ is inferred via robust MLE. Open urban spatial features ($X_U$) separately provide spatial opportunity context — production and attraction potentials $(O_i, A_j)$ — that constrains the spatial allocation of flows. Local parameter inference of $\boldsymbol{\theta}$ is adopted as a modeling principle to respect city-specific distance-sensitivity profiles.
+The aggregate mobility observation provides a compressed distance-sensitivity signal from which a decay parameter $\hat{\boldsymbol{\theta}}$ is inferred via robust MLE. When the observation is generated directly from OD flows, it can be expressed as an OD-derived TLD; when it follows the Meta release design, it is treated as a Meta-like aggregate movement observation. Open urban spatial features ($X_U$) separately provide spatial opportunity context — production and attraction potentials $(O_i, A_j)$ — that constrains the spatial allocation of flows. Local parameter inference of $\boldsymbol{\theta}$ is adopted as a modeling principle to respect city-specific distance-sensitivity profiles.
 
 Because the aggregate observation alone is insufficient to uniquely determine the disaggregated OD matrix, complementary open urban information is required to narrow the solution space. The two information streams are combined operationally through the gravity integration model, rather than being assumed to represent empirically independent or uniquely separable components of mobility.
 
@@ -126,12 +126,12 @@ Because the aggregate observation alone is insufficient to uniquely determine th
 
 # 8. Ho Chi Minh City Case Study Strategy
 
-Ho Chi Minh City (HCMC) represents a high-priority, extreme data-scarcity urban domain in Southeast Asia. Lacking complete disaggregated OD travel matrices, HCMC serves as the ultimate real-world application testbed. The framework is zero-target-OD: target-city reconstruction uses open spatial features ($X_U$) and the aggregate travel-distance distribution ($D_{\text{target}}$) to infer a local distance-interaction parameterization ($\hat{\boldsymbol{\theta}}$), while explicitly avoiding disaggregated target-city OD observations.
+Ho Chi Minh City (HCMC) represents a high-priority, extreme data-scarcity urban domain in Southeast Asia. Lacking complete disaggregated OD travel matrices, HCMC serves as the ultimate real-world application testbed. The framework is zero-target-OD: target-city reconstruction uses open spatial features ($X_U$) and the aggregate mobility observation ($\mathbf{y}_{\text{target}}$) to infer a local distance-interaction parameterization ($\hat{\boldsymbol{\theta}}$), while explicitly avoiding disaggregated target-city OD observations.
 
 ```text
-HCMC Open Spatial Features (OSM, WorldPop, POI) ──► Potentials (O_i, A_j) ──┐
-                                                                            ├──► Reconstructed HCMC OD Matrix
-Meta MDM HCMC Aggregate TLD (3-bin) ──────────────► Deterrence Parameter θ ─┘
+HCMC Open Spatial Features (OSM, WorldPop, POI) ───────────► Potentials (O_i, A_j) ──┐
+                                                                                      ├──► Reconstructed HCMC OD Matrix
+Meta-like HCMC Aggregate Movement Observation (3-bin) ───► Deterrence Parameter θ ─┘
 ```
 
 ---

@@ -26,7 +26,7 @@
 ```text
 OBSERVATION ──► RECOVERABLE ──► OBSERVATION ──► UNDERDETERMINATION ──► COMPLEMENTARY ──► OD RECONSTRUCTION ──► INDEPENDENT
                 INFORMATION     SENSITIVITY                              CONTEXT                                VALIDATION
-  (Meta MDM)     (Paper 1)       (T29-T30)       (TLD -> OD Non-ID)      (Paper 2)          (C3 Pipeline)        (HCMC Case Study)
+  (Meta MDM Obs.) (Paper 1)      (T29-T30)       (Agg. Obs. -> OD Non-ID) (Paper 2)         (C3 Pipeline)        (HCMC Case Study)
 ```
 
 ---

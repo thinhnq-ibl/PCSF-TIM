@@ -34,10 +34,10 @@ Distance-deterrence governs spatial interaction → Requires calibration → Cur
 **Objective:** Briefly summarize the methodological workflow.
 
 **Logic:**
-Aggregate mobility → Trip-length distribution → Likelihood → Parameter inference → Gravity calibration → OD estimation
+Aggregate mobility observation → Observation model → Likelihood → Parameter inference → Gravity calibration → OD estimation
 
 **Template:**
-> Aggregate travel-distance distributions are extracted from Meta Movement Distribution Maps and formulated within a multinomial likelihood framework to infer latent distance-deterrence parameters. The recovered parameters are subsequently used to calibrate a gravity model for OD estimation.
+> Aggregate movement-distance observations are obtained from Meta Movement Distribution Maps and linked to an explicit observation model within a multinomial likelihood framework to infer latent distance-deterrence parameters. OD-derived trip-length distributions are used as the controlled benchmark representation, and the recovered parameters are subsequently used to calibrate a gravity model for OD estimation.
 
 ---
 

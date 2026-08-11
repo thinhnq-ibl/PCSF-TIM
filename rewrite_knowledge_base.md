@@ -58,7 +58,7 @@ What types of mobility datasets are available to observe Spatial Interaction?
 
 Nội dung
 
-Trong nhiều thập kỷ qua, sự phát triển của công nghệ đã tạo ra nhiều nguồn dữ liệu khác nhau để quan sát Human Mobility. Các nguồn dữ liệu bao gồm Household Travel Survey (HTS), Census, Call Detail Records (CDR), GPS trajectories, Smart Card, Location-Based Services (LBS) và các sản phẩm mobility mở như Meta Movement Distribution Maps. Mỗi nguồn dữ liệu được thu thập theo một cơ chế khác nhau và phản ánh Spatial Interaction ở những mức độ chi tiết khác nhau. Mặc dù khác nhau về phương pháp thu thập và phạm vi bao phủ, tất cả đều được xem là các quan sát của cùng một hiện tượng Spatial Interaction.
+Trong nhiều thập kỷ qua, sự phát triển của công nghệ đã tạo ra nhiều nguồn dữ liệu khác nhau để quan sát Human Mobility. Các nguồn dữ liệu bao gồm Household Travel Survey (HTS), Census, Call Detail Records (CDR), GPS trajectories, Smart Card, Location-Based Services (LBS) và các sản phẩm mobility mở như Meta Movement Distribution Maps. Mỗi nguồn dữ liệu được thu thập theo một cơ chế khác nhau và phản ánh Spatial Interaction ở những mức độ chi tiết khác nhau. Riêng Meta Movement Distribution nên được hiểu cẩn thận như một aggregate movement observation về phạm vi di chuyển hàng ngày tương đối với nơi cư trú, chứ không phải là một Trip Length Distribution được quan sát trực tiếp từ OD. Mặc dù khác nhau về phương pháp thu thập và phạm vi bao phủ, tất cả đều được xem là các quan sát của cùng một hiện tượng Spatial Interaction.
 
 APA References
 Barbosa et al. (2018).
@@ -72,7 +72,7 @@ Do different mobility datasets preserve the same information about Spatial Inter
 
 Nội dung
 
-Mặc dù cùng phản ánh Spatial Interaction, các nguồn dữ liệu mobility không lưu giữ cùng một lượng thông tin. Dữ liệu quỹ đạo cá nhân cung cấp thông tin chi tiết về đường đi, thời gian và trình tự các chuyến đi, trong khi ma trận OD chỉ lưu giữ thông tin về số lượng chuyến đi giữa các vùng. Các thống kê tổng hợp như travel-distance distributions hay mobility indices tiếp tục nén thông tin bằng cách loại bỏ danh tính của các cặp OD nhưng vẫn giữ lại các đặc trưng thống kê ở mức tập thể. Vì vậy, mỗi loại dữ liệu nên được hiểu là một observation layer khác nhau của cùng một đối tượng khoa học, thay vì là các hiện tượng độc lập.
+Mặc dù cùng phản ánh Spatial Interaction, các nguồn dữ liệu mobility không lưu giữ cùng một lượng thông tin. Dữ liệu quỹ đạo cá nhân cung cấp thông tin chi tiết về đường đi, thời gian và trình tự các chuyến đi, trong khi ma trận OD chỉ lưu giữ thông tin về số lượng chuyến đi giữa các vùng. Các thống kê tổng hợp như OD-derived travel-distance distributions, aggregate movement-distance observations, hay mobility indices tiếp tục nén thông tin bằng cách loại bỏ danh tính của các cặp OD nhưng vẫn giữ lại các đặc trưng thống kê ở mức tập thể. Vì vậy, mỗi loại dữ liệu nên được hiểu là một observation layer khác nhau của cùng một đối tượng khoa học, thay vì là các hiện tượng độc lập.
 
 APA References
 Barbosa et al. (2018).
