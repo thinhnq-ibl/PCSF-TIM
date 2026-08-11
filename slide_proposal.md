@@ -2,9 +2,9 @@
 
 ## Slide 1 - Title
 
-# Learning Human Mobility from Aggregate Observations
+# Recovering Origin-Destination Flows from Aggregate Mobility Observations
 
-### Sufficiency of Observable Information and Complementary Urban Context for OD Reconstruction
+### Information Sufficiency, Observation Design, and Complementary Urban Context
 
 **PhD Dissertation Proposal**
 
@@ -18,7 +18,7 @@ Core question:
 
 ## Slide 2 - Research Motivation
 
-# Why This Topic Matters
+# The Planning Need
 
 Urban planning needs OD information for transport policy, infrastructure, and accessibility design.
 
@@ -32,8 +32,8 @@ $$
 
 Research motivation:
 
-- Move from data scarcity to defensible OD inference.
-- Build a method that works under incomplete mobility observations.
+- Move from missing OD data to defensible OD inference.
+- Study what can be supported by incomplete observations before claiming reconstruction.
 
 > **Key refs:** Ortuzar and Willumsen (2011); Barbosa et al. (2018); Pappalardo et al. (2023)
 
@@ -41,7 +41,7 @@ Research motivation:
 
 ## Slide 3 - Practical Problem
 
-# The Core Practical Problem
+# The Observation Problem
 
 Complete OD data are costly and difficult to obtain at scale.
 
@@ -49,8 +49,14 @@ Common sources are limited by cost, privacy, access, and coverage stability.
 
 Resulting challenge:
 
-- Cities may have aggregate mobility signals.
+- Cities may observe only aggregate mobility statistics.
 - Cities still lack reliable disaggregated OD matrices.
+
+Examples of incomplete observations:
+
+- Distance-binned movement summaries.
+- Mobility indices and marginals.
+- Partial traffic or boarding counts.
 
 $$
 \text{Aggregate observation} \neq \text{Complete OD information}
@@ -62,18 +68,34 @@ $$
 
 ## Slide 4 - Scientific Problem Framing
 
-# Information Sufficiency Problem
+# Conceptual Breakthrough
 
-This dissertation treats OD reconstruction as an information-sufficiency problem.
+This dissertation treats OD reconstruction as an observation-and-identifiability problem.
 
-Main scientific issue:
-
-- What information survives aggregation?
-- What is lost?
-- What additional information is needed for recovery?
+Conceptual representation:
 
 $$
-\text{Observation} \rightarrow \text{Recoverable Information} \rightarrow \text{OD Recoverability}
+\boxed{\mathbf{T}}
+\xrightarrow{A}
+\boxed{\mathbf{Y}}
+$$
+
+where:
+
+- $\mathbf{T}$ = latent OD flow matrix.
+- $A$ = aggregation / observation operator.
+- $\mathbf{Y}$ = observed aggregate mobility statistics.
+
+Core problem:
+
+$$
+A(\mathbf{T}_1)=A(\mathbf{T}_2)
+\quad \text{while} \quad
+\mathbf{T}_1 \neq \mathbf{T}_2
+$$
+
+$$
+\mathrm{Observation\ consistency} \neq \mathrm{OD\ identification}
 $$
 
 > **Key refs:** Abrahamsson (1998); Cover and Thomas (2006)
@@ -82,11 +104,21 @@ $$
 
 ## Slide 5 - Core Scientific Premises
 
-# Three Premises
+# Evaluation Principle
 
 1. Aggregate observation is informative but non-identifying at OD level.
-2. Matching aggregate input is not equivalent to valid OD reconstruction.
-3. Validity requires improvement on unconstrained OD properties.
+2. Matching the observed aggregate input is not equivalent to valid OD reconstruction.
+3. A reconstruction should be evaluated on OD properties that were not directly used as fitting constraints.
+
+If the input constrains only an aggregate distance statistic such as $P(d)$, matching $P(d)$ is not independent validation.
+
+Defensible validation should also examine unconstrained OD properties such as:
+
+- OD overlap.
+- Origin and destination marginals.
+- Flow concentration.
+- Network structure.
+- Spatial heterogeneity.
 
 $$
 \text{Input consistency} \neq \text{Reconstruction validity}
@@ -98,23 +130,27 @@ $$
 
 ## Slide 6 - Research Gap Map
 
-# Where the Gap Remains
+# What Existing Research Has Solved
 
-Existing literature supports pieces of the puzzle.
+Existing studies have established important components of the problem:
 
-The remaining gap is the integrated question:
+- Spatial interaction models can generate OD flows.
+- Deep learning models can use urban and geographic features to predict flows.
+- Aggregate mobility datasets provide useful but distorted partial views of mobility systems.
 
 $$
-\text{Aggregate observation constraints}
-\rightarrow
-\text{What is recoverable}
-\rightarrow
-\text{How complementary context improves OD reconstruction}
+\mathrm{Known\ pieces} \neq \mathrm{the\ missing\ scientific\ answer}
 $$
+
+What remains unknown is:
+
+- What OD structure is identifiable from a specified aggregate observation.
+- Which observation-design choices determine that recoverability.
+- How much additional information each complementary observable source contributes once the aggregate observation is held fixed.
 
 Gap type:
 
-- Synthesis and inference gap under shared observation constraints.
+- An identifiability and incremental-information gap in OD reconstruction under aggregate observation constraints.
 
 > **Key refs:** Abrahamsson (1998); Merlin (2020); Simini et al. (2021); Gallotti et al. (2024)
 
@@ -122,16 +158,38 @@ Gap type:
 
 ## Slide 7 - Gap 1
 
-# Gap 1: Observation Sufficiency
+# Three Unanswered Questions
+
+This proposal organizes the gap as a progression:
+
+$$
+\boxed{
+\mathrm{Can\ we\ recover?}
+\rightarrow
+\mathrm{When\ can\ we\ recover?}
+\rightarrow
+\mathrm{What\ helps\ us\ recover\ more?}
+}
+$$
+
+Gap 1 — Identifiability
 
 Question:
 
-> What OD-relevant information remains recoverable after strong aggregation?
+> What OD information is recoverable from aggregate observations at all?
+
+Gap 2 — Observation Design
+
+> Which properties of the observation determine that recoverability?
+
+Gap 3 — Information Complementarity
+
+> What additional observable information reduces the remaining reconstruction uncertainty?
 
 Need:
 
-- Controlled analysis of compression vs recoverability.
-- Clear boundary between retained signal and lost fidelity.
+- A controlled recoverability map.
+- A defensible dependency structure across the full thesis.
 
 > **Key refs:** Merlin (2020); Cover and Thomas (2006)
 
@@ -139,21 +197,37 @@ Need:
 
 ## Slide 8 - Gap 2
 
-# Gap 2: Determinants of Sufficiency
+# Validation Architecture
 
-Question:
-
-> How do observation-design choices affect recoverability?
-
-Test dimensions:
-
-- Spatial support
-- Bin resolution
-- Bin geometry
-- Model complexity
+Level 1 — Controlled benchmark setting
 
 $$
-\text{Recoverability} = f(\text{support, bins, geometry, complexity})
+\mathbf{T}^{GT}
+\xrightarrow{A}
+\mathbf{Y}
+\xrightarrow{\text{reconstruction}}
+\hat{\mathbf{T}}
+$$
+
+Because $\mathbf{T}^{GT}$ is known, recoverability can be measured directly.
+
+Level 2 — Real data-scarce city
+
+$$
+\mathbf{Y}_{\text{real}} + \mathbf{X}_{\text{urban}}
+\xrightarrow{\text{reconstruction}}
+\hat{\mathbf{T}}_{\text{real}}
+$$
+
+Then evaluate with independent partial observations rather than the fitting constraint itself.
+
+Why this matters:
+
+- Level 1 establishes the recoverability boundary.
+- Level 2 establishes real-world external defensibility.
+
+$$
+\mathrm{controlled\ validity} + \mathrm{external\ validation}
 $$
 
 > **Key refs:** Gallotti et al. (2024); Merlin (2020)
@@ -162,43 +236,69 @@ $$
 
 ## Slide 9 - Gap 3
 
-# Gap 3: Complementary Reconstruction Value
+# Unified Research Framework
 
-Question:
-
-> How much OD reconstruction improvement is gained from open urban spatial information?
-
-Target quantity:
+Latent system:
 
 $$
-\Delta \text{CPC}
+\mathbf{T}
+\xrightarrow{A}
+\mathbf{Y}
 $$
 
-under fixed aggregate mobility constraints.
+Paper 1 asks:
 
-Focus is marginal improvement, not just predictive performance.
+$$
+R(\mathbf{T} \mid \mathbf{Y})
+$$
 
-> **Key refs:** Simini et al. (2021); Rong et al. (2023); Xu et al. (2025)
+Paper 2 asks:
+
+$$
+\Delta R
+=
+R(\hat{\mathbf{T}}_{\mathbf{Y},\mathbf{X}}, \mathbf{T})
+-
+R(\hat{\mathbf{T}}_{\mathbf{Y}}, \mathbf{T})
+$$
+
+where $\mathbf{X}$ denotes complementary urban context.
+
+Interpretation:
+
+- Paper 1 establishes the information ceiling under observation alone.
+- Paper 2 tests whether complementary observables close the remaining gap.
+
+This makes the PhD one integrated inference program rather than two loosely related projects.
+
+> **Key refs:** Fotheringham (1981); Simini et al. (2021); Gallotti et al. (2024)
 
 ---
 
 ## Slide 10 - Paper 1
 
-# Paper 1: Information Retention in Aggregate Mobility Observations
+# Paper 1: Recoverability Boundary
 
 Research objective:
 
-- Quantify what information is retained and lost after aggregation.
+- Determine what OD-relevant information survives aggregation.
+- Distinguish retained signal from lost fidelity.
 
 Design:
 
-- Systematic experiments across support, bins, geometry, and complexity.
+- Controlled experiments with known OD ground truth.
+- Systematic variation in spatial support, bin resolution, bin geometry, and model complexity.
 
-Expected output:
+Scientific output:
 
 $$
-\text{Observation Compression} \rightarrow \text{Parameter Fidelity / Recoverability Profile}
+R = f(\mathrm{support}, \mathrm{resolution}, \mathrm{geometry}, \mathrm{model\ flexibility})
 $$
+
+Expected contribution:
+
+- A recoverability map under aggregate observation constraints.
+- A principled boundary for when observation-only reconstruction becomes unreliable.
 
 > **Key refs:** Hyman (1969); Tanner (1961); Fotheringham (1981); Rubio-Herrero and Munuzuri (2023)
 
@@ -206,44 +306,60 @@ $$
 
 ## Slide 11 - Paper 2
 
-# Paper 2: Complementary Information for OD Reconstruction
+# Paper 2: Complementary Information and HCMC Testbed
 
 Research objective:
 
-- Estimate incremental OD reconstruction value from open spatial context.
+- Estimate the conditional value of complementary urban information once the aggregate observation is held fixed.
+- Deploy the framework in a real data-scarce urban testbed.
 
 Design:
 
-- Combine aggregate mobility observation with open urban features.
-- Evaluate marginal gains under the same observation constraints.
+- Compare $R(\hat{\mathbf{T}}_{\mathbf{Y}}, \mathbf{T})$ against $R(\hat{\mathbf{T}}_{\mathbf{Y},\mathbf{X}}, \mathbf{T})$.
+- Use open urban features as auxiliary observables.
+- Use Ho Chi Minh City as the empirical testbed for external validation with independent partial observations.
 
 Expected output:
 
 $$
-\text{Aggregate Mobility Signal} + \text{Open Spatial Context}
-\rightarrow
-\text{Improved OD Recoverability}
+\Delta R
+=
+R(\hat{\mathbf{T}}_{\mathbf{Y},\mathbf{X}}, \mathbf{T})
+-
+R(\hat{\mathbf{T}}_{\mathbf{Y}}, \mathbf{T})
 $$
 
-> **Key refs:** Wilson (1971); Simini et al. (2021); Fotheringham (1981)
+Operationally, $R$ can be evaluated using CPC and complementary unconstrained OD properties rather than a single metric alone.
+
+> **Key refs:** Wilson (1971); Simini et al. (2021); Rong et al. (2023); Xu et al. (2025)
 
 ---
 
 ## Slide 12 - Dissertation Scope and Deliverables
 
-# What Will Be Delivered
+# PhD Contribution
 
 Scientific deliverables:
 
-- A recoverability map under aggregate observation constraints.
-- A framework for observation-sensitivity analysis.
-- A complementary-information reconstruction pipeline.
-- A defensibility-oriented evaluation logic for reconstructed OD.
+- A framework for determining what OD structure is supported by incomplete observations.
+- A recoverability boundary under explicit observation-design choices.
+- An estimate of the conditional value of complementary urban context.
+- A validation architecture combining controlled benchmarks and real-world external checks.
+
+Closing claim:
+
+> The contribution is not another OD prediction model. It is a framework for determining what OD structure is supported by incomplete observations, when reconstruction becomes unreliable, and which additional observable information makes it more defensible.
 
 Thesis logic:
 
 $$
-\text{Observation} \rightarrow \text{Recoverability} \rightarrow \text{Complementary Information} \rightarrow \text{Defensible Reconstruction}
+\mathrm{Incomplete\ Observation}
+\rightarrow
+\mathrm{Information\ Sufficiency}
+\rightarrow
+\mathrm{OD\ Recoverability}
+\rightarrow
+\mathrm{Complementary\ Information}
 $$
 
 > **Key refs:** Abrahamsson (1998); Fotheringham (1981); Simini et al. (2021); Liang et al. (2013)
