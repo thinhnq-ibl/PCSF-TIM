@@ -1,5 +1,8 @@
 # Mechanism-Based Human Mobility Science — Mind Map & Architecture State (v13.0+)
 
+### Subtitle
+*Towards Mechanism-Based Human Mobility Science through Observability, Recoverability, and Empirical Defensibility*
+
 > **CORE DISSERTATION MASTER STATEMENT (FROZEN KEY SENTENCE):**  
 > *"This dissertation investigates the sufficiency of observable information for reconstructing urban spatial interaction under mobility data scarcity. It examines what information is retained or lost under aggregate mobility observation, how observation design affects recoverability, and how complementary open urban information improves OD reconstruction when the mobility observation alone is insufficient."*  
 > *(Vietnamese: "Luận án này nghiên cứu tính đầy đủ của thông tin quan sát được để khôi phục tương tác không gian đô thị trong điều kiện khan hiếm dữ liệu di chuyển. Luận án phân tích thông tin nào được giữ lại hoặc mất đi dưới các quan sát di chuyển gộp, thiết kế quan sát ảnh hưởng thế nào đến khả năng định danh, và thông tin không gian đô thị mở bổ trợ cải thiện việc khôi phục OD ra sao khi bản thân quan sát di chuyển không đủ đơn độc.")*  
@@ -21,9 +24,9 @@
 ## 1. Refined 7-Stage Master Derivation Backbone
 
 ```text
-OBSERVATION ──► INFORMATION ──► INFORMATION ──► UNDERDETERMINATION ──► COMPLEMENTARY ──► OD RECONSTRUCTION ──► INDEPENDENT
-                  RETENTION         LOSS                                INFORMATION                               VALIDATION
-  (Meta MDM)      (Paper 1)        (T29-T30)    (TLD -> OD Non-ID)       (Paper 2)          (C3 Pipeline)        (HCMC Case Study)
+OBSERVATION ──► RECOVERABLE ──► OBSERVATION ──► UNDERDETERMINATION ──► COMPLEMENTARY ──► OD RECONSTRUCTION ──► INDEPENDENT
+                INFORMATION     SENSITIVITY                              CONTEXT                                VALIDATION
+  (Meta MDM)     (Paper 1)       (T29-T30)       (TLD -> OD Non-ID)      (Paper 2)          (C3 Pipeline)        (HCMC Case Study)
 ```
 
 ---
@@ -36,7 +39,7 @@ OBSERVATION ──► INFORMATION ──► INFORMATION ──► UNDERDETERMINA
 * **Complexity-Controlled Failure Regression:** $\text{CPC} \sim \log(N)$ yields $\beta = -0.0611$ ($p < 0.01$), confirming spatial system scale $\log(N)$ maintains an independent negative difficulty association after density control.
 * **Negative Evidence on Simple Feature Similarity:** Proper cross-city model transfer reveals that simple similarity in raw feature space does not significantly predict transfer performance directly ($\rho = +0.0955, p = 0.1681$).
 * **Robustness of Spatial Context:** In downstream OD reconstruction, the incremental CPC gain provided by independent spatial features is highly robust to parameter misspecification in the distance decay function (gain remains stable between $+0.0411$ and $+0.0530$ across $\pm 60\%$ beta perturbations).
-* **Deterrence Robustness & Complexity (T35):** In the Chicago case study, parameter fidelity deteriorates under increasing compression for both Exp and Power-law models, while the two-parameter Tanner form exhibits substantially greater instability, supporting the hypothesis that higher parameterization increases information demand.
+* **Deterrence Robustness & Complexity (T35):** In the Chicago case study, compression-induced parameter degradation is observed across alternative deterrence specifications (Exponential, Power-law, Tanner), with Tanner exhibiting higher instability under coarse compression.
 
 ---
 *Status: Updated V13.0+ — Feasibility Frozen & Proposal Scientifically Locked.*
