@@ -44,20 +44,29 @@ Reconstructing spatial interactions from partial data has a rich history in tran
 In spatial interaction modeling, foundational work by Fotheringham (1981, 1986) establishes that estimated distance-decay parameters ($\hat{\boldsymbol{\theta}}$) are systematically influenced by the spatial configuration of opportunity fields, demonstrating that observed decay rates are not pure behavioral parameters. Liang et al. (2013) confirm this by demonstrating that aggregate exponential travel-length distributions can emerge naturally from exponential urban population density decay. Gallotti et al. (2024) further demonstrate that observed mobility statistics and downstream urban conclusions vary systematically across measurement pipelines.
 
 While these streams of literature are individually mature, their intersection has received limited systematic empirical attention. Specifically:
-1. **Gap 1 — Observation Sufficiency:** What OD-relevant information survives highly compressed aggregate mobility observations (such as Meta MDM)? Existing work demonstrates that highly reduced mobility summaries such as median travel time can support single-parameter calibration when the spatial system is otherwise fully specified (Merlin 2020), but does not systematically characterize how observation resolution, bin geometry, and spatial support govern recoverability from compressed aggregate mobility representations under zero-target-OD constraints.
-2. **Gap 2 — Determinants of Observation Sufficiency:** How do spatial support, bin resolution, bin geometry, and model complexity affect recoverability? Existing studies evaluate data sparsity generally, but the joint effect of these observation design parameters on downstream parameter recoverability has received limited attention.
-3. **Gap 3 — Complementary Reconstruction Value:** How much marginal reconstruction improvement ($\Delta\text{CPC}$) is obtained from adding open urban spatial information under the same mobility observation constraints? Although geographic variables improve flow prediction (e.g. DeepGravity, Imagery2Flow 2025), it remains less systematically quantified how much marginal OD reconstruction improvement each additional open data source contributes on top of incomplete aggregate observations.
-
-When complete target-city OD ground truth is unavailable, reconstruction must be evaluated against independent partial observations and unconstrained OD properties rather than against the observations used to construct the model. This validation requirement is addressed as a methodological contribution (C4) in the HCMC case study.
+1. **Gap 1 — Information Retained / Lost:** Existing studies do not sufficiently characterize what reconstruction-relevant information is retained or lost when spatial interaction is observed only through aggregate mobility measurements.
+2. **Gap 2 — Observation Design & Resolution:** The effect of aggregate observation design and resolution on OD recoverability remains insufficiently understood, particularly beyond properties directly constrained by the observation.
+3. **Gap 3 — Complementary Urban Information:** When aggregate mobility observations are insufficient, it remains unclear how much complementary independently observable urban information can reduce the remaining reconstruction uncertainty.
 
 ---
 
-# 3. Paper 1 Formulation — Information Retention in Aggregate Mobility Observations
+### Core Research Questions (RQs)
+* **RQ1 (Information Characterization):** *What reconstruction-relevant information is retained or lost under aggregate mobility observation?*
+* **RQ2 (Observation Design):** *How does aggregate mobility observation design affect the recoverability of urban spatial interaction?*
+* **RQ3 (Complementary Information Integration):** *To what extent can complementary open urban information improve OD reconstruction when aggregate mobility observation alone is insufficient?*
+* **RQ4 (Empirical Defensibility):** *How can reconstructed OD patterns be empirically evaluated when complete target-city OD ground truth is unavailable?*
 
-* **Research Gap 1 (Observation Sufficiency & Determinants - Gaps 1 & 2):** Calibration models traditionally assume continuous distance observations or disaggregated flows. However, there is limited systematic understanding of what spatial-interaction information is retained by binned aggregate observations themselves, and how spatial support, distance resolution, and bin geometry control that information loss under varying model complexity.
-* **Paper 1 Mission:** Parametric statistical inference of collective distance sensitivity from aggregate mobility observations, using OD-derived TLDs as the controlled benchmark representation and Meta-like aggregate movement observations as the practical observation design, with $\beta$ serving as an interpretable probe of information degradation across Exponential, Power-law, and Tanner models.
-* **Claim P1-A (Information Retention):** Three-bin aggregation preserves non-trivial distance-related ordering and trend information.
-* **Claim P1-B (Signal Retention vs. Parameter Fidelity):** Coarse aggregation can retain detectable distance-related signal while substantially degrading quantitative parameter fidelity ($R^2 = 0.9624$, Multi-start $\text{CV} = 0.00\%$ under 20-bins; $\text{Mean Error} \approx 36.94\%$ under 3-bins).
+> **Structural Rule:** The progression $\text{RQ1} \to \text{RQ2} \to \text{RQ3}$ strictly operates on **information sufficiency for reconstruction** without assuming $S \perp B$ or requiring $S$ and $B$ to be independently observable.
+
+---
+
+# 3. Paper 1 Formulation — Aggregate Observation Information Characterization
+
+* **Research Focus (Gaps 1 & 2):** Characterize what reconstruction-relevant information is retained or lost under aggregate mobility observation across 50 US metropolitan areas.
+* **Paper 1 Mission:** Parametric statistical inference and information characterization mapping $R(c, r, p)$ across city $c$, observation design $r$, and evaluation property $p$ (distance-distribution error, Q50/Q90, CPC, network flow properties, and inferred deterrence parameter $\beta$ as a *diagnostic reconstruction property*).
+* **Core Question:** *"What is recoverable from this aggregate observation, and what remains unconstrained?"*
+* **Claim P1-A (Information Retention):** Coarse aggregate distance observation retains measurable information relevant to OD reconstruction, though information recovered varies across properties ($\text{Information Sufficiency is Property-Dependent}$).
+* **Claim P1-B (Diagnostic Parameter Representation):** The behavioural representation induced by coarse observation differs systematically from that obtained under fuller OD information ($\hat{\beta}_3 = 0.2499$ vs. OD ref, a $10.64\%$ systematic difference serving as a diagnostic property rather than "true human behaviour").
 
 ---
 
@@ -85,12 +94,17 @@ By scanning the likelihood profile, we avoid local minima traps caused by the cl
 
 ---
 
-# 5. Paper 2 Formulation — Complementary Information for OD Reconstruction
+# 5. Paper 2 Formulation — Complementary Open Information Integration
 
-* **Research Gap 2 (Complementary Reconstruction Value - Gap 3):** Aggregate mobility observations are mathematically underdetermined. When the mobility observation itself is incomplete and quantitatively degraded, it remains less systematically quantified how much marginal OD reconstruction improvement is obtained by adding each open urban data source ($X_U$) under the same aggregate observation constraints.
-* **Core Sub-Question (Spatial Context Robustness):** *To what extent does open urban spatial context preserve incremental reconstruction value when distance-interaction information is uncertain?*
-* **Paper 2 Mission:** Spatial representation learning (Spatial GNNs) to map open spatial features $X_U$ (Population, POIs, Area, Roads, Accessibility, etc.) into operational production and attraction potentials $(O_i, A_j)$.
-* **Spatial Complementarity Mechanism (T32):** Spatial variation in population and opportunities supplies complementary allocation information that is not directly captured by aggregate distance observations. Among the tested open spatial sources, population and POI density provide most of the observed incremental CPC improvement, accounting for approximately **97.6%** of the observed CPC gain provided by the full open spatial feature set under clean 3-bin TLD-MLE conditions.
+* **Research Focus (Gap 3):** When aggregate mobility observation alone is insufficient, quantify how much complementary independently observable open urban information improves OD reconstruction.
+* **Paper 2 Mission:** Spatial representation learning (Spatial GNNs) mapping open spatial features $X_U$ (Population, POIs, Area, Roads, Accessibility, etc.) to operational production and attraction potentials $(O_i, A_j)$, evaluated on the 50-city experimental triad:
+  1. `Aggregate Mobility Observation` (Baseline)
+  2. `Aggregate Mobility Observation + Open Urban Information` (Proposed Open Framework)
+  3. `Aggregate Mobility Observation + Oracle Destination Info` (Upper-Bound Benchmark)
+* **Core Recovery Index:**
+  $$\text{RecoveryRatio}_c = \frac{\text{Gain}_c^{\text{open}}}{\text{Gain}_c^{\text{oracle}}} = \frac{\text{CPC}_c(\text{Agg}+\text{Open}) - \text{CPC}_c(\text{Agg})}{\text{CPC}_c(\text{Agg}+\text{Oracle}) - \text{CPC}_c(\text{Agg})}$$
+* **Spatial Complementarity Mechanism (T32 & Q6b):** Aggregate mobility observation does not contain all information useful for OD reconstruction ($\text{TLD} + A_j^{\text{uniform}} \to \text{TLD} + A_j^{\text{oracle}}$ yields $\Delta\text{CPC} = +0.0636$). Among open spatial sources, population and POI density supply key complementary allocation context (~97.6% of full spatial context gain).
+
 
 ---
 
@@ -156,11 +170,24 @@ Validation follows a **3-Level Indirect Validation Hierarchy**:
 
 ---
 
-# 10. Preliminary Feasibility Evidence (v13.0 Audited Evidence Base)
+# 10. Preliminary Feasibility Evidence (v14.0 Audited Evidence Base)
 
 The pre-validation suite was executed across the **50 US Metropolitan Areas Dataset** under a controlled simulation paradigm ($\text{Full OD} \to \text{Meta 3-bin} \to \text{Hide OD} \to \text{Reconstruct} \to \text{Reveal OD}$):
 
+### Pilot Diagnostic Battery (Q0–Q6b) & Narrative Reinterpretation
+
+| Diagnostic Test | Measured Result | Aligned Narrative Interpretation |
+| :--- | :--- | :--- |
+| **Q1: TLD Information Retention** | $\Delta V_{\text{Q90}} > 0, \Delta V_{\text{CPC}} > 0$ <br> $NLL_{\text{shuffle}} < NLL_{\text{true}} < NLL_{\text{noTLD}}$ | **Coarse aggregate distance observation retains measurable information relevant to OD reconstruction**, though information recovered varies across properties ($\text{Information Sufficiency is Property-Dependent}$). |
+| **Q2: Compression Discrepancy** | $\hat{\beta}_3 = 0.2499$ vs. OD ref ($10.64\%$ diff) | **The behavioural representation induced by coarse observation differs systematically from that obtained under fuller OD information.** ($\beta$ is a diagnostic property, not "true behaviour"). |
+| **Q3: Identification Stability** | Profile LR $\in [0.2498, 0.2500]$ | **The chosen distance-deterrence representation is statistically identifiable under this observation/model configuration.** (Shows precise optimum given assumed gravity model; does NOT prove "true travel behaviour identified"). |
+| **Q5 / Q6a: Cross-City Diagnostic** | $5/6$ $\text{OWN\_CITY\_BETTER}$, $1/6$ $\text{CROSS\_CITY\_BETTER}$ | **Cross-city reuse of inferred mobility representations cannot be assumed to be universally valid.** (Acts as caution; parameterization from one city lacks uniform cross-city performance). |
+| **Q6b: Complementary Information Bridge** | $\text{TLD} + A_j^{\text{uniform}} \to \text{TLD} + A_j^{\text{oracle}}$ ($\Delta \text{CPC} = +0.0636$) | **The aggregate mobility observation does not contain all information useful for OD reconstruction; complementary destination-side information has incremental value.** (Serves as upper-bound feasibility evidence for Paper 2). |
+
+---
+
 ### Master Experiment Registry & Quantitative Results
+
 
 | Experiment | Dataset & Cities | Training Protocol | Available Inputs | Target OD Status | Key CPC Metric |
 | :--- | :--- | :--- | :--- | :--- | :---: |

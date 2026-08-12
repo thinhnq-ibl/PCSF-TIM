@@ -56,33 +56,67 @@ This architecture is grounded in foundational and modern spatial interaction lit
 
 ## 3. Paper Scope & Core Research Questions
 
-### 3.1 Core Research Questions (RQs)
-* **Gap 1 — Observation Sufficiency:** *What OD-relevant information survives highly compressed aggregate mobility observations?*
-* **Gap 2 — Determinants of Observation Sufficiency:** *How do spatial support, bin resolution, bin geometry, and model complexity affect recoverability?*
-* **Gap 3 — Complementary Reconstruction Value:** *How much marginal reconstruction improvement is obtained from adding open urban spatial information under the same mobility observation constraints?*
-* **RQ4 — Empirical Defensibility:** *How can reconstructed OD patterns be empirically evaluated when complete target-city OD ground truth is unavailable?*
+### 3.1 3 Core Research Gaps & 3 Aligned RQs
+
+* **Gap 1 — Information Retained / Lost:** Existing studies do not sufficiently characterize what reconstruction-relevant information is retained or lost when spatial interaction is observed only through aggregate mobility measurements.
+* **Gap 2 — Observation Design & Resolution:** The effect of aggregate observation design and resolution on OD recoverability remains insufficiently understood, particularly beyond properties directly constrained by the observation.
+* **Gap 3 — Complementary Urban Information:** When aggregate mobility observations are insufficient, it remains unclear how much complementary independently observable urban information can reduce the remaining reconstruction uncertainty.
 
 ---
 
-### 3.2 Paper Stream & Technical Scope
-* **Paper 1 — Information Retention in Aggregate Mobility Observations**
-  - *Research Question:* *How does the design of an aggregate mobility observation determine what spatial-interaction information remains recoverable?*
-  - *Technical Scope:* Evaluates the observation transformation ($OD \to \text{Observation} \to \text{Information}$) across the axes of $\text{spatial support} \times \text{distance resolution} \times \text{bin geometry} \times \text{model complexity}$.
-  - *Decay Probes:* Exponential primary probe (stable, interpretable), Power-law robustness check, and Tanner complexity stress test.
-  - *Key Evidence:* T28, T29, T30, and T35.
-* **Paper 2 — Complementary Information for OD Reconstruction**
-  - *Research Question:* *How much complementary open urban information is needed to improve OD recoverability when aggregate mobility observations are insufficient?*
-  - *Sub-Question:* *To what extent does open urban spatial context preserve incremental reconstruction value when distance-interaction information is uncertain?*
-  - *Technical Scope:* Develops a zero-target-OD reconstruction methodology mapping open features ($X_U$) to complementary constraints, quantifying the incremental value along the information ladder ($\text{Aggregate Observation} \to +P \to +\text{POI} \to \text{Full } X_U$), with OD-derived TLD retained as a controlled benchmark representation rather than a synonym for Meta observation.
-  - *Key Evidence:* T20, T21, T22, T32, and T34.
+* **RQ1 (Information Characterization):** *What reconstruction-relevant information is retained or lost under aggregate mobility observation?*
+* **RQ2 (Observation Design):** *How does aggregate mobility observation design affect the recoverability of urban spatial interaction?*
+* **RQ3 (Complementary Information Integration):** *To what extent can complementary open urban information improve OD reconstruction when aggregate mobility observation alone is insufficient?*
+* **RQ4 (Empirical Defensibility):** *How can reconstructed OD patterns be empirically evaluated when complete target-city OD ground truth is unavailable?*
+
+> **Structural Rule:** The progression $\text{RQ1} \to \text{RQ2} \to \text{RQ3}$ strictly operates on **information sufficiency for reconstruction** without assuming $S \perp B$ or requiring $S$ and $B$ to be independently observable.
+
+---
+
+### 3.2 Reframed 50-City Stage & Paper Stream
+
+```text
+                                  50 US METROPOLITAN AREAS (50 CITIES)
+                                                   │
+         ┌─────────────────────────────────────────┴─────────────────────────────────────────┐
+         ▼                                                                                   ▼
+PAPER 1: AGGREGATE OBSERVATION CHARACTERIZATION                    PAPER 2: COMPLEMENTARY URBAN INFORMATION INTEGRATION
+Measure R(c, r, p):                                                Evaluate OD Reconstruction Performance:
+  • c = City (50 MSAs)                                               • Baseline: Aggregate Mobility Observation
+  • r = Resolution / Design (Meta 3-bin vs 20-bin vs OD)              • Proposed: Aggregate Obs + Open Urban Info (POIs/NLCD)
+  • p = Evaluation Property (CPC, Q50, Q90, Distance Err, β)          • Benchmark: Aggregate Obs + Oracle Destination Info
+Core Question: What is recoverable & what remains unconstrained?   Core Metric: RecoveryRatio_c = Gain_c(open) / Gain_c(oracle)
+```
+
+* **Paper 1 — Aggregate Observation Information Characterization**
+  - *Objective:* Characterize what reconstruction-relevant information is retained or lost under aggregate mobility observation across 50 US metropolitan areas.
+  - *Technical Scope:* Evaluates $R(c, r, p)$ across city $c$, observation design $r$, and evaluation property $p$ (distance-distribution error, Q50/Q90, CPC, network flow properties, and inferred deterrence parameter $\beta$ as a *diagnostic reconstruction property*).
+  - *Core Question:* *"What is recoverable from this aggregate observation, and what remains unconstrained?"*
+  - *Key Evidence:* Q1–Q4, T28, T29, T30, and T35.
+* **Paper 2 — Complementary Open Information Integration**
+  - *Research Question:* *When aggregate mobility observation is insufficient, how much can complementary open urban information improve OD reconstruction?*
+  - *Technical Scope:* Evaluates the experimental triad (`Aggregate Obs` vs. `Aggregate Obs + Open Urban Info` vs. `Aggregate Obs + Oracle Destination Info`) across 50 cities.
+  - *Core Metric:* $\text{RecoveryRatio}_c = \frac{\text{Gain}_c^{\text{open}}}{\text{Gain}_c^{\text{oracle}}} = \frac{\text{CPC}_c(\text{Agg}+\text{Open}) - \text{CPC}_c(\text{Agg})}{\text{CPC}_c(\text{Agg}+\text{Oracle}) - \text{CPC}_c(\text{Agg})}$.
+  - *Key Evidence:* Q6b, T20, T21, T22, T32, and T34.
 * **Ho Chi Minh City Applied Case Study**
   - *Research Question:* *Can the resulting latent OD be empirically defended through independent partial manifestations when complete OD ground truth is unavailable?*
-  - *Technical Scope:* Deploys the reconstruction pipeline under extreme data scarcity and evaluates OD patterns using unconstrained properties and available independent sources such as bus smart-card/tap data, traffic counts, and commuting statistics, subject to data availability.
-  - *Supporting preliminary evidence:* T24, subject to clean no-oracle replication.
+  - *Technical Scope:* Deploys the zero-target-OD reconstruction pipeline under extreme data scarcity and evaluates OD patterns using unconstrained properties and available independent sources (bus tap counts, arterial traffic volumes, commuting censuses).
 
 ---
 
-## 4. Master Scoped Dissertation Claim Status Matrix (v13.0+)
+## 4. Pilot Diagnostic Battery (Q0–Q6b) & Reinterpretation Matrix
+
+| Diagnostic Test | Measured Result | Aligned Narrative Interpretation |
+| :--- | :--- | :--- |
+| **Q1: TLD Information Retention** | $\Delta V_{\text{Q90}} > 0, \Delta V_{\text{CPC}} > 0$ <br> $NLL_{\text{shuffle}} < NLL_{\text{true}} < NLL_{\text{noTLD}}$ | **Coarse aggregate distance observation retains measurable information relevant to OD reconstruction**, though information recovered varies across properties ($\text{Information Sufficiency is Property-Dependent}$). |
+| **Q2: Compression Discrepancy** | $\hat{\beta}_3 = 0.2499$ vs. OD ref ($10.64\%$ diff) | **The behavioural representation induced by coarse observation differs systematically from that obtained under fuller OD information.** (Coarsening observation changes inferred distance deterrence representation; $\beta$ is a diagnostic property, not "true behaviour"). |
+| **Q3: Identification Stability** | Profile LR $\in [0.2498, 0.2500]$ | **The chosen distance-deterrence representation is statistically identifiable under this observation/model configuration.** (Shows precise optimum given assumed gravity model; does NOT prove "true travel behaviour identified"). |
+| **Q5 / Q6a: Cross-City Diagnostic** | $5/6$ $\text{OWN\_CITY\_BETTER}$, $1/6$ $\text{CROSS\_CITY\_BETTER}$ | **Cross-city reuse of inferred mobility representations cannot be assumed to be universally valid.** (Acts as caution; parameterization from one city lacks uniform cross-city performance). |
+| **Q6b: Complementary Information Bridge** | $\text{TLD} + A_j^{\text{uniform}} \to \text{TLD} + A_j^{\text{oracle}}$ ($\Delta \text{CPC} = +0.0636$) | **The aggregate mobility observation does not contain all information useful for OD reconstruction; complementary destination-side information has incremental value.** (Serves as upper-bound feasibility evidence for Paper 2). |
+
+---
+
+## 5. Master Scoped Dissertation Claim Status Matrix (v14.0+)
 
 | Scientific Claim | Audited Evidence Status | Phrasing Constraint & Boundary |
 | :--- | :--- | :--- |
@@ -100,4 +134,5 @@ This architecture is grounded in foundational and modern spatial interaction lit
 | **HCMC real-world applicability** | **Feasibility Justified** | US cities results provide sufficient feasibility evidence to justify testing in HCMC. |
 
 ---
-*Status: Updated V13.0+ — Master Scientific Operating System (Frozen & Formalization Active).*
+*Status: Updated V14.0+ — Master Scientific Operating System (Frozen & Formalization Active).*
+

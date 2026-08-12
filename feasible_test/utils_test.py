@@ -150,10 +150,14 @@ def fit_beta_tld_mle(df: pd.DataFrame, K: int = 20):
         log_denom = lf_max + np.log(np.maximum(sum_exp, 1e-300))
         log_p = log_f - log_denom[o_idx_mapped]
         
-        # Expected trips per pair
+        # Expected trips per pair weighted by origin outflow O_i
         p_ij = np.exp(log_p)
+        O_i_orig = np.zeros(n_o)
+        np.add.at(O_i_orig, o_idx_mapped, trips)
+        expected_flows = O_i_orig[o_idx_mapped] * p_ij
+
         # Binned expected trip probability
-        p_k = np.bincount(bin_idx, weights=p_ij, minlength=K).astype(float)
+        p_k = np.bincount(bin_idx, weights=expected_flows, minlength=K).astype(float)
         p_k_tot = p_k.sum()
         if p_k_tot < 1e-12:
             return 1e12
