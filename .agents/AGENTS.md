@@ -288,23 +288,24 @@ Do NOT describe aggregate mobility products (such as TLDs or Meta MDM) as "inher
   - ✅ *"Aggregate mobility observations reduce the granularity of disclosed movement information by removing individual-level and pairwise spatial identities. Their privacy properties, however, depend on the aggregation and data-release mechanism and should not be equated automatically with formal privacy guarantees."*
   - ✅ *"Resolving these gaps enables mobility reconstruction in data-scarce cities using survey-free aggregate observational inputs that can reduce exposure to individual-level mobility information, subject to the privacy properties of the underlying data-release mechanism."*
 
-## Rule: Decoupled Complementary Inference Pathways (Paper 1 & Paper 2 Parallel Architecture)
+## Rule: Asymmetric Sequential Architecture (Paper 1 → Paper 2 Uncertainty Resolution)
 
 ### Context
-Do NOT claim that "Paper 2 must succeed before Paper 1 can be valid" or that "Paper 1 is sequentially dependent on Paper 2's structure transferability". Paper 1 identifies Travel Behaviour ($R_B$) from aggregate TLDs under a specified structural condition ($R_S$), while Paper 2 independently tests whether $R_S$ can be learned and transferred across cities. They are **complementary parallel tasks unified at the joint integration stage ($R_S + R_B \longrightarrow T_{ij}$)**.
+Paper 1 and Paper 2 address distinct but sequentially connected scientific questions within the structural uncertainty framework. Paper 1 characterizes the structural uncertainty $U_{\text{struct}}(T \mid Y_B)$ that remains after conditioning on a coarse aggregate mobility observation. Paper 1 stands independently as a complete contribution even if Paper 2 were never conducted. Paper 2 takes Paper 1's uncertainty characterization as its empirical starting point and tests which complementary information sources resolve which dimensions of the identified uncertainty. The dependency is **asymmetric**: Paper 1 does not depend on Paper 2, but Paper 2's research question is defined in terms of Paper 1's output.
 
 ### Phrasing Matrix
 - **Forbidden Phrasing:**
-  - ❌ *"Paper 2's transferability establishes the prerequisite condition for Paper 1."*
-  - ❌ *"If Paper 2 transfers structure, then Paper 1 can identify behaviour."*
-  - ❌ *"Paper 1 relies on Paper 2 to validate its structural inputs."*
-  - ❌ *"Derivation chain: Principle $\to$ RQ1 $\to$ Paper 1 $\to$ RQ2 $\to$ Paper 2"*
-  - ❌ *"Sequential dependency: Paper 1 establishes the scientific foundation for Paper 2."*
+  - ❌ *"Paper 1 and Paper 2 are independent parallel tasks."*
+  - ❌ *"Paper 2 must succeed before Paper 1 can be valid."*
+  - ❌ *"Paper 1 requires Paper 2's structural representation to validate its inputs."*
+  - ❌ *"Paper 1 sequentially depends on Paper 2."*
+  - ❌ *"Paper 2 independently invents its own research problem."*
 
 - **Required Phrasing:**
-  - ✅ *"Behavioural Identification (Gap I) and Urban Structure Transferability (Gap II) are complementary scientific problems unified by the Structure–Behaviour Separation Principle."*
-  - ✅ *"Derivation structure: Principle $\to$ two complementary parallel pathways (Gap I $\to$ RQ1 $\to$ Paper 1; Gap II $\to$ RQ2 $\to$ Paper 2) $\to$ Joint Integration (RQ3) $\to$ Downstream OD Reconstruction Validation $\to$ Dissertation Synthesis."*
-  - ✅ *"The two papers address independent scientific tasks, complementary within a common framework. Paper 1 identifies $R_B$ and Paper 2 learns $R_S$ through distinct inference pathways before their joint integration (RQ3) is evaluated."*
+  - ✅ *"Paper 1 characterizes the structural uncertainty that coarse aggregate observations leave unresolved. Paper 2 tests which complementary information resolves which dimensions of that uncertainty."*
+  - ✅ *"The dependency is asymmetric: Paper 1 contributes independently, while Paper 2's research question is defined by Paper 1's uncertainty characterization."*
+  - ✅ *"Paper 1: Where is uncertainty? → Paper 2: Which information removes which uncertainty?"*
+  - ✅ *"The two papers are unified by the structural uncertainty object $U_{\text{struct}}(T \mid Y_B)$: Paper 1 maps it, Paper 2 reduces it."*
 
 ## Rule: Zero-Target-OD vs. Target-Data-Free Positioning
 
