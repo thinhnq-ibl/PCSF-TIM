@@ -1,5 +1,41 @@
 # Project-Scoped Agent Rules
 
+## Rule: Master Thesis Narrative & Central Question (The "Trust & Value" Progression)
+
+### The 45-Second Narrative Pitch
+"Urban mobility data are increasingly available, but available observations do not necessarily represent the underlying mobility process faithfully, and they often lack destination-resolved OD information. Previous studies have shown both that digital mobility observations can be distorted by sampling and processing, and that aggregate distance information can nevertheless improve OD estimation. This thesis therefore asks two narrower questions. First, under what conditions can a coarse distance-binned mobility distribution be trusted as a measurement of mobility distance? Second, once validated, does that signal improve destination-level OD reconstruction beyond urban context alone? Paper 1 establishes the measurement-validity domain; Paper 2 measures its incremental reconstructive value. HCMC then demonstrates how the framework can be applied when complete target-city OD ground truth is unavailable."
+
+### The Thesis Identity
+**Can we trust the signal? $\rightarrow$ Does the signal add OD value?**
+
+### Central Question & RQ Breakdown
+- **Central Question:** Under what conditions is a coarse distance-binned mobility distribution a valid mobility-distance observation, and does it improve destination-level OD reconstruction beyond urban context alone?
+- **RQ1 (Paper 1):** When is $Y_D$ valid? (Measurement-validity domain: spatial support, temporal support, distance definition).
+- **RQ2 (Paper 2):** Does validated $Y_D$ improve OD reconstruction beyond $X_{urban}$? (Subquestions: How much? When / under what urban conditions?)
+
+### Defensible Novelty Claims
+- ❌ "Digital mobility data has not been validated." $\rightarrow$ ✅ Criterion-validity domain of a coarse distance-binned mobility observation remains unclear.
+- ❌ "Meta MDM has not been evaluated." $\rightarrow$ ✅ Existing MDM studies assess sensitivity/bias/usability; direct agreement with an independent matched mobility-distance reference remains the relevant question.
+- ❌ "Additional data value for OD is unknown." $\rightarrow$ ✅ Marginal data value has been studied; the unresolved question is the incremental value of $Y_D$ beyond urban context.
+- ❌ "Distance information can reconstruct OD." $\rightarrow$ ✅ Distance information constrains OD, but destination-level reconstructive value must be tested.
+- ❌ "$Y_D$ helps OD reconstruction." $\rightarrow$ ✅ $Y_D$ may be complementary, redundant, or detrimental depending on conditions.
+
+### The Role of HCMC
+HCMC is **not** used to prove OD ground truth. Its role is: $X_{urban}^{HCMC} + Y_D^{Meta} \rightarrow \hat{T}^{HCMC}$, demonstrating application after validity/reconstructive boundaries are established elsewhere. HCMC tests external consistency ($\hat{T} \rightarrow$ network flows; $\hat{T}^{transit} \rightarrow$ boarding/alighting), because external consistency $\neq$ ground-truth OD recovery.
+
+## Rule: Meta MDM Terminology (Four Mobility Categories vs. Three Distance Bins)
+
+### Context
+Do NOT refer to Meta Movement Distribution Maps (MDM) as having "four distance bins" or being a "4-bin distance distribution". Meta MDM reports the daily fraction of users in **four mobility categories**, which consist of **one immobility category** and **three movement-distance bins**.
+
+### Required Terminology & Notation
+- **General Dataset Description:** *"Meta MDM reports the daily fraction of users in four mobility categories: immobility and three movement-distance bins—short-range (0–10 km), medium-range (10–100 km), and long-range (>100 km)."*
+- **Shorthand:** *"MDM contains one immobility state and three movement-distance bins."*
+- **When referring to the distance signal of moving users:** Use *"three coarse movement-distance bins"*.
+- **Notation:** Do NOT use a generic $Y_D = [p_1, p_2, p_3, p_4]$. Instead, use explicit notation that separates immobility from movement:
+  - Full distribution: $Y_D = [p_{\mathrm{immobile}}, p_{0-10}, p_{10-100}, p_{>100}]$
+  - Conditional movement distribution: $Y_D^{move} = [p_{0-10}, p_{10-100}, p_{>100}]$
+
 ## Rule: Evaluate Whether Meta Movement Distribution Maps (MDM) Citation Should Be Added
 
 ### Objective

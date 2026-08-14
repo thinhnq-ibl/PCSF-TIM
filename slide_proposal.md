@@ -2,7 +2,7 @@ Case study: Ho Chi Minh City
 Learning from Distance-Binned Mobility Distributions
 Measurement Validity and Reconstructive Value for OD Reconstruction
 help_outlineCentral Question
-Under what conditions does a mobility distribution represented by a small number of coarse distance bins constitute a valid mobility-distance observation, and whether, and how much additional destination-resolved OD information does it provide beyond urban contextual information?
+Under what conditions is a coarse distance-binned mobility distribution a valid mobility-distance observation, and does it improve destination-level OD reconstruction beyond urban context alone?
 1
 Presenter: Thinh Nguyen
 1
@@ -111,12 +111,12 @@ Gap 1 — Paper 1
 Measurement Validity of Distance-Binned Mobility Distributions
 YD_Meta ↔ YD_Reference
 Core Question
-Can we trust the observed distance signal?
+When is a coarse distance-binned observation valid?
 Gap 2 — Paper 2
 Marginal Reconstructive Value of Distance-Binned Mobility Constraints
 X_urban vs X_urban + YD
 Core Question
-If trustworthy, does it actually reduce OD ambiguity?
+Does validated YD improve OD reconstruction beyond X_urban?
 7
 
 8
@@ -124,7 +124,7 @@ Gap Analysis
 Gap 1: Measurement Validity
 Refs: Meta AI for Good (n.d.); Muller et al. (2025); Gosselin et al. (2025); Gibbs et al. (2026).
 Gap Statement
-Under what observation conditions does the compressed YD preserve the intended distance signal?
+Under what observation conditions does a coarse distance-binned mobility distribution preserve the intended mobility-distance signal?
 Stress Factors
 -Sampling
 -Distance binning
@@ -133,7 +133,7 @@ Stress Factors
 -Privacy / filtering
 Research Question 1
 help_outline
-Under what conditions does a distance-binned mobility distribution remain a valid quantitative representation of its intended mobility-distance property?
+How closely does YD reproduce independently observed mobility-distance patterns, and under what observation conditions does this agreement hold?
 8
 
 9
@@ -209,10 +209,10 @@ Gap 2
 Marginal Reconstructive Value
 Gap Statement
 warning_amber
-A measurement-valid distance-binned mobility distribution may still contain little destination-resolved information. It remains unclear how much such a constraint reduces OD ambiguity beyond urban contextual information alone, and when its marginal contribution is complementary, redundant, or insufficient.
+A measurement-valid coarse distance-binned mobility distribution may still contain little destination-resolved information. It remains unclear if it provides non-redundant constraints, or merely repeats information already encoded in the urban structure.
 Research Question 2
 help_outline
-How much additional destination-resolved OD information does a validated distance-binned mobility constraint provide beyond urban contextual information, and under which urban conditions is this incremental contribution reliable?
+Does a validated coarse distance-binned mobility distribution improve destination-level OD reconstruction beyond urban context alone, and under what conditions is its contribution non-redundant?
 Core Idea
 tips_and_updates
 Measure Validity ≠ OD Reconstructive Value
@@ -259,7 +259,7 @@ Thesis Boundary
 Paper 2 is not about proving that OD can be generated from urban data.
 Remaining Gap
 help_outline
-What destination-level OD information does YD add beyond urban context?
+Does validated YD improve destination-level OD reconstruction beyond urban context alone?
 Refs: Cascetta & Nguyen (1988); Ait-Ali & Eliasson (2022); Rong et al. (2023); Zhang et al. (2025); Rong et al. (2025); Chen et al. (2026).
 14
 
@@ -331,7 +331,7 @@ Marginal Reconstructive Value
 Quantify whether validated distance constraints reduce OD ambiguity beyond urban contextual information.
 mapContribution 3
 HCMC Application
-External Validation Framework under Missing Target-City OD Ground Truth 
+Demonstrate external consistency testing under incomplete target-city OD observation 
 Bottom-line contribution
 Validate the observationeastMeasure its marginal reconstructive valueeastApply under incomplete target-city OD observation
 18
