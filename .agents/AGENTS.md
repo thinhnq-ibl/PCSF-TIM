@@ -322,20 +322,33 @@ Do NOT describe the framework as "target-data-free", "data-free", or "zero-shot 
   - ✅ *"The framework is zero-target-OD rather than target-data-free: target-city reconstruction uses open structural features ($X_S$) and an aggregate travel-distance distribution ($D_{\text{target}}$) to infer the local Behaviour Representation ($R_B$), while explicitly avoiding disaggregated target-city OD observations."*
   - ✅ *"OD-free target-city reconstruction using aggregate mobility observations and open spatial features."*
 
-## Rule: Paper 1 Novelty & Gap 1 Positioning (Full TLD Probabilistic Identification)
+## Rule: Paper 1 Gap & Novelty Framing (Criterion Validity of Compressed Signal)
 
 ### Context
-Do NOT claim that "no previous method calibrates gravity models from aggregate data" or that Paper 1 is the "first to perform aggregate gravity calibration". Prior literature has demonstrated calibration from OD data or compressed summary statistics (Tanner 1961, Hyman 1969, Merlin 2020 median-based estimator). Paper 1's novelty lies in treating the **full aggregate travel-distance distribution (the complete empirical histogram)** as a probabilistic observation layer, deriving an explicit **multinomial likelihood function $Y \sim \text{Multinomial}(N, \boldsymbol{p}(\boldsymbol{\theta}))$**, and empirically demonstrating city-specific parameter identification with strong agreement to OD-calibrated reference parameters.
+Do NOT claim novelty on the generic idea of "validating digital mobility data" or "evaluating bias/sensitivity in Meta MDM". Literature has already evaluated digital mobility observations, including Meta MDM (e.g., Gosselin et al., 2025; Gallotti et al., 2024; Cui et al., 2018). The novelty of Paper 1 is strictly narrower and focuses on testing the **criterion/concurrent validity domain of a coarse distance-binned mobility distribution** ($Y_D$).
+
+### Boundary Definition
+- **Gosselin et al. (2025):** Evaluates Meta MDM sensitivity to known events, noise, and demographic bias (internal coherence).
+- **Cui et al. (2018) / Gallotti et al. (2024):** Establishes that digital mobility observations can be biased, dataset-dependent, yet informative, and reconstructs distance from richer underlying trajectory/check-in data.
+- **Paper 1:** Evaluates whether a *provider-released, coarse distance-binned* mobility distribution ($Y_D^{Meta}$) reproduces an *independent, harmonized mobility-distance reference* ($Y_D^{Reference}$) under matched space, time, and distance definitions.
+
+### Narrative Flow (Predecessors → Paper 1)
+The logical narrative must follow this sequence:
+1. Digital mobility observations can be biased, dataset-dependent, yet informative (Gallotti, Cui, Gosselin).
+2. Remaining question: **Does this specific compressed $Y_D$ actually agree with an independent reference?**
+3. **Paper 1:** Evaluates the criterion validity domain: how closely does $Y_D$ reproduce independently observed mobility-distance patterns, and under what observation conditions does this agreement hold?
 
 ### Phrasing Matrix
 - **Forbidden Phrasing:**
-  - ❌ *"No existing method calibrates gravity models from aggregate mobility statistics."*
-  - ❌ *"First to calibrate gravity models without complete origin-destination matrices."*
-  - ❌ *"Lack of any likelihood inference formulation for aggregate mobility data."*
+  - ❌ *"It is unclear whether digital/social-media mobility data is valid."* (Gap is dead).
+  - ❌ *"It is unclear whether mobility-distance distributions derived from digital data agree with traditional mobility observations."* (Gap is weak; Cui/Gallotti addressed this).
+  - ❌ *"It is unclear whether Meta MDM has been evaluated for sensitivity, privacy effects or temporal variation."* (Gap is killed directly by Gosselin).
+  - ❌ *"No one has validated a social-media-derived mobility-distance distribution against an independent travel survey."* (Cui did this).
 
 - **Required Phrasing:**
-  - ✅ *"Gap 1 (Behaviour Identification): Existing studies demonstrate calibration from OD data and, in some cases, from compressed summary statistics (such as mean or median travel time), but it remains insufficiently established whether a full aggregate travel-distance distribution can be formulated as a probabilistic observation model supporting city-specific parameter identification and agreement with OD-based reference estimates."*
-  - ✅ *"The novelty of Paper 1 lies not in the general idea that gravity parameters can be calibrated without complete OD matrices, as prior work has demonstrated calibration from compressed summary statistics. Rather, the novelty lies in treating the full aggregate travel-distance distribution as a probabilistic observation layer, formulating an explicit multinomial observation likelihood, and empirically demonstrating city-specific parameter identification with strong agreement to OD-based reference estimates."*
+  - ✅ *"It remains unclear whether a provider-released, privacy-preserved coarse distance-binned mobility distribution reproduces independently observed mobility-distance composition when the observations are harmonized in space, time, and distance definition."*
+  - ✅ *"How closely does $Y_D$ reproduce independently observed mobility-distance patterns, and under what observation conditions does this agreement hold?"*
+  - ✅ *"The novelty is testing the criterion-validity domain of a coarse distance-binned mobility distribution."*
 
 ## Rule: Epistemic Boundary of Model Integration (Joint OD Fit != Causal/Mechanistic Proof)
 
@@ -352,6 +365,52 @@ Do NOT claim that "fitting an integrated gravity model ($\hat{T}_{ij} \approx T_
   - ✅ *"Can the probabilistic integration of the inferred Travel Behaviour representation and the learned Urban Structure representation provide an adequate mechanism-based account of observed Spatial Interaction under the specified model?"*
   - ✅ *"Develop a mechanism-oriented probabilistic integration framework... Its empirical role is to evaluate whether their joint integration provides adequate explanatory and predictive performance under the specified model, rather than establishing causal mechanisms."*
   - ✅ *"The dissertation evaluates the adequacy of a proposed mechanism-oriented decomposition under a specified model, not causal truth."*
+
+
+## Rule: Paper 2 Gap & Novelty Framing (Ait-Ali Predecessor & Coarse Signal Addition)
+
+### Context
+Do NOT claim novelty on the general idea that "no one has studied the value of additional data for OD estimation". Ait-Ali & Eliasson (2022) is acknowledged as the **conceptual predecessor** to Paper 2 because both ask about the marginal value of additional information. The novelty of Paper 2 is strictly narrower and focuses on whether a **weak, compressed distance-binned observation** adds non-redundant value beyond urban context alone.
+
+### Boundary Definition
+- **Ait-Ali & Eliasson (2022):** Direct/richer transport observations.
+- **Paper 2:** Weak, compressed distance-binned observation (aggregate TLD) + urban context.
+
+### The Non-Redundancy Condition (Core Novelty)
+The deepest novelty lies in testing the "non-redundancy condition." It is commonly assumed that more data always improves models. Paper 2 challenges this by asking: does the coarse distance signal merely repeat information already encoded in the urban structure ($R_S$)? The novelty is in quantifying **under what conditions** (e.g., which city structures) this coarse signal provides a genuine marginal gain versus being redundant.
+
+### Narrative Flow (Paper 1 → Paper 2)
+The logical narrative must follow this sequence:
+1. Average distance can help OD estimation (Ait-Ali).
+2. But what if distance is observed only through a few coarse bins?
+3. **Paper 1:** Can that compressed signal be trusted? (Measurement validity/Identification)
+4. **Paper 2:** If yes, does it improve destination-level OD reconstruction beyond urban context alone, and under what conditions is its contribution non-redundant?
+
+### Phrasing Matrix
+- **Forbidden Phrasing:**
+  - ❌ *"This is the first study to investigate the value of supplementary data for OD estimation."*
+  - ❌ *"Previous studies rely on static models, whereas we propose a dynamic doubly-constrained model."* (Do not use dynamic vs. static or constrainedness as the primary novelty; they are just setting differences).
+  - ❌ *"Paper 2 independently evaluates OD estimation."*
+
+- **Required Phrasing:**
+  - ✅ *"Does a validated distance-binned mobility signal improve destination-level OD reconstruction beyond urban context alone, and under what conditions is its contribution non-redundant?"*
+  - ✅ *"Building on the conceptual foundation of evaluating the marginal value of information (e.g., Ait-Ali & Eliasson, 2022), Paper 2 investigates whether a much weaker, compressed distance-binned observation provides non-redundant constraints..."*
+  - ✅ *"Paper 1 establishes whether the compressed signal can be trusted for parameter identification. Paper 2 subsequently evaluates whether this trusted signal actually improves downstream OD reconstruction beyond urban context alone."*
+  - ✅ *"The novelty lies in quantifying the conditions under which a compressed aggregate signal provides non-redundant value over the baseline urban structure."*
+## Knowledge Base: Literature Positioning & Threat Mitigation
+
+### Context
+When writing literature reviews or responding to reviewers for Paper 1 and Paper 2, use the following mapping to handle highly relevant recent papers. Do not treat these papers as "killing the gap", but rather as "conceptual predecessors" that narrow the research scope to the specific criterion validity of compressed signals (Gap 1) and the non-redundancy condition (Gap 2).
+
+### Literature Threat Mapping
+
+| Challenger / Predecessor | What they solved | Threat Level / Status | Positioning Strategy |
+| :--- | :--- | :--- | :--- |
+| **Gosselin et al. (2025)** | Evaluated exact Meta MDM for sensitivity to known events, noise, demographic bias, and hazard usability. | 🔴🔴🔴 (High) | Acknowledge as the "Ait-Ali of Gap 1" for dataset-specific evaluation. Position Paper 1 as solving the missing *criterion validity* (Does $Y_D^{Meta} \approx Y_D^{Reference}$ at matched support?) rather than internal coherence. |
+| **Cui et al. (2018)** | Compared social-media distance distributions against independent surveys, with sample reconstruction. | 🔴🔴🔴 (High) | Acknowledge as a strong conceptual predecessor. Emphasize that they reconstruct distances from underlying check-ins, whereas Paper 1 works with *coarse distance-binned* provider-released aggregates. |
+| **Gallotti et al. (2024)** | Showed cross-provider distortion of displacement distributions across 7 sources. | 🔴🔴🔴 (High) | Use as strong motivation: since observations are distorted/provider-dependent, we *must* test the validity domain of specific compressed observations before using them in spatial interaction models. |
+| **Gibbs et al. (2026)** | Studied how privacy mechanisms and spatial/temporal aggregation affect mobility accuracy. | 🔴🔴 (Medium) | Acknowledge as methodological basis for stress factors, but note they target privacy-protected OD matrices, not the validity of Meta's specific 4-bin distance distribution. |
+| **Alexander (2015) / Cáceres (2020)** | Validated mobile phone mobility against independent travel surveys. | 🔴🔴 (Medium) | Acknowledge prior survey-based validation. Differentiate by stressing they use richer underlying trajectory data to infer trips/ODs, not starting from severe 4-bin compression. |
 
 
 ### More
